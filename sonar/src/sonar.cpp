@@ -34,75 +34,86 @@
 
 using namespace std;
 
-ReadSonar* initialize();
-void loop(ReadSonar*, ros::Publisher*);
-void readDataFromSonar(ReadSonar*);
-bool ledServiceCallback(sonar::Led::Request& , sonar::Led::Response&);
+class SonarLedManager {
+    private:
+        ReadSonar* read_sonar;
+        LedParser* led;
+        ros::NodeHandle ros_node;
+        ros::Publisher sonar_data_pub;
+        ros::ServiceServer led_service;
+    public:
+        SonarLedManager(int argc, char** argv);
+        ~SonarLedManager();
+        bool ledCallback(sonar::Led::Request&, sonar::Led::Response&);
+        void publishSonarData();
+        void readSonarData();
+        void sendMessage(float, float, float, float);
+};
 
-int main(int argc, char** argv) {
-    try {
-        ReadSonar* readSonar = initialize();
-        LedParser led(readSonar);
-
-        ros::init(argc, argv, "sonar");
-        ros::NodeHandle n;
-
-        /* initialization as publisher of sonar_data msgs */
-        ros::Publisher sonar_data_pub = n.advertise<sonar::Sonar>("sonar_data", 1000);
-        ros::ServiceServer service = n.advertiseService("led_data", ledServiceCallback);
-        
-        loop(readSonar, &sonar_data_pub);
-    
-        delete readSonar;
-        return 0;
-    } catch  ( ReadSonarDeviceException &e ){
-        cerr << "Read sonar device exception\n";
-        cerr << e.what() << "\n";
-    }
-    return 1;
-}
-
-ReadSonar* initialize() {
-    ReadSonar* readSonar = new ReadSonar( SERIAL_DEVICE_FILENAME, 1 );
-    if ( readSonar ) {
-        readSonar->sendRun();
+SonarLedManager::SonarLedManager(int argc, char** argv) {
+    read_sonar = new ReadSonar( SERIAL_DEVICE_FILENAME, 1 );
+    if ( read_sonar ) {
+        read_sonar->sendRun();
         char c = (char) 0;
-        readSonar->sendStringCommand(&c,1);
+        read_sonar->sendStringCommand(&c,1);
         sleep(3);
     }
-    return readSonar;
+
+    led = new LedParser(read_sonar);
+    /* Initialise ROS */
+    ros::init(argc, argv, "sonar");
+    /* Initialisation as publisher of sonar_data msgs */
+    sonar_data_pub = ros_node.advertise<sonar::Sonar>("sonar_data", 1000);
+    led_service = ros_node.advertiseService("led_data", &SonarLedManager::ledCallback, this);
 }
 
-void loop(ReadSonar* readSonar, ros::Publisher* sonar_data_pub_ptr) {
-    ros::Publisher sonar_data_pub = *sonar_data_pub_ptr;
-    while(ros::ok()){
-        readDataFromSonar(readSonar);
-        /* build the message and publish it */
-        sonar::Sonar* msg = new sonar::Sonar();
-        msg->north = readSonar->getMeasure(NORTH);
-        msg->south = readSonar->getMeasure(SOUTH);
-        msg->east = readSonar->getMeasure(EAST);
-        msg->west = readSonar->getMeasure(WEST);
-        sonar_data_pub.publish(*msg);
-        ros::spinOnce();
-        delete msg;
+SonarLedManager::~SonarLedManager() {
+    delete led;
+    delete read_sonar;
+}
+
+bool SonarLedManager::ledCallback(sonar::Led::Request& request, sonar::Led::Response& response) {
+    bool yellow_on[4];
+    if (request.editGreen == true) {
+        led->Green(request.greenIsOn);
     }
+    if (request.editRed == true) {
+        led->Red(request.redNumOn);
+    }
+    if (request.editYellow == true) {
+        for (int i = 1; i < 4; i++) {
+            if (request.yellowIsOn[i] == 1) yellow_on[i] = true;
+            else yellow_on[i] = false;
+        }
+        led->Yellow(yellow_on);
+    }
+    led->SendToLed();
+    response.requestSuccessful = true;
+    return true;
 }
 
-void readDataFromSonar(ReadSonar* readSonar) {
+void SonarLedManager::publishSonarData() {
+    this->readSonarData();
+    this->sendMessage(read_sonar->getMeasure(NORTH),
+                      read_sonar->getMeasure(SOUTH),
+                      read_sonar->getMeasure(EAST),
+                      read_sonar->getMeasure(WEST));
+}
+
+void SonarLedManager::readSonarData() {
     static int meas_progress=0;
     static int line_readed=0;
-    if(readSonar->readData()==0){
+    if(read_sonar->readData()==0){
         unsigned int n_line;
-        n_line=readSonar->getLineToParseNum();
+        n_line=read_sonar->getLineToParseNum();
         line_readed+=n_line;
 
         for(unsigned int i=0;i<n_line;i++){
-            switch(readSonar->parseLine()){
+            switch(read_sonar->parseLine()){
             case ReadSonar::parse_err:
-                cerr << "Error in parse method :" << readSonar->getParsedLine() << endl;
-                cout << "NORD: " << readSonar->getMeasure(NORTH) << endl;
-                cout << "SUD: "  << readSonar->getMeasure(SOUTH) << endl;
+                cerr << "Error in parse method :" << read_sonar->getParsedLine() << endl;
+                cout << "NORD: " << read_sonar->getMeasure(NORTH) << endl;
+                cout << "SUD: "  << read_sonar->getMeasure(SOUTH) << endl;
                 meas_progress=0;
                 break;
             case ReadSonar::parse_meas_b1:
@@ -126,7 +137,7 @@ void readDataFromSonar(ReadSonar* readSonar) {
                 if(meas_progress==3)meas_progress++;
                 break;
             case ReadSonar::parse_dbg:
-                printf("found DBG line <%s>",readSonar->getParsedLine());
+                printf("found DBG line <%s>",read_sonar->getParsedLine());
                 meas_progress=0;
                 break;
                 //                  case ReadSonar::parse_ok:
@@ -134,7 +145,7 @@ void readDataFromSonar(ReadSonar* readSonar) {
                 //                      meas_progress=0;
                 //                      break;
             case ReadSonar::parse_response_err:
-                printf("found ERR line <%s>",readSonar->getParsedLine());
+                printf("found ERR line <%s>",read_sonar->getParsedLine());
                 meas_progress=0;
                 break;
             default:
@@ -146,8 +157,27 @@ void readDataFromSonar(ReadSonar* readSonar) {
     }
 }
 
+void SonarLedManager::sendMessage(float north, float south, float east, float west) {
+    sonar::Sonar* msg = new sonar::Sonar();
+    msg->north = north;
+    msg->south = south;
+    msg->east = east;
+    msg->west = west;
+    sonar_data_pub.publish(*msg);
+    delete msg;
+}
 
-bool ledServiceCallback(sonar::Led::Request& req, sonar::Led::Response& res ) {
-    // TODO
-    return true;
+int main(int argc, char** argv) {
+    try {
+        SonarLedManager manager(argc, argv);
+        while (ros::ok()) {
+            manager.publishSonarData();
+            ros::spinOnce();
+        }
+        return EXIT_SUCCESS;
+    } catch  ( ReadSonarDeviceException &e ){
+        cerr << "Read sonar device exception\n";
+        cerr << e.what() << "\n";
+    }
+    return EXIT_FAILURE;
 }

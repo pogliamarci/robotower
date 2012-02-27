@@ -2,6 +2,8 @@
 #include <cstdio>
 #include "LedParser.h"
 
+#define NUMREDLED 4
+
 LedParser::LedParser(ReadSonar* read_sonar)
 {
     int i;
@@ -22,8 +24,13 @@ void LedParser::Green(bool g)
 
 void LedParser::Red(char r)
 {
-	this->RedS=r;
-	this->C = (this->C & 0xF8) | RedS;
+    if (r <= NUMREDLED && r >= 1)
+        this->RedS = r;
+    else if (r > NUMREDLED)
+        this->RedS = NUMREDLED;
+    else this->RedS = 0;
+
+    this->C = (this->C & 0xF8) | RedS;
 }
 
 void LedParser::Yellow(bool y[4])
