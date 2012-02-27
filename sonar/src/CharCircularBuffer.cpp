@@ -1,8 +1,8 @@
 /*
  * RoboTower, Hi-CoRG based on ROS
  *
- *
- * Copyright (C) 2011 Marcello Pogliani, Davide Tateo
+ * Copyright (C) 2012 Politecnico di Milano
+ * Copyright (C) 2012 Marcello Pogliani, Davide Tateo
  * Versione 1.0
  *
  * This program is free software; you can redistribute it and/or
@@ -23,7 +23,8 @@
 #include <string>
 
 #endif
-CharCircularBuffer::CharCircularBuffer(unsigned int n,char end_line_char){
+CharCircularBuffer::CharCircularBuffer(unsigned int n,char end_line_char)
+{
 	buf=new char[n+1];
 	this->n=n+1;
 	start=0;
@@ -34,7 +35,8 @@ CharCircularBuffer::CharCircularBuffer(unsigned int n,char end_line_char){
 	this->end_line_chars_num = 1;
 }
 
-CharCircularBuffer::CharCircularBuffer(unsigned int n,char * end_line_chars){
+CharCircularBuffer::CharCircularBuffer(unsigned int n,char * end_line_chars)
+{
 	buf=new char[n+1];
 	this->n=n+1;
 	start=0;
@@ -46,17 +48,20 @@ CharCircularBuffer::CharCircularBuffer(unsigned int n,char * end_line_chars){
 }
 
 
-CharCircularBuffer::~CharCircularBuffer(){
+CharCircularBuffer::~CharCircularBuffer()
+{
 	delete [] buf;
 	delete [] end_line_chars;
 }
 
-unsigned int CharCircularBuffer::getLineCount(){
+unsigned int CharCircularBuffer::getLineCount()
+{
 	return lineCount;
 }
-		
-int CharCircularBuffer::addChar(char src){
-	 //ret n char added (0: error, 1 ok)
+
+//ret n char added (0: error, 1 ok)
+int CharCircularBuffer::addChar(char src)
+{
 	 if(isFull())return 0;
 	 buf[end]=src;
 	 end=inc(end);
@@ -64,14 +69,18 @@ int CharCircularBuffer::addChar(char src){
 	 return 1;
  }
  
- int CharCircularBuffer::isEndLine(char c){
-	 for(int  i=0;i<end_line_chars_num;i++){
+ int CharCircularBuffer::isEndLine(char c)
+ {
+	 for(int  i=0;i<end_line_chars_num;i++)
+	 {
 		 if(c==end_line_chars[i])return 1;
 	 }
 	 return 0;
  }
 
-int CharCircularBuffer::removeChar(char *dest){//ret n char removed (0: buffer empty)
+//ret n char removed (0: buffer empty)
+int CharCircularBuffer::removeChar(char *dest)
+{
 	if(isEmpty())return 0;
 	*dest=buf[start];
 	start=inc(start);
@@ -79,41 +88,48 @@ int CharCircularBuffer::removeChar(char *dest){//ret n char removed (0: buffer e
 	return 1;
 }
 
-int CharCircularBuffer::addNChar(char *src,unsigned int nx){
 //ret n char added (0: error, 1 ok)
+int CharCircularBuffer::addNChar(char *src,unsigned int nx) 
+{
 	unsigned int disp=n-getCount()-1;//#posti disponibili
 	nx=(disp>nx?nx:disp);
-	for (int i=0;i<nx;i++){
+	for (int i=0;i<nx;i++)
+	{
 		if(isEndLine(src[i]))lineCount++;
 		buf[end]=src[i];
-		end=inc(end);		
+		end=inc(end);
 	}
 	return nx;
 }
 
-int CharCircularBuffer::removeNChar(char *dest,unsigned int nx){	
-	//ret n char removed (0: buffer empty, 0-n)
+//ret n char removed (0: buffer empty, 0-n)
+int CharCircularBuffer::removeNChar(char *dest,unsigned int nx)
+{
 	unsigned int disp=getCount();//#posti disponibili
 	nx=(disp>nx?nx:disp);
-	for (int i=0;i<nx;i++){
+	for (int i=0;i<nx;i++)
+	{
 		if(isEndLine(buf[start]))lineCount--;
-	 	dest[i]=buf[start];
-	 	start=inc(start);		
+		dest[i]=buf[start];
+		start=inc(start);
 	}
 	return nx;
 }
 
-int CharCircularBuffer::removeLine(char *dest,unsigned int maxn){
-	//ret nchar readed, (max maxn char), terminate string with \0 (instead of \n or in maxn position)
+//ret nchar readed, (max maxn char), terminate string with \0 (instead of \n or in maxn position)
+int CharCircularBuffer::removeLine(char *dest,unsigned int maxn)
+{
 	unsigned int c=0;
 	if(lineCount==0)return 0;
-	while( (!isEmpty()) && (!isEndLine(buf[start])) && (c<maxn) ){
+	while( (!isEmpty()) && (!isEndLine(buf[start])) && (c<maxn) )
+	{
 		dest[c]=buf[start];
 		start=inc(start);
 		c++;
 	}
 	dest[c]='\0';
-	if(!isEmpty() && isEndLine(buf[start])){
+	if(!isEmpty() && isEndLine(buf[start]))
+	{
 		lineCount--;
 		start=inc(start);
 	}
@@ -123,13 +139,15 @@ int CharCircularBuffer::removeLine(char *dest,unsigned int maxn){
 #if (defined TEST_VERSION) || (defined  DEBUG)
 
 
-std::string CharCircularBuffer::getStringStatus(){
+std::string CharCircularBuffer::getStringStatus()
+{
 	std::ostringstream ss;
 	char str[n];
 	unsigned int x;
 	unsigned int i=0;
 	x=start;
-	for (i=0;i<getCount();i++){
+	for (i=0;i<getCount();i++)
+	{
 		//std::cout<<"I:"<<i<<std::endl;
 		str[i]=buf[x];
 		x=inc(x);
@@ -143,7 +161,8 @@ std::string CharCircularBuffer::getStringStatus(){
 #endif
 
 #ifdef TEST_VERSION
-int main (){
+int main ()
+{
 	CharCircularBuffer *b=new CharCircularBuffer(5);
 	unsigned int x;
 	char c,s[10];

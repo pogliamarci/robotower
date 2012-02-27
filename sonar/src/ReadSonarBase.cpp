@@ -1,8 +1,8 @@
 /*
  * RoboTower, Hi-CoRG based on ROS
  *
- *
- * Copyright (C) 2011 Marcello Pogliani, Davide Tateo
+ * Copyright (C) 2012 Politecnico di Milano
+ * Copyright (C) 2012 Marcello Pogliani, Davide Tateo
  * Versione 1.0
  *
  * This program is free software; you can redistribute it and/or
@@ -25,12 +25,14 @@ const char ReadSonarBase::response_dbg_header[]="%DBG";
 const char ReadSonarBase::response_meas_header[]="+OK ";
 
 
-const char* ReadSonarDeviceException::what() const throw(){
+const char* ReadSonarDeviceException::what() const throw()
+{
   return "Sonar port open error!";
 }
 
 ReadSonarBase::ReadSonarBase(float to_meter)
-		throw (ReadSonarDeviceException){
+throw (ReadSonarDeviceException)
+{
 	
 	pack_n=0;	
 	measure=NULL;
@@ -46,23 +48,27 @@ ReadSonarBase::ReadSonarBase(float to_meter)
 	
 }
 
-ReadSonarBase::~ReadSonarBase(){
+ReadSonarBase::~ReadSonarBase()
+{
 	if(measure)delete [] measure;
 	if(tmp_buf)delete [] tmp_buf;
 }
 
-unsigned int ReadSonarBase::getLastPackNum(){
+unsigned int ReadSonarBase::getLastPackNum()
+{
 	return pack_n;
 }
 
-float ReadSonarBase::getMeasure(unsigned int index){
+float ReadSonarBase::getMeasure(unsigned int index)
+{
 	if(!measure)return -1;
 	if(index<0)return -1;
 	if(index>=n_sonar)return -1;
 	return measure[index];
 }
 
-int ReadSonarBase::parseLine(){
+int ReadSonarBase::parseLine()
+{
 	int parsed_type = ReadSonarBase::parse_err;
 	if(buffer->getLineCount()<=0)return parsed_type;
 	
@@ -70,16 +76,20 @@ int ReadSonarBase::parseLine(){
 	if(len<=0)return parsed_type;
 	if(tmp_buf[len-1]=='\n')tmp_buf[len-1]='\0';
 	
-	if(strncmp(tmp_buf,ReadSonarBase::response_err_header,ReadSonarBase::response_header_len)==0){
+	if(strncmp(tmp_buf,ReadSonarBase::response_err_header,ReadSonarBase::response_header_len)==0)
+	{
 		parsed_type = ReadSonarBase::parse_response_err;
 	}
-	else if(strncmp(tmp_buf,ReadSonarBase::response_dbg_header,ReadSonarBase::response_header_len)==0){
+	else if(strncmp(tmp_buf,ReadSonarBase::response_dbg_header,ReadSonarBase::response_header_len)==0)
+	{
 		parsed_type = ReadSonarBase::parse_dbg;
 	}
-	else if(strncmp(tmp_buf,ReadSonarBase::response_meas_header,ReadSonarBase::response_header_len)==0){
+	else if(strncmp(tmp_buf,ReadSonarBase::response_meas_header,ReadSonarBase::response_header_len)==0)
+	{
 		std::vector<std::string> tokens;
 		tokenize(std::string(tmp_buf),tokens,",");
-		if(tokens.size()!=7){
+		if(tokens.size()!=7)
+		{
 			parsed_type = ReadSonarBase::parse_err;
 			return parsed_type;
 		}
@@ -87,7 +97,8 @@ int ReadSonarBase::parseLine(){
 		bank = atoi(tokens[2].c_str());
 		pack_n = atoi(tokens[1].c_str());
 
-		switch(bank){
+		switch(bank)
+		{
 			case 1:
 				offset=0;
 				parsed_type=ReadSonarBase::parse_meas_b1;
@@ -110,43 +121,48 @@ int ReadSonarBase::parseLine(){
 				break;
 		}
 		
-		for (int i=0;i<4;i++){
-		    if (offset != 4) {
-		        /* TODO: ignoring offset = 4 to avoid having two connectors
-		         * pushing data to measure[WEST]...
-		         */
-		        measure[i*3+offset]=to_meter*(float)atoi(tokens[i+3].c_str());
-		    }
+		for (int i=0;i<4;i++)
+		{
+			if (offset != 4)
+			{
+				/* TODO: ignoring offset = 4 to avoid having two connectors
+				* pushing data to measure[WEST]...
+				*/
+				measure[i*3+offset]=to_meter*(float)atoi(tokens[i+3].c_str());
+			}
 		}
 	}
 	return parsed_type;
 }
 
-char * ReadSonarBase::getParsedLine(){
+char * ReadSonarBase::getParsedLine()
+{
 	//call it only after parse line!!!
 	return tmp_buf;
 }
 
 
-unsigned int ReadSonarBase::getLineToParseNum(){
+unsigned int ReadSonarBase::getLineToParseNum()
+{
 	return buffer->getLineCount();
 }
 
 void ReadSonarBase::tokenize(const std::string& str,
                       std::vector<std::string>& tokens,
-                      const std::string& delimiters ){
-    // Skip delimiters at beginning.
-    std::string::size_type lastPos = str.find_first_not_of(delimiters, 0);
-    // Find first "non-delimiter".
-    std::string::size_type pos     = str.find_first_of(delimiters, lastPos);
+                      const std::string& delimiters )
+{
+	// Skip delimiters at beginning.
+	std::string::size_type lastPos = str.find_first_not_of(delimiters, 0);
+	// Find first "non-delimiter".
+	std::string::size_type pos     = str.find_first_of(delimiters, lastPos);
 
-    while (std::string::npos != pos || std::string::npos != lastPos)
-    {
-        // Found a token, add it to the vector.
-        tokens.push_back(str.substr(lastPos, pos - lastPos));
-        // Skip delimiters.  Note the "not_of"
-        lastPos = str.find_first_not_of(delimiters, pos);
-        // Find next "non-delimiter"
-        pos = str.find_first_of(delimiters, lastPos);
-    }
+	while (std::string::npos != pos || std::string::npos != lastPos)
+	{
+		// Found a token, add it to the vector.
+		tokens.push_back(str.substr(lastPos, pos - lastPos));
+		// Skip delimiters.  Note the "not_of"
+		lastPos = str.find_first_not_of(delimiters, pos);
+		// Find next "non-delimiter"
+		pos = str.find_first_of(delimiters, lastPos);
+	}
 }

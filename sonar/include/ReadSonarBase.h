@@ -1,7 +1,7 @@
 /*
  * RoboTower, Hi-CoRG based on ROS
  *
- *
+ * Copyright (C) 2012 Politecnico di Milano
  * Copyright (C) 2011 Marcello Pogliani, Davide Tateo
  * Versione 1.0
  *

@@ -18,7 +18,8 @@ COMPILAZIONE
 ------------
 
 Per compilare usare rosmake, che si occuperà di risolvere le dipendenze, sia dei pacchetti ROS che dei pacchetti esterni.
-poichè ROS basa la compilazione su Cmake, sarà necessario aggiornare i percorsi dei Packages che formano RoboTower Tramite lo script di configurazione. E' possibile che sia necessario cancellare precendeti file di cache di CMake.
+poichè ROS basa la compilazione su Cmake, sarà necessario aggiornare i percorsi dei Packages che formano RoboTower Tramite lo script di configurazione. 
+E' possibile che sia necessario cancellare precendeti file di cache di CMake.
 
 ESECUZIONE
 ----------
@@ -35,8 +36,9 @@ Il progetto è distribuito sotto licenza GNU GPL versione 2.
 RACCOMANDAZIONI
 ---------------
 
-Il codice è offerto con licenza GPLv2, e quindi è liberamente utilizzabile e editabile da chiunque, nello spirito della condivisione del sapere che è il fondamento della formazione universitaria, di cui questo progetto è parte.
-Invitiamo chiunque riusi questo codice a mantenerlo pulito e ordinato, con commenti e mettendo ogni parte di codice al posto corretto, ed evitando di riempire i repository con file di altro software (se fosse necessario aggiornare .gitignore).
+Il codice è offerto con licenza GPLv2, e quindi è liberamente utilizzabile e editabile da chiunque, nello spirito della condivisione del sapere che è il fondamento della formazione universitaria, 
+di cui questo progetto è parte. Invitiamo chiunque riusi questo codice a mantenerlo pulito e ordinato, con commenti e mettendo ogni parte di codice al posto corretto, 
+ed evitando di riempire i repository con file di altro software (se fosse necessario aggiornare .gitignore).
 Nello scrivere il codice, cercate, ove possibile, di rendere chiaro cosa si stia facendo a chiunque possa in futuro riusarlo.
 
 CONTATTI

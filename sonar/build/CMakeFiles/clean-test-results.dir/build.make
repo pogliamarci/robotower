@@ -32,15 +32,15 @@ CMAKE_COMMAND = /usr/bin/cmake
 RM = /usr/bin/cmake -E remove -f
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/marcello/robotower/sonar
+CMAKE_SOURCE_DIR = /home/dave/RoboTower/sonar
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/marcello/robotower/sonar/build
+CMAKE_BINARY_DIR = /home/dave/RoboTower/sonar/build
 
 # Utility rule file for clean-test-results.
 
 CMakeFiles/clean-test-results:
-	if ! rm -rf /home/marcello/.ros/test_results/sonar; then echo WARNING:\ failed\ to\ remove\ test-results\ directory ; fi
+	if ! rm -rf /home/dave/.ros/test_results/sonar; then echo WARNING:\ failed\ to\ remove\ test-results\ directory ; fi
 
 clean-test-results: CMakeFiles/clean-test-results
 clean-test-results: CMakeFiles/clean-test-results.dir/build.make
@@ -55,6 +55,6 @@ CMakeFiles/clean-test-results.dir/clean:
 .PHONY : CMakeFiles/clean-test-results.dir/clean
 
 CMakeFiles/clean-test-results.dir/depend:
-	cd /home/marcello/robotower/sonar/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/marcello/robotower/sonar /home/marcello/robotower/sonar /home/marcello/robotower/sonar/build /home/marcello/robotower/sonar/build /home/marcello/robotower/sonar/build/CMakeFiles/clean-test-results.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/dave/RoboTower/sonar/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/dave/RoboTower/sonar /home/dave/RoboTower/sonar /home/dave/RoboTower/sonar/build /home/dave/RoboTower/sonar/build /home/dave/RoboTower/sonar/build/CMakeFiles/clean-test-results.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/clean-test-results.dir/depend
 

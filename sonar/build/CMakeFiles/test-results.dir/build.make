@@ -32,15 +32,15 @@ CMAKE_COMMAND = /usr/bin/cmake
 RM = /usr/bin/cmake -E remove -f
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/marcello/robotower/sonar
+CMAKE_SOURCE_DIR = /home/dave/RoboTower/sonar
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/marcello/robotower/sonar/build
+CMAKE_BINARY_DIR = /home/dave/RoboTower/sonar/build
 
 # Utility rule file for test-results.
 
 CMakeFiles/test-results:
-	/home/marcello/ros/ros/tools/rosunit/scripts/summarize_results.py --nodeps sonar
+	/home/dave/ros/ros/tools/rosunit/scripts/summarize_results.py --nodeps sonar
 
 test-results: CMakeFiles/test-results
 test-results: CMakeFiles/test-results.dir/build.make
@@ -55,6 +55,6 @@ CMakeFiles/test-results.dir/clean:
 .PHONY : CMakeFiles/test-results.dir/clean
 
 CMakeFiles/test-results.dir/depend:
-	cd /home/marcello/robotower/sonar/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/marcello/robotower/sonar /home/marcello/robotower/sonar /home/marcello/robotower/sonar/build /home/marcello/robotower/sonar/build /home/marcello/robotower/sonar/build/CMakeFiles/test-results.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/dave/RoboTower/sonar/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/dave/RoboTower/sonar /home/dave/RoboTower/sonar /home/dave/RoboTower/sonar/build /home/dave/RoboTower/sonar/build /home/dave/RoboTower/sonar/build/CMakeFiles/test-results.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/test-results.dir/depend
 
