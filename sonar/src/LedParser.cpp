@@ -3,22 +3,22 @@
 
 LedParser::LedParser()
 {
-	this.Red=0;
-	this.Green=FALSE;
-	this.Yellow[4]=FALSE;
+	this.RedS=0;
+	this.GreenS=FALSE;
+	this.YellowS[4]=FALSE;
 	this.C=0x00;
 }
 
 LedParser::Green(bool g)
 {
-	this.Green=g;
-	if(Green=TRUE) this.C=this.C|0x08;
+	this.GreenS=g;
+	if(GreenS=TRUE) this.C=this.C|0x08;
 	else this.C=this.C&0xF7;
 }
 
 void LedParser::Red(char r)
 {
-	this.Red=r;
+	this.RedS=r;
 	this.C=this.C&(8+Red);
 }
 
@@ -28,8 +28,8 @@ void LedParser::Yellow(bool y[4])
 	char l=32;
 	for(i=0; i<4; i++) 
 	{
-		this.Yellow[i]=y[i];
-		if(this.Yellow[i]=TRUE) this.C=this.C|l;
+		this.YellowS[i]=y[i];
+		if(this.YellowS[i]=TRUE) this.C=this.C|l;
 		else this.C=this.C&(!l);
 		l*2;
 	}

@@ -10,9 +10,9 @@ class LedParser
 		void Red(char r);
 		void Yellow(bool y[4]);
 		void SendToLed();
-		char Red;
-		bool Green;
-		bool Yellow;
+		char RedS;
+		bool GreenS;
+		bool YellowS;
 	private:
 		char C;
 		ReadSonar* Sender;
