@@ -44,7 +44,6 @@ desktop.ini
 sonar/.cproject
 sonar/.project
 CMakeCache.txt
-CMakeCache.txt.orig
 sonar/build/sonar
 sonar/build/CMakeFiles
 build/CMakeFiles
