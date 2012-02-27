@@ -1,7 +1,10 @@
 FILE(REMOVE_RECURSE
   "../msg_gen"
+  "../srv_gen"
   "../src/sonar/msg"
+  "../src/sonar/srv"
   "../msg_gen"
+  "../srv_gen"
   "CMakeFiles/ROSBUILD_genmsg_lisp"
   "../msg_gen/lisp/Led.lisp"
   "../msg_gen/lisp/_package.lisp"

@@ -1,12 +1,16 @@
 FILE(REMOVE_RECURSE
   "../msg_gen"
+  "../srv_gen"
   "../src/sonar/msg"
+  "../src/sonar/srv"
   "../msg_gen"
+  "../srv_gen"
   "CMakeFiles/sonar.dir/src/sonar.o"
   "CMakeFiles/sonar.dir/src/ReadSonar.o"
   "CMakeFiles/sonar.dir/src/ReadSonarBase.o"
   "CMakeFiles/sonar.dir/src/SerialCommunication.o"
   "CMakeFiles/sonar.dir/src/CharCircularBuffer.o"
+  "CMakeFiles/sonar.dir/src/LedParser.o"
   "../bin/sonar.pdb"
   "../bin/sonar"
 )

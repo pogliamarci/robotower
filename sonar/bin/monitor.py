@@ -34,14 +34,14 @@ if __name__ == "__main__":
     widget.setLayout(layout)
 
     # bind widgets to layout  
-    layout.addWidget(QLabel('North:', widget), 1, 1, 1, 1)
-    layout.addWidget(north_d, 1, 2, 1, 1)
-    layout.addWidget(QLabel('South:', widget), 2, 1, 1, 1)
-    layout.addWidget(south_d, 2, 2, 1, 1)
-    layout.addWidget(QLabel('East:', widget), 3, 1, 1, 1)
-    layout.addWidget(east_d, 3, 2, 1, 1)
-    layout.addWidget(QLabel('West:', widget), 4, 1, 1, 1)
-    layout.addWidget(west_d, 4, 2, 1, 1)
+    layout.addWidget(QLabel('North:', widget), 1, 1, 1, 2)
+    layout.addWidget(north_d, 1, 3, 1, 3)
+    layout.addWidget(QLabel('South:', widget), 2, 1, 1, 2)
+    layout.addWidget(south_d, 2, 3, 1, 3)
+    layout.addWidget(QLabel('East:', widget), 3, 1, 1, 2)
+    layout.addWidget(east_d, 3, 3, 1, 3)
+    layout.addWidget(QLabel('West:', widget), 4, 1, 1, 2)
+    layout.addWidget(west_d, 4, 3, 1, 3)
 
     widget.show()
 

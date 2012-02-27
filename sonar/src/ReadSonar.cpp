@@ -86,8 +86,7 @@ int ReadSonar::readData(){
 				fprintf(stderr,"(1) Sonar TOUT on fileno %d\n",fd);
 				res=-1;
 				break;
-		}		
-		
+		}
 		
 		if(res==-1)break;
 		

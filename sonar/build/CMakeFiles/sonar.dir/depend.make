@@ -4,6 +4,13 @@
 CMakeFiles/sonar.dir/src/CharCircularBuffer.o: ../include/CharCircularBuffer.h
 CMakeFiles/sonar.dir/src/CharCircularBuffer.o: ../src/CharCircularBuffer.cpp
 
+CMakeFiles/sonar.dir/src/LedParser.o: ../include/CharCircularBuffer.h
+CMakeFiles/sonar.dir/src/LedParser.o: ../include/LedParser.h
+CMakeFiles/sonar.dir/src/LedParser.o: ../include/ReadSonar.h
+CMakeFiles/sonar.dir/src/LedParser.o: ../include/ReadSonarBase.h
+CMakeFiles/sonar.dir/src/LedParser.o: ../include/SerialCommunication.h
+CMakeFiles/sonar.dir/src/LedParser.o: ../src/LedParser.cpp
+
 CMakeFiles/sonar.dir/src/ReadSonar.o: ../include/CharCircularBuffer.h
 CMakeFiles/sonar.dir/src/ReadSonar.o: ../include/ReadSonar.h
 CMakeFiles/sonar.dir/src/ReadSonar.o: ../include/ReadSonarBase.h
@@ -19,11 +26,13 @@ CMakeFiles/sonar.dir/src/SerialCommunication.o: ../include/SerialCommunication.h
 CMakeFiles/sonar.dir/src/SerialCommunication.o: ../src/SerialCommunication.cpp
 
 CMakeFiles/sonar.dir/src/sonar.o: ../include/CharCircularBuffer.h
+CMakeFiles/sonar.dir/src/sonar.o: ../include/LedParser.h
 CMakeFiles/sonar.dir/src/sonar.o: ../include/ReadSonar.h
 CMakeFiles/sonar.dir/src/sonar.o: ../include/ReadSonarBase.h
 CMakeFiles/sonar.dir/src/sonar.o: ../include/SerialCommunication.h
 CMakeFiles/sonar.dir/src/sonar.o: ../msg_gen/cpp/include/sonar/Led.h
 CMakeFiles/sonar.dir/src/sonar.o: ../msg_gen/cpp/include/sonar/Sonar.h
+CMakeFiles/sonar.dir/src/sonar.o: ../src/sonar.cpp
 CMakeFiles/sonar.dir/src/sonar.o: /home/marcello/ros/ros_comm/clients/cpp/roscpp/include/ros/advertise_options.h
 CMakeFiles/sonar.dir/src/sonar.o: /home/marcello/ros/ros_comm/clients/cpp/roscpp/include/ros/advertise_service_options.h
 CMakeFiles/sonar.dir/src/sonar.o: /home/marcello/ros/ros_comm/clients/cpp/roscpp/include/ros/common.h
@@ -78,5 +87,4 @@ CMakeFiles/sonar.dir/src/sonar.o: /home/marcello/ros/ros_comm/utilities/rostime/
 CMakeFiles/sonar.dir/src/sonar.o: /home/marcello/ros/ros_comm/utilities/rostime/include/ros/time.h
 CMakeFiles/sonar.dir/src/sonar.o: /home/marcello/ros/ros_comm/utilities/xmlrpcpp/src/XmlRpcDecl.h
 CMakeFiles/sonar.dir/src/sonar.o: /home/marcello/ros/ros_comm/utilities/xmlrpcpp/src/XmlRpcValue.h
-CMakeFiles/sonar.dir/src/sonar.o: ../src/sonar.cpp
 

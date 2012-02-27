@@ -36,10 +36,10 @@ CMAKE_COMMAND = /usr/bin/cmake
 RM = /usr/bin/cmake -E remove -f
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/marcello/ros_workspace/sonar
+CMAKE_SOURCE_DIR = /home/marcello/robotower/sonar
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/marcello/ros_workspace/sonar/build
+CMAKE_BINARY_DIR = /home/marcello/robotower/sonar/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -66,9 +66,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/marcello/ros_workspace/sonar/build/CMakeFiles /home/marcello/ros_workspace/sonar/build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/marcello/robotower/sonar/build/CMakeFiles /home/marcello/robotower/sonar/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/marcello/ros_workspace/sonar/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/marcello/robotower/sonar/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -159,6 +159,19 @@ ROSBUILD_gensrv_lisp: cmake_check_build_system
 ROSBUILD_gensrv_lisp/fast:
 	$(MAKE) -f CMakeFiles/ROSBUILD_gensrv_lisp.dir/build.make CMakeFiles/ROSBUILD_gensrv_lisp.dir/build
 .PHONY : ROSBUILD_gensrv_lisp/fast
+
+#=============================================================================
+# Target rules for targets named ROSBUILD_gensrv_py
+
+# Build rule for target.
+ROSBUILD_gensrv_py: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 ROSBUILD_gensrv_py
+.PHONY : ROSBUILD_gensrv_py
+
+# fast build rule for target.
+ROSBUILD_gensrv_py/fast:
+	$(MAKE) -f CMakeFiles/ROSBUILD_gensrv_py.dir/build.make CMakeFiles/ROSBUILD_gensrv_py.dir/build
+.PHONY : ROSBUILD_gensrv_py/fast
 
 #=============================================================================
 # Target rules for targets named clean-test-results
@@ -345,6 +358,21 @@ src/CharCircularBuffer.s:
 .PHONY : src/CharCircularBuffer.s
 
 # target to build an object file
+src/LedParser.o:
+	$(MAKE) -f CMakeFiles/sonar.dir/build.make CMakeFiles/sonar.dir/src/LedParser.o
+.PHONY : src/LedParser.o
+
+# target to preprocess a source file
+src/LedParser.i:
+	$(MAKE) -f CMakeFiles/sonar.dir/build.make CMakeFiles/sonar.dir/src/LedParser.i
+.PHONY : src/LedParser.i
+
+# target to generate assembly for a file
+src/LedParser.s:
+	$(MAKE) -f CMakeFiles/sonar.dir/build.make CMakeFiles/sonar.dir/src/LedParser.s
+.PHONY : src/LedParser.s
+
+# target to build an object file
 src/ReadSonar.o:
 	$(MAKE) -f CMakeFiles/sonar.dir/build.make CMakeFiles/sonar.dir/src/ReadSonar.o
 .PHONY : src/ReadSonar.o
@@ -415,6 +443,7 @@ help:
 	@echo "... ROSBUILD_genmsg_py"
 	@echo "... ROSBUILD_gensrv_cpp"
 	@echo "... ROSBUILD_gensrv_lisp"
+	@echo "... ROSBUILD_gensrv_py"
 	@echo "... clean-test-results"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
@@ -433,6 +462,9 @@ help:
 	@echo "... src/CharCircularBuffer.o"
 	@echo "... src/CharCircularBuffer.i"
 	@echo "... src/CharCircularBuffer.s"
+	@echo "... src/LedParser.o"
+	@echo "... src/LedParser.i"
+	@echo "... src/LedParser.s"
 	@echo "... src/ReadSonar.o"
 	@echo "... src/ReadSonar.i"
 	@echo "... src/ReadSonar.s"

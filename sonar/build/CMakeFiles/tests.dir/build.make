@@ -32,10 +32,10 @@ CMAKE_COMMAND = /usr/bin/cmake
 RM = /usr/bin/cmake -E remove -f
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/marcello/ros_workspace/sonar
+CMAKE_SOURCE_DIR = /home/marcello/robotower/sonar
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/marcello/ros_workspace/sonar/build
+CMAKE_BINARY_DIR = /home/marcello/robotower/sonar/build
 
 # Utility rule file for tests.
 
@@ -54,6 +54,6 @@ CMakeFiles/tests.dir/clean:
 .PHONY : CMakeFiles/tests.dir/clean
 
 CMakeFiles/tests.dir/depend:
-	cd /home/marcello/ros_workspace/sonar/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/marcello/ros_workspace/sonar /home/marcello/ros_workspace/sonar /home/marcello/ros_workspace/sonar/build /home/marcello/ros_workspace/sonar/build /home/marcello/ros_workspace/sonar/build/CMakeFiles/tests.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/marcello/robotower/sonar/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/marcello/robotower/sonar /home/marcello/robotower/sonar /home/marcello/robotower/sonar/build /home/marcello/robotower/sonar/build /home/marcello/robotower/sonar/build/CMakeFiles/tests.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/tests.dir/depend
 

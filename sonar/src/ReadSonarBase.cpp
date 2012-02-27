@@ -70,13 +70,6 @@ int ReadSonarBase::parseLine(){
 		bank = atoi(tokens[2].c_str());
 		pack_n = atoi(tokens[1].c_str());
 
-		/*int t = 0;
-		for (t=0; t < tokens.size(); t++) {
-
-		    std::cout << tokens[t] << "\n";
-
-		}*/
-
 		switch(bank){
 			case 1:
 				offset=0;
@@ -101,7 +94,12 @@ int ReadSonarBase::parseLine(){
 		}
 		
 		for (int i=0;i<4;i++){
-			measure[i*3+offset]=to_meter*(float)atoi(tokens[i+3].c_str());
+		    if (offset != 4) {
+		        /* TODO: ignoring offset = 4 to avoid having two connectors
+		         * pushing data to measure[WEST]...
+		         */
+		        measure[i*3+offset]=to_meter*(float)atoi(tokens[i+3].c_str());
+		    }
 		}
 	}
 	return parsed_type;

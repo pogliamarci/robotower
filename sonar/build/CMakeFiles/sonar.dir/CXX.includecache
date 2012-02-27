@@ -60,9 +60,9 @@ stdio.h
 errno.h
 -
 
-/home/marcello/ros_workspace/sonar/src/ReadSonarBase.cpp
+/home/marcello/robotower/sonar/src/ReadSonarBase.cpp
 ReadSonarBase.h
-/home/marcello/ros_workspace/sonar/src/ReadSonarBase.h
+/home/marcello/robotower/sonar/src/ReadSonarBase.h
 iostream
 -
 

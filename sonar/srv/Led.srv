@@ -1,0 +1,6 @@
+bool 	editGreen
+bool 	greenStatus
+bool 	editRed
+uint8 	numRed
+bool 	editYellow
+bool[4] yellowStatus
