@@ -1,8 +1,8 @@
 /*
  * RoboTower, Hi-CoRG based on ROS
  *
- *
- * Copyright (C) 2011 Marcello Pogliani, Davide Tateo
+ * Copyright (C) 2012 Politecnico di Milano
+ * Copyright (C) 2012 Marcello Pogliani, Davide Tateo
  * Versione 1.0
  *
  * This program is free software; you can redistribute it and/or
@@ -31,7 +31,8 @@ ReadSonar::ReadSonar(std::string sdev,float to_meter) throw (ReadSonarDeviceExce
 :ReadSonarBase(to_meter){
 
 	fd = open(sdev.c_str(), O_RDWR | O_NOCTTY );
-	if(fd>=0){
+	if(fd>=0)
+	{
 		tcgetattr(fd,&oldtio);
 		bzero(&newtio, sizeof(termios));
 		newtio.c_cflag = BAUDRATE  | CS8 | CLOCAL | CREAD | CLOCAL ;
@@ -49,27 +50,33 @@ ReadSonar::ReadSonar(std::string sdev,float to_meter) throw (ReadSonarDeviceExce
 		buffer=new CharCircularBuffer(MAX_BUF_CHAR,'\r');
 				
 	}
-	else{
+	else
+	{
 		throw ReadSonarDeviceException();
 	}	
 }
 
-ReadSonar::~ReadSonar(){
-    if(fd>=0) {
-        sendStop();
-        close(fd);
-    }
-	if(buffer) {
-	    delete buffer;
+ReadSonar::~ReadSonar()
+{
+	if(fd>=0) 
+	{
+		sendStop();
+		close(fd);
 	}
+		if(buffer) 
+		{
+			delete buffer;
+		}
 }
 
 bool ReadSonar::isReady(){
 	return (fd>=0);
 }
 
-int ReadSonar::readData(){
-	if(fd<0) {
+int ReadSonar::readData()
+{
+	if(fd<0) 
+	{
 		return -1;
 	}
 
@@ -82,14 +89,17 @@ int ReadSonar::readData(){
 	res=0;
 
 	do {
-		switch(waitData(TOUT)){
+		switch(waitData(TOUT))
+		{
 			case SerialCommunication::wait_ok:
 				res = read(fd,tmp_buf,max_buf_tmp);
-				if(res<=0){
+				if(res<=0)
+				{
 					fprintf(stderr,"(1) Sonar READ Error on fileno %d\n",fd);
 					res=-1;
 				}
-				if(buffer->addNChar(tmp_buf,res)!=res){
+				if(buffer->addNChar(tmp_buf,res)!=res)
+				{
 					count_c	= count_c+res;			
 					fprintf(stderr,"(1) Sonar BUF_FULL on fileno %d\n",fd);
 					res=-1;
@@ -113,18 +123,22 @@ int ReadSonar::readData(){
 	return 0;
 }
 
-int ReadSonar::sendRun(){
+int ReadSonar::sendRun()
+{
 	tcflush(fd, TCIFLUSH);
 	return sendStringCommand((char *)"R\r",2);
 }
 
-int ReadSonar::sendStop(){
+int ReadSonar::sendStop()
+{
 	return sendStringCommand((char *)"S\r", 2);
 }
 
-int ReadSonar::sendStringCommand(char *cmd,int len){
+int ReadSonar::sendStringCommand(char *cmd,int len)
+{
 	if(fd<0)return -1;
-	for(int i=0;i<len;i++){
+	for(int i=0;i<len;i++)
+	{
 		if(write(fd,&cmd[i],1)!=1)return -1;
 		usleep(CHAR_PAUSE);
 	}

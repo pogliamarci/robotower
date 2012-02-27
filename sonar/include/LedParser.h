@@ -1,7 +1,7 @@
 /*
  * RoboTower, Hi-CoRG based on ROS
  *
- *
+ * Copyright (C) 2012 Politecnico di Milano
  * Copyright (C) 2011 Marcello Pogliani, Davide Tateo
  * Versione 1.0
  *
@@ -17,6 +17,7 @@
 
 #include <iostream>
 #include "ReadSonar.h"
+#define DIRECTION_N 4
 
 class LedParser
 {
@@ -24,11 +25,11 @@ class LedParser
 		LedParser(ReadSonar* read_sonar);
 		void Green(bool g);
 		void Red(char r);
-		void Yellow(bool y[4]);
+		void Yellow(bool y[DIRECTION_N]);
 		void SendToLed();
 		char RedS;
 		bool GreenS;
-		bool YellowS[4];
+		bool YellowS[DIRECTION_N];
 	private:
 		char C;
 		ReadSonar* Sender;

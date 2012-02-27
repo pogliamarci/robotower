@@ -1,8 +1,8 @@
 /*
  * RoboTower, Hi-CoRG based on ROS
  *
- *
- * Copyright (C) 2011 Marcello Pogliani, Davide Tateo
+ * Copyright (C) 2012 Politecnico di Milano
+ * Copyright (C) 2012 Marcello Pogliani, Davide Tateo
  * Versione 1.0
  *
  * This program is free software; you can redistribute it and/or
@@ -20,21 +20,22 @@
 
 #include "ReadSonarBase.h"
 
-class ReadSonar : public SerialCommunication, public ReadSonarBase{
-        int fd;  	//descrittore del file per leggere/scrivere sulla seriale
-        termios oldtio,newtio;
+class ReadSonar : public SerialCommunication, public ReadSonarBase
+{
+	int fd;  	//descrittore del file per leggere/scrivere sulla seriale
+	termios oldtio,newtio;
 
-    public:
-        int sendStringCommand(char *cmd,int len);
-    public:
-        ReadSonar(std::string sdev,float to_meter)
-        throw (ReadSonarDeviceException);
-        ~ReadSonar();
+	public:
+		int sendStringCommand(char *cmd,int len);
+	public:
+		ReadSonar(std::string sdev,float to_meter)
+		throw (ReadSonarDeviceException);
+		~ReadSonar();
 
-        virtual bool isReady();
-        virtual int readData();
-        virtual int sendRun();
-        virtual int sendStop();
+		virtual bool isReady();
+		virtual int readData();
+		virtual int sendRun();
+		virtual int sendStop();
 };
 
 #endif

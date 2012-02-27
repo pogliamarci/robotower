@@ -1,8 +1,8 @@
 /*
  * RoboTower, Hi-CoRG based on ROS
  *
- *
- * Copyright (C) 2011 Marcello Pogliani, Davide Tateo
+ * Copyright (C) 2012 Politecnico di Milano
+ * Copyright (C) 2012 Marcello Pogliani, Davide Tateo
  * Versione 1.0
  *
  * This program is free software; you can redistribute it and/or
@@ -22,18 +22,19 @@
 #include <stdio.h>
 #include <errno.h>
 
-class SerialCommunication{
-        struct pollfd ufd[1];
+class SerialCommunication
+{
+	struct pollfd ufd[1];
 
-    public:
-        static const int wait_ok=1;
-        static const int wait_tout=0;
-        static const int wait_err=-1;
+	public:
+		static const int wait_ok=1;
+		static const int wait_tout=0;
+		static const int wait_err=-1;
 
-        void set_fd(int fd);
+		void set_fd(int fd);
 
-        int waitData(int msec_tout);
-        //int set_low_latency();
+		int waitData(int msec_tout);
+		//int set_low_latency();
 };
 
 
