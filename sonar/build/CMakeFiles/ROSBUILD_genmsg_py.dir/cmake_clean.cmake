@@ -7,7 +7,6 @@ FILE(REMOVE_RECURSE
   "../srv_gen"
   "CMakeFiles/ROSBUILD_genmsg_py"
   "../src/sonar/msg/__init__.py"
-  "../src/sonar/msg/_Led.py"
   "../src/sonar/msg/_Sonar.py"
 )
 

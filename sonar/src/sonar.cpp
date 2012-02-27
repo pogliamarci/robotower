@@ -37,14 +37,7 @@ using namespace std;
 ReadSonar* initialize();
 void loop(ReadSonar*, ros::Publisher*);
 void readDataFromSonar(ReadSonar*);
-/*void ledCallback(Led);*/
-/*
-void ledCallback(Led led_data) {
-
-
-
-} */
-
+bool ledServiceCallback(sonar::Led::Request& , sonar::Led::Response&);
 
 int main(int argc, char** argv) {
     try {
@@ -56,7 +49,7 @@ int main(int argc, char** argv) {
 
         /* initialization as publisher of sonar_data msgs */
         ros::Publisher sonar_data_pub = n.advertise<sonar::Sonar>("sonar_data", 1000);
-        /* ros::ServiceServer advertiseService("led_data", ledCallback); */
+        ros::ServiceServer service = n.advertiseService("led_data", ledServiceCallback);
         
         loop(readSonar, &sonar_data_pub);
     
@@ -151,4 +144,10 @@ void readDataFromSonar(ReadSonar* readSonar) {
             }
         }
     }
+}
+
+
+bool ledServiceCallback(sonar::Led::Request& req, sonar::Led::Response& res ) {
+    // TODO
+    return true;
 }

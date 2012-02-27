@@ -39,42 +39,9 @@ CMAKE_BINARY_DIR = /home/marcello/robotower/sonar/build
 
 # Utility rule file for ROSBUILD_genmsg_lisp.
 
-CMakeFiles/ROSBUILD_genmsg_lisp: ../msg_gen/lisp/Led.lisp
-CMakeFiles/ROSBUILD_genmsg_lisp: ../msg_gen/lisp/_package.lisp
-CMakeFiles/ROSBUILD_genmsg_lisp: ../msg_gen/lisp/_package_Led.lisp
 CMakeFiles/ROSBUILD_genmsg_lisp: ../msg_gen/lisp/Sonar.lisp
 CMakeFiles/ROSBUILD_genmsg_lisp: ../msg_gen/lisp/_package.lisp
 CMakeFiles/ROSBUILD_genmsg_lisp: ../msg_gen/lisp/_package_Sonar.lisp
-
-../msg_gen/lisp/Led.lisp: ../msg/Led.msg
-../msg_gen/lisp/Led.lisp: /home/marcello/ros/ros_comm/clients/roslisp/scripts/genmsg_lisp.py
-../msg_gen/lisp/Led.lisp: /home/marcello/ros/ros/core/roslib/scripts/gendeps
-../msg_gen/lisp/Led.lisp: ../manifest.xml
-../msg_gen/lisp/Led.lisp: /home/marcello/ros/ros/core/rosbuild/manifest.xml
-../msg_gen/lisp/Led.lisp: /home/marcello/ros/ros/core/roslang/manifest.xml
-../msg_gen/lisp/Led.lisp: /home/marcello/ros/ros_comm/utilities/cpp_common/manifest.xml
-../msg_gen/lisp/Led.lisp: /home/marcello/ros/ros_comm/clients/cpp/roscpp_traits/manifest.xml
-../msg_gen/lisp/Led.lisp: /home/marcello/ros/ros_comm/utilities/rostime/manifest.xml
-../msg_gen/lisp/Led.lisp: /home/marcello/ros/ros_comm/clients/cpp/roscpp_serialization/manifest.xml
-../msg_gen/lisp/Led.lisp: /home/marcello/ros/ros/tools/rospack/manifest.xml
-../msg_gen/lisp/Led.lisp: /home/marcello/ros/ros/core/roslib/manifest.xml
-../msg_gen/lisp/Led.lisp: /home/marcello/ros/ros_comm/utilities/xmlrpcpp/manifest.xml
-../msg_gen/lisp/Led.lisp: /home/marcello/ros/ros_comm/tools/rosconsole/manifest.xml
-../msg_gen/lisp/Led.lisp: /home/marcello/ros/ros_comm/messages/std_msgs/manifest.xml
-../msg_gen/lisp/Led.lisp: /home/marcello/ros/ros_comm/messages/rosgraph_msgs/manifest.xml
-../msg_gen/lisp/Led.lisp: /home/marcello/ros/ros_comm/clients/cpp/roscpp/manifest.xml
-../msg_gen/lisp/Led.lisp: /home/marcello/ros/ros_comm/clients/rospy/manifest.xml
-../msg_gen/lisp/Led.lisp: /home/marcello/ros/ros_comm/messages/std_msgs/msg_gen/generated
-../msg_gen/lisp/Led.lisp: /home/marcello/ros/ros_comm/messages/rosgraph_msgs/msg_gen/generated
-../msg_gen/lisp/Led.lisp: /home/marcello/ros/ros_comm/clients/cpp/roscpp/msg_gen/generated
-../msg_gen/lisp/Led.lisp: /home/marcello/ros/ros_comm/clients/cpp/roscpp/srv_gen/generated
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/marcello/robotower/sonar/build/CMakeFiles $(CMAKE_PROGRESS_1)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating ../msg_gen/lisp/Led.lisp, ../msg_gen/lisp/_package.lisp, ../msg_gen/lisp/_package_Led.lisp"
-	/home/marcello/ros/ros_comm/clients/roslisp/scripts/genmsg_lisp.py /home/marcello/robotower/sonar/msg/Led.msg
-
-../msg_gen/lisp/_package.lisp: ../msg_gen/lisp/Led.lisp
-
-../msg_gen/lisp/_package_Led.lisp: ../msg_gen/lisp/Led.lisp
 
 ../msg_gen/lisp/Sonar.lisp: ../msg/Sonar.msg
 ../msg_gen/lisp/Sonar.lisp: /home/marcello/ros/ros_comm/clients/roslisp/scripts/genmsg_lisp.py
@@ -98,7 +65,7 @@ CMakeFiles/ROSBUILD_genmsg_lisp: ../msg_gen/lisp/_package_Sonar.lisp
 ../msg_gen/lisp/Sonar.lisp: /home/marcello/ros/ros_comm/messages/rosgraph_msgs/msg_gen/generated
 ../msg_gen/lisp/Sonar.lisp: /home/marcello/ros/ros_comm/clients/cpp/roscpp/msg_gen/generated
 ../msg_gen/lisp/Sonar.lisp: /home/marcello/ros/ros_comm/clients/cpp/roscpp/srv_gen/generated
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/marcello/robotower/sonar/build/CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/marcello/robotower/sonar/build/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating ../msg_gen/lisp/Sonar.lisp, ../msg_gen/lisp/_package.lisp, ../msg_gen/lisp/_package_Sonar.lisp"
 	/home/marcello/ros/ros_comm/clients/roslisp/scripts/genmsg_lisp.py /home/marcello/robotower/sonar/msg/Sonar.msg
 
@@ -107,9 +74,6 @@ CMakeFiles/ROSBUILD_genmsg_lisp: ../msg_gen/lisp/_package_Sonar.lisp
 ../msg_gen/lisp/_package_Sonar.lisp: ../msg_gen/lisp/Sonar.lisp
 
 ROSBUILD_genmsg_lisp: CMakeFiles/ROSBUILD_genmsg_lisp
-ROSBUILD_genmsg_lisp: ../msg_gen/lisp/Led.lisp
-ROSBUILD_genmsg_lisp: ../msg_gen/lisp/_package.lisp
-ROSBUILD_genmsg_lisp: ../msg_gen/lisp/_package_Led.lisp
 ROSBUILD_genmsg_lisp: ../msg_gen/lisp/Sonar.lisp
 ROSBUILD_genmsg_lisp: ../msg_gen/lisp/_package.lisp
 ROSBUILD_genmsg_lisp: ../msg_gen/lisp/_package_Sonar.lisp

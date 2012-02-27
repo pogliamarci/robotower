@@ -1,6 +1,8 @@
-bool 	editGreen
-bool 	greenStatus
-bool 	editRed
-uint8 	numRed
-bool 	editYellow
-bool[4] yellowStatus
+bool editGreen
+bool editYellow
+bool editRed
+bool greenIsOn
+uint8 redNumOn
+bool[4] yellowIsOn
+---
+bool requestSuccessful

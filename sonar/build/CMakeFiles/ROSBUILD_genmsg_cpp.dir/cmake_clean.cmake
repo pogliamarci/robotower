@@ -6,7 +6,6 @@ FILE(REMOVE_RECURSE
   "../msg_gen"
   "../srv_gen"
   "CMakeFiles/ROSBUILD_genmsg_cpp"
-  "../msg_gen/cpp/include/sonar/Led.h"
   "../msg_gen/cpp/include/sonar/Sonar.h"
 )
 

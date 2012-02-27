@@ -31,8 +31,8 @@ CMakeFiles/sonar.dir/src/sonar.o
  ../include/ReadSonar.h
  ../include/ReadSonarBase.h
  ../include/SerialCommunication.h
- ../msg_gen/cpp/include/sonar/Led.h
  ../msg_gen/cpp/include/sonar/Sonar.h
+ ../srv_gen/cpp/include/sonar/Led.h
  /home/marcello/robotower/sonar/src/sonar.cpp
  /home/marcello/ros/ros_comm/clients/cpp/roscpp/include/ros/advertise_options.h
  /home/marcello/ros/ros_comm/clients/cpp/roscpp/include/ros/advertise_service_options.h
