@@ -11,6 +11,7 @@
   <url>http://ros.org/wiki/sonar</url>
 
   <depend package="roscpp"/>
+  <depend package="rospy" />
 
 </package>
 
