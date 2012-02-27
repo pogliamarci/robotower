@@ -16,7 +16,7 @@ LedParser::Green(bool g)
 	else this.C=this.C&0xF7;
 }
 
-void LedParser::Red(uint8_t r)
+void LedParser::Red(char r)
 {
 	this.Red=r;
 	this.C=this.C&(8+Red);
