@@ -24,8 +24,6 @@
 #define RED_OFF 0xF8
 #define FIRST_YELLOW 16
 
-#define NUMREDLED 4
-
 LedParser::LedParser(ReadSonar* read_sonar)
 {
 	int i;
@@ -45,25 +43,24 @@ void LedParser::Green(bool g)
 
 void LedParser::Red(char r)
 {
-<<<<<<< HEAD
-    if (r <= NUMREDLED && r >= 1)
-        this->RedS = r;
-    else if (r > NUMREDLED)
-        this->RedS = NUMREDLED;
-    else this->RedS = 0;
 
-    this->C = (this->C & 0xF8) | RedS;
-=======
-	this->RedS=r;
-	this->C = (this->C & RED_OFF) | RedS;
->>>>>>> 37bcc978956a2846bff22d97cfae384578616c9e
+	if (r <= NUMREDLED && r >= 1)
+		this->RedS = r;
+	else if (r > NUMREDLED)
+		this->RedS = NUMREDLED;
+	else this->RedS = 0;
+
+	this->C = (this->C & 0xF8) | RedS;
+		this->RedS=r;
+		this->C = (this->C & RED_OFF) | RedS;
+
 }
 
-void LedParser::Yellow(bool y[DIRECTION_N])
+void LedParser::Yellow(bool y[NUMREDLED])
 {
 	int i;
 	char l=FIRST_YELLOW;
-	for(i=0; i<DIRECTION_N; i++) 
+	for(i=0; i<NUMREDLED; i++) 
 	{
 		this->YellowS[i]=y[i];
 		if(this->YellowS[i]==true) this->C=this->C|l;

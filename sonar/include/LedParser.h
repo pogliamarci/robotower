@@ -17,7 +17,7 @@
 
 #include <iostream>
 #include "ReadSonar.h"
-#define DIRECTION_N 4
+#define NUMREDLED 4
 
 class LedParser
 {
@@ -25,11 +25,11 @@ class LedParser
 		LedParser(ReadSonar* read_sonar);
 		void Green(bool g);
 		void Red(char r);
-		void Yellow(bool y[DIRECTION_N]);
+		void Yellow(bool y[NUMREDLED]);
 		void SendToLed();
 		char RedS;
 		bool GreenS;
-		bool YellowS[DIRECTION_N];
+		bool YellowS[NUMREDLED];
 	private:
 		char C;
 		ReadSonar* Sender;
