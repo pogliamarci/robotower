@@ -18,36 +18,40 @@
 #include <iostream>
 #include <cstdio>
 #include "LedParser.h"
+#define ALL_OFF 0x00
+#define GREEN_ON 0x08
+#define GREEN_OFF 0xF7
+#define RED_OFF 0xF8
+#define FIRST_YELLOW 16
 
 LedParser::LedParser(ReadSonar* read_sonar)
 {
-    int i;
+	int i;
 	this->RedS=0;
 	this->GreenS = false;
-	for(i=0;i<4; i++)
-	this->YellowS[i] = false;
-	this->C=0x00;
+	for(i=0;i<4; i++) this->YellowS[i] = false;
+	this->C=ALL_OFF;
 	this->Sender = read_sonar;
 }
 
 void LedParser::Green(bool g)
 {
 	this->GreenS = g;
-	if(GreenS==true) this->C = this->C|0x08;
-	else this->C=this->C&0xF7;
+	if(GreenS==true) this->C = this->C|GREEN_ON;
+	else this->C=this->C&GREEN_OFF;
 }
 
 void LedParser::Red(char r)
 {
 	this->RedS=r;
-	this->C = (this->C & 0xF8) | RedS;
+	this->C = (this->C & RED_OFF) | RedS;
 }
 
-void LedParser::Yellow(bool y[4])
+void LedParser::Yellow(bool y[DIRECTION_N])
 {
 	int i;
-	char l=16;
-	for(i=0; i<4; i++) 
+	char l=FIRST_YELLOW;
+	for(i=0; i<DIRECTION_N; i++) 
 	{
 		this->YellowS[i]=y[i];
 		if(this->YellowS[i]==true) this->C=this->C|l;

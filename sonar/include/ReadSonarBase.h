@@ -37,65 +37,67 @@
 #include "SerialCommunication.h"
 #include "CharCircularBuffer.h"
 
-class ReadSonarDeviceException: public std::exception {
-    public:
-    virtual const char* what() const throw();
+class ReadSonarDeviceException: public std::exception 
+{
+	public:
+	virtual const char* what() const throw();
 };
 
-class ReadSonarBase{
-    protected:
-        unsigned int pack_n;
+class ReadSonarBase
+{
+	protected:
+		unsigned int pack_n;
 
-        bool ready;
+		bool ready;
 
-        float to_meter;
+		float to_meter;
 
-        void tokenize(const std::string& str, std::vector<std::string>& tokens, const std::string& delimiters );
+		void tokenize(const std::string& str, std::vector<std::string>& tokens, const std::string& delimiters );
 
-        float * measure;
-        CharCircularBuffer * buffer;
-        char * tmp_buf;
-    public:
-        ReadSonarBase(float to_meter)
-        throw (ReadSonarDeviceException);
-        virtual ~ReadSonarBase();
+		float * measure;
+		CharCircularBuffer * buffer;
+		char * tmp_buf;
+	public:
+		ReadSonarBase(float to_meter)
+		throw (ReadSonarDeviceException);
+		virtual ~ReadSonarBase();
 
-        virtual unsigned int getLastPackNum();
+		virtual unsigned int getLastPackNum();
 
-        virtual float getMeasure(unsigned int index);
+		virtual float getMeasure(unsigned int index);
 
-        virtual bool isReady()=0; //to implement
+		virtual bool isReady()=0; //to implement
 
-        virtual int readData()=0; //to implement
+		virtual int readData()=0; //to implement
 
-        virtual int sendRun()=0;//to implement
-        virtual int sendStop()=0;//to implement
+		virtual int sendRun()=0;//to implement
+		virtual int sendStop()=0;//to implement
 
-        virtual int parseLine();
+		virtual int parseLine();
 
-        virtual unsigned int getLineToParseNum();
+		virtual unsigned int getLineToParseNum();
 
-        virtual char * getParsedLine();
+		virtual char * getParsedLine();
 
-        static const unsigned int n_sonar = 12;
+		static const unsigned int n_sonar = 12;
 
-        static const int parse_err 		 = -1;
+		static const int parse_err 	 = -1;
 
-        static const int parse_meas_b1   =  0;
-        static const int parse_meas_b2   =  1;
-        static const int parse_meas_b3   =  2;
-        static const int parse_meas_b4	 =  4;
+		static const int parse_meas_b1	 =  0;
+		static const int parse_meas_b2	 =  1;
+		static const int parse_meas_b3	 =  2;
+		static const int parse_meas_b4	 =  4;
 
-        static const int parse_dbg		 =  3;
-        static const int parse_ok		 =  4;
-        static const int parse_response_err		=  5;
+		static const int parse_dbg		=  3;
+		static const int parse_ok		=  4;
+		static const int parse_response_err	=  5;
 
-        static const int response_header_len = 4;
-        static const char response_ok_header[];
-        static const char response_err_header[];
-        static const char response_dbg_header[];
-        static const char response_meas_header[];
+		static const int response_header_len = 4;
+		static const char response_ok_header[];
+		static const char response_err_header[];
+		static const char response_dbg_header[];
+		static const char response_meas_header[];
 
-        static const int max_buf_tmp = 256;
+		static const int max_buf_tmp = 256;
 };
 #endif
