@@ -1,5 +1,5 @@
 <package>
-  <description brief="sonar">
+  <description brief="Echoes">
 
      Package che si assume il compito di gestire i moduli hardware connessi tramite la connessione seriale Zigbee.
      In partcolare viene gestita la ricezione dei dati dai sonar e le richieste di accensione dei led.	

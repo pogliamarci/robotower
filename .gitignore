@@ -7,7 +7,7 @@
 *.o
 *.so
 # More
-sonar/bin/sonar
+Echoes/bin/Echoes
 
 # Python precompiled files #
 ############################
@@ -50,11 +50,11 @@ desktop.ini
 
 # ROS\RoboTower specific #
 ##########################
-sonar/.cproject
-sonar/.project
+Echoes/.cproject
+Echoes/.project
 CMakeCache.txt
-sonar/build/sonar
-sonar/build/CMakeFiles
+Echoes/build/sonar
+Echoes/build/CMakeFiles
 build/CMakeFiles
 cmake_install.cmake
 setup.sh
