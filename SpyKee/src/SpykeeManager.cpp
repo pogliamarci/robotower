@@ -1,4 +1,4 @@
-#include "Spykee.h"
+#include "SpykeeManager.h"
 #include "string.h"
 #include "pthread.h"
 
@@ -15,7 +15,7 @@ using namespace std;
 void HandleTCPClient(TCPSocket *sr);     // TCP client handling function
 void *ThreadMain(void *arg);               // Main program of a thread 
 
-Spykee::Spykee(char* user, char* pass)
+SpykeeManager::SpykeeManager(char* user, char* pass)
 {
     /* search a Spykee on the network, and tries to connect to it 
        with provided user and pass (default: user=admin pass=admin) */
@@ -65,7 +65,7 @@ Spykee::Spykee(char* user, char* pass)
 	state |= Connected;
 }
 
-void Spykee::unplug()
+void SpykeeManager::unplug()
 {
     /* sends command to make spykee unplug from charger */
 	char message[] = {80, 75, 16, 00, 1};
@@ -74,7 +74,7 @@ void Spykee::unplug()
 	tcp->send(message, 1);
 }
 
-void Spykee::setplug()
+void SpykeeManager::setplug()
 {
     /* sends command to make spykee plug to charger */
 	char message[] = {80, 75, 16, 00, 1};
@@ -83,7 +83,7 @@ void Spykee::setplug()
 	tcp->send(message, 1);
 }
 
-void Spykee::soundAllarm()
+void SpykeeManager::soundAllarm()
 {
     /* make spykee execute an alarm-like sound */
 	char message[] = {80, 75, 7, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -95,7 +95,7 @@ void Spykee::soundAllarm()
 	}
 }
 
-void Spykee::soundBomb()
+void SpykeeManager::soundBomb()
 {
     /* make spykee execute a bomb-like sound */
 	char message[] = {80, 75, 7, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -107,7 +107,7 @@ void Spykee::soundBomb()
 	}
 }
 
-void Spykee::turnOnCameraLight()
+void SpykeeManager::turnOnCameraLight()
 {
     /* make spykee turn on the light under the camera */
 	printf("\nACCENSIONE!!");
@@ -122,7 +122,7 @@ void Spykee::turnOnCameraLight()
 	}
 }
 
-void Spykee::turnOffCameraLight()
+void SpykeeManager::turnOffCameraLight()
 {
     /* make spykee turn off the light under the camera */
 	printf("\nSPEGNIMENTO!!");
@@ -137,7 +137,7 @@ void Spykee::turnOffCameraLight()
 	}
 }
 
-void Spykee::move(int leftSpeed, int rightSpeed)
+void SpykeeManager::move(int leftSpeed, int rightSpeed)
 {
     /* make spykee move
      * speeds are in the range (-90, 90)
@@ -158,7 +158,7 @@ void Spykee::move(int leftSpeed, int rightSpeed)
 	tcp->send(speedMessage, 2);
 }
 
-void Spykee::startCamera()
+void SpykeeManager::startCamera()
 {
 	char respString[100];
 	int dimPackets = 0, bytesRecived;
@@ -172,15 +172,7 @@ void Spykee::startCamera()
 	state |= CameraOn;
 }
 
-unsigned char* Spykee::captureFrame()
-{
-}
-
-Spykee::~Spykee()
-{
-}
-
-int Spykee::getState()
+int SpykeeManager::getState()
 {
 	return (enum states) state;
 }
@@ -192,7 +184,7 @@ void HandleTCPClient(TCPSocket *sock) {
 	while ((recvMsgSize = sock->recv(buffer, 1460)) > 0) {
 		//printf("\nRICEVUTO MESSAGGIO");
 		//fflush(stdin);
-		Spykee::pharseMessage(buffer, &recvMsgSize, NULL, Spykee::pharseNewMessage);
+		SpykeeManager::pharseMessage(buffer, &recvMsgSize, NULL, SpykeeManager::pharseNewMessage);
 		//printf("\nFINE ANALISI");
 		//fflush(stdin);
 	}

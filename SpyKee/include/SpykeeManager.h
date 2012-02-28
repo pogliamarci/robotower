@@ -5,7 +5,7 @@
 
 #define WRITEIMAGEONDISK
 
-class Spykee
+class SpykeeManager
 {
     	  public:
 		enum operations
@@ -21,13 +21,11 @@ class Spykee
 			Moving = 2,
 			CameraOn = 4
 		};
-		Spykee(char*, char*);
-		~Spykee();
+        SpykeeManager(char*, char*);
 		void unplug();
 		void setplug();
 		void move(int, int);
 		void startCamera();
-		unsigned char* captureFrame();
 		int getState();
 		void soundAllarm();
 		void soundBomb();
@@ -205,7 +203,7 @@ class Spykee
 					}
 					
 					lenMessage -= remaningLengthImage;
-					Spykee::pharseMessage(m + remaningLengthImage, &lenMessage, NULL, pharseNewMessage);
+					SpykeeManager::pharseMessage(m + remaningLengthImage, &lenMessage, NULL, pharseNewMessage);
 					
 					return NULL;
 				}
