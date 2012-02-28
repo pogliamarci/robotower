@@ -8,6 +8,7 @@
 *.so
 # More
 Echoes/bin/Echoes
+SpyKee/bin/SpyKee
 
 # Python precompiled files #
 ############################
@@ -52,6 +53,8 @@ desktop.ini
 ##########################
 Echoes/.cproject
 Echoes/.project
+SpyKee/.cproject
+SpyKee/.project
 CMakeCache.txt
 Echoes/build/Echoes/
 Echoes/build/CMakeFiles/
