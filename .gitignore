@@ -56,3 +56,4 @@ sonar/build/sonar
 sonar/build/CMakeFiles
 build/CMakeFiles
 setup.sh
+Makefile
