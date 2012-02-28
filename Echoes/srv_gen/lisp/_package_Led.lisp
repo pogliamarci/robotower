@@ -1,4 +1,4 @@
-(cl:in-package Echoes-srv)
+(cl:in-package sonar-srv)
 (cl:export '(EDITGREEN-VAL
           EDITGREEN
           EDITYELLOW-VAL

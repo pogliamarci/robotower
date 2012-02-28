@@ -71,5 +71,6 @@ void LedParser::Yellow(bool y[NUMREDLED])
 
 void LedParser::SendToLed() 
 {
+	printf("numero %d\n", C);
 	(this->Sender)->sendStringCommand(&C, 1);
 }

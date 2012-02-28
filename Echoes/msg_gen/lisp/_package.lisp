@@ -1,4 +1,4 @@
-(cl:defpackage Echoes-msg
+(cl:defpackage sonar-msg
   (:use )
   (:export
    "<SONAR>"
