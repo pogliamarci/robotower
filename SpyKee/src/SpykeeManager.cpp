@@ -1,203 +1,217 @@
 #include "SpykeeManager.h"
-#include "string.h"
-#include "pthread.h"
+#include <iostream>
+#include <stdio.h>
+#include <string.h>
 
-typedef struct
-{
-	TCPSocket* sock;
-	char buffer[300];
-	int lenBuffer;
-	bool free;
-} structRecv;
+#define DEBUG_SPYKEE
 
 using namespace std;
 
-void HandleTCPClient(TCPSocket *sr);     // TCP client handling function
-void *ThreadMain(void *arg);               // Main program of a thread 
-
-SpykeeManager::SpykeeManager(char* user, char* pass)
+SpykeeManager::SpykeeManager(char* username, char* password)
 {
-    /* search a Spykee on the network, and tries to connect to it 
-       with provided user and pass (default: user=admin pass=admin) */
+	//definisco i nomi utente e password
+
+#ifdef DEBUG_SPYKEE
+	cout << "Nome utente: " << username << endl;
+	cout << "Password: " << password << endl;
+#endif
+
+	//inizializzo i campi per la connessione
 	UDPSocket udp;
-	char UDPMessage[] = {68, 83, 67, 86, 01}, respString[100];
-	char message[] = {80, 75, 10, 00, 12};
-	char messageAuthentication[strlen(user) + strlen(pass) + 2];
+	char UDPMessage[] = { 68, 83, 67, 86, 01 }, respString[100];
+	char message[] = { 80, 75, 10, 00, 12 };
+	char messageAuthentication[strlen(username) + strlen(password) + 2];
 	string sourceAddress;
 	unsigned short port;
-	pthread_t threadID;
 	structRecv sr;
-	
-	/* search a spykee... */
+
+	//avvio la connessione
 	udp.sendTo(UDPMessage, 5, "172.17.6.255", 9000);
-	
+
 	if (udp.recvFrom(respString, 100, sourceAddress, port) > 0)
-	    printf("%s\n", (respString + 7));
-	
-	/* connects to it and authenticates */
+		printf("%s\n", (respString + 7));
+
 	tcp = new TCPSocket(sourceAddress, 9000);
-	
+
 	tcp->send(message, 5);
-	
+
 	messageAuthentication[0] = 5;
-	for (int i = 0; i < strlen(user); i++)
+	for (unsigned int i = 0; i < strlen(username); i++)
 	{
-		messageAuthentication[1 + i] = user[i];
+		messageAuthentication[1 + i] = username[i];
 	}
-	messageAuthentication[1 + strlen(user)] = 5;
-	for (int i = 0; i <  strlen(pass); i++)
+
+	messageAuthentication[1 + strlen(username)] = 5;
+	for (unsigned int i = 0; i < strlen(password); i++)
 	{
-		messageAuthentication[2 + strlen(user) + i] = pass[i];
+		messageAuthentication[2 + strlen(username) + i] = password[i];
 	}
-	tcp->send(messageAuthentication, strlen(user) + strlen(pass) + 2);
-	
+	tcp->send(messageAuthentication, strlen(username) + strlen(password) + 2);
 	if (tcp->recv(respString, 100) > 0)
 	{
 		printf("%s\n", (respString + 7));
 	}
-	
 	sr.sock = tcp;
 	sr.lenBuffer = 0;
 	sr.free = true;
-	//Viene creato un thread per la ricezione dei messaggi
-	//pthread_create(&threadID, NULL, ThreadMain, (void *) tcp);
-	
-	state |= Connected;
-}
-
-void SpykeeManager::unplug()
-{
-    /* sends command to make spykee unplug from charger */
-	char message[] = {80, 75, 16, 00, 1};
-	tcp->send(message, 5);
-	message[0] = 5;
-	tcp->send(message, 1);
-}
-
-void SpykeeManager::setplug()
-{
-    /* sends command to make spykee plug to charger */
-	char message[] = {80, 75, 16, 00, 1};
-	tcp->send(message, 5);
-	message[0] = 5;
-	tcp->send(message, 1);
-}
-
-void SpykeeManager::soundAllarm()
-{
-    /* make spykee execute an alarm-like sound */
-	char message[] = {80, 75, 7, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-	tcp->send(message, 5);
-	if (tcp->recv(message, 15) > 0)
-	{
-		message[0] = 0;
-		tcp->send(message, 1);
-	}
-}
-
-void SpykeeManager::soundBomb()
-{
-    /* make spykee execute a bomb-like sound */
-	char message[] = {80, 75, 7, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-	tcp->send(message, 5);
-	if (tcp->recv(message, 15) > 0)
-	{
-		message[0] = 1;
-		tcp->send(message, 1);
-	}
-}
-
-void SpykeeManager::turnOnCameraLight()
-{
-    /* make spykee turn on the light under the camera */
-	printf("\nACCENSIONE!!");
-	char message[] = {80, 75, 4, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-	tcp->send(message, 5);
-	//if (tcp->recv(message, 15) > 0)
-	{
-		message[0] = 0;
-		message[1] = 1;
-		tcp->send(message, 2);
-		printf("\nACCESA!!!");
-	}
-}
-
-void SpykeeManager::turnOffCameraLight()
-{
-    /* make spykee turn off the light under the camera */
-	printf("\nSPEGNIMENTO!!");
-	char message[] = {80, 75, 4, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-	tcp->send(message, 5);
-	//if (tcp->recv(message, 15) > 0)
-	{
-		message[0] = 0;
-		message[1] = 0;
-		tcp->send(message, 2);
-		printf("\nSPENTA!!!");
-	}
-}
-
-void SpykeeManager::move(int leftSpeed, int rightSpeed)
-{
-    /* make spykee move
-     * speeds are in the range (-90, 90)
-     * positive speeds move forward, negative ones backward
-     */
-	if ((leftSpeed != 0) && (rightSpeed != 0))
-	{
-		state |= Moving;
-	}
-	else
-	{
-		state &= ~Moving;
-	}
-	char message[] = {80, 75, 5, 0, 2};
-	char speedMessage[] = {leftSpeed, rightSpeed, 0};
-	//printf("\nLeftMotor: %d, RightMotor: %d", leftSpeed, rightSpeed);
-	tcp->send(message, 5);
-	tcp->send(speedMessage, 2);
+#ifdef DEBUG_SPYKEE
+	cout << "Connessione effettuata" << endl;
+#endif
 }
 
 void SpykeeManager::startCamera()
 {
-	char respString[100];
-	int dimPackets = 0, bytesRecived;
-	char firstMessage[] = {80, 75, 15, 0, 2};
-	char secondMessage[] = {1, 1, 80, 75, 15, 0, 2, 2, 1};
-	FILE* imm;
-	
+	//dico a Spykee di inizializzare la telecamera
+	char firstMessage[] =
+	{ 80, 75, 15, 0, 2 };
+	char secondMessage[] =
+	{ 1, 1, 80, 75, 15, 0, 2, 2, 1 };
 	tcp->send(firstMessage, 5);
 	tcp->send(secondMessage, 9);
-	
-	state |= CameraOn;
+
+#ifdef DEBUG_SPYKEE
+	cout << "Camera accesa" << endl;
+#endif
 }
 
-int SpykeeManager::getState()
+void SpykeeManager::getImage()
 {
-	return (enum states) state;
-}
-
-// TCP client handling function
-void HandleTCPClient(TCPSocket *sock) {
-	unsigned char buffer[1460];
+	//inizializzo le variabili per leggere le immagini
+	unsigned char buffer[SPYKEE_MAX_IMAGE];
 	int recvMsgSize;
-	while ((recvMsgSize = sock->recv(buffer, 1460)) > 0) {
-		//printf("\nRICEVUTO MESSAGGIO");
-		//fflush(stdin);
-		SpykeeManager::pharseMessage(buffer, &recvMsgSize, NULL, SpykeeManager::pharseNewMessage);
-		//printf("\nFINE ANALISI");
-		//fflush(stdin);
+	enum stati
+	{
+		nonTrovata, acquisizione, immagineFinita
+	};
+	int stato = nonTrovata;
+	static unsigned char immagine[SPYKEE_MAX_IMAGE];
+	unsigned int lengthImage;
+	unsigned int posizioneCorrente;
+	FILE* file;
+
+	//inizio ciclo acquisizione
+	while (!(stato == immagineFinita))
+	{
+		recvMsgSize = tcp->recv(buffer, SPYKEE_MAX_IMAGE);
+#ifdef DEBUG_SPYKEE
+		cout << endl << endl << endl << endl << "Messaggio arrivato di " << recvMsgSize << " byte." << endl;
+#endif
+
+		if (stato == acquisizione)
+		{
+#ifdef DEBUG_SPYKEE
+			cout << "Continuazione dell'acquisizione" << endl;
+			cout << "La posizione corrente di riempimento del buffer è partita da " << posizioneCorrente;
+#endif
+
+			for (register int i = 0;
+					((i < recvMsgSize) && (posizioneCorrente < lengthImage));
+					i++)
+			{
+				immagine[posizioneCorrente] = buffer[i];
+
+				if ((i < recvMsgSize) && (posizioneCorrente < lengthImage))
+					posizioneCorrente++;
+			}
+
+#ifdef DEBUG_SPYKEE
+			cout << " ed è finita a " << posizioneCorrente << endl;
+#endif
+
+			if (posizioneCorrente >= lengthImage)
+			{
+				stato = immagineFinita;
+			}
+			else
+			{
+				stato = acquisizione;
+			}
+
+#ifdef DEBUG_SPYKEE
+			cout <<"Ci sono ancora: " << (lengthImage-posizioneCorrente) << " byte"<<endl;
+			cout <<"Ricordo che la dimensione totale dell'immagine è di " << lengthImage << " byte" << endl;
+#endif
+		}
+		//controllo se è arrivata una nuova immagine
+		if (((buffer[0] == 80) && (buffer[1] == 75) && (buffer[2] == 2))
+				&& (stato == nonTrovata))
+		{
+#ifdef DEBUG_SPYKEE
+			cout << "Il messaggio contine una nuova immagine" << endl;
+#endif
+
+			//ottengo la lunghezza dell'immagine
+			lengthImage = (buffer[3] << 8) + buffer[4];
+
+#ifdef DEBUG_SPYKEE
+			cout << "L'immagine contenuta nel pacchetto è lunga " << lengthImage << " byte" << endl;
+#endif
+
+			register int i;
+
+			//scrivo l'immagine ricevuta nella mia in locale
+			for (i = 5, posizioneCorrente = 0;
+					((i < recvMsgSize) && (posizioneCorrente < lengthImage));
+					i++, posizioneCorrente++)
+			{
+				immagine[posizioneCorrente] = buffer[i];
+			}
+
+#ifdef DEBUG_SPYKEE
+			cout << "La posizione corrente di riempimento del buffer è partita da 0 ed è finita a " << posizioneCorrente << endl;
+#endif
+
+			if (posizioneCorrente < lengthImage)
+			{
+				stato = acquisizione;
+			}
+			else
+			{
+				stato = immagineFinita;
+			}
+		}
+#ifdef DEBUG_SPYKEE
+		cout << "Il pacchetto è stato  processato"<<endl;
+#endif
 	}
+
+	//fine acquisizione immagine
+#ifdef DEBUG_SPYKEE
+	cout << "Immagine acquisita";
+#endif
+	file = fopen("image.jpg", "wb");
+	fwrite(immagine, 1, posizioneCorrente + 1, file);
+	fclose(file);
 }
 
-void *ThreadMain(void *clntSock) {
-	// Guarantees that thread resources are deallocated upon return  
-	pthread_detach(pthread_self()); 
-	
-	// Extract socket file descriptor from argument  
-	HandleTCPClient((TCPSocket *) clntSock);
-	
-	//delete (TCPSocket *) clntSock;
-	return NULL;
+void SpykeeManager::move(int leftSpeed, int rightSpeed)
+{
+	if ((leftSpeed != 0) && (rightSpeed != 0))
+	{
+		//state |= Moving;
+	}
+	else
+	{
+		//state &= ~Moving;
+	}
+	char message[] =
+	{ 80, 75, 5, 0, 2 };
+	char speedMessage[] =
+	{ leftSpeed, rightSpeed, 0 };
+
+#ifdef DEBUG_SPYKEE
+	printf("\nLeftMotor: %d, RightMotor: %d", leftSpeed, rightSpeed);
+#endif
+
+	tcp->send(message, 5);
+	tcp->send(speedMessage, 2);
 }
 
+void SpykeeManager::unplug()
+{
+	char message[] =
+	{ 80, 75, 16, 00, 1 };
+	tcp->send(message, 5);
+	message[0] = 5;
+	tcp->send(message, 1);
+}
