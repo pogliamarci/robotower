@@ -18,8 +18,8 @@
 #include "ReadSonar.h"
 #include <iostream>
 #include "ros/ros.h"
-#include "sonar/Sonar.h"
-#include "sonar/Led.h"
+#include "Echoes/Sonar.h"
+#include "Echoes/Led.h"
 #include "LedParser.h"
 
 #define SERIAL_DEVICE_FILENAME "/dev/ttyUSB0"
@@ -34,7 +34,7 @@
 
 using namespace std;
 
-class SonarLedManager 
+class EchoesManager
 {
 	private:
 		ReadSonar* read_sonar;
@@ -43,15 +43,15 @@ class SonarLedManager
 		ros::Publisher sonar_data_pub;
 		ros::ServiceServer led_service;
 	public:
-		SonarLedManager();
-		~SonarLedManager();
-		bool ledCallback(sonar::Led::Request&, sonar::Led::Response&);
+		EchoesManager();
+		~EchoesManager();
+		bool ledCallback(Echoes::Led::Request&, Echoes::Led::Response&);
 		void publishSonarData();
 		void readSonarData();
 		void sendMessage(float, float, float, float);
 };
 
-SonarLedManager::SonarLedManager()
+EchoesManager::EchoesManager()
 {
 	read_sonar = new ReadSonar( SERIAL_DEVICE_FILENAME, 1 );
 	if ( read_sonar ) {
@@ -63,17 +63,17 @@ SonarLedManager::SonarLedManager()
 
 	led = new LedParser(read_sonar);
 	/* Initialisation as publisher of sonar_data msgs */
-	sonar_data_pub = ros_node.advertise<sonar::Sonar>("sonar_data", 1000);
-	led_service = ros_node.advertiseService("led_data", &SonarLedManager::ledCallback, this);
+	sonar_data_pub = ros_node.advertise<Echoes::Sonar>("sonar_data", 1000);
+	led_service = ros_node.advertiseService("led_data", &EchoesManager::ledCallback, this);
 }
 
-SonarLedManager::~SonarLedManager() 
+EchoesManager::~EchoesManager()
 {
 	delete led;
 	delete read_sonar;
 }
 
-bool SonarLedManager::ledCallback(sonar::Led::Request& request, sonar::Led::Response& response) 
+bool EchoesManager::ledCallback(Echoes::Led::Request& request, Echoes::Led::Response& response) 
 {
 	bool yellow_on[4];
 	if (request.editGreen == true) 
@@ -98,16 +98,16 @@ bool SonarLedManager::ledCallback(sonar::Led::Request& request, sonar::Led::Resp
 	return true;
 }
 
-void SonarLedManager::publishSonarData() 
+void EchoesManager::publishSonarData() 
 {
 	this->readSonarData();
 	this->sendMessage(read_sonar->getMeasure(NORTH),
-			read_sonar->getMeasure(SOUTH),
-			read_sonar->getMeasure(EAST),
-			read_sonar->getMeasure(WEST));
+			  read_sonar->getMeasure(SOUTH),
+			  read_sonar->getMeasure(EAST),
+			  read_sonar->getMeasure(WEST));
 }
 
-void SonarLedManager::readSonarData() 
+void EchoesManager::readSonarData() 
 {
 	static int meas_progress=0;
 	static int line_readed=0;
@@ -167,9 +167,9 @@ void SonarLedManager::readSonarData()
 	}
 }
 
-void SonarLedManager::sendMessage(float north, float south, float east, float west) 
+void EchoesManager::sendMessage(float north, float south, float east, float west) 
 {
-	sonar::Sonar* msg = new sonar::Sonar();
+	Echoes::Sonar* msg = new Echoes::Sonar();
 	msg->north = north;
 	msg->south = south;
 	msg->east = east;
@@ -181,10 +181,10 @@ void SonarLedManager::sendMessage(float north, float south, float east, float we
 int main(int argc, char** argv) 
 {
     /* Initialise ROS */
-    ros::init(argc, argv, "sonar");
+    ros::init(argc, argv, "Echoes");
     try
 	{
-		SonarLedManager manager;
+		EchoesManager manager;
 		while (ros::ok()) 
 		{
 			manager.publishSonarData();

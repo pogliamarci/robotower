@@ -4,11 +4,11 @@
 #
 
 import sys
-import roslib; roslib.load_manifest('sonar')
+import roslib; roslib.load_manifest('Echoes')
 import rospy
 from PyQt4.Qt import *
-from sonar.msg import Sonar
-from sonar.srv import Led
+from Echoes.msg import Sonar
+from Echoes.srv import Led
 
 class MessageListenerThread(QThread):
 	def run(self):
