@@ -1,7 +1,9 @@
 #include <iostream>
+#include <vector>
 #include "ros/ros.h"
 #include "SpykeeManager.h"
 #include "SpyKee/Motion.h"
+#include "sensor_msgs/CompressedImage.h"
 
 #define SPYKEE_USER "admin"
 #define SPYKEE_PWD "admin"
@@ -32,12 +34,23 @@ int main(int argc, char** argv)
 
 	/* subscribe to motion messages */
 	ros::Subscriber sub = ros_node.subscribe("spykee_motion", 1000, move);
+	ros::Publisher img_pub = ros_node.advertise<sensor_msgs::CompressedImage>("spykee_camera", 1);
 
-	/* main loop */
+	/* start camera... maybe it is better to have a service enable\disable the camera? */
+	robot_ptr->startCamera();
+
 	while (ros::ok())
 	{
-		// do something...
+		vector<unsigned char>* image = robot_ptr->getImage();
+		/* COME RIEMPIRE GLI ALTRI CAMPI?!? */
+		sensor_msgs::CompressedImage image_msg;
+		image_msg.data = *image;
+		image_msg.format = "jpeg";
+
+		img_pub.publish(image_msg);
+
 		ros::spinOnce();
+		delete image; /* ros should have copied the image... */
 	}
 	delete robot_ptr;
 	return EXIT_SUCCESS;

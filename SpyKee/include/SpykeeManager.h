@@ -2,6 +2,7 @@
 #define SPYKEE_HEADER
 
 #include "PracticalSocket.h"
+#include <vector>
 
 #define SPYKEE_MAX_IMAGE 10000
 
@@ -23,7 +24,7 @@ class SpykeeManager
 
 	void startCamera();
 
-	void getImage();
+	std::vector<unsigned char>* getImage();
 
 	~SpykeeManager()
 	{}
