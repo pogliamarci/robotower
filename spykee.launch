@@ -1,0 +1,4 @@
+<launch>
+	<node pkg="Echoes" name="Echoes_main" type="Echoes"/>
+	<node pkg="Echoes" name="Echoes_debug" type="monitor.py"/>  
+</launch>
