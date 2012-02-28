@@ -1,7 +1,7 @@
 ; Auto-generated. Do not edit!
 
 
-(cl:in-package sonar-msg)
+(cl:in-package Echoes-msg)
 
 
 ;//! \htmlinclude Sonar.msg.html
@@ -35,26 +35,26 @@
 (cl:defmethod cl:initialize-instance :after ((m <Sonar>) cl:&rest args)
   (cl:declare (cl:ignorable args))
   (cl:unless (cl:typep m 'Sonar)
-    (roslisp-msg-protocol:msg-deprecation-warning "using old message class name sonar-msg:<Sonar> is deprecated: use sonar-msg:Sonar instead.")))
+    (roslisp-msg-protocol:msg-deprecation-warning "using old message class name Echoes-msg:<Sonar> is deprecated: use Echoes-msg:Sonar instead.")))
 
 (cl:ensure-generic-function 'north-val :lambda-list '(m))
 (cl:defmethod north-val ((m <Sonar>))
-  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader sonar-msg:north-val is deprecated.  Use sonar-msg:north instead.")
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader Echoes-msg:north-val is deprecated.  Use Echoes-msg:north instead.")
   (north m))
 
 (cl:ensure-generic-function 'south-val :lambda-list '(m))
 (cl:defmethod south-val ((m <Sonar>))
-  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader sonar-msg:south-val is deprecated.  Use sonar-msg:south instead.")
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader Echoes-msg:south-val is deprecated.  Use Echoes-msg:south instead.")
   (south m))
 
 (cl:ensure-generic-function 'east-val :lambda-list '(m))
 (cl:defmethod east-val ((m <Sonar>))
-  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader sonar-msg:east-val is deprecated.  Use sonar-msg:east instead.")
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader Echoes-msg:east-val is deprecated.  Use Echoes-msg:east instead.")
   (east m))
 
 (cl:ensure-generic-function 'west-val :lambda-list '(m))
 (cl:defmethod west-val ((m <Sonar>))
-  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader sonar-msg:west-val is deprecated.  Use sonar-msg:west instead.")
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader Echoes-msg:west-val is deprecated.  Use Echoes-msg:west instead.")
   (west m))
 (cl:defmethod roslisp-msg-protocol:serialize ((msg <Sonar>) ostream)
   "Serializes a message object of type '<Sonar>"
@@ -109,10 +109,10 @@
 )
 (cl:defmethod roslisp-msg-protocol:ros-datatype ((msg (cl:eql '<Sonar>)))
   "Returns string type for a message object of type '<Sonar>"
-  "sonar/Sonar")
+  "Echoes/Sonar")
 (cl:defmethod roslisp-msg-protocol:ros-datatype ((msg (cl:eql 'Sonar)))
   "Returns string type for a message object of type 'Sonar"
-  "sonar/Sonar")
+  "Echoes/Sonar")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<Sonar>)))
   "Returns md5sum for a message object of type '<Sonar>"
   "bfb04bad3590e564c12fae1e3d9f10d9")

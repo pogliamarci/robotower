@@ -1,4 +1,4 @@
-(cl:in-package sonar-msg)
+(cl:in-package Echoes-msg)
 (cl:export '(NORTH-VAL
           NORTH
           SOUTH-VAL
