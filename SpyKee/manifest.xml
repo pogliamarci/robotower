@@ -9,7 +9,6 @@
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/SpyKee</url>
   <depend package="roscpp"/>
-  <depend package="Echoes"/>
 </package>
 
 
