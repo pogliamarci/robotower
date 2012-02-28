@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 35
+/mrt/!svn/ver/1805/trunk/mrt/shared
+END
+stc.h
+K 25
+svn:wc:ra_dav:version-url
+V 39
+/mrt/!svn/ver/15/trunk/mrt/shared/stc.h
+END
+artcomm.h
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/mrt/!svn/ver/381/trunk/mrt/shared/artcomm.h
+END
+stl.h
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/mrt/!svn/ver/1510/trunk/mrt/shared/stl.h
+END
+const.h
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/mrt/!svn/ver/1805/trunk/mrt/shared/const.h
+END
+msg.h
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/mrt/!svn/ver/1650/trunk/mrt/shared/msg.h
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/mrt/!svn/ver/1630/trunk/mrt/shared/Makefile
+END

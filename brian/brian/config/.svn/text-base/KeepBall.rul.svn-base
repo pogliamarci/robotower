@@ -1,0 +1,23 @@
+# Section NORTH
+
+#   SubSection CLOSE
+
+(AND (BallClose) (BallNrNNE))      =>  (RotSpeed SLOW_RIGHT)       (TanSpeed VERY_SLOW_FORWARD)
+(AND (BallClose) (BallNrNNW))      =>  (RotSpeed SLOW_LEFT)        (TanSpeed VERY_SLOW_FORWARD)
+
+#   SubSection NEAR
+
+(AND (BallNear) (BallNrNNE))      =>  (RotSpeed SLOW_RIGHT)       		(TanSpeed SLOW_FORWARD)
+(AND (BallNear) (BallNrNNW))      =>  (RotSpeed SLOW_LEFT)        		(TanSpeed SLOW_FORWARD)
+
+# Section SOUTH
+
+#   SubSection CLOSE
+
+(AND (BallClose) (BallNrSSE))     =>  (RotSpeed SLOW_LEFT)			(TanSpeed VERY_SLOW_BACKWARD)
+(AND (BallClose) (BallNrSSW))     =>  (RotSpeed SLOW_RIGHT)		(TanSpeed VERY_SLOW_BACKWARD)
+
+#   SubSection NEAR
+
+(AND (BallNear) (BallNrSSE))      =>  (RotSpeed SLOW_LEFT)        		(TanSpeed SLOW_BACKWARD)
+(AND (BallNear) (BallNrSSW))      =>  (RotSpeed SLOW_RIGHT)       		(TanSpeed SLOW_BACKWARD)

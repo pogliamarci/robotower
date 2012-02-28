@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/mrt/!svn/ver/1637/trunk/mrt/brian/src/checker
+END
+assflex.l
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/mrt/!svn/ver/18/trunk/mrt/brian/src/checker/assflex.l
+END
+.directory
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/mrt/!svn/ver/18/trunk/mrt/brian/src/checker/.directory
+END
+predflex.l
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/mrt/!svn/ver/325/trunk/mrt/brian/src/checker/predflex.l
+END
+rulesflex.l
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/mrt/!svn/ver/475/trunk/mrt/brian/src/checker/rulesflex.l
+END
+assgram.y
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/mrt/!svn/ver/18/trunk/mrt/brian/src/checker/assgram.y
+END
+predgram.y
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/mrt/!svn/ver/18/trunk/mrt/brian/src/checker/predgram.y
+END
+rulesgram.y
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/mrt/!svn/ver/18/trunk/mrt/brian/src/checker/rulesgram.y
+END
+shapeflex.l
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/mrt/!svn/ver/18/trunk/mrt/brian/src/checker/shapeflex.l
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/mrt/!svn/ver/74/trunk/mrt/brian/src/checker/Makefile
+END
+check.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/mrt/!svn/ver/1637/trunk/mrt/brian/src/checker/check.cpp
+END
+shapegram.y
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/mrt/!svn/ver/18/trunk/mrt/brian/src/checker/shapegram.y
+END

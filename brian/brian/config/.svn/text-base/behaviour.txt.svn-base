@@ -1,0 +1,7 @@
+( ManualMove behaviors/ManualMove.rul )
+( GotoBall behaviors/GotoBall.rul )
+( AlignWithBall behaviors/Dummy.rul )
+( KeepBall behaviors/Dummy.rul )
+( KickInGoal behaviors/Dummy.rul )
+( GotoTarget behaviors/Dummy.rul )
+( GotoTargetOriented behaviors/Dummy.rul )
