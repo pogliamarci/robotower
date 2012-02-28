@@ -1,4 +1,4 @@
-(cl:defpackage sonar-srv
+(cl:defpackage Echoes-srv
   (:use )
   (:export
    "LED"

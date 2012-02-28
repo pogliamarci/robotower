@@ -1,7 +1,7 @@
 ; Auto-generated. Do not edit!
 
 
-(cl:in-package sonar-srv)
+(cl:in-package Echoes-srv)
 
 
 ;//! \htmlinclude Led-request.msg.html
@@ -45,36 +45,36 @@
 (cl:defmethod cl:initialize-instance :after ((m <Led-request>) cl:&rest args)
   (cl:declare (cl:ignorable args))
   (cl:unless (cl:typep m 'Led-request)
-    (roslisp-msg-protocol:msg-deprecation-warning "using old message class name sonar-srv:<Led-request> is deprecated: use sonar-srv:Led-request instead.")))
+    (roslisp-msg-protocol:msg-deprecation-warning "using old message class name Echoes-srv:<Led-request> is deprecated: use Echoes-srv:Led-request instead.")))
 
 (cl:ensure-generic-function 'editGreen-val :lambda-list '(m))
 (cl:defmethod editGreen-val ((m <Led-request>))
-  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader sonar-srv:editGreen-val is deprecated.  Use sonar-srv:editGreen instead.")
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader Echoes-srv:editGreen-val is deprecated.  Use Echoes-srv:editGreen instead.")
   (editGreen m))
 
 (cl:ensure-generic-function 'editYellow-val :lambda-list '(m))
 (cl:defmethod editYellow-val ((m <Led-request>))
-  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader sonar-srv:editYellow-val is deprecated.  Use sonar-srv:editYellow instead.")
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader Echoes-srv:editYellow-val is deprecated.  Use Echoes-srv:editYellow instead.")
   (editYellow m))
 
 (cl:ensure-generic-function 'editRed-val :lambda-list '(m))
 (cl:defmethod editRed-val ((m <Led-request>))
-  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader sonar-srv:editRed-val is deprecated.  Use sonar-srv:editRed instead.")
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader Echoes-srv:editRed-val is deprecated.  Use Echoes-srv:editRed instead.")
   (editRed m))
 
 (cl:ensure-generic-function 'greenIsOn-val :lambda-list '(m))
 (cl:defmethod greenIsOn-val ((m <Led-request>))
-  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader sonar-srv:greenIsOn-val is deprecated.  Use sonar-srv:greenIsOn instead.")
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader Echoes-srv:greenIsOn-val is deprecated.  Use Echoes-srv:greenIsOn instead.")
   (greenIsOn m))
 
 (cl:ensure-generic-function 'redNumOn-val :lambda-list '(m))
 (cl:defmethod redNumOn-val ((m <Led-request>))
-  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader sonar-srv:redNumOn-val is deprecated.  Use sonar-srv:redNumOn instead.")
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader Echoes-srv:redNumOn-val is deprecated.  Use Echoes-srv:redNumOn instead.")
   (redNumOn m))
 
 (cl:ensure-generic-function 'yellowIsOn-val :lambda-list '(m))
 (cl:defmethod yellowIsOn-val ((m <Led-request>))
-  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader sonar-srv:yellowIsOn-val is deprecated.  Use sonar-srv:yellowIsOn instead.")
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader Echoes-srv:yellowIsOn-val is deprecated.  Use Echoes-srv:yellowIsOn instead.")
   (yellowIsOn m))
 (cl:defmethod roslisp-msg-protocol:serialize ((msg <Led-request>) ostream)
   "Serializes a message object of type '<Led-request>"
@@ -101,10 +101,10 @@
 )
 (cl:defmethod roslisp-msg-protocol:ros-datatype ((msg (cl:eql '<Led-request>)))
   "Returns string type for a service object of type '<Led-request>"
-  "sonar/LedRequest")
+  "Echoes/LedRequest")
 (cl:defmethod roslisp-msg-protocol:ros-datatype ((msg (cl:eql 'Led-request)))
   "Returns string type for a service object of type 'Led-request"
-  "sonar/LedRequest")
+  "Echoes/LedRequest")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<Led-request>)))
   "Returns md5sum for a message object of type '<Led-request>"
   "123e812292460e49a24080052eae9c17")
@@ -152,11 +152,11 @@
 (cl:defmethod cl:initialize-instance :after ((m <Led-response>) cl:&rest args)
   (cl:declare (cl:ignorable args))
   (cl:unless (cl:typep m 'Led-response)
-    (roslisp-msg-protocol:msg-deprecation-warning "using old message class name sonar-srv:<Led-response> is deprecated: use sonar-srv:Led-response instead.")))
+    (roslisp-msg-protocol:msg-deprecation-warning "using old message class name Echoes-srv:<Led-response> is deprecated: use Echoes-srv:Led-response instead.")))
 
 (cl:ensure-generic-function 'requestSuccessful-val :lambda-list '(m))
 (cl:defmethod requestSuccessful-val ((m <Led-response>))
-  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader sonar-srv:requestSuccessful-val is deprecated.  Use sonar-srv:requestSuccessful instead.")
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader Echoes-srv:requestSuccessful-val is deprecated.  Use Echoes-srv:requestSuccessful instead.")
   (requestSuccessful m))
 (cl:defmethod roslisp-msg-protocol:serialize ((msg <Led-response>) ostream)
   "Serializes a message object of type '<Led-response>"
@@ -169,10 +169,10 @@
 )
 (cl:defmethod roslisp-msg-protocol:ros-datatype ((msg (cl:eql '<Led-response>)))
   "Returns string type for a service object of type '<Led-response>"
-  "sonar/LedResponse")
+  "Echoes/LedResponse")
 (cl:defmethod roslisp-msg-protocol:ros-datatype ((msg (cl:eql 'Led-response)))
   "Returns string type for a service object of type 'Led-response"
-  "sonar/LedResponse")
+  "Echoes/LedResponse")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<Led-response>)))
   "Returns md5sum for a message object of type '<Led-response>"
   "123e812292460e49a24080052eae9c17")
@@ -200,4 +200,4 @@
   'Led-response)
 (cl:defmethod roslisp-msg-protocol:ros-datatype ((msg (cl:eql 'Led)))
   "Returns string type for a service object of type '<Led>"
-  "sonar/Led")
+  "Echoes/Led")

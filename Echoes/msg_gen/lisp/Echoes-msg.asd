@@ -1,7 +1,7 @@
 
 (cl:in-package :asdf)
 
-(defsystem "sonar-msg"
+(defsystem "Echoes-msg"
   :depends-on (:roslisp-msg-protocol :roslisp-utils )
   :components ((:file "_package")
     (:file "Sonar" :depends-on ("_package_Sonar"))
