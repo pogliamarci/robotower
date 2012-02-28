@@ -14,6 +14,24 @@ class MessageListenerThread(QThread):
 	def run(self):
 		rospy.spin()
 
+class LedManager():
+	def __init__(self):
+		self.green_status = False
+
+	def toggleGreen(self):
+		if self.green_status == False:
+			self.green_status = True
+		else: self.green_status = False
+		rospy.wait_for_service('led_data')
+		led_data = rospy.ServiceProxy('led_data', Led)
+		print self.green_status
+		return led_data(editGreen = True,
+						editYellow = True,
+						editRed = True,
+						greenIsOn = self.green_status,
+						yellowIsOn = [False, False, self.green_status, False],
+						redNumOn = 2)
+
 class SonarMonitorGui():
     def __init__(self): 
         self.app = QApplication(sys.argv)
@@ -27,6 +45,9 @@ class SonarMonitorGui():
         self.east_d = QLCDNumber(self.widget)
         self.west_d = QLCDNumber(self.widget)
         
+        self.green_btn = QPushButton(self.widget)
+        self.led = LedManager()
+        
         # bind widgets to layout    
         layout.addWidget(QLabel('North:', self.widget), 1, 1, 1, 2)
         layout.addWidget(self.north_d, 1, 3, 1, 3)
@@ -36,6 +57,9 @@ class SonarMonitorGui():
         layout.addWidget(self.east_d, 3, 3, 1, 3)
         layout.addWidget(QLabel('West:', self.widget), 4, 1, 1, 2)
         layout.addWidget(self.west_d, 4, 3, 1, 3)
+    	layout.addWidget(self.green_btn, 5, 1, 1, 1)
+    	
+    	self.widget.connect(self.green_btn, SIGNAL("clicked()"), self.led.toggleGreen)
     
     def start(self):
         self.widget.show()

@@ -43,7 +43,7 @@ class SonarLedManager
 		ros::Publisher sonar_data_pub;
 		ros::ServiceServer led_service;
 	public:
-		SonarLedManager(int argc, char** argv);
+		SonarLedManager();
 		~SonarLedManager();
 		bool ledCallback(sonar::Led::Request&, sonar::Led::Response&);
 		void publishSonarData();
@@ -51,7 +51,7 @@ class SonarLedManager
 		void sendMessage(float, float, float, float);
 };
 
-SonarLedManager::SonarLedManager(int argc, char** argv) 
+SonarLedManager::SonarLedManager()
 {
 	read_sonar = new ReadSonar( SERIAL_DEVICE_FILENAME, 1 );
 	if ( read_sonar ) {
@@ -62,8 +62,6 @@ SonarLedManager::SonarLedManager(int argc, char** argv)
 	}
 
 	led = new LedParser(read_sonar);
-	/* Initialise ROS */
-	ros::init(argc, argv, "sonar");
 	/* Initialisation as publisher of sonar_data msgs */
 	sonar_data_pub = ros_node.advertise<sonar::Sonar>("sonar_data", 1000);
 	led_service = ros_node.advertiseService("led_data", &SonarLedManager::ledCallback, this);
@@ -88,7 +86,7 @@ bool SonarLedManager::ledCallback(sonar::Led::Request& request, sonar::Led::Resp
 	}
 	if (request.editYellow == true) 
 	{
-		for (int i = 1; i < 4; i++) 
+		for (int i = 0; i < 4; i++)
 		{
 			if (request.yellowIsOn[i] == 1) yellow_on[i] = true;
 			else yellow_on[i] = false;
@@ -182,9 +180,11 @@ void SonarLedManager::sendMessage(float north, float south, float east, float we
 
 int main(int argc, char** argv) 
 {
-	try 
+    /* Initialise ROS */
+    ros::init(argc, argv, "sonar");
+    try
 	{
-		SonarLedManager manager(argc, argv);
+		SonarLedManager manager;
 		while (ros::ok()) 
 		{
 			manager.publishSonarData();
