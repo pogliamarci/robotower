@@ -8,7 +8,7 @@
 *.so
 # More
 Echoes/bin/Echoes
-SpyKee/bin/SpyKee
+SpyKee/bin/spykee
 
 # Python precompiled files #
 ############################
@@ -46,23 +46,16 @@ desktop.ini
 .directory
 .cproject
 .project
-.pydevprojects
+.pydevproject
 .csettings
 
 # ROS\RoboTower specific #
 ##########################
-Echoes/.cproject
-Echoes/.project
-SpyKee/.cproject
-SpyKee/.project
 CMakeCache.txt
-Echoes/build/Echoes/
-Echoes/build/CMakeFiles/
-SpyKee/build/CMakeFiles/
-Spykee/build/SpyKee/
+Echoes/build/
+SpyKee/build/
 SpyKee/CMakeFiles/
 build/CMakeFiles/
 CMakeFiles
 cmake_install.cmake
-setup.sh
 Makefile
