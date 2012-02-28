@@ -53,9 +53,12 @@ desktop.ini
 Echoes/.cproject
 Echoes/.project
 CMakeCache.txt
-Echoes/build/sonar
+Echoes/build/Echoes
 Echoes/build/CMakeFiles
+SpyKee/build/CMakeFiles
+Spykee/build/SpyKee
 build/CMakeFiles
+CMakeFiles
 cmake_install.cmake
 setup.sh
 Makefile
