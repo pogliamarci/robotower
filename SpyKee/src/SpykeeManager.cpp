@@ -4,14 +4,10 @@
 #include <stdio.h>
 #include <string.h>
 
-#define DEBUG_SPYKEE
-
 using namespace std;
 
 SpykeeManager::SpykeeManager(char* username, char* password)
 {
-	//definisco i nomi utente e password
-
 #ifdef DEBUG_SPYKEE
 	cout << "Nome utente: " << username << endl;
 	cout << "Password: " << password << endl;
@@ -73,7 +69,8 @@ void SpykeeManager::startCamera()
 #endif
 }
 
-/* returns an Image objects dynamically allocated, containing the image data */
+/* returns a pointer to a dynamically allocated vector containing the image data */
+/* waits the image to be sent from the robot... if no img is sent, the method doesn't return */
 vector<unsigned char>* SpykeeManager::getImage()
 {
 	//inizializzo le variabili per leggere le immagini
