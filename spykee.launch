@@ -3,4 +3,5 @@
 	<node pkg="Echoes" name="Echoes_debug" type="monitor.py"/>  
 	<node pkg="SpyKee" name="SpyKee_main" type="spykee"/>
         <node pkg="SpyKee" name="SpyKee_debug" type="monitor.py"/>
+	<node pkg="Vision" name="Vision_main" type="vision"/>
 </launch>
