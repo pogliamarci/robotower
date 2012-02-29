@@ -24,7 +24,9 @@ E' possibile che sia necessario cancellare precendeti file di cache di CMake.
 ESECUZIONE
 ----------
 
-usare il launcher di ROS nella cartella principale.
+Usare il launcher di ROS nella cartella principale,
+basta dare il comando:
+roslaunch spykee.launch
 
 COPYRIGHT
 ---------

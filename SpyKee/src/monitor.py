@@ -4,7 +4,7 @@
 #
 
 import sys
-import roslib; roslib.load_manifest('Echoes')
+import roslib; roslib.load_manifest('SpyKee')
 import rospy
 from PyQt4.Qt import *
 from SpyKee.msg import Motion
@@ -13,7 +13,7 @@ class SonarMonitorGui():
     def __init__(self): 
         self.app = QApplication(sys.argv)
         self.widget = QWidget()
-        self.widget.setWindowTitle('Sonar GUI monitor')
+        self.widget.setWindowTitle('SpyKee GUI Control')
         self.widget.resize(300, 200)
         layout = QGridLayout(self.widget)
         self.widget.setLayout(layout)
