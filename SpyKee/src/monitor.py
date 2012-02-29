@@ -9,7 +9,6 @@ import rospy
 from PyQt4.Qt import *
 from SpyKee.msg import Motion
 from sensor_msgs.msg import CompressedImage
-from PIL import Image, ImageQt
 
 
 class MessageListenerThread(QThread):
@@ -33,21 +32,25 @@ class SonarMonitorGui():
         
         self.pub = rospy.Publisher('spykee_motion', Motion)
         
+        self.pix = QPixmap("myfile")
+        
         self.left_track_box = QLineEdit(self.widget)
         self.right_track_box = QLineEdit(self.widget)
         self.commit_btn = QPushButton(self.widget)
     
-        self.image_label = QLabel()
-        self.image_label.setGeometry(0, 300, 320, 240)
-        self.image_label.setPixmap(QPixmap("myfile"))
+        self.image_view = QGraphicsView(self.widget)
+        self.image_view.setGeometry(0, 300, 320, 240)
+        self.image_scene = QGraphicsScene()
+        self.image_scene.addPixmap(self.pix)
+        self.image_view.setScene(self.image_scene)
         
-        # bind widgets to layout    
+        # bind widgets to layout
         layout.addWidget(QLabel('Left:', self.widget), 1, 1, 1, 2)
         layout.addWidget(self.left_track_box, 1, 3, 1, 3)
         layout.addWidget(QLabel('Right:', self.widget), 2, 1, 1, 2)
         layout.addWidget(self.right_track_box, 2, 3, 1, 3)
         layout.addWidget(self.commit_btn, 3, 1, 1, 5)
-    	layout.addWidget(self.image_label, 4, 1, 1, 5)
+    	layout.addWidget(self.image_view, 4, 1, 1, 5)
         
         self.widget.connect(self.commit_btn, SIGNAL("clicked()"), self.commitMotionValues)
         thr.signal.connect(self.commit_image_change)
@@ -71,7 +74,9 @@ class SonarMonitorGui():
         
     def commit_image_change(self):
         self.pix = QPixmap("myfile")
-        
+        self.image_scene = QGraphicsScene()
+        self.image_scene.addPixmap(self.pix)
+        self.image_view.setScene(self.image_scene)
 
 if __name__ == "__main__":  
     # GUI initialization

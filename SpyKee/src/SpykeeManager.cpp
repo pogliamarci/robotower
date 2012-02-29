@@ -85,18 +85,10 @@ vector<unsigned char>* SpykeeManager::getImage()
 	};
 	int stato = nonTrovata;
 
-	/* static unsigned char immagine[SPYKEE_MAX_IMAGE]; */
-
 	vector<unsigned char>* image_data = new vector<unsigned char>(SPYKEE_MAX_IMAGE);
-
-	/* unsigned int lengthImage; */
 
 	unsigned int posizioneCorrente;
 	unsigned int image_length;
-
-	/*// no more needed...
-	FILE* file;
-	*/
 
 	//inizio ciclo acquisizione
 	while (!(stato == immagineFinita))
@@ -188,10 +180,7 @@ vector<unsigned char>* SpykeeManager::getImage()
 	#ifdef DEBUG_SPYKEE
 	cout << "Immagine acquisita";
 	#endif
-	/*
-	file = fopen("image.jpg", "wb");
-	fwrite(immagine, 1, posizioneCorrente + 1, file);
-	fclose(file);*/
+
 	return image_data;
 }
 
