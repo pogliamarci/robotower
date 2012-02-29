@@ -13,11 +13,13 @@ bool started;
 
 void move(const SpyKee::Motion::ConstPtr& message)
 {
+	/*
 	if (!started)
 	{
 		robot_ptr->unplug();
 		started = true;
 	}
+	*/
 	robot_ptr->move((int) message->leftTrack, (int) message->rightTrack);
 }
 
@@ -34,9 +36,10 @@ int main(int argc, char** argv)
 
 	/* subscribe to motion messages */
 	ros::Subscriber sub = ros_node.subscribe("spykee_motion", 1000, move);
-	ros::Publisher img_pub = ros_node.advertise<sensor_msgs::CompressedImage>("spykee_camera", 1);
+	ros::Publisher img_pub = ros_node.advertise<sensor_msgs::CompressedImage>("spykee_camera", 3);
 
 	/* start camera... maybe it is better to have a service enable\disable the camera? */
+	robot_ptr->unplug();
 	robot_ptr->startCamera();
 
 	while (ros::ok())
@@ -48,9 +51,9 @@ int main(int argc, char** argv)
 		image_msg.format = "jpeg";
 
 		img_pub.publish(image_msg);
+		delete image; /* ros should have copied the image... */
 
 		ros::spinOnce();
-		delete image; /* ros should have copied the image... */
 	}
 	delete robot_ptr;
 	return EXIT_SUCCESS;

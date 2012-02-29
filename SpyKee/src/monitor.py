@@ -8,13 +8,26 @@ import roslib; roslib.load_manifest('SpyKee')
 import rospy
 from PyQt4.Qt import *
 from SpyKee.msg import Motion
+from sensor_msgs.msg import CompressedImage
+from PIL import Image, ImageQt
+
+
+class MessageListenerThread(QThread):
+    signal = pyqtSignal()
+    
+    def run(self):
+        print 'thread started'
+        rospy.spin()
+
+thr = MessageListenerThread()
 
 class SonarMonitorGui():
     def __init__(self): 
+        self.i = 0
         self.app = QApplication(sys.argv)
         self.widget = QWidget()
         self.widget.setWindowTitle('SpyKee GUI Control')
-        self.widget.resize(300, 200)
+        self.widget.resize(600, 400)
         layout = QGridLayout(self.widget)
         self.widget.setLayout(layout)
         
@@ -23,6 +36,10 @@ class SonarMonitorGui():
         self.left_track_box = QLineEdit(self.widget)
         self.right_track_box = QLineEdit(self.widget)
         self.commit_btn = QPushButton(self.widget)
+    
+        self.image_label = QLabel()
+        self.image_label.setGeometry(0, 300, 320, 240)
+        self.image_label.setPixmap(QPixmap("myfile"))
         
         # bind widgets to layout    
         layout.addWidget(QLabel('Left:', self.widget), 1, 1, 1, 2)
@@ -30,8 +47,10 @@ class SonarMonitorGui():
         layout.addWidget(QLabel('Right:', self.widget), 2, 1, 1, 2)
         layout.addWidget(self.right_track_box, 2, 3, 1, 3)
         layout.addWidget(self.commit_btn, 3, 1, 1, 5)
-    	
-    	self.widget.connect(self.commit_btn, SIGNAL("clicked()"), self.commitMotionValues)
+    	layout.addWidget(self.image_label, 4, 1, 1, 5)
+        
+        self.widget.connect(self.commit_btn, SIGNAL("clicked()"), self.commitMotionValues)
+        thr.signal.connect(self.commit_image_change)
     
     def start(self):
         self.widget.show()
@@ -42,11 +61,25 @@ class SonarMonitorGui():
         right_track = self.right_track_box.text().toInt()[0]
         self.pub.publish(leftTrack = left_track, rightTrack = right_track)
         
+    def imageCallback(self, img):
+        print 'sto per salvare su file', self.i
+        myfile = open("myfile", "w")
+        myfile.write(img.data)
+        myfile.close
+        self.i += 1
+        thr.signal.emit()
         
+    def commit_image_change(self):
+        self.pix = QPixmap("myfile")
+        
+
 if __name__ == "__main__":  
     # GUI initialization
     gui = SonarMonitorGui()
     # ROS initialization
     rospy.init_node('spykeeMonitor', anonymous=True)
+    rospy.Subscriber("spykee_camera", CompressedImage, gui.imageCallback)
+    
+    thr.start()
     # GUI start
     gui.start()
