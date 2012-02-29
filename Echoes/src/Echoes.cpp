@@ -54,7 +54,8 @@ class EchoesManager
 EchoesManager::EchoesManager()
 {
 	read_sonar = new ReadSonar( SERIAL_DEVICE_FILENAME, 1 );
-	if ( read_sonar ) {
+	if ( read_sonar ) 
+	{
 		read_sonar->sendRun();
 		char c = (char) 0;
 		read_sonar->sendStringCommand(&c,1);
@@ -111,7 +112,8 @@ void EchoesManager::readSonarData()
 {
 	static int meas_progress=0;
 	static int line_readed=0;
-	if(read_sonar->readData()==0){
+	if(read_sonar->readData()==0)
+	{
 		unsigned int n_line;
 		n_line=read_sonar->getLineToParseNum();
 		line_readed+=n_line;
