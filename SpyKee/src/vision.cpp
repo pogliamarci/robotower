@@ -1,8 +1,16 @@
+#include <iostream>
+#include <vector>
+#include "ros/ros.h"
+#include "SpyKee/Motion.h"
+#include "sensor_msgs/CompressedImage.h"
+
+//calcback per gestire le immagini ricevute
 rcvd_image()
 {
 	
 }
 
+//nodo si analisi immagini
 int main (int argc, char** argv)
 {
 	ros::init(argc, argv, "vision");
