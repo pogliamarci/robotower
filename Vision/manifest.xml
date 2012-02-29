@@ -9,7 +9,8 @@
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/Vision</url>
   <depend package="SpyKee"/>
-  <rosdep name="libopencv-dev"/>	
+  <depend package="roscpp"/>
+  <depend package="opencv2"/>	
 </package>
 
 

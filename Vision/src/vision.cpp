@@ -21,8 +21,11 @@
 #include "ros/ros.h"
 #include "SpyKee/Vision.h"
 #include "sensor_msgs/CompressedImage.h"
+#include "opencv2/opencv.hpp"
+#include "opencv2/highgui/highgui.hpp"
 
 using namespace std;
+using namespace cv;
 
 //calcback per gestire le immagini ricevute
 void rcvd_image(const  sensor_msgs::CompressedImage::ConstPtr& message)
@@ -42,10 +45,15 @@ int main (int argc, char** argv)
 	ros::NodeHandle ros_node;
 	ros::Subscriber source = ros_node.subscribe("spykee_camera", 1, rcvd_image);
 	ros::Publisher seen = ros_node.advertise<SpyKee::Vision>("chatter", 1000);
+	namedWindow("SpyKeeView", CV_WINDOW_AUTOSIZE);
 	while (ros::ok())
 	{
 		//pubblica le info prese dall'immagine precedente
-		cout << "open cv work...\n";
+		Mat img = imread("img.jpg");
+		if( !img.data )
+		{
+			imshow("SpyKeeView", img);
+		}
 		ros::spinOnce();
 	}
 }
