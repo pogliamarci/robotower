@@ -46,14 +46,31 @@ int main (int argc, char** argv)
 	ros::Subscriber source = ros_node.subscribe("spykee_camera", 1, rcvd_image);
 	ros::Publisher seen = ros_node.advertise<SpyKee::Vision>("chatter", 1000);
 	namedWindow("SpyKeeView", CV_WINDOW_AUTOSIZE);
+	Mat frame;
+
+	/*// DEBUG - grab image from webcam
+	CvCapture* capture;
+	capture = cvCaptureFromCAM( CV_CAP_ANY );
+	if (!capture) {
+	    cout << "Error: cannot capture from camera" << endl;
+	    return EXIT_FAILURE;
+	}
+	*/
+
 	while (ros::ok())
 	{
-		//pubblica le info prese dall'immagine precedente
-		Mat img = imread("img.jpg");
-		if( !img.data )
-		{
-			imshow("SpyKeeView", img);
-		}
-		ros::spinOnce();
-	}
+	    /*// DEBUG - grab image from webcam
+        frame = cvQueryFrame(capture);
+        */
+	    Mat frame = imread("img.jpg");
+        if (!frame.empty())
+        {
+            imshow("SpyKeeView", frame);
+            int c = waitKey(5);
+            if ((char) c == 'c') {
+                break;
+            }
+        }
+        ros::spinOnce();
+    }
 }
