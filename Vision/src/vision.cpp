@@ -27,6 +27,32 @@
 using namespace std;
 using namespace cv;
 
+// callback again, trying version without saving on file
+void imageMessageCallback(const sensor_msgs::CompressedImage::ConstPtr& message) {
+    char c = '';
+    /* decompress frame from spykee (JPEG encoded) */
+
+    /* if Mat works, it should manage automatically memory management ...
+    const CvMat compressed = cvMat(1, message->data.size(), CV_8UC1,
+                                   const_cast<unsigned char*>(&message->data[0]));
+    CvMat* raw_frame = cvDecodeImageM(&compressed, CV_LOAD_IMAGE_ANYCOLOR);
+    */
+
+    Mat compressed = Mat(1, message->data.size(), CV_8UC1,
+                                   const_cast<unsigned char*>(&message->data[0]));
+    Mat frame = imdecode(compressed, CV_LOAD_IMAGE_ANYCOLOR);
+
+    /* maybe works... =): */
+    // Mat frame = imdecode(message->data, CV_LOAD_IMAGE_ANYCOLOR);
+
+    imshow("SpyKeeView", frame);
+    c = waitKey(5);
+    if (c == 'c') {
+        exit(EXIT_SUCCESS);
+    }
+    // do what it is needed to do with the image...
+}
+
 //calcback per gestire le immagini ricevute
 void rcvd_image(const  sensor_msgs::CompressedImage::ConstPtr& message)
 {
