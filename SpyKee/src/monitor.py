@@ -22,11 +22,12 @@ class ImageWidget(QWidget):
     
     def __init__(self, width, heigth, parent = None):
         super(ImageWidget, self).__init__(parent)
-        self._frame = QImage("myfile")
+        self._frame = QImage("frame.jpg")
         self._width = width
         self._heigth = heigth
         self.setMinimumSize(self._width, self._heigth)
         self.setMaximumSize(self._width, self._heigth)
+        self.new_frame_sig.connect(self._onNewFrame)
     
     def _onNewFrame(self, image):
         self._frame = image
@@ -76,15 +77,15 @@ class SonarMonitorGui():
         self.pub.publish(leftTrack = left_track, rightTrack = right_track)
 
 class ImageSubscriber():
-    def __init__(self, widget_obj, filename = "myfile.jpg"):
-        _widget_obj = widget_obj
-        _filename = filename
+    def __init__(self, widget_obj, filename = "frane.jpg"):
+        self._widget_obj = widget_obj
+        self._filename = filename
     
     def callback(self, img):
         myfile = open(self._filename, "w")
         myfile.write(img.data)
         myfile.close
-        _widget_obj.new_frame_sig.emit(QImage(filename))
+        self._widget_obj.new_frame_sig.emit(QImage(self._filename))
 
 if __name__ == "__main__":  
     # GUI initialization
