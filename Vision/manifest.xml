@@ -10,7 +10,8 @@
   <url>http://ros.org/wiki/Vision</url>
   <depend package="SpyKee"/>
   <depend package="roscpp"/>
-  <depend package="opencv2"/>	
+  <depend package="opencv2"/>
+  <depend package="ann"	/>
 </package>
 
 
