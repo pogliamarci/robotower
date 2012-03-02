@@ -45,7 +45,7 @@ class SonarMonitorGui():
         self.east_d = QLCDNumber(self.widget)
         self.west_d = QLCDNumber(self.widget)
         
-        self.green_btn = QPushButton(self.widget)
+        self.green_btn = QPushButton('Comanda led',self.widget)
         self.led = LedManager()
         
         # bind widgets to layout    

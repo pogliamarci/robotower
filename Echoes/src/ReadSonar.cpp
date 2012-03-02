@@ -18,7 +18,6 @@
 #include "ReadSonar.h"
 #include "sstream"
 
-//#define DEBUG
 #define BAUDRATE 	B19200
 #define TOUT		300 //msec
 #define MAX_C_RECV 	40
@@ -83,9 +82,6 @@ int ReadSonar::readData()
 	int res;
 	unsigned int count_c=0;
 	
-	#ifdef DEBUG 
-	printf("ciclo read\n");
-	#endif
 	res=0;
 
 	do {

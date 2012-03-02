@@ -24,16 +24,21 @@
 #define RED_OFF 0xF8
 #define FIRST_YELLOW 16
 
+//costruttore: inizializza le variabili, aggancia l'oggetto che invia dati al sonar
 LedParser::LedParser(ReadSonar* read_sonar)
 {
 	int i;
+	//inizializza lo stato dei led
 	this->RedS=0;
 	this->GreenS = false;
 	for(i=0;i<4; i++) this->YellowS[i] = false;
+	//inizializza lo stato binario
 	this->C=ALL_OFF;
+	//aggancia l'oggetto readsonar
 	this->Sender = read_sonar;
 }
 
+//metodo per accendere la luce verde
 void LedParser::Green(bool g)
 {
 	this->GreenS = g;
@@ -41,35 +46,39 @@ void LedParser::Green(bool g)
 	else this->C=this->C&GREEN_OFF;
 }
 
+//metodo per accendere le luci rosse
 void LedParser::Red(char r)
 {
-
+	//aggiorna lo stato dei led rossi
 	if (r <= NUMREDLED && r >= 1)
 		this->RedS = r;
 	else if (r > NUMREDLED)
 		this->RedS = NUMREDLED;
 	else this->RedS = 0;
 
-	this->C = (this->C & 0xF8) | RedS;
-		this->RedS=r;
-		this->C = (this->C & RED_OFF) | RedS;
+	//aggiorna lo stato binario
+	this->C = (this->C & RED_OFF) | RedS;
 
 }
 
+//metodo per accendere le luci gialle
 void LedParser::Yellow(bool y[NUMREDLED])
 {
 	int i;
-	char l=FIRST_YELLOW;
+	char l=FIRST_YELLOW; //inizializza la maschera
+	//aggiorna stato dei led gialli e stato binario bit a bit.
 	for(i=0; i<NUMREDLED; i++) 
 	{
 		this->YellowS[i]=y[i];
 		if(this->YellowS[i]==true) this->C=this->C|l;
 		else this->C=this->C&(~l);
-		l*=2;
+		l*=2; //shift a sinistra della maschera l 
 	}
 }
 
+//metodo per inviare i comandi effettuati via zigbee al robot
 void LedParser::SendToLed() 
 {
+	//manda il comando ai led come stringa di un carattere binario
 	(this->Sender)->sendStringCommand(&C, 1);
 }

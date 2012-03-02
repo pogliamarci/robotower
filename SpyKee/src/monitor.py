@@ -52,7 +52,7 @@ class SonarMonitorGui():
         
         self.left_track_box = QLineEdit(self.widget)
         self.right_track_box = QLineEdit(self.widget)
-        self.commit_btn = QPushButton(self.widget)
+        self.commit_btn = QPushButton('Manda i comandi al robot',self.widget)
 
         self.camera_widget = ImageWidget(320, 240, self.widget)
 
