@@ -24,35 +24,60 @@
 #include "opencv2/opencv.hpp"
 #include "opencv2/highgui/highgui.hpp"
 
+#include "ColorClassifier.h"
+#include "ColorDataset.h"
+#include "Blob.h"
+#include "PixelMap.h"
+
+#define MIN_BLOB_SIZE 100
+#define BLOB_LIST_SIZE	15
+
 using namespace std;
 using namespace cv;
 
-// callback again, trying version without saving on file
-void imageMessageCallback(const sensor_msgs::CompressedImage::ConstPtr& message)
+// structs
+struct blob_info
 {
+	int numPixel;
+	char blobClass;
+	CvPoint a;
+	CvPoint b;
+	CvPoint center;
+};
 
-	Mat frame = imdecode(message->data, CV_LOAD_IMAGE_ANYCOLOR);
+struct blobQueue
+{
+	struct blob_info list[BLOB_LIST_SIZE];
+	int index;
+};
 
-	if (!frame.empty())
-	{
-		imshow("SpyKeeView", frame);
-		char c = waitKey(5);
-		if (c == 'c') exit(EXIT_SUCCESS);
-	}
-}
+//Message to brian
+bool homeFounded;
+bool energyPointFounded;
+bool posLeft;
+bool posRight;
 
-int main(int argc, char** argv)
-    if (!frame.empty())
-    {
-	analyzeCurrentImage(img, filter);
-        imshow("SpyKeeView", frame);
-        char c = waitKey(5);
-        if (c == 'c')
-            exit(EXIT_SUCCESS);
-    }
-}
+unsigned char* temp;
+char * value;
+struct blob_info YBLOB, RBLOB, UBLOB;
+struct blobQueue blobList;
+int i;
 
-void VisionExpert::analyzeCurrentImage(IplImage* img, bool filter)
+//Map for BlobAnalysis
+map < char, map< int,Blob* > >:: iterator BlobsItr1;
+map< int,Blob* > :: iterator BlobsItr2;
+
+KnnColorClassifier* cc;
+PixelMap* pm;
+ColorDataset* cd;
+
+IplImage* img;
+
+//Filter Blob
+bool filter;
+bool createClassifier;
+
+void analyzeCurrentImage(IplImage* img, bool filter)
 {
 	//Point2D
 	CvPoint pt1, pt2, pt3, pt4;
@@ -65,7 +90,7 @@ void VisionExpert::analyzeCurrentImage(IplImage* img, bool filter)
 	bool shape = false;
 	
 	//Inizializzazione delle strutture dati per i blob di interesse
-	
+
 	YBLOB.numPixel=0;
 	YBLOB.a.x=-1;
 	YBLOB.a.y=-1;
@@ -252,6 +277,24 @@ void VisionExpert::analyzeCurrentImage(IplImage* img, bool filter)
 						i--;
 					}
 				}
+}
+}
+
+
+// callback again, trying version without saving on file
+void imageMessageCallback(const sensor_msgs::CompressedImage::ConstPtr& message)
+{
+
+	Mat frame = imdecode(message->data, CV_LOAD_IMAGE_ANYCOLOR);
+
+	if (!frame.empty())
+	{
+		analyzeCurrentImage(img, filter);
+		imshow("SpyKeeView", frame);
+		char c = waitKey(5);
+		if (c == 'c')
+			exit(EXIT_SUCCESS);
+	}
 }
 
 int main (int argc, char** argv)
