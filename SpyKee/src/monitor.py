@@ -13,7 +13,6 @@ from sensor_msgs.msg import CompressedImage
 
 class MessageListenerThread(QThread):  
     def run(self):
-        print 'thread started'
         rospy.spin()
 
 class ImageWidget(QWidget):
@@ -77,7 +76,7 @@ class SonarMonitorGui():
         self.pub.publish(leftTrack = left_track, rightTrack = right_track)
 
 class ImageSubscriber():
-    def __init__(self, widget_obj, filename = "frane.jpg"):
+    def __init__(self, widget_obj, filename = "frame.jpg"):
         self._widget_obj = widget_obj
         self._filename = filename
     
