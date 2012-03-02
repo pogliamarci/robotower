@@ -1,7 +1,7 @@
 <launch>
-	<node pkg="Echoes" name="Echoes_main" type="Echoes"/>
-	<node pkg="Echoes" name="Echoes_debug" type="monitor.py"/>  
-	<node pkg="SpyKee" name="SpyKee_main" type="spykee"/>
-        <node pkg="SpyKee" name="SpyKee_debug" type="monitor.py"/>
-	<node pkg="Vision" name="Vision_main" type="vision"/>
+	<node pkg="Echoes" name="Echoes_main" type="Echoes" cwd="node" output="screen"/>
+	<node pkg="Echoes" name="Echoes_debug" type="monitor.py" cwd="node" output="screen"/>  
+	<node pkg="SpyKee" name="SpyKee_main" type="spykee" cwd="node" output="screen" />
+        <node pkg="SpyKee" name="SpyKee_debug" type="monitor.py" cwd="node" output="screen" />
+	<node pkg="Vision" name="Vision_main" type="vision" cwd="node" output="screen"/>
 </launch>

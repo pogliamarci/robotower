@@ -51,10 +51,6 @@ struct blobQueue
 	int index;
 };
 
-//Message to brian
-bool energyPointFounded;
-bool posLeft;
-bool posRight;
 
 unsigned char* temp;
 char * value;

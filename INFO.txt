@@ -36,4 +36,25 @@ Altre sotto/cartelle sono automaticamente generate da ROS.
 Generalmente non sono di interesse per il programmatore.
 
 --------------------------------------------------------------
-  
+
+###############################
+#Noti problemi di compilazione#
+###############################
+
+
+Se Ros fallisce una compilazione, in alcuni casi potrebbe cancellare il makefile.
+In questo caso, esistono due metodi per risolvere il problema, infatti rosmake non ri-creerà il makefile,
+questo avrà come conseguenza la non compilazione degli eseguibili.
+Se non si hanno particolari necessità, è sufficente entrare nel package e dare il comando:
+
+cmake .
+
+Se vuoi avere un Makefile che supporti i tag di eclipse,
+copia questa riga in un file, chiamalo Makefile, spostalo nel package e dai make
+
+include $(shell rospack find mk)/cmake.mk 
+
+compilerai e avrai utilizzabili i flag di eclipse
+
+
+   
