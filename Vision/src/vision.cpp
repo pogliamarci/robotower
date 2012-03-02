@@ -19,70 +19,39 @@
 #include <fstream>
 #include <vector>
 #include "ros/ros.h"
-#include "SpyKee/Vision.h"
 #include "sensor_msgs/CompressedImage.h"
-#include "opencv2/opencv.hpp"
-#include "opencv2/highgui/highgui.hpp"
 
+
+#include "vision.h"
 #include "ColorClassifier.h"
 #include "ColorDataset.h"
 #include "Blob.h"
 #include "PixelMap.h"
 
-#define MIN_BLOB_SIZE 100
-#define BLOB_LIST_SIZE	15
-
 using namespace std;
-using namespace cv;
 
-// structs
-struct blob_info
-{
-	int numPixel;
-	char blobClass;
-	Point a;
-	Point b;
-	Point center;
-};
-
-struct blobQueue
-{
-	struct blob_info list[BLOB_LIST_SIZE];
-	int index;
-};
-
-
-unsigned char* temp;
-char * value;
 struct blob_info YBLOB, RBLOB, UBLOB;
 struct blobQueue blobList;
 int i;
-
-//Map for BlobAnalysis
-map < char, map< int,Blob* > >:: iterator BlobsItr1;
-map< int,Blob* > :: iterator BlobsItr2;
 
 KnnColorClassifier* cc;
 PixelMap* pm;
 ColorDataset* cd;
 
-//Filter Blob
-bool filter;
-bool createClassifier;
-
 void analyzeCurrentImage(Mat& img, bool filter)
 {
 	//Point2D
 	Point pt1, pt2, pt3, pt4;
-
+	
+	//Map for BlobAnalysis
+	map < char, map< int,Blob* > >:: iterator BlobsItr1;
+	map< int,Blob* > :: iterator BlobsItr2;
+	
 	//Inizializzazione blob identificate
-
-
 	float rap, blobWidth, blobHeight;
 	bool shape = false;
 	
 	//Inizializzazione delle strutture dati per i blob di interesse
-
 	YBLOB.numPixel=0;
 	YBLOB.a.x=-1;
 	YBLOB.a.y=-1;
@@ -248,9 +217,12 @@ void analyzeCurrentImage(Mat& img, bool filter)
 // callback again, trying version without saving on file
 void imageMessageCallback(const sensor_msgs::CompressedImage::ConstPtr& message)
 {
-
+	//Filter Blob
+	bool filter;
+	
 	Mat frame = imdecode(message->data, CV_LOAD_IMAGE_ANYCOLOR);
-
+	filter=true;
+	
 	if (!frame.empty())
 	{
 		analyzeCurrentImage(frame, filter);
@@ -267,10 +239,6 @@ int main (int argc, char** argv)
 	ros::NodeHandle ros_node;
 	ros::Subscriber source = ros_node.subscribe("spykee_camera", 1,imageMessageCallback);
 	namedWindow("SpyKeeView", CV_WINDOW_AUTOSIZE);
-	
-	//Variabili di controllo
-	createClassifier = false;
-	filter = true;
 	
 	blobList.index = 0;
 	UBLOB.blobClass = 'U';
@@ -291,7 +259,6 @@ int main (int argc, char** argv)
 	cc = new KnnColorClassifier();
 	pm = new PixelMap();
 	
-	value = (char*)malloc(sizeof(char)*100);
 
 	//Carica classificatore
 	cc->load_matrix("classifier[5-17].kcc");
