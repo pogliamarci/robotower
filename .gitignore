@@ -26,6 +26,7 @@ SpyKee/bin/spykee
 *.rar
 *.tar
 *.zip
+*.jpg
 
 # Logs and databases #
 ######################
@@ -48,6 +49,7 @@ desktop.ini
 .project
 .pydevproject
 .csettings
+.settings/
 
 # ROS\RoboTower specific #
 ##########################
