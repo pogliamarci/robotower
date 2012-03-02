@@ -40,9 +40,9 @@ struct blob_info
 {
 	int numPixel;
 	char blobClass;
-	CvPoint a;
-	CvPoint b;
-	CvPoint center;
+	Point a;
+	Point b;
+	Point center;
 };
 
 struct blobQueue
@@ -52,7 +52,6 @@ struct blobQueue
 };
 
 //Message to brian
-bool homeFounded;
 bool energyPointFounded;
 bool posLeft;
 bool posRight;
@@ -71,20 +70,17 @@ KnnColorClassifier* cc;
 PixelMap* pm;
 ColorDataset* cd;
 
-IplImage* img;
-
 //Filter Blob
 bool filter;
 bool createClassifier;
 
-void analyzeCurrentImage(IplImage* img, bool filter)
+void analyzeCurrentImage(Mat& img, bool filter)
 {
 	//Point2D
-	CvPoint pt1, pt2, pt3, pt4;
+	Point pt1, pt2, pt3, pt4;
 
 	//Inizializzazione blob identificate
-	homeFounded = false;
-	energyPointFounded = false;
+
 
 	float rap, blobWidth, blobHeight;
 	bool shape = false;
@@ -108,15 +104,15 @@ void analyzeCurrentImage(IplImage* img, bool filter)
 	RBLOB.center.y=-1;
 
 	//Linea in mezzo al filmato
-	pt3.x = img->width/2;
+	pt3.x = img.cols/2;
 	pt3.y = 0;
-	pt4.x = img->width/2;
-	pt4.y = img->height;
+	pt4.x = img.cols/2;
+	pt4.y = img.rows;
 	
-	cvLine(img, pt3, pt4, CV_RGB(0,0,254), 2, 8, 0);
+	line(img, pt3, pt4, CV_RGB(0,0,254), 2, 8, 0);
 
 	//Blob parameters
-	pm->SetImage((unsigned char*)img->imageData, img->width, img->height, cc,3);
+	pm->SetImage((unsigned char*)img.data, img.cols, img.rows, cc,3);
 	
 	/*
 	Algoritmo di BlobGrowing (2°-3°-4°-5° identificano la regione dell'immagine
@@ -155,7 +151,7 @@ void analyzeCurrentImage(IplImage* img, bool filter)
 						if(BlobsItr1->first == 'R')
 						{
 							//Confronta il blob con il precedente e salvalo
-							if(RBLOB.numPixel == 0)
+							if(RBLOB.numPixel == 0 || RBLOB.numPixel <  BlobsItr2->second->GetNumPix())
 							{
 								RBLOB.numPixel = BlobsItr2->second->GetNumPix();
 								RBLOB.blobClass = 'R';
@@ -164,22 +160,11 @@ void analyzeCurrentImage(IplImage* img, bool filter)
 								RBLOB.center.x = (pt2.x-pt1.x)/2 + pt1.x;
 								RBLOB.center.y = (pt2.y-pt1.y)/2 + pt1.y;
 							}
-							
-							else if (RBLOB.numPixel <  BlobsItr2->second->GetNumPix())
-							{
-								RBLOB.numPixel = BlobsItr2->second->GetNumPix();
-								RBLOB.blobClass = 'R';
-								RBLOB.a = pt1;
-								RBLOB.b = pt2;
-								RBLOB.center.x = (pt2.x-pt1.x)/2 + pt1.x; 
-								RBLOB.center.y = (pt2.y-pt1.y)/2 + pt1.y;
-							}
 						}
-					
 						else if(BlobsItr1->first == 'Y')
 						{
 							//Confronta il blob con il precedente e salvalo
-							if(YBLOB.numPixel == 0)
+							if(YBLOB.numPixel == 0 || YBLOB.numPixel <  BlobsItr2->second->GetNumPix())
 							{
 								YBLOB.numPixel = BlobsItr2->second->GetNumPix();
 								YBLOB.blobClass = 'Y';
@@ -188,21 +173,11 @@ void analyzeCurrentImage(IplImage* img, bool filter)
 								YBLOB.center.x = (pt2.x-pt1.x)/2 + pt1.x; 
 								YBLOB.center.y = (pt2.y-pt1.y)/2 + pt1.y;
 							}
-							
-							else if (YBLOB.numPixel <  BlobsItr2->second->GetNumPix())
-							{
-								YBLOB.numPixel = BlobsItr2->second->GetNumPix();
-								YBLOB.blobClass = 'Y';
-								YBLOB.a = pt1;
-								YBLOB.b = pt2;
-								YBLOB.center.x = (pt2.x-pt1.x)/2 + pt1.x; 
-								YBLOB.center.y = (pt2.y-pt1.y)/2 + pt1.y;
-							}
-						}	
+						}
 					}
 				}
 				
-				else {cvRectangle(img, pt1, pt2, CV_RGB(0,255,0), 2, 8, 0 );}
+				else {rectangle(img, pt1, pt2, CV_RGB(0,255,0), 2, 8, 0 );}
 			}
 			
 			//Aggiungilo nella coda
@@ -236,14 +211,12 @@ void analyzeCurrentImage(IplImage* img, bool filter)
 				{
 					if (blobList.list[i].blobClass == 'Y')
 					{
-						homeFounded = true;
-						cvRectangle(img, blobList.list[i].a, blobList.list[i].b, CV_RGB(254,254,0), 2, 8, 0 );
+						rectangle(img, blobList.list[i].a, blobList.list[i].b, CV_RGB(254,254,0), 2, 8, 0 );
 					}
 					
 					else if (blobList.list[i].blobClass == 'R')
 					{
-						energyPointFounded = true;
-						cvRectangle(img, blobList.list[i].a, blobList.list[i].b, CV_RGB(254,0,0), 2, 8, 0 );
+						rectangle(img, blobList.list[i].a, blobList.list[i].b, CV_RGB(254,0,0), 2, 8, 0 );
 					}
 				}
 				
@@ -260,24 +233,19 @@ void analyzeCurrentImage(IplImage* img, bool filter)
 						}
 						if (blobList.list[i].blobClass == 'Y')
 						{
-								//cout<<"BLOB GIALLA"<<endl;
-								homeFounded = true;
-								cvRectangle(img, blobList.list[i].a, blobList.list[i].b, CV_RGB(254,254,0), 2, 8, 0 );
+								rectangle(img, blobList.list[i].a, blobList.list[i].b, CV_RGB(254,254,0), 2, 8, 0 );
 								break;
 						}
-				
 						else if (blobList.list[i].blobClass == 'R')
 						{
-								//cout<<"BLOB rossa"<<endl;
-								energyPointFounded = true;
-								cvRectangle(img, blobList.list[i].a, blobList.list[i].b, CV_RGB(254,0,0), 2, 8, 0 );
+								rectangle(img, blobList.list[i].a, blobList.list[i].b, CV_RGB(254,0,0), 2, 8, 0 );
 								break;
 						}
 						
 						i--;
 					}
 				}
-}
+			}
 }
 
 
@@ -289,7 +257,7 @@ void imageMessageCallback(const sensor_msgs::CompressedImage::ConstPtr& message)
 
 	if (!frame.empty())
 	{
-		analyzeCurrentImage(img, filter);
+		analyzeCurrentImage(frame, filter);
 		imshow("SpyKeeView", frame);
 		char c = waitKey(5);
 		if (c == 'c')
@@ -301,8 +269,7 @@ int main (int argc, char** argv)
 {
 	ros::init(argc, argv, "vision");
 	ros::NodeHandle ros_node;
-	ros::Subscriber source = ros_node.subscribe("spykee_camera", 1,
-			imageMessageCallback);
+	ros::Subscriber source = ros_node.subscribe("spykee_camera", 1,imageMessageCallback);
 	namedWindow("SpyKeeView", CV_WINDOW_AUTOSIZE);
 	
 	//Variabili di controllo
@@ -329,13 +296,9 @@ int main (int argc, char** argv)
 	pm = new PixelMap();
 	
 	value = (char*)malloc(sizeof(char)*100);
-	
-	//Creazione della finestra per visualizzare il video
-	cvNamedWindow("Frame", 0);
-	cvWaitKey(0); 
 
 	//Carica classificatore
-	cc->load_matrix("config/vision_config/classifier[5-17].kcc");
+	cc->load_matrix("classifier[5-17].kcc");
 	cout << "----> Classifier loaded  [OK]"<<endl;
 	/* let's start it all */
 	ros::spin();
