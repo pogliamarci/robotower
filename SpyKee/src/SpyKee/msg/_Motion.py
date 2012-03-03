@@ -4,14 +4,14 @@ import struct
 
 
 class Motion(roslib.message.Message):
-  _md5sum = "8b9854287dfc6ff663000aa3d6914b20"
+  _md5sum = "1652fa15339d862f9e744f6e325e4ee4"
   _type = "SpyKee/Motion"
   _has_header = False #flag to mark the presence of a Header object
-  _full_text = """int8 leftTrack
-int8 rightTrack
+  _full_text = """int8 tanSpeed
+int8 rotSpeed
 
 """
-  __slots__ = ['leftTrack','rightTrack']
+  __slots__ = ['tanSpeed','rotSpeed']
   _slot_types = ['int8','int8']
 
   def __init__(self, *args, **kwds):
@@ -22,7 +22,7 @@ int8 rightTrack
     changes.  You cannot mix in-order arguments and keyword arguments.
     
     The available fields are:
-       leftTrack,rightTrack
+       tanSpeed,rotSpeed
     
     @param args: complete set of field values, in .msg order
     @param kwds: use keyword arguments corresponding to message field names
@@ -31,13 +31,13 @@ int8 rightTrack
     if args or kwds:
       super(Motion, self).__init__(*args, **kwds)
       #message fields cannot be None, assign default values for those that are
-      if self.leftTrack is None:
-        self.leftTrack = 0
-      if self.rightTrack is None:
-        self.rightTrack = 0
+      if self.tanSpeed is None:
+        self.tanSpeed = 0
+      if self.rotSpeed is None:
+        self.rotSpeed = 0
     else:
-      self.leftTrack = 0
-      self.rightTrack = 0
+      self.tanSpeed = 0
+      self.rotSpeed = 0
 
   def _get_types(self):
     """
@@ -53,7 +53,7 @@ int8 rightTrack
     """
     try:
       _x = self
-      buff.write(_struct_2b.pack(_x.leftTrack, _x.rightTrack))
+      buff.write(_struct_2b.pack(_x.tanSpeed, _x.rotSpeed))
     except struct.error as se: self._check_types(se)
     except TypeError as te: self._check_types(te)
 
@@ -68,7 +68,7 @@ int8 rightTrack
       _x = self
       start = end
       end += 2
-      (_x.leftTrack, _x.rightTrack,) = _struct_2b.unpack(str[start:end])
+      (_x.tanSpeed, _x.rotSpeed,) = _struct_2b.unpack(str[start:end])
       return self
     except struct.error as e:
       raise roslib.message.DeserializationError(e) #most likely buffer underfill
@@ -84,7 +84,7 @@ int8 rightTrack
     """
     try:
       _x = self
-      buff.write(_struct_2b.pack(_x.leftTrack, _x.rightTrack))
+      buff.write(_struct_2b.pack(_x.tanSpeed, _x.rotSpeed))
     except struct.error as se: self._check_types(se)
     except TypeError as te: self._check_types(te)
 
@@ -101,7 +101,7 @@ int8 rightTrack
       _x = self
       start = end
       end += 2
-      (_x.leftTrack, _x.rightTrack,) = _struct_2b.unpack(str[start:end])
+      (_x.tanSpeed, _x.rotSpeed,) = _struct_2b.unpack(str[start:end])
       return self
     except struct.error as e:
       raise roslib.message.DeserializationError(e) #most likely buffer underfill

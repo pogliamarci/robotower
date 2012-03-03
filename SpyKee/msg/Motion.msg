@@ -1,2 +1,2 @@
-int8 leftTrack
-int8 rightTrack
+int8 tanSpeed
+int8 rotSpeed

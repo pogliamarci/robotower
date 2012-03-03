@@ -3,7 +3,5 @@
   (:export
    "<MOTION>"
    "MOTION"
-   "<VISION>"
-   "VISION"
   ))
 

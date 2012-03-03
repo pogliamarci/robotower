@@ -4,6 +4,7 @@
 #
 
 import sys
+import math
 import roslib; roslib.load_manifest('SpyKee')
 import rospy
 from PyQt4.Qt import *
@@ -44,36 +45,62 @@ class SonarMonitorGui():
         self.app = QApplication(sys.argv)
         self.widget = QWidget()
         self.widget.setWindowTitle('SpyKee GUI Control')
-        self.widget.resize(600, 400)
+        self.widget.resize(300, 400)
         layout = QGridLayout(self.widget)
         self.widget.setLayout(layout)
         
         self.pub = rospy.Publisher('spykee_motion', Motion)
         
-        self.left_track_box = QLineEdit(self.widget)
-        self.right_track_box = QLineEdit(self.widget)
+        #self.tan_speed_box = QLineEdit(self.widget)
+        #self.rot_speed_box = QLineEdit(self.widget)
+        self.tan_speed_box = QSlider(Qt.Horizontal, self.widget)
+        self.tan_speed_view = QLCDNumber(self.widget)
+        self.rot_speed_box = QSlider(Qt.Horizontal, self.widget)
+        self.rot_speed_view = QLCDNumber(self.widget)
+        self.tan_speed_box.setMinimum(-100)
+        self.tan_speed_box.setMaximum(100)
+        self.tan_speed_box.setValue(0)
+        self.rot_speed_box.setMinimum(-100)
+        self.rot_speed_box.setMaximum(100)
+        self.rot_speed_box.setValue(0)
+        
         self.commit_btn = QPushButton('Manda i comandi al robot',self.widget)
 
         self.camera_widget = ImageWidget(320, 240, self.widget)
 
         # bind widgets to layout
-        layout.addWidget(QLabel('Left:', self.widget), 1, 1, 1, 2)
-        layout.addWidget(self.left_track_box, 1, 3, 1, 3)
-        layout.addWidget(QLabel('Right:', self.widget), 2, 1, 1, 2)
-        layout.addWidget(self.right_track_box, 2, 3, 1, 3)
+        layout.addWidget(QLabel('Tangential speed:', self.widget), 1, 1, 1, 1)
+        layout.addWidget(self.tan_speed_box, 1, 2, 1, 3)
+        layout.addWidget(self.tan_speed_view, 1, 5, 1, 1)
+        layout.addWidget(QLabel('Rotational speed:', self.widget), 2, 1, 1, 1)
+        layout.addWidget(self.rot_speed_box, 2, 2, 1, 3)
+        layout.addWidget(self.rot_speed_view, 2, 5, 1, 1)
         layout.addWidget(self.commit_btn, 3, 1, 1, 5)
     	layout.addWidget(self.camera_widget, 4, 1, 1, 5)
         
         self.widget.connect(self.commit_btn, SIGNAL("clicked()"), self.commitMotionValues)
+        self.widget.connect(self.tan_speed_box, SIGNAL("valueChanged(int)"), self.changeLcdValues)
+        self.widget.connect(self.rot_speed_box, SIGNAL("valueChanged(int)"), self.changeLcdValues)
+    
+    def changeLcdValues(self):
+        self.tan_speed_view.display(self.computeSpeed(self.tan_speed_box.value()))
+        self.rot_speed_view.display(self.computeSpeed(self.rot_speed_box.value()))
     
     def start(self):
         self.widget.show()
         sys.exit(self.app.exec_())
         
+    def computeSpeed(self, speed):
+        ''' this is just to have greater (manual) control at low speeds
+        and a greater area for speed = 0 in the slider... '''
+        comp = int( (speed * 9 / 100.0)**2 * 90 / 81 )
+        if speed >= 0: return comp
+        else: return -comp
+    
     def commitMotionValues(self):
-        left_track = self.left_track_box.text().toInt()[0]
-        right_track = self.right_track_box.text().toInt()[0]
-        self.pub.publish(leftTrack = left_track, rightTrack = right_track)
+        tan_speed = self.computeSpeed( self.tan_speed_box.value() )
+        rot_speed = self.computeSpeed( self.rot_speed_box.value() )
+        self.pub.publish(tanSpeed = tan_speed, rotSpeed = rot_speed)
 
 class ImageSubscriber():
     def __init__(self, widget_obj, filename = "frame.jpg"):

@@ -1,6 +1,6 @@
 (cl:in-package SpyKee-msg)
-(cl:export '(LEFTTRACK-VAL
-          LEFTTRACK
-          RIGHTTRACK-VAL
-          RIGHTTRACK
+(cl:export '(TANSPEED-VAL
+          TANSPEED
+          ROTSPEED-VAL
+          ROTSPEED
 ))

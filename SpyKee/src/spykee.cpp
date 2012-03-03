@@ -30,7 +30,9 @@ bool started;
 
 void move(const SpyKee::Motion::ConstPtr& message)
 {
-	robot_ptr->move((int) message->leftTrack, (int) message->rightTrack);
+	int right_track = message->tanSpeed - message->rotSpeed;
+	int left_track = message->tanSpeed + message->rotSpeed;
+	robot_ptr->move(left_track, right_track);
 }
 
 int main(int argc, char** argv)
