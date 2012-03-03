@@ -41,20 +41,14 @@ Generalmente non sono di interesse per il programmatore.
 #Noti problemi di compilazione#
 ###############################
 
-
 Se Ros fallisce una compilazione, in alcuni casi potrebbe cancellare il makefile.
-In questo caso, esistono due metodi per risolvere il problema, infatti rosmake non ri-creerà il makefile,
-questo avrà come conseguenza la non compilazione degli eseguibili.
-Se non si hanno particolari necessità, è sufficente entrare nel package e dare il comando:
-
-cmake .
-
-Se vuoi avere un Makefile che supporti i tag di eclipse,
-copia questa riga in un file, chiamalo Makefile, spostalo nel package e dai make
+Il makefile dei package di ROS che viene sovrascritto in questi casi è costituito soltanto dalla riga
 
 include $(shell rospack find mk)/cmake.mk 
 
-compilerai e avrai utilizzabili i flag di eclipse
+È sufficiente pertanto creare un file di nome Makefile nella cartella del package che si vuole compilare, e dare il comando rosmake.
 
-
-   
+Se si vuole utilizzare Eclipse come IDE, il comando
+   make eclipse-project
+crea i file necessari per fare in modo che Eclipse riconosca gli header di ROS - e dei package indicati come dipendenza - e quindi non segnali tutte le funzioni di ROS come errate.
+Dopo aver dato il comando, basta importare il package (ogni package) in Eclipse come progetto già esistente (File > Import > Existing project into Workspace)

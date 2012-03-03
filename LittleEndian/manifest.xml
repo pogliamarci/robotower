@@ -1,7 +1,8 @@
 <package>
   <description brief="LittleEndian">
 
-     LittleEndian: tool di creazione file .kcc, necessari  per riconoscere i colori.
+	  LittleEndian: tool per creare, selezionando le aree di interesse di un'immagine,
+	  un file .dts contenente le informazioni necessarie per generare il classificatore.
 
   </description>
   <author>Davide Tateo</author>
