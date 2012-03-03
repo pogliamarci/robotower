@@ -1,0 +1,16 @@
+<package>
+  <description brief="LittleEndian">
+
+     LittleEndian: tool di creazione file .kcc, necessari  per riconoscere i colori.
+
+  </description>
+  <author>Davide Tateo</author>
+  <license>GPLv2</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/LittleEndian</url>
+  <depend package="roscpp"/>
+  <depend package="opencv2"/>
+
+</package>
+
+
