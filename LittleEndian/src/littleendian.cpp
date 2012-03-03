@@ -16,7 +16,9 @@
  */
 
 #include <iostream>
+#include <vector>
 #include "opencv2/opencv.hpp"
+#include <fstream>
 
 #include "Zone.h"
 
@@ -24,7 +26,7 @@ using namespace std;
 using namespace cv;
 
 
-void SelectArea( int event, int x, int y, int, void* p)
+void SelectArea(int event, int x, int y, int, void* p)
 {
 	Zone* regione;
 	regione=(Zone*)p;
@@ -42,21 +44,64 @@ void SelectArea( int event, int x, int y, int, void* p)
 	return;
 }
 
+void getColor(vector<Vec3b>& V, Mat& img, Zone* Z)
+{
+	int x,y;
+	for(x=Z->Start.x; x<Z->End.x; x++)
+		for(y=Z->Start.y; y<Z->End.y; y++)
+		{
+			V.push_back(img.at<float>(x,y));
+		}
+}
+
+void eliminateDuplicates(vector<Vec3b>& V)
+{
+	vector<Vec3b>::iterator i1,i2;
+	for(i1=V.begin(); i1<V.end(); i1++)
+		for(i2=(i1+1); i2<V.end(); i2++)
+		{
+			if(i2==i1) V.erase(i2);
+		}
+}
+
+void printOnfile(vector<Vec3b>& V, char c, ofstream& output)
+{
+	vector<Vec3b>::iterator it;
+	for(it=V.begin(); it<V.end(); it++)
+	{
+		cout << (*it)[0];
+		output << " " << (int)(*it)[0] << " " << (int)(*it)[1] << " " << (int) (*it)[2] << " " << c; 
+	}
+
+}
+
 int main(int argc,char** argv)
 {
 	char c;
 	bool Loop=true;
 	Mat img;
 	Zone* regione;
+	vector<Vec3b> r;
+	vector<Vec3b> b;
+	vector<Vec3b> g;
 	if(argc<2)
 	{
-		cout << "utilizzo:\nlittleendian [file name] [options]\n";
+		cout << "Utilizzo:\nlittleendian [file name] [options]\n";
+		exit(EXIT_FAILURE);
 	}
 	img=imread(argv[1],CV_LOAD_IMAGE_COLOR);
+	if(img.empty())
+	{
+		cerr << "Errore: File non valido o non esistente\n";
+		exit(EXIT_FAILURE);
+	}
 	namedWindow("Little Endian Interface", CV_WINDOW_AUTOSIZE);
 	regione= new Zone("Little Endian Interface",img);
 	cout << "Hot keys: \n"
 			"\tESC - esce dal programma\n"
+			"\tr - attribuisce ai pixel l'etichetta r\n"
+			"\tg - attribuisce ai pixel l'etichetta g\n"
+			"\tb - attribuisce ai pixel l'etichetta b\n"
 			"\tc - crea il file .kcc\n"
 			<< endl;
 	cvSetMouseCallback("Little Endian Interface",SelectArea,regione);
@@ -69,9 +114,23 @@ int main(int argc,char** argv)
 			case 27:
 				exit(0);
 				break;
+			case 'r':
+				cout << "seleziono rosso\n";
+				getColor(r, img, regione);
+				eliminateDuplicates(r);
+				break;
+			case 'g':
+				cout << "seleziono giallo\n";
+				getColor(g, img, regione);
+				eliminateDuplicates(g);
+				break;
+			case 'b':
+				cout << "seleziono blu\n";
+				getColor(b, img, regione);
+				eliminateDuplicates(b);
+				break;
 			case 'c':
-				destroyWindow("Little Endian Interface");
-				cout << "creo file .kcc\n";
+				cout << "creo file .dts\n";
 				Loop=false;
 				break;
 			case 'e':
@@ -81,5 +140,20 @@ int main(int argc,char** argv)
 				cout << "comando sconosciuto\n";
 				break;
 		}
+	}
+	ofstream output;
+	output.open ("DataSet.dts", ios::out);
+	if (output.is_open())
+	{
+		output << (r.size()+g.size()+b.size());
+		printOnfile(r,'R', output);
+		printOnfile(g,'B', output);
+		printOnfile(b,'B', output);
+		output.close();
+		cout << "\nFile Creato!\n";
+	}
+	else
+	{
+		cerr << "\nErrore! file non aperto in scrittura!\n";
 	}
 }
