@@ -24,10 +24,12 @@ Zone::Zone(const char* Window, Mat& img)
 {
 	this->W=Window;
 	this->I=img;
+	this->Drag_Drop=false;
 }
 
 void Zone::setStart(int x, int y)
 {
+	this->Drag_Drop=true;
 	this->Start=Point(x,y);
 }
 
@@ -36,6 +38,7 @@ void Zone::setEnd(int x, int y)
 	Point tmp;
 	tmp.x=x;
 	tmp.y=y;
+	this->Drag_Drop=false;
 	if(this->Start.x>tmp.x)
 	{
 		this->End.x=this->Start.x;
@@ -60,6 +63,20 @@ void Zone::drawZone()
 	waitKey(0);
 }
 
+void Zone::drawZone(int x, int y)
+{
+	Point Now;
+	if(this->Drag_Drop)
+	{
+		Now.x=x;
+		Now.y=y;
+		Mat img=this->I.clone();
+		rectangle(img,this->Start,Now,CV_RGB(255,255,255), 1,8,0);
+		imshow(W,img);
+		waitKey(0);
+	}
+}
+
 void Zone::pointRGB(int col, int row)
 {
     Vec3b& element = I.at<Vec3b>(row, col);
@@ -67,6 +84,6 @@ void Zone::pointRGB(int col, int row)
     int g_pix = element[1];
     int r_pix = element[2];
 
-    std::cout << "(" << r_pix << ", " << g_pix << ", " << b_pix << ")" << std::endl;
+    std::cout << "\r"<< "Coordinate:" <<"(" << col << "," << row << ")"<< "\tRGB:" <<"(" << r_pix << ", " << g_pix << ", " << b_pix << ")" << std::flush;
 }
 

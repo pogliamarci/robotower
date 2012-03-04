@@ -22,6 +22,9 @@
 
 #include "Zone.h"
 
+
+#define ESC 27
+
 using namespace std;
 using namespace cv;
 
@@ -33,17 +36,16 @@ void SelectArea(int event, int x, int y, int, void* p)
 	if(event == CV_EVENT_LBUTTONDOWN)
 	{
 		regione->setStart(x,y);
-		cout << "click del mouse giù\n";
 	}
 	else if(event == CV_EVENT_LBUTTONUP)
 	{
 		regione->setEnd(x,y);
-		cout << "click del mouse su\n";
 		regione->drawZone();
 	}
 	else
 	{
 		regione->pointRGB(x,y);
+		regione->drawZone(x,y);
 	}
 	return;
 }
@@ -118,33 +120,34 @@ int main(int argc,char** argv)
 		c=waitKey(0);
 		switch(c)
 		{
-			case 27:
+			case ESC:
+				cout << "\n";
 				exit(0);
 				break;
 			case 'r':
-				cout << "seleziono rosso\n";
+				cout << "\nseleziono rosso\n";
 				getColor(r, img, regione);
 				eliminateDuplicates(r);
 				break;
 			case 'g':
-				cout << "seleziono giallo\n";
+				cout << "\nseleziono giallo\n";
 				getColor(g, img, regione);
 				eliminateDuplicates(g);
 				break;
 			case 'b':
-				cout << "seleziono blu\n";
+				cout << "\nseleziono blu\n";
 				getColor(b, img, regione);
 				eliminateDuplicates(b);
 				break;
 			case 'c':
-				cout << "creo file .dts\n";
+				cout << "\ncreo file .dts\n";
 				Loop=false;
 				break;
 			case 'e':
-				cout << "LittleEndian: il lato giusto dell'uovo!\n\nps: W lilliput!\n";
+				cout << "\nLittleEndian: il lato giusto dell'uovo!\n\nps: W lilliput!\n";
 				break;
 			default:
-				cout << "comando sconosciuto\n";
+				cout << "\ncomando sconosciuto\n";
 				break;
 		}
 	}

@@ -31,6 +31,8 @@ class Zone
 		void setEnd(int x, int y);
 		//disegna il rettangolo nella finestra
 		void drawZone();
+		//disegna il rettangolo mentre trascini il mouse
+		void drawZone(int x, int y);
 		//stampa a schermo il colore del punto (x,y)
 		void pointRGB(int x, int y);
 		//punto iniziale del rettangolo
@@ -38,6 +40,7 @@ class Zone
 		//punto finale del rettangolo
 		cv::Point End;
 	private:
+		bool Drag_Drop;
 		const char* W;
 		cv::Mat I;
 };
