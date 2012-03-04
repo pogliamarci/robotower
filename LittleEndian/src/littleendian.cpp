@@ -50,7 +50,7 @@ void getColor(vector<Vec3b>& V, Mat& img, Zone* Z)
 	for(x=Z->Start.x; x<Z->End.x; x++)
 		for(y=Z->Start.y; y<Z->End.y; y++)
 		{
-			V.push_back(img.at<float>(x,y));
+			V.push_back(img.at<Vec3b>(x,y));
 		}
 }
 
@@ -60,7 +60,7 @@ void eliminateDuplicates(vector<Vec3b>& V)
 	for(i1=V.begin(); i1<V.end(); i1++)
 		for(i2=(i1+1); i2<V.end(); i2++)
 		{
-			if(i2==i1) V.erase(i2);
+			if(((*i2)[0]==(*i1)[0]) && ((*i2)[1]==(*i1)[1]) && ((*i2)[2]==(*i1)[2]) ) V.erase(i2);
 		}
 }
 
@@ -69,8 +69,7 @@ void printOnfile(vector<Vec3b>& V, char c, ofstream& output)
 	vector<Vec3b>::iterator it;
 	for(it=V.begin(); it<V.end(); it++)
 	{
-		cout << (*it)[0];
-		output << " " << (int)(*it)[0] << " " << (int)(*it)[1] << " " << (int) (*it)[2] << " " << c; 
+		output << " " << (int)((*it)[0]) << " " << (int)((*it)[1]) << " " << (int)((*it)[2]) << " " << c; 
 	}
 
 }
