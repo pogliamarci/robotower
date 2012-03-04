@@ -41,6 +41,10 @@ void SelectArea(int event, int x, int y, int, void* p)
 		cout << "click del mouse su\n";
 		regione->drawZone();
 	}
+	else
+	{
+		regione->pointRGB(x,y);
+	}
 	return;
 }
 
@@ -60,7 +64,11 @@ void eliminateDuplicates(vector<Vec3b>& V)
 	for(i1=V.begin(); i1<V.end(); i1++)
 		for(i2=(i1+1); i2<V.end(); i2++)
 		{
-			if(((*i2)[0]==(*i1)[0]) && ((*i2)[1]==(*i1)[1]) && ((*i2)[2]==(*i1)[2]) ) V.erase(i2);
+			if(((*i2)[0]==(*i1)[0]) && ((*i2)[1]==(*i1)[1]) && ((*i2)[2]==(*i1)[2]) ) 
+			{
+				i2=V.erase(i2);
+				i2--;
+			}
 		}
 }
 
@@ -101,7 +109,7 @@ int main(int argc,char** argv)
 			"\tr - attribuisce ai pixel l'etichetta r\n"
 			"\tg - attribuisce ai pixel l'etichetta g\n"
 			"\tb - attribuisce ai pixel l'etichetta b\n"
-			"\tc - crea il file .kcc\n"
+			"\tc - crea il file .dts\n"
 			<< endl;
 	cvSetMouseCallback("Little Endian Interface",SelectArea,regione);
 	while(Loop)
@@ -146,7 +154,7 @@ int main(int argc,char** argv)
 	{
 		output << (r.size()+g.size()+b.size());
 		printOnfile(r,'R', output);
-		printOnfile(g,'B', output);
+		printOnfile(g,'G', output);
 		printOnfile(b,'B', output);
 		output.close();
 		cout << "\nFile Creato!\n";

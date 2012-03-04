@@ -31,6 +31,8 @@ class Zone
 		void setEnd(int x, int y);
 		//disegna il rettangolo nella finestra
 		void drawZone();
+		//stampa a schermo il colore del punto (x,y)
+		void pointRGB(int x, int y);
 		//punto iniziale del rettangolo
 		cv::Point Start;
 		//punto finale del rettangolo
