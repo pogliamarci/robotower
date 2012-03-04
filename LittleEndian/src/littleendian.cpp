@@ -24,6 +24,7 @@
 
 
 #define ESC 27
+#define CLOSE_FROM_WINDOW -1
 
 using namespace std;
 using namespace cv;
@@ -120,6 +121,7 @@ int main(int argc,char** argv)
 		c=waitKey(0);
 		switch(c)
 		{
+			case CLOSE_FROM_WINDOW:
 			case ESC:
 				cout << "\n";
 				exit(0);
