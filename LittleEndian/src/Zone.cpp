@@ -79,11 +79,13 @@ void Zone::drawZone(int x, int y)
 
 void Zone::pointRGB(int col, int row)
 {
-    Vec3b& element = I.at<Vec3b>(row, col);
-    int b_pix = element[0];
-    int g_pix = element[1];
-    int r_pix = element[2];
-
-    std::cout << "\r"<< "Coordinate:" <<"(" << col << "," << row << ")"<< "\tRGB:" <<"(" << r_pix << ", " << g_pix << ", " << b_pix << ")" << std::flush;
+	Vec3b& element = I.at<Vec3b>(row, col);
+	int b_pix = element[0];
+	int g_pix = element[1];
+	int r_pix = element[2];
+	//cancella la precedente stampa di coordinate
+	std::cout << "\r" << "                    " << "\t" << "   " << "                  ";
+	//stampa le nuove coordinate
+	std::cout << "\rCoordinate:" <<"(" << col << "," << row << ")" << "\tRGB:" <<"(" << r_pix << ", " << g_pix << ", " << b_pix << ")" << std::flush;
 }
 
