@@ -54,7 +54,7 @@ void getColor(vector<Vec3b>& V, Mat& img, Zone* Z)
 	for(x=Z->Start.x; x<Z->End.x; x++)
 		for(y=Z->Start.y; y<Z->End.y; y++)
 		{
-			V.push_back(img.at<Vec3b>(x,y));
+			V.push_back(img.at<Vec3b>(y, x));
 		}
 }
 

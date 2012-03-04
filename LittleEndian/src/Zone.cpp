@@ -60,10 +60,13 @@ void Zone::drawZone()
 	waitKey(0);
 }
 
-void Zone::pointRGB(int x, int y)
+void Zone::pointRGB(int col, int row)
 {
-	Vec3b V;
-	V=this->I.at<Vec3b>(x,y);
-	std::cout << "(" << (int)V[0] << "," << (int)V[1] << "," << (int)V[2] << ")" << std::endl;
+    Vec3b& element = I.at<Vec3b>(row, col);
+    int b_pix = element[0];
+    int g_pix = element[1];
+    int r_pix = element[2];
+
+    std::cout << "(" << r_pix << ", " << g_pix << ", " << b_pix << ")" << std::endl;
 }
 

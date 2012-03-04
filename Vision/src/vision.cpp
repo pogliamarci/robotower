@@ -82,6 +82,7 @@ void analyzeCurrentImage(Mat& img)
 				/* bottom right point */
 				pt2.x = BlobsItr2->second->GetMaxX();
 				pt2.y = BlobsItr2->second->GetMinY();
+				cout << "Blob found: " << BlobsItr1->first <<endl;
 				
 				/* compute width and height to perform some check... */
 				int blob_width = pt2.x - pt1.x;
@@ -171,16 +172,29 @@ int main (int argc, char** argv)
 	cc = new KnnColorClassifier();
 	pm = new PixelMap();
 
+	// DEBUG
+	if (argc == 3)
+	{
+		cd->load("DataSet.dts");
+		cout << "----> Color Data set  [OK]" << endl;
+		//Creazione del classificatore colore
+		cc->fast_build(cd, 5, 17, false);
+		cc->save_matrix("classifier[5-17].kcc");
+	}
+	// END DEBUG
+
 	/* load classifier */
 	cc->load_matrix("classifier[5-17].kcc");
 	cout << "----> Classifier loaded  [OK]"<<endl;
 
-	/*
-	Mat frame = imread(argv[1], CV_LOAD_IMAGE_ANYCOLOR);
-	analyzeCurrentImage(frame);
-	imshow("SpyKeeView", frame);
-	if (waitKey(0) == 'c') exit(EXIT_SUCCESS);
-	*/
+	if (argc >= 2)
+	{
+		Mat frame = imread(argv[1], CV_LOAD_IMAGE_ANYCOLOR);
+		analyzeCurrentImage(frame);
+		imshow("SpyKeeView", frame);
+		if (waitKey(0) == 'c') exit(EXIT_SUCCESS);
+	}
+
 
 	/* let's start it all */
 	ros::spin();
