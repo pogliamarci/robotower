@@ -32,7 +32,8 @@
 #define MIN_BLOB_RATIO 0.2
 #define MAX_BLOB_RATIO 0.8
 
-class BlobInfo {
+class BlobInfo 
+{
 	private:
 		int num_pixel;
 		char blob_class;
@@ -42,15 +43,18 @@ class BlobInfo {
 		cv::Point b;
 		BlobInfo(char new_class = 'U');
 		void save(int num_pix, cv::Point point_1, cv::Point point_2);
-		inline char getClass() {
+		inline char getClass() 
+		{
 			return this->blob_class;
 		}
-		inline int getNumPix() {
+		inline int getNumPix() 
+		{
 			return this->num_pixel;
 		}
 };
 
-class BlobBuffer {
+class BlobBuffer 
+{
 	private:
 		std::vector<BlobInfo>* data;
 		int size;
