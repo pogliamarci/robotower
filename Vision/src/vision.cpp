@@ -84,14 +84,14 @@ void analyzeCurrentImage(Mat& img)
 				/* bottom right point */
 				pt2.x = BlobsItr2->second->GetMaxX();
 				pt2.y = BlobsItr2->second->GetMinY();
-				cout << "Blob found: " << BlobsItr1->first <<endl;
+				cout << "Blob found: " << BlobsItr1->first << endl;
 				
 				/* compute width and height to perform some check... */
 				int blob_width = pt2.x - pt1.x;
 				int blob_heigth = pt1.y - pt2.x;
 
 				/* is the blob shape similar to the expected one? */
-				if (true/*checkBlobShape(blob_width, blob_heigth)*/)
+				if (checkBlobShape(blob_width, blob_heigth))
 				{
 					/* save the biggest found blob for each colour class */
 					if(BlobsItr1->first == 'R' && ( red_blob.getNumPix() == 0
@@ -130,14 +130,17 @@ void analyzeCurrentImage(Mat& img)
 	{
 		switch (result->getClass())
 		{
-		case 'Y':
-			rectangle(img, result->a, result->b, CV_RGB(254,254,0), 2, 8, 0);
-			break;
-		case 'R':
-			rectangle(img, result->a, result->b, CV_RGB(254,0,0), 2, 8, 0);
-			break;
-		default:
-			break;
+			case 'Y':
+				rectangle(img, result->a, result->b, CV_RGB(254,254,0), 2, 8, 0);
+				break;
+			case 'R':
+				rectangle(img, result->a, result->b, CV_RGB(254,0,0), 2, 8, 0);
+				break;
+			case 'G':
+				rectangle(img, result->a, result->b, CV_RGB(254,0,0), 2, 8, 0);
+				break;
+			default:
+				break;
 		}
 	}
 
@@ -170,6 +173,10 @@ int main (int argc, char** argv)
 	bool classifier_loaded = false;
 	bool from_file = false;
 	
+	//vision variables
+	char DefaultDataset[] = "DataSet.dts";
+	char DefaultClassifier[] = "classifier[5-17].kcc";
+	
 	//ros variable
 	ros::init(argc, argv, "vision");
 	ros::NodeHandle ros_node;
@@ -177,6 +184,7 @@ int main (int argc, char** argv)
 	
 	//opencv variables
 	Mat frame;
+	
 	
 	namedWindow("SpyKeeView", CV_WINDOW_AUTOSIZE);
 	
@@ -189,9 +197,9 @@ int main (int argc, char** argv)
 		if(strcmp(argv[i],"-h") == 0)
 		{
 			cout 	<< "Utilizzo:\n"
-				<< "-h\t visualizza questo messaggio\n"
+				<< "-h\t\t visualizza questo messaggio\n"
 				<< "-f [filename]\t carica il frame da analizzare da file\n"
-				<< "-l\t Carica il file DataSet.dts e genera il file .kcc\n"
+				<< "-l\t\t Carica il file DataSet.dts e genera il file .kcc\n"
 				<< "-L [filename]\t carica il Color Data Set da file e genera il file .kcc\n"
 				<< "-k [filename]\t carica il file .kcc da file\n"
 				<< endl;
@@ -204,11 +212,11 @@ int main (int argc, char** argv)
 		}
 		else if(strcmp(argv[i],"-l") == 0)
 		{
-			cd->load("DataSet.dts");
+			cd->load(DefaultDataset);
 			cout << "----> Color Data set  [OK]" << endl;
 			//Creazione del classificatore colore
 			cc->fast_build(cd, 5, 17, false);
-			cc->save_matrix("classifier[5-17].kcc");
+			cc->save_matrix(DefaultClassifier);
 		}
 		else if((strcmp(argv[i],"-L" ) == 0) && (argc > (i+1)))
 		{
@@ -216,7 +224,7 @@ int main (int argc, char** argv)
 			cout << "----> Color Data set  [OK]" << "caricato file:" << argv[i] << endl;
 			//Creazione del classificatore colore
 			cc->fast_build(cd, 5, 17, false);
-			cc->save_matrix("classifier[5-17].kcc");
+			cc->save_matrix(DefaultClassifier);
 		}
 		else if((strcmp(argv[i], "-k") == 0) && (argc > (i+1)))
 		{
