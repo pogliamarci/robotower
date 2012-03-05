@@ -22,6 +22,8 @@
 
 #include "vision.h"
 
+#define EXIT_FROM_WINDOW -1
+
 using namespace std;
 using namespace cv;
 
@@ -89,7 +91,7 @@ void analyzeCurrentImage(Mat& img)
 				int blob_heigth = pt1.y - pt2.x;
 
 				/* is the blob shape similar to the expected one? */
-				if (checkBlobShape(blob_width, blob_heigth))
+				if (true/*checkBlobShape(blob_width, blob_heigth)*/)
 				{
 					/* save the biggest found blob for each colour class */
 					if(BlobsItr1->first == 'R' && ( red_blob.getNumPix() == 0
@@ -163,38 +165,83 @@ void imageMessageCallback(const sensor_msgs::CompressedImage::ConstPtr& message)
 
 int main (int argc, char** argv)
 {
+	//variables for parsing line command
+	int i;
+	bool classifier_loaded = false;
+	bool from_file = false;
+	
+	//ros variable
 	ros::init(argc, argv, "vision");
 	ros::NodeHandle ros_node;
 	ros::Subscriber source = ros_node.subscribe("spykee_camera", 1, imageMessageCallback);
+	
+	//opencv variables
+	Mat frame;
+	
 	namedWindow("SpyKeeView", CV_WINDOW_AUTOSIZE);
 	
 	cd = new ColorDataset();	/* is it really needed? */
 	cc = new KnnColorClassifier();
 	pm = new PixelMap();
-
-	// DEBUG
-	if (argc == 3)
+	
+	for(i=1; i<argc; i++)
 	{
-		cd->load("DataSet.dts");
-		cout << "----> Color Data set  [OK]" << endl;
-		//Creazione del classificatore colore
-		cc->fast_build(cd, 5, 17, false);
-		cc->save_matrix("classifier[5-17].kcc");
+		if(strcmp(argv[i],"-h") == 0)
+		{
+			cout 	<< "Utilizzo:\n"
+				<< "-h\t visualizza questo messaggio\n"
+				<< "-f [filename]\t carica il frame da analizzare da file\n"
+				<< "-l\t Carica il file DataSet.dts e genera il file .kcc\n"
+				<< "-L [filename]\t carica il Color Data Set da file e genera il file .kcc\n"
+				<< "-k [filename]\t carica il file .kcc da file\n"
+				<< endl;
+			exit(EXIT_SUCCESS);
+		}
+		else if((strcmp(argv[i],"-f") == 0) && (argc > (i+1)))
+		{
+			frame = imread(argv[++i], CV_LOAD_IMAGE_ANYCOLOR);
+			from_file = true;
+		}
+		else if(strcmp(argv[i],"-l") == 0)
+		{
+			cd->load("DataSet.dts");
+			cout << "----> Color Data set  [OK]" << endl;
+			//Creazione del classificatore colore
+			cc->fast_build(cd, 5, 17, false);
+			cc->save_matrix("classifier[5-17].kcc");
+		}
+		else if((strcmp(argv[i],"-L" ) == 0) && (argc > (i+1)))
+		{
+			cd->load(argv[++i]);
+			cout << "----> Color Data set  [OK]" << "caricato file:" << argv[i] << endl;
+			//Creazione del classificatore colore
+			cc->fast_build(cd, 5, 17, false);
+			cc->save_matrix("classifier[5-17].kcc");
+		}
+		else if((strcmp(argv[i], "-k") == 0) && (argc > (i+1)))
+		{
+			/* load classifier */
+			cc->load_matrix(argv[++i]);
+			cout << "----> Classifier loaded  [OK]" << endl;
+			classifier_loaded = true;
+		}
 	}
-	// END DEBUG
-
-	/* load classifier */
-	cc->load_matrix("classifier[5-17].kcc");
-	cout << "----> Classifier loaded  [OK]"<<endl;
-
-	if (argc >= 2)
+	
+	if (!classifier_loaded)
 	{
-		Mat frame = imread(argv[1], CV_LOAD_IMAGE_ANYCOLOR);
+		/* load classifier */
+		cout << "----> No classifier loaded, loading default classifier" << endl;
+		cc->load_matrix("classifier[5-17].kcc");
+		cout << "----> Classifier loaded  [OK]"<<endl;
+	}
+	
+	if(from_file)
+	{
 		analyzeCurrentImage(frame);
 		imshow("SpyKeeView", frame);
-		if (waitKey(0) == 'c') exit(EXIT_SUCCESS);
+		char c = waitKey(0);
+		if((c == 'c') || (c == EXIT_FROM_WINDOW)) exit(EXIT_SUCCESS);
 	}
-
 
 	/* let's start it all */
 	ros::spin();
