@@ -58,7 +58,7 @@ void Zone::setEnd(int x, int y)
 void Zone::drawZone()
 {
 	Mat img=this->I.clone();
-	rectangle(img,this->Start,this->End,CV_RGB(0,255,0), 1,8,0);
+	rectangle(img,this->Start,this->End,BLACK_R, 1,8,0);
 	imshow(W,img);
 	waitKey(0);
 }
@@ -71,12 +71,16 @@ void Zone::drawZone(int x, int y)
 		Now.x=x;
 		Now.y=y;
 		Mat img=this->I.clone();
-		rectangle(img,this->Start,Now,CV_RGB(255,255,255), 1,8,0);
+		rectangle(img,this->Start,Now,WHITE_R, 1,8,0);
 		imshow(W,img);
 		waitKey(0);
 	}
 }
 
+void Zone::printZone(Scalar C)
+{
+	rectangle(this->I,this->Start,this->End,C, 1,8,0);
+}
 void Zone::pointRGB(int col, int row)
 {
 	Vec3b& element = I.at<Vec3b>(row, col);

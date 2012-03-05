@@ -113,6 +113,7 @@ int main(int argc,char** argv)
 			"\tg - attribuisce ai pixel l'etichetta g\n"
 			"\tb - attribuisce ai pixel l'etichetta b\n"
 			"\tc - crea il file .dts\n"
+			"\tz - annulla tutte le selezioni\n"
 			<< endl;
 	cvSetMouseCallback("Little Endian Interface",SelectArea,regione);
 	while(Loop)
@@ -130,20 +131,31 @@ int main(int argc,char** argv)
 				cout << "\nseleziono rosso\n";
 				getColor(r, img, regione);
 				eliminateDuplicates(r);
+				regione->printZone(RED_R);
 				break;
 			case 'g':
-				cout << "\nseleziono giallo\n";
+				cout << "\nseleziono verde\n";
 				getColor(g, img, regione);
 				eliminateDuplicates(g);
+				regione->printZone(GREEN_R);
 				break;
 			case 'b':
 				cout << "\nseleziono blu\n";
 				getColor(b, img, regione);
 				eliminateDuplicates(b);
+				regione->printZone(BLUE_R);
 				break;
 			case 'c':
 				cout << "\ncreo file .dts\n";
 				Loop=false;
+				break;
+			case 'z':
+				cout << "\nannullo tutte le selezioni\n";
+				img=imread(argv[1],CV_LOAD_IMAGE_COLOR);
+				imshow("Little Endian Interface",img);
+				r.clear();
+				g.clear();
+				b.clear();
 				break;
 			case 'e':
 				cout << "\nLittleEndian: il lato giusto dell'uovo!\n\nps: W lilliput!\n";
@@ -153,6 +165,7 @@ int main(int argc,char** argv)
 				break;
 		}
 	}
+	
 	ofstream output;
 	output.open ("DataSet.dts", ios::out);
 	if (output.is_open())

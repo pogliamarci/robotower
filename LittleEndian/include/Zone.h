@@ -17,6 +17,12 @@
 
 #include "opencv2/opencv.hpp"
 
+#define RED_R CV_RGB(255,0,0)
+#define GREEN_R CV_RGB(0,255,0)
+#define BLUE_R CV_RGB(0,0,255)
+#define WHITE_R CV_RGB(255,255,255)
+#define BLACK_R CV_RGB(0,0,0)
+
 //classe per la selezione di zone in una immagine
 class Zone
 {
@@ -35,6 +41,8 @@ class Zone
 		void drawZone(int x, int y);
 		//stampa a schermo il colore del punto (x,y)
 		void pointRGB(int x, int y);
+		//segna permanentemente la zona colorata
+		void printZone(cv::Scalar C);
 		//punto iniziale del rettangolo
 		cv::Point Start;
 		//punto finale del rettangolo
