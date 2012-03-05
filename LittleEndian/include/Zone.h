@@ -43,6 +43,8 @@ class Zone
 		void pointRGB(int x, int y);
 		//segna permanentemente la zona colorata
 		void printZone(cv::Scalar C);
+		//aggiorna l'immagine 
+		void updateImg(cv::Mat& img);
 		//punto iniziale del rettangolo
 		cv::Point Start;
 		//punto finale del rettangolo

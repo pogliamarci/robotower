@@ -81,6 +81,7 @@ void Zone::printZone(Scalar C)
 {
 	rectangle(this->I,this->Start,this->End,C, 1,8,0);
 }
+
 void Zone::pointRGB(int col, int row)
 {
 	Vec3b& element = I.at<Vec3b>(row, col);
@@ -91,5 +92,10 @@ void Zone::pointRGB(int col, int row)
 	std::cout << "\r" << "                    " << "\t" << "   " << "                  ";
 	//stampa le nuove coordinate
 	std::cout << "\rCoordinate:" <<"(" << col << "," << row << ")" << "\tRGB:" <<"(" << r_pix << ", " << g_pix << ", " << b_pix << ")" << std::flush;
+}
+
+void Zone::updateImg(Mat& img)
+{
+	this->I=img;
 }
 

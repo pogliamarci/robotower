@@ -152,6 +152,7 @@ int main(int argc,char** argv)
 			case 'z':
 				cout << "\nannullo tutte le selezioni\n";
 				img=imread(argv[1],CV_LOAD_IMAGE_COLOR);
+				regione->updateImg(img);
 				imshow("Little Endian Interface",img);
 				r.clear();
 				g.clear();
