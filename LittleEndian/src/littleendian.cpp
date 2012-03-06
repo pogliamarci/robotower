@@ -75,14 +75,15 @@ int main(int argc,char** argv)
 
 	if(data == NULL)
 	{
-	    /* ROS initialization */
-	    data = new LittleObject(true);
-        ros::init(argc, argv, "little_endian");
-	    ros_node = new ros::NodeHandle();
+		/* ROS initialization */
+		data = new LittleObject(true);
+		ros::init(argc, argv, "little_endian");
+		ros_node = new ros::NodeHandle();
 		sub = ros_node->subscribe("spykee_camera", 1, &LittleObject::getImgRos, data);
 	}
 	namedWindow("Little Endian Interface", CV_WINDOW_AUTOSIZE);
 	regione= new Zone("Little Endian Interface",data->img);
+	data->Z=regione;
 	cout << "Hot keys: \n"
 			"\tESC - esce dal programma\n"
 			"\tr - attribuisce ai pixel l'etichetta r\n"
@@ -106,19 +107,19 @@ int main(int argc,char** argv)
 				break;
 			case 'r':
 				cout << "\nseleziono rosso\n";
-				data->getColor('r',regione);
+				data->getColor('r');
 				data->eliminateDuplicates('r');
 				regione->printZone(RED_R);
 				break;
 			case 'g':
 				cout << "\nseleziono verde\n";
-				data->getColor('g', regione);
+				data->getColor('g');
 				data->eliminateDuplicates('g');
 				regione->printZone(GREEN_R);
 				break;
 			case 'b':
 				cout << "\nseleziono blu\n";
-				data->getColor('b', regione);
+				data->getColor('b');
 				data->eliminateDuplicates('b');
 				regione->printZone(BLUE_R);
 				break;

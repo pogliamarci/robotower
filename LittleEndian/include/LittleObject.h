@@ -20,7 +20,7 @@ class LittleObject
 		//aggiorna l'immagine
 		void updateImg();
 		//salva nei vettori i colori selezionati 
-		void getColor(char color, Zone* Z);
+		void getColor(char color);
 		//elimina i duplicati
 		void eliminateDuplicates(char color);
 		//sceglie il vettore su cui operare
@@ -35,6 +35,8 @@ class LittleObject
 		void cleanVectors();
 		//immagine
 		cv::Mat img;
+		//zona 
+		Zone* Z;
 	private:
 		//vettore r
 		std::vector<cv::Vec3b> r;

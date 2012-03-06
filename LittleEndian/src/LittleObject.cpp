@@ -40,16 +40,8 @@ inline vector<Vec3b> LittleObject::selectVector(char color)
 //callback per ricevere i messaggi da ROS
 void LittleObject::getImgRos(const sensor_msgs::CompressedImage::ConstPtr& message)
 {
-    cout << "ricevo!" << endl;
 	this->img = imdecode(message->data, CV_LOAD_IMAGE_ANYCOLOR);
-	
-	/* if (!(this->img.empty()))
-	{
-		imshow("Little Endian Interface", this->img);
-		char c = waitKey(5);
-		if (c == 'c')
-			exit(EXIT_SUCCESS);
-	} */
+	Z->updateImg(img);
 }
 
 //metodo per caricare le immagini da file
@@ -72,7 +64,7 @@ void LittleObject::updateImg()
 }
 
 //metodo per prendere il colore rgb dei pixel selezionati
-void LittleObject::getColor(char color, Zone* Z)
+void LittleObject::getColor(char color)
 {
 	int x,y;
 	vector<Vec3b> V;
@@ -123,7 +115,8 @@ void LittleObject::printOnfile(char color, char c, ofstream& output)
 //metodo per visualizzare l'immagine
 char LittleObject::showImage()
 {
-	if(this->mode_r) {
+	if(this->mode_r) 
+	{
 		ros::spinOnce();
 	}
 	if(!(this->img.empty()))
