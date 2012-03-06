@@ -57,11 +57,11 @@ void analyzeCurrentImage(Mat& img)
 	BlobInfo yellow_blob('Y');
 
 	/* draw a line in the middle of the frame (why?) */
-	pt3.x = img.cols/2;
+	/* pt3.x = img.cols/2;
 	pt3.y = 0;
 	pt4.x = img.cols/2;
 	pt4.y = img.rows;
-	line(img, pt3, pt4, CV_RGB(0,0,254), 2, 8, 0);
+	line(img, pt3, pt4, CV_RGB(0,0,254), 2, 8, 0); */
 
 	/* Blob parameters, PixMap object initialisation */
 	pm->SetImage((unsigned char*)img.data, img.cols, img.rows, cc, 3);
@@ -89,6 +89,10 @@ void analyzeCurrentImage(Mat& img)
 				/* compute width and height to perform some check... */
 				int blob_width = pt2.x - pt1.x;
 				int blob_heigth = pt1.y - pt2.x;
+
+				if ((BlobsItr1->first == 'R')) {
+					rectangle(img, pt1, pt2, CV_RGB(254,254,0), 2, 8, 0);
+				}
 
 				/* is the blob shape similar to the expected one? */
 				if (checkBlobShape(blob_width, blob_heigth))

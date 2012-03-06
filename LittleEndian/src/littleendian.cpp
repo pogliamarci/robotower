@@ -60,6 +60,8 @@ int main(int argc,char** argv)
 	//oggetti
 	Zone* regione;
 	LittleObject* data=NULL;
+	ros::NodeHandle* ros_node;
+	ros::Subscriber sub;
 	
 	//parsing degli argomenti in ingresso
 	for(i=0; i<argc; i++)
@@ -70,13 +72,14 @@ int main(int argc,char** argv)
 			data->getImg(argv[++i]);
 		}
 	}
+
 	if(data == NULL)
 	{
-		/* ROS initialization */
-		data= new LittleObject(true);
-		ros::init(argc, argv, "little_endian");
-		ros::NodeHandle ros_node;
-		ros::Subscriber sub = ros_node.subscribe("spykee_camera", 1, &LittleObject::getImgRos, data);
+	    /* ROS initialization */
+	    data = new LittleObject(true);
+        ros::init(argc, argv, "little_endian");
+	    ros_node = new ros::NodeHandle();
+		sub = ros_node->subscribe("spykee_camera", 1, &LittleObject::getImgRos, data);
 	}
 	namedWindow("Little Endian Interface", CV_WINDOW_AUTOSIZE);
 	regione= new Zone("Little Endian Interface",data->img);
@@ -157,4 +160,5 @@ int main(int argc,char** argv)
 	{
 		cerr << "\nErrore! file non aperto in scrittura!\n";
 	}
+
 }
