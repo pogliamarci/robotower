@@ -52,16 +52,25 @@ void SelectArea(int event, int x, int y, int, void* p)
 
 int main(int argc,char** argv)
 {
+	//variabili main
+	int i;
 	char c;
 	bool Loop = true;
+	
+	//oggetti
 	Zone* regione;
-	LittleObject* data;
-	if(argc>1)
+	LittleObject* data=NULL;
+	
+	//parsing degli argomenti in ingresso
+	for(i=0; i<argc; i++)
 	{
-		data=new LittleObject(false);
-		data->getImg(argv[1]);
+		if((strcmp(argv[i],"-f") == 0) && (argc>i+1))
+		{
+			data=new LittleObject(false);
+			data->getImg(argv[++i]);
+		}
 	}
-	else
+	if(data == NULL)
 	{
 		/* ROS initialization */
 		data= new LittleObject(true);
@@ -80,10 +89,11 @@ int main(int argc,char** argv)
 			"\tz - annulla tutte le selezioni\n"
 			<< endl;
 	cvSetMouseCallback("Little Endian Interface",SelectArea,regione);
+	
+	//main loop
 	while(Loop)
 	{
-		imshow("Little Endian Interface",data->img);
-		c=waitKey(0);
+		c=data->showImage();
 		switch(c)
 		{
 			case CLOSE_FROM_WINDOW:
@@ -123,12 +133,15 @@ int main(int argc,char** argv)
 			case 'e':
 				cout << "\nLittleEndian: il lato giusto dell'uovo!\n\nps: W lilliput!\n";
 				break;
+			case 0:
+				break;
 			default:
 				cout << "\ncomando sconosciuto\n";
 				break;
 		}
 	}
 	
+	//creazione file di output DataSet.dts
 	ofstream output;
 	output.open ("DataSet.dts", ios::out);
 	if (output.is_open())

@@ -1,0 +1,6 @@
+<launch>
+        <node pkg="SpyKee" name="SpyKee_main" type="spykee" cwd="node" output="screen" />
+        <node pkg="SpyKee" name="SpyKee_debug" type="monitor.py" cwd="node" output="screen" />
+	<node pkg="LittleEndian" name="little_endian" type="littleendian" cwd="node" output="screen" />
+</launch>
+

@@ -3,6 +3,7 @@
 using namespace std;
 using namespace cv;
 
+//costruttore della classe. fa poca roba
 LittleObject::LittleObject(bool from_ros)
 {
 	if(from_ros)
@@ -17,6 +18,7 @@ LittleObject::LittleObject(bool from_ros)
 	}
 }
 
+//funzione inline per la selezione del vettore
 inline vector<Vec3b> LittleObject::selectVector(char color)
 {
 	vector<Vec3b> V;
@@ -35,9 +37,11 @@ inline vector<Vec3b> LittleObject::selectVector(char color)
 	return V;
 }
 
+//callback per ricevere i messaggi da ROS
 void LittleObject::getImgRos(const sensor_msgs::CompressedImage::ConstPtr& message)
 {
 	this->img = imdecode(message->data, CV_LOAD_IMAGE_ANYCOLOR);
+	cout << "ricevo!" << endl;
 	
 	if (!(this->img.empty()))
 	{
@@ -48,6 +52,7 @@ void LittleObject::getImgRos(const sensor_msgs::CompressedImage::ConstPtr& messa
 	}
 }
 
+//metodo per caricare le immagini da file
 void LittleObject::getImg(const char* file)
 {
 	this->path = file;
@@ -59,12 +64,14 @@ void LittleObject::getImg(const char* file)
 	}
 }
 
+//metodo per aggiornare l'immagine
 void LittleObject::updateImg()
 {
 	if(!mode_r)
 		this->getImg(this->path);
 }
 
+//metodo per prendere il colore rgb dei pixel selezionati
 void LittleObject::getColor(char color, Zone* Z)
 {
 	int x,y;
@@ -77,6 +84,7 @@ void LittleObject::getColor(char color, Zone* Z)
 		}
 }
 
+//metodo per eliminare i duplicati dai vettori dei colori
 void LittleObject::eliminateDuplicates(char color)
 {
 	vector<Vec3b> V;
@@ -93,11 +101,13 @@ void LittleObject::eliminateDuplicates(char color)
 		}
 }
 
+//metodo per stampare il numero di campioni
 void LittleObject::printOnfileNumber(ofstream& output)
 {
 	output << (this->r.size()+this->g.size()+this->b.size());
 }
 
+//metodo per stampare i campioni di colore di ciascun vettore
 void LittleObject::printOnfile(char color, char c, ofstream& output)
 {
 	vector<Vec3b> V;
@@ -110,6 +120,23 @@ void LittleObject::printOnfile(char color, char c, ofstream& output)
 
 }
 
+//metodo per visualizzare l'immagine
+char LittleObject::showImage()
+{
+	if(this->mode_r)
+		ros::spinOnce();
+	if(!(this->img.empty()))
+		imshow("Little Endian Interface",this->img);
+	if(this->mode_r)
+	{
+		waitKey(1);
+		return 0;
+	}
+	else return waitKey(0);
+	
+}
+
+//metodo per azzerare i vettori dei colori
 void LittleObject::cleanVectors()
 {
 	this->r.clear();

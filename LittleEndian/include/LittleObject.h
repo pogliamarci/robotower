@@ -29,6 +29,8 @@ class LittleObject
 		void printOnfile(char color, char c, std::ofstream& output);
 		//stampa il numero di elementi in testa al filename
 		void printOnfileNumber(std::ofstream& output);
+		//visualizza l'immagine caricata
+		char showImage();
 		//svuota i vettori
 		void cleanVectors();
 		//immagine
