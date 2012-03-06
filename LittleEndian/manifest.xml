@@ -11,6 +11,8 @@
   <url>http://ros.org/wiki/LittleEndian</url>
   <depend package="roscpp"/>
   <depend package="opencv2"/>
+  <depend package="SpyKee"/>
+  <depend package="SpyKee"/>
 
 </package>
 

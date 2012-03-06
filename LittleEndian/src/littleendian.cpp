@@ -19,16 +19,15 @@
 #include <vector>
 #include "opencv2/opencv.hpp"
 #include <fstream>
+#include "ros/ros.h"
 
-#include "Zone.h"
-
+#include "LittleObject.h"
 
 #define ESC 27
 #define CLOSE_FROM_WINDOW -1
 
 using namespace std;
 using namespace cv;
-
 
 void SelectArea(int event, int x, int y, int, void* p)
 {
@@ -51,62 +50,27 @@ void SelectArea(int event, int x, int y, int, void* p)
 	return;
 }
 
-void getColor(vector<Vec3b>& V, Mat& img, Zone* Z)
-{
-	int x,y;
-	for(x=Z->Start.x; x<Z->End.x; x++)
-		for(y=Z->Start.y; y<Z->End.y; y++)
-		{
-			V.push_back(img.at<Vec3b>(y, x));
-		}
-}
-
-void eliminateDuplicates(vector<Vec3b>& V)
-{
-	vector<Vec3b>::iterator i1,i2;
-	for(i1=V.begin(); i1<V.end(); i1++)
-		for(i2=(i1+1); i2<V.end(); i2++)
-		{
-			if(((*i2)[0]==(*i1)[0]) && ((*i2)[1]==(*i1)[1]) && ((*i2)[2]==(*i1)[2]) ) 
-			{
-				i2=V.erase(i2);
-				i2--;
-			}
-		}
-}
-
-void printOnfile(vector<Vec3b>& V, char c, ofstream& output)
-{
-	vector<Vec3b>::iterator it;
-	for(it=V.begin(); it<V.end(); it++)
-	{
-		output << " " << (int)((*it)[0]) << " " << (int)((*it)[1]) << " " << (int)((*it)[2]) << " " << c; 
-	}
-
-}
-
 int main(int argc,char** argv)
 {
 	char c;
-	bool Loop=true;
-	Mat img;
+	bool Loop = true;
 	Zone* regione;
-	vector<Vec3b> r;
-	vector<Vec3b> b;
-	vector<Vec3b> g;
-	if(argc<2)
+	LittleObject* data;
+	if(argc>1)
 	{
-		cout << "Utilizzo:\nlittleendian [file name] [options]\n";
-		exit(EXIT_FAILURE);
+		data=new LittleObject(false);
+		data->getImg(argv[1]);
 	}
-	img=imread(argv[1],CV_LOAD_IMAGE_COLOR);
-	if(img.empty())
+	else
 	{
-		cerr << "Errore: File non valido o non esistente\n";
-		exit(EXIT_FAILURE);
+		/* ROS initialization */
+		data= new LittleObject(true);
+		ros::init(argc, argv, "little_endian");
+		ros::NodeHandle ros_node;
+		ros::Subscriber sub = ros_node.subscribe("spykee_camera", 1, &LittleObject::getImgRos, data);
 	}
 	namedWindow("Little Endian Interface", CV_WINDOW_AUTOSIZE);
-	regione= new Zone("Little Endian Interface",img);
+	regione= new Zone("Little Endian Interface",data->img);
 	cout << "Hot keys: \n"
 			"\tESC - esce dal programma\n"
 			"\tr - attribuisce ai pixel l'etichetta r\n"
@@ -118,7 +82,7 @@ int main(int argc,char** argv)
 	cvSetMouseCallback("Little Endian Interface",SelectArea,regione);
 	while(Loop)
 	{
-		imshow("Little Endian Interface",img);
+		imshow("Little Endian Interface",data->img);
 		c=waitKey(0);
 		switch(c)
 		{
@@ -129,20 +93,20 @@ int main(int argc,char** argv)
 				break;
 			case 'r':
 				cout << "\nseleziono rosso\n";
-				getColor(r, img, regione);
-				eliminateDuplicates(r);
+				data->getColor('r',regione);
+				data->eliminateDuplicates('r');
 				regione->printZone(RED_R);
 				break;
 			case 'g':
 				cout << "\nseleziono verde\n";
-				getColor(g, img, regione);
-				eliminateDuplicates(g);
+				data->getColor('g', regione);
+				data->eliminateDuplicates('g');
 				regione->printZone(GREEN_R);
 				break;
 			case 'b':
 				cout << "\nseleziono blu\n";
-				getColor(b, img, regione);
-				eliminateDuplicates(b);
+				data->getColor('b', regione);
+				data->eliminateDuplicates('b');
 				regione->printZone(BLUE_R);
 				break;
 			case 'c':
@@ -151,12 +115,10 @@ int main(int argc,char** argv)
 				break;
 			case 'z':
 				cout << "\nannullo tutte le selezioni\n";
-				img=imread(argv[1],CV_LOAD_IMAGE_COLOR);
-				regione->updateImg(img);
-				imshow("Little Endian Interface",img);
-				r.clear();
-				g.clear();
-				b.clear();
+				data->updateImg();
+				regione->updateImg(data->img);
+				imshow("Little Endian Interface",data->img);
+				data->cleanVectors();
 				break;
 			case 'e':
 				cout << "\nLittleEndian: il lato giusto dell'uovo!\n\nps: W lilliput!\n";
@@ -171,10 +133,10 @@ int main(int argc,char** argv)
 	output.open ("DataSet.dts", ios::out);
 	if (output.is_open())
 	{
-		output << (r.size()+g.size()+b.size());
-		printOnfile(r,'R', output);
-		printOnfile(g,'G', output);
-		printOnfile(b,'B', output);
+		data->printOnfileNumber(output);
+		data->printOnfile('r','R', output);
+		data->printOnfile('g','G', output);
+		data->printOnfile('b','B', output);
 		output.close();
 		cout << "\nFile Creato!\n";
 	}
