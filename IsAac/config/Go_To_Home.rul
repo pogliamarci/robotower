@@ -1,0 +1,3 @@
+(Obj_Center)  => (TanSpeed SLOW_FORWARD);
+(Obj_Left) => (RotSpeed SLOW_LEFT);
+(Obj_Right) => (RotSpeed SLOW_RIGHT);

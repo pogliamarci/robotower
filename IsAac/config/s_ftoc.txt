@@ -1,0 +1,4 @@
+( TanSpeed TANSPEED )
+( RotSpeed ROTSPEED )
+( Win WIN )
+( Recharge  RECHARGE )

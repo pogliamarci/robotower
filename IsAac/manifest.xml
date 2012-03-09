@@ -1,0 +1,16 @@
+<package>
+  <description brief="IsAac">
+
+     IsAac modulo per interfacciarsi all'intelligenza artificiale
+
+  </description>
+  <author>Dave</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/IsAcc</url>
+  <depend package="brian"/>
+  <depend package="fuzzy"/>
+
+</package>
+
+

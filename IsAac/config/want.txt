@@ -1,0 +1,7 @@
+Go_To_Home 			= ( P Energy_High );
+Go_To_Energy 		= ( P Energy_Low );
+Search_Home			= ( AND ( P Robot_Not_Locked ) (P Energy_High));
+Search_Energy		= ( AND ( P Robot_Not_Locked ) (P Energy_Low));
+Obstacle				= ( P Home_Not_Detected);
+Win							= ( P Obj_Center );
+Recharge				= ( P Obj_Center );
