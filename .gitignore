@@ -6,10 +6,12 @@
 *.exe
 *.o
 *.so
+*.a
 # More
 Echoes/bin/Echoes
 SpyKee/bin/spykee
 Vision/bin/vision
+IsAac/bin/isaac
 LittleEndian/bin/littleendian
 
 # Python precompiled files #
