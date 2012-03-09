@@ -1,0 +1,74 @@
+# Section NORTH
+
+#	SubSection FAR
+
+(AND (BallFar) (BallN))        =>  (RotSpeed AHEAD)				(TanSpeed VERY_FAST_FORWARD)
+(AND (BallFar) (BallNNE))      =>  (RotSpeed FAST_RIGHT)		(TanSpeed FAST_FORWARD)
+(AND (BallFar) (BallNNW))      =>  (RotSpeed FAST_LEFT)			(TanSpeed FAST_FORWARD)
+(AND (BallFar) (BallNE))       =>  (RotSpeed VERY_FAST_RIGHT)	(TanSpeed FORWARD)
+(AND (BallFar) (BallNW))       =>  (RotSpeed VERY_FAST_LEFT) 	(TanSpeed FORWARD)
+
+#	SubSection MID
+
+(AND (BallMid) (BallN))       =>  (RotSpeed AHEAD)				(TanSpeed VERY_FAST_FORWARD)
+(AND (BallMid) (BallNNE))     =>  (RotSpeed FAST_RIGHT)			(TanSpeed FORWARD)
+(AND (BallMid) (BallNNW))     =>  (RotSpeed FAST_LEFT)			(TanSpeed FORWARD)
+(AND (BallMid) (BallNE))      =>  (RotSpeed VERY_FAST_RIGHT)	(TanSpeed SLOW_FORWARD)
+(AND (BallMid) (BallNW))      =>  (RotSpeed VERY_FAST_LEFT)     (TanSpeed SLOW_FORWARD)
+
+#	SubSection NEAR
+
+#		SubSubSection BallForward - GoalForward
+
+(AND (BallNear) (AND (BallNrNe) (GoalForward)))			=>  (RotSpeed SLOW_RIGHT)		(TanSpeed FORWARD)
+(AND (BallNear) (AND (BallNrNw) (GoalForward)))			=>  (RotSpeed SLOW_LEFT)		(TanSpeed FORWARD)
+(AND (BallNear) (AND (BallNrNNE) (GoalForward)))		=>  (RotSpeed RIGHT)			(TanSpeed FORWARD)
+(AND (BallNear) (AND (BallNrNNW) (GoalForward)))		=>  (RotSpeed LEFT)				(TanSpeed FORWARD)
+(AND (BallNear) (AND (BallForward) (AND (GoalForward) (OR (BallNrNW) (BallNrNE)))))	=>	(TanSpeed BACKWARD)
+
+#		SubSubSection BallForward - GoalBackward
+
+(AND (BallNear) (AND (BallForward) (AND (GoalBW) (GoalWest))))		=>  (RotSpeed FAST_RIGHT)
+(AND (BallNear) (AND (BallForward) (AND (GoalBE) (GoalEst))))		=>  (RotSpeed FATS_LEFT)
+(AND (BallNear) (AND (BallForward) (GoalBackward)))		=>  (TanSpeed FORWARD)
+
+
+#	SubSection CLOSE
+
+#		SubSubSection BallForward - GoalForward
+
+(AND (BallClose) (AND (BallN) (GoalForward)))			=>  (RotSpeed AHEAD)		(TanSpeed STEADY)
+(AND (BallClose) (AND (BallNNE) (GoalForward)))			=>  (RotSpeed FAST_RIGHT)	(TanSpeed STEADY)
+(AND (BallClose) (AND (BallNNW) (GoalForward)))			=>  (RotSpeed FAST_LEFT)	(TanSpeed STEADY)
+(AND (BallClose) (AND (BallNE) (GoalForward)))			=>  (RotSpeed AHEAD)	(TanSpeed BACKWARD)
+(AND (BallClose) (AND (BallNW) (GoalForward)))			=>  (RotSpeed AHEAD)	(TanSpeed BACKWARD)
+
+#		SubSubSection BallForward - GoalBackward
+
+(AND (BallClose) (AND (OR (BallN) (OR (BallNNE) (BallNNW))) (GoalBackward)))	=>	(TanSpeed BACKWARD)
+(AND (BallClose) (AND (OR (BallNE) (BallNW)) GoalBackward)) =>	(TanSpeed FORWARD)
+
+# Section SOUTH
+
+
+#	SubSubSection BallBackward - GoalBackward
+
+(AND (BallNear) (AND (BallNrSe) (GoalForward)))			=>  (RotSpeed SLOW_LEFT)		(TanSpeed BACKWARD)
+(AND (BallNear) (AND (BallNrSw) (GoalForward)))			=>  (RotSpeed SLOW_RIGHT)		(TanSpeed BACKWARD)
+(AND (BallNear) (AND (BallNrSSE) (GoalForward)))		=>  (RotSpeed LEFT)			(TanSpeed BACKWARD)
+(AND (BallNear) (AND (BallNrSSW) (GoalForward)))		=>  (RotSpeed RIGHT)				(TanSpeed BACKWARD)
+(AND (BallNear) (AND (BallBackward) (AND (GoalBackward) (OR (BallNrSW) (BallNrSE)))))	=>	(TanSpeed FORWARD)
+
+#	SubSection S - N
+
+(AND (BallNear) (AND (BallBack) (AND (GoalFW) (GoalWest))))		=>  (RotSpeed FAST_LEFT)
+(AND (BallNear) (AND (BallBack) (AND (GoalFE) (GoalEst))))		=>  (RotSpeed FAST_RIGHT)
+(AND (BallNear) (AND (BallBack) (GoalForward)))		=>  (TanSpeed BACKWARD)
+
+#	SubSection S - S
+
+(AND (BallClose) (AND (BallS) (GoalBackward)))			=>  (RotSpeed AHEAD)		(TanSpeed STEADY)
+(AND (BallClose) (AND (BallSSE) (GoalBackward)))		=>  (RotSpeed FAST_LEFT)	(TanSpeed STEADY)
+(AND (BallClose) (AND (BallSSW) (GoalBackward)))		=>  (RotSpeed FAST_RIGHT)	(TanSpeed STEADY)
+(AND (BallClose) (AND (BallSE) (GoalBackward)))			=>  (RotSpeed AHEAD)	(TanSpeed FORWARD)
+(AND (BallClose) (AND (BallSW) (GoalBackward)))			=>  (RotSpeed AHEAD)	(TanSpeed FORWARD)

@@ -1,0 +1,15 @@
+# Velocità tangenziale
+
+(VtAvanti) => (TanSpeed VERY_FAST_FORWARD)
+(VtStop) => (TanSpeed STEADY)
+(VtIndietro) => (TanSpeed VERY_FAST_BACKWARD)
+
+#Velocità di rotazione
+
+(VrStop) => (RotSpeed AHEAD)
+(VrDx) => (RotSpeed FAST_RIGHT)
+(VrSx) => (RotSpeed FAST_LEFT)
+
+#Kicker
+
+(ManKick) => (Kick FRONT)

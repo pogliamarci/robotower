@@ -1,0 +1,69 @@
+# Section NORTH
+
+#	SubSection CLOSE
+
+(AND (PositionTargetClose) (OrientationTargetNrN))       =>  (RotSpeed AHEAD)				(TanSpeed STEADY)
+(AND (PositionTargetClose) (OrientationTargetNrNNE))     =>  (RotSpeed RIGHT)				(TanSpeed STEADY)
+(AND (PositionTargetClose) (OrientationTargetNrNNW))     =>  (RotSpeed LEFT)				(TanSpeed STEADY)
+(AND (PositionTargetClose) (OrientationTargetNrNE))      =>  (RotSpeed VERY_FAST_RIGHT)		(TanSpeed STEADY)
+(AND (PositionTargetClose) (OrientationTargetNrNW))      =>  (RotSpeed VERY_FAST_LEFT)    	(TanSpeed STEADY)
+
+#	SubSection NEAR
+
+(AND (PositionTargetNear) (PositionTargetN))        =>  (RotSpeed AHEAD)			(TanSpeed FAST_FORWARD)
+(AND (PositionTargetNear) (PositionTargetNNE))      =>  (RotSpeed RIGHT)			(TanSpeed FORWARD)
+(AND (PositionTargetNear) (PositionTargetNNW))      =>  (RotSpeed LEFT)				(TanSpeed FORWARD)
+(AND (PositionTargetNear) (PositionTargetNE))       =>  (RotSpeed FAST_RIGHT)		(TanSpeed SLOW_FORWARD)
+(AND (PositionTargetNear) (PositionTargetNW))       =>  (RotSpeed FAST_LEFT)		(TanSpeed SLOW_FORWARD)
+
+#	SubSection MID
+
+(AND (PositionTargetMid) (PositionTargetN))       	=>  (RotSpeed AHEAD)			(TanSpeed VERY_FAST_FORWARD)
+(AND (PositionTargetMid) (PositionTargetNNE))     	=>  (RotSpeed FAST_RIGHT)		(TanSpeed FAST_FORWARD)
+(AND (PositionTargetMid) (PositionTargetNNW))     	=>  (RotSpeed FAST_LEFT)		(TanSpeed FAST_FORWARD)
+(AND (PositionTargetMid) (PositionTargetNE))      	=>  (RotSpeed VERY_FAST_RIGHT)	(TanSpeed FORWARD)
+(AND (PositionTargetMid) (PositionTargetNW))      	=>  (RotSpeed VERY_FAST_LEFT)   (TanSpeed FORWARD)
+
+#	SubSection FAR
+
+(AND (PositionTargetFar) (PositionTargetN))        =>  (RotSpeed AHEAD)				(TanSpeed VERY_FAST_FORWARD)
+(AND (PositionTargetFar) (PositionTargetNNE))      =>  (RotSpeed FAST_RIGHT)		(TanSpeed FAST_FORWARD)
+(AND (PositionTargetFar) (PositionTargetNNW))      =>  (RotSpeed FAST_LEFT)			(TanSpeed FAST_FORWARD)
+(AND (PositionTargetFar) (PositionTargetNE))       =>  (RotSpeed VERY_FAST_RIGHT)	(TanSpeed FORWARD)
+(AND (PositionTargetFar) (PositionTargetNW))       =>  (RotSpeed VERY_FAST_LEFT) 	(TanSpeed FORWARD)
+
+
+# Section SOUTH
+
+#	SubSection CLOSE
+
+(AND (PositionTargetClose) (OrientationTargetNrS))       =>  (RotSpeed AHEAD)			(TanSpeed STEADY)
+(AND (PositionTargetClose) (OrientationTargetNrSSE))     =>  (RotSpeed LEFT)			(TanSpeed STEADY)
+(AND (PositionTargetClose) (OrientationTargetNrSSW))     =>  (RotSpeed RIGHT)			(TanSpeed STEADY)
+(AND (PositionTargetClose) (OrientationTargetNrSE))      =>  (RotSpeed VERY_FAST_LEFT)	(TanSpeed STEADY)
+(AND (PositionTargetClose) (OrientationTargetNrSW))      =>  (RotSpeed VERY_FAST_RIGHT) (TanSpeed STEADY)
+
+#	SubSection NEAR
+
+(AND (PositionTargetNear) (PositionTargetS))        =>  (RotSpeed AHEAD)			(TanSpeed FAST_BACKWARD)
+(AND (PositionTargetNear) (PositionTargetSSE))      =>  (RotSpeed LEFT)				(TanSpeed BACKWARD)
+(AND (PositionTargetNear) (PositionTargetSSW))      =>  (RotSpeed RIGHT)			(TanSpeed BACKWARD)
+(AND (PositionTargetNear) (PositionTargetSE))       =>  (RotSpeed FAST_LEFT)		(TanSpeed SLOW_BACKWARD)
+(AND (PositionTargetNear) (PositionTargetSW))       =>  (RotSpeed FAST_RIGHT)		(TanSpeed SLOW_BACKWARD)
+
+#	SubSection MID
+
+(AND (PositionTargetMid) (PositionTargetS))       =>  (RotSpeed AHEAD)				(TanSpeed VERY_FAST_BACKWARD)
+(AND (PositionTargetMid) (PositionTargetSSE))     =>  (RotSpeed FAST_LEFT)			(TanSpeed FAST_BACKWARD)
+(AND (PositionTargetMid) (PositionTargetSSW))     =>  (RotSpeed FAST_RIGHT)			(TanSpeed FAST_BACKWARD)
+(AND (PositionTargetMid) (PositionTargetSE))      =>  (RotSpeed VERY_FAST_LEFT)		(TanSpeed BACKWARD)
+(AND (PositionTargetMid) (PositionTargetSW))      =>  (RotSpeed VERY_FAST_RIGHT)    (TanSpeed BACKWARD)
+
+#	SubSection FAR
+
+(AND (PositionTargetFar) (PositionTargetS))        =>  (RotSpeed AHEAD)				(TanSpeed VERY_FAST_BACKWARD)
+(AND (PositionTargetFar) (PositionTargetSSE))      =>  (RotSpeed FAST_LEFT)			(TanSpeed FAST_BACKWARD)
+(AND (PositionTargetFar) (PositionTargetSSW))      =>  (RotSpeed FAST_RIGHT)		(TanSpeed FAST_BACKWARD)
+(AND (PositionTargetFar) (PositionTargetSE))       =>  (RotSpeed VERY_FAST_LEFT)	(TanSpeed BACKWARD)
+(AND (PositionTargetFar) (PositionTargetSW))       =>  (RotSpeed VERY_FAST_RIGHT) 	(TanSpeed BACKWARD)
+

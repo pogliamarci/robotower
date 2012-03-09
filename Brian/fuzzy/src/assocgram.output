@@ -1,0 +1,121 @@
+Grammar
+
+  Number, Line, Rule
+    1  31 associationlist -> /* empty */
+    2  32 associationlist -> association associationlist
+    3  35 association -> LEFTPAR name name RIGHTPAR
+    4  44 name -> NAME
+
+
+Terminals, with rules where they appear
+
+$ (-1)
+error (256)
+NAME (257) 4
+LEFTPAR (258) 3
+RIGHTPAR (259) 3
+
+
+Nonterminals, with rules where they appear
+
+associationlist (6)
+    on left: 1 2, on right: 2
+association (7)
+    on left: 3, on right: 2
+name (8)
+    on left: 4, on right: 3
+
+
+state 0
+
+    LEFTPAR	shift, and go to state 1
+
+    $default	reduce using rule 1 (associationlist)
+
+    associationlist	go to state 8
+    association	go to state 2
+
+
+
+state 1
+
+    association  ->  LEFTPAR . name name RIGHTPAR   (rule 3)
+
+    NAME	shift, and go to state 3
+
+    name	go to state 4
+
+
+
+state 2
+
+    associationlist  ->  association . associationlist   (rule 2)
+
+    LEFTPAR	shift, and go to state 1
+
+    $default	reduce using rule 1 (associationlist)
+
+    associationlist	go to state 5
+    association	go to state 2
+
+
+
+state 3
+
+    name  ->  NAME .   (rule 4)
+
+    $default	reduce using rule 4 (name)
+
+
+
+state 4
+
+    association  ->  LEFTPAR name . name RIGHTPAR   (rule 3)
+
+    NAME	shift, and go to state 3
+
+    name	go to state 6
+
+
+
+state 5
+
+    associationlist  ->  association associationlist .   (rule 2)
+
+    $default	reduce using rule 2 (associationlist)
+
+
+
+state 6
+
+    association  ->  LEFTPAR name name . RIGHTPAR   (rule 3)
+
+    RIGHTPAR	shift, and go to state 7
+
+
+
+state 7
+
+    association  ->  LEFTPAR name name RIGHTPAR .   (rule 3)
+
+    $default	reduce using rule 3 (association)
+
+
+
+state 8
+
+    $   	go to state 9
+
+
+
+state 9
+
+    $   	go to state 10
+
+
+
+state 10
+
+    $default	accept
+
+
