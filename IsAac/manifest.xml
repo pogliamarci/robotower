@@ -10,6 +10,10 @@
   <url>http://ros.org/wiki/IsAcc</url>
   <depend package="brian"/>
   <depend package="fuzzy"/>
+  <depend package="roscpp"/>
+  <depend package="Echoes"/>
+  <depend package="SpyKee"/>
+  <depend package="Vision"/>
 
 </package>
 

@@ -24,7 +24,7 @@ class LittleObject
 		//elimina i duplicati
 		void eliminateDuplicates(char color);
 		//sceglie il vettore su cui operare
-		std::vector<cv::Vec3b> selectVector(char color);
+		std::vector<cv::Vec3b>* selectVector(char color);
 		//stampa su file
 		void printOnfile(char color, char c, std::ofstream& output);
 		//stampa il numero di elementi in testa al filename

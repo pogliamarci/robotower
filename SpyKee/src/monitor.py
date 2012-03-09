@@ -3,7 +3,7 @@
 # Sonar GUI monitor (ROS-based)
 #
 
-import sys
+import sys, os
 import math
 import roslib; roslib.load_manifest('SpyKee')
 import rospy
@@ -11,6 +11,11 @@ from PyQt4.Qt import *
 from SpyKee.msg import Motion
 from sensor_msgs.msg import CompressedImage
 
+mutex = QMutex()
+
+class DataMatrixThread(QThread):  
+    def run(self):
+        os.system("dmtxread -n frame.jpg -m 300 || echo non riconosciuto")
 
 class MessageListenerThread(QThread):  
     def run(self):
@@ -37,7 +42,9 @@ class ImageWidget(QWidget):
         if self._frame is None:
             return
         painter = QPainter(self)
+        mutex.lock()
         painter.drawImage(QPoint(0,0), self._frame)
+        mutex.unlock()
 
 class SonarMonitorGui():
     def __init__(self): 
@@ -102,15 +109,21 @@ class SonarMonitorGui():
         rot_speed = self.computeSpeed( self.rot_speed_box.value() )
         self.pub.publish(tanSpeed = tan_speed, rotSpeed = rot_speed)
 
+t = DataMatrixThread()
+
 class ImageSubscriber():
     def __init__(self, widget_obj, filename = "frame.jpg"):
         self._widget_obj = widget_obj
         self._filename = filename
     
     def callback(self, img):
+        mutex.lock()
         myfile = open(self._filename, "w")
         myfile.write(img.data)
-        myfile.close
+        myfile.close()
+        mutex.unlock()
+        if not t.isRunning():
+            t.start()
         self._widget_obj.new_frame_sig.emit(QImage(self._filename))
 
 if __name__ == "__main__":  
@@ -120,7 +133,7 @@ if __name__ == "__main__":
     im = ImageSubscriber(gui.camera_widget)
     # ROS initialization
     rospy.init_node('spykeeMonitor', anonymous=True)
-    rospy.Subscriber("spykee_camera", CompressedImage, im.callback)
+    rospy.Subscriber("spykee_camera", CompressedImage, im.callback, queue_size=1, buff_size=10000)
     
     thr.start()
     gui.start()

@@ -19,22 +19,22 @@ LittleObject::LittleObject(bool from_ros)
 }
 
 //funzione inline per la selezione del vettore
-inline vector<Vec3b> LittleObject::selectVector(char color)
+inline vector<Vec3b>* LittleObject::selectVector(char color)
 {
-	vector<Vec3b> V;
 	switch(color)
 	{
 		case 'r':
-			V=this->r;
+			return &(this->r);
 			break;
 		case 'g':
-			V=this->g;
+			return &(this->g);
 			break;
 		case 'b':
-			V=this->b;
+			return &(this->b);
 			break;
+		default:
+		    return NULL;
 	}
-	return V;
 }
 
 //callback per ricevere i messaggi da ROS
@@ -67,27 +67,27 @@ void LittleObject::updateImg()
 void LittleObject::getColor(char color)
 {
 	int x,y;
-	vector<Vec3b> V;
+	vector<Vec3b> *V;
 	V=selectVector(color);
 	for(x=Z->Start.x; x<Z->End.x; x++)
 		for(y=Z->Start.y; y<Z->End.y; y++)
 		{
-			V.push_back(this->img.at<Vec3b>(y, x));
+			V->push_back(this->img.at<Vec3b>(y, x));
 		}
 }
 
 //metodo per eliminare i duplicati dai vettori dei colori
 void LittleObject::eliminateDuplicates(char color)
 {
-	vector<Vec3b> V;
+	vector<Vec3b>* V;
 	vector<Vec3b>::iterator i1,i2;
 	V=selectVector(color);
-	for(i1=V.begin(); i1<V.end(); i1++)
-		for(i2=(i1+1); i2<V.end(); i2++)
+	for(i1=V->begin(); i1<V->end(); i1++)
+		for(i2=(i1+1); i2<V->end(); i2++)
 		{
 			if(((*i2)[0]==(*i1)[0]) && ((*i2)[1]==(*i1)[1]) && ((*i2)[2]==(*i1)[2]) ) 
 			{
-				i2=V.erase(i2);
+				i2=V->erase(i2);
 				i2--;
 			}
 		}
@@ -102,10 +102,10 @@ void LittleObject::printOnfileNumber(ofstream& output)
 //metodo per stampare i campioni di colore di ciascun vettore
 void LittleObject::printOnfile(char color, char c, ofstream& output)
 {
-	vector<Vec3b> V;
+	vector<Vec3b>* V;
 	vector<Vec3b>::iterator it;
 	V=selectVector(color);
-	for(it=V.begin(); it<V.end(); it++)
+	for(it=V->begin(); it<V->end(); it++)
 	{
 		output << " " << (int)((*it)[0]) << " " << (int)((*it)[1]) << " " << (int)((*it)[2]) << " " << c; 
 	}
