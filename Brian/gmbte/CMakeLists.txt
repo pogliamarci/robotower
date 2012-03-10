@@ -22,30 +22,33 @@ set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 #rosbuild_gensrv()
 
 #common commands for building c++ executables and libraries
-rosbuild_add_library(	brian STATIC 
-			src/brian.cpp 
-			src/behavior_eng.cpp 
-			src/can_doer.cpp 
-			src/compose.cpp 	
-			src/preacher.cpp 
-			src/predicate.cpp 
-			src/predicate_list.cpp 
-			src/predicate_list_debug.cpp
-			src/proposed_action_list.cpp
-			src/proposed_action_list_debug.cpp
-			src/wanter_eng.cpp
-			src/weight_want.cpp
-			src/weight_want_list.cpp
-			src/weight_want_list_debug.cpp
-			src/engine_objects.cpp 
-			src/rules_behav.cpp
-			src/rulesflex.cpp
-			src/predgram.tab.cpp
-			src/predflex.cpp
-			src/rulesgram.tab.cpp
-		    )
-
-#target_link_libraries(fuzzy libfuzzy.a)
+#rosbuild_add_library(${PROJECT_NAME} src/example.cpp)
+#target_link_libraries(${PROJECT_NAME} another_library)
 #rosbuild_add_boost_directories()
 #rosbuild_link_boost(${PROJECT_NAME} thread)
 #target_link_libraries(example ${PROJECT_NAME})
+INCLUDE (FindPkgConfig)
+
+#Controlla se c'e' il programma pkg-config
+IF (NOT PKG_CONFIG_FOUND)
+	MESSAGE (FATAL_ERROR "pkg-config not found...")
+ENDIF (NOT PKG_CONFIG_FOUND)
+
+pkg_check_modules (GTK REQUIRED gtk+-2.0>=2.6)
+
+#Controlla se ci sono le Gtk+-2.0
+IF (NOT GTK_FOUND)
+	MESSAGE(FATAL_ERROR "You don't seem to have gtk >= 2.6 development libraries installed...")
+ENDIF (NOT GTK_FOUND)
+
+ADD_DEFINITIONS()
+
+
+#Include
+INCLUDE_DIRECTORIES (. ${GTK_INCLUDE_DIRS})
+
+#Lincaggio alle librerie
+LINK_DIRECTORIES (${GTK_LIBRARY_DIRS} )
+LINK_LIBRARIES (${GTK_LIBRARIES} )
+rosbuild_add_executable(gmbte src/callbacks.cpp  src/interface.cpp  src/main.cpp  src/support.cpp)
+
