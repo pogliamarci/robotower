@@ -21,6 +21,22 @@ set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 #uncomment if you have defined services
 #rosbuild_gensrv()
 
+#genera i parser .cpp dai sorgenti flex e Bison
+find_package(BISON)
+find_package(FLEX)
+
+BISON_TARGET(PredParser psr/predgram.y psr/predgram.tab.cpp)
+FLEX_TARGET(PredScanner psr/predflex.l  psr/predflex.cpp)
+BISON_TARGET(RulesParser psr/rulesgram.y psr/rulesgram.tab.cpp)
+FLEX_TARGET(RulesScanner psr/rulesflex.l  psr/rulesflex.cpp)
+
+ADD_FLEX_BISON_DEPENDENCY(PredScanner PredParser)
+ADD_FLEX_BISON_DEPENDENCY(RulesScanner RulesParser)
+
+
+include_directories(${CMAKE_CURRENT_BINARY_DIR})
+#add_executable(Foo  Foo.cc  ${BISON_MyParser_OUTPUTS}  ${FLEX_MyScanner_OUTPUTS}) 
+
 #common commands for building c++ executables and libraries
 rosbuild_add_library(	brian STATIC 
 			src/brian.cpp 
