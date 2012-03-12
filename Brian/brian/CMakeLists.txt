@@ -25,12 +25,10 @@ set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 find_package(BISON)
 find_package(FLEX)
 
-BISON_TARGET(PredParser prs/predgram.y prs/predgram.tab.cpp)
-FLEX_TARGET(PredScanner prs/predflex.l  prs/predflex.cpp)
-BISON_TARGET(RulesParser prs/rulesgram.y prs/rulesgram.tab.cpp)
-FLEX_TARGET(RulesScanner prs/rulesflex.l  prs/rulesflex.cpp)
-SET(BISON_PredParser_COMPILE_FLAGS -d -p)
-SET(BISON_RulesParser_COMPILE_FLAGS -d -p)
+BISON_TARGET(PredParser prs/predgram.y src/predgram.tab.cpp COMPILE_FLAGS "-p pred")
+FLEX_TARGET(PredScanner prs/predflex.l  src/predflex.cpp)
+BISON_TARGET(RulesParser prs/rulesgram.y src/rulesgram.tab.cpp COMPILE_FLAGS "-p rules")
+FLEX_TARGET(RulesScanner prs/rulesflex.l  src/rulesflex.cpp)
 
 ADD_FLEX_BISON_DEPENDENCY(PredScanner PredParser)
 ADD_FLEX_BISON_DEPENDENCY(RulesScanner RulesParser)
@@ -57,10 +55,10 @@ rosbuild_add_library(	brian STATIC
 			src/weight_want_list_debug.cpp
 			src/engine_objects.cpp 
 			src/rules_behav.cpp
-			src/rulesflex.cpp
-			src/predgram.tab.cpp
-			src/predflex.cpp
-			src/rulesgram.tab.cpp
+			${BISON_PredParser_OUTPUTS}  
+			${FLEX_PredScanner_OUTPUTS}
+			${BISON_RulesParser_OUTPUTS}  
+			${FLEX_RulesScanner_OUTPUTS}
 		    )
 
 #target_link_libraries(fuzzy libfuzzy.a)
