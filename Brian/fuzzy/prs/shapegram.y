@@ -9,7 +9,7 @@
 #define YYERROR_VERBOSE 1
 
 extern int shapelex();
-int shapeerror(char *);
+int shapeerror(const char *);
 extern int shapeleng;
 //Added by mr:021128
 extern void shape_cancel_memory_leaks();
@@ -81,7 +81,7 @@ value: VALUE {$$=atof($1);}
 
 %%
 
-int shapeerror(char *s)
+int shapeerror(const char *s)
 {
   printf("%s\n",s);
   return 0;

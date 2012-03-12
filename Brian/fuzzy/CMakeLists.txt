@@ -21,6 +21,26 @@ set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 #uncomment if you have defined services
 #rosbuild_gensrv()
 
+#cerca i package Bison e Flex
+find_package(BISON)
+find_package(FLEX)
+
+#setta l'output per gli header
+SET(BISON_ShapeParser_OUTPUT_HEADER include/shapegram.tab.hpp)
+SET(BISON_AssocParser_OUTPUT_HEADER include/assocgram.tab.hpp)
+
+
+#genera i parser .cpp dai sorgenti flex e Bison
+BISON_TARGET(ShapeParser prs/shapegram.y src/shapegram.tab.cpp COMPILE_FLAGS "-p shape")
+FLEX_TARGET(ShapeScanner prs/shapeflex.l  src/shapeflex.cpp COMPILE_FLAGS "-Pshape")
+BISON_TARGET(AssocParser prs/assocgram.y src/assocgram.tab.cpp COMPILE_FLAGS "-p assoc")
+FLEX_TARGET(AssocScanner prs/assocflex.l  src/assocflex.cpp COMPILE_FLAGS "-Passoc")
+
+#aggiunge le dipendenze tra parser e scanner (.l e .y)
+ADD_FLEX_BISON_DEPENDENCY(ShapeScanner ShapeParser)
+ADD_FLEX_BISON_DEPENDENCY(AssocScanner AssocParser)
+
+
 #common commands for building c++ executables and libraries
 rosbuild_add_library(	fuzzy STATIC
 			src/action.cpp
@@ -63,15 +83,9 @@ rosbuild_add_library(	fuzzy STATIC
 			src/triangle.cpp
 			src/triangle_ol.cpp
 			src/triangle_or.cpp
-			src/assocflex.cpp
-			src/shapegram.tab.cpp
-			src/shapeflex.cpp
-			src/assocgram.tab.cpp
-
+			${BISON_ShapeParser_OUTPUTS}  
+                        ${FLEX_ShapeScanner_OUTPUTS}
+                        ${BISON_AssocParser_OUTPUTS}  
+                        ${FLEX_AssocScanner_OUTPUTS}
 		    )
 
-#target_link_libraries(fuzzy libfuzzy.a)
-#rosbuild_add_boost_directories()
-#rosbuild_link_boost(${PROJECT_NAME} thread)
-#rosbuild_add_executable(isaac src/isaac.cpp)
-#target_link_libraries(example ${PROJECT_NAME})
