@@ -21,21 +21,27 @@ set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 #uncomment if you have defined services
 #rosbuild_gensrv()
 
-#genera i parser .cpp dai sorgenti flex e Bison
+#cerca i package Bison e Flex
 find_package(BISON)
 find_package(FLEX)
 
-BISON_TARGET(PredParser prs/predgram.y src/predgram.tab.cpp COMPILE_FLAGS "-p pred")
-FLEX_TARGET(PredScanner prs/predflex.l  src/predflex.cpp)
-BISON_TARGET(RulesParser prs/rulesgram.y src/rulesgram.tab.cpp COMPILE_FLAGS "-p rules")
-FLEX_TARGET(RulesScanner prs/rulesflex.l  src/rulesflex.cpp)
+#setta l'output per gli header
+SET(BISON_PredParser_OUTPUT_HEADER include/predgram.tab.hpp)
+SET(BISON_RulesParser_OUTPUT_HEADER include/rulesgram.tab.hpp)
 
+
+#genera i parser .cpp dai sorgenti flex e Bison
+BISON_TARGET(PredParser prs/predgram.y src/predgram.tab.cpp COMPILE_FLAGS "-p pred")
+FLEX_TARGET(PredScanner prs/predflex.l  src/predflex.cpp COMPILE_FLAGS "-Ppred")
+BISON_TARGET(RulesParser prs/rulesgram.y src/rulesgram.tab.cpp COMPILE_FLAGS "-p rules")
+FLEX_TARGET(RulesScanner prs/rulesflex.l  src/rulesflex.cpp COMPILE_FLAGS "-Prules")
+
+#aggiunge le dipendenze tra parser e scanner (.l e .y)
 ADD_FLEX_BISON_DEPENDENCY(PredScanner PredParser)
 ADD_FLEX_BISON_DEPENDENCY(RulesScanner RulesParser)
 
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
-#add_executable(Foo  Foo.cc  ${BISON_MyParser_OUTPUTS}  ${FLEX_MyScanner_OUTPUTS}) 
 
 #common commands for building c++ executables and libraries
 rosbuild_add_library(	brian STATIC 
@@ -61,7 +67,3 @@ rosbuild_add_library(	brian STATIC
 			${FLEX_RulesScanner_OUTPUTS}
 		    )
 
-#target_link_libraries(fuzzy libfuzzy.a)
-#rosbuild_add_boost_directories()
-#rosbuild_link_boost(${PROJECT_NAME} thread)
-#target_link_libraries(example ${PROJECT_NAME})

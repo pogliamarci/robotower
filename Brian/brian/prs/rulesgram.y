@@ -10,7 +10,7 @@
 #define YYERROR_VERBOSE 1
 
 extern int yylex();
-int yyerror(char *);
+int yyerror(const char *);
 extern int yyleng;
 
 rules_list *rl=NULL;
@@ -81,7 +81,7 @@ name: NAME {$$=(char *) malloc(strlen($1)+1);
 
 %%
 
-int yyerror(char *s)
+int yyerror(const char *s)
 {
   printf("%s\n",s);
   return 0;
