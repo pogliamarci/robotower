@@ -1,0 +1,16 @@
+<package>
+  <description brief="gmbte">
+
+     gmbte
+
+  </description>
+  <author>Dave</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/gmbte</url>
+  <rosdep name="gtk+-2.0"/>
+  <depend package="brian"/>
+
+</package>
+
+

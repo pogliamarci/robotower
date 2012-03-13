@@ -1,0 +1,14 @@
+<package>
+  <description brief="checker">
+
+     checker
+
+  </description>
+  <author>Dave</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/checker</url>
+
+</package>
+
+

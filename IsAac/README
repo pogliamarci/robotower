@@ -1,0 +1,12 @@
+File di configurazione di Brian
+
+1) ctof.txt 			---> le associazioni per il fuzzificatore
+2) shape_ctof.txt 		---> le forme utilizzate dal fuzzificatore
+3) Predicate.ini		---> le definizioni dei predicati per il preacher
+4) PredicatesActions.ini	---> boh!
+5) Cando.ini			---> le azioni che può compiere
+6) Behaviour.txt		---> la lista dei riferimenti alle regole
+7) Want.txt			---> le azioni che vuole compiere
+8) s_ftoc.txt			---> definizione delle associazioni usate dal defuzzyficatore
+9) s_shape.txt			---> definizionee delle forme usate dal defuzzificatore
+

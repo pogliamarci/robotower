@@ -1,3 +1,0 @@
-( TanSpeed TANSPEED )
-( RotSpeed ROTSPEED )
-( Kick KICK )

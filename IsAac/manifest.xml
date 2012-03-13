@@ -1,10 +1,10 @@
 <package>
   <description brief="IsAac">
 
-     IsAac modulo per interfacciarsi all'intelligenza artificiale
+     IsAac "Is Another AI Controller" modulo per interfacciarsi all'intelligenza artificiale che sfrutta la libreria Mr.Brian
 
   </description>
-  <author>Dave</author>
+  <author>Marcello Pogliani, Davide Tateo</author>
   <license>BSD</license>
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/IsAcc</url>

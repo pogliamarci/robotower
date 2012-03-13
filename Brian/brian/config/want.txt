@@ -1,7 +1,0 @@
-ManualMove = (NOT (P Auto))
-GotoBall = (NOT (P OwnBall))
-AlignWithBall = (NOT (P AlignedWithBall))
-KeepBall = (NOT (P AlignedWithBall))
-KickInGoal = (P Auto)
-GotoTarget = (NOT (P OnPositionTarget))
-GotoTargetOriented = (NOT (P OnOrientationTarget))
