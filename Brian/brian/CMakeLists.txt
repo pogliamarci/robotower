@@ -61,9 +61,9 @@ rosbuild_add_library(	brian STATIC
 			src/weight_want_list_debug.cpp
 			src/engine_objects.cpp 
 			src/rules_behav.cpp
-			${BISON_PredParser_OUTPUTS}  
-			${FLEX_PredScanner_OUTPUTS}
-			${BISON_RulesParser_OUTPUTS}  
-			${FLEX_RulesScanner_OUTPUTS}
+			../${BISON_PredParser_OUTPUTS}  
+			../${FLEX_PredScanner_OUTPUTS}
+			../${BISON_RulesParser_OUTPUTS}  
+			../${FLEX_RulesScanner_OUTPUTS}
 		    )
 

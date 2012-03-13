@@ -1,6 +1,6 @@
-#line 2 "assocflex.c"
+#line 2 "src/assocflex.cpp"
 
-#line 4 "assocflex.c"
+#line 4 "src/assocflex.cpp"
 
 #define  YY_INT_ALIGNED short int
 
@@ -483,8 +483,8 @@ int assoc_flex_debug = 0;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *assoctext;
-#line 1 "assocflex.l"
-#line 2 "assocflex.l"
+#line 1 "prs/assocflex.l"
+#line 2 "prs/assocflex.l"
 #include <getFuzzy.h>
 #include "assocgram.tab.h"
 
@@ -493,7 +493,7 @@ char *assoctext;
 #include <dmalloc.h>
 #endif
 
-#line 497 "assocflex.c"
+#line 497 "src/assocflex.cpp"
 
 #define INITIAL 0
 
@@ -680,10 +680,10 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 18 "assocflex.l"
+#line 18 "prs/assocflex.l"
 
 
-#line 687 "assocflex.c"
+#line 687 "src/assocflex.cpp"
 
 	if ( !(yy_init) )
 		{
@@ -768,43 +768,43 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 20 "assocflex.l"
+#line 20 "prs/assocflex.l"
 /* eat up comments */
 	YY_BREAK
 case 2:
 /* rule 2 can match eol */
 YY_RULE_SETUP
-#line 21 "assocflex.l"
+#line 21 "prs/assocflex.l"
 /* eat up all newline*/
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 22 "assocflex.l"
+#line 22 "prs/assocflex.l"
 /* eat up blank spaces */
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 23 "assocflex.l"
+#line 23 "prs/assocflex.l"
 return LEFTPAR;
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 24 "assocflex.l"
+#line 24 "prs/assocflex.l"
 return RIGHTPAR;
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 25 "assocflex.l"
+#line 25 "prs/assocflex.l"
 { *(assoctext+assocleng)='\0';
                assoclval.dataname=assoctext;
                return NAME;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 28 "assocflex.l"
+#line 28 "prs/assocflex.l"
 ECHO;
 	YY_BREAK
-#line 808 "assocflex.c"
+#line 808 "src/assocflex.cpp"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1802,7 +1802,7 @@ void assocfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 28 "assocflex.l"
+#line 28 "prs/assocflex.l"
 
 
 
