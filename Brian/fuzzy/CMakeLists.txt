@@ -83,9 +83,9 @@ rosbuild_add_library(	fuzzy STATIC
 			src/triangle.cpp
 			src/triangle_ol.cpp
 			src/triangle_or.cpp
-			${BISON_ShapeParser_OUTPUTS}  
-                        ${FLEX_ShapeScanner_OUTPUTS}
-                        ${BISON_AssocParser_OUTPUTS}  
-                        ${FLEX_AssocScanner_OUTPUTS}
+			../${BISON_ShapeParser_OUTPUTS}  
+                        ../${FLEX_ShapeScanner_OUTPUTS}
+                        ../${BISON_AssocParser_OUTPUTS}  
+                        ../${FLEX_AssocScanner_OUTPUTS}
 		    )
 
