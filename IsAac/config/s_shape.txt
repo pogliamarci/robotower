@@ -26,12 +26,3 @@
 (SNG (VERY_FAST_LEFT -80))
 )
 
-(WIN
-(SNG (F 0))
-(SNG (T 1))
-)
-
-(RECHARGE
-(SNG (F 0))
-(SNG (T 1))
-)

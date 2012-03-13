@@ -1,7 +1,0 @@
-( level 1 Win		../config/Win.rul )
-( level 1 Recharge	../config/Recharge.rul )
-( level 1 Go_To_Home 	../config/Go_To_Home.rul )
-( level 1 Go_To_Energy	../config/Go_To_Energy.rul )
-( level 2 Search_Home	../config/Search_Home.rul )
-( level 2 Search_Energy	../config/Search_Energy.rul )
-( level 3 Obstacle	../config/Avoid_Object.rul )

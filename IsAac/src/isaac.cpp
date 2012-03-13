@@ -109,8 +109,10 @@ void Sender::sendMotionMessage(int rot, int tan) {
 }
 
 void sendBrianOutputs(command_list* cl, Sender& ms) {
-	if (cl == NULL)
+	if (cl == NULL || cl->empty()) {
+		cerr << "Ricevuta lista vuota da Brian" << endl;
 		return;
+	}
 
 	int tan_speed = 0;
 	int rot_speed = 0;
@@ -124,16 +126,17 @@ void sendBrianOutputs(command_list* cl, Sender& ms) {
 
 		if (temp.compare("TanSpeed") == 0)
 		{
+			cout << "Ricevuta tan speed" << endl;
 			tan_speed = it->second->get_set_point();
 		}
 		else if (temp.compare("RotSpeed") == 0)
 		{
+			cout << "Ricevuta rot speed" << endl;
 			rot_speed = it->second->get_set_point();
+		} else {
+			cout << "Ricevuto qualcos'altro" << endl;
 		}
 	}
-
-	/* clear list */
-	cl->clear();
 
 	cout << "rot_speed: " << rot_speed << " tan_speed: " << tan_speed << endl;
 
@@ -197,7 +200,9 @@ int main(int argc, char** argv)
 		brian.run();
 
 		/* parse outputs from brian and send them to actuators */
-		sendBrianOutputs(brian.getFuzzy()->get_command_singleton_list(), message_sender);
+		command_list* cl = brian.getFuzzy()->get_command_singleton_list();
+		sendBrianOutputs(cl, message_sender);
+		cl->clear();
 
 		ros::spinOnce();
 		loop_rate.sleep();
