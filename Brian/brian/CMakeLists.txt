@@ -25,23 +25,18 @@ set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 find_package(BISON)
 find_package(FLEX)
 
-#setta l'output per gli header
-SET(BISON_PredParser_OUTPUT_HEADER include/predgram.tab.hpp)
-SET(BISON_RulesParser_OUTPUT_HEADER include/rulesgram.tab.hpp)
-
-
 #genera i parser .cpp dai sorgenti flex e Bison
-BISON_TARGET(PredParser prs/predgram.y src/predgram.tab.cpp COMPILE_FLAGS "-p pred")
+BISON_TARGET(PredParser prs/predgram.y src/predgram.tab.cpp COMPILE_FLAGS --defines="${PROJECT_SOURCE_DIR}/include/predgram.tab.h" COMPILE_FLAGS "-p pred")
 FLEX_TARGET(PredScanner prs/predflex.l  src/predflex.cpp COMPILE_FLAGS "-Ppred")
-BISON_TARGET(RulesParser prs/rulesgram.y src/rulesgram.tab.cpp COMPILE_FLAGS "-p rules")
+BISON_TARGET(RulesParser prs/rulesgram.y src/rulesgram.tab.cpp COMPILE_FLAGS --defines="${PROJECT_SOURCE_DIR}/include/rulesgram.tab.h"  COMPILE_FLAGS "-p rules")
 FLEX_TARGET(RulesScanner prs/rulesflex.l  src/rulesflex.cpp COMPILE_FLAGS "-Prules")
 
 #aggiunge le dipendenze tra parser e scanner (.l e .y)
 ADD_FLEX_BISON_DEPENDENCY(PredScanner PredParser)
 ADD_FLEX_BISON_DEPENDENCY(RulesScanner RulesParser)
 
-
-include_directories(${CMAKE_CURRENT_BINARY_DIR})
+#FILE(GLOB HEADERS "*.tab.hpp")
+#FILE(REMOVE HEADERSTOREMOVE ${HEADERS})
 
 #common commands for building c++ executables and libraries
 rosbuild_add_library(	brian STATIC 
@@ -61,9 +56,9 @@ rosbuild_add_library(	brian STATIC
 			src/weight_want_list_debug.cpp
 			src/engine_objects.cpp 
 			src/rules_behav.cpp
-			../${BISON_PredParser_OUTPUTS}  
-			../${FLEX_PredScanner_OUTPUTS}
-			../${BISON_RulesParser_OUTPUTS}  
-			../${FLEX_RulesScanner_OUTPUTS}
+			${PROJECT_SOURCE_DIR}/${BISON_PredParser_OUTPUTS}  
+			${PROJECT_SOURCE_DIR}/${FLEX_PredScanner_OUTPUTS}
+			${PROJECT_SOURCE_DIR}/${BISON_RulesParser_OUTPUTS}  
+			${PROJECT_SOURCE_DIR}/${FLEX_RulesScanner_OUTPUTS}
 		    )
 

@@ -57,15 +57,15 @@ typedef union YYSTYPE
 {
 
 /* Line 2068 of yacc.c  */
-#line 20 "predgram.y"
+#line 15 "prs/predgram.y"
 
   char * dataname;
-  int pippo;
+  operation * op;
 
 
 
 /* Line 2068 of yacc.c  */
-#line 69 "predgram.tab.h"
+#line 69 "/home/dave/RoboTower/Brian/brian/include/predgram.tab.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */

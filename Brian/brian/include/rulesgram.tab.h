@@ -44,11 +44,7 @@
      THEN = 262,
      NOT = 263,
      OR = 264,
-     AND = 265,
-     START = 266,
-     SEPARATOR = 267,
-     MODALITY = 268,
-     SOMEBEHAVIOR = 269
+     AND = 265
    };
 #endif
 
@@ -59,14 +55,17 @@ typedef union YYSTYPE
 {
 
 /* Line 2068 of yacc.c  */
-#line 20 "rulesgram.y"
+#line 24 "prs/rulesgram.y"
 
   char * dataname;
+  rule * r;
+  aggregation_tree * prec;
+  operation * op;
 
 
 
 /* Line 2068 of yacc.c  */
-#line 70 "rulesgram.tab.h"
+#line 69 "/home/dave/RoboTower/Brian/brian/include/rulesgram.tab.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
