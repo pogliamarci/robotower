@@ -62,10 +62,10 @@ ReadSonar::~ReadSonar()
 		sendStop();
 		close(fd);
 	}
-		if(buffer) 
-		{
-			delete buffer;
-		}
+	if(buffer)
+	{
+		delete buffer;
+	}
 }
 
 bool ReadSonar::isReady(){

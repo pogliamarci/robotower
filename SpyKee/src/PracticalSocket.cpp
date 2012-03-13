@@ -37,11 +37,16 @@
 #include <string.h>
 #include <stdlib.h>
 
+#include <iostream>
+
 using namespace std;
 
 #ifdef WIN32
 static bool initialized = false;
 #endif
+
+#define TIMEOUT 1
+
 
 // SocketException Code
 
@@ -236,8 +241,8 @@ unsigned short CommunicatingSocket::getForeignPort() throw(SocketException) {
 // TCPSocket Code
 
 TCPSocket::TCPSocket() 
-    throw(SocketException) : CommunicatingSocket(SOCK_STREAM, 
-    IPPROTO_TCP) {
+    throw(SocketException) : CommunicatingSocket(SOCK_STREAM, IPPROTO_TCP) {
+
 }
 
 TCPSocket::TCPSocket(const string &foreignAddress, unsigned short foreignPort)
@@ -340,6 +345,23 @@ int UDPSocket::recvFrom(void *buffer, int bufferLen, string &sourceAddress,
   sockaddr_in clntAddr;
   socklen_t addrLen = sizeof(clntAddr);
   int rtn;
+
+  fd_set readfds, masterfds;
+  struct timeval timeout;
+
+  timeout.tv_sec = TIMEOUT;
+  timeout.tv_usec = 0;
+
+  FD_ZERO(&masterfds);
+  FD_SET(sockDesc, &masterfds);
+
+  memcpy(&readfds, &masterfds, sizeof(fd_set));
+
+  if (select(sockDesc + 1, &readfds, NULL, NULL, &timeout) < 0)
+	  throw SocketException("Receive failed (select())", true);
+  else if (!FD_ISSET(sockDesc, &readfds))
+	  throw SocketException("Receive failed (timeout expired)", true);
+
   if ((rtn = recvfrom(sockDesc, (raw_type *) buffer, bufferLen, 0, 
                       (sockaddr *) &clntAddr, (socklen_t *) &addrLen)) < 0) {
     throw SocketException("Receive failed (recvfrom())", true);

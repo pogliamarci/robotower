@@ -13,6 +13,8 @@ from Echoes.srv import Led
 class MessageListenerThread(QThread):
 	def run(self):
 		rospy.spin()
+		print "uscito da spin"
+		sys.exit()
 
 class LedManager():
 	def __init__(self):

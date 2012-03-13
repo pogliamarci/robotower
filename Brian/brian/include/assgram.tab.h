@@ -40,13 +40,8 @@
      NAME = 258,
      LEFTPAR = 259,
      RIGHTPAR = 260,
-     NEWLINE = 261,
-     DEF = 262,
-     AND = 263,
-     OR = 264,
-     NOT = 265,
-     P = 266,
-     D = 267
+     LEVEL = 261,
+     VALUE = 262
    };
 #endif
 
@@ -57,7 +52,7 @@ typedef union YYSTYPE
 {
 
 /* Line 2068 of yacc.c  */
-#line 20 "predgram.y"
+#line 18 "assgram.y"
 
   char * dataname;
   int pippo;
@@ -65,13 +60,13 @@ typedef union YYSTYPE
 
 
 /* Line 2068 of yacc.c  */
-#line 69 "predgram.tab.h"
+#line 64 "assgram.tab.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
 #endif
 
-extern YYSTYPE predlval;
+extern YYSTYPE asslval;
 
 

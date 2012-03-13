@@ -1,10 +1,8 @@
+/* A Bison parser, made by GNU Bison 2.5.  */
 
-/* A Bison parser, made by GNU Bison 2.4.1.  */
-
-/* Skeleton interface for Bison's Yacc-like parsers in C
+/* Bison interface for Yacc-like parsers in C
    
-      Copyright (C) 1984, 1989, 1990, 2000, 2001, 2002, 2003, 2004, 2005, 2006
-   Free Software Foundation, Inc.
+      Copyright (C) 1984, 1989-1990, 2000-2011 Free Software Foundation, Inc.
    
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -46,7 +44,11 @@
      THEN = 262,
      NOT = 263,
      OR = 264,
-     AND = 265
+     AND = 265,
+     START = 266,
+     SEPARATOR = 267,
+     MODALITY = 268,
+     SOMEBEHAVIOR = 269
    };
 #endif
 
@@ -56,18 +58,15 @@
 typedef union YYSTYPE
 {
 
-/* Line 1676 of yacc.c  */
-#line 24 "rulesgram.y"
+/* Line 2068 of yacc.c  */
+#line 20 "rulesgram.y"
 
   char * dataname;
-  rule * r;
-  aggregation_tree * prec;
-  operation * op;
 
 
 
-/* Line 1676 of yacc.c  */
-#line 71 "rulesgram.tab.h"
+/* Line 2068 of yacc.c  */
+#line 70 "rulesgram.tab.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */

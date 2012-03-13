@@ -19,8 +19,11 @@
 #include <fstream>
 #include "ros/ros.h"
 #include "sensor_msgs/CompressedImage.h"
+#include "Vision/Results.h"
 
 #include "vision.h"
+
+#define TOWER_CLASS 'R'
 
 #define EXIT_FROM_WINDOW -1
 
@@ -31,14 +34,27 @@ KnnColorClassifier* cc;
 PixelMap* pm;
 ColorDataset* cd;
 
+ros::Publisher results_publisher;
+
 bool checkBlobShape(int width, int heigth) {
 	//Shape control -> must be rectangular with height > width
-	float ratio = (float) width / heigth;
+	return true;
+	/* float ratio = (float) width / heigth;
 	if (ratio > MIN_BLOB_RATIO && ratio < MAX_BLOB_RATIO)
 	{
 		return true;
 	}
-	return false;
+	return false; */
+}
+
+void sendMessage(bool tower_found, int pos) {
+	Vision::Results msg;
+	if (tower_found)
+		cout << "Ho trovato la torre" << endl;
+	else cout << "Non ho trovato la torre" << endl;
+	msg.towerFound = tower_found;
+	msg.towerPos = tower_found ? pos : 0;
+	results_publisher.publish(msg);
 }
 
 void analyzeCurrentImage(Mat& img)
@@ -53,15 +69,7 @@ void analyzeCurrentImage(Mat& img)
 	map< int,Blob* > :: iterator BlobsItr2;
 	
 	/* initialise classes to store data regarding the found blobs */
-	BlobInfo red_blob('R');
-	BlobInfo yellow_blob('Y');
-
-	/* draw a line in the middle of the frame (why?) */
-	/* pt3.x = img.cols/2;
-	pt3.y = 0;
-	pt4.x = img.cols/2;
-	pt4.y = img.rows;
-	line(img, pt3, pt4, CV_RGB(0,0,254), 2, 8, 0); */
+	BlobInfo tower_blob(TOWER_CLASS);
 
 	/* Blob parameters, PixMap object initialisation */
 	pm->SetImage((unsigned char*)img.data, img.cols, img.rows, cc, 3);
@@ -90,23 +98,19 @@ void analyzeCurrentImage(Mat& img)
 				int blob_width = pt2.x - pt1.x;
 				int blob_heigth = pt1.y - pt2.x;
 
-				if ((BlobsItr1->first == 'R')) {
+				/* DEBUG DEBUG DEBUG */
+				/*if ((BlobsItr1->first == TOWER_CLASS)) {
 					rectangle(img, pt1, pt2, CV_RGB(254,254,0), 2, 8, 0);
-				}
+				}*/
 
 				/* is the blob shape similar to the expected one? */
 				if (checkBlobShape(blob_width, blob_heigth))
 				{
 					/* save the biggest found blob for each colour class */
-					if(BlobsItr1->first == 'R' && ( red_blob.getNumPix() == 0
-							|| red_blob.getNumPix() <  BlobsItr2->second->GetNumPix()))
+					if(BlobsItr1->first == TOWER_CLASS && ( tower_blob.getNumPix() == 0
+							|| tower_blob.getNumPix() <  BlobsItr2->second->GetNumPix()))
 					{
-						red_blob.save(BlobsItr2->second->GetNumPix(), pt1, pt2);
-					}
-					else if(BlobsItr1->first == 'Y' && (yellow_blob.getNumPix() == 0
-							|| yellow_blob.getNumPix() <  BlobsItr2->second->GetNumPix()))
-					{
-						yellow_blob.save(BlobsItr2->second->GetNumPix(), pt1, pt2);
+						tower_blob.save(BlobsItr2->second->GetNumPix(), pt1, pt2);
 					}
 				}
 			}
@@ -115,13 +119,10 @@ void analyzeCurrentImage(Mat& img)
 
 	/* Add the found blob to the queue */
 	/* Assumption: in each frame there is only one blob of interest */
-	if (yellow_blob.getNumPix() > 0)
+	if (tower_blob.getNumPix() > 0)
 	{
-		buffer.insert(yellow_blob);
-	}
-	else if (red_blob.getNumPix() > 0)
-	{
-		buffer.insert(red_blob);
+		cout << "Inserisco nel bugffer" << endl;
+		buffer.insert(tower_blob);
 	}
 	else
 	{
@@ -132,28 +133,14 @@ void analyzeCurrentImage(Mat& img)
 	BlobInfo* result = buffer.lastValidBlob();
 	if (result != NULL)
 	{
-		switch (result->getClass())
+		cout << "c'e' qualcosa nel buffer" << endl;
+		if (result->getClass() == TOWER_CLASS)
 		{
-			case 'Y':
-				rectangle(img, result->a, result->b, CV_RGB(254,254,0), 2, 8, 0);
-				break;
-			case 'R':
-				rectangle(img, result->a, result->b, CV_RGB(254,0,0), 2, 8, 0);
-				break;
-			case 'G':
-				rectangle(img, result->a, result->b, CV_RGB(254,0,0), 2, 8, 0);
-				break;
-			default:
-				break;
+			/* draw result on image (debug) */
+			rectangle(img, result->a, result->b, CV_RGB(254,254,0), 2, 8, 0);
 		}
+		sendMessage(result->getClass() == TOWER_CLASS, result->getPosition());
 	}
-
-	/*
-	 * Here the original code sent a message via the middleware
-	 * passing result->centre plus two booleans to indicate
-	 * whether the algorithm recognised the "home" (red blob)
-	 * or the "energy point" (yellow blob)
-	 */
 }
 
 void imageMessageCallback(const sensor_msgs::CompressedImage::ConstPtr& message)
@@ -185,6 +172,7 @@ int main (int argc, char** argv)
 	ros::init(argc, argv, "vision");
 	ros::NodeHandle ros_node;
 	ros::Subscriber source = ros_node.subscribe("spykee_camera", 1, imageMessageCallback);
+	results_publisher = ros_node.advertise<Vision::Results>("vision_results", 10);
 	
 	//opencv variables
 	Mat frame;

@@ -44,7 +44,16 @@ int main(int argc, char** argv)
 	ros::NodeHandle ros_node;
 
 	/* try to connect to the robot... */
-	robot_ptr = new SpykeeManager(SPYKEE_USER, SPYKEE_PWD);
+	char user[] = SPYKEE_USER;
+	char pwd[] = SPYKEE_PWD;
+	try {
+		robot_ptr = new SpykeeManager(user, pwd);
+	} catch (exception& e) {
+		cerr << "Error connecting with the robot" << endl;
+		cerr << "Make sure that Spykee is turned on and " <<
+				"that your wireless network is working" << endl;
+		exit(EXIT_FAILURE);
+	}
 
 	/* subscribe to motion messages */
 	ros::Subscriber sub = ros_node.subscribe("spykee_motion", 1000, move);

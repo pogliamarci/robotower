@@ -1,0 +1,2 @@
+(Random_Search_Right) 	=> (RotSpeed VERY_SLOW_RIGHT);
+(Random_Search_Left) 	=> (RotSpeed VERY_SLOW_LEFT);

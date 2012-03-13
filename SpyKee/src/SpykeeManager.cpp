@@ -23,32 +23,22 @@
 
 using namespace std;
 
-SpykeeManager::SpykeeManager(char* username, char* password)
+SpykeeManager::SpykeeManager(char* username, char* password) throw(SpykeeException)
 {
 #ifdef DEBUG_SPYKEE
 	cout << "Nome utente: " << username << endl;
 	cout << "Password: " << password << endl;
 #endif
 
-	//inizializzo i campi per la connessione
+	/* initialize variables to connect */
 	UDPSocket udp;
 	char UDPMessage[] = { 68, 83, 67, 86, 01 }, respString[100];
 	char message[] = { 80, 75, 10, 00, 12 };
 	char messageAuthentication[strlen(username) + strlen(password) + 2];
 	string sourceAddress;
 	unsigned short port;
-	structRecv sr;
 
-	//avvio la connessione
-	udp.sendTo(UDPMessage, 5, "172.17.6.255", 9000);
-
-	if (udp.recvFrom(respString, 100, sourceAddress, port) > 0)
-		printf("%s\n", (respString + 7));
-
-	tcp = new TCPSocket(sourceAddress, 9000);
-
-	tcp->send(message, 5);
-
+	/* build authentication message */
 	messageAuthentication[0] = 5;
 	for (unsigned int i = 0; i < strlen(username); i++)
 	{
@@ -60,14 +50,31 @@ SpykeeManager::SpykeeManager(char* username, char* password)
 	{
 		messageAuthentication[2 + strlen(username) + i] = password[i];
 	}
-	tcp->send(messageAuthentication, strlen(username) + strlen(password) + 2);
-	if (tcp->recv(respString, 100) > 0)
-	{
-		printf("%s\n", (respString + 7));
+
+	/* connection */
+	try {
+		/* search for a turned on robot and gets its address */
+		udp.sendTo(UDPMessage, 5, "172.17.6.255", 9000);
+
+		if (udp.recvFrom(respString, 100, sourceAddress, port) > 0)
+			printf("%s\n", (respString + 7));
+
+		/* start TCP connection with the robot */
+		tcp = new TCPSocket(sourceAddress, 9000);
+		tcp->send(message, 5);
+
+		/* authentication */
+		tcp->send(messageAuthentication, strlen(username) + strlen(password) + 2);
+		if (tcp->recv(respString, 100) > 0)
+			printf("%s\n", (respString + 7));
+
+	} catch (SocketException& e) {
+#ifdef DEBUG_SPYKEE
+		cerr << e.what() << endl;
+#endif
+		throw SpykeeException();
 	}
-	sr.sock = tcp;
-	sr.lenBuffer = 0;
-	sr.free = true;
+
 #ifdef DEBUG_SPYKEE
 	cout << "Connessione effettuata" << endl;
 #endif
@@ -101,8 +108,8 @@ vector<unsigned char>* SpykeeManager::getImage()
 
 	vector<unsigned char>* image_data = new vector<unsigned char>(SPYKEE_MAX_IMAGE);
 
-	unsigned int posizioneCorrente;
-	unsigned int image_length;
+	unsigned int posizioneCorrente = 0;
+	unsigned int image_length = 0;
 
 	//inizio ciclo acquisizione
 	while (!(stato == immagineFinita))

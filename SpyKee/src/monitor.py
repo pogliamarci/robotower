@@ -134,6 +134,5 @@ if __name__ == "__main__":
     # ROS initialization
     rospy.init_node('spykeeMonitor', anonymous=True)
     rospy.Subscriber("spykee_camera", CompressedImage, im.callback, queue_size=1, buff_size=10000)
-    
     thr.start()
     gui.start()

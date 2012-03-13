@@ -6,13 +6,13 @@
 
 #define SPYKEE_MAX_IMAGE 10000
 
-typedef struct
-	{
-		TCPSocket* sock;
-		char buffer[300];
-		int lenBuffer;
-		bool free;
-	} structRecv;
+class SpykeeException: public exception
+{
+  virtual const char* what() const throw()
+  {
+    return "Error while communicating with the robot!";
+  }
+};
 
 class SpykeeManager
 {
@@ -20,7 +20,7 @@ class SpykeeManager
 		TCPSocket* tcp;
 	public:
 
-	SpykeeManager(char* username, char* password);
+	SpykeeManager(char* username, char* password) throw(SpykeeException);
 
 	void startCamera();
 

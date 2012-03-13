@@ -48,6 +48,9 @@ class BlobInfo {
 		inline int getNumPix() {
 			return this->num_pixel;
 		}
+		inline int getPosition() {
+			return this->center.x;
+		}
 };
 
 class BlobBuffer {

@@ -152,10 +152,10 @@ void EchoesManager::readSonarData()
 					printf("found DBG line <%s>",read_sonar->getParsedLine());
 					meas_progress=0;
 					break;
-					//                  case ReadSonar::parse_ok:
-					//                      printf("found OK line <%s>",readSonar->getParsedLine());
-					//                      meas_progress=0;
-					//                      break;
+					// case ReadSonar::parse_ok:
+					// printf("found OK line <%s>",readSonar->getParsedLine());
+					// meas_progress=0;
+					// break;
 				case ReadSonar::parse_response_err:
 					printf("found ERR line <%s>",read_sonar->getParsedLine());
 					meas_progress=0;

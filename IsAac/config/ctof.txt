@@ -1,18 +1,10 @@
-(HomeDetected TRUE_FALSE)
-(EnergyPointDetected TRUE_FALSE)
-(RobotLocked TRUE_FALSE)
+(TowerDetected TRUE_FALSE)
 
-(ObjectDistanceNORD OBJECTDISTANCE)
-(ObjectDistanceEST OBJECTDISTANCE)
-(ObjectDistanceSUD OBJECTDISTANCE)
-(ObjectDistanceOVEST OBJECTDISTANCE)
+(DistanceNorth OBJECTDISTANCE)
+(DistanceSouth OBJECTDISTANCE)
+(DistanceEast OBJECTDISTANCE)
+(DistanceWest OBJECTDISTANCE)
 
-(ObjectPosition OBJECTPOSITION)
-
-(RobotEnergy ENERGYLEVEL)
+(TowerPosition OBJECTPOSITION)
 
 (RandomSearch RANDOM_VAR)
-
-(TanSpeed TANSPEED)
-
-

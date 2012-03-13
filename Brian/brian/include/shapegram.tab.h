@@ -41,12 +41,14 @@
      LEFTPAR = 259,
      RIGHTPAR = 260,
      NEWLINE = 261,
-     DEF = 262,
-     AND = 263,
-     OR = 264,
-     NOT = 265,
-     P = 266,
-     D = 267
+     TOL = 262,
+     TRI = 263,
+     TRA = 264,
+     TOR = 265,
+     REC = 266,
+     SNG = 267,
+     DIV = 268,
+     VALUE = 269
    };
 #endif
 
@@ -57,21 +59,21 @@ typedef union YYSTYPE
 {
 
 /* Line 2068 of yacc.c  */
-#line 20 "predgram.y"
+#line 19 "shapegram.y"
 
   char * dataname;
-  int pippo;
+  //  int pippo;
 
 
 
 /* Line 2068 of yacc.c  */
-#line 69 "predgram.tab.h"
+#line 71 "shapegram.tab.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
 #endif
 
-extern YYSTYPE predlval;
+extern YYSTYPE shapelval;
 
 
