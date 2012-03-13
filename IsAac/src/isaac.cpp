@@ -16,6 +16,8 @@
 #define DEFUZZYASSOC (char *) "../config/s_ftoc.txt"
 #define DEFUZZYSHAPES (char *) "../config/s_shape.txt"
 
+#define LOOPRATE 20
+
 typedef enum {
 	NORTH, SOUTH, EAST, WEST
 } CardinalPoint;
@@ -151,6 +153,9 @@ int main(int argc, char** argv)
 	ros::NodeHandle ros_node = ros::NodeHandle();
 	ros::Subscriber sonar_sub = ros_node.subscribe("sonar_data", 1,
 			&SensorStatus::fromSonarCallback, &sensors);
+	ros::Subscriber vision_sub = ros_node.subscribe("vision_results", 1,
+				&SensorStatus::fromVisionCallback, &sensors);
+	ros::Rate loop_rate(LOOPRATE);
 
 	Sender message_sender(ros_node);
 
@@ -195,6 +200,7 @@ int main(int argc, char** argv)
 		sendBrianOutputs(brian.getFuzzy()->get_command_singleton_list(), message_sender);
 
 		ros::spinOnce();
+		loop_rate.sleep();
 	}
 	return 0;
 }

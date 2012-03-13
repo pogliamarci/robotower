@@ -140,6 +140,8 @@ void analyzeCurrentImage(Mat& img)
 			rectangle(img, result->a, result->b, CV_RGB(254,254,0), 2, 8, 0);
 		}
 		sendMessage(result->getClass() == TOWER_CLASS, result->getPosition());
+	} else {
+		sendMessage(false, 0);
 	}
 }
 
