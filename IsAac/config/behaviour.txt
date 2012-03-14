@@ -1,3 +1,4 @@
 ( level 1 GoToTower 	../config/GoToTower.rul )
 ( level 1 SearchTower	../config/SearchTower.rul )
 ( level 1 AvoidObstacle	../config/AvoidObstacle.rul )
+( level 1 Stop 		../config/Stop.rul )

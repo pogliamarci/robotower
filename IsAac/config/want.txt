@@ -1,4 +1,4 @@
-GoToTower 		= (P TowerDetected);
+GoToTower 		= (P Tower_Detected);
 SearchTower		= (P Tower_Not_Detected);
 AvoidObstacle		= (P Obstacle_Nord);
-
+Stop			= (P Win);
