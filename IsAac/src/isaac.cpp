@@ -175,7 +175,7 @@ int main(int argc, char** argv)
 		cdl->clear();
 
 		/* get some random vars */
-		int random_search = rand() % 2;
+		int random_search = 1; // rand() % 2;
 
 		cout << "sonar: N " << sensors.getSonar(NORTH) << " , " <<
 				sensors.getSonar(SOUTH) << " , " << sensors.getSonar(EAST)

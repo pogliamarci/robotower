@@ -1,3 +1,4 @@
-(Obj_Center)  => (TanSpeed SLOW_FORWARD);
-(Obj_Left) => (RotSpeed SLOW_LEFT);
+(AND (Obj_Center) (Obstacle_Nord))  => (TanSpeed VERY_SLOW_FORWARD);
+(AND (Obj_Center) (NOT (Obstacle_Nord))) => (TanSpeed SLOW_FORWARD);
+(Obj_Left) => (RotSpeed VERY_SLOW_LEFT);
 (Obj_Right) => (RotSpeed SLOW_RIGHT);
