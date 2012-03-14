@@ -23,7 +23,8 @@ typedef enum {
 	NORTH, SOUTH, EAST, WEST
 } CardinalPoint;
 
-class SensorStatus {
+class SensorStatus 
+{
 	private:
 		int sonar_north;
 		int sonar_south;
@@ -37,10 +38,12 @@ class SensorStatus {
 		void fromVisionCallback(const Vision::Results& message);
 		int getSonar(CardinalPoint p);
 		/* some getters (declared here as inline) */
-		inline bool isTowerDetected() {
+		inline bool isTowerDetected() 
+		{
 			return tower_found;
 		}
-		inline int getTowerPosition() {
+		inline int getTowerPosition() 
+		{
 			return tower_position;
 		}
 };
@@ -90,7 +93,8 @@ int SensorStatus::getSonar(CardinalPoint p)
 	}
 }
 
-class Sender {
+class Sender 
+{
 	private:
 		ros::Publisher motion;
 	public:
@@ -98,19 +102,23 @@ class Sender {
 		void sendMotionMessage(int rot, int tan);
 };
 
-Sender::Sender(ros::NodeHandle& n) {
+Sender::Sender(ros::NodeHandle& n) 
+{
 	 motion = n.advertise<SpyKee::Motion>("spykee_motion", 1000);
 }
 
-void Sender::sendMotionMessage(int rot, int tan) {
+void Sender::sendMotionMessage(int rot, int tan) 
+{
 	SpyKee::Motion msg;
 	msg.rotSpeed = rot;
 	msg.tanSpeed = tan;
 	this->motion.publish(msg);
 }
 
-void sendBrianOutputs(command_list* cl, Sender& ms, ros::ServiceClient client) {
-	if (cl == NULL || cl->empty()) {
+void sendBrianOutputs(command_list* cl, Sender& ms, ros::ServiceClient client) 
+{
+	if (cl == NULL || cl->empty()) 
+	{
 		cerr << "Ricevuta lista vuota da Brian" << endl;
 		return;
 	}
@@ -136,11 +144,15 @@ void sendBrianOutputs(command_list* cl, Sender& ms, ros::ServiceClient client) {
 		{
 			cout << "Ricevuta rot speed" << endl;
 			rot_speed = it->second->get_set_point();
-		} else if (temp.compare("GreenLed") == 0) {
+		} 
+		else if (temp.compare("GreenLed") == 0) 
+		{
 			led_service.request.editGreen = true;
 			led_service.request.greenIsOn = it->second->get_set_point();
 			client.call(led_service);
-		} else {
+		} 
+		else 
+		{
 			cout << "Ricevuto qualcos'altro" << endl;
 		}
 	}
@@ -153,12 +165,22 @@ void sendBrianOutputs(command_list* cl, Sender& ms, ros::ServiceClient client) {
 
 int main(int argc, char** argv)
 {
+	//random variables and functions
+	int random_timer   = 0;
+	int random_search  = 0;
+	int detected_timer = 0;
+	int random_ahead   = 0;
+	srand((unsigned)time(NULL));
+	
+	//data
 	SensorStatus sensors;
 	crisp_data_list* cdl;
-
+	
+	
 	/* reliability (not used ==> set to 1) */
 	const int reliability = 1;
 
+	//ros initialization
 	ros::init(argc, argv, "isaac");
 	ros::NodeHandle ros_node = ros::NodeHandle();
 	ros::Subscriber sonar_sub = ros_node.subscribe("sonar_data", 1,
@@ -183,9 +205,6 @@ int main(int argc, char** argv)
 		cdl = (brian.getFuzzy())->get_crisp_data_list();
 		cdl->clear();
 
-		/* get some random vars */
-		int random_search = 1; // rand() % 2;
-
 		cout << "sonar: N " << sensors.getSonar(NORTH) << " , " <<
 				sensors.getSonar(SOUTH) << " , " << sensors.getSonar(EAST)
 				<< " , " << sensors.getSonar(WEST) << endl;
@@ -197,14 +216,31 @@ int main(int argc, char** argv)
 		cdl->add(new crisp_data("DistanceWest", sensors.getSonar(WEST), reliability));
 
 		if (sensors.isTowerDetected())
+		{
 			cout << "tower detected: pos = " << sensors.getTowerPosition() << endl;
+			detected_timer=0;
+		}
+		else detected_timer++;
 
 		cdl->add(new crisp_data("TowerDetected", sensors.isTowerDetected(), reliability));
 		cdl->add(new crisp_data("TowerPosition", sensors.getTowerPosition(), reliability));
 
+		/* random data set to ros */
+		if(detected_timer == LOOPRATE)
+		{
+			random_ahead = rand() % 2;
+			detected_timer = 0;
+		}
+		
+		if((random_timer++) == LOOPRATE)
+		{
+			random_search = rand() % 2;
+			random_timer = 0;
+		}
 		cout << "random src: " << random_search << endl;
 		cdl->add(new crisp_data("RandomSearch", random_search, reliability));
-
+		cdl->add(new crisp_data("RandomAhead", random_ahead, reliability));
+		
 		/* let's start it all */
 		brian.run();
 		brian.debug();

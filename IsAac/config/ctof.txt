@@ -8,3 +8,4 @@
 (TowerPosition OBJECTPOSITION)
 
 (RandomSearch RANDOM_VAR)
+(RandomAhead RANDOM_VAR)
