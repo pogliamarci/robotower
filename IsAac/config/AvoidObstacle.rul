@@ -1,2 +1,3 @@
 (AND (Obstacle_Nord) (Random_Search_Right)) => (RotSpeed VERY_FAST_RIGHT);
 (AND (Obstacle_Nord) (Random_Search_Left)) => (RotSpeed VERY_FAST_LEFT);
+(Obstacle_Nord) => (TanSpeed FAST_FORWARD);

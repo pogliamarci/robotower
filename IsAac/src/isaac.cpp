@@ -2,6 +2,7 @@
 #include <string>
 #include "brian.h"
 #include "Echoes/Sonar.h"
+#include "Echoes/Led.h"
 #include "SpyKee/Motion.h"
 #include "Vision/Results.h"
 #include "ros/ros.h"
@@ -108,7 +109,7 @@ void Sender::sendMotionMessage(int rot, int tan) {
 	this->motion.publish(msg);
 }
 
-void sendBrianOutputs(command_list* cl, Sender& ms) {
+void sendBrianOutputs(command_list* cl, Sender& ms, ros::ServiceClient client) {
 	if (cl == NULL || cl->empty()) {
 		cerr << "Ricevuta lista vuota da Brian" << endl;
 		return;
@@ -116,6 +117,8 @@ void sendBrianOutputs(command_list* cl, Sender& ms) {
 
 	int tan_speed = 0;
 	int rot_speed = 0;
+
+	Echoes::Led led_service;
 
 	//iteratore
 	command_list::iterator it;
@@ -133,6 +136,10 @@ void sendBrianOutputs(command_list* cl, Sender& ms) {
 		{
 			cout << "Ricevuta rot speed" << endl;
 			rot_speed = it->second->get_set_point();
+		} else if (temp.compare("GreenLed") == 0) {
+			led_service.request.editGreen = true;
+			led_service.request.greenIsOn = it->second->get_set_point();
+			client.call(led_service);
 		} else {
 			cout << "Ricevuto qualcos'altro" << endl;
 		}
@@ -158,6 +165,8 @@ int main(int argc, char** argv)
 			&SensorStatus::fromSonarCallback, &sensors);
 	ros::Subscriber vision_sub = ros_node.subscribe("vision_results", 1,
 				&SensorStatus::fromVisionCallback, &sensors);
+	ros::ServiceClient client = ros_node.serviceClient<Echoes::Led>("led_data");
+
 	ros::Rate loop_rate(LOOPRATE);
 
 	Sender message_sender(ros_node);
@@ -202,7 +211,7 @@ int main(int argc, char** argv)
 
 		/* parse outputs from brian and send them to actuators */
 		command_list* cl = brian.getFuzzy()->get_command_singleton_list();
-		sendBrianOutputs(cl, message_sender);
+		sendBrianOutputs(cl, message_sender, client);
 		cl->clear();
 
 		ros::spinOnce();

@@ -26,3 +26,7 @@
 (SNG (VERY_FAST_LEFT -80))
 )
 
+(LED
+(SNG (ON 1))
+(SNG (OFF 0))
+)

@@ -36,6 +36,7 @@ LedParser::LedParser(ReadSonar* read_sonar)
 	this->C=ALL_OFF;
 	//aggancia l'oggetto readsonar
 	this->Sender = read_sonar;
+	this->SendToLed();
 }
 
 //metodo per accendere la luce verde

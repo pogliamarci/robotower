@@ -1,0 +1,3 @@
+(AND (Obstacle_Nord) (DistanceSouth FAR)) => (TanSpeed SLOW_BACKWARD);
+(AND (Obstacle_Nord) (DistanceSouth VERYFAR)) => (TanSpeed VERY_SLOW_BACKWARD);
+(Obstacle_Nord) => (RotSpeed AHEAD);

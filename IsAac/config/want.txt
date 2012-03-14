@@ -1,5 +1,5 @@
 GoToTower 		= (P Tower_Detected);
 SearchTower		= (P Tower_Not_Detected);
-AvoidObstacle		= (AND (P Obstacle_Nord) (D DistanceNorth NEAR));
-GoBack			= (AND (P Obstacle_Nord) (D DistanceNorth VERYNEAR));
+AvoidObstacle		= (P Obstacle_Nord);
+GoBack			= (P Crashed); 
 Stop			= (P Win);
