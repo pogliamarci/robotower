@@ -1,3 +1,4 @@
-AvoidObstacle	= ( TRUE );
-GoToTower	= ( P Obj_Center );
-SearchTower	= ( TRUE );
+GoToTower 		= (P TowerDetected);
+SearchTower		= (P Tower_Not_Detected);
+AvoidObstacle		= (P Obstacle_Nord);
+

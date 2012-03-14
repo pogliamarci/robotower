@@ -198,6 +198,7 @@ int main(int argc, char** argv)
 
 		/* let's start it all */
 		brian.run();
+		brian.debug();
 
 		/* parse outputs from brian and send them to actuators */
 		command_list* cl = brian.getFuzzy()->get_command_singleton_list();
