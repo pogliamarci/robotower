@@ -7,6 +7,7 @@ import sys, os
 import math
 import roslib; roslib.load_manifest('SpyKee')
 import rospy
+import signal
 from PyQt4.Qt import *
 from SpyKee.msg import Motion
 from sensor_msgs.msg import CompressedImage
@@ -58,8 +59,6 @@ class SonarMonitorGui():
         
         self.pub = rospy.Publisher('spykee_motion', Motion)
         
-        #self.tan_speed_box = QLineEdit(self.widget)
-        #self.rot_speed_box = QLineEdit(self.widget)
         self.tan_speed_box = QSlider(Qt.Horizontal, self.widget)
         self.tan_speed_view = QLCDNumber(self.widget)
         self.rot_speed_box = QSlider(Qt.Horizontal, self.widget)
@@ -134,5 +133,7 @@ if __name__ == "__main__":
     # ROS initialization
     rospy.init_node('spykeeMonitor', anonymous=True)
     rospy.Subscriber("spykee_camera", CompressedImage, im.callback, queue_size=1, buff_size=10000)
+    # catch SIGINT
+    signal.signal(signal.SIGINT, signal.SIG_DFL)
     thr.start()
     gui.start()

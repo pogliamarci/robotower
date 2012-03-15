@@ -4,6 +4,7 @@
 #
 
 import sys
+import signal
 import roslib; roslib.load_manifest('Echoes')
 import rospy
 from PyQt4.Qt import *
@@ -13,8 +14,6 @@ from Echoes.srv import Led
 class MessageListenerThread(QThread):
 	def run(self):
 		rospy.spin()
-		print "uscito da spin"
-		sys.exit()
 
 class LedManager():
 	def __init__(self):
@@ -79,6 +78,8 @@ if __name__ == "__main__":
     # ROS initialization
     rospy.init_node('sonarMonitor', anonymous=True)
     rospy.Subscriber("sonar_data", Sonar, gui.sonarDataCallback)
+    # Catch SIGINT
+    signal.signal(signal.SIGINT, signal.SIG_DFL)
     thr = MessageListenerThread()
     thr.start()
     # GUI start
