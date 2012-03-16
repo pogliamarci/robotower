@@ -232,8 +232,9 @@ int main(int argc, char** argv)
 			detected_timer = 0;
 		}
 		
-		if((random_timer++) == LOOPRATE)
+		if((random_timer++) == 4*LOOPRATE)
 		{
+			cout << "azzero timer, frocio chi legge" << endl;
 			random_search = rand() % 2;
 			random_timer = 0;
 		}

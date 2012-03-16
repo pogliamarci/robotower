@@ -176,7 +176,14 @@ vector<unsigned char>* SpykeeManager::getImage()
 					((i < recvMsgSize) && (posizioneCorrente < image_length));
 					i++, posizioneCorrente++)
 			{
-				image_data->at(posizioneCorrente) = buffer[i];
+				try
+				{
+					image_data->at(posizioneCorrente) = buffer[i];
+				}
+				catch(...)
+				{
+					break;
+				}
 			}
 
 			#ifdef DEBUG_SPYKEE

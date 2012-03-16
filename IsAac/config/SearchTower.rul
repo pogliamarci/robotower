@@ -1,3 +1,3 @@
 (Random_Search_Right) => (RotSpeed VERY_SLOW_RIGHT);
-(Random_Search_Left) => (RotSpeed VERY_SLOW_LEFT);
-(AND (Random_Search_Ahead) (NOT (Obstacle_Nord))) => (TanSpeed FAST_FORWARD);
+(Random_Search_Left)  => (RotSpeed VERY_SLOW_LEFT);
+(Random_Search_Ahead) => (TanSpeed FAST_FORWARD);
