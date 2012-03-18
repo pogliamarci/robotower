@@ -31,5 +31,6 @@ rosbuild_add_executable(foxtrot
 			src/groundobjects.cpp  
 			src/playground.cpp  
 			src/robot.cpp
+			src/foxtype.cpp
 )
 #target_link_libraries(example ${PROJECT_NAME})
