@@ -16,25 +16,24 @@
  */
 
 #include "foxtrot.h"
-#include "groundobjects.h"
 
-Object::Objetc(int height, rgb_color color)
+GenericObject::GenericObject(int height, Color_rgb* color)
 {
 	this->height=height;
 	this->color=color;
 }
 
-rgb_color Object::getColor()
+Color_rgb GenericObject::getColor()
 {
-	return this->color;
+	return *this->color;
 }
 
-int Object::getHeight()
+int GenericObject::getHeight()
 {
 	return this->height;
 }
 
-Wall::Wall(int height, char color, Point start, Point end):Objetc(height, color)
+Wall::Wall(int height, Color_rgb* color, Point* start, Point* end):GenericObject(height, color)
 {
 	this->start=start;
 	this->end=end;
@@ -42,23 +41,23 @@ Wall::Wall(int height, char color, Point start, Point end):Objetc(height, color)
 
 Point Wall::getStart()
 {
-	return this->start;
+	return *this->start;
 }
 
 Point Wall::getEnd()
 {
-	return this->end;
+	return *this->end;
 }
 
-Tower::Tower(int height, char color, Point center, int radius):Object(height, color)
+Tower::Tower(int height, Color_rgb* color, Point* center, int radius):GenericObject(height, color)
 {
 	this->center=center;
 	this->radius=radius;
 }
 
-int Tower::getCenter()
+Point Tower::getCenter()
 {
-	return this->center;
+	return *this->center;
 }
 
 int Tower::getRadius()
@@ -66,7 +65,7 @@ int Tower::getRadius()
 	return this->radius;
 }
 
-Obstacle(int height, char color, Point a, Point b, Point c, Point d):Object(height, color)
+Obstacle::Obstacle(int height, Color_rgb* color, Point* a, Point* b, Point* c, Point* d):GenericObject(height, color)
 {
 	this->p[0]=a;
 	this->p[1]=b;
@@ -74,7 +73,7 @@ Obstacle(int height, char color, Point a, Point b, Point c, Point d):Object(heig
 	this->p[3]=d;
 }
 
-Point getPoint(char n)
+Point Obstacle::getPoint(int n)
 {
-	return this->p[n];
+	return *this->p[n];
 }

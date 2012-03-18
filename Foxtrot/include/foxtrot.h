@@ -1,49 +1,98 @@
-#include <iostream>
-#include <string>
-#include <cmath>
-#include <vector>
+/*
+ * RoboTower, Hi-CoRG based on ROS
+ *
+ * Copyright (C) 2012 Politecnico di Milano
+ * Copyright (C) 2011 Marcello Pogliani, Davide Tateo
+ * Versione 1.0
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation, version 2 of the License.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ */
 
-#define POINTNUMBERS 4
-#define DIRECTIONS 4
-#define ANGLEINCREMENT 45
-#define ROBOTRADIUS 14.14213562
+#include "foxtype.h"
 
-class Point
+class GenericObject
 {
 	public:
-		Point(float x, float y);
-		float x;
-		float y;
-		Point operator+ (Point &);
-
+		GenericObject(int height, Color_rgb* color);
+		Color_rgb getColor();
+		int getHeight();
+	private:
+		int height;
+		Color_rgb* color;
 };
 
-Point::Point(float x, float y)
-{
-	this->x=x;
-	this->y=y;
-}
-
-
-Point Point::operator+ (Point& p)
-{
-	return Point(this->x+p.x, this->y+p.y);
-}
-
-class Color_rgb
+class Wall : public GenericObject
 {
 	public:
-		Color_rgb(char r, char g, char b);
-		char r;
-		char g;
-		char b;
+		Wall(int height, Color_rgb* color, Point* start, Point* end);
+		Point getStart();
+		Point getEnd();
+	private:
+		Point* start;
+		Point* end;
+};
+
+class Tower : public GenericObject
+{
+	public:
+		Tower(int height, Color_rgb* color, Point* center, int radius);
+		Point getCenter();
+		int getRadius();
+	private:
+		Point* center;
+		int radius;
+};
+
+class Obstacle : public GenericObject
+{
+	public:
+		Obstacle(int height, Color_rgb* color, Point* a, Point* b, Point* c, Point* d);
+		Point getPoint(int n);
+	private:
+		Point* p[POINTNUMBERS];
+};
+
+class Robot
+{
+	public:
+		Robot(const char* name);
+		void setPosition(Point center, int angle);
+		const char* getName();
+		void setTanSpeed(int tanspeed);
+		void setRotSpeed(int rotspeed);
+		int getSonar(int direction);
+		Point getPosition(int n);
+		void updateStatus();
 		
+	private:
+		const char* name;
+		Point* p[POINTNUMBERS];
+		int sonardata[DIRECTIONS];
+		int tanspeed;
+		int rotspeed;
+		bool seetower;
 };
 
-Color_rgb::Color_rgb(char r, char g, char b)
+class Playground
 {
-	this->r=r;
-	this->g=g;
-	this->b=b;
-}
+	public:
+		Playground(const char* name);
+		float getDistance(Robot* robot, GenericObject* object);
+		void addRobot(Robot& robot);
+		void addWall(Wall& wall);
+		void addObstacle(Obstacle& obstacle);
+	private:
+		const char* name;
+		std::vector<Wall> walls;
+		std::vector<Obstacle> obstacles;
+		std::vector<Robot> robots;
+	
+};
 

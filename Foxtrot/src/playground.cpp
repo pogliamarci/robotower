@@ -15,29 +15,31 @@
  * GNU General Public License for more details.
  */
 
-#include "playground.h"
+#include "foxtrot.h"
+
 
 Playground::Playground(const char* name)
 {
 	this->name=name;
 }
 
-float Playground::getDistance(Robot* robot, Object* object)
+float Playground::getDistance(Robot* robot, GenericObject* object)
 {
 	; //TODO get the distance from robot to the object
+	return 0.0;
 }
 
-void Playground::addRobot(Robot* robot)
+void Playground::addRobot(Robot& robot)
 {
-	this->robots.insert(robot);
+	this->robots.push_back(robot);
 }
 
-void Playground::addWall(Wall* wall)
+void Playground::addWall(Wall& wall)
 {
-	this->walls.insert(wall);
+	this->walls.push_back(wall);
 }
 
-void Playground::addObstacle(Obstalce* obstacle)
+void Playground::addObstacle(Obstacle& obstacle)
 {
-	this->obstacles.insert(obstacle);
+	this->obstacles.push_back(obstacle);
 }
