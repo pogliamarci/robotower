@@ -182,6 +182,9 @@ vector<unsigned char>* SpykeeManager::getImage()
 				}
 				catch(...)
 				{
+					cerr << "Error: OUT OF RANGE!" << endl;
+					cerr << "recvMsgSize = " << recvMsgSize << ", image_length = " << image_length << endl;
+					cerr << "Error occurred at posizioneCorrente = " << posizioneCorrente << endl;
 					break;
 				}
 			}
