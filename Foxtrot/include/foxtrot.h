@@ -84,6 +84,7 @@ class Playground
 {
 	public:
 		Playground(const char* name);
+		float getDistance(Robot* robot, Tower* tower);
 		float getDistance(Robot* robot, GenericObject* object);
 		void addRobot(Robot& robot);
 		void addWall(Wall& wall);
@@ -91,8 +92,8 @@ class Playground
 	private:
 		const char* name;
 		std::vector<Wall> walls;
+		std::vector<Tower> towers;
 		std::vector<Obstacle> obstacles;
 		std::vector<Robot> robots;
-	
 };
 
