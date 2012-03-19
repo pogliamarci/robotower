@@ -128,10 +128,7 @@ void sendBrianOutputs(command_list* cl, Sender& ms, ros::ServiceClient client)
 
 	Echoes::Led led_service;
 
-	//iteratore
-	command_list::iterator it;
-
-	for (it = cl->begin(); it != cl->end(); it++)
+	for (command_list::iterator it = cl->begin(); it != cl->end(); it++)
 	{
 		std::string temp = it->first;
 
@@ -228,14 +225,13 @@ int main(int argc, char** argv)
 		/* random data set to ros */
 		if(detected_timer == LOOPRATE)
 		{
-			random_ahead = rand() % 2;
+			random_ahead = rand() % 100;
 			detected_timer = 0;
 		}
 		
 		if((random_timer++) == 4*LOOPRATE)
 		{
-			cout << "azzero timer, frocio chi legge" << endl;
-			random_search = rand() % 2;
+			random_search = rand() % 100;
 			random_timer = 0;
 		}
 		cout << "random src: " << random_search << endl;
