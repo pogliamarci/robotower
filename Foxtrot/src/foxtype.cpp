@@ -15,25 +15,29 @@
  * GNU General Public License for more details.
  */
 
-#include "foxtrot.h"
+#include "foxtype.h"
 
-class Robot
+Point::Point(float x, float y)
 {
-	public:
-		Robot(const char* name);
-		void setPosition(Point center, int angle);
-		const char* getName();
-		int setTanSpeed(int tanspeed);
-		int setRotSpeed(int rotspeed);
-		int getSonar(int direction);
-		Point getPosition(char n);
-		void updateStatus();
-		
-	private:
-		const char* name;
-		Point p[POINTNUMBERS];
-		int sonardata[DIRECTIONS];
-		int tanspeed;
-		int rotspeed;
-		bool seetower;
-};
+	this->x=x;
+	this->y=y;
+}
+
+Point Point::operator+ (Point p)
+{
+	return Point(this->x+p.x, this->y+p.y);
+}
+
+Point& Point::operator+=(const Point& p)
+{
+            x += p.x ;
+            y += p.y ;
+            return *this ;
+}
+
+Color_rgb::Color_rgb(char r, char g, char b)
+{
+	this->r=r;
+	this->g=g;
+	this->b=b;
+}

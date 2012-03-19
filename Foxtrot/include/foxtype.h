@@ -2,7 +2,7 @@
  * RoboTower, Hi-CoRG based on ROS
  *
  * Copyright (C) 2012 Politecnico di Milano
- * Copyright (C) 2012 Marcello Pogliani, Davide Tateo
+ * Copyright (C) 2011 Marcello Pogliani, Davide Tateo
  * Versione 1.0
  *
  * This program is free software; you can redistribute it and/or
@@ -15,20 +15,33 @@
  * GNU General Public License for more details.
  */
 
-#include "foxtrot.h"
+#include <iostream>
+#include <string>
+#include <cmath>
+#include <vector>
 
-class Playground
+#define POINTNUMBERS 4
+#define DIRECTIONS 4
+#define ANGLEINCREMENT 45
+#define ROBOTRADIUS 14.14213562
+
+class Point
 {
 	public:
-		Playground(const char* name);
-		float getDistance(Robot* robot, Object* object);
-		void addRobot(Robot* robot)
-		void addWall(Wall* wall);
-		void addObstacle(Obstalce* obstacle);
-	private:
-		const char* name;
-		Vector<Wall> walls;
-		Vector<Obstacle> obstacles;
-		Vector<Robot> robots;
-	
+		Point(float x, float y);
+		float x;
+		float y;
+		Point operator+ (Point p);
+		Point& operator+= (const Point& p);
 };
+
+class Color_rgb
+{
+	public:
+		Color_rgb(char r, char g, char b);
+		char r;
+		char g;
+		char b;
+		
+};
+

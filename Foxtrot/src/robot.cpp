@@ -15,8 +15,8 @@
  * GNU General Public License for more details.
  */
 
+
 #include "foxtrot.h"
-#include "robot.h"
 
 Robot::Robot(const char* name)
 {
@@ -28,7 +28,8 @@ void Robot::setPosition(Point center, int angle)
 	int i;
 	for(i=0; i<POINTNUMBERS; i++)
 	{
-		this->p[i]+=Point(ROBOTRADIUS*cos(ANGLEINCREMENT*(i+1)+angle), ROBOTRADIUS*sin(ANGLEINCREMENT*(i+1)+angle));
+		Point pp(ROBOTRADIUS*cos(ANGLEINCREMENT*(i+1)+angle), ROBOTRADIUS*sin(ANGLEINCREMENT*(i+1)+angle));
+		*this->p[i] += pp;
 	}
 }
 
@@ -37,12 +38,12 @@ const char* Robot::getName()
 	return this->name;
 }
 
-int Robot::setTanSpeed(int tanspeed)
+void Robot::setTanSpeed(int tanspeed)
 {
 	this->tanspeed=tanspeed;
 }
 
-int Robot::setRotSpeed(int rotspeed)
+void Robot::setRotSpeed(int rotspeed)
 {
 	this->rotspeed=rotspeed;
 }
@@ -54,11 +55,10 @@ int Robot::getSonar(int direction)
 	else return -1; //TODO emit exception
 }
 
-Point Robot::getPosition(char n)
+Point Robot::getPosition(int n)
 {
-	if(n<POINTNUMBERS)
-		return p[n];
-	else return p[0]; //TODO emit exception
+	if(n<POINTNUMBERS) return *p[n];
+	else return *p[0]; //TODO emit exception
 }
 
 void Robot::updateStatus()
