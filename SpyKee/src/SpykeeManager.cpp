@@ -106,7 +106,7 @@ vector<unsigned char>* SpykeeManager::getImage()
 	};
 	int stato = nonTrovata;
 
-	vector<unsigned char>* image_data = new vector<unsigned char>(SPYKEE_MAX_IMAGE);
+	vector<unsigned char>* image_data;
 
 	unsigned int posizioneCorrente = 0;
 	unsigned int image_length = 0;
@@ -115,6 +115,7 @@ vector<unsigned char>* SpykeeManager::getImage()
 	while (!(stato == immagineFinita))
 	{
 		recvMsgSize = tcp->recv(buffer, SPYKEE_MAX_IMAGE);
+		recvMsgSize = (recvMsgSize > SPYKEE_MAX_IMAGE) ? SPYKEE_MAX_IMAGE : recvMsgSize;
 		#ifdef DEBUG_SPYKEE
 		cout << endl << endl << endl << endl << "Messaggio arrivato di " << recvMsgSize << " byte." << endl;
 		#endif
@@ -130,18 +131,7 @@ vector<unsigned char>* SpykeeManager::getImage()
 					((i < recvMsgSize) && (posizioneCorrente < image_length));
 					i++)
 			{
-
-				try
-				{
-					image_data->at(posizioneCorrente) = buffer[i];
-				}
-				catch(...)
-				{
-					cerr << "Error: OUT OF RANGE!" << endl;
-					cerr << "recvMsgSize = " << recvMsgSize << ", image_length = " << image_length << endl;
-					cerr << "Error occurred at posizioneCorrente = " << posizioneCorrente << endl;
-					break;
-				}
+				image_data->at(posizioneCorrente) = buffer[i];
 
 				if ((i < recvMsgSize) && (posizioneCorrente < image_length))
 					posizioneCorrente++;
@@ -176,6 +166,8 @@ vector<unsigned char>* SpykeeManager::getImage()
 			//ottengo la lunghezza dell'immagine
 			image_length = (buffer[3] << 8) + buffer[4];
 
+			image_data = new vector<unsigned char>(image_length);
+
 			#ifdef DEBUG_SPYKEE
 			cout << "L'immagine contenuta nel pacchetto è lunga " << image_length << " byte" << endl;
 			#endif
@@ -187,17 +179,7 @@ vector<unsigned char>* SpykeeManager::getImage()
 					((i < recvMsgSize) && (posizioneCorrente < image_length));
 					i++, posizioneCorrente++)
 			{
-				try
-				{
-					image_data->at(posizioneCorrente) = buffer[i];
-				}
-				catch(...)
-				{
-					cerr << "Error: OUT OF RANGE!" << endl;
-					cerr << "recvMsgSize = " << recvMsgSize << ", image_length = " << image_length << endl;
-					cerr << "Error occurred at posizioneCorrente = " << posizioneCorrente << endl;
-					break;
-				}
+				image_data->at(posizioneCorrente) = buffer[i];
 			}
 
 			#ifdef DEBUG_SPYKEE
