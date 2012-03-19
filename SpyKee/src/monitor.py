@@ -17,6 +17,7 @@ mutex = QMutex()
 class DataMatrixThread(QThread):  
     def run(self):
         #os.system("dmtxread -n frame.jpg -m 300 || echo non riconosciuto")
+	pass
 
 class MessageListenerThread(QThread):  
     def run(self):

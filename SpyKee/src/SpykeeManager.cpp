@@ -130,7 +130,18 @@ vector<unsigned char>* SpykeeManager::getImage()
 					((i < recvMsgSize) && (posizioneCorrente < image_length));
 					i++)
 			{
-				image_data->at(posizioneCorrente) = buffer[i];
+
+				try
+				{
+					image_data->at(posizioneCorrente) = buffer[i];
+				}
+				catch(...)
+				{
+					cerr << "Error: OUT OF RANGE!" << endl;
+					cerr << "recvMsgSize = " << recvMsgSize << ", image_length = " << image_length << endl;
+					cerr << "Error occurred at posizioneCorrente = " << posizioneCorrente << endl;
+					break;
+				}
 
 				if ((i < recvMsgSize) && (posizioneCorrente < image_length))
 					posizioneCorrente++;
