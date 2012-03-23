@@ -6,16 +6,16 @@
 
 #define MAXSTR 150
 
-extern void shapeerror(char *s);
+extern void shapeerror(const char *s);
 extern FILE * shapein;
 extern void shapeparse();
-extern void asserror(char *s);
+extern void asserror(const char *s);
 extern FILE * assin;
 extern void assparse();
-extern void prederror(char *s);
+extern void prederror(const char *s);
 extern FILE * predin;
 extern void predparse();
-extern void ruleserror(char *s);
+extern void ruleserror(const char *s);
 extern FILE * rulesin;
 extern void rulesparse();
 
@@ -370,7 +370,7 @@ int main(int argc, char ** argv)
 	}
     }
   else
-    basepath="\0";
+    basepath="../config/";
 
   linenum=1;
   filename=(char *) malloc(MAXSTR);
@@ -541,5 +541,4 @@ int main(int argc, char ** argv)
 	cout << *i << " non trovato!\n";
       i++;
     }
-  free(basepath);
 }

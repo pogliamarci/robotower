@@ -5,7 +5,7 @@
 #define RULESERROR_VERBOSE 1
 
 extern int ruleslex();
-int ruleserror(char *);
+extern int ruleserror(const char *);
 extern int rulesleng;
 
 extern void pred_exists(char *name);
@@ -91,7 +91,7 @@ name: NAME {$$=(char *) malloc(strlen($1)+1);
 
 %%
 
-int ruleserror(char *s)
+int ruleserror(const char *s)
 {
   printf("\n# errore nel file %s alla linea %d: %s\n",filename,linenum,s);
   return 0;

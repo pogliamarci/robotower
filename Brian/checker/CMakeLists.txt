@@ -32,8 +32,8 @@ BISON_TARGET(RulesParser prs/rulesgram.y src/rulesgram.tab.cpp COMPILE_FLAGS --d
 FLEX_TARGET(RulesScanner prs/rulesflex.l  src/rulesflex.cpp COMPILE_FLAGS "-Prules")
 BISON_TARGET(ShapeParser prs/shapegram.y src/shapegram.tab.cpp COMPILE_FLAGS --defines="${PROJECT_SOURCE_DIR}/include/shapegram.tab.h" COMPILE_FLAGS "-p shape")
 FLEX_TARGET(ShapeScanner prs/shapeflex.l  src/shapeflex.cpp COMPILE_FLAGS "-Pshape")
-BISON_TARGET(AssocParser prs/assocgram.y src/assocgram.tab.cpp COMPILE_FLAGS --defines="${PROJECT_SOURCE_DIR}/include/assocgram.tab.h" COMPILE_FLAGS "-p assoc")
-FLEX_TARGET(AssocScanner prs/assocflex.l  src/assocflex.cpp COMPILE_FLAGS "-Passoc")
+BISON_TARGET(AssocParser prs/assgram.y src/assgram.tab.cpp COMPILE_FLAGS --defines="${PROJECT_SOURCE_DIR}/include/assgram.tab.h" COMPILE_FLAGS "-p ass")
+FLEX_TARGET(AssocScanner prs/assflex.l  src/assflex.cpp COMPILE_FLAGS "-Pass")
 
 #aggiunge le dipendenze tra parser e scanner (.l e .y)
 ADD_FLEX_BISON_DEPENDENCY(PredScanner PredParser)
@@ -42,7 +42,7 @@ ADD_FLEX_BISON_DEPENDENCY(ShapeScanner ShapeParser)
 ADD_FLEX_BISON_DEPENDENCY(AssocScanner AssocParser)
 
 #common commands for building c++ executables and libraries
-rosbuild_add_executable	(	checher
+rosbuild_add_executable	(	checker
 				src/check.cpp 
 				${PROJECT_SOURCE_DIR}/${BISON_PredParser_OUTPUTS}  
 				${PROJECT_SOURCE_DIR}/${FLEX_PredScanner_OUTPUTS}

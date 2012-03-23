@@ -4,8 +4,8 @@
 #include <stdio.h>
 #define YYERROR_VERBOSE 1
   
-  extern int asslex();
- int asserror(char *);
+ extern int asslex();
+ extern int asserror(const char *);
  extern int shapeleng;
  
  extern char* filename;
@@ -47,7 +47,7 @@ name: NAME  {$$=(char *) malloc(strlen($1)+1);
 
 %%
 
-int asserror(char *s)
+int asserror(const char *s)
 {
   printf("\n# errore nel file %s alla linea %d: %s\n",filename,linenum,s);
   return 0;
