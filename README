@@ -1,51 +1,59 @@
-OGGETTO
+SUBJECT
 --------
 
-RoboTower, Hi-CoRG (Higly Competitive RoboGame) di tipo Tower defense basato sul robot SpyKee della Meccano. 
+RoboTower [1] , a Tower Defense Hi-CoRG (Higly Competitive RoboGame) based on Meccano's Spykee robot.
+Aim of this project is to develop a strategic realtime Robogame, based on the idea of a "Tower defense" 
+(a game in which the player has to defend an object, that is the "tower", from an attack pursued by the enemy).
+A mobile robot should try to ruin down the enemy tower in a given amount of time.
+The human player has to prevent this by acquiring obstacles and putting them on the game field, 
+either at the beginning of the game, or during the game, by buying obstacles from a computer dispenser.
 
-Versione 1.0 (2012-02-27)
 
-UTILIZZO
+Ver. 1.0 (2012-03-21)
+Warning: this is an _extremely_ preliminar version. This code could - and it's very likely that does - not work!!!
+
+
+USAGE
 --------
 
-E' Necessario disporre dell'intera suite ROS per poter compilare ed eseguire il sorgente.
-Il gioco necessita inoltre di un Robot per essere utilizzato, equipaggiato con sonar, led, telecamera e con capacità di movimento.
-Può essere necessario adattare il software al robot usato
+This project is being developed on the Linux operating system.
+You need to install the ROS middleware [2] to compile and execute the code in this repository. Furthermore, some
+part of the code need the OpenCV libraries to be installed on your system (this should be automatically done by ROS)
+and the ANN ROS package (you can download it on [3]).
+To use the code, you need the Spykee robot together with some sonars and leds that have been added later to our robot.
+If you have a different hardware (robot and\or sonar interface card), you need to adapt the software.
 
 
-
-COMPILAZIONE
+COMPILING
 ------------
 
-Per compilare usare rosmake, che si occuperà di risolvere le dipendenze, sia dei pacchetti ROS che dei pacchetti esterni.
-poichè ROS basa la compilazione su Cmake, sarà necessario aggiornare i percorsi dei Packages che formano RoboTower Tramite lo script di configurazione. 
-E' possibile che sia necessario cancellare precendeti file di cache di CMake.
+To compile, the command
+    rosmake
+(entered on every ROS package in the repository, aka directory with a source tree) should work.
+Known issues\notices:
+* You should have configured ROS so that the directory in which you clone the repository is part of the ROS workspace.
+* If compilation fails, try to remove the Cmake cache from the package directory.
 
-ESECUZIONE
+EXECUTION
 ----------
 
-Usare il launcher di ROS nella cartella principale,
-basta dare il comando:
-roslaunch spykee.launch
+To start the software, you can simple enter
+    roslaunch spykee.launch
+in the main directory (the one in which you cloned the repo).
 
 COPYRIGHT
 ---------
 
-Il progetto è distribuito sotto licenza GNU GPL versione 2.
+This project is distributed under the GNU GPL license, version 2.
 (C) 2012 Marcello Pogliani, Davide Tateo
 (C) 2012 Politecnico Di Milano
 
-RACCOMANDAZIONI
----------------
-
-Il codice è offerto con licenza GPLv2, e quindi è liberamente utilizzabile e editabile da chiunque, nello spirito della condivisione del sapere che è il fondamento della formazione universitaria, 
-di cui questo progetto è parte. Invitiamo chiunque riusi questo codice a mantenerlo pulito e ordinato, con commenti e mettendo ogni parte di codice al posto corretto, 
-ed evitando di riempire i repository con file di altro software (se fosse necessario aggiornare .gitignore).
-Nello scrivere il codice, cercate, ove possibile, di rendere chiaro cosa si stia facendo a chiunque possa in futuro riusarlo.
-
-CONTATTI
+CONTACTS
 --------
 
-Per qualsiasi info riguardante il codice, rivolgersi a
-davide.tateo90@gmail.com
+For further information, please contact
+    davide.tateo90@gmail.com
  
+[1] http://airwiki.ws.dei.polimi.it/index.php/RoboTower
+[2] http://www.ros.org
+[3] http://ros.org/wiki/ann
