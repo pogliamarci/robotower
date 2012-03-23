@@ -25,11 +25,6 @@ set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 find_package(BISON)
 find_package(FLEX)
 
-#setta l'output per gli header
-SET(BISON_ShapeParser_OUTPUT_HEADER include/shapegram.tab.hpp)
-SET(BISON_AssocParser_OUTPUT_HEADER include/assocgram.tab.hpp)
-
-
 #genera i parser .cpp dai sorgenti flex e Bison
 BISON_TARGET(ShapeParser prs/shapegram.y src/shapegram.tab.cpp COMPILE_FLAGS --defines="${PROJECT_SOURCE_DIR}/include/shapegram.tab.h" COMPILE_FLAGS "-p shape")
 FLEX_TARGET(ShapeScanner prs/shapeflex.l  src/shapeflex.cpp COMPILE_FLAGS "-Pshape")

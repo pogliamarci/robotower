@@ -21,6 +21,8 @@
 #include <stdio.h>
 #include <string.h>
 
+//#define DEBUG_SPYKEE
+
 using namespace std;
 
 SpykeeManager::SpykeeManager(char* username, char* password) throw(SpykeeException)

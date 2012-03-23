@@ -21,20 +21,36 @@ set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 #uncomment if you have defined services
 #rosbuild_gensrv()
 
+#cerca i package Bison e Flex
+find_package(BISON)
+find_package(FLEX)
+
+#genera i parser .cpp dai sorgenti flex e Bison
+BISON_TARGET(PredParser prs/predgram.y src/predgram.tab.cpp COMPILE_FLAGS --defines="${PROJECT_SOURCE_DIR}/include/predgram.tab.h" COMPILE_FLAGS "-p pred")
+FLEX_TARGET(PredScanner prs/predflex.l  src/predflex.cpp COMPILE_FLAGS "-Ppred")
+BISON_TARGET(RulesParser prs/rulesgram.y src/rulesgram.tab.cpp COMPILE_FLAGS --defines="${PROJECT_SOURCE_DIR}/include/rulesgram.tab.h"  COMPILE_FLAGS "-p rules")
+FLEX_TARGET(RulesScanner prs/rulesflex.l  src/rulesflex.cpp COMPILE_FLAGS "-Prules")
+BISON_TARGET(ShapeParser prs/shapegram.y src/shapegram.tab.cpp COMPILE_FLAGS --defines="${PROJECT_SOURCE_DIR}/include/shapegram.tab.h" COMPILE_FLAGS "-p shape")
+FLEX_TARGET(ShapeScanner prs/shapeflex.l  src/shapeflex.cpp COMPILE_FLAGS "-Pshape")
+BISON_TARGET(AssocParser prs/assocgram.y src/assocgram.tab.cpp COMPILE_FLAGS --defines="${PROJECT_SOURCE_DIR}/include/assocgram.tab.h" COMPILE_FLAGS "-p assoc")
+FLEX_TARGET(AssocScanner prs/assocflex.l  src/assocflex.cpp COMPILE_FLAGS "-Passoc")
+
+#aggiunge le dipendenze tra parser e scanner (.l e .y)
+ADD_FLEX_BISON_DEPENDENCY(PredScanner PredParser)
+ADD_FLEX_BISON_DEPENDENCY(RulesScanner RulesParser)
+ADD_FLEX_BISON_DEPENDENCY(ShapeScanner ShapeParser)
+ADD_FLEX_BISON_DEPENDENCY(AssocScanner AssocParser)
+
 #common commands for building c++ executables and libraries
-#rosbuild_add_library(${PROJECT_NAME} src/example.cpp)
-#target_link_libraries(${PROJECT_NAME} another_library)
-#rosbuild_add_boost_directories()
-#rosbuild_link_boost(${PROJECT_NAME} thread)
-rosbuild_add_executable	(	checker
+rosbuild_add_executable	(	checher
 				src/check.cpp 
-				src/assflex.c  
-				src/assgram.tab.c  
-				src/predflex.c  
-				src/rulesflex.c  
-				src/rulesgram.tab.c  
-				src/shapeflex.c  
-				src/shapegram.tab.c
-				src/predgram.tab.c
+				${PROJECT_SOURCE_DIR}/${BISON_PredParser_OUTPUTS}  
+				${PROJECT_SOURCE_DIR}/${FLEX_PredScanner_OUTPUTS}
+				${PROJECT_SOURCE_DIR}/${BISON_RulesParser_OUTPUTS}  
+				${PROJECT_SOURCE_DIR}/${FLEX_RulesScanner_OUTPUTS}
+				${PROJECT_SOURCE_DIR}/${BISON_ShapeParser_OUTPUTS}  
+                	        ${PROJECT_SOURCE_DIR}/${FLEX_ShapeScanner_OUTPUTS}
+                	        ${PROJECT_SOURCE_DIR}/${BISON_AssocParser_OUTPUTS}  
+                	        ${PROJECT_SOURCE_DIR}/${FLEX_AssocScanner_OUTPUTS}
 			)
-#target_link_libraries(example ${PROJECT_NAME})
+

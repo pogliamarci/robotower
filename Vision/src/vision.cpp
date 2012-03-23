@@ -151,6 +151,9 @@ void imageMessageCallback(const sensor_msgs::CompressedImage::ConstPtr& message)
 	
 	if (!frame.empty())
 	{
+		vector<Point2f> corners;
+		bool debug= findChessboardCorners(frame, Size(4,4), corners,  CALIB_CB_ADAPTIVE_THRESH + CALIB_CB_NORMALIZE_IMAGE + CALIB_CB_FAST_CHECK);
+		cout << "DEBUG===================>" << debug << endl;
 		analyzeCurrentImage(frame);
 		imshow("SpyKeeView", frame);
 		char c = waitKey(5);
