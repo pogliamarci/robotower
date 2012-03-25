@@ -5,7 +5,7 @@
 #define YYERROR_VERBOSE 1
 
 extern int predlex();
-int prederror(char *);
+extern int prederror(const char *);
 extern int shapeleng;
 
 extern char* filename;
@@ -61,7 +61,7 @@ name: NAME  {$$=(char *) malloc(strlen($1)+1);
 
 %%
 
-int prederror(char *s)
+int prederror(const char *s)
 {
   printf("\n# errore nel file %s alla linea %d: %s\n",filename,linenum,s);
   return 0;

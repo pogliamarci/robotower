@@ -5,7 +5,7 @@
 #define YYERROR_VERBOSE 1
 
 extern int shapelex();
-int shapeerror(char *);
+extern int shapeerror(const char *);
 extern int shapeleng;
 
 extern char* filename;
@@ -65,7 +65,7 @@ name: NAME  {$$=(char *) malloc(strlen($1)+1);
 
 %%
 
-int shapeerror(char *s)
+int shapeerror(const char *s)
 {
   printf("\n# errore nel file %s alla linea %d: %s\n",filename,linenum,s);
   return 0;
