@@ -1,6 +1,6 @@
-#line 2 "src/assocflex.cpp"
+#line 2 "/home/dave/RoboTower/Brian/fuzzy/src/assocflex.cpp"
 
-#line 4 "src/assocflex.cpp"
+#line 4 "/home/dave/RoboTower/Brian/fuzzy/src/assocflex.cpp"
 
 #define  YY_INT_ALIGNED short int
 
@@ -493,7 +493,7 @@ char *assoctext;
 #include <dmalloc.h>
 #endif
 
-#line 497 "src/assocflex.cpp"
+#line 497 "/home/dave/RoboTower/Brian/fuzzy/src/assocflex.cpp"
 
 #define INITIAL 0
 
@@ -683,7 +683,7 @@ YY_DECL
 #line 18 "prs/assocflex.l"
 
 
-#line 687 "src/assocflex.cpp"
+#line 687 "/home/dave/RoboTower/Brian/fuzzy/src/assocflex.cpp"
 
 	if ( !(yy_init) )
 		{
@@ -804,7 +804,7 @@ YY_RULE_SETUP
 #line 28 "prs/assocflex.l"
 ECHO;
 	YY_BREAK
-#line 808 "src/assocflex.cpp"
+#line 808 "/home/dave/RoboTower/Brian/fuzzy/src/assocflex.cpp"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 

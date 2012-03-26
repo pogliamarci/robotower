@@ -94,7 +94,7 @@ extern void addfuzzyset(char * name,char * lab);
 
 
 /* Line 268 of yacc.c  */
-#line 98 "src/shapegram.tab.cpp"
+#line 98 "/home/dave/RoboTower/Brian/checker/src/shapegram.tab.cpp"
 
 /* Enabling traces.  */
 #ifndef YYDEBUG
@@ -151,7 +151,7 @@ typedef union YYSTYPE
 
 
 /* Line 293 of yacc.c  */
-#line 155 "src/shapegram.tab.cpp"
+#line 155 "/home/dave/RoboTower/Brian/checker/src/shapegram.tab.cpp"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
@@ -163,7 +163,7 @@ typedef union YYSTYPE
 
 
 /* Line 343 of yacc.c  */
-#line 167 "src/shapegram.tab.cpp"
+#line 167 "/home/dave/RoboTower/Brian/checker/src/shapegram.tab.cpp"
 
 #ifdef short
 # undef short
@@ -1481,7 +1481,7 @@ yyreduce:
 
 
 /* Line 1806 of yacc.c  */
-#line 1485 "src/shapegram.tab.cpp"
+#line 1485 "/home/dave/RoboTower/Brian/checker/src/shapegram.tab.cpp"
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires

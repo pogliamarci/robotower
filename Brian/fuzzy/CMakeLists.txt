@@ -26,10 +26,10 @@ find_package(BISON)
 find_package(FLEX)
 
 #genera i parser .cpp dai sorgenti flex e Bison
-BISON_TARGET(ShapeParser prs/shapegram.y src/shapegram.tab.cpp COMPILE_FLAGS --defines="${PROJECT_SOURCE_DIR}/include/shapegram.tab.h" COMPILE_FLAGS "-p shape")
-FLEX_TARGET(ShapeScanner prs/shapeflex.l  src/shapeflex.cpp COMPILE_FLAGS "-Pshape")
-BISON_TARGET(AssocParser prs/assocgram.y src/assocgram.tab.cpp COMPILE_FLAGS --defines="${PROJECT_SOURCE_DIR}/include/assocgram.tab.h" COMPILE_FLAGS "-p assoc")
-FLEX_TARGET(AssocScanner prs/assocflex.l  src/assocflex.cpp COMPILE_FLAGS "-Passoc")
+BISON_TARGET(ShapeParser prs/shapegram.y ${PROJECT_SOURCE_DIR}/src/shapegram.tab.cpp COMPILE_FLAGS --defines="${PROJECT_SOURCE_DIR}/include/shapegram.tab.h" COMPILE_FLAGS "-p shape")
+FLEX_TARGET(ShapeScanner prs/shapeflex.l ${PROJECT_SOURCE_DIR}/src/shapeflex.cpp COMPILE_FLAGS "-Pshape")
+BISON_TARGET(AssocParser prs/assocgram.y ${PROJECT_SOURCE_DIR}/src/assocgram.tab.cpp COMPILE_FLAGS --defines="${PROJECT_SOURCE_DIR}/include/assocgram.tab.h" COMPILE_FLAGS "-p assoc")
+FLEX_TARGET(AssocScanner prs/assocflex.l ${PROJECT_SOURCE_DIR}/src/assocflex.cpp COMPILE_FLAGS "-Passoc")
 
 #aggiunge le dipendenze tra parser e scanner (.l e .y)
 ADD_FLEX_BISON_DEPENDENCY(ShapeScanner ShapeParser)
@@ -78,9 +78,9 @@ rosbuild_add_library(	fuzzy STATIC
 			src/triangle.cpp
 			src/triangle_ol.cpp
 			src/triangle_or.cpp
-			${PROJECT_SOURCE_DIR}/${BISON_ShapeParser_OUTPUTS}  
-                        ${PROJECT_SOURCE_DIR}/${FLEX_ShapeScanner_OUTPUTS}
-                        ${PROJECT_SOURCE_DIR}/${BISON_AssocParser_OUTPUTS}  
-                        ${PROJECT_SOURCE_DIR}/${FLEX_AssocScanner_OUTPUTS}
+			${BISON_ShapeParser_OUTPUTS}  
+                        ${FLEX_ShapeScanner_OUTPUTS}
+                        ${BISON_AssocParser_OUTPUTS}  
+                        ${FLEX_AssocScanner_OUTPUTS}
 		    )
 

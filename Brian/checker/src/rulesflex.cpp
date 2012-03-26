@@ -1,6 +1,6 @@
-#line 2 "rulesflex.c"
+#line 2 "/home/dave/RoboTower/Brian/checker/src/rulesflex.cpp"
 
-#line 4 "rulesflex.c"
+#line 4 "/home/dave/RoboTower/Brian/checker/src/rulesflex.cpp"
 
 #define  YY_INT_ALIGNED short int
 
@@ -520,13 +520,13 @@ int rules_flex_debug = 0;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *rulestext;
-#line 1 "rulesflex.l"
-#line 2 "rulesflex.l"
+#line 1 "prs/rulesflex.l"
+#line 2 "prs/rulesflex.l"
 #include "rulesgram.tab.h"
 
 extern int linenum;
 
-#line 530 "rulesflex.c"
+#line 530 "/home/dave/RoboTower/Brian/checker/src/rulesflex.cpp"
 
 #define INITIAL 0
 
@@ -713,10 +713,10 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 14 "rulesflex.l"
+#line 14 "prs/rulesflex.l"
 
 
-#line 720 "rulesflex.c"
+#line 720 "/home/dave/RoboTower/Brian/checker/src/rulesflex.cpp"
 
 	if ( !(yy_init) )
 		{
@@ -801,94 +801,94 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 16 "rulesflex.l"
+#line 16 "prs/rulesflex.l"
 /* eat up comments */
 	YY_BREAK
 case 2:
 /* rule 2 can match eol */
 YY_RULE_SETUP
-#line 17 "rulesflex.l"
+#line 17 "prs/rulesflex.l"
 /* eat up comments */
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 18 "rulesflex.l"
+#line 18 "prs/rulesflex.l"
 /* eat up blank spaces */
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 19 "rulesflex.l"
+#line 19 "prs/rulesflex.l"
 return NEWLINE;
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 20 "rulesflex.l"
+#line 20 "prs/rulesflex.l"
 return LEFTPAR;
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 21 "rulesflex.l"
+#line 21 "prs/rulesflex.l"
 return RIGHTPAR;
 	YY_BREAK
 case 7:
 /* rule 7 can match eol */
 YY_RULE_SETUP
-#line 22 "rulesflex.l"
+#line 22 "prs/rulesflex.l"
 linenum++;
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 23 "rulesflex.l"
+#line 23 "prs/rulesflex.l"
 return THEN;
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 24 "rulesflex.l"
+#line 24 "prs/rulesflex.l"
 return NOT;
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 25 "rulesflex.l"
+#line 25 "prs/rulesflex.l"
 return AND;
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 26 "rulesflex.l"
+#line 26 "prs/rulesflex.l"
 return OR;
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 27 "rulesflex.l"
+#line 27 "prs/rulesflex.l"
 return SEPARATOR;
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 28 "rulesflex.l"
+#line 28 "prs/rulesflex.l"
 return START;
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 29 "rulesflex.l"
+#line 29 "prs/rulesflex.l"
 return MODALITY;
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 30 "rulesflex.l"
+#line 30 "prs/rulesflex.l"
 return SOMEBEHAVIOR;
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 31 "rulesflex.l"
+#line 31 "prs/rulesflex.l"
 {*(rulestext+rulesleng)='\0';
 		ruleslval.dataname=rulestext;
                 return NAME;}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 34 "rulesflex.l"
+#line 34 "prs/rulesflex.l"
 ECHO;
 	YY_BREAK
-#line 892 "rulesflex.c"
+#line 892 "/home/dave/RoboTower/Brian/checker/src/rulesflex.cpp"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1886,7 +1886,7 @@ void rulesfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 34 "rulesflex.l"
+#line 34 "prs/rulesflex.l"
 
 
 

@@ -1,6 +1,6 @@
-#line 2 "shapeflex.c"
+#line 2 "/home/dave/RoboTower/Brian/checker/src/shapeflex.cpp"
 
-#line 4 "shapeflex.c"
+#line 4 "/home/dave/RoboTower/Brian/checker/src/shapeflex.cpp"
 
 #define  YY_INT_ALIGNED short int
 
@@ -501,12 +501,12 @@ int shape_flex_debug = 0;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *shapetext;
-#line 1 "shapeflex.l"
-#line 2 "shapeflex.l"
+#line 1 "prs/shapeflex.l"
+#line 2 "prs/shapeflex.l"
 #include "shapegram.tab.h"
 
 extern int linenum;
-#line 510 "shapeflex.c"
+#line 510 "/home/dave/RoboTower/Brian/checker/src/shapeflex.cpp"
 
 #define INITIAL 0
 
@@ -693,10 +693,10 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 14 "shapeflex.l"
+#line 14 "prs/shapeflex.l"
 
 
-#line 700 "shapeflex.c"
+#line 700 "/home/dave/RoboTower/Brian/checker/src/shapeflex.cpp"
 
 	if ( !(yy_init) )
 		{
@@ -781,83 +781,83 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 16 "shapeflex.l"
+#line 16 "prs/shapeflex.l"
 /* eat up comments */
 	YY_BREAK
 case 2:
 /* rule 2 can match eol */
 YY_RULE_SETUP
-#line 17 "shapeflex.l"
+#line 17 "prs/shapeflex.l"
 linenum++;/* eat up all newline*/
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 18 "shapeflex.l"
+#line 18 "prs/shapeflex.l"
 /* eat up blank spaces */
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 19 "shapeflex.l"
+#line 19 "prs/shapeflex.l"
 return LEFTPAR;
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 20 "shapeflex.l"
+#line 20 "prs/shapeflex.l"
 return RIGHTPAR;
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 21 "shapeflex.l"
+#line 21 "prs/shapeflex.l"
 return TRI;
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 22 "shapeflex.l"
+#line 22 "prs/shapeflex.l"
 return TOL;
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 23 "shapeflex.l"
+#line 23 "prs/shapeflex.l"
 return TOR;
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 24 "shapeflex.l"
+#line 24 "prs/shapeflex.l"
 return DIV;
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 25 "shapeflex.l"
+#line 25 "prs/shapeflex.l"
 return TRA;
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 26 "shapeflex.l"
+#line 26 "prs/shapeflex.l"
 return REC;
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 27 "shapeflex.l"
+#line 27 "prs/shapeflex.l"
 return SNG;
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 28 "shapeflex.l"
+#line 28 "prs/shapeflex.l"
 return VALUE;
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 29 "shapeflex.l"
+#line 29 "prs/shapeflex.l"
 { *(shapetext+shapeleng)='\0';
                shapelval.dataname=shapetext;
                return NAME;}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 33 "shapeflex.l"
+#line 33 "prs/shapeflex.l"
 ECHO;
 	YY_BREAK
-#line 861 "shapeflex.c"
+#line 861 "/home/dave/RoboTower/Brian/checker/src/shapeflex.cpp"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1855,7 +1855,7 @@ void shapefree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 33 "shapeflex.l"
+#line 33 "prs/shapeflex.l"
 
 
 
