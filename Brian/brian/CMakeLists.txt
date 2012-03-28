@@ -26,10 +26,10 @@ find_package(BISON)
 find_package(FLEX)
 
 #genera i parser .cpp dai sorgenti flex e Bison
-BISON_TARGET(PredParser prs/predgram.y src/predgram.tab.cpp COMPILE_FLAGS --defines="${PROJECT_SOURCE_DIR}/include/predgram.tab.h" COMPILE_FLAGS "-p pred")
-FLEX_TARGET(PredScanner prs/predflex.l  src/predflex.cpp COMPILE_FLAGS "-Ppred")
-BISON_TARGET(RulesParser prs/rulesgram.y src/rulesgram.tab.cpp COMPILE_FLAGS --defines="${PROJECT_SOURCE_DIR}/include/rulesgram.tab.h"  COMPILE_FLAGS "-p rules")
-FLEX_TARGET(RulesScanner prs/rulesflex.l  src/rulesflex.cpp COMPILE_FLAGS "-Prules")
+BISON_TARGET(PredParser prs/predgram.y ${PROJECT_SOURCE_DIR}/src/predgram.tab.cpp COMPILE_FLAGS --defines="${PROJECT_SOURCE_DIR}/include/predgram.tab.h" COMPILE_FLAGS "-p pred")
+FLEX_TARGET(PredScanner prs/predflex.l ${PROJECT_SOURCE_DIR}/src/predflex.cpp COMPILE_FLAGS "-Ppred")
+BISON_TARGET(RulesParser prs/rulesgram.y ${PROJECT_SOURCE_DIR}/src/rulesgram.tab.cpp COMPILE_FLAGS --defines="${PROJECT_SOURCE_DIR}/include/rulesgram.tab.h"  COMPILE_FLAGS "-p rules")
+FLEX_TARGET(RulesScanner prs/rulesflex.l  ${PROJECT_SOURCE_DIR}/src/rulesflex.cpp COMPILE_FLAGS "-Prules")
 
 #aggiunge le dipendenze tra parser e scanner (.l e .y)
 ADD_FLEX_BISON_DEPENDENCY(PredScanner PredParser)
@@ -56,9 +56,10 @@ rosbuild_add_library(	brian STATIC
 			src/weight_want_list_debug.cpp
 			src/engine_objects.cpp 
 			src/rules_behav.cpp
-			${PROJECT_SOURCE_DIR}/${BISON_PredParser_OUTPUTS}  
-			${PROJECT_SOURCE_DIR}/${FLEX_PredScanner_OUTPUTS}
-			${PROJECT_SOURCE_DIR}/${BISON_RulesParser_OUTPUTS}  
-			${PROJECT_SOURCE_DIR}/${FLEX_RulesScanner_OUTPUTS}
+			${FLEX_PredScanner_OUTPUTS}
+			${BISON_PredParser_OUTPUTS}  
+			${BISON_RulesParser_OUTPUTS}
+		 	${FLEX_RulesScanner_OUTPUTS}
+			${FLEX_RulesScanner_OUTPUTS}
 		    )
 

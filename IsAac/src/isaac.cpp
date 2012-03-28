@@ -1,3 +1,20 @@
+/*
+ * RoboTower, Hi-CoRG based on ROS
+ *
+ * Copyright (C) 2012 Politecnico di Milano
+ * Copyright (C) 2012 Marcello Pogliani, Davide Tateo
+ * Versione 1.0
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation, version 2 of the License.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ */
+
 #include <iostream>
 #include <string>
 #include "brian.h"
@@ -5,7 +22,10 @@
 #include "Echoes/Led.h"
 #include "SpyKee/Motion.h"
 #include "Vision/Results.h"
+#include "IsAac/MediaVarianza.h"
 #include "ros/ros.h"
+
+#include "isaac.h"
 
 #define FUZZYASSOC (char *) "../config/ctof.txt"
 #define FUZZYSHAPES (char *) "../config/shape_ctof.txt"
@@ -19,7 +39,8 @@
 
 #define LOOPRATE 20
 
-typedef enum {
+typedef enum
+{
 	NORTH, SOUTH, EAST, WEST
 } CardinalPoint;
 
@@ -97,14 +118,17 @@ class Sender
 {
 	private:
 		ros::Publisher motion;
+		ros::Publisher debug_mediavarianza;
 	public:
 		Sender(ros::NodeHandle& n);
 		void sendMotionMessage(int rot, int tan);
+		void sendDebugMessage(float avg, float var, int time);
 };
 
 Sender::Sender(ros::NodeHandle& n) 
 {
-	 motion = n.advertise<SpyKee::Motion>("spykee_motion", 1000);
+	motion = n.advertise<SpyKee::Motion>("spykee_motion", 1000);
+	debug_mediavarianza = n.advertise<IsAac::MediaVarianza>("debug_mediavarianza", 1000);
 }
 
 void Sender::sendMotionMessage(int rot, int tan) 
@@ -113,6 +137,15 @@ void Sender::sendMotionMessage(int rot, int tan)
 	msg.rotSpeed = rot;
 	msg.tanSpeed = tan;
 	this->motion.publish(msg);
+}
+
+void Sender::sendDebugMessage(float avg, float var, int time)
+{
+	IsAac::MediaVarianza msg;
+	msg.Average = avg;
+	msg.Variance = var;
+	msg.Time = time;
+	this->debug_mediavarianza.publish(msg);
 }
 
 void sendBrianOutputs(command_list* cl, Sender& ms, ros::ServiceClient client) 
@@ -169,6 +202,9 @@ int main(int argc, char** argv)
 	int random_ahead   = 0;
 	srand((unsigned)time(NULL));
 	
+	//sonar variable
+	SonarBuffer sonarBuffer;
+
 	//data
 	SensorStatus sensors;
 	crisp_data_list* cdl;
@@ -205,13 +241,16 @@ int main(int argc, char** argv)
 		cout << "sonar: N " << sensors.getSonar(NORTH) << " , " <<
 				sensors.getSonar(SOUTH) << " , " << sensors.getSonar(EAST)
 				<< " , " << sensors.getSonar(WEST) << endl;
-
+		int sonar_north = sensors.getSonar(NORTH);
+		sonarBuffer.insert(sonar_north);
+		sonarBuffer.setTempoBloccato();
+		cerr << "TEMPO BLOCCATO:" << sonarBuffer.getTempoBloccato() << endl;
 		/* update inputs */
-		cdl->add(new crisp_data("DistanceNorth", sensors.getSonar(NORTH), reliability));
+		cdl->add(new crisp_data("DistanceNorth",sonar_north , reliability));
 		cdl->add(new crisp_data("DistanceSouth", sensors.getSonar(SOUTH), reliability));
 		cdl->add(new crisp_data("DistanceEast", sensors.getSonar(EAST), reliability));
 		cdl->add(new crisp_data("DistanceWest", sensors.getSonar(WEST), reliability));
-
+		cdl->add(new crisp_data("TempoBloccato", sonarBuffer.getTempoBloccato(), reliability));
 		if (sensors.isTowerDetected())
 		{
 			cout << "tower detected: pos = " << sensors.getTowerPosition() << endl;
@@ -245,6 +284,10 @@ int main(int argc, char** argv)
 		/* parse outputs from brian and send them to actuators */
 		command_list* cl = brian.getFuzzy()->get_command_singleton_list();
 		sendBrianOutputs(cl, message_sender, client);
+
+		message_sender.sendDebugMessage(sonarBuffer.calcolaMedia(),
+				sonarBuffer.calcolaVarianza(), sonarBuffer.getTempoBloccato());
+
 		cl->clear();
 
 		ros::spinOnce();

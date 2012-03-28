@@ -7,12 +7,17 @@
 *.o
 *.so
 *.a
-# More
+# Binary files
 Echoes/bin/Echoes
 SpyKee/bin/spykee
 Vision/bin/vision
 IsAac/bin/isaac
 LittleEndian/bin/littleendian
+<<<<<<< HEAD
+=======
+Brian/checker/bin/checker
+Brian/gmbte/bin/gmbte
+>>>>>>> 90b68bb866f8ea2bbc9705fd3f6c0c7c8dfdb6e0
 Foxtrot/bin/foxtrot
 
 # Python precompiled files #
@@ -55,6 +60,7 @@ desktop.ini
 .pydevproject
 .csettings
 .settings/
+.metadata/
 
 # ROS\RoboTower specific #
 ##########################

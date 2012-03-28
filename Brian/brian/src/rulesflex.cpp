@@ -1,6 +1,6 @@
-#line 2 "src/rulesflex.cpp"
+#line 2 "/home/dave/RoboTower/Brian/brian/src/rulesflex.cpp"
 
-#line 4 "src/rulesflex.cpp"
+#line 4 "/home/dave/RoboTower/Brian/brian/src/rulesflex.cpp"
 
 #define  YY_INT_ALIGNED short int
 
@@ -515,7 +515,7 @@ char *rulestext;
 
 extern unsigned int line_num;
 
-#line 519 "src/rulesflex.cpp"
+#line 519 "/home/dave/RoboTower/Brian/brian/src/rulesflex.cpp"
 
 #define INITIAL 0
 
@@ -705,7 +705,7 @@ YY_DECL
 #line 21 "prs/rulesflex.l"
 
 
-#line 709 "src/rulesflex.cpp"
+#line 709 "/home/dave/RoboTower/Brian/brian/src/rulesflex.cpp"
 
 	if ( !(yy_init) )
 		{
@@ -857,7 +857,7 @@ YY_RULE_SETUP
 #line 37 "prs/rulesflex.l"
 ECHO;
 	YY_BREAK
-#line 861 "src/rulesflex.cpp"
+#line 861 "/home/dave/RoboTower/Brian/brian/src/rulesflex.cpp"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 

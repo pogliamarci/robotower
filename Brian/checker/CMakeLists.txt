@@ -26,14 +26,14 @@ find_package(BISON)
 find_package(FLEX)
 
 #genera i parser .cpp dai sorgenti flex e Bison
-BISON_TARGET(PredParser prs/predgram.y src/predgram.tab.cpp COMPILE_FLAGS --defines="${PROJECT_SOURCE_DIR}/include/predgram.tab.h" COMPILE_FLAGS "-p pred")
-FLEX_TARGET(PredScanner prs/predflex.l  src/predflex.cpp COMPILE_FLAGS "-Ppred")
-BISON_TARGET(RulesParser prs/rulesgram.y src/rulesgram.tab.cpp COMPILE_FLAGS --defines="${PROJECT_SOURCE_DIR}/include/rulesgram.tab.h"  COMPILE_FLAGS "-p rules")
-FLEX_TARGET(RulesScanner prs/rulesflex.l  src/rulesflex.cpp COMPILE_FLAGS "-Prules")
-BISON_TARGET(ShapeParser prs/shapegram.y src/shapegram.tab.cpp COMPILE_FLAGS --defines="${PROJECT_SOURCE_DIR}/include/shapegram.tab.h" COMPILE_FLAGS "-p shape")
-FLEX_TARGET(ShapeScanner prs/shapeflex.l  src/shapeflex.cpp COMPILE_FLAGS "-Pshape")
-BISON_TARGET(AssocParser prs/assgram.y src/assgram.tab.cpp COMPILE_FLAGS --defines="${PROJECT_SOURCE_DIR}/include/assgram.tab.h" COMPILE_FLAGS "-p ass")
-FLEX_TARGET(AssocScanner prs/assflex.l  src/assflex.cpp COMPILE_FLAGS "-Pass")
+BISON_TARGET(PredParser prs/predgram.y ${PROJECT_SOURCE_DIR}/src/predgram.tab.cpp COMPILE_FLAGS --defines="${PROJECT_SOURCE_DIR}/include/predgram.tab.h" COMPILE_FLAGS "-p pred")
+FLEX_TARGET(PredScanner prs/predflex.l ${PROJECT_SOURCE_DIR}/src/predflex.cpp COMPILE_FLAGS "-Ppred")
+BISON_TARGET(RulesParser prs/rulesgram.y ${PROJECT_SOURCE_DIR}/src/rulesgram.tab.cpp COMPILE_FLAGS --defines="${PROJECT_SOURCE_DIR}/include/rulesgram.tab.h"  COMPILE_FLAGS "-p rules")
+FLEX_TARGET(RulesScanner prs/rulesflex.l ${PROJECT_SOURCE_DIR}/src/rulesflex.cpp COMPILE_FLAGS "-Prules")
+BISON_TARGET(ShapeParser prs/shapegram.y ${PROJECT_SOURCE_DIR}/src/shapegram.tab.cpp COMPILE_FLAGS --defines="${PROJECT_SOURCE_DIR}/include/shapegram.tab.h" COMPILE_FLAGS "-p shape")
+FLEX_TARGET(ShapeScanner prs/shapeflex.l ${PROJECT_SOURCE_DIR}/src/shapeflex.cpp COMPILE_FLAGS "-Pshape")
+BISON_TARGET(AssocParser prs/assgram.y ${PROJECT_SOURCE_DIR}/src/assgram.tab.cpp COMPILE_FLAGS --defines="${PROJECT_SOURCE_DIR}/include/assgram.tab.h" COMPILE_FLAGS "-p ass")
+FLEX_TARGET(AssocScanner prs/assflex.l ${PROJECT_SOURCE_DIR}/src/assflex.cpp COMPILE_FLAGS "-Pass")
 
 #aggiunge le dipendenze tra parser e scanner (.l e .y)
 ADD_FLEX_BISON_DEPENDENCY(PredScanner PredParser)
@@ -44,13 +44,13 @@ ADD_FLEX_BISON_DEPENDENCY(AssocScanner AssocParser)
 #common commands for building c++ executables and libraries
 rosbuild_add_executable	(	checker
 				src/check.cpp 
-				${PROJECT_SOURCE_DIR}/${BISON_PredParser_OUTPUTS}  
-				${PROJECT_SOURCE_DIR}/${FLEX_PredScanner_OUTPUTS}
-				${PROJECT_SOURCE_DIR}/${BISON_RulesParser_OUTPUTS}  
-				${PROJECT_SOURCE_DIR}/${FLEX_RulesScanner_OUTPUTS}
-				${PROJECT_SOURCE_DIR}/${BISON_ShapeParser_OUTPUTS}  
-                	        ${PROJECT_SOURCE_DIR}/${FLEX_ShapeScanner_OUTPUTS}
-                	        ${PROJECT_SOURCE_DIR}/${BISON_AssocParser_OUTPUTS}  
-                	        ${PROJECT_SOURCE_DIR}/${FLEX_AssocScanner_OUTPUTS}
+				${BISON_PredParser_OUTPUTS}  
+				${FLEX_PredScanner_OUTPUTS}
+				${BISON_RulesParser_OUTPUTS}  
+				${FLEX_RulesScanner_OUTPUTS}
+				${BISON_ShapeParser_OUTPUTS}  
+                	        ${FLEX_ShapeScanner_OUTPUTS}
+                	        ${BISON_AssocParser_OUTPUTS}  
+                	        ${FLEX_AssocScanner_OUTPUTS}
 			)
 

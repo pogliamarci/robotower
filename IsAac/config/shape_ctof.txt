@@ -27,3 +27,7 @@
 (TOL (LOW 20 30))
 (TOR (HIGH 20 30))
 )
+
+(TIMEOUT
+(TOR (BLOCCATO 10 20))
+)
