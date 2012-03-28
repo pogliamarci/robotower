@@ -54,6 +54,7 @@ desktop.ini
 .pydevproject
 .csettings
 .settings/
+.metadata/
 
 # ROS\RoboTower specific #
 ##########################

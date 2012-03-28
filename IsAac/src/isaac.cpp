@@ -1,3 +1,20 @@
+/*
+ * RoboTower, Hi-CoRG based on ROS
+ *
+ * Copyright (C) 2012 Politecnico di Milano
+ * Copyright (C) 2012 Marcello Pogliani, Davide Tateo
+ * Versione 1.0
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation, version 2 of the License.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ */
+
 #include <iostream>
 #include <string>
 #include "brian.h"
@@ -6,6 +23,8 @@
 #include "SpyKee/Motion.h"
 #include "Vision/Results.h"
 #include "ros/ros.h"
+
+#include "isaac.h"
 
 #define FUZZYASSOC (char *) "../config/ctof.txt"
 #define FUZZYSHAPES (char *) "../config/shape_ctof.txt"
@@ -19,7 +38,8 @@
 
 #define LOOPRATE 20
 
-typedef enum {
+typedef enum
+{
 	NORTH, SOUTH, EAST, WEST
 } CardinalPoint;
 
@@ -169,6 +189,9 @@ int main(int argc, char** argv)
 	int random_ahead   = 0;
 	srand((unsigned)time(NULL));
 	
+	//sonar variable
+	SonarBuffer sonarBuffer;
+
 	//data
 	SensorStatus sensors;
 	crisp_data_list* cdl;
@@ -205,13 +228,16 @@ int main(int argc, char** argv)
 		cout << "sonar: N " << sensors.getSonar(NORTH) << " , " <<
 				sensors.getSonar(SOUTH) << " , " << sensors.getSonar(EAST)
 				<< " , " << sensors.getSonar(WEST) << endl;
-
+		int sonar_north = sensors.getSonar(NORTH);
+		sonarBuffer.insert(sonar_north);
+		sonarBuffer.setTempoBloccato();
+		cerr << "TEMPO BLOCCATO:" << sonarBuffer.getTempoBloccato() << endl;
 		/* update inputs */
-		cdl->add(new crisp_data("DistanceNorth", sensors.getSonar(NORTH), reliability));
+		cdl->add(new crisp_data("DistanceNorth",sonar_north , reliability));
 		cdl->add(new crisp_data("DistanceSouth", sensors.getSonar(SOUTH), reliability));
 		cdl->add(new crisp_data("DistanceEast", sensors.getSonar(EAST), reliability));
 		cdl->add(new crisp_data("DistanceWest", sensors.getSonar(WEST), reliability));
-
+		cdl->add(new crisp_data("TempoBloccato", sonarBuffer.getTempoBloccato(), reliability));
 		if (sensors.isTowerDetected())
 		{
 			cout << "tower detected: pos = " << sensors.getTowerPosition() << endl;
