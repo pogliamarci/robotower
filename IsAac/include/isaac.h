@@ -25,9 +25,9 @@ class SonarBuffer
 		void insert(int element);
 		void setTempoBloccato();
 		int getTempoBloccato();
-	private:
 		float calcolaVarianza();
 		float calcolaMedia();
+	private:
 		int data[MAXCAMPIONI];
 		int index;
 		int tempo;

@@ -22,6 +22,7 @@
 #include "Echoes/Led.h"
 #include "SpyKee/Motion.h"
 #include "Vision/Results.h"
+#include "IsAac/MediaVarianza.h"
 #include "ros/ros.h"
 
 #include "isaac.h"
@@ -117,14 +118,17 @@ class Sender
 {
 	private:
 		ros::Publisher motion;
+		ros::Publisher debug_mediavarianza;
 	public:
 		Sender(ros::NodeHandle& n);
 		void sendMotionMessage(int rot, int tan);
+		void sendDebugMessage(float avg, float var, int time);
 };
 
 Sender::Sender(ros::NodeHandle& n) 
 {
-	 motion = n.advertise<SpyKee::Motion>("spykee_motion", 1000);
+	motion = n.advertise<SpyKee::Motion>("spykee_motion", 1000);
+	debug_mediavarianza = n.advertise<IsAac::MediaVarianza>("debug_mediavarianza", 1000);
 }
 
 void Sender::sendMotionMessage(int rot, int tan) 
@@ -133,6 +137,15 @@ void Sender::sendMotionMessage(int rot, int tan)
 	msg.rotSpeed = rot;
 	msg.tanSpeed = tan;
 	this->motion.publish(msg);
+}
+
+void Sender::sendDebugMessage(float avg, float var, int time)
+{
+	IsAac::MediaVarianza msg;
+	msg.Average = avg;
+	msg.Variance = var;
+	msg.Time = time;
+	this->debug_mediavarianza.publish(msg);
 }
 
 void sendBrianOutputs(command_list* cl, Sender& ms, ros::ServiceClient client) 
@@ -271,6 +284,10 @@ int main(int argc, char** argv)
 		/* parse outputs from brian and send them to actuators */
 		command_list* cl = brian.getFuzzy()->get_command_singleton_list();
 		sendBrianOutputs(cl, message_sender, client);
+
+		message_sender.sendDebugMessage(sonarBuffer.calcolaMedia(),
+				sonarBuffer.calcolaVarianza(), sonarBuffer.getTempoBloccato());
+
 		cl->clear();
 
 		ros::spinOnce();
