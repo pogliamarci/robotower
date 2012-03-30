@@ -52,7 +52,7 @@ triangle_ol::~triangle_ol()
 
 // Additional Declarations
 
-const float triangle_ol::get_membership_value(float avalue)
+float triangle_ol::get_membership_value(float avalue)
 {
   if (avalue <= c) return(1);
   else if (avalue > c && avalue < d) return ((avalue-d)/(c-d));

@@ -85,7 +85,7 @@ class fuzzy_data : public data
        * Method to retrieve membership value.
        * @return data membership value.
        */
-      const float get_membership_value ();
+      float get_membership_value ();
       /**
        * Method to set membership value.
        * @param value New membership value.
@@ -114,7 +114,7 @@ inline void fuzzy_data::set_label (const char * value)
   strcpy(label,value);
 }
 
-inline const float fuzzy_data::get_membership_value ()
+inline float fuzzy_data::get_membership_value ()
 {
   return membership_value;
 }

@@ -105,7 +105,7 @@ class threshold_filter : public can_do_filter
        * Method to read read threshold value.
        * @return Threshold value.
        */
-      const float get_threshold ();
+      float get_threshold ();
       
       /**
        * Method to set threshold value.
@@ -152,7 +152,7 @@ class rthreshold_filter : public can_do_filter
        * Method to read read threshold value.
        * @return Threshold value.
        */
-      const float get_rthreshold ();
+      float get_rthreshold ();
       
       /**
        * Method to set threshold value.
@@ -199,8 +199,8 @@ class composite_filter : public can_do_filter
        * Method to read read threshold value.
        * @return Threshold value.
        */
-      const float get_threshold();
-		const float get_rthreshold();
+      float get_threshold();
+      float get_rthreshold();
       
       /**
        * Method to set threshold value.
@@ -459,7 +459,7 @@ class behavior_engine
 
 
 //get e set threshold per threshold_filter
-inline const float threshold_filter::get_threshold ()
+inline float threshold_filter::get_threshold ()
 {
   return threshold;
 }
@@ -472,7 +472,7 @@ inline void threshold_filter::set_threshold (float value)
 
 
 //get e set rthreshold per rthreshold_filter
-inline const float rthreshold_filter::get_rthreshold ()
+inline float rthreshold_filter::get_rthreshold ()
 {
   return rthreshold;
 }
@@ -483,12 +483,12 @@ inline void rthreshold_filter::set_rthreshold (float reliability)
 }
 
 //get e set per composite_filter 
-inline const float composite_filter::get_threshold()
+inline float composite_filter::get_threshold()
 {
 	return threshold;
 }
 
-inline const float composite_filter::get_rthreshold()
+inline float composite_filter::get_rthreshold()
 {
 	return rthreshold;
 }

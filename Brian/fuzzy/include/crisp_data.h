@@ -68,7 +68,7 @@ class crisp_data : public data
        * Method to retrieve data value.
        * @return Data value.
        */
-      const float get_value ();
+      float get_value ();
       /**
        * Method to set data value.
        * @param value New data value.
@@ -80,7 +80,7 @@ class crisp_data : public data
       float value;
 };
 
-inline const float crisp_data::get_value ()
+inline float crisp_data::get_value ()
 {
   return value;
 }

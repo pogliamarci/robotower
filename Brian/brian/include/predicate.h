@@ -101,7 +101,7 @@ class predicate
        * Method to retrieve object value.
        * @return Object value.
        */
-      const float get_value ();
+      float get_value ();
       /**
        * Method to set object value.
        * @param value New object value.
@@ -112,7 +112,7 @@ class predicate
        * Method to retrieve object reliability.
        * @return Object reliability; 0 means not reliable.
        */
-      const float get_reliability ();
+      float get_reliability ();
       /**
        * Method to set object reliability.
        * @param value New reliability value. 0 means not reliable.
@@ -141,7 +141,7 @@ inline void predicate::set_name (const char * value)
   strcpy(name,value);
 }
 
-inline const float predicate::get_value ()
+inline float predicate::get_value ()
 {
   return value;
 }
@@ -151,7 +151,7 @@ inline void predicate::set_value (float Value)
   value = Value;
 }
 
-inline const float predicate::get_reliability ()
+inline float predicate::get_reliability ()
 {
   return reliability;
 }

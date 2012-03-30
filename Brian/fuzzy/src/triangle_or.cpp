@@ -50,7 +50,7 @@ triangle_or::~triangle_or()
 
 // Additional Declarations
   
-const float triangle_or::get_membership_value(float avalue)
+float triangle_or::get_membership_value(float avalue)
 {
   if (avalue >= b) return (1);
   else if (avalue > a && avalue < b) return((avalue-a)/(b-a));

@@ -62,7 +62,7 @@ class data
        * Method to retrieve actual data reliability.
        * @return data reliability; 0 means not reliable.
        */
-      const float get_reliability ();
+      float get_reliability ();
 
       /**
        * Method to set data reliability.
@@ -91,7 +91,7 @@ class data
 
 // Class data
 
-inline const float data::get_reliability ()
+inline float data::get_reliability ()
 {
   return reliability;
 }

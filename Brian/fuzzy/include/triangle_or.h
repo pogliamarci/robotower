@@ -61,7 +61,7 @@ class triangle_or : public fuzzy_set  //## Inherits: open_left_triangle_inherita
    * Return the first point of the fuzzy set.
    * @return the value of the first point
    */
-  const float get_a ();
+  float get_a ();
   /**
    * Modify the value of the first point of the fuzzy set.
    * @param value the new value of the point
@@ -72,7 +72,7 @@ class triangle_or : public fuzzy_set  //## Inherits: open_left_triangle_inherita
    * Return the second point of the fuzzy set.
    * @return the value of the first point
    */
-  const float get_b ();
+  float get_b ();
   /**
    * Modify the value of the second point of the fuzzy set.
    * @param value the new value of the point
@@ -85,7 +85,7 @@ class triangle_or : public fuzzy_set  //## Inherits: open_left_triangle_inherita
    * @return the membership value
    * @param avalue is a crisp data
    */
-  const float get_membership_value(float avalue);
+  float get_membership_value(float avalue);
 
  private:
   // Data Members for Class Attributes
@@ -97,7 +97,7 @@ class triangle_or : public fuzzy_set  //## Inherits: open_left_triangle_inherita
 
 // Class triangle_or 
 
-inline const float triangle_or::get_a ()
+inline float triangle_or::get_a ()
 {
   return a;
 }
@@ -107,7 +107,7 @@ inline void triangle_or::set_a (float value)
   a = value;
 }
 
-inline const float triangle_or::get_b ()
+inline float triangle_or::get_b ()
 {
   return b;
 }

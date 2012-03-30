@@ -60,7 +60,7 @@ class shape_point : public point  //## Inherits: <unnamed>%385AB3D102C6
    * Return the ordinate of the first point
    * @return a value
    */
-  const float get_ya ();
+  float get_ya ();
   /**
    * Set the ordinate of the first point
    * @param value the new value for the ordinate
@@ -71,7 +71,7 @@ class shape_point : public point  //## Inherits: <unnamed>%385AB3D102C6
    * Return the abscissa of the second point
    * @return a value
    */
-  const float get_xb ();
+  float get_xb ();
   /**
    * Set the abscissa of the second point
    * @param value the new value for the abscissa
@@ -82,7 +82,7 @@ class shape_point : public point  //## Inherits: <unnamed>%385AB3D102C6
    * Return the ordinate of the second point
    * @return a value
    */
-  const float get_yb ();
+  float get_yb ();
   /**
    * Set the ordinate of the second point
    * @param value the new value for the ordinate
@@ -93,7 +93,7 @@ class shape_point : public point  //## Inherits: <unnamed>%385AB3D102C6
    * Return the abscissa of the third point
    * @return a value
    */
-  const float get_xc ();
+  float get_xc ();
   /**
    * Set the abscissa of the third point
    * @param value the new value for the abscissa
@@ -104,7 +104,7 @@ class shape_point : public point  //## Inherits: <unnamed>%385AB3D102C6
    * Return the ordinate of the third point
    * @return a value
    */
-  const float get_yc ();
+  float get_yc ();
   /**
    * Set the ordinate of the third point
    * @param value the new value for the ordinate
@@ -115,7 +115,7 @@ class shape_point : public point  //## Inherits: <unnamed>%385AB3D102C6
    * Return the abscissa of the fourth point
    * @return a value
    */
-  const float get_xd ();
+  float get_xd ();
     /**
    * Set the abscissa of the fourth point
    * @param value the new value for the abscissa
@@ -126,7 +126,7 @@ class shape_point : public point  //## Inherits: <unnamed>%385AB3D102C6
    * Return the ordinate of the fourth point
    * @return a value
    */
-  const float get_yd ();
+  float get_yd ();
   /**
    * Set the ordinate of the fourth point
    * @param value the new value for the ordinate
@@ -155,7 +155,7 @@ class shape_point : public point  //## Inherits: <unnamed>%385AB3D102C6
 
 // Class shape_point
 
-inline const float shape_point::get_xb ()
+inline float shape_point::get_xb ()
 {
   return xb;
 }
@@ -165,7 +165,7 @@ inline void shape_point::set_xb (float value)
   xb = value;
 }
 
-inline const float shape_point::get_yb ()
+inline float shape_point::get_yb ()
 {
   return yb;
 }
@@ -175,7 +175,7 @@ inline void shape_point::set_yb (float value)
   yb = value;
 }
 
-inline const float shape_point::get_xc ()
+inline float shape_point::get_xc ()
 {
   return xc;
 }
@@ -185,7 +185,7 @@ inline void shape_point::set_xc (float value)
   xc = value;
 }
 
-inline const float shape_point::get_yc ()
+inline float shape_point::get_yc ()
 {
   return yc;
 }
@@ -195,7 +195,7 @@ inline void shape_point::set_yc (float value)
   yc = value;
 }
 
-inline const float shape_point::get_xd ()
+inline float shape_point::get_xd ()
 {
   return xd;
 }
@@ -205,7 +205,7 @@ inline void shape_point::set_xd (float value)
   xd = value;
 }
 
-inline const float shape_point::get_yd ()
+inline float shape_point::get_yd ()
 {
   return yd;
 }

@@ -2,4 +2,4 @@
 (AND (Obstacle_Nord) (Free_South)) => (TanSpeed VERY_SLOW_BACKWARD);
 (Invisible_Obstacle) => (TanSpeed SLOW_BACKWARD);
 (Obstacle_East) => (RotSpeed FAST_LEFT);
-(Obstacle_West) => (RotSpeed FAST_RIGHT);
+(AND (Obstacle_West) (InvisibleObstacle.BLOCCATO)) => (RotSpeed FAST_RIGHT);

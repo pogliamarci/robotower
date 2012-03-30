@@ -61,7 +61,7 @@ class fuzzy_set
    * @return the membership value
    * @param avalue is a crisp data
    */
-  virtual const float get_membership_value(float avalue)=0;
+  virtual float get_membership_value(float avalue)=0;
 
   /**	
    * Return the name of the fuzzy set.
