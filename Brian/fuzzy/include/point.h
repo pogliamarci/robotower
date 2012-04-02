@@ -60,7 +60,7 @@ class point
    * Return the abscissa of the point
    * @return a value
    */
-  const float get_xa ();
+  float get_xa ();
   /**
    * Set the abscissa of the point
    * @param value the new value for the abscissa
@@ -71,7 +71,7 @@ class point
    * Return the ordinate of the point
    * @return a value
    */
-  const float get_ya ();
+  float get_ya ();
   /**
    * Set the ordinate of the point
    * @param value the new value for the ordinate
@@ -89,7 +89,7 @@ class point
 
 // Class figure_point 
 
-inline const float point::get_xa ()
+inline float point::get_xa ()
 {
   return xa;
 }
@@ -99,7 +99,7 @@ inline void point::set_xa (float value)
   xa = value;
 }
 
-inline const float point::get_ya ()
+inline float point::get_ya ()
 {
   return ya;
 }

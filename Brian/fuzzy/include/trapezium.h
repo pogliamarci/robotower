@@ -67,7 +67,7 @@ class trapezium : public fuzzy_set  //## Inherits: trapezium_inheritance%382BDE1
    * Return the first point of the fuzzy set.
    * @return the value of the first point
    */
-  const float get_a ();
+  float get_a ();
   /**
    * Modify the value of the first point of the fuzzy set.
    * @param value the new value of the point
@@ -78,7 +78,7 @@ class trapezium : public fuzzy_set  //## Inherits: trapezium_inheritance%382BDE1
    * Return the second point of the fuzzy set.
    * @return the value of the first point
    */
-  const float get_c ();
+  float get_c ();
   /**
    * Modify the value of the second point of the fuzzy set.
    * @param value the new value of the point
@@ -89,7 +89,7 @@ class trapezium : public fuzzy_set  //## Inherits: trapezium_inheritance%382BDE1
    * Return the third point of the fuzzy set.
    * @return the value of the third point
    */
-  const float get_b ();
+ float get_b ();
   /**
    * Modify the value of the fourth point of the fuzzy set.
    * @param value the new value of the point
@@ -100,7 +100,7 @@ class trapezium : public fuzzy_set  //## Inherits: trapezium_inheritance%382BDE1
    * Return the fourth point of the fuzzy set.
    * @return the value of the fourth point
    */
-  const float get_d ();
+  float get_d ();
   /**
    * Modify the value of the fourth point of the fuzzy set.
    * @param value the new value of the point
@@ -113,7 +113,7 @@ class trapezium : public fuzzy_set  //## Inherits: trapezium_inheritance%382BDE1
    * @return the membership value
    * @param avalue is a crisp data
    */
-  const float get_membership_value(float avalue);
+  float get_membership_value(float avalue);
 
  private:
   // Data Members for Class Attributes
@@ -130,7 +130,7 @@ class trapezium : public fuzzy_set  //## Inherits: trapezium_inheritance%382BDE1
 
 // Class trapezium 
 
-inline const float trapezium::get_a ()
+inline float trapezium::get_a ()
 {
   return a;
 }
@@ -140,7 +140,7 @@ inline void trapezium::set_a (float value)
   a = value;
 }
 
-inline const float trapezium::get_c ()
+inline float trapezium::get_c ()
 {
   return c;
 }
@@ -150,7 +150,7 @@ inline void trapezium::set_c (float value)
   c = value;
 }
 
-inline const float trapezium::get_b ()
+inline float trapezium::get_b ()
 {
   return b;
 }
@@ -160,7 +160,7 @@ inline void trapezium::set_b (float value)
   b = value;
 }
 
-inline const float trapezium::get_d ()
+inline float trapezium::get_d ()
 {
   return d;
 }

@@ -52,7 +52,7 @@ trapezium::~trapezium()
 
 // Additional Declarations
 
-const float trapezium::get_membership_value(float avalue)
+float trapezium::get_membership_value(float avalue)
 {
   if (avalue >= b && avalue <= c) return(1);
   else if (avalue > a && avalue <= b) return ((avalue-a)/(b-a));

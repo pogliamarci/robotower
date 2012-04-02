@@ -63,7 +63,7 @@ class singleton : public fuzzy_set  //## Inherits: singleton_inheritance%382BDE2
    * Return the point of the fuzzy set.
    * @return the value of the point
    */
-  const float get_a ();
+  float get_a ();
   /**
    * Modify the value of the point of the fuzzy set.
    * @param value the new value of the point
@@ -76,7 +76,7 @@ class singleton : public fuzzy_set  //## Inherits: singleton_inheritance%382BDE2
    * @return the membership value
    * @param avalue is a crisp data
    */
-  const float get_membership_value(float avalue);
+ float get_membership_value(float avalue);
 
  private: 
   // Data Members for Class Attributes
@@ -86,7 +86,7 @@ class singleton : public fuzzy_set  //## Inherits: singleton_inheritance%382BDE2
 
 // Class singleton 
 
-inline const float singleton::get_a ()
+inline float singleton::get_a ()
 {
   return a;
 }

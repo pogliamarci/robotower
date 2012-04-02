@@ -117,7 +117,7 @@ class action
        * Method to retrieve membership value.
        * @return Action membership value.
        */
-      const float get_membership_value ();
+      float get_membership_value ();
 
       /**
        * Method to set membership value.
@@ -126,7 +126,7 @@ class action
       void set_membership_value (float value);
 
       //SM: Metodi get e set della reliability
-		const float get_reliability_value();
+		float get_reliability_value();
 		void set_reliability_value(float areliability_value);
 	   
   protected:
@@ -165,7 +165,7 @@ inline void action::set_label (const char * value)
   strcpy(label,value);
 }
 
-inline const float action::get_membership_value ()
+inline float action::get_membership_value ()
 {
   return membership_value;
 }
@@ -176,7 +176,7 @@ inline void action::set_membership_value (float value)
 }
 
 //SM: get e set per la reliability
-inline const float action:: get_reliability_value()
+inline float action:: get_reliability_value()
 {
 	return reliability_value;
 }

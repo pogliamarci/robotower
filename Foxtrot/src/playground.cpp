@@ -23,7 +23,7 @@ Playground::Playground(const char* name)
 	this->name=name;
 }
 
-float Playground::getDistance(Robot* robot, GenericObject* object)
+float Playground::getDistance(Robot* robot, Tower* tower)
 {
 	; //TODO get the distance from robot to the object
 	return 0.0;

@@ -49,7 +49,7 @@ singleton::~singleton()
 
 // Additional Declarations
 
-const float singleton::get_membership_value(float avalue)
+float singleton::get_membership_value(float avalue)
 {
   if (avalue == a) return(1);
   else return(0);

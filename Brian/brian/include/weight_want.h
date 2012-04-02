@@ -81,7 +81,7 @@ class weight_want
        * Method to retrieve weight value.
        * @return Weight value.
        */
-      const float get_value ();
+      float get_value ();
 
       /**
        * Method to set weight value.
@@ -110,7 +110,7 @@ class weight_want
 
 // Class weight_want
 
-inline const float weight_want::get_value ()
+inline float weight_want::get_value ()
 {
   return value;
 }

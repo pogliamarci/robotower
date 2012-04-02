@@ -86,7 +86,7 @@ class command
        * Method to retrieve command set point.
        * @return command set point.
        */
-      const float get_set_point ();
+      float get_set_point ();
       /**
        * Method to set set-point.
        * @param value New set point.
@@ -113,7 +113,7 @@ inline void command::set_label (const char * value)
   strcpy(label,value);
 }
 
-inline const float command::get_set_point ()
+inline float command::get_set_point ()
 {
   return set_point;
 }
