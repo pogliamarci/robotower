@@ -35,10 +35,10 @@ void SonarBuffer::setTempoBloccato()
 	varianza=this->calcolaVarianza();
 	devStandard=sqrt(varianza);
 	media=this->calcolaMedia();
-	std::cerr << "VARIANZA: " << varianza  << std::endl;
-	std::cerr << "MEDIA: " << media  << std::endl;
-	std::cerr << "DEVIAZIONE STANDARD: " <<  devStandard << std::endl;
-	if(varianza>media/5)
+	//std::cerr << "VARIANZA: " << varianza  << std::endl;
+	//std::cerr << "MEDIA: " << media  << std::endl;
+	//std::cerr << "DEVIAZIONE STANDARD: " <<  devStandard << std::endl;
+	if(varianza>THRESHOLD)
 	{
 		this->tempo=0;
 	}

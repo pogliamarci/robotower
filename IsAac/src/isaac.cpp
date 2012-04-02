@@ -17,6 +17,7 @@
 
 #include <iostream>
 #include <string>
+#include <cmath>
 #include "brian.h"
 #include "Echoes/Sonar.h"
 #include "Echoes/Led.h"
@@ -244,13 +245,13 @@ int main(int argc, char** argv)
 		int sonar_north = sensors.getSonar(NORTH);
 		sonarBuffer.insert(sonar_north);
 		sonarBuffer.setTempoBloccato();
-		cerr << "TEMPO BLOCCATO:" << sonarBuffer.getTempoBloccato() << endl;
+		//cerr << "TEMPO BLOCCATO:" << sonarBuffer.getTempoBloccato() << endl;
 		/* update inputs */
 		cdl->add(new crisp_data("DistanceNorth",sonar_north , reliability));
 		cdl->add(new crisp_data("DistanceSouth", sensors.getSonar(SOUTH), reliability));
 		cdl->add(new crisp_data("DistanceEast", sensors.getSonar(EAST), reliability));
 		cdl->add(new crisp_data("DistanceWest", sensors.getSonar(WEST), reliability));
-		cdl->add(new crisp_data("TempoBloccato", sonarBuffer.getTempoBloccato(), reliability));
+		cdl->add(new crisp_data("InvisibleObstacle", sonarBuffer.getTempoBloccato(), reliability));
 		if (sensors.isTowerDetected())
 		{
 			cout << "tower detected: pos = " << sensors.getTowerPosition() << endl;
@@ -286,7 +287,7 @@ int main(int argc, char** argv)
 		sendBrianOutputs(cl, message_sender, client);
 
 		message_sender.sendDebugMessage(sonarBuffer.calcolaMedia(),
-				sonarBuffer.calcolaVarianza(), sonarBuffer.getTempoBloccato());
+				sqrt(sonarBuffer.calcolaVarianza()), sonarBuffer.getTempoBloccato());
 
 		cl->clear();
 

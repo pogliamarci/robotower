@@ -16,7 +16,7 @@
  */
 
 #define MAXCAMPIONI 20
-#define THRESHOLD 1
+#define THRESHOLD 80
 
 class SonarBuffer 
 {
