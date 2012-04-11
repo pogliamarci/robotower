@@ -3,4 +3,8 @@
           TOWERFOUND
           TOWERPOS-VAL
           TOWERPOS
+          FACTORYFOUND-VAL
+          FACTORYFOUND
+          FACTORYPOS-VAL
+          FACTORYPOS
 ))

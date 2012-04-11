@@ -24,6 +24,7 @@
 #include "vision.h"
 
 #define TOWER_CLASS 'R'
+#define FACTORY_CLASS 'G'
 
 #define EXIT_FROM_WINDOW -1
 
@@ -47,19 +48,26 @@ bool checkBlobShape(int width, int heigth) {
 	return false; */
 }
 
-void sendMessage(bool tower_found, int pos) {
+void sendMessage(bool tower_found, int tpos, bool factory_found, int fpos)
+{
 	Vision::Results msg;
 	if (tower_found)
 		cout << "Ho trovato la torre" << endl;
 	else cout << "Non ho trovato la torre" << endl;
+	if (factory_found)
+			cout << "Ho trovato la fabbrica" << endl;
+	else cout << "Non ho trovato la fabbrica" << endl;
 	msg.towerFound = tower_found;
-	msg.towerPos = tower_found ? pos : 0;
+	msg.towerPos = tower_found ? tpos : 0;
+	msg.factoryFound = factory_found;
+	msg.factoryPos = factory_found ? fpos : 0;
 	results_publisher.publish(msg);
 }
 
 void analyzeCurrentImage(Mat& img)
 {
-	static BlobBuffer buffer;
+	static BlobBuffer tower_buffer;
+	static BlobBuffer factory_buffer;
 
 	/* Point 2D */
 	Point pt1, pt2, pt3, pt4;
@@ -70,6 +78,7 @@ void analyzeCurrentImage(Mat& img)
 	
 	/* initialise classes to store data regarding the found blobs */
 	BlobInfo tower_blob(TOWER_CLASS);
+	BlobInfo factory_blob(FACTORY_CLASS);
 
 	/* Blob parameters, PixMap object initialisation */
 	pm->SetImage((unsigned char*)img.data, img.cols, img.rows, cc, 3);
@@ -98,19 +107,19 @@ void analyzeCurrentImage(Mat& img)
 				int blob_width = pt2.x - pt1.x;
 				int blob_heigth = pt1.y - pt2.x;
 
-				/* DEBUG DEBUG DEBUG */
-				/*if ((BlobsItr1->first == TOWER_CLASS)) {
-					rectangle(img, pt1, pt2, CV_RGB(254,254,0), 2, 8, 0);
-				}*/
-
 				/* is the blob shape similar to the expected one? */
 				if (checkBlobShape(blob_width, blob_heigth))
 				{
 					/* save the biggest found blob for each colour class */
-					if(BlobsItr1->first == TOWER_CLASS && ( tower_blob.getNumPix() == 0
-							|| tower_blob.getNumPix() <  BlobsItr2->second->GetNumPix()))
+					if(BlobsItr1->first == TOWER_CLASS &&
+							tower_blob.getNumPix() <  BlobsItr2->second->GetNumPix())
 					{
 						tower_blob.save(BlobsItr2->second->GetNumPix(), pt1, pt2);
+					}
+					if(BlobsItr1->first == FACTORY_CLASS &&
+							factory_blob.getNumPix() <  BlobsItr2->second->GetNumPix())
+					{
+						factory_blob.save(BlobsItr2->second->GetNumPix(), pt1, pt2);
 					}
 				}
 			}
@@ -118,31 +127,24 @@ void analyzeCurrentImage(Mat& img)
 	}
 
 	/* Add the found blob to the queue */
-	/* Assumption: in each frame there is only one blob of interest */
-	if (tower_blob.getNumPix() > 0)
+	tower_buffer.addIfPresent(tower_blob);
+	factory_buffer.addIfPresent(factory_blob);
+
+	BlobInfo* tower_result = tower_buffer.lastValidBlob();
+	if (tower_result != NULL && tower_result->getClass() == TOWER_CLASS)
 	{
-		cout << "Inserisco nel bugffer" << endl;
-		buffer.insert(tower_blob);
+		/* draw result on image (debug) */
+		rectangle(img, tower_result->a, tower_result->b, CV_RGB(254,254,0), 2, 8, 0);
 	}
-	else
+	BlobInfo* factory_result = factory_buffer.lastValidBlob();
+	if (factory_result != NULL && factory_result->getClass() == FACTORY_CLASS)
 	{
-		BlobInfo undefined_blob('U');
-		buffer.insert(undefined_blob);
+		/* draw result on image (debug) */
+		rectangle(img, factory_result->a, factory_result->b, CV_RGB(254,0,0), 2, 8, 0);
 	}
 
-	BlobInfo* result = buffer.lastValidBlob();
-	if (result != NULL)
-	{
-		cout << "c'e' qualcosa nel buffer" << endl;
-		if (result->getClass() == TOWER_CLASS)
-		{
-			/* draw result on image (debug) */
-			rectangle(img, result->a, result->b, CV_RGB(254,254,0), 2, 8, 0);
-		}
-		sendMessage(result->getClass() == TOWER_CLASS, result->getPosition());
-	} else {
-		sendMessage(false, 0);
-	}
+	sendMessage(tower_result != NULL, tower_result != NULL ? tower_result->getPosition() : 0,
+			factory_result != NULL, factory_result != NULL ? factory_result->getPosition() : 0);
 }
 
 void imageMessageCallback(const sensor_msgs::CompressedImage::ConstPtr& message)
@@ -151,9 +153,6 @@ void imageMessageCallback(const sensor_msgs::CompressedImage::ConstPtr& message)
 	
 	if (!frame.empty())
 	{
-		vector<Point2f> corners;
-		bool debug= findChessboardCorners(frame, Size(4,4), corners,  CALIB_CB_ADAPTIVE_THRESH + CALIB_CB_NORMALIZE_IMAGE + CALIB_CB_FAST_CHECK);
-		cout << "DEBUG===================>" << debug << endl;
 		analyzeCurrentImage(frame);
 		imshow("SpyKeeView", frame);
 		char c = waitKey(5);

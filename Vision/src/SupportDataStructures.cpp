@@ -69,3 +69,15 @@ void BlobBuffer::insert(BlobInfo element) {
 	index += 1;
 	if (index >= size) index = 0;
 }
+
+void BlobBuffer::addIfPresent(BlobInfo blob) {
+	if (blob.getNumPix() > 0)
+	{
+		this->insert(blob);
+	}
+	else
+	{
+		BlobInfo undefined_blob('U');
+		this->insert(undefined_blob);
+	}
+}

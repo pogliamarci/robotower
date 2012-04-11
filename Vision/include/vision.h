@@ -62,6 +62,7 @@ class BlobBuffer {
 		BlobBuffer(int buffer_size = BLOB_LIST_SIZE);
 		void insert(BlobInfo element);
 		BlobInfo* lastValidBlob();
+		void addIfPresent(BlobInfo blob);
 };
 
 #endif

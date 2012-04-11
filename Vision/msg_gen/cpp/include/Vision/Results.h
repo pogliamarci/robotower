@@ -24,12 +24,16 @@ struct Results_ {
   Results_()
   : towerFound(false)
   , towerPos(0)
+  , factoryFound(false)
+  , factoryPos(0)
   {
   }
 
   Results_(const ContainerAllocator& _alloc)
   : towerFound(false)
   , towerPos(0)
+  , factoryFound(false)
+  , factoryPos(0)
   {
   }
 
@@ -38,6 +42,12 @@ struct Results_ {
 
   typedef int32_t _towerPos_type;
   int32_t towerPos;
+
+  typedef uint8_t _factoryFound_type;
+  uint8_t factoryFound;
+
+  typedef int32_t _factoryPos_type;
+  int32_t factoryPos;
 
 
 private:
@@ -48,7 +58,7 @@ public:
   ROS_DEPRECATED const std::string __getDataType() const { return __s_getDataType_(); }
 
 private:
-  static const char* __s_getMD5Sum_() { return "1a16ba0649349930ae4825fafd88f261"; }
+  static const char* __s_getMD5Sum_() { return "d9fe852390cd4bb971b1dc4db0a336f9"; }
 public:
   ROS_DEPRECATED static const std::string __s_getMD5Sum() { return __s_getMD5Sum_(); }
 
@@ -57,7 +67,8 @@ public:
 private:
   static const char* __s_getMessageDefinition_() { return "bool towerFound\n\
 int32  towerPos\n\
-\n\
+bool factoryFound\n\
+int32  factoryPos\n\
 "; }
 public:
   ROS_DEPRECATED static const std::string __s_getMessageDefinition() { return __s_getMessageDefinition_(); }
@@ -69,6 +80,8 @@ public:
     ros::serialization::OStream stream(write_ptr, 1000000000);
     ros::serialization::serialize(stream, towerFound);
     ros::serialization::serialize(stream, towerPos);
+    ros::serialization::serialize(stream, factoryFound);
+    ros::serialization::serialize(stream, factoryPos);
     return stream.getData();
   }
 
@@ -77,6 +90,8 @@ public:
     ros::serialization::IStream stream(read_ptr, 1000000000);
     ros::serialization::deserialize(stream, towerFound);
     ros::serialization::deserialize(stream, towerPos);
+    ros::serialization::deserialize(stream, factoryFound);
+    ros::serialization::deserialize(stream, factoryPos);
     return stream.getData();
   }
 
@@ -85,6 +100,8 @@ public:
     uint32_t size = 0;
     size += ros::serialization::serializationLength(towerFound);
     size += ros::serialization::serializationLength(towerPos);
+    size += ros::serialization::serializationLength(factoryFound);
+    size += ros::serialization::serializationLength(factoryPos);
     return size;
   }
 
@@ -116,12 +133,12 @@ template<class ContainerAllocator>
 struct MD5Sum< ::Vision::Results_<ContainerAllocator> > {
   static const char* value() 
   {
-    return "1a16ba0649349930ae4825fafd88f261";
+    return "d9fe852390cd4bb971b1dc4db0a336f9";
   }
 
   static const char* value(const  ::Vision::Results_<ContainerAllocator> &) { return value(); } 
-  static const uint64_t static_value1 = 0x1a16ba0649349930ULL;
-  static const uint64_t static_value2 = 0xae4825fafd88f261ULL;
+  static const uint64_t static_value1 = 0xd9fe852390cd4bb9ULL;
+  static const uint64_t static_value2 = 0x71b1dc4db0a336f9ULL;
 };
 
 template<class ContainerAllocator>
@@ -140,7 +157,8 @@ struct Definition< ::Vision::Results_<ContainerAllocator> > {
   {
     return "bool towerFound\n\
 int32  towerPos\n\
-\n\
+bool factoryFound\n\
+int32  factoryPos\n\
 ";
   }
 
@@ -162,6 +180,8 @@ template<class ContainerAllocator> struct Serializer< ::Vision::Results_<Contain
   {
     stream.next(m.towerFound);
     stream.next(m.towerPos);
+    stream.next(m.factoryFound);
+    stream.next(m.factoryPos);
   }
 
   ROS_DECLARE_ALLINONE_SERIALIZER;
@@ -183,6 +203,10 @@ struct Printer< ::Vision::Results_<ContainerAllocator> >
     Printer<uint8_t>::stream(s, indent + "  ", v.towerFound);
     s << indent << "towerPos: ";
     Printer<int32_t>::stream(s, indent + "  ", v.towerPos);
+    s << indent << "factoryFound: ";
+    Printer<uint8_t>::stream(s, indent + "  ", v.factoryFound);
+    s << indent << "factoryPos: ";
+    Printer<int32_t>::stream(s, indent + "  ", v.factoryPos);
   }
 };
 
