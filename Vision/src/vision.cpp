@@ -38,14 +38,14 @@ ColorDataset* cd;
 ros::Publisher results_publisher;
 
 bool checkBlobShape(int width, int heigth) {
-	//Shape control -> must be rectangular with height > width
-	return true;
-	/* float ratio = (float) width / heigth;
+	/* Shape control -> must be rectangular with height > width */
+	float ratio = ((float) width) / ((float) heigth);
+	cout << "Factory ratio" << ratio << endl;
 	if (ratio > MIN_BLOB_RATIO && ratio < MAX_BLOB_RATIO)
 	{
 		return true;
 	}
-	return false; */
+	return false;
 }
 
 void sendMessage(bool tower_found, int tpos, bool factory_found, int fpos)
@@ -70,8 +70,8 @@ void analyzeCurrentImage(Mat& img)
 	static BlobBuffer factory_buffer;
 
 	/* Point 2D */
-	Point pt1, pt2, pt3, pt4;
-	
+	Point pt1, pt2;
+
 	/* Maps needed for BlobAnalysis */
 	map < char, map< int,Blob* > >:: iterator BlobsItr1;
 	map< int,Blob* > :: iterator BlobsItr2;
@@ -105,22 +105,20 @@ void analyzeCurrentImage(Mat& img)
 				
 				/* compute width and height to perform some check... */
 				int blob_width = pt2.x - pt1.x;
-				int blob_heigth = pt1.y - pt2.x;
+				int blob_heigth = pt1.y - pt2.y;
 
 				/* is the blob shape similar to the expected one? */
-				if (checkBlobShape(blob_width, blob_heigth))
+				/* save the biggest found blob for each colour class */
+				if(BlobsItr1->first == TOWER_CLASS &&
+						tower_blob.getNumPix() <  BlobsItr2->second->GetNumPix())
 				{
-					/* save the biggest found blob for each colour class */
-					if(BlobsItr1->first == TOWER_CLASS &&
-							tower_blob.getNumPix() <  BlobsItr2->second->GetNumPix())
-					{
-						tower_blob.save(BlobsItr2->second->GetNumPix(), pt1, pt2);
-					}
-					if(BlobsItr1->first == FACTORY_CLASS &&
-							factory_blob.getNumPix() <  BlobsItr2->second->GetNumPix())
-					{
+					tower_blob.save(BlobsItr2->second->GetNumPix(), pt1, pt2);
+				}
+				if(BlobsItr1->first == FACTORY_CLASS &&
+						factory_blob.getNumPix() <  BlobsItr2->second->GetNumPix())
+				{
+					if (checkBlobShape(blob_width, blob_heigth))
 						factory_blob.save(BlobsItr2->second->GetNumPix(), pt1, pt2);
-					}
 				}
 			}
    		}
