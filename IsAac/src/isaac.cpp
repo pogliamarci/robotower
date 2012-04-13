@@ -17,16 +17,12 @@
 
 #include <iostream>
 #include <string>
-#include <cmath>
 #include "brian.h"
-#include "Echoes/Sonar.h"
-#include "Echoes/Led.h"
-#include "SpyKee/Motion.h"
-#include "Vision/Results.h"
-#include "IsAac/MediaVarianza.h"
 #include "ros/ros.h"
 
-#include "isaac.h"
+#include "sonarbuffer.h"
+#include "sensorstatus.h"
+#include "sender.h"
 
 #define FUZZYASSOC (char *) "../config/ctof.txt"
 #define FUZZYSHAPES (char *) "../config/shape_ctof.txt"
@@ -39,115 +35,6 @@
 #define DEFUZZYSHAPES (char *) "../config/s_shape.txt"
 
 #define LOOPRATE 20
-
-typedef enum
-{
-	NORTH, SOUTH, EAST, WEST
-} CardinalPoint;
-
-class SensorStatus 
-{
-	private:
-		int sonar_north;
-		int sonar_south;
-		int sonar_east;
-		int sonar_west;
-		bool tower_found;
-		int tower_position;
-	public:
-		SensorStatus();
-		void fromSonarCallback(const Echoes::Sonar& message);
-		void fromVisionCallback(const Vision::Results& message);
-		int getSonar(CardinalPoint p);
-		/* some getters (declared here as inline) */
-		inline bool isTowerDetected() 
-		{
-			return tower_found;
-		}
-		inline int getTowerPosition() 
-		{
-			return tower_position;
-		}
-};
-
-SensorStatus::SensorStatus()
-{
-	sonar_north = 0;
-	sonar_south = 0;
-	sonar_east = 0;
-	sonar_west = 0;
-	tower_found = false;
-	tower_position = 0;
-}
-
-void SensorStatus::fromSonarCallback(const Echoes::Sonar& message)
-{
-	sonar_north = message.north;
-	sonar_south = message.south;
-	sonar_east = message.east;
-	sonar_west = message.west;
-}
-
-void SensorStatus::fromVisionCallback(const Vision::Results& message)
-{
-	tower_found = message.towerFound;
-	tower_position = message.towerPos;
-}
-
-int SensorStatus::getSonar(CardinalPoint p)
-{
-	switch(p)
-	{
-		case NORTH:
-			return sonar_north;
-			break;
-		case SOUTH:
-			return sonar_south;
-			break;
-		case EAST:
-			return sonar_east;
-			break;
-		case WEST:
-			return sonar_west;
-			break;
-		default:
-			return 0;
-	}
-}
-
-class Sender 
-{
-	private:
-		ros::Publisher motion;
-		ros::Publisher debug_mediavarianza;
-	public:
-		Sender(ros::NodeHandle& n);
-		void sendMotionMessage(int rot, int tan);
-		void sendDebugMessage(float avg, float var, int time);
-};
-
-Sender::Sender(ros::NodeHandle& n) 
-{
-	motion = n.advertise<SpyKee::Motion>("spykee_motion", 1000);
-	debug_mediavarianza = n.advertise<IsAac::MediaVarianza>("debug_mediavarianza", 1000);
-}
-
-void Sender::sendMotionMessage(int rot, int tan) 
-{
-	SpyKee::Motion msg;
-	msg.rotSpeed = rot;
-	msg.tanSpeed = tan;
-	this->motion.publish(msg);
-}
-
-void Sender::sendDebugMessage(float avg, float var, int time)
-{
-	IsAac::MediaVarianza msg;
-	msg.Average = avg;
-	msg.Variance = var;
-	msg.Time = time;
-	this->debug_mediavarianza.publish(msg);
-}
 
 void sendBrianOutputs(command_list* cl, Sender& ms, ros::ServiceClient client) 
 {
@@ -228,10 +115,10 @@ int main(int argc, char** argv)
 	Sender message_sender(ros_node);
 
 	MrBrian brian = MrBrian(FUZZYASSOC, FUZZYSHAPES,
-							PRIES, PRIESACTIONS,
-							CANDOES, BEHAVIORS,
-							WANTERS, DEFUZZYASSOC,
-							DEFUZZYSHAPES);
+				PRIES, PRIESACTIONS,
+				CANDOES, BEHAVIORS,
+				WANTERS, DEFUZZYASSOC,
+				DEFUZZYSHAPES);
 
 	while (ros::ok())
 	{
@@ -245,7 +132,7 @@ int main(int argc, char** argv)
 		int sonar_north = sensors.getSonar(NORTH);
 		sonarBuffer.insert(sonar_north);
 		sonarBuffer.setTempoBloccato();
-		//cerr << "TEMPO BLOCCATO:" << sonarBuffer.getTempoBloccato() << endl;
+
 		/* update inputs */
 		cdl->add(new crisp_data("DistanceNorth",sonar_north , reliability));
 		cdl->add(new crisp_data("DistanceSouth", sensors.getSonar(SOUTH), reliability));
@@ -261,6 +148,8 @@ int main(int argc, char** argv)
 
 		cdl->add(new crisp_data("TowerDetected", sensors.isTowerDetected(), reliability));
 		cdl->add(new crisp_data("TowerPosition", sensors.getTowerPosition(), reliability));
+		cdl->add(new crisp_data("FactoryDetected", sensors.isFactoryDetected(), reliability));
+		cdl->add(new crisp_data("FactoryPosition", sensors.getFactoryPosition(), reliability));
 
 		/* random data set to ros */
 		if(detected_timer == LOOPRATE)
@@ -287,7 +176,7 @@ int main(int argc, char** argv)
 		sendBrianOutputs(cl, message_sender, client);
 
 		message_sender.sendDebugMessage(sonarBuffer.calcolaMedia(),
-				sqrt(sonarBuffer.calcolaVarianza()), sonarBuffer.getTempoBloccato());
+				sonarBuffer.calcolaStdDev(), sonarBuffer.getTempoBloccato());
 
 		cl->clear();
 

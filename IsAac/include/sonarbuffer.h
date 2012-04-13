@@ -15,6 +15,8 @@
  * GNU General Public License for more details.
  */
 
+#include <cmath>
+
 #define MAXCAMPIONI 20
 #define THRESHOLD 80
 
@@ -27,6 +29,10 @@ class SonarBuffer
 		int getTempoBloccato();
 		float calcolaVarianza();
 		float calcolaMedia();
+		inline float calcolaStdDev()
+		{
+			return sqrt(this->calcolaVarianza());
+		}
 	private:
 		int data[MAXCAMPIONI];
 		int index;

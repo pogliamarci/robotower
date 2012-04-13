@@ -15,9 +15,8 @@
  * GNU General Public License for more details.
  */
 
-#include "isaac.h"
+#include "sonarbuffer.h"
 #include <iostream>
-#include <cmath>
 
 SonarBuffer::SonarBuffer()
 {
@@ -31,14 +30,7 @@ SonarBuffer::SonarBuffer()
 
 void SonarBuffer::setTempoBloccato()
 {
-	float varianza, media, devStandard;
-	varianza=this->calcolaVarianza();
-	devStandard=sqrt(varianza);
-	media=this->calcolaMedia();
-	//std::cerr << "VARIANZA: " << varianza  << std::endl;
-	//std::cerr << "MEDIA: " << media  << std::endl;
-	//std::cerr << "DEVIAZIONE STANDARD: " <<  devStandard << std::endl;
-	if(varianza>THRESHOLD)
+	if( this->calcolaVarianza() > THRESHOLD )
 	{
 		this->tempo=0;
 	}
