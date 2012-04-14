@@ -21,172 +21,70 @@
 #include "sensor_msgs/CompressedImage.h"
 #include "Vision/Results.h"
 
-#include "vision.h"
-
-#define TOWER_CLASS 'R'
-#define FACTORY_CLASS 'G'
+#include "ImageAnalyzer.h"
 
 #define EXIT_FROM_WINDOW -1
 
 using namespace std;
 using namespace cv;
 
-KnnColorClassifier* cc;
-PixelMap* pm;
-ColorDataset* cd;
-
+/* variabili globali in cerca di sistemazione... */
 ros::Publisher results_publisher;
+ImageAnalyzer* analyzer;
 
-bool checkBlobShape(int width, int heigth) {
-	/* Shape control -> must be rectangular with height > width */
-	float ratio = ((float) width) / ((float) heigth);
-	cout << "Factory ratio" << ratio << endl;
-	if (ratio > MIN_BLOB_RATIO && ratio < MAX_BLOB_RATIO)
-	{
-		return true;
-	}
-	return false;
+void sendMessage(Vision::Results message)
+{
+	results_publisher.publish(message);
 }
 
-void sendMessage(bool tower_found, int tpos, bool factory_found, int fpos)
+void imageAction(Mat& frame)
 {
-	Vision::Results msg;
-	if (tower_found)
-		cout << "Ho trovato la torre" << endl;
-	else cout << "Non ho trovato la torre" << endl;
-	if (factory_found)
-			cout << "Ho trovato la fabbrica" << endl;
-	else cout << "Non ho trovato la fabbrica" << endl;
-	msg.towerFound = tower_found;
-	msg.towerPos = tower_found ? tpos : 0;
-	msg.factoryFound = factory_found;
-	msg.factoryPos = factory_found ? fpos : 0;
-	results_publisher.publish(msg);
-}
-
-void analyzeCurrentImage(Mat& img)
-{
-	static BlobBuffer tower_buffer;
-	static BlobBuffer factory_buffer;
-
-	/* Point 2D */
-	Point pt1, pt2;
-
-	/* Maps needed for BlobAnalysis */
-	map < char, map< int,Blob* > >:: iterator BlobsItr1;
-	map< int,Blob* > :: iterator BlobsItr2;
-	
-	/* initialise classes to store data regarding the found blobs */
-	BlobInfo tower_blob(TOWER_CLASS);
-	BlobInfo factory_blob(FACTORY_CLASS);
-
-	/* Blob parameters, PixMap object initialisation */
-	pm->SetImage((unsigned char*)img.data, img.cols, img.rows, cc, 3);
-	
-	/* Start blob growing algorithm: parameters from the 2nd to the 5th
-	 * identify the region of the image in which blobs are to be searched for
-	 * (2nd to 5th params are set to -1 ==> search blobs over the whole image)
-	 */
-	pm->BlobGrowing(1,-1,-1,-1,-1);
-	for(BlobsItr1=pm->GetBlobs()->begin();BlobsItr1!=pm->GetBlobs()->end();BlobsItr1++)
-	{
-   		for(BlobsItr2 = BlobsItr1->second.begin();BlobsItr2!=BlobsItr1->second.end();BlobsItr2++)
-   		{
-   			if(BlobsItr2->second->GetValid() && BlobsItr2->second->GetNumPix()>MIN_BLOB_SIZE)
-			{
-				/* load blob coordinates */
-   				/* top left point */
-				pt1.x = BlobsItr2->second->GetMinX();
-				pt1.y = BlobsItr2->second->GetMaxY();
-				/* bottom right point */
-				pt2.x = BlobsItr2->second->GetMaxX();
-				pt2.y = BlobsItr2->second->GetMinY();
-				cout << "Blob found: " << BlobsItr1->first << endl;
-				
-				/* compute width and height to perform some check... */
-				int blob_width = pt2.x - pt1.x;
-				int blob_heigth = pt1.y - pt2.y;
-
-				/* is the blob shape similar to the expected one? */
-				/* save the biggest found blob for each colour class */
-				if(BlobsItr1->first == TOWER_CLASS &&
-						tower_blob.getNumPix() <  BlobsItr2->second->GetNumPix())
-				{
-					tower_blob.save(BlobsItr2->second->GetNumPix(), pt1, pt2);
-				}
-				if(BlobsItr1->first == FACTORY_CLASS &&
-						factory_blob.getNumPix() <  BlobsItr2->second->GetNumPix())
-				{
-					if (checkBlobShape(blob_width, blob_heigth))
-						factory_blob.save(BlobsItr2->second->GetNumPix(), pt1, pt2);
-				}
-			}
-   		}
-	}
-
-	/* Add the found blob to the queue */
-	tower_buffer.addIfPresent(tower_blob);
-	factory_buffer.addIfPresent(factory_blob);
-
-	BlobInfo* tower_result = tower_buffer.lastValidBlob();
-	if (tower_result != NULL && tower_result->getClass() == TOWER_CLASS)
-	{
-		/* draw result on image (debug) */
-		rectangle(img, tower_result->a, tower_result->b, CV_RGB(254,254,0), 2, 8, 0);
-	}
-	BlobInfo* factory_result = factory_buffer.lastValidBlob();
-	if (factory_result != NULL && factory_result->getClass() == FACTORY_CLASS)
-	{
-		/* draw result on image (debug) */
-		rectangle(img, factory_result->a, factory_result->b, CV_RGB(254,0,0), 2, 8, 0);
-	}
-
-	sendMessage(tower_result != NULL, tower_result != NULL ? tower_result->getPosition() : 0,
-			factory_result != NULL, factory_result != NULL ? factory_result->getPosition() : 0);
-}
-
-void imageMessageCallback(const sensor_msgs::CompressedImage::ConstPtr& message)
-{
-	Mat frame = imdecode(message->data, CV_LOAD_IMAGE_ANYCOLOR);
-	
 	if (!frame.empty())
 	{
-		analyzeCurrentImage(frame);
+		sendMessage(analyzer->analyze(frame));
 		imshow("SpyKeeView", frame);
 		char c = waitKey(5);
-		if (c == 'c')
+		if((c == 'c') || (c == EXIT_FROM_WINDOW))
 			exit(EXIT_SUCCESS);
 	}
 }
 
+void imageMessageCallback(const sensor_msgs::CompressedImage::ConstPtr& message)
+{
+	cv::Mat f = imdecode(message->data, CV_LOAD_IMAGE_ANYCOLOR);
+	imageAction(f);
+}
+
 int main (int argc, char** argv)
 {
-	//variables for parsing line command
-	int i;
+	/* variables to parse CLI arguments */
 	bool classifier_loaded = false;
 	bool from_file = false;
 	
-	//vision variables
+	/* file paths */
 	char DefaultDataset[] = "DataSet.dts";
 	char DefaultClassifier[] = "classifier[5-17].kcc";
 	
-	//ros variable
+	/* vision algorithm variables */
+	KnnColorClassifier* cc = new KnnColorClassifier();
+	PixelMap* pm = new PixelMap();
+	ColorDataset* cd = new ColorDataset();
+
+	/* initialize image analyzer */
+	analyzer = new ImageAnalyzer(cc, pm, cd);
+
+	/* ROS variables */
 	ros::init(argc, argv, "vision");
 	ros::NodeHandle ros_node;
 	ros::Subscriber source = ros_node.subscribe("spykee_camera", 1, imageMessageCallback);
 	results_publisher = ros_node.advertise<Vision::Results>("vision_results", 10);
-	
-	//opencv variables
+
+	/* opencv variables */
 	Mat frame;
-	
 	
 	namedWindow("SpyKeeView", CV_WINDOW_AUTOSIZE);
 	
-	cd = new ColorDataset();	/* is it really needed? */
-	cc = new KnnColorClassifier();
-	pm = new PixelMap();
-	
-	for(i=1; i<argc; i++)
+	for(int i=1; i<argc; i++)
 	{
 		if(strcmp(argv[i],"-h") == 0)
 		{
@@ -239,10 +137,7 @@ int main (int argc, char** argv)
 	
 	if(from_file)
 	{
-		analyzeCurrentImage(frame);
-		imshow("SpyKeeView", frame);
-		char c = waitKey(0);
-		if((c == 'c') || (c == EXIT_FROM_WINDOW)) exit(EXIT_SUCCESS);
+		imageAction(frame);
 	}
 
 	/* let's start it all */

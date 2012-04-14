@@ -15,11 +15,11 @@
  * GNU General Public License for more details.
  */
 
-#include "vision.h"
 #include <vector>
 #include <iostream>
+#include "SupportDataStructures.h"
 
-using namespace cv;
+using namespace std;
 
 BlobInfo::BlobInfo(char new_class) {
 	this->blob_class = new_class;
@@ -32,7 +32,7 @@ BlobInfo::BlobInfo(char new_class) {
 	this->center.y=-1;
 }
 
-void BlobInfo::save(int num_pix, Point point_1, Point point_2) {
+void BlobInfo::save(int num_pix, cv::Point point_1, cv::Point point_2) {
 	this->num_pixel = num_pix;
 	this->a = point_1;
 	this->b = point_2;

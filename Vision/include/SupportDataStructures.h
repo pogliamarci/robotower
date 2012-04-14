@@ -21,16 +21,7 @@
 #include "opencv2/opencv.hpp"
 #include "opencv2/highgui/highgui.hpp"
 
-#include "ColorClassifier.h"
-#include "ColorDataset.h"
-#include "Blob.h"
-#include "PixelMap.h"
-
-#define MIN_BLOB_SIZE 100
-#define BLOB_LIST_SIZE	15
-#define NUM_FRAME_TO_SEARCH 5
-#define MIN_BLOB_RATIO 0.2
-#define MAX_BLOB_RATIO 0.8
+#define BLOB_LIST_SIZE	10
 
 class BlobInfo {
 	private:
@@ -50,6 +41,9 @@ class BlobInfo {
 		}
 		inline int getPosition() {
 			return this->center.x;
+		}
+		inline int getWidth() {
+			return this->b.x - this->a.x;
 		}
 };
 

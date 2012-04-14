@@ -64,7 +64,7 @@ void PixelMap::BlobGrowing(int step, int StartWindowX, int StartWindowY, int End
 
 //cout << "----> BlobGrowing    [ok]" << endl;
 
-int time = 0;
+/* int time = 0; */
 
 map < pair <int,int>, char > EquivSet;
 map < pair <int,int>, char > EquivSwap;
@@ -138,7 +138,7 @@ if(StartWindowY > EndWindowY)
 }
 
 
-time=getTime();
+/* time = getTime(); */
 
 	
 
@@ -159,7 +159,7 @@ for(int i=StartWindowY; i < EndWindowY; i+=step)
 
 // Begin the blob growing code
 
-time = getTime();
+/* time = getTime();*/
 
   for(int i=StartWindowY; i<EndWindowY;i=i+step)	
     {
@@ -406,7 +406,7 @@ time = getTime();
   //#endif 
   
   //#ifdef DEBUG
-  time=getTime();
+  /* time=getTime();*/
   //#endif
   NewEquiv.clear();
   NewEquiv.reserve(EquivSet.size());
@@ -426,7 +426,7 @@ time = getTime();
   
   //Start new equivalence resolution
   //#ifdef DEBUG
-  time = getTime();
+  /* time = getTime(); */
   //#endif
   if(!NewEquiv.empty())
     {
