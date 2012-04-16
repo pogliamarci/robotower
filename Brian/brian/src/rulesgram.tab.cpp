@@ -99,7 +99,7 @@ aggregation_tree *ptrule=NULL;
 
 
 /* Line 268 of yacc.c  */
-#line 103 "/home/dave/RoboTower/Brian/brian/src/rulesgram.tab.cpp"
+#line 103 "/home/marcello/robotower/Brian/brian/src/rulesgram.tab.cpp"
 
 /* Enabling traces.  */
 #ifndef YYDEBUG
@@ -154,7 +154,7 @@ typedef union YYSTYPE
 
 
 /* Line 293 of yacc.c  */
-#line 158 "/home/dave/RoboTower/Brian/brian/src/rulesgram.tab.cpp"
+#line 158 "/home/marcello/robotower/Brian/brian/src/rulesgram.tab.cpp"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
@@ -166,7 +166,7 @@ typedef union YYSTYPE
 
 
 /* Line 343 of yacc.c  */
-#line 170 "/home/dave/RoboTower/Brian/brian/src/rulesgram.tab.cpp"
+#line 170 "/home/marcello/robotower/Brian/brian/src/rulesgram.tab.cpp"
 
 #ifdef short
 # undef short
@@ -392,7 +392,7 @@ union yyalloc
 /* YYNNTS -- Number of nonterminals.  */
 #define YYNNTS  8
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  14
+#define YYNRULES  13
 /* YYNRULES -- Number of states.  */
 #define YYNSTATES  31
 
@@ -440,26 +440,25 @@ static const yytype_uint8 yytranslate[] =
    YYRHS.  */
 static const yytype_uint8 yyprhs[] =
 {
-       0,     0,     3,     4,     7,     9,    14,    16,    21,    27,
-      33,    37,    43,    49,    50
+       0,     0,     3,     4,     7,    12,    14,    19,    25,    31,
+      35,    41,    47,    48
 };
 
 /* YYRHS -- A `-1'-separated list of the rules' RHS.  */
 static const yytype_int8 yyrhs[] =
 {
-      12,     0,    -1,    -1,    13,    12,    -1,    13,    -1,    14,
-       7,    16,     6,    -1,    15,    -1,     4,     8,    15,     5,
-      -1,     4,    10,    15,    15,     5,    -1,     4,     9,    15,
-      15,     5,    -1,     4,    18,     5,    -1,     4,    18,    18,
-       5,    17,    -1,     4,    18,    18,     5,    16,    -1,    -1,
-       3,    -1
+      12,     0,    -1,    -1,    13,    12,    -1,    14,     7,    16,
+       6,    -1,    15,    -1,     4,     8,    15,     5,    -1,     4,
+      10,    15,    15,     5,    -1,     4,     9,    15,    15,     5,
+      -1,     4,    18,     5,    -1,     4,    18,    18,     5,    17,
+      -1,     4,    18,    18,     5,    16,    -1,    -1,     3,    -1
 };
 
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    46,    46,    47,    48,    51,    59,    62,    63,    64,
-      65,    68,    71,    76,    78
+       0,    46,    46,    47,    50,    58,    61,    62,    63,    64,
+      67,    70,    75,    77
 };
 #endif
 
@@ -487,15 +486,15 @@ static const yytype_uint16 yytoknum[] =
 /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
 static const yytype_uint8 yyr1[] =
 {
-       0,    11,    12,    12,    12,    13,    14,    15,    15,    15,
-      15,    16,    16,    17,    18
+       0,    11,    12,    12,    13,    14,    15,    15,    15,    15,
+      16,    16,    17,    18
 };
 
 /* YYR2[YYN] -- Number of symbols composing right hand side of rule YYN.  */
 static const yytype_uint8 yyr2[] =
 {
-       0,     2,     0,     2,     1,     4,     1,     4,     5,     5,
-       3,     5,     5,     0,     1
+       0,     2,     0,     2,     4,     1,     4,     5,     5,     3,
+       5,     5,     0,     1
 };
 
 /* YYDEFACT[STATE-NAME] -- Default reduction number in state STATE-NUM.
@@ -503,10 +502,10 @@ static const yytype_uint8 yyr2[] =
    means the default is an error.  */
 static const yytype_uint8 yydefact[] =
 {
-       2,     0,     0,     2,     0,     6,    14,     0,     0,     0,
-       0,     1,     3,     0,     0,     0,     0,    10,     0,     0,
-       7,     0,     0,     0,     5,     9,     8,     0,    13,    12,
-      11
+       2,     0,     0,     2,     0,     5,    13,     0,     0,     0,
+       0,     1,     3,     0,     0,     0,     0,     9,     0,     0,
+       6,     0,     0,     0,     4,     8,     7,     0,    12,    11,
+      10
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
@@ -1397,10 +1396,10 @@ yyreduce:
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
-        case 5:
+        case 4:
 
 /* Line 1806 of yacc.c  */
-#line 51 "prs/rulesgram.y"
+#line 50 "prs/rulesgram.y"
     { 
 					rule* r = new rule(ptrule,actuallist);
 					r->SetLineNum(line_num);
@@ -1409,63 +1408,63 @@ yyreduce:
 					ptrule=new aggregation_tree();}
     break;
 
+  case 5:
+
+/* Line 1806 of yacc.c  */
+#line 58 "prs/rulesgram.y"
+    {ptrule->set_pTerm((yyvsp[(1) - (1)].op));}
+    break;
+
   case 6:
 
 /* Line 1806 of yacc.c  */
-#line 59 "prs/rulesgram.y"
-    {ptrule->set_pTerm((yyvsp[(1) - (1)].op));}
+#line 61 "prs/rulesgram.y"
+    {(yyval.op)=new op_not((yyvsp[(3) - (4)].op));}
     break;
 
   case 7:
 
 /* Line 1806 of yacc.c  */
 #line 62 "prs/rulesgram.y"
-    {(yyval.op)=new op_not((yyvsp[(3) - (4)].op));}
+    {(yyval.op)=new op_and((yyvsp[(3) - (5)].op),(yyvsp[(4) - (5)].op));}
     break;
 
   case 8:
 
 /* Line 1806 of yacc.c  */
 #line 63 "prs/rulesgram.y"
-    {(yyval.op)=new op_and((yyvsp[(3) - (5)].op),(yyvsp[(4) - (5)].op));}
+    {(yyval.op)=new op_or((yyvsp[(3) - (5)].op),(yyvsp[(4) - (5)].op));}
     break;
 
   case 9:
 
 /* Line 1806 of yacc.c  */
 #line 64 "prs/rulesgram.y"
-    {(yyval.op)=new op_or((yyvsp[(3) - (5)].op),(yyvsp[(4) - (5)].op));}
+    {(yyval.op)=new predicate_node((yyvsp[(2) - (3)].dataname)); free((yyvsp[(2) - (3)].dataname));}
     break;
 
   case 10:
 
 /* Line 1806 of yacc.c  */
-#line 65 "prs/rulesgram.y"
-    {(yyval.op)=new predicate_node((yyvsp[(2) - (3)].dataname)); free((yyvsp[(2) - (3)].dataname));}
-    break;
-
-  case 11:
-
-/* Line 1806 of yacc.c  */
-#line 68 "prs/rulesgram.y"
+#line 67 "prs/rulesgram.y"
     {actuallist->add(new proposed_action((yyvsp[(2) - (5)].dataname),(yyvsp[(3) - (5)].dataname),"noname"));
                                                       free((yyvsp[(2) - (5)].dataname));
 	                                              free((yyvsp[(3) - (5)].dataname));}
     break;
 
-  case 12:
+  case 11:
 
 /* Line 1806 of yacc.c  */
-#line 71 "prs/rulesgram.y"
+#line 70 "prs/rulesgram.y"
     {actuallist->add(new proposed_action((yyvsp[(2) - (5)].dataname),(yyvsp[(3) - (5)].dataname),"noname"));
                                                    free((yyvsp[(2) - (5)].dataname));
                                                    free((yyvsp[(3) - (5)].dataname));}
     break;
 
-  case 14:
+  case 13:
 
 /* Line 1806 of yacc.c  */
-#line 78 "prs/rulesgram.y"
+#line 77 "prs/rulesgram.y"
     {(yyval.dataname)=(char *) malloc(strlen((yyvsp[(1) - (1)].dataname))+1);
              strcpy((yyval.dataname),(yyvsp[(1) - (1)].dataname));}
     break;
@@ -1473,7 +1472,7 @@ yyreduce:
 
 
 /* Line 1806 of yacc.c  */
-#line 1477 "/home/dave/RoboTower/Brian/brian/src/rulesgram.tab.cpp"
+#line 1476 "/home/marcello/robotower/Brian/brian/src/rulesgram.tab.cpp"
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1704,7 +1703,7 @@ yyreturn:
 
 
 /* Line 2067 of yacc.c  */
-#line 82 "prs/rulesgram.y"
+#line 81 "prs/rulesgram.y"
 
 
 int yyerror(const char *s)

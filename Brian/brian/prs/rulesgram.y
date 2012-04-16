@@ -45,7 +45,6 @@ aggregation_tree *ptrule=NULL;
 
 ruleslist: /* empty */
            | rule  ruleslist
-	   | rule
            ;
 
 rule: precond THEN actions NEWLINE    { 
