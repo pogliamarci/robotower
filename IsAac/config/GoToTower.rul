@@ -1,4 +1,3 @@
-(AND (Tower_Center) (Obstacle_Nord))  => (TanSpeed VERY_SLOW_FORWARD);
-(AND (Tower_Center) (NOT (Obstacle_Nord))) => (TanSpeed SLOW_FORWARD);
-(Tower_Left) => (RotSpeed VERY_SLOW_LEFT);
-(Tower_Right) => (RotSpeed VERY_SLOW_RIGHT);
+(Tower_Center) => (TanSpeed FAST_FORWARD);
+(Tower_Left)   => (RotSpeed VERY_SLOW_LEFT);
+(Tower_Right)  => (RotSpeed VERY_SLOW_RIGHT);

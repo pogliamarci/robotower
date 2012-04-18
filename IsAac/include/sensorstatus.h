@@ -18,7 +18,6 @@
 #define CARDINAL_POINTS 4
 
 #include "Echoes/Sonar.h"
-#include "Echoes/Led.h"
 #include "Vision/Results.h"
 
 typedef enum

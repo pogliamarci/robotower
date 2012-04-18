@@ -1,6 +1,9 @@
-( level 1 GoToTower 	../config/GoToTower.rul )
-( level 1 GoToFactory	../config/GoToFactory.rul )
 ( level 1 Search	../config/Search.rul )
-( level 1 Stop 		../config/Stop.rul )
-( level 1 GoBack	../config/GoBack.rul )
-( level 1 AvoidObstacle ../config/AvoidObstacle.rul )
+( level 1 GoToFactory	../config/GoToFactory.rul )
+( level 1 GoToTower 	../config/GoToTower.rul )
+
+( level 2 AvoidObstacle ../config/AvoidObstacle.rul )
+( level 2 GoBack	../config/GoBack.rul )
+
+( level 3 Destroy       ../config/Destroy.rul )
+

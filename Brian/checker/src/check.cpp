@@ -478,7 +478,7 @@ int main(int argc, char ** argv)
   free(filename);
   filename=(char *) malloc(MAXSTR);
   strcpy(filename,basepath);
-  strcat(filename,"want.txt");
+  strcat(filename,"Want.ini");
   if ((predin=fopen(filename,"r"))!=NULL)
     {
       stat=want;

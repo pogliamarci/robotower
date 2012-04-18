@@ -1,6 +1,0 @@
-GoToTower 		= (P Tower_Detected);
-GoToFactory		= (P Factory_Detected);
-Search			= (AND (P Tower_Not_Detected) (P Factory_Not_Detected));
-AvoidObstacle		= (P Obstacle_Nord);
-GoBack			= (OR (P Crashed) (P Invisible_Obstacle)); 
-Stop			= (P Win);

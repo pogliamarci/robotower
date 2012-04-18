@@ -17,6 +17,7 @@
 
 #include "ros/ros.h"
 #include "SpyKee/Motion.h"
+#include "Echoes/Led.h"
 #include "IsAac/MediaVarianza.h"
 
 class Sender 

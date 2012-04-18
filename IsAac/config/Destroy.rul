@@ -1,0 +1,5 @@
+(OR 	(Tower_Chargeable) 
+	(Factory_Chargeable))	=> 	(&DEL.TanSpeed ANY)
+					(&DEL.RotSpeed ANY)
+					(TanSpeed VERY_FAST_FORWARD)
+					(RotSpeed AHEAD);

@@ -1,4 +1,3 @@
-(AND (Factory_Center) (Obstacle_Nord))  => (TanSpeed FAST_FORWARD);
-(AND (Factory_Center) (NOT (Obstacle_Nord))) => (TanSpeed SLOW_FORWARD);
-(Factory_Left) => (RotSpeed VERY_SLOW_LEFT);
-(Factory_Right) => (RotSpeed VERY_SLOW_RIGHT);
+(Factory_Center) => (TanSpeed FAST_FORWARD);
+(Factory_Left)   => (RotSpeed VERY_SLOW_LEFT);
+(Factory_Right)	 => (RotSpeed VERY_SLOW_RIGHT);

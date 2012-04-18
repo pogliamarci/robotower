@@ -13,3 +13,5 @@
 (RandomAhead RANDOM_VAR)
 
 (InvisibleObstacle TIMEOUT)
+
+(ProposedRotSpeed ROTSPEEDP)

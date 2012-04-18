@@ -30,7 +30,7 @@
 #define PRIESACTIONS (char *) "../config/PredicateActions.ini"
 #define CANDOES (char *) "../config/Cando.ini"
 #define BEHAVIORS (char *) "../config/behaviour.txt"
-#define WANTERS (char *) "../config/want.txt"
+#define WANTERS (char *) "../config/Want.ini"
 #define DEFUZZYASSOC (char *) "../config/s_ftoc.txt"
 #define DEFUZZYSHAPES (char *) "../config/s_shape.txt"
 
