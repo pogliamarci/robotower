@@ -1,0 +1,11 @@
+main.o: main.c
+main.o: C:\Programmi\Keil\ARM\RV31\Inc\stdio.h
+main.o: C:\Programmi\Keil\ARM\RV31\Inc\string.h
+main.o: C:\Programmi\Keil\ARM\Inc\ST\STM32F10x\stm32f10x.h
+main.o: C:\Programmi\Keil\ARM\CMSIS\Include\core_cm3.h
+main.o: C:\Programmi\Keil\ARM\RV31\Inc\stdint.h
+main.o: C:\Programmi\Keil\ARM\CMSIS\Include\core_cmInstr.h
+main.o: C:\Programmi\Keil\ARM\CMSIS\Include\core_cmFunc.h
+main.o: C:\Programmi\Keil\ARM\Inc\ST\STM32F10x\system_stm32f10x.h
+main.o: libusart.h
+main.o: libperiferiche.h
