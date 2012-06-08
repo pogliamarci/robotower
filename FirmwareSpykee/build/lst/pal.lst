@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccHDNDWR.s 			page 1
+ARM GAS  /tmp/ccdn9Qhg.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccHDNDWR.s 			page 1
   51              		.cfi_endproc
   52              	.LFE117:
   53              		.size	palReadBus, .-palReadBus
-ARM GAS  /tmp/ccHDNDWR.s 			page 2
+ARM GAS  /tmp/ccdn9Qhg.s 			page 2
 
 
   54              		.section	.text.palWriteBus,"ax",%progbits
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccHDNDWR.s 			page 1
  106              		@ args = 0, pretend = 0, frame = 0
  107              		@ frame_needed = 0, uses_anonymous_args = 0
  108              		@ link register save eliminated.
-ARM GAS  /tmp/ccHDNDWR.s 			page 3
+ARM GAS  /tmp/ccdn9Qhg.s 			page 3
 
 
  109              	.LVL5:
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccHDNDWR.s 			page 1
  163 0055 00000000 		.4byte	0x0
  164              	.LLST4:
  165 0059 00000000 		.4byte	.LVL5
-ARM GAS  /tmp/ccHDNDWR.s 			page 4
+ARM GAS  /tmp/ccdn9Qhg.s 			page 4
 
 
  166 005d 08000000 		.4byte	.LVL7
@@ -226,7 +226,7 @@ ARM GAS  /tmp/ccHDNDWR.s 			page 1
  208 0037 03       		.uleb128 0x3
  209 0038 01       		.byte	0x1
  210 0039 06       		.byte	0x6
- 211 003a 90010000 		.4byte	.LASF1
+ 211 003a 97010000 		.4byte	.LASF1
  212 003e 03       		.uleb128 0x3
  213 003f 01       		.byte	0x1
  214 0040 08       		.byte	0x8
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccHDNDWR.s 			page 1
  220 004c 04       		.uleb128 0x4
  221 004d 57010000 		.4byte	.LASF5
  222 0051 02       		.byte	0x2
-ARM GAS  /tmp/ccHDNDWR.s 			page 5
+ARM GAS  /tmp/ccdn9Qhg.s 			page 5
 
 
  223 0052 36       		.byte	0x36
@@ -272,7 +272,7 @@ ARM GAS  /tmp/ccHDNDWR.s 			page 1
  251 0089 03       		.uleb128 0x3
  252 008a 08       		.byte	0x8
  253 008b 07       		.byte	0x7
- 254 008c 9C010000 		.4byte	.LASF11
+ 254 008c A3010000 		.4byte	.LASF11
  255 0090 04       		.uleb128 0x4
  256 0091 28000000 		.4byte	.LASF12
  257 0095 02       		.byte	0x2
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccHDNDWR.s 			page 1
  277 00bb 4C000000 		.4byte	0x4c
  278 00bf 02       		.byte	0x2
  279 00c0 23       		.byte	0x23
-ARM GAS  /tmp/ccHDNDWR.s 			page 6
+ARM GAS  /tmp/ccdn9Qhg.s 			page 6
 
 
  280 00c1 00       		.uleb128 0x0
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccHDNDWR.s 			page 1
  334 011d 08       		.uleb128 0x8
  335 011e 08       		.uleb128 0x8
  336 011f 27010000 		.4byte	.LASF18
-ARM GAS  /tmp/ccHDNDWR.s 			page 7
+ARM GAS  /tmp/ccdn9Qhg.s 			page 7
 
 
  337 0123 03       		.byte	0x3
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccHDNDWR.s 			page 1
  391 0180 00       		.byte	0x0
  392 0181 05       		.uleb128 0x5
  393 0182 D1000000 		.4byte	0xd1
-ARM GAS  /tmp/ccHDNDWR.s 			page 8
+ARM GAS  /tmp/ccdn9Qhg.s 			page 8
 
 
  394 0186 04       		.uleb128 0x4
@@ -475,10 +475,10 @@ ARM GAS  /tmp/ccHDNDWR.s 			page 1
  445 01e9 08       		.uleb128 0x8
  446 01ea 00       		.byte	0x0
  447 01eb 04       		.uleb128 0x4
- 448 01ec B3010000 		.4byte	.LASF30
+ 448 01ec BA010000 		.4byte	.LASF30
  449 01f0 04       		.byte	0x4
  450 01f1 94       		.byte	0x94
-ARM GAS  /tmp/ccHDNDWR.s 			page 9
+ARM GAS  /tmp/ccdn9Qhg.s 			page 9
 
 
  451 01f2 B8010000 		.4byte	0x1b8
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccHDNDWR.s 			page 1
  505 026d 0E000000 		.4byte	.LFE119
  506 0271 02       		.byte	0x2
  507 0272 7D       		.byte	0x7d
-ARM GAS  /tmp/ccHDNDWR.s 			page 10
+ARM GAS  /tmp/ccdn9Qhg.s 			page 10
 
 
  508 0273 00       		.sleb128 0
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccHDNDWR.s 			page 1
  562 0017 00       		.byte	0x0
  563 0018 0B       		.uleb128 0xb
  564 0019 0B       		.uleb128 0xb
-ARM GAS  /tmp/ccHDNDWR.s 			page 11
+ARM GAS  /tmp/ccdn9Qhg.s 			page 11
 
 
  565 001a 3E       		.uleb128 0x3e
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccHDNDWR.s 			page 1
  619 0050 08       		.uleb128 0x8
  620 0051 3A       		.uleb128 0x3a
  621 0052 0B       		.uleb128 0xb
-ARM GAS  /tmp/ccHDNDWR.s 			page 12
+ARM GAS  /tmp/ccdn9Qhg.s 			page 12
 
 
  622 0053 3B       		.uleb128 0x3b
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccHDNDWR.s 			page 1
  676 0089 49       		.uleb128 0x49
  677 008a 13       		.uleb128 0x13
  678 008b 00       		.byte	0x0
-ARM GAS  /tmp/ccHDNDWR.s 			page 13
+ARM GAS  /tmp/ccdn9Qhg.s 			page 13
 
 
  679 008c 00       		.byte	0x0
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccHDNDWR.s 			page 1
  733 00c2 11       		.uleb128 0x11
  734 00c3 01       		.uleb128 0x1
  735 00c4 12       		.uleb128 0x12
-ARM GAS  /tmp/ccHDNDWR.s 			page 14
+ARM GAS  /tmp/ccdn9Qhg.s 			page 14
 
 
  736 00c5 01       		.uleb128 0x1
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccHDNDWR.s 			page 1
  790 00fb 49       		.uleb128 0x49
  791 00fc 13       		.uleb128 0x13
  792 00fd 3F       		.uleb128 0x3f
-ARM GAS  /tmp/ccHDNDWR.s 			page 15
+ARM GAS  /tmp/ccdn9Qhg.s 			page 15
 
 
  793 00fe 0C       		.uleb128 0xc
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccHDNDWR.s 			page 1
  827      736B5F74 
  827      00
  828 0067 9C010000 		.4byte	0x19c
-ARM GAS  /tmp/ccHDNDWR.s 			page 16
+ARM GAS  /tmp/ccdn9Qhg.s 			page 16
 
 
  829 006b 696F6D6F 		.ascii	"iomode_t\000"
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccHDNDWR.s 			page 1
  871      757300
  872              	.LASF12:
  873 0028 75696E74 		.ascii	"uint_fast8_t\000"
-ARM GAS  /tmp/ccHDNDWR.s 			page 17
+ARM GAS  /tmp/ccdn9Qhg.s 			page 17
 
 
  873      5F666173 
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/ccHDNDWR.s 			page 1
  899 00b5 49544D5F 		.ascii	"ITM_RxBuffer\000"
  899      52784275 
  899      66666572 
-ARM GAS  /tmp/ccHDNDWR.s 			page 18
+ARM GAS  /tmp/ccdn9Qhg.s 			page 18
 
 
  899      00
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/ccHDNDWR.s 			page 1
  928              	.LASF5:
  929 0157 75696E74 		.ascii	"uint16_t\000"
  929      31365F74 
-ARM GAS  /tmp/ccHDNDWR.s 			page 19
+ARM GAS  /tmp/ccdn9Qhg.s 			page 19
 
 
  929      00
@@ -1091,36 +1091,36 @@ ARM GAS  /tmp/ccHDNDWR.s 			page 1
  933      20696E74 
  933      00
  934              	.LASF38:
- 935 0172 2F686F6D 		.ascii	"/home/stm32/Workspace/demoarm\000"
+ 935 0172 2F686F6D 		.ascii	"/home/stm32/Workspace/FirmwareSpykee\000"
  935      652F7374 
  935      6D33322F 
  935      576F726B 
  935      73706163 
  936              	.LASF1:
- 937 0190 7369676E 		.ascii	"signed char\000"
+ 937 0197 7369676E 		.ascii	"signed char\000"
  937      65642063 
  937      68617200 
  938              	.LASF11:
- 939 019c 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 939 01a3 6C6F6E67 		.ascii	"long long unsigned int\000"
  939      206C6F6E 
  939      6720756E 
  939      7369676E 
  939      65642069 
  940              	.LASF30:
- 941 01b3 494F4275 		.ascii	"IOBus\000"
+ 941 01ba 494F4275 		.ascii	"IOBus\000"
  941      7300
  942              		.ident	"GCC: (Sourcery G++ Lite 2011.03-42) 4.5.2"
-ARM GAS  /tmp/ccHDNDWR.s 			page 20
+ARM GAS  /tmp/ccdn9Qhg.s 			page 20
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 pal.c
-     /tmp/ccHDNDWR.s:26     .text.palReadBus:00000000 $t
-     /tmp/ccHDNDWR.s:32     .text.palReadBus:00000000 palReadBus
-     /tmp/ccHDNDWR.s:55     .text.palWriteBus:00000000 $t
-     /tmp/ccHDNDWR.s:61     .text.palWriteBus:00000000 palWriteBus
-     /tmp/ccHDNDWR.s:96     .text.palSetBusMode:00000000 $t
-     /tmp/ccHDNDWR.s:102    .text.palSetBusMode:00000000 palSetBusMode
+     /tmp/ccdn9Qhg.s:26     .text.palReadBus:00000000 $t
+     /tmp/ccdn9Qhg.s:32     .text.palReadBus:00000000 palReadBus
+     /tmp/ccdn9Qhg.s:55     .text.palWriteBus:00000000 $t
+     /tmp/ccdn9Qhg.s:61     .text.palWriteBus:00000000 palWriteBus
+     /tmp/ccdn9Qhg.s:96     .text.palSetBusMode:00000000 $t
+     /tmp/ccdn9Qhg.s:102    .text.palSetBusMode:00000000 palSetBusMode
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS

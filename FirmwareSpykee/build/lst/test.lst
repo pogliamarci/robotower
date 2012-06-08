@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccFueNYe.s 			page 1
+ARM GAS  /tmp/cc4Xt1TY.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
   51              	.LFE131:
   52              		.size	tmr, .-tmr
   53 000c AFF30080 		.section	.text.print_line,"ax",%progbits
-ARM GAS  /tmp/ccFueNYe.s 			page 2
+ARM GAS  /tmp/cc4Xt1TY.s 			page 2
 
 
   54              		.align	2
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  108 0040 4FF0FF32 		mov	r2, #-1
  109 0044 9847     		blx	r3
  110              		.loc 1 321 0
-ARM GAS  /tmp/ccFueNYe.s 			page 3
+ARM GAS  /tmp/cc4Xt1TY.s 			page 3
 
 
  111 0046 70BD     		pop	{r4, r5, r6, pc}
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  165              		.loc 1 109 0
  166 0026 002B     		cmp	r3, #0
  167 0028 F1D1     		bne	.L14
-ARM GAS  /tmp/ccFueNYe.s 			page 4
+ARM GAS  /tmp/cc4Xt1TY.s 			page 4
 
 
  168              		.loc 1 111 0
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  222              	.L26:
  223 008a 00BF     		.align	2
  224              	.L25:
-ARM GAS  /tmp/ccFueNYe.s 			page 5
+ARM GAS  /tmp/cc4Xt1TY.s 			page 5
 
 
  225 008c CDCCCCCC 		.word	-858993459
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  277 0024 AFF30080 		.section	.text.test_println,"ax",%progbits
  277      AFF30080 
  277      AFF30080 
-ARM GAS  /tmp/ccFueNYe.s 			page 6
+ARM GAS  /tmp/cc4Xt1TY.s 			page 6
 
 
  278              		.align	2
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  332              	.LFB122:
  333              		.loc 1 159 0
  334              		.cfi_startproc
-ARM GAS  /tmp/ccFueNYe.s 			page 7
+ARM GAS  /tmp/cc4Xt1TY.s 			page 7
 
 
  335              		@ args = 0, pretend = 0, frame = 0
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  389              		@ frame_needed = 0, uses_anonymous_args = 0
  390              		@ link register save eliminated.
  391              	.LVL18:
-ARM GAS  /tmp/ccFueNYe.s 			page 8
+ARM GAS  /tmp/cc4Xt1TY.s 			page 8
 
 
  392              		.loc 1 173 0
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  446 000a 054A     		ldr	r2, .L45+8
  447              		.loc 1 172 0
  448 000c 0B60     		str	r3, [r1, #0]
-ARM GAS  /tmp/ccFueNYe.s 			page 9
+ARM GAS  /tmp/cc4Xt1TY.s 			page 9
 
 
  449              		.loc 1 173 0
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  501 0008 2368     		ldr	r3, [r4, #0]
  502 000a 9D1A     		subs	r5, r3, r2
  503 000c 15F0010F 		tst	r5, #1
-ARM GAS  /tmp/ccFueNYe.s 			page 10
+ARM GAS  /tmp/cc4Xt1TY.s 			page 10
 
 
  504              		.loc 1 185 0
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  558 0056 074A     		ldr	r2, .L63+8
  559              		.loc 1 172 0
  560 0058 0749     		ldr	r1, .L63+12
-ARM GAS  /tmp/ccFueNYe.s 			page 11
+ARM GAS  /tmp/cc4Xt1TY.s 			page 11
 
 
  561              		.loc 1 171 0
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  615              	.LVL37:
  616 0008 FFF7FEFF 		bl	chTimeIsWithin
  617              	.LVL38:
-ARM GAS  /tmp/ccFueNYe.s 			page 12
+ARM GAS  /tmp/cc4Xt1TY.s 			page 12
 
 
  618              	.LBB31:
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  672              		@ frame_needed = 0, uses_anonymous_args = 0
  673              	.LVL43:
  674 0000 10B5     		push	{r4, lr}
-ARM GAS  /tmp/ccFueNYe.s 			page 13
+ARM GAS  /tmp/cc4Xt1TY.s 			page 13
 
 
  675              	.LCFI7:
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  728              		.thumb
  729              		.thumb_func
  730              		.type	test_wait_threads, %function
-ARM GAS  /tmp/ccFueNYe.s 			page 14
+ARM GAS  /tmp/cc4Xt1TY.s 			page 14
 
 
  731              	test_wait_threads:
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  785              	.L82:
  786              	.LVL52:
  787              		.loc 1 223 0
-ARM GAS  /tmp/ccFueNYe.s 			page 15
+ARM GAS  /tmp/cc4Xt1TY.s 			page 15
 
 
  788 003a 2069     		ldr	r0, [r4, #16]
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  842 001c 04EB9010 		add	r0, r4, r0, lsr #6
  843              	.LVL57:
  844              	.L96:
-ARM GAS  /tmp/ccFueNYe.s 			page 16
+ARM GAS  /tmp/cc4Xt1TY.s 			page 16
 
 
  845              		.loc 1 247 0
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  898              	.LCFI10:
  899              		.cfi_def_cfa_offset 8
  900              		.loc 1 259 0
-ARM GAS  /tmp/ccFueNYe.s 			page 17
+ARM GAS  /tmp/cc4Xt1TY.s 			page 17
 
 
  901 0002 0120     		movs	r0, #1
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  953              		.loc 1 286 0
  954 000e 4FF47A72 		mov	r2, #1000
  955 0012 02FB00FC 		mul	ip, r2, r0
-ARM GAS  /tmp/ccFueNYe.s 			page 18
+ARM GAS  /tmp/cc4Xt1TY.s 			page 18
 
 
  956 0016 0949     		ldr	r1, .L104+4
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  1009              		.loc 1 332 0
  1010 0004 6B4F     		ldr	r7, .L123
  1011              		.cfi_offset 14, -4
-ARM GAS  /tmp/ccFueNYe.s 			page 19
+ARM GAS  /tmp/cc4Xt1TY.s 			page 19
 
 
  1012              		.cfi_offset 11, -8
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  1066              		.loc 1 339 0
  1067 0042 6548     		ldr	r0, .L123+36
  1068 0044 FFF7FEFF 		bl	test_println
-ARM GAS  /tmp/ccFueNYe.s 			page 20
+ARM GAS  /tmp/cc4Xt1TY.s 			page 20
 
 
  1069              		.loc 1 341 0
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  1123              	.LVL75:
  1124              		.loc 1 368 0 discriminator 1
  1125 00a6 B300     		lsls	r3, r6, #2
-ARM GAS  /tmp/ccFueNYe.s 			page 21
+ARM GAS  /tmp/cc4Xt1TY.s 			page 21
 
 
  1126 00a8 54F82600 		ldr	r0, [r4, r6, lsl #2]
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  1180              	.LVL79:
  1181              		.loc 1 303 0
  1182 00fc C8F80000 		str	r0, [r8, #0]
-ARM GAS  /tmp/ccFueNYe.s 			page 22
+ARM GAS  /tmp/cc4Xt1TY.s 			page 22
 
 
  1183              	.LVL80:
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  1237 0148 14F8011B 		ldrb	r1, [r4], #1	@ zero_extendqisi2
  1238              	.LVL88:
  1239 014c 0268     		ldr	r2, [r0, #0]
-ARM GAS  /tmp/ccFueNYe.s 			page 23
+ARM GAS  /tmp/cc4Xt1TY.s 			page 23
 
 
  1240 014e 1369     		ldr	r3, [r2, #16]
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  1294 019e 2748     		ldr	r0, .L123+136
  1295 01a0 FFF7FEFF 		bl	test_println
  1296              	.LVL94:
-ARM GAS  /tmp/ccFueNYe.s 			page 24
+ARM GAS  /tmp/cc4Xt1TY.s 			page 24
 
 
  1297 01a4 5BF8044C 		ldr	r4, [fp, #-4]
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  1351              		.global	threads
  1352              		.global	test
  1353              		.global	test_timer_done
-ARM GAS  /tmp/ccFueNYe.s 			page 25
+ARM GAS  /tmp/cc4Xt1TY.s 			page 25
 
 
  1354              		.section	.bss.test,"aw",%nobits
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  1404 0000 00000000 		.space	4
  1405              		.section	.rodata.str1.4,"aMS",%progbits,1
  1406              		.align	2
-ARM GAS  /tmp/ccFueNYe.s 			page 26
+ARM GAS  /tmp/cc4Xt1TY.s 			page 26
 
 
  1407              	.LC0:
@@ -1532,11 +1532,11 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  1422      202000
  1423 0053 00       		.space	1
  1424              	.LC6:
- 1425 0054 4D617920 		.ascii	"May 28 2012 - 19:22:51\000"
- 1425      32382032 
+ 1425 0054 4A756E20 		.ascii	"Jun  8 2012 - 14:03:36\000"
+ 1425      20382032 
  1425      30313220 
- 1425      2D203139 
- 1425      3A32323A 
+ 1425      2D203134 
+ 1425      3A30333A 
  1426 006b 00       		.space	1
  1427              	.LC7:
  1428 006c 2A2A2A20 		.ascii	"*** Compiler:     \000"
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  1434      3A2000
  1435 009f 00       		.space	1
  1436              	.LC10:
-ARM GAS  /tmp/ccFueNYe.s 			page 27
+ARM GAS  /tmp/cc4Xt1TY.s 			page 27
 
 
  1437 00a0 41524D76 		.ascii	"ARMv7-ME\000"
@@ -1618,7 +1618,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  1461      46342D44 
  1461      6973636F 
  1461      76657279 
-ARM GAS  /tmp/ccFueNYe.s 			page 28
+ARM GAS  /tmp/cc4Xt1TY.s 			page 28
 
 
  1462 0155 000000   		.space	3
@@ -1678,7 +1678,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  1499      00000000 
  1499      00000000 
  1499      00000000 
-ARM GAS  /tmp/ccFueNYe.s 			page 29
+ARM GAS  /tmp/cc4Xt1TY.s 			page 29
 
 
  1499      00000000 
@@ -1738,7 +1738,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  1546 0008 0200     		.2byte	0x2
  1547 000a 7D       		.byte	0x7d
  1548 000b 00       		.sleb128 0
-ARM GAS  /tmp/ccFueNYe.s 			page 30
+ARM GAS  /tmp/cc4Xt1TY.s 			page 30
 
 
  1549 000c 02000000 		.4byte	.LCFI0
@@ -1798,7 +1798,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  1603 0099 0200     		.2byte	0x2
  1604 009b 7D       		.byte	0x7d
  1605 009c 00       		.sleb128 0
-ARM GAS  /tmp/ccFueNYe.s 			page 31
+ARM GAS  /tmp/cc4Xt1TY.s 			page 31
 
 
  1606 009d 02000000 		.4byte	.LCFI3
@@ -1858,7 +1858,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  1660 012c 20000000 		.4byte	.LFE123
  1661 0130 0500     		.2byte	0x5
  1662 0132 03       		.byte	0x3
-ARM GAS  /tmp/ccFueNYe.s 			page 32
+ARM GAS  /tmp/cc4Xt1TY.s 			page 32
 
 
  1663 0133 00000000 		.4byte	failpoint
@@ -1918,7 +1918,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  1717 01c7 50       		.byte	0x50
  1718 01c8 56000000 		.4byte	.LVL33
  1719 01cc 66000000 		.4byte	.LVL34
-ARM GAS  /tmp/ccFueNYe.s 			page 33
+ARM GAS  /tmp/cc4Xt1TY.s 			page 33
 
 
  1720 01d0 0100     		.2byte	0x1
@@ -1978,7 +1978,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  1774 025e 30000000 		.4byte	.LFE126
  1775 0262 0100     		.2byte	0x1
  1776 0264 54       		.byte	0x54
-ARM GAS  /tmp/ccFueNYe.s 			page 34
+ARM GAS  /tmp/cc4Xt1TY.s 			page 34
 
 
  1777 0265 00000000 		.4byte	0x0
@@ -2038,7 +2038,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  1831 02f7 0200     		.2byte	0x2
  1832 02f9 30       		.byte	0x30
  1833 02fa 9F       		.byte	0x9f
-ARM GAS  /tmp/ccFueNYe.s 			page 35
+ARM GAS  /tmp/cc4Xt1TY.s 			page 35
 
 
  1834 02fb 0C000000 		.4byte	.LVL44
@@ -2098,7 +2098,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  1888 0381 33       		.byte	0x33
  1889 0382 9F       		.byte	0x9f
  1890 0383 3A000000 		.4byte	.LVL52
-ARM GAS  /tmp/ccFueNYe.s 			page 36
+ARM GAS  /tmp/cc4Xt1TY.s 			page 36
 
 
  1891 0387 48000000 		.4byte	.LVL53
@@ -2158,7 +2158,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  1945 0412 7D       		.byte	0x7d
  1946 0413 00       		.sleb128 0
  1947 0414 02000000 		.4byte	.LCFI11
-ARM GAS  /tmp/ccFueNYe.s 			page 37
+ARM GAS  /tmp/cc4Xt1TY.s 			page 37
 
 
  1948 0418 48000000 		.4byte	.LFE132
@@ -2218,7 +2218,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  2002 04a3 00000000 		.4byte	chp
  2003 04a7 00000000 		.4byte	0x0
  2004 04ab 00000000 		.4byte	0x0
-ARM GAS  /tmp/ccFueNYe.s 			page 38
+ARM GAS  /tmp/cc4Xt1TY.s 			page 38
 
 
  2005              	.LLST40:
@@ -2278,7 +2278,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  2059 0534 54       		.byte	0x54
  2060 0535 00000000 		.4byte	0x0
  2061 0539 00000000 		.4byte	0x0
-ARM GAS  /tmp/ccFueNYe.s 			page 39
+ARM GAS  /tmp/cc4Xt1TY.s 			page 39
 
 
  2062              	.LLST43:
@@ -2338,7 +2338,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  2116 05c0 9F       		.byte	0x9f
  2117 05c1 56010000 		.4byte	.LVL89
  2118 05c5 5C010000 		.4byte	.LVL90
-ARM GAS  /tmp/ccFueNYe.s 			page 40
+ARM GAS  /tmp/cc4Xt1TY.s 			page 40
 
 
  2119 05c9 0100     		.2byte	0x1
@@ -2374,10 +2374,10 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  2149 0006 00000000 		.4byte	.Ldebug_abbrev0
  2150 000a 04       		.byte	0x4
  2151 000b 01       		.uleb128 0x1
- 2152 000c 26010000 		.4byte	.LASF134
+ 2152 000c 08010000 		.4byte	.LASF134
  2153 0010 01       		.byte	0x1
- 2154 0011 43050000 		.4byte	.LASF135
- 2155 0015 D4000000 		.4byte	.LASF136
+ 2154 0011 25050000 		.4byte	.LASF135
+ 2155 0015 8C050000 		.4byte	.LASF136
  2156 0019 00000000 		.4byte	0x0
  2157 001d 00000000 		.4byte	0x0
  2158 0021 60000000 		.4byte	.Ldebug_ranges0+0x60
@@ -2394,49 +2394,49 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  2169 003b 04       		.uleb128 0x4
  2170 003c 04       		.byte	0x4
  2171 003d 07       		.byte	0x7
- 2172 003e EF010000 		.4byte	.LASF0
+ 2172 003e D1010000 		.4byte	.LASF0
  2173 0042 04       		.uleb128 0x4
  2174 0043 01       		.byte	0x1
  2175 0044 06       		.byte	0x6
-ARM GAS  /tmp/ccFueNYe.s 			page 41
+ARM GAS  /tmp/cc4Xt1TY.s 			page 41
 
 
  2176 0045 C8000000 		.4byte	.LASF1
  2177 0049 03       		.uleb128 0x3
- 2178 004a FC040000 		.4byte	.LASF3
+ 2178 004a DE040000 		.4byte	.LASF3
  2179 004e 03       		.byte	0x3
  2180 004f 2A       		.byte	0x2a
  2181 0050 54000000 		.4byte	0x54
  2182 0054 04       		.uleb128 0x4
  2183 0055 01       		.byte	0x1
  2184 0056 08       		.byte	0x8
- 2185 0057 8F030000 		.4byte	.LASF4
+ 2185 0057 71030000 		.4byte	.LASF4
  2186 005b 04       		.uleb128 0x4
  2187 005c 02       		.byte	0x2
  2188 005d 05       		.byte	0x5
- 2189 005e C2030000 		.4byte	.LASF5
+ 2189 005e A4030000 		.4byte	.LASF5
  2190 0062 04       		.uleb128 0x4
  2191 0063 02       		.byte	0x2
  2192 0064 07       		.byte	0x7
- 2193 0065 3B020000 		.4byte	.LASF6
+ 2193 0065 1D020000 		.4byte	.LASF6
  2194 0069 03       		.uleb128 0x3
- 2195 006a 87030000 		.4byte	.LASF7
+ 2195 006a 69030000 		.4byte	.LASF7
  2196 006e 03       		.byte	0x3
  2197 006f 4F       		.byte	0x4f
  2198 0070 74000000 		.4byte	0x74
  2199 0074 04       		.uleb128 0x4
  2200 0075 04       		.byte	0x4
  2201 0076 05       		.byte	0x5
- 2202 0077 32010000 		.4byte	.LASF8
+ 2202 0077 14010000 		.4byte	.LASF8
  2203 007b 03       		.uleb128 0x3
- 2204 007c 30040000 		.4byte	.LASF9
+ 2204 007c 12040000 		.4byte	.LASF9
  2205 0080 03       		.byte	0x3
  2206 0081 50       		.byte	0x50
  2207 0082 86000000 		.4byte	0x86
  2208 0086 04       		.uleb128 0x4
  2209 0087 04       		.byte	0x4
  2210 0088 07       		.byte	0x7
- 2211 0089 4D040000 		.4byte	.LASF10
+ 2211 0089 2F040000 		.4byte	.LASF10
  2212 008d 04       		.uleb128 0x4
  2213 008e 08       		.byte	0x8
  2214 008f 05       		.byte	0x5
@@ -2451,66 +2451,66 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  2223 00a1 07       		.byte	0x7
  2224 00a2 48000000 		.4byte	.LASF13
  2225 00a6 03       		.uleb128 0x3
- 2226 00a7 FA000000 		.4byte	.LASF14
+ 2226 00a7 DC000000 		.4byte	.LASF14
  2227 00ab 04       		.byte	0x4
  2228 00ac 2E       		.byte	0x2e
  2229 00ad 69000000 		.4byte	0x69
  2230 00b1 03       		.uleb128 0x3
- 2231 00b2 66020000 		.4byte	.LASF15
+ 2231 00b2 48020000 		.4byte	.LASF15
  2232 00b6 04       		.byte	0x4
-ARM GAS  /tmp/ccFueNYe.s 			page 42
+ARM GAS  /tmp/cc4Xt1TY.s 			page 42
 
 
  2233 00b7 2F       		.byte	0x2f
  2234 00b8 49000000 		.4byte	0x49
  2235 00bc 03       		.uleb128 0x3
- 2236 00bd 47010000 		.4byte	.LASF16
+ 2236 00bd 29010000 		.4byte	.LASF16
  2237 00c1 04       		.byte	0x4
  2238 00c2 30       		.byte	0x30
  2239 00c3 49000000 		.4byte	0x49
  2240 00c7 03       		.uleb128 0x3
- 2241 00c8 68030000 		.4byte	.LASF17
+ 2241 00c8 4A030000 		.4byte	.LASF17
  2242 00cc 04       		.byte	0x4
  2243 00cd 31       		.byte	0x31
  2244 00ce 49000000 		.4byte	0x49
  2245 00d2 03       		.uleb128 0x3
- 2246 00d3 7F030000 		.4byte	.LASF18
+ 2246 00d3 61030000 		.4byte	.LASF18
  2247 00d7 04       		.byte	0x4
  2248 00d8 32       		.byte	0x32
  2249 00d9 7B000000 		.4byte	0x7b
  2250 00dd 03       		.uleb128 0x3
- 2251 00de 4E020000 		.4byte	.LASF19
+ 2251 00de 30020000 		.4byte	.LASF19
  2252 00e2 04       		.byte	0x4
  2253 00e3 33       		.byte	0x33
  2254 00e4 69000000 		.4byte	0x69
  2255 00e8 03       		.uleb128 0x3
- 2256 00e9 84020000 		.4byte	.LASF20
+ 2256 00e9 66020000 		.4byte	.LASF20
  2257 00ed 04       		.byte	0x4
  2258 00ee 35       		.byte	0x35
  2259 00ef 7B000000 		.4byte	0x7b
  2260 00f3 03       		.uleb128 0x3
- 2261 00f4 7F040000 		.4byte	.LASF21
+ 2261 00f4 61040000 		.4byte	.LASF21
  2262 00f8 04       		.byte	0x4
  2263 00f9 36       		.byte	0x36
  2264 00fa 7B000000 		.4byte	0x7b
  2265 00fe 03       		.uleb128 0x3
- 2266 00ff E9010000 		.4byte	.LASF22
+ 2266 00ff CB010000 		.4byte	.LASF22
  2267 0103 04       		.byte	0x4
  2268 0104 37       		.byte	0x37
  2269 0105 69000000 		.4byte	0x69
  2270 0109 03       		.uleb128 0x3
- 2271 010a 15040000 		.4byte	.LASF23
+ 2271 010a F7030000 		.4byte	.LASF23
  2272 010e 05       		.byte	0x5
  2273 010f 2A       		.byte	0x2a
  2274 0110 14010000 		.4byte	0x114
  2275 0114 05       		.uleb128 0x5
- 2276 0115 15040000 		.4byte	.LASF23
+ 2276 0115 F7030000 		.4byte	.LASF23
  2277 0119 48       		.byte	0x48
  2278 011a 06       		.byte	0x6
  2279 011b 5E       		.byte	0x5e
  2280 011c 2B020000 		.4byte	0x22b
  2281 0120 06       		.uleb128 0x6
- 2282 0121 FB030000 		.4byte	.LASF24
+ 2282 0121 DD030000 		.4byte	.LASF24
  2283 0125 06       		.byte	0x6
  2284 0126 5F       		.byte	0x5f
  2285 0127 50020000 		.4byte	0x250
@@ -2518,10 +2518,10 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  2287 012c 23       		.byte	0x23
  2288 012d 00       		.uleb128 0x0
  2289 012e 06       		.uleb128 0x6
-ARM GAS  /tmp/ccFueNYe.s 			page 43
+ARM GAS  /tmp/cc4Xt1TY.s 			page 43
 
 
- 2290 012f 70030000 		.4byte	.LASF25
+ 2290 012f 52030000 		.4byte	.LASF25
  2291 0133 06       		.byte	0x6
  2292 0134 61       		.byte	0x61
  2293 0135 50020000 		.4byte	0x250
@@ -2537,7 +2537,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  2303 0148 23       		.byte	0x23
  2304 0149 08       		.uleb128 0x8
  2305 014a 06       		.uleb128 0x6
- 2306 014b 13030000 		.4byte	.LASF27
+ 2306 014b F5020000 		.4byte	.LASF27
  2307 014f 06       		.byte	0x6
  2308 0150 64       		.byte	0x64
  2309 0151 28030000 		.4byte	0x328
@@ -2545,7 +2545,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  2311 0156 23       		.byte	0x23
  2312 0157 0C       		.uleb128 0xc
  2313 0158 06       		.uleb128 0x6
- 2314 0159 93010000 		.4byte	.LASF28
+ 2314 0159 75010000 		.4byte	.LASF28
  2315 015d 06       		.byte	0x6
  2316 015e 66       		.byte	0x66
  2317 015f 50020000 		.4byte	0x250
@@ -2553,7 +2553,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  2319 0164 23       		.byte	0x23
  2320 0165 10       		.uleb128 0x10
  2321 0166 06       		.uleb128 0x6
- 2322 0167 DC030000 		.4byte	.LASF29
+ 2322 0167 BE030000 		.4byte	.LASF29
  2323 016b 06       		.byte	0x6
  2324 016c 67       		.byte	0x67
  2325 016d 50020000 		.4byte	0x250
@@ -2561,7 +2561,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  2327 0172 23       		.byte	0x23
  2328 0173 14       		.uleb128 0x14
  2329 0174 06       		.uleb128 0x6
- 2330 0175 D1040000 		.4byte	.LASF30
+ 2330 0175 B3040000 		.4byte	.LASF30
  2331 0179 06       		.byte	0x6
  2332 017a 6E       		.byte	0x6e
  2333 017b 10050000 		.4byte	0x510
@@ -2569,7 +2569,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  2335 0180 23       		.byte	0x23
  2336 0181 18       		.uleb128 0x18
  2337 0182 06       		.uleb128 0x6
- 2338 0183 CC030000 		.4byte	.LASF31
+ 2338 0183 AE030000 		.4byte	.LASF31
  2339 0187 06       		.byte	0x6
  2340 0188 79       		.byte	0x79
  2341 0189 BC000000 		.4byte	0xbc
@@ -2577,8 +2577,8 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  2343 018e 23       		.byte	0x23
  2344 018f 1C       		.uleb128 0x1c
  2345 0190 06       		.uleb128 0x6
- 2346 0191 02040000 		.4byte	.LASF32
-ARM GAS  /tmp/ccFueNYe.s 			page 44
+ 2346 0191 E4030000 		.4byte	.LASF32
+ARM GAS  /tmp/cc4Xt1TY.s 			page 44
 
 
  2347 0195 06       		.byte	0x6
@@ -2588,7 +2588,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  2351 019c 23       		.byte	0x23
  2352 019d 1D       		.uleb128 0x1d
  2353 019e 06       		.uleb128 0x6
- 2354 019f D8040000 		.4byte	.LASF33
+ 2354 019f BA040000 		.4byte	.LASF33
  2355 01a3 06       		.byte	0x6
  2356 01a4 82       		.byte	0x82
  2357 01a5 C7000000 		.4byte	0xc7
@@ -2596,7 +2596,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  2359 01aa 23       		.byte	0x23
  2360 01ab 1E       		.uleb128 0x1e
  2361 01ac 06       		.uleb128 0x6
- 2362 01ad 80010000 		.4byte	.LASF34
+ 2362 01ad 62010000 		.4byte	.LASF34
  2363 01b1 06       		.byte	0x6
  2364 01b2 89       		.byte	0x89
  2365 01b3 0D040000 		.4byte	0x40d
@@ -2612,7 +2612,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  2375 01c6 23       		.byte	0x23
  2376 01c7 24       		.uleb128 0x24
  2377 01c8 06       		.uleb128 0x6
- 2378 01c9 C0020000 		.4byte	.LASF35
+ 2378 01c9 A2020000 		.4byte	.LASF35
  2379 01cd 06       		.byte	0x6
  2380 01ce B3       		.byte	0xb3
  2381 01cf 78020000 		.4byte	0x278
@@ -2620,7 +2620,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  2383 01d4 23       		.byte	0x23
  2384 01d5 28       		.uleb128 0x28
  2385 01d6 06       		.uleb128 0x6
- 2386 01d7 0A020000 		.4byte	.LASF36
+ 2386 01d7 EC010000 		.4byte	.LASF36
  2387 01db 06       		.byte	0x6
  2388 01dc B9       		.byte	0xb9
  2389 01dd 56020000 		.4byte	0x256
@@ -2628,7 +2628,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  2391 01e2 23       		.byte	0x23
  2392 01e3 2C       		.uleb128 0x2c
  2393 01e4 06       		.uleb128 0x6
- 2394 01e5 B0040000 		.4byte	.LASF37
+ 2394 01e5 92040000 		.4byte	.LASF37
  2395 01e9 06       		.byte	0x6
  2396 01ea BD       		.byte	0xbd
  2397 01eb DD000000 		.4byte	0xdd
@@ -2636,9 +2636,9 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  2399 01f0 23       		.byte	0x23
  2400 01f1 34       		.uleb128 0x34
  2401 01f2 06       		.uleb128 0x6
- 2402 01f3 25040000 		.4byte	.LASF38
+ 2402 01f3 07040000 		.4byte	.LASF38
  2403 01f7 06       		.byte	0x6
-ARM GAS  /tmp/ccFueNYe.s 			page 45
+ARM GAS  /tmp/cc4Xt1TY.s 			page 45
 
 
  2404 01f8 C3       		.byte	0xc3
@@ -2647,7 +2647,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  2407 01fe 23       		.byte	0x23
  2408 01ff 38       		.uleb128 0x38
  2409 0200 06       		.uleb128 0x6
- 2410 0201 7A020000 		.4byte	.LASF39
+ 2410 0201 5C020000 		.4byte	.LASF39
  2411 0205 06       		.byte	0x6
  2412 0206 CA       		.byte	0xca
  2413 0207 22050000 		.4byte	0x522
@@ -2655,7 +2655,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  2415 020c 23       		.byte	0x23
  2416 020d 3C       		.uleb128 0x3c
  2417 020e 06       		.uleb128 0x6
- 2418 020f 89040000 		.4byte	.LASF40
+ 2418 020f 6B040000 		.4byte	.LASF40
  2419 0213 06       		.byte	0x6
  2420 0214 CE       		.byte	0xce
  2421 0215 D2000000 		.4byte	0xd2
@@ -2663,7 +2663,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  2423 021a 23       		.byte	0x23
  2424 021b 40       		.uleb128 0x40
  2425 021c 06       		.uleb128 0x6
- 2426 021d F2000000 		.4byte	.LASF41
+ 2426 021d D4000000 		.4byte	.LASF41
  2427 0221 06       		.byte	0x6
  2428 0222 D4       		.byte	0xd4
  2429 0223 8E020000 		.4byte	0x28e
@@ -2677,7 +2677,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  2437 022e 61       		.byte	0x61
  2438 022f 50020000 		.4byte	0x250
  2439 0233 06       		.uleb128 0x6
- 2440 0234 FB030000 		.4byte	.LASF24
+ 2440 0234 DD030000 		.4byte	.LASF24
  2441 0238 05       		.byte	0x5
  2442 0239 62       		.byte	0x62
  2443 023a 50020000 		.4byte	0x250
@@ -2685,7 +2685,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  2445 023f 23       		.byte	0x23
  2446 0240 00       		.uleb128 0x0
  2447 0241 06       		.uleb128 0x6
- 2448 0242 70030000 		.4byte	.LASF25
+ 2448 0242 52030000 		.4byte	.LASF25
  2449 0246 05       		.byte	0x5
  2450 0247 64       		.byte	0x64
  2451 0248 50020000 		.4byte	0x250
@@ -2697,8 +2697,8 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  2457 0251 04       		.byte	0x4
  2458 0252 09010000 		.4byte	0x109
  2459 0256 03       		.uleb128 0x3
- 2460 0257 06030000 		.4byte	.LASF42
-ARM GAS  /tmp/ccFueNYe.s 			page 46
+ 2460 0257 E8020000 		.4byte	.LASF42
+ARM GAS  /tmp/cc4Xt1TY.s 			page 46
 
 
  2461 025b 05       		.byte	0x5
@@ -2710,7 +2710,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  2467 0264 6B       		.byte	0x6b
  2468 0265 78020000 		.4byte	0x278
  2469 0269 06       		.uleb128 0x6
- 2470 026a FB030000 		.4byte	.LASF24
+ 2470 026a DD030000 		.4byte	.LASF24
  2471 026e 05       		.byte	0x5
  2472 026f 6D       		.byte	0x6d
  2473 0270 50020000 		.4byte	0x250
@@ -2719,24 +2719,24 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  2476 0276 00       		.uleb128 0x0
  2477 0277 00       		.byte	0x0
  2478 0278 03       		.uleb128 0x3
- 2479 0279 6E020000 		.4byte	.LASF43
+ 2479 0279 50020000 		.4byte	.LASF43
  2480 027d 05       		.byte	0x5
  2481 027e 70       		.byte	0x70
  2482 027f 61020000 		.4byte	0x261
  2483 0283 03       		.uleb128 0x3
- 2484 0284 C2010000 		.4byte	.LASF44
+ 2484 0284 A4010000 		.4byte	.LASF44
  2485 0288 07       		.byte	0x7
  2486 0289 D7       		.byte	0xd7
  2487 028a 8E020000 		.4byte	0x28e
  2488 028e 0A       		.uleb128 0xa
  2489 028f 04       		.byte	0x4
  2490 0290 03       		.uleb128 0x3
- 2491 0291 95020000 		.4byte	.LASF45
+ 2491 0291 77020000 		.4byte	.LASF45
  2492 0295 07       		.byte	0x7
  2493 0296 DD       		.byte	0xdd
  2494 0297 94000000 		.4byte	0x94
  2495 029b 05       		.uleb128 0x5
- 2496 029c B6040000 		.4byte	.LASF46
+ 2496 029c 98040000 		.4byte	.LASF46
  2497 02a0 24       		.byte	0x24
  2498 02a1 07       		.byte	0x7
  2499 02a2 FE       		.byte	0xfe
@@ -2758,7 +2758,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  2515 02c1 23       		.byte	0x23
  2516 02c2 04       		.uleb128 0x4
  2517 02c3 0B       		.uleb128 0xb
-ARM GAS  /tmp/ccFueNYe.s 			page 47
+ARM GAS  /tmp/cc4Xt1TY.s 			page 47
 
 
  2518 02c4 723600   		.ascii	"r6\000"
@@ -2818,10 +2818,10 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  2572 0326 20       		.uleb128 0x20
  2573 0327 00       		.byte	0x0
  2574 0328 0C       		.uleb128 0xc
-ARM GAS  /tmp/ccFueNYe.s 			page 48
+ARM GAS  /tmp/cc4Xt1TY.s 			page 48
 
 
- 2575 0329 A8040000 		.4byte	.LASF47
+ 2575 0329 8A040000 		.4byte	.LASF47
  2576 032d 04       		.byte	0x4
  2577 032e 07       		.byte	0x7
  2578 032f 2301     		.2byte	0x123
@@ -2839,7 +2839,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  2590 0346 04       		.byte	0x4
  2591 0347 9B020000 		.4byte	0x29b
  2592 034b 03       		.uleb128 0x3
- 2593 034c 94040000 		.4byte	.LASF48
+ 2593 034c 76040000 		.4byte	.LASF48
  2594 0350 08       		.byte	0x8
  2595 0351 53       		.byte	0x53
  2596 0352 56030000 		.4byte	0x356
@@ -2853,18 +2853,18 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  2604 0363 8E020000 		.4byte	0x28e
  2605 0367 00       		.byte	0x0
  2606 0368 03       		.uleb128 0x3
- 2607 0369 2E020000 		.4byte	.LASF49
+ 2607 0369 10020000 		.4byte	.LASF49
  2608 036d 08       		.byte	0x8
  2609 036e 58       		.byte	0x58
  2610 036f 73030000 		.4byte	0x373
  2611 0373 05       		.uleb128 0x5
- 2612 0374 2E020000 		.4byte	.LASF49
+ 2612 0374 10020000 		.4byte	.LASF49
  2613 0378 14       		.byte	0x14
  2614 0379 08       		.byte	0x8
  2615 037a 5F       		.byte	0x5f
  2616 037b C6030000 		.4byte	0x3c6
  2617 037f 06       		.uleb128 0x6
- 2618 0380 FC010000 		.4byte	.LASF50
+ 2618 0380 DE010000 		.4byte	.LASF50
  2619 0384 08       		.byte	0x8
  2620 0385 60       		.byte	0x60
  2621 0386 C6030000 		.4byte	0x3c6
@@ -2872,18 +2872,18 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  2623 038b 23       		.byte	0x23
  2624 038c 00       		.uleb128 0x0
  2625 038d 06       		.uleb128 0x6
- 2626 038e CB010000 		.4byte	.LASF51
+ 2626 038e AD010000 		.4byte	.LASF51
  2627 0392 08       		.byte	0x8
  2628 0393 62       		.byte	0x62
  2629 0394 C6030000 		.4byte	0x3c6
  2630 0398 02       		.byte	0x2
  2631 0399 23       		.byte	0x23
-ARM GAS  /tmp/ccFueNYe.s 			page 49
+ARM GAS  /tmp/cc4Xt1TY.s 			page 49
 
 
  2632 039a 04       		.uleb128 0x4
  2633 039b 06       		.uleb128 0x6
- 2634 039c B8020000 		.4byte	.LASF52
+ 2634 039c 9A020000 		.4byte	.LASF52
  2635 03a0 08       		.byte	0x8
  2636 03a1 64       		.byte	0x64
  2637 03a2 F3000000 		.4byte	0xf3
@@ -2891,7 +2891,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  2639 03a7 23       		.byte	0x23
  2640 03a8 08       		.uleb128 0x8
  2641 03a9 06       		.uleb128 0x6
- 2642 03aa D5020000 		.4byte	.LASF53
+ 2642 03aa B7020000 		.4byte	.LASF53
  2643 03ae 08       		.byte	0x8
  2644 03af 65       		.byte	0x65
  2645 03b0 4B030000 		.4byte	0x34b
@@ -2899,7 +2899,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  2647 03b5 23       		.byte	0x23
  2648 03b6 0C       		.uleb128 0xc
  2649 03b7 06       		.uleb128 0x6
- 2650 03b8 BD040000 		.4byte	.LASF54
+ 2650 03b8 9F040000 		.4byte	.LASF54
  2651 03bc 08       		.byte	0x8
  2652 03bd 67       		.byte	0x67
  2653 03be 8E020000 		.4byte	0x28e
@@ -2916,7 +2916,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  2664 03cf 71       		.byte	0x71
  2665 03d0 0D040000 		.4byte	0x40d
  2666 03d4 06       		.uleb128 0x6
- 2667 03d5 FC010000 		.4byte	.LASF50
+ 2667 03d5 DE010000 		.4byte	.LASF50
  2668 03d9 08       		.byte	0x8
  2669 03da 72       		.byte	0x72
  2670 03db C6030000 		.4byte	0x3c6
@@ -2924,7 +2924,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  2672 03e0 23       		.byte	0x23
  2673 03e1 00       		.uleb128 0x0
  2674 03e2 06       		.uleb128 0x6
- 2675 03e3 CB010000 		.4byte	.LASF51
+ 2675 03e3 AD010000 		.4byte	.LASF51
  2676 03e7 08       		.byte	0x8
  2677 03e8 74       		.byte	0x74
  2678 03e9 C6030000 		.4byte	0x3c6
@@ -2932,18 +2932,18 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  2680 03ee 23       		.byte	0x23
  2681 03ef 04       		.uleb128 0x4
  2682 03f0 06       		.uleb128 0x6
- 2683 03f1 B8020000 		.4byte	.LASF52
+ 2683 03f1 9A020000 		.4byte	.LASF52
  2684 03f5 08       		.byte	0x8
  2685 03f6 76       		.byte	0x76
  2686 03f7 F3000000 		.4byte	0xf3
  2687 03fb 02       		.byte	0x2
  2688 03fc 23       		.byte	0x23
-ARM GAS  /tmp/ccFueNYe.s 			page 50
+ARM GAS  /tmp/cc4Xt1TY.s 			page 50
 
 
  2689 03fd 08       		.uleb128 0x8
  2690 03fe 06       		.uleb128 0x6
- 2691 03ff 38050000 		.4byte	.LASF55
+ 2691 03ff 1A050000 		.4byte	.LASF55
  2692 0403 08       		.byte	0x8
  2693 0404 77       		.byte	0x77
  2694 0405 0D040000 		.4byte	0x40d
@@ -2954,7 +2954,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  2699 040d 0F       		.uleb128 0xf
  2700 040e F3000000 		.4byte	0xf3
  2701 0412 03       		.uleb128 0x3
- 2702 0413 79050000 		.4byte	.LASF56
+ 2702 0413 5B050000 		.4byte	.LASF56
  2703 0417 08       		.byte	0x8
  2704 0418 78       		.byte	0x78
  2705 0419 CC030000 		.4byte	0x3cc
@@ -2964,7 +2964,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  2709 0420 5E       		.byte	0x5e
  2710 0421 88040000 		.4byte	0x488
  2711 0425 06       		.uleb128 0x6
- 2712 0426 39040000 		.4byte	.LASF57
+ 2712 0426 1B040000 		.4byte	.LASF57
  2713 042a 09       		.byte	0x9
  2714 042b 5F       		.byte	0x5f
  2715 042c 56020000 		.4byte	0x256
@@ -2972,7 +2972,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  2717 0431 23       		.byte	0x23
  2718 0432 00       		.uleb128 0x0
  2719 0433 06       		.uleb128 0x6
- 2720 0434 B1020000 		.4byte	.LASF58
+ 2720 0434 93020000 		.4byte	.LASF58
  2721 0438 09       		.byte	0x9
  2722 0439 60       		.byte	0x60
  2723 043a D2000000 		.4byte	0xd2
@@ -2980,7 +2980,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  2725 043f 23       		.byte	0x23
  2726 0440 08       		.uleb128 0x8
  2727 0441 06       		.uleb128 0x6
- 2728 0442 00030000 		.4byte	.LASF59
+ 2728 0442 E2020000 		.4byte	.LASF59
  2729 0446 09       		.byte	0x9
  2730 0447 62       		.byte	0x62
  2731 0448 28030000 		.4byte	0x328
@@ -2988,7 +2988,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  2733 044d 23       		.byte	0x23
  2734 044e 0C       		.uleb128 0xc
  2735 044f 06       		.uleb128 0x6
- 2736 0450 BA010000 		.4byte	.LASF60
+ 2736 0450 9C010000 		.4byte	.LASF60
  2737 0454 09       		.byte	0x9
  2738 0455 65       		.byte	0x65
  2739 0456 50020000 		.4byte	0x250
@@ -2996,9 +2996,9 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  2741 045b 23       		.byte	0x23
  2742 045c 10       		.uleb128 0x10
  2743 045d 06       		.uleb128 0x6
- 2744 045e 3F030000 		.4byte	.LASF61
+ 2744 045e 21030000 		.4byte	.LASF61
  2745 0462 09       		.byte	0x9
-ARM GAS  /tmp/ccFueNYe.s 			page 51
+ARM GAS  /tmp/cc4Xt1TY.s 			page 51
 
 
  2746 0463 66       		.byte	0x66
@@ -3007,7 +3007,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  2749 0469 23       		.byte	0x23
  2750 046a 14       		.uleb128 0x14
  2751 046b 06       		.uleb128 0x6
- 2752 046c 8C050000 		.4byte	.LASF62
+ 2752 046c 6E050000 		.4byte	.LASF62
  2753 0470 09       		.byte	0x9
  2754 0471 6A       		.byte	0x6a
  2755 0472 FE000000 		.4byte	0xfe
@@ -3015,7 +3015,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  2757 0477 23       		.byte	0x23
  2758 0478 18       		.uleb128 0x18
  2759 0479 06       		.uleb128 0x6
- 2760 047a 35030000 		.4byte	.LASF63
+ 2760 047a 17030000 		.4byte	.LASF63
  2761 047e 09       		.byte	0x9
  2762 047f 6C       		.byte	0x6c
  2763 0480 50020000 		.4byte	0x250
@@ -3024,18 +3024,18 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  2766 0486 1C       		.uleb128 0x1c
  2767 0487 00       		.byte	0x0
  2768 0488 03       		.uleb128 0x3
- 2769 0489 DF040000 		.4byte	.LASF64
+ 2769 0489 C1040000 		.4byte	.LASF64
  2770 048d 09       		.byte	0x9
  2771 048e 6E       		.byte	0x6e
  2772 048f 1D040000 		.4byte	0x41d
  2773 0493 05       		.uleb128 0x5
- 2774 0494 DD020000 		.4byte	.LASF65
+ 2774 0494 BF020000 		.4byte	.LASF65
  2775 0498 10       		.byte	0x10
  2776 0499 0A       		.byte	0xa
  2777 049a 2C       		.byte	0x2c
  2778 049b CA040000 		.4byte	0x4ca
  2779 049f 06       		.uleb128 0x6
- 2780 04a0 01010000 		.4byte	.LASF66
+ 2780 04a0 E3000000 		.4byte	.LASF66
  2781 04a4 0A       		.byte	0xa
  2782 04a5 2D       		.byte	0x2d
  2783 04a6 56020000 		.4byte	0x256
@@ -3043,7 +3043,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  2785 04ab 23       		.byte	0x23
  2786 04ac 00       		.uleb128 0x0
  2787 04ad 06       		.uleb128 0x6
- 2788 04ae 96050000 		.4byte	.LASF67
+ 2788 04ae 78050000 		.4byte	.LASF67
  2789 04b2 0A       		.byte	0xa
  2790 04b3 2F       		.byte	0x2f
  2791 04b4 50020000 		.4byte	0x250
@@ -3051,14 +3051,14 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  2793 04b9 23       		.byte	0x23
  2794 04ba 08       		.uleb128 0x8
  2795 04bb 06       		.uleb128 0x6
- 2796 04bc 78040000 		.4byte	.LASF68
+ 2796 04bc 5A040000 		.4byte	.LASF68
  2797 04c0 0A       		.byte	0xa
  2798 04c1 31       		.byte	0x31
  2799 04c2 CA040000 		.4byte	0x4ca
  2800 04c6 02       		.byte	0x2
  2801 04c7 23       		.byte	0x23
  2802 04c8 0C       		.uleb128 0xc
-ARM GAS  /tmp/ccFueNYe.s 			page 52
+ARM GAS  /tmp/cc4Xt1TY.s 			page 52
 
 
  2803 04c9 00       		.byte	0x0
@@ -3066,7 +3066,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  2805 04cb 04       		.byte	0x4
  2806 04cc 93040000 		.4byte	0x493
  2807 04d0 03       		.uleb128 0x3
- 2808 04d1 DD020000 		.4byte	.LASF65
+ 2808 04d1 BF020000 		.4byte	.LASF65
  2809 04d5 0A       		.byte	0xa
  2810 04d6 33       		.byte	0x33
  2811 04d7 93040000 		.4byte	0x493
@@ -3086,12 +3086,12 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  2825 04f4 9E       		.byte	0x9e
  2826 04f5 DD000000 		.4byte	0xdd
  2827 04f9 11       		.uleb128 0x11
- 2828 04fa 24050000 		.4byte	.LASF71
+ 2828 04fa 06050000 		.4byte	.LASF71
  2829 04fe 06       		.byte	0x6
  2830 04ff A5       		.byte	0xa5
  2831 0500 8E020000 		.4byte	0x28e
  2832 0504 11       		.uleb128 0x11
- 2833 0505 F4030000 		.4byte	.LASF72
+ 2833 0505 D6030000 		.4byte	.LASF72
  2834 0509 06       		.byte	0x6
  2835 050a AC       		.byte	0xac
  2836 050b E8000000 		.4byte	0xe8
@@ -3104,7 +3104,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  2843 051b 04       		.uleb128 0x4
  2844 051c 01       		.byte	0x1
  2845 051d 08       		.byte	0x8
- 2846 051e 5F040000 		.4byte	.LASF73
+ 2846 051e 41040000 		.4byte	.LASF73
  2847 0522 09       		.uleb128 0x9
  2848 0523 04       		.byte	0x4
  2849 0524 D0040000 		.4byte	0x4d0
@@ -3118,7 +3118,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  2857 0538 0E       		.uleb128 0xe
  2858 0539 8E020000 		.4byte	0x28e
  2859 053d 0E       		.uleb128 0xe
-ARM GAS  /tmp/ccFueNYe.s 			page 53
+ARM GAS  /tmp/cc4Xt1TY.s 			page 53
 
 
  2860 053e 48050000 		.4byte	0x548
@@ -3154,7 +3154,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  2890 0580 51       		.byte	0x51
  2891 0581 F6050000 		.4byte	0x5f6
  2892 0585 06       		.uleb128 0x6
- 2893 0586 AB020000 		.4byte	.LASF75
+ 2893 0586 8D020000 		.4byte	.LASF75
  2894 058a 0B       		.byte	0xb
  2895 058b 52       		.byte	0x52
  2896 058c 53050000 		.4byte	0x553
@@ -3162,7 +3162,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  2898 0591 23       		.byte	0x23
  2899 0592 00       		.uleb128 0x0
  2900 0593 06       		.uleb128 0x6
- 2901 0594 5D030000 		.4byte	.LASF76
+ 2901 0594 3F030000 		.4byte	.LASF76
  2902 0598 0B       		.byte	0xb
  2903 0599 52       		.byte	0x52
  2904 059a 73050000 		.4byte	0x573
@@ -3170,7 +3170,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  2906 059f 23       		.byte	0x23
  2907 05a0 04       		.uleb128 0x4
  2908 05a1 06       		.uleb128 0x6
- 2909 05a2 9B010000 		.4byte	.LASF77
+ 2909 05a2 7D010000 		.4byte	.LASF77
  2910 05a6 0B       		.byte	0xb
  2911 05a7 52       		.byte	0x52
  2912 05a8 06060000 		.4byte	0x606
@@ -3178,10 +3178,10 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  2914 05ad 23       		.byte	0x23
  2915 05ae 08       		.uleb128 0x8
  2916 05af 06       		.uleb128 0x6
-ARM GAS  /tmp/ccFueNYe.s 			page 54
+ARM GAS  /tmp/cc4Xt1TY.s 			page 54
 
 
- 2917 05b0 65050000 		.4byte	.LASF78
+ 2917 05b0 47050000 		.4byte	.LASF78
  2918 05b4 0B       		.byte	0xb
  2919 05b5 52       		.byte	0x52
  2920 05b6 06060000 		.4byte	0x606
@@ -3205,7 +3205,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  2938 05d7 23       		.byte	0x23
  2939 05d8 14       		.uleb128 0x14
  2940 05d9 06       		.uleb128 0x6
- 2941 05da 54020000 		.4byte	.LASF79
+ 2941 05da 36020000 		.4byte	.LASF79
  2942 05de 0B       		.byte	0xb
  2943 05df 52       		.byte	0x52
  2944 05e0 66060000 		.4byte	0x666
@@ -3238,7 +3238,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  2971 0616 0E       		.uleb128 0xe
  2972 0617 8E020000 		.4byte	0x28e
  2973 061b 0E       		.uleb128 0xe
-ARM GAS  /tmp/ccFueNYe.s 			page 55
+ARM GAS  /tmp/cc4Xt1TY.s 			page 55
 
 
  2974 061c 49000000 		.4byte	0x49
@@ -3298,7 +3298,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  3028 0694 5C       		.byte	0x5c
  3029 0695 A8060000 		.4byte	0x6a8
  3030 0699 07       		.uleb128 0x7
-ARM GAS  /tmp/ccFueNYe.s 			page 56
+ARM GAS  /tmp/cc4Xt1TY.s 			page 56
 
 
  3031 069a 766D7400 		.ascii	"vmt\000"
@@ -3315,20 +3315,20 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  3042 06ae 12       		.uleb128 0x12
  3043 06af 79050000 		.4byte	0x579
  3044 06b3 03       		.uleb128 0x3
- 3045 06b4 80050000 		.4byte	.LASF81
+ 3045 06b4 62050000 		.4byte	.LASF81
  3046 06b8 0B       		.byte	0xb
  3047 06b9 60       		.byte	0x60
  3048 06ba 91060000 		.4byte	0x691
  3049 06be 0F       		.uleb128 0xf
  3050 06bf 69000000 		.4byte	0x69
  3051 06c3 05       		.uleb128 0x5
- 3052 06c4 1C040000 		.4byte	.LASF82
+ 3052 06c4 FE030000 		.4byte	.LASF82
  3053 06c8 10       		.byte	0x10
  3054 06c9 0C       		.byte	0xc
  3055 06ca 46       		.byte	0x46
  3056 06cb 08070000 		.4byte	0x708
  3057 06cf 06       		.uleb128 0x6
- 3058 06d0 29020000 		.4byte	.LASF83
+ 3058 06d0 0B020000 		.4byte	.LASF83
  3059 06d4 0C       		.byte	0xc
  3060 06d5 47       		.byte	0x47
  3061 06d6 10050000 		.4byte	0x510
@@ -3336,7 +3336,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  3063 06db 23       		.byte	0x23
  3064 06dc 00       		.uleb128 0x0
  3065 06dd 06       		.uleb128 0x6
- 3066 06de 19030000 		.4byte	.LASF84
+ 3066 06de FB020000 		.4byte	.LASF84
  3067 06e2 0C       		.byte	0xc
  3068 06e3 48       		.byte	0x48
  3069 06e4 0A070000 		.4byte	0x70a
@@ -3344,7 +3344,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  3071 06e9 23       		.byte	0x23
  3072 06ea 04       		.uleb128 0x4
  3073 06eb 06       		.uleb128 0x6
- 3074 06ec 0E050000 		.4byte	.LASF85
+ 3074 06ec F0040000 		.4byte	.LASF85
  3075 06f0 0C       		.byte	0xc
  3076 06f1 49       		.byte	0x49
  3077 06f2 0A070000 		.4byte	0x70a
@@ -3352,13 +3352,13 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  3079 06f7 23       		.byte	0x23
  3080 06f8 08       		.uleb128 0x8
  3081 06f9 06       		.uleb128 0x6
- 3082 06fa 77030000 		.4byte	.LASF86
+ 3082 06fa 59030000 		.4byte	.LASF86
  3083 06fe 0C       		.byte	0xc
  3084 06ff 4A       		.byte	0x4a
  3085 0700 0A070000 		.4byte	0x70a
  3086 0704 02       		.byte	0x2
  3087 0705 23       		.byte	0x23
-ARM GAS  /tmp/ccFueNYe.s 			page 57
+ARM GAS  /tmp/cc4Xt1TY.s 			page 57
 
 
  3088 0706 0C       		.uleb128 0xc
@@ -3418,14 +3418,14 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  3142 0760 90020000 		.4byte	0x290
  3143 0764 6F070000 		.4byte	0x76f
  3144 0768 17       		.uleb128 0x17
-ARM GAS  /tmp/ccFueNYe.s 			page 58
+ARM GAS  /tmp/cc4Xt1TY.s 			page 58
 
 
  3145 0769 3B000000 		.4byte	0x3b
  3146 076d 23       		.byte	0x23
  3147 076e 00       		.byte	0x0
  3148 076f 18       		.uleb128 0x18
- 3149 0770 C4040000 		.4byte	.LASF137
+ 3149 0770 A6040000 		.4byte	.LASF137
  3150 0774 A005     		.2byte	0x5a0
  3151 0776 0C       		.byte	0xc
  3152 0777 4E       		.byte	0x4e
@@ -3436,7 +3436,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  3157 0781 55       		.byte	0x55
  3158 0782 10070000 		.4byte	0x710
  3159 0786 11       		.uleb128 0x11
- 3160 0787 8C010000 		.4byte	.LASF87
+ 3160 0787 6E010000 		.4byte	.LASF87
  3161 078b 0C       		.byte	0xc
  3162 078c 56       		.byte	0x56
  3163 078d 92070000 		.4byte	0x792
@@ -3450,7 +3450,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  3171 07a2 00       		.byte	0x0
  3172 07a3 1B       		.uleb128 0x1b
  3173 07a4 01       		.byte	0x1
- 3174 07a5 5B020000 		.4byte	.LASF88
+ 3174 07a5 3D020000 		.4byte	.LASF88
  3175 07a9 01       		.byte	0x1
  3176 07aa A9       		.byte	0xa9
  3177 07ab 01       		.byte	0x1
@@ -3458,31 +3458,31 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  3179 07b0 01       		.byte	0x1
  3180 07b1 C1070000 		.4byte	0x7c1
  3181 07b5 1C       		.uleb128 0x1c
- 3182 07b6 04020000 		.4byte	.LASF90
+ 3182 07b6 E6010000 		.4byte	.LASF90
  3183 07ba 01       		.byte	0x1
  3184 07bb A9       		.byte	0xa9
  3185 07bc 3B000000 		.4byte	0x3b
  3186 07c0 00       		.byte	0x0
  3187 07c1 1D       		.uleb128 0x1d
- 3188 07c2 17050000 		.4byte	.LASF138
+ 3188 07c2 F9040000 		.4byte	.LASF138
  3189 07c6 01       		.byte	0x1
  3190 07c7 8E       		.byte	0x8e
  3191 07c8 01       		.byte	0x1
  3192 07c9 01       		.byte	0x1
  3193 07ca 1B       		.uleb128 0x1b
  3194 07cb 01       		.byte	0x1
- 3195 07cc 2B050000 		.4byte	.LASF89
+ 3195 07cc 0D050000 		.4byte	.LASF89
  3196 07d0 01       		.byte	0x1
  3197 07d1 B1       		.byte	0xb1
  3198 07d2 01       		.byte	0x1
  3199 07d3 A6000000 		.4byte	0xa6
  3200 07d7 01       		.byte	0x1
  3201 07d8 F3070000 		.4byte	0x7f3
-ARM GAS  /tmp/ccFueNYe.s 			page 59
+ARM GAS  /tmp/cc4Xt1TY.s 			page 59
 
 
  3202 07dc 1C       		.uleb128 0x1c
- 3203 07dd 04020000 		.4byte	.LASF90
+ 3203 07dd E6010000 		.4byte	.LASF90
  3204 07e1 01       		.byte	0x1
  3205 07e2 B1       		.byte	0xb1
  3206 07e3 3B000000 		.4byte	0x3b
@@ -3493,7 +3493,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  3211 07ee A6000000 		.4byte	0xa6
  3212 07f2 00       		.byte	0x0
  3213 07f3 1E       		.uleb128 0x1e
- 3214 07f4 E9040000 		.4byte	.LASF92
+ 3214 07f4 CB040000 		.4byte	.LASF92
  3215 07f8 01       		.byte	0x1
  3216 07f9 2801     		.2byte	0x128
  3217 07fb 01       		.byte	0x1
@@ -3516,7 +3516,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  3234 081e 12       		.uleb128 0x12
  3235 081f C3060000 		.4byte	0x6c3
  3236 0823 21       		.uleb128 0x21
- 3237 0824 DC010000 		.4byte	.LASF93
+ 3237 0824 BE010000 		.4byte	.LASF93
  3238 0828 01       		.byte	0x1
  3239 0829 93       		.byte	0x93
  3240 082a 01       		.byte	0x1
@@ -3538,7 +3538,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  3256 0849 01       		.byte	0x1
  3257 084a 00000000 		.4byte	.LFB131
  3258 084e 0C000000 		.4byte	.LFE131
-ARM GAS  /tmp/ccFueNYe.s 			page 60
+ARM GAS  /tmp/cc4Xt1TY.s 			page 60
 
 
  3259 0852 02       		.byte	0x2
@@ -3554,7 +3554,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  3269 0864 50       		.byte	0x50
  3270 0865 00       		.byte	0x0
  3271 0866 25       		.uleb128 0x25
- 3272 0867 E3020000 		.4byte	.LASF94
+ 3272 0867 C5020000 		.4byte	.LASF94
  3273 086b 01       		.byte	0x1
  3274 086c 3A01     		.2byte	0x13a
  3275 086e 01       		.byte	0x1
@@ -3571,7 +3571,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  3286 088d 00       		.byte	0x0
  3287 088e 27       		.uleb128 0x27
  3288 088f 01       		.byte	0x1
- 3289 0890 41040000 		.4byte	.LASF95
+ 3289 0890 23040000 		.4byte	.LASF95
  3290 0894 01       		.byte	0x1
  3291 0895 66       		.byte	0x66
  3292 0896 01       		.byte	0x1
@@ -3598,7 +3598,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  3313 08c5 01       		.byte	0x1
  3314 08c6 67       		.byte	0x67
  3315 08c7 3B080000 		.4byte	0x83b
-ARM GAS  /tmp/ccFueNYe.s 			page 61
+ARM GAS  /tmp/cc4Xt1TY.s 			page 61
 
 
  3316 08cb 7E000000 		.4byte	.LLST4
@@ -3612,7 +3612,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  3324 08df 00       		.byte	0x0
  3325 08e0 27       		.uleb128 0x27
  3326 08e1 01       		.byte	0x1
- 3327 08e2 A0020000 		.4byte	.LASF96
+ 3327 08e2 82020000 		.4byte	.LASF96
  3328 08e6 01       		.byte	0x1
  3329 08e7 79       		.byte	0x79
  3330 08e8 01       		.byte	0x1
@@ -3621,7 +3621,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  3333 08f1 91000000 		.4byte	.LLST5
  3334 08f5 09090000 		.4byte	0x909
  3335 08f9 2B       		.uleb128 0x2b
- 3336 08fa 90020000 		.4byte	.LASF97
+ 3336 08fa 72020000 		.4byte	.LASF97
  3337 08fe 01       		.byte	0x1
  3338 08ff 79       		.byte	0x79
  3339 0900 10050000 		.4byte	0x510
@@ -3629,7 +3629,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  3341 0908 00       		.byte	0x0
  3342 0909 27       		.uleb128 0x27
  3343 090a 01       		.byte	0x1
- 3344 090b 19010000 		.4byte	.LASF98
+ 3344 090b FB000000 		.4byte	.LASF98
  3345 090f 01       		.byte	0x1
  3346 0910 84       		.byte	0x84
  3347 0911 01       		.byte	0x1
@@ -3638,7 +3638,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  3350 091a C4000000 		.4byte	.LLST7
  3351 091e 32090000 		.4byte	0x932
  3352 0922 2B       		.uleb128 0x2b
- 3353 0923 90020000 		.4byte	.LASF97
+ 3353 0923 72020000 		.4byte	.LASF97
  3354 0927 01       		.byte	0x1
  3355 0928 84       		.byte	0x84
  3356 0929 10050000 		.4byte	0x510
@@ -3646,7 +3646,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  3358 0931 00       		.byte	0x0
  3359 0932 2C       		.uleb128 0x2c
  3360 0933 01       		.byte	0x1
- 3361 0934 09010000 		.4byte	.LASF99
+ 3361 0934 EB000000 		.4byte	.LASF99
  3362 0938 01       		.byte	0x1
  3363 0939 9F       		.byte	0x9f
  3364 093a 01       		.byte	0x1
@@ -3657,8 +3657,8 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  3369 0945 00       		.sleb128 0
  3370 0946 8A090000 		.4byte	0x98a
  3371 094a 2D       		.uleb128 0x2d
- 3372 094b 62030000 		.4byte	.LASF100
-ARM GAS  /tmp/ccFueNYe.s 			page 62
+ 3372 094b 44030000 		.4byte	.LASF100
+ARM GAS  /tmp/cc4Xt1TY.s 			page 62
 
 
  3373 094f 01       		.byte	0x1
@@ -3718,7 +3718,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  3427 09d3 02000000 		.4byte	.LBB25
  3428 09d7 10000000 		.4byte	.LBE25
  3429 09db 01       		.byte	0x1
-ARM GAS  /tmp/ccFueNYe.s 			page 63
+ARM GAS  /tmp/cc4Xt1TY.s 			page 63
 
 
  3430 09dc B4       		.byte	0xb4
@@ -3729,7 +3729,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  3435 09e7 00       		.byte	0x0
  3436 09e8 33       		.uleb128 0x33
  3437 09e9 01       		.byte	0x1
- 3438 09ea 1F030000 		.4byte	.LASF102
+ 3438 09ea 01030000 		.4byte	.LASF102
  3439 09ee 01       		.byte	0x1
  3440 09ef B8       		.byte	0xb8
  3441 09f0 01       		.byte	0x1
@@ -3739,13 +3739,13 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  3445 09fd 9D010000 		.4byte	.LLST15
  3446 0a01 5A0A0000 		.4byte	0xa5a
  3447 0a05 2B       		.uleb128 0x2b
- 3448 0a06 04020000 		.4byte	.LASF90
+ 3448 0a06 E6010000 		.4byte	.LASF90
  3449 0a0a 01       		.byte	0x1
  3450 0a0b B8       		.byte	0xb8
  3451 0a0c 3B000000 		.4byte	0x3b
  3452 0a10 BD010000 		.4byte	.LLST16
  3453 0a14 2B       		.uleb128 0x2b
- 3454 0a15 15020000 		.4byte	.LASF101
+ 3454 0a15 F7010000 		.4byte	.LASF101
  3455 0a19 01       		.byte	0x1
  3456 0a1a B8       		.byte	0xb8
  3457 0a1b 3B080000 		.4byte	0x83b
@@ -3775,10 +3775,10 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  3481 0a59 00       		.byte	0x0
  3482 0a5a 33       		.uleb128 0x33
  3483 0a5b 01       		.byte	0x1
- 3484 0a5c 50010000 		.4byte	.LASF103
+ 3484 0a5c 32010000 		.4byte	.LASF103
  3485 0a60 01       		.byte	0x1
  3486 0a61 C4       		.byte	0xc4
-ARM GAS  /tmp/ccFueNYe.s 			page 64
+ARM GAS  /tmp/cc4Xt1TY.s 			page 64
 
 
  3487 0a62 01       		.byte	0x1
@@ -3788,13 +3788,13 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  3491 0a6f 2F020000 		.4byte	.LLST20
  3492 0a73 DE0A0000 		.4byte	0xade
  3493 0a77 2B       		.uleb128 0x2b
- 3494 0a78 04020000 		.4byte	.LASF90
+ 3494 0a78 E6010000 		.4byte	.LASF90
  3495 0a7c 01       		.byte	0x1
  3496 0a7d C4       		.byte	0xc4
  3497 0a7e 3B000000 		.4byte	0x3b
  3498 0a82 4F020000 		.4byte	.LLST21
  3499 0a86 2B       		.uleb128 0x2b
- 3500 0a87 73050000 		.4byte	.LASF104
+ 3500 0a87 55050000 		.4byte	.LASF104
  3501 0a8b 01       		.byte	0x1
  3502 0a8c C4       		.byte	0xc4
  3503 0a8d F3000000 		.4byte	0xf3
@@ -3832,13 +3832,13 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  3535 0add 00       		.byte	0x0
  3536 0ade 27       		.uleb128 0x27
  3537 0adf 01       		.byte	0x1
- 3538 0ae0 69010000 		.4byte	.LASF105
+ 3538 0ae0 4B010000 		.4byte	.LASF105
  3539 0ae4 01       		.byte	0x1
  3540 0ae5 D0       		.byte	0xd0
  3541 0ae6 01       		.byte	0x1
  3542 0ae7 00000000 		.4byte	.LFB127
  3543 0aeb 38000000 		.4byte	.LFE127
-ARM GAS  /tmp/ccFueNYe.s 			page 65
+ARM GAS  /tmp/cc4Xt1TY.s 			page 65
 
 
  3544 0aef CF020000 		.4byte	.LLST26
@@ -3852,7 +3852,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  3552 0b04 00       		.byte	0x0
  3553 0b05 27       		.uleb128 0x27
  3554 0b06 01       		.byte	0x1
- 3555 0b07 EE020000 		.4byte	.LASF106
+ 3555 0b07 D0020000 		.4byte	.LASF106
  3556 0b0b 01       		.byte	0x1
  3557 0b0c DB       		.byte	0xdb
  3558 0b0d 01       		.byte	0x1
@@ -3878,13 +3878,13 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  3578 0b3d 97030000 		.4byte	.LLST30
  3579 0b41 7E0B0000 		.4byte	0xb7e
  3580 0b45 2B       		.uleb128 0x2b
- 3581 0b46 D3010000 		.4byte	.LASF108
+ 3581 0b46 B5010000 		.4byte	.LASF108
  3582 0b4a 01       		.byte	0x1
  3583 0b4b EC       		.byte	0xec
  3584 0b4c 3B000000 		.4byte	0x3b
  3585 0b50 B7030000 		.4byte	.LLST31
  3586 0b54 36       		.uleb128 0x36
- 3587 0b55 73050000 		.4byte	.LASF104
+ 3587 0b55 55050000 		.4byte	.LASF104
  3588 0b59 01       		.byte	0x1
  3589 0b5a ED       		.byte	0xed
  3590 0b5b F3000000 		.4byte	0xf3
@@ -3898,7 +3898,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  3598 0b6c 01       		.byte	0x1
  3599 0b6d 50       		.byte	0x50
  3600 0b6e 2A       		.uleb128 0x2a
-ARM GAS  /tmp/ccFueNYe.s 			page 66
+ARM GAS  /tmp/cc4Xt1TY.s 			page 66
 
 
  3601 0b6f 6E6F7700 		.ascii	"now\000"
@@ -3909,7 +3909,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  3606 0b7d 00       		.byte	0x0
  3607 0b7e 37       		.uleb128 0x37
  3608 0b7f 01       		.byte	0x1
- 3609 0b80 A8030000 		.4byte	.LASF139
+ 3609 0b80 8A030000 		.4byte	.LASF139
  3610 0b84 01       		.byte	0x1
  3611 0b85 0101     		.2byte	0x101
  3612 0b87 01       		.byte	0x1
@@ -3919,7 +3919,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  3616 0b94 E8030000 		.4byte	.LLST33
  3617 0b98 38       		.uleb128 0x38
  3618 0b99 01       		.byte	0x1
- 3619 0b9a A9010000 		.4byte	.LASF109
+ 3619 0b9a 8B010000 		.4byte	.LASF109
  3620 0b9e 01       		.byte	0x1
  3621 0b9f 1C01     		.2byte	0x11c
  3622 0ba1 01       		.byte	0x1
@@ -3934,7 +3934,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  3631 0bb9 3B000000 		.4byte	0x3b
  3632 0bbd 28040000 		.4byte	.LLST35
  3633 0bc1 3A       		.uleb128 0x3a
- 3634 0bc2 D3010000 		.4byte	.LASF108
+ 3634 0bc2 B5010000 		.4byte	.LASF108
  3635 0bc6 01       		.byte	0x1
  3636 0bc7 1E01     		.2byte	0x11e
  3637 0bc9 F3000000 		.4byte	0xf3
@@ -3958,14 +3958,14 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  3655 0bfa 2201     		.2byte	0x122
  3656 0bfc 7B000000 		.4byte	0x7b
  3657 0c00 4E040000 		.4byte	.LLST37
-ARM GAS  /tmp/ccFueNYe.s 			page 67
+ARM GAS  /tmp/cc4Xt1TY.s 			page 67
 
 
  3658 0c04 00       		.byte	0x0
  3659 0c05 00       		.byte	0x0
  3660 0c06 3C       		.uleb128 0x3c
  3661 0c07 01       		.byte	0x1
- 3662 0c08 9D030000 		.4byte	.LASF110
+ 3662 0c08 7F030000 		.4byte	.LASF110
  3663 0c0c 01       		.byte	0x1
  3664 0c0d 4901     		.2byte	0x149
  3665 0c0f 01       		.byte	0x1
@@ -4018,7 +4018,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  3712 0c8b 40       		.uleb128 0x40
  3713 0c8c 23080000 		.4byte	0x823
  3714 0c90 3E010000 		.4byte	.LBB45
-ARM GAS  /tmp/ccFueNYe.s 			page 68
+ARM GAS  /tmp/cc4Xt1TY.s 			page 68
 
 
  3715 0c94 5C010000 		.4byte	.LBE45
@@ -4041,7 +4041,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  3732 0cbb 01       		.byte	0x1
  3733 0cbc 01       		.byte	0x1
  3734 0cbd 41       		.uleb128 0x41
- 3735 0cbe F6040000 		.4byte	.LASF112
+ 3735 0cbe D8040000 		.4byte	.LASF112
  3736 0cc2 09       		.byte	0x9
  3737 0cc3 72       		.byte	0x72
  3738 0cc4 88040000 		.4byte	0x488
@@ -4062,7 +4062,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  3753 0ce6 04       		.byte	0x4
  3754 0ce7 00       		.byte	0x0
  3755 0ce8 41       		.uleb128 0x41
- 3756 0ce9 D4030000 		.4byte	.LASF114
+ 3756 0ce9 B6030000 		.4byte	.LASF114
  3757 0ced 0C       		.byte	0xc
  3758 0cee B0       		.byte	0xb0
  3759 0cef D80C0000 		.4byte	0xcd8
@@ -4076,9 +4076,9 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  3767 0d00 01       		.byte	0x1
  3768 0d01 01       		.byte	0x1
  3769 0d02 41       		.uleb128 0x41
- 3770 0d03 E4030000 		.4byte	.LASF116
+ 3770 0d03 C6030000 		.4byte	.LASF116
  3771 0d07 0C       		.byte	0xc
-ARM GAS  /tmp/ccFueNYe.s 			page 69
+ARM GAS  /tmp/cc4Xt1TY.s 			page 69
 
 
  3772 0d08 B3       		.byte	0xb3
@@ -4091,7 +4091,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  3779 0d18 43       		.uleb128 0x43
  3780 0d19 00       		.byte	0x0
  3781 0d1a 41       		.uleb128 0x41
- 3782 0d1b 6D040000 		.4byte	.LASF117
+ 3782 0d1b 4F040000 		.4byte	.LASF117
  3783 0d1f 0E       		.byte	0xe
  3784 0d20 1F       		.byte	0x1f
  3785 0d21 270D0000 		.4byte	0xd27
@@ -4100,7 +4100,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  3788 0d27 12       		.uleb128 0x12
  3789 0d28 0F0D0000 		.4byte	0xd0f
  3790 0d2c 41       		.uleb128 0x41
- 3791 0d2d 47030000 		.4byte	.LASF118
+ 3791 0d2d 29030000 		.4byte	.LASF118
  3792 0d31 0F       		.byte	0xf
  3793 0d32 1F       		.byte	0x1f
  3794 0d33 390D0000 		.4byte	0xd39
@@ -4109,7 +4109,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  3797 0d39 12       		.uleb128 0x12
  3798 0d3a 0F0D0000 		.4byte	0xd0f
  3799 0d3e 41       		.uleb128 0x41
- 3800 0d3f B7030000 		.4byte	.LASF119
+ 3800 0d3f 99030000 		.4byte	.LASF119
  3801 0d43 10       		.byte	0x10
  3802 0d44 1F       		.byte	0x1f
  3803 0d45 4B0D0000 		.4byte	0xd4b
@@ -4118,7 +4118,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  3806 0d4b 12       		.uleb128 0x12
  3807 0d4c 0F0D0000 		.4byte	0xd0f
  3808 0d50 41       		.uleb128 0x41
- 3809 0d51 CA020000 		.4byte	.LASF120
+ 3809 0d51 AC020000 		.4byte	.LASF120
  3810 0d55 11       		.byte	0x11
  3811 0d56 1F       		.byte	0x1f
  3812 0d57 5D0D0000 		.4byte	0xd5d
@@ -4127,7 +4127,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  3815 0d5d 12       		.uleb128 0x12
  3816 0d5e 0F0D0000 		.4byte	0xd0f
  3817 0d62 41       		.uleb128 0x41
- 3818 0d63 9E050000 		.4byte	.LASF121
+ 3818 0d63 80050000 		.4byte	.LASF121
  3819 0d67 12       		.byte	0x12
  3820 0d68 1F       		.byte	0x1f
  3821 0d69 6F0D0000 		.4byte	0xd6f
@@ -4136,9 +4136,9 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  3824 0d6f 12       		.uleb128 0x12
  3825 0d70 0F0D0000 		.4byte	0xd0f
  3826 0d74 41       		.uleb128 0x41
- 3827 0d75 1E020000 		.4byte	.LASF122
+ 3827 0d75 00020000 		.4byte	.LASF122
  3828 0d79 13       		.byte	0x13
-ARM GAS  /tmp/ccFueNYe.s 			page 70
+ARM GAS  /tmp/cc4Xt1TY.s 			page 70
 
 
  3829 0d7a 1F       		.byte	0x1f
@@ -4166,7 +4166,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  3851 0da5 12       		.uleb128 0x12
  3852 0da6 0F0D0000 		.4byte	0xd0f
  3853 0daa 41       		.uleb128 0x41
- 3854 0dab 9D040000 		.4byte	.LASF125
+ 3854 0dab 7F040000 		.4byte	.LASF125
  3855 0daf 16       		.byte	0x16
  3856 0db0 1F       		.byte	0x1f
  3857 0db1 B70D0000 		.4byte	0xdb7
@@ -4184,7 +4184,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  3869 0dc9 12       		.uleb128 0x12
  3870 0dca 0F0D0000 		.4byte	0xd0f
  3871 0dce 41       		.uleb128 0x41
- 3872 0dcf 0A040000 		.4byte	.LASF127
+ 3872 0dcf EC030000 		.4byte	.LASF127
  3873 0dd3 18       		.byte	0x18
  3874 0dd4 1F       		.byte	0x1f
  3875 0dd5 DB0D0000 		.4byte	0xddb
@@ -4198,7 +4198,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  3883 0de9 17       		.uleb128 0x17
  3884 0dea 3B000000 		.4byte	0x3b
  3885 0dee 0B       		.byte	0xb
-ARM GAS  /tmp/ccFueNYe.s 			page 71
+ARM GAS  /tmp/cc4Xt1TY.s 			page 71
 
 
  3886 0def 00       		.byte	0x0
@@ -4208,7 +4208,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  3890 0df6 12       		.uleb128 0x12
  3891 0df7 18080000 		.4byte	0x818
  3892 0dfb 36       		.uleb128 0x36
- 3893 0dfc 64040000 		.4byte	.LASF128
+ 3893 0dfc 46040000 		.4byte	.LASF128
  3894 0e00 01       		.byte	0x1
  3895 0e01 37       		.byte	0x37
  3896 0e02 0C0E0000 		.4byte	0xe0c
@@ -4218,7 +4218,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  3900 0e0c 12       		.uleb128 0x12
  3901 0e0d E00D0000 		.4byte	0xde0
  3902 0e11 36       		.uleb128 0x36
- 3903 0e12 52030000 		.4byte	.LASF129
+ 3903 0e12 34030000 		.4byte	.LASF129
  3904 0e16 01       		.byte	0x1
  3905 0e17 46       		.byte	0x46
  3906 0e18 A6000000 		.4byte	0xa6
@@ -4226,7 +4226,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  3908 0e1d 03       		.byte	0x3
  3909 0e1e 00000000 		.4byte	local_fail
  3910 0e22 36       		.uleb128 0x36
- 3911 0e23 3B010000 		.4byte	.LASF130
+ 3911 0e23 1D010000 		.4byte	.LASF130
  3912 0e27 01       		.byte	0x1
  3913 0e28 46       		.byte	0x46
  3914 0e29 A6000000 		.4byte	0xa6
@@ -4234,7 +4234,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  3916 0e2e 03       		.byte	0x3
  3917 0e2f 00000000 		.4byte	global_fail
  3918 0e33 36       		.uleb128 0x36
- 3919 0e34 04050000 		.4byte	.LASF131
+ 3919 0e34 E6040000 		.4byte	.LASF131
  3920 0e38 01       		.byte	0x1
  3921 0e39 47       		.byte	0x47
  3922 0e3a 3B000000 		.4byte	0x3b
@@ -4250,7 +4250,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  3932 0e50 03       		.byte	0x3
  3933 0e51 00000000 		.4byte	tokens_buffer
  3934 0e55 36       		.uleb128 0x36
- 3935 0e56 87010000 		.4byte	.LASF133
+ 3935 0e56 69010000 		.4byte	.LASF133
  3936 0e5a 01       		.byte	0x1
  3937 0e5b 49       		.byte	0x49
  3938 0e5c 3B080000 		.4byte	0x83b
@@ -4258,7 +4258,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  3940 0e61 03       		.byte	0x3
  3941 0e62 00000000 		.4byte	tokp
  3942 0e66 29       		.uleb128 0x29
-ARM GAS  /tmp/ccFueNYe.s 			page 72
+ARM GAS  /tmp/cc4Xt1TY.s 			page 72
 
 
  3943 0e67 63687000 		.ascii	"chp\000"
@@ -4287,7 +4287,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  3966 0e99 01       		.byte	0x1
  3967 0e9a 01       		.byte	0x1
  3968 0e9b 41       		.uleb128 0x41
- 3969 0e9c F6040000 		.4byte	.LASF112
+ 3969 0e9c D8040000 		.4byte	.LASF112
  3970 0ea0 09       		.byte	0x9
  3971 0ea1 72       		.byte	0x72
  3972 0ea2 88040000 		.4byte	0x488
@@ -4301,7 +4301,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  3980 0eb4 01       		.byte	0x1
  3981 0eb5 01       		.byte	0x1
  3982 0eb6 45       		.uleb128 0x45
- 3983 0eb7 D4030000 		.4byte	.LASF114
+ 3983 0eb7 B6030000 		.4byte	.LASF114
  3984 0ebb 01       		.byte	0x1
  3985 0ebc 54       		.byte	0x54
  3986 0ebd D80C0000 		.4byte	0xcd8
@@ -4318,7 +4318,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  3997 0ed4 05       		.byte	0x5
  3998 0ed5 03       		.byte	0x3
  3999 0ed6 00000000 		.4byte	test
-ARM GAS  /tmp/ccFueNYe.s 			page 73
+ARM GAS  /tmp/cc4Xt1TY.s 			page 73
 
 
  4000 0eda 16       		.uleb128 0x16
@@ -4340,7 +4340,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  4016 0efb 12       		.uleb128 0x12
  4017 0efc DA0E0000 		.4byte	0xeda
  4018 0f00 47       		.uleb128 0x47
- 4019 0f01 E4030000 		.4byte	.LASF116
+ 4019 0f01 C6030000 		.4byte	.LASF116
  4020 0f05 01       		.byte	0x1
  4021 0f06 0E01     		.2byte	0x10e
  4022 0f08 A6000000 		.4byte	0xa6
@@ -4349,7 +4349,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  4025 0f0e 03       		.byte	0x3
  4026 0f0f 00000000 		.4byte	test_timer_done
  4027 0f13 41       		.uleb128 0x41
- 4028 0f14 6D040000 		.4byte	.LASF117
+ 4028 0f14 4F040000 		.4byte	.LASF117
  4029 0f18 0E       		.byte	0xe
  4030 0f19 1F       		.byte	0x1f
  4031 0f1a 200F0000 		.4byte	0xf20
@@ -4358,7 +4358,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  4034 0f20 12       		.uleb128 0x12
  4035 0f21 0F0D0000 		.4byte	0xd0f
  4036 0f25 41       		.uleb128 0x41
- 4037 0f26 47030000 		.4byte	.LASF118
+ 4037 0f26 29030000 		.4byte	.LASF118
  4038 0f2a 0F       		.byte	0xf
  4039 0f2b 1F       		.byte	0x1f
  4040 0f2c 320F0000 		.4byte	0xf32
@@ -4367,7 +4367,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  4043 0f32 12       		.uleb128 0x12
  4044 0f33 0F0D0000 		.4byte	0xd0f
  4045 0f37 41       		.uleb128 0x41
- 4046 0f38 B7030000 		.4byte	.LASF119
+ 4046 0f38 99030000 		.4byte	.LASF119
  4047 0f3c 10       		.byte	0x10
  4048 0f3d 1F       		.byte	0x1f
  4049 0f3e 440F0000 		.4byte	0xf44
@@ -4376,9 +4376,9 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  4052 0f44 12       		.uleb128 0x12
  4053 0f45 0F0D0000 		.4byte	0xd0f
  4054 0f49 41       		.uleb128 0x41
- 4055 0f4a CA020000 		.4byte	.LASF120
+ 4055 0f4a AC020000 		.4byte	.LASF120
  4056 0f4e 11       		.byte	0x11
-ARM GAS  /tmp/ccFueNYe.s 			page 74
+ARM GAS  /tmp/cc4Xt1TY.s 			page 74
 
 
  4057 0f4f 1F       		.byte	0x1f
@@ -4388,7 +4388,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  4061 0f56 12       		.uleb128 0x12
  4062 0f57 0F0D0000 		.4byte	0xd0f
  4063 0f5b 41       		.uleb128 0x41
- 4064 0f5c 9E050000 		.4byte	.LASF121
+ 4064 0f5c 80050000 		.4byte	.LASF121
  4065 0f60 12       		.byte	0x12
  4066 0f61 1F       		.byte	0x1f
  4067 0f62 680F0000 		.4byte	0xf68
@@ -4397,7 +4397,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  4070 0f68 12       		.uleb128 0x12
  4071 0f69 0F0D0000 		.4byte	0xd0f
  4072 0f6d 41       		.uleb128 0x41
- 4073 0f6e 1E020000 		.4byte	.LASF122
+ 4073 0f6e 00020000 		.4byte	.LASF122
  4074 0f72 13       		.byte	0x13
  4075 0f73 1F       		.byte	0x1f
  4076 0f74 7A0F0000 		.4byte	0xf7a
@@ -4424,7 +4424,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  4097 0f9e 12       		.uleb128 0x12
  4098 0f9f 0F0D0000 		.4byte	0xd0f
  4099 0fa3 41       		.uleb128 0x41
- 4100 0fa4 9D040000 		.4byte	.LASF125
+ 4100 0fa4 7F040000 		.4byte	.LASF125
  4101 0fa8 16       		.byte	0x16
  4102 0fa9 1F       		.byte	0x1f
  4103 0faa B00F0000 		.4byte	0xfb0
@@ -4438,14 +4438,14 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  4111 0fbb 1F       		.byte	0x1f
  4112 0fbc C20F0000 		.4byte	0xfc2
  4113 0fc0 01       		.byte	0x1
-ARM GAS  /tmp/ccFueNYe.s 			page 75
+ARM GAS  /tmp/cc4Xt1TY.s 			page 75
 
 
  4114 0fc1 01       		.byte	0x1
  4115 0fc2 12       		.uleb128 0x12
  4116 0fc3 0F0D0000 		.4byte	0xd0f
  4117 0fc7 41       		.uleb128 0x41
- 4118 0fc8 0A040000 		.4byte	.LASF127
+ 4118 0fc8 EC030000 		.4byte	.LASF127
  4119 0fcc 18       		.byte	0x18
  4120 0fcd 1F       		.byte	0x1f
  4121 0fce D40F0000 		.4byte	0xfd4
@@ -4498,7 +4498,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  4168 0028 0B       		.uleb128 0xb
  4169 0029 49       		.uleb128 0x49
  4170 002a 13       		.uleb128 0x13
-ARM GAS  /tmp/ccFueNYe.s 			page 76
+ARM GAS  /tmp/cc4Xt1TY.s 			page 76
 
 
  4171 002b 00       		.byte	0x0
@@ -4558,7 +4558,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  4225 0061 38       		.uleb128 0x38
  4226 0062 0A       		.uleb128 0xa
  4227 0063 00       		.byte	0x0
-ARM GAS  /tmp/ccFueNYe.s 			page 77
+ARM GAS  /tmp/cc4Xt1TY.s 			page 77
 
 
  4228 0064 00       		.byte	0x0
@@ -4618,7 +4618,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  4282 009a 3B       		.uleb128 0x3b
  4283 009b 05       		.uleb128 0x5
  4284 009c 01       		.uleb128 0x1
-ARM GAS  /tmp/ccFueNYe.s 			page 78
+ARM GAS  /tmp/cc4Xt1TY.s 			page 78
 
 
  4285 009d 13       		.uleb128 0x13
@@ -4678,7 +4678,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  4339 00d3 00       		.byte	0x0
  4340 00d4 49       		.uleb128 0x49
  4341 00d5 13       		.uleb128 0x13
-ARM GAS  /tmp/ccFueNYe.s 			page 79
+ARM GAS  /tmp/cc4Xt1TY.s 			page 79
 
 
  4342 00d6 00       		.byte	0x0
@@ -4738,7 +4738,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  4396 010c 03       		.uleb128 0x3
  4397 010d 0E       		.uleb128 0xe
  4398 010e 0B       		.uleb128 0xb
-ARM GAS  /tmp/ccFueNYe.s 			page 80
+ARM GAS  /tmp/cc4Xt1TY.s 			page 80
 
 
  4399 010f 05       		.uleb128 0x5
@@ -4798,7 +4798,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  4453 0145 00       		.byte	0x0
  4454 0146 03       		.uleb128 0x3
  4455 0147 0E       		.uleb128 0xe
-ARM GAS  /tmp/ccFueNYe.s 			page 81
+ARM GAS  /tmp/cc4Xt1TY.s 			page 81
 
 
  4456 0148 3A       		.uleb128 0x3a
@@ -4858,7 +4858,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  4510 017e 34       		.uleb128 0x34
  4511 017f 00       		.byte	0x0
  4512 0180 03       		.uleb128 0x3
-ARM GAS  /tmp/ccFueNYe.s 			page 82
+ARM GAS  /tmp/cc4Xt1TY.s 			page 82
 
 
  4513 0181 08       		.uleb128 0x8
@@ -4918,7 +4918,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  4567 01b7 40       		.uleb128 0x40
  4568 01b8 0A       		.uleb128 0xa
  4569 01b9 01       		.uleb128 0x1
-ARM GAS  /tmp/ccFueNYe.s 			page 83
+ARM GAS  /tmp/cc4Xt1TY.s 			page 83
 
 
  4570 01ba 13       		.uleb128 0x13
@@ -4978,7 +4978,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  4624 01f0 27       		.uleb128 0x27
  4625 01f1 2E       		.uleb128 0x2e
  4626 01f2 01       		.byte	0x1
-ARM GAS  /tmp/ccFueNYe.s 			page 84
+ARM GAS  /tmp/cc4Xt1TY.s 			page 84
 
 
  4627 01f3 3F       		.uleb128 0x3f
@@ -5038,7 +5038,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  4681 0229 08       		.uleb128 0x8
  4682 022a 3A       		.uleb128 0x3a
  4683 022b 0B       		.uleb128 0xb
-ARM GAS  /tmp/ccFueNYe.s 			page 85
+ARM GAS  /tmp/cc4Xt1TY.s 			page 85
 
 
  4684 022c 3B       		.uleb128 0x3b
@@ -5098,7 +5098,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  4738 0262 0B       		.uleb128 0xb
  4739 0263 49       		.uleb128 0x49
  4740 0264 13       		.uleb128 0x13
-ARM GAS  /tmp/ccFueNYe.s 			page 86
+ARM GAS  /tmp/cc4Xt1TY.s 			page 86
 
 
  4741 0265 02       		.uleb128 0x2
@@ -5158,7 +5158,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  4795 029b 01       		.uleb128 0x1
  4796 029c 58       		.uleb128 0x58
  4797 029d 0B       		.uleb128 0xb
-ARM GAS  /tmp/ccFueNYe.s 			page 87
+ARM GAS  /tmp/cc4Xt1TY.s 			page 87
 
 
  4798 029e 59       		.uleb128 0x59
@@ -5218,7 +5218,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  4852 02d4 34       		.uleb128 0x34
  4853 02d5 00       		.byte	0x0
  4854 02d6 03       		.uleb128 0x3
-ARM GAS  /tmp/ccFueNYe.s 			page 88
+ARM GAS  /tmp/cc4Xt1TY.s 			page 88
 
 
  4855 02d7 0E       		.uleb128 0xe
@@ -5278,7 +5278,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  4909 030d 13       		.uleb128 0x13
  4910 030e 00       		.byte	0x0
  4911 030f 00       		.byte	0x0
-ARM GAS  /tmp/ccFueNYe.s 			page 89
+ARM GAS  /tmp/cc4Xt1TY.s 			page 89
 
 
  4912 0310 39       		.uleb128 0x39
@@ -5338,7 +5338,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  4966 0346 12       		.uleb128 0x12
  4967 0347 01       		.uleb128 0x1
  4968 0348 40       		.uleb128 0x40
-ARM GAS  /tmp/ccFueNYe.s 			page 90
+ARM GAS  /tmp/cc4Xt1TY.s 			page 90
 
 
  4969 0349 06       		.uleb128 0x6
@@ -5398,7 +5398,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  5023 037f 01       		.uleb128 0x1
  5024 0380 58       		.uleb128 0x58
  5025 0381 0B       		.uleb128 0xb
-ARM GAS  /tmp/ccFueNYe.s 			page 91
+ARM GAS  /tmp/cc4Xt1TY.s 			page 91
 
 
  5026 0382 59       		.uleb128 0x59
@@ -5458,7 +5458,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  5080 03b8 02       		.uleb128 0x2
  5081 03b9 0A       		.uleb128 0xa
  5082 03ba 00       		.byte	0x0
-ARM GAS  /tmp/ccFueNYe.s 			page 92
+ARM GAS  /tmp/cc4Xt1TY.s 			page 92
 
 
  5083 03bb 00       		.byte	0x0
@@ -5518,7 +5518,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  5137 0000 54010000 		.4byte	0x154
  5138 0004 0200     		.2byte	0x2
  5139 0006 00000000 		.4byte	.Ldebug_info0
-ARM GAS  /tmp/ccFueNYe.s 			page 93
+ARM GAS  /tmp/cc4Xt1TY.s 			page 93
 
 
  5140 000a DA0F0000 		.4byte	0xfda
@@ -5578,7 +5578,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  5162      5F637075 
  5162      5F70756C 
  5162      736500
-ARM GAS  /tmp/ccFueNYe.s 			page 94
+ARM GAS  /tmp/cc4Xt1TY.s 			page 94
 
 
  5163 00ed 7E0B0000 		.4byte	0xb7e
@@ -5638,7 +5638,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  5195 0056 B1000000 		.4byte	0xb1
  5196 005a 746D6F64 		.ascii	"tmode_t\000"
  5196      655F7400 
-ARM GAS  /tmp/ccFueNYe.s 			page 95
+ARM GAS  /tmp/cc4Xt1TY.s 			page 95
 
 
  5197 0062 BC000000 		.4byte	0xbc
@@ -5698,7 +5698,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  5227 0125 68030000 		.4byte	0x368
  5228 0129 56697274 		.ascii	"VirtualTimer\000"
  5228      75616C54 
-ARM GAS  /tmp/ccFueNYe.s 			page 96
+ARM GAS  /tmp/cc4Xt1TY.s 			page 96
 
 
  5228      696D6572 
@@ -5758,7 +5758,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  5262 0020 00000000 		.4byte	.LFB117
  5263 0024 94000000 		.4byte	.LFE117-.LFB117
  5264 0028 00000000 		.4byte	.LFB118
-ARM GAS  /tmp/ccFueNYe.s 			page 97
+ARM GAS  /tmp/cc4Xt1TY.s 			page 97
 
 
  5265 002c 24000000 		.4byte	.LFE118-.LFB118
@@ -5818,7 +5818,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  5319 0064 0C000000 		.4byte	.LFE131
  5320 0068 00000000 		.4byte	.LFB134
  5321 006c 4C000000 		.4byte	.LFE134
-ARM GAS  /tmp/ccFueNYe.s 			page 98
+ARM GAS  /tmp/cc4Xt1TY.s 			page 98
 
 
  5322 0070 00000000 		.4byte	.LFB117
@@ -5878,7 +5878,7 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  5365              	.LASF124:
  5366 003b 70617474 		.ascii	"patternpools\000"
  5366      65726E70 
-ARM GAS  /tmp/ccFueNYe.s 			page 99
+ARM GAS  /tmp/cc4Xt1TY.s 			page 99
 
 
  5366      6F6F6C73 
@@ -5934,589 +5934,589 @@ ARM GAS  /tmp/ccFueNYe.s 			page 1
  5390 00c8 7369676E 		.ascii	"signed char\000"
  5390      65642063 
  5390      68617200 
- 5391              	.LASF136:
- 5392 00d4 2F686F6D 		.ascii	"/home/stm32/Workspace/demoarm\000"
- 5392      652F7374 
- 5392      6D33322F 
-ARM GAS  /tmp/ccFueNYe.s 			page 100
+ 5391              	.LASF41:
+ 5392 00d4 705F6D70 		.ascii	"p_mpool\000"
+ 5392      6F6F6C00 
+ 5393              	.LASF14:
+ARM GAS  /tmp/cc4Xt1TY.s 			page 100
 
 
- 5392      576F726B 
- 5392      73706163 
- 5393              	.LASF41:
- 5394 00f2 705F6D70 		.ascii	"p_mpool\000"
- 5394      6F6F6C00 
- 5395              	.LASF14:
- 5396 00fa 626F6F6C 		.ascii	"bool_t\000"
- 5396      5F7400
- 5397              	.LASF66:
- 5398 0101 6D5F7175 		.ascii	"m_queue\000"
- 5398      65756500 
- 5399              	.LASF99:
- 5400 0109 74657374 		.ascii	"test_emit_token\000"
- 5400      5F656D69 
- 5400      745F746F 
- 5400      6B656E00 
- 5401              	.LASF98:
- 5402 0119 74657374 		.ascii	"test_println\000"
- 5402      5F707269 
- 5402      6E746C6E 
- 5402      00
- 5403              	.LASF134:
- 5404 0126 474E5520 		.ascii	"GNU C 4.5.2\000"
- 5404      4320342E 
- 5404      352E3200 
- 5405              	.LASF8:
- 5406 0132 6C6F6E67 		.ascii	"long int\000"
- 5406      20696E74 
- 5406      00
- 5407              	.LASF130:
- 5408 013b 676C6F62 		.ascii	"global_fail\000"
- 5408      616C5F66 
- 5408      61696C00 
- 5409              	.LASF16:
- 5410 0147 74737461 		.ascii	"tstate_t\000"
- 5410      74655F74 
- 5410      00
- 5411              	.LASF103:
- 5412 0150 5F746573 		.ascii	"_test_assert_time_window\000"
- 5412      745F6173 
- 5412      73657274 
- 5412      5F74696D 
- 5412      655F7769 
- 5413              	.LASF105:
- 5414 0169 74657374 		.ascii	"test_terminate_threads\000"
- 5414      5F746572 
- 5414      6D696E61 
- 5414      74655F74 
- 5414      68726561 
- 5415              	.LASF34:
- 5416 0180 705F7469 		.ascii	"p_time\000"
- 5416      6D6500
- 5417              	.LASF133:
- 5418 0187 746F6B70 		.ascii	"tokp\000"
- 5418      00
- 5419              	.LASF87:
- 5420 018c 62756666 		.ascii	"buffer\000"
-ARM GAS  /tmp/ccFueNYe.s 			page 101
+ 5394 00dc 626F6F6C 		.ascii	"bool_t\000"
+ 5394      5F7400
+ 5395              	.LASF66:
+ 5396 00e3 6D5F7175 		.ascii	"m_queue\000"
+ 5396      65756500 
+ 5397              	.LASF99:
+ 5398 00eb 74657374 		.ascii	"test_emit_token\000"
+ 5398      5F656D69 
+ 5398      745F746F 
+ 5398      6B656E00 
+ 5399              	.LASF98:
+ 5400 00fb 74657374 		.ascii	"test_println\000"
+ 5400      5F707269 
+ 5400      6E746C6E 
+ 5400      00
+ 5401              	.LASF134:
+ 5402 0108 474E5520 		.ascii	"GNU C 4.5.2\000"
+ 5402      4320342E 
+ 5402      352E3200 
+ 5403              	.LASF8:
+ 5404 0114 6C6F6E67 		.ascii	"long int\000"
+ 5404      20696E74 
+ 5404      00
+ 5405              	.LASF130:
+ 5406 011d 676C6F62 		.ascii	"global_fail\000"
+ 5406      616C5F66 
+ 5406      61696C00 
+ 5407              	.LASF16:
+ 5408 0129 74737461 		.ascii	"tstate_t\000"
+ 5408      74655F74 
+ 5408      00
+ 5409              	.LASF103:
+ 5410 0132 5F746573 		.ascii	"_test_assert_time_window\000"
+ 5410      745F6173 
+ 5410      73657274 
+ 5410      5F74696D 
+ 5410      655F7769 
+ 5411              	.LASF105:
+ 5412 014b 74657374 		.ascii	"test_terminate_threads\000"
+ 5412      5F746572 
+ 5412      6D696E61 
+ 5412      74655F74 
+ 5412      68726561 
+ 5413              	.LASF34:
+ 5414 0162 705F7469 		.ascii	"p_time\000"
+ 5414      6D6500
+ 5415              	.LASF133:
+ 5416 0169 746F6B70 		.ascii	"tokp\000"
+ 5416      00
+ 5417              	.LASF87:
+ 5418 016e 62756666 		.ascii	"buffer\000"
+ 5418      657200
+ 5419              	.LASF28:
+ 5420 0175 705F6E65 		.ascii	"p_newer\000"
+ 5420      77657200 
+ 5421              	.LASF77:
+ 5422 017d 70757477 		.ascii	"putwouldblock\000"
+ARM GAS  /tmp/cc4Xt1TY.s 			page 101
 
 
- 5420      657200
- 5421              	.LASF28:
- 5422 0193 705F6E65 		.ascii	"p_newer\000"
- 5422      77657200 
- 5423              	.LASF77:
- 5424 019b 70757477 		.ascii	"putwouldblock\000"
- 5424      6F756C64 
- 5424      626C6F63 
- 5424      6B00
- 5425              	.LASF109:
- 5426 01a9 74657374 		.ascii	"test_start_timer\000"
- 5426      5F737461 
- 5426      72745F74 
- 5426      696D6572 
- 5426      00
- 5427              	.LASF60:
- 5428 01ba 725F6E65 		.ascii	"r_newer\000"
- 5428      77657200 
- 5429              	.LASF44:
- 5430 01c2 72656761 		.ascii	"regarm_t\000"
- 5430      726D5F74 
- 5430      00
- 5431              	.LASF51:
- 5432 01cb 76745F70 		.ascii	"vt_prev\000"
- 5432      72657600 
- 5433              	.LASF108:
- 5434 01d3 64757261 		.ascii	"duration\000"
- 5434      74696F6E 
+ 5422      6F756C64 
+ 5422      626C6F63 
+ 5422      6B00
+ 5423              	.LASF109:
+ 5424 018b 74657374 		.ascii	"test_start_timer\000"
+ 5424      5F737461 
+ 5424      72745F74 
+ 5424      696D6572 
+ 5424      00
+ 5425              	.LASF60:
+ 5426 019c 725F6E65 		.ascii	"r_newer\000"
+ 5426      77657200 
+ 5427              	.LASF44:
+ 5428 01a4 72656761 		.ascii	"regarm_t\000"
+ 5428      726D5F74 
+ 5428      00
+ 5429              	.LASF51:
+ 5430 01ad 76745F70 		.ascii	"vt_prev\000"
+ 5430      72657600 
+ 5431              	.LASF108:
+ 5432 01b5 64757261 		.ascii	"duration\000"
+ 5432      74696F6E 
+ 5432      00
+ 5433              	.LASF93:
+ 5434 01be 7072696E 		.ascii	"print_tokens\000"
+ 5434      745F746F 
+ 5434      6B656E73 
  5434      00
- 5435              	.LASF93:
- 5436 01dc 7072696E 		.ascii	"print_tokens\000"
- 5436      745F746F 
- 5436      6B656E73 
- 5436      00
- 5437              	.LASF22:
- 5438 01e9 636E745F 		.ascii	"cnt_t\000"
- 5438      7400
- 5439              	.LASF0:
- 5440 01ef 756E7369 		.ascii	"unsigned int\000"
- 5440      676E6564 
- 5440      20696E74 
- 5440      00
- 5441              	.LASF50:
- 5442 01fc 76745F6E 		.ascii	"vt_next\000"
- 5442      65787400 
- 5443              	.LASF90:
- 5444 0204 706F696E 		.ascii	"point\000"
- 5444      7400
- 5445              	.LASF36:
- 5446 020a 705F6D73 		.ascii	"p_msgqueue\000"
- 5446      67717565 
- 5446      756500
- 5447              	.LASF101:
- 5448 0215 65787065 		.ascii	"expected\000"
- 5448      63746564 
- 5448      00
- 5449              	.LASF122:
-ARM GAS  /tmp/ccFueNYe.s 			page 102
+ 5435              	.LASF22:
+ 5436 01cb 636E745F 		.ascii	"cnt_t\000"
+ 5436      7400
+ 5437              	.LASF0:
+ 5438 01d1 756E7369 		.ascii	"unsigned int\000"
+ 5438      676E6564 
+ 5438      20696E74 
+ 5438      00
+ 5439              	.LASF50:
+ 5440 01de 76745F6E 		.ascii	"vt_next\000"
+ 5440      65787400 
+ 5441              	.LASF90:
+ 5442 01e6 706F696E 		.ascii	"point\000"
+ 5442      7400
+ 5443              	.LASF36:
+ 5444 01ec 705F6D73 		.ascii	"p_msgqueue\000"
+ 5444      67717565 
+ 5444      756500
+ 5445              	.LASF101:
+ 5446 01f7 65787065 		.ascii	"expected\000"
+ 5446      63746564 
+ 5446      00
+ 5447              	.LASF122:
+ 5448 0200 70617474 		.ascii	"patternevt\000"
+ 5448      65726E65 
+ 5448      767400
+ 5449              	.LASF83:
+ 5450 020b 6E616D65 		.ascii	"name\000"
+ 5450      00
+ARM GAS  /tmp/cc4Xt1TY.s 			page 102
 
 
- 5450 021e 70617474 		.ascii	"patternevt\000"
- 5450      65726E65 
- 5450      767400
- 5451              	.LASF83:
- 5452 0229 6E616D65 		.ascii	"name\000"
+ 5451              	.LASF49:
+ 5452 0210 56697274 		.ascii	"VirtualTimer\000"
+ 5452      75616C54 
+ 5452      696D6572 
  5452      00
- 5453              	.LASF49:
- 5454 022e 56697274 		.ascii	"VirtualTimer\000"
- 5454      75616C54 
- 5454      696D6572 
- 5454      00
- 5455              	.LASF6:
- 5456 023b 73686F72 		.ascii	"short unsigned int\000"
- 5456      7420756E 
- 5456      7369676E 
- 5456      65642069 
- 5456      6E7400
- 5457              	.LASF19:
- 5458 024e 6D73675F 		.ascii	"msg_t\000"
- 5458      7400
- 5459              	.LASF79:
- 5460 0254 77726974 		.ascii	"writet\000"
- 5460      657400
- 5461              	.LASF88:
- 5462 025b 5F746573 		.ascii	"_test_fail\000"
- 5462      745F6661 
- 5462      696C00
- 5463              	.LASF15:
- 5464 0266 746D6F64 		.ascii	"tmode_t\000"
- 5464      655F7400 
- 5465              	.LASF43:
- 5466 026e 54687265 		.ascii	"ThreadsList\000"
- 5466      6164734C 
- 5466      69737400 
- 5467              	.LASF39:
- 5468 027a 705F6D74 		.ascii	"p_mtxlist\000"
- 5468      786C6973 
- 5468      7400
- 5469              	.LASF20:
- 5470 0284 6576656E 		.ascii	"eventmask_t\000"
- 5470      746D6173 
- 5470      6B5F7400 
- 5471              	.LASF97:
- 5472 0290 6D736770 		.ascii	"msgp\000"
- 5472      00
- 5473              	.LASF45:
- 5474 0295 73746B61 		.ascii	"stkalign_t\000"
- 5474      6C69676E 
- 5474      5F7400
- 5475              	.LASF96:
- 5476 02a0 74657374 		.ascii	"test_print\000"
- 5476      5F707269 
- 5476      6E7400
- 5477              	.LASF75:
- 5478 02ab 77726974 		.ascii	"write\000"
- 5478      6500
- 5479              	.LASF58:
-ARM GAS  /tmp/ccFueNYe.s 			page 103
+ 5453              	.LASF6:
+ 5454 021d 73686F72 		.ascii	"short unsigned int\000"
+ 5454      7420756E 
+ 5454      7369676E 
+ 5454      65642069 
+ 5454      6E7400
+ 5455              	.LASF19:
+ 5456 0230 6D73675F 		.ascii	"msg_t\000"
+ 5456      7400
+ 5457              	.LASF79:
+ 5458 0236 77726974 		.ascii	"writet\000"
+ 5458      657400
+ 5459              	.LASF88:
+ 5460 023d 5F746573 		.ascii	"_test_fail\000"
+ 5460      745F6661 
+ 5460      696C00
+ 5461              	.LASF15:
+ 5462 0248 746D6F64 		.ascii	"tmode_t\000"
+ 5462      655F7400 
+ 5463              	.LASF43:
+ 5464 0250 54687265 		.ascii	"ThreadsList\000"
+ 5464      6164734C 
+ 5464      69737400 
+ 5465              	.LASF39:
+ 5466 025c 705F6D74 		.ascii	"p_mtxlist\000"
+ 5466      786C6973 
+ 5466      7400
+ 5467              	.LASF20:
+ 5468 0266 6576656E 		.ascii	"eventmask_t\000"
+ 5468      746D6173 
+ 5468      6B5F7400 
+ 5469              	.LASF97:
+ 5470 0272 6D736770 		.ascii	"msgp\000"
+ 5470      00
+ 5471              	.LASF45:
+ 5472 0277 73746B61 		.ascii	"stkalign_t\000"
+ 5472      6C69676E 
+ 5472      5F7400
+ 5473              	.LASF96:
+ 5474 0282 74657374 		.ascii	"test_print\000"
+ 5474      5F707269 
+ 5474      6E7400
+ 5475              	.LASF75:
+ 5476 028d 77726974 		.ascii	"write\000"
+ 5476      6500
+ 5477              	.LASF58:
+ 5478 0293 725F7072 		.ascii	"r_prio\000"
+ 5478      696F00
+ 5479              	.LASF52:
+ 5480 029a 76745F74 		.ascii	"vt_time\000"
+ 5480      696D6500 
+ 5481              	.LASF35:
+ARM GAS  /tmp/cc4Xt1TY.s 			page 103
 
 
- 5480 02b1 725F7072 		.ascii	"r_prio\000"
- 5480      696F00
- 5481              	.LASF52:
- 5482 02b8 76745F74 		.ascii	"vt_time\000"
- 5482      696D6500 
- 5483              	.LASF35:
- 5484 02c0 705F7761 		.ascii	"p_waiting\000"
- 5484      6974696E 
- 5484      6700
- 5485              	.LASF120:
- 5486 02ca 70617474 		.ascii	"patternmsg\000"
- 5486      65726E6D 
- 5486      736700
- 5487              	.LASF53:
- 5488 02d5 76745F66 		.ascii	"vt_func\000"
- 5488      756E6300 
- 5489              	.LASF65:
- 5490 02dd 4D757465 		.ascii	"Mutex\000"
- 5490      7800
- 5491              	.LASF94:
- 5492 02e3 7072696E 		.ascii	"print_line\000"
- 5492      745F6C69 
- 5492      6E6500
- 5493              	.LASF106:
- 5494 02ee 74657374 		.ascii	"test_wait_threads\000"
- 5494      5F776169 
- 5494      745F7468 
- 5494      72656164 
- 5494      7300
- 5495              	.LASF59:
- 5496 0300 725F6374 		.ascii	"r_ctx\000"
- 5496      7800
- 5497              	.LASF42:
- 5498 0306 54687265 		.ascii	"ThreadsQueue\000"
- 5498      61647351 
- 5498      75657565 
- 5498      00
- 5499              	.LASF27:
- 5500 0313 705F6374 		.ascii	"p_ctx\000"
- 5500      7800
- 5501              	.LASF84:
- 5502 0319 73657475 		.ascii	"setup\000"
- 5502      7000
- 5503              	.LASF102:
- 5504 031f 5F746573 		.ascii	"_test_assert_sequence\000"
- 5504      745F6173 
- 5504      73657274 
- 5504      5F736571 
- 5504      75656E63 
- 5505              	.LASF63:
- 5506 0335 725F6375 		.ascii	"r_current\000"
- 5506      7272656E 
- 5506      7400
- 5507              	.LASF61:
- 5508 033f 725F6F6C 		.ascii	"r_older\000"
- 5508      64657200 
- 5509              	.LASF118:
-ARM GAS  /tmp/ccFueNYe.s 			page 104
+ 5482 02a2 705F7761 		.ascii	"p_waiting\000"
+ 5482      6974696E 
+ 5482      6700
+ 5483              	.LASF120:
+ 5484 02ac 70617474 		.ascii	"patternmsg\000"
+ 5484      65726E6D 
+ 5484      736700
+ 5485              	.LASF53:
+ 5486 02b7 76745F66 		.ascii	"vt_func\000"
+ 5486      756E6300 
+ 5487              	.LASF65:
+ 5488 02bf 4D757465 		.ascii	"Mutex\000"
+ 5488      7800
+ 5489              	.LASF94:
+ 5490 02c5 7072696E 		.ascii	"print_line\000"
+ 5490      745F6C69 
+ 5490      6E6500
+ 5491              	.LASF106:
+ 5492 02d0 74657374 		.ascii	"test_wait_threads\000"
+ 5492      5F776169 
+ 5492      745F7468 
+ 5492      72656164 
+ 5492      7300
+ 5493              	.LASF59:
+ 5494 02e2 725F6374 		.ascii	"r_ctx\000"
+ 5494      7800
+ 5495              	.LASF42:
+ 5496 02e8 54687265 		.ascii	"ThreadsQueue\000"
+ 5496      61647351 
+ 5496      75657565 
+ 5496      00
+ 5497              	.LASF27:
+ 5498 02f5 705F6374 		.ascii	"p_ctx\000"
+ 5498      7800
+ 5499              	.LASF84:
+ 5500 02fb 73657475 		.ascii	"setup\000"
+ 5500      7000
+ 5501              	.LASF102:
+ 5502 0301 5F746573 		.ascii	"_test_assert_sequence\000"
+ 5502      745F6173 
+ 5502      73657274 
+ 5502      5F736571 
+ 5502      75656E63 
+ 5503              	.LASF63:
+ 5504 0317 725F6375 		.ascii	"r_current\000"
+ 5504      7272656E 
+ 5504      7400
+ 5505              	.LASF61:
+ 5506 0321 725F6F6C 		.ascii	"r_older\000"
+ 5506      64657200 
+ 5507              	.LASF118:
+ 5508 0329 70617474 		.ascii	"patternsem\000"
+ 5508      65726E73 
+ 5508      656D00
+ 5509              	.LASF129:
+ 5510 0334 6C6F6361 		.ascii	"local_fail\000"
+ 5510      6C5F6661 
+ARM GAS  /tmp/cc4Xt1TY.s 			page 104
 
 
- 5510 0347 70617474 		.ascii	"patternsem\000"
- 5510      65726E73 
- 5510      656D00
- 5511              	.LASF129:
- 5512 0352 6C6F6361 		.ascii	"local_fail\000"
- 5512      6C5F6661 
- 5512      696C00
- 5513              	.LASF76:
- 5514 035d 72656164 		.ascii	"read\000"
- 5514      00
- 5515              	.LASF100:
- 5516 0362 746F6B65 		.ascii	"token\000"
- 5516      6E00
- 5517              	.LASF17:
- 5518 0368 74726566 		.ascii	"trefs_t\000"
- 5518      735F7400 
- 5519              	.LASF25:
- 5520 0370 705F7072 		.ascii	"p_prev\000"
- 5520      657600
- 5521              	.LASF86:
- 5522 0377 65786563 		.ascii	"execute\000"
- 5522      75746500 
- 5523              	.LASF18:
- 5524 037f 74707269 		.ascii	"tprio_t\000"
- 5524      6F5F7400 
- 5525              	.LASF7:
- 5526 0387 696E7433 		.ascii	"int32_t\000"
- 5526      325F7400 
- 5527              	.LASF4:
- 5528 038f 756E7369 		.ascii	"unsigned char\000"
- 5528      676E6564 
- 5528      20636861 
- 5528      7200
- 5529              	.LASF110:
- 5530 039d 54657374 		.ascii	"TestThread\000"
- 5530      54687265 
- 5530      616400
- 5531              	.LASF139:
- 5532 03a8 74657374 		.ascii	"test_wait_tick\000"
- 5532      5F776169 
- 5532      745F7469 
- 5532      636B00
- 5533              	.LASF119:
- 5534 03b7 70617474 		.ascii	"patternmtx\000"
- 5534      65726E6D 
- 5534      747800
- 5535              	.LASF5:
- 5536 03c2 73686F72 		.ascii	"short int\000"
- 5536      7420696E 
- 5536      7400
- 5537              	.LASF31:
- 5538 03cc 705F7374 		.ascii	"p_state\000"
- 5538      61746500 
- 5539              	.LASF114:
- 5540 03d4 74687265 		.ascii	"threads\000"
- 5540      61647300 
- 5541              	.LASF29:
-ARM GAS  /tmp/ccFueNYe.s 			page 105
+ 5510      696C00
+ 5511              	.LASF76:
+ 5512 033f 72656164 		.ascii	"read\000"
+ 5512      00
+ 5513              	.LASF100:
+ 5514 0344 746F6B65 		.ascii	"token\000"
+ 5514      6E00
+ 5515              	.LASF17:
+ 5516 034a 74726566 		.ascii	"trefs_t\000"
+ 5516      735F7400 
+ 5517              	.LASF25:
+ 5518 0352 705F7072 		.ascii	"p_prev\000"
+ 5518      657600
+ 5519              	.LASF86:
+ 5520 0359 65786563 		.ascii	"execute\000"
+ 5520      75746500 
+ 5521              	.LASF18:
+ 5522 0361 74707269 		.ascii	"tprio_t\000"
+ 5522      6F5F7400 
+ 5523              	.LASF7:
+ 5524 0369 696E7433 		.ascii	"int32_t\000"
+ 5524      325F7400 
+ 5525              	.LASF4:
+ 5526 0371 756E7369 		.ascii	"unsigned char\000"
+ 5526      676E6564 
+ 5526      20636861 
+ 5526      7200
+ 5527              	.LASF110:
+ 5528 037f 54657374 		.ascii	"TestThread\000"
+ 5528      54687265 
+ 5528      616400
+ 5529              	.LASF139:
+ 5530 038a 74657374 		.ascii	"test_wait_tick\000"
+ 5530      5F776169 
+ 5530      745F7469 
+ 5530      636B00
+ 5531              	.LASF119:
+ 5532 0399 70617474 		.ascii	"patternmtx\000"
+ 5532      65726E6D 
+ 5532      747800
+ 5533              	.LASF5:
+ 5534 03a4 73686F72 		.ascii	"short int\000"
+ 5534      7420696E 
+ 5534      7400
+ 5535              	.LASF31:
+ 5536 03ae 705F7374 		.ascii	"p_state\000"
+ 5536      61746500 
+ 5537              	.LASF114:
+ 5538 03b6 74687265 		.ascii	"threads\000"
+ 5538      61647300 
+ 5539              	.LASF29:
+ 5540 03be 705F6F6C 		.ascii	"p_older\000"
+ 5540      64657200 
+ 5541              	.LASF116:
+ 5542 03c6 74657374 		.ascii	"test_timer_done\000"
+ 5542      5F74696D 
+ 5542      65725F64 
+ARM GAS  /tmp/cc4Xt1TY.s 			page 105
 
 
- 5542 03dc 705F6F6C 		.ascii	"p_older\000"
- 5542      64657200 
- 5543              	.LASF116:
- 5544 03e4 74657374 		.ascii	"test_timer_done\000"
- 5544      5F74696D 
- 5544      65725F64 
- 5544      6F6E6500 
- 5545              	.LASF72:
- 5546 03f4 65776D61 		.ascii	"ewmask\000"
- 5546      736B00
- 5547              	.LASF24:
- 5548 03fb 705F6E65 		.ascii	"p_next\000"
- 5548      787400
- 5549              	.LASF32:
- 5550 0402 705F666C 		.ascii	"p_flags\000"
- 5550      61677300 
- 5551              	.LASF127:
- 5552 040a 70617474 		.ascii	"patternbmk\000"
- 5552      65726E62 
- 5552      6D6B00
- 5553              	.LASF23:
- 5554 0415 54687265 		.ascii	"Thread\000"
- 5554      616400
- 5555              	.LASF82:
- 5556 041c 74657374 		.ascii	"testcase\000"
- 5556      63617365 
- 5556      00
- 5557              	.LASF38:
- 5558 0425 705F6570 		.ascii	"p_epending\000"
- 5558      656E6469 
- 5558      6E6700
- 5559              	.LASF9:
- 5560 0430 75696E74 		.ascii	"uint32_t\000"
- 5560      33325F74 
- 5560      00
- 5561              	.LASF57:
- 5562 0439 725F7175 		.ascii	"r_queue\000"
- 5562      65756500 
- 5563              	.LASF95:
- 5564 0441 74657374 		.ascii	"test_printn\000"
- 5564      5F707269 
- 5564      6E746E00 
- 5565              	.LASF10:
- 5566 044d 6C6F6E67 		.ascii	"long unsigned int\000"
- 5566      20756E73 
- 5566      69676E65 
- 5566      6420696E 
- 5566      7400
- 5567              	.LASF73:
- 5568 045f 63686172 		.ascii	"char\000"
+ 5542      6F6E6500 
+ 5543              	.LASF72:
+ 5544 03d6 65776D61 		.ascii	"ewmask\000"
+ 5544      736B00
+ 5545              	.LASF24:
+ 5546 03dd 705F6E65 		.ascii	"p_next\000"
+ 5546      787400
+ 5547              	.LASF32:
+ 5548 03e4 705F666C 		.ascii	"p_flags\000"
+ 5548      61677300 
+ 5549              	.LASF127:
+ 5550 03ec 70617474 		.ascii	"patternbmk\000"
+ 5550      65726E62 
+ 5550      6D6B00
+ 5551              	.LASF23:
+ 5552 03f7 54687265 		.ascii	"Thread\000"
+ 5552      616400
+ 5553              	.LASF82:
+ 5554 03fe 74657374 		.ascii	"testcase\000"
+ 5554      63617365 
+ 5554      00
+ 5555              	.LASF38:
+ 5556 0407 705F6570 		.ascii	"p_epending\000"
+ 5556      656E6469 
+ 5556      6E6700
+ 5557              	.LASF9:
+ 5558 0412 75696E74 		.ascii	"uint32_t\000"
+ 5558      33325F74 
+ 5558      00
+ 5559              	.LASF57:
+ 5560 041b 725F7175 		.ascii	"r_queue\000"
+ 5560      65756500 
+ 5561              	.LASF95:
+ 5562 0423 74657374 		.ascii	"test_printn\000"
+ 5562      5F707269 
+ 5562      6E746E00 
+ 5563              	.LASF10:
+ 5564 042f 6C6F6E67 		.ascii	"long unsigned int\000"
+ 5564      20756E73 
+ 5564      69676E65 
+ 5564      6420696E 
+ 5564      7400
+ 5565              	.LASF73:
+ 5566 0441 63686172 		.ascii	"char\000"
+ 5566      00
+ 5567              	.LASF128:
+ 5568 0446 70617474 		.ascii	"patterns\000"
+ 5568      65726E73 
  5568      00
- 5569              	.LASF128:
- 5570 0464 70617474 		.ascii	"patterns\000"
- 5570      65726E73 
- 5570      00
- 5571              	.LASF117:
- 5572 046d 70617474 		.ascii	"patternthd\000"
-ARM GAS  /tmp/ccFueNYe.s 			page 106
+ 5569              	.LASF117:
+ 5570 044f 70617474 		.ascii	"patternthd\000"
+ 5570      65726E74 
+ 5570      686400
+ 5571              	.LASF68:
+ 5572 045a 6D5F6E65 		.ascii	"m_next\000"
+ 5572      787400
+ 5573              	.LASF21:
+ARM GAS  /tmp/cc4Xt1TY.s 			page 106
 
 
- 5572      65726E74 
- 5572      686400
- 5573              	.LASF68:
- 5574 0478 6D5F6E65 		.ascii	"m_next\000"
- 5574      787400
- 5575              	.LASF21:
- 5576 047f 73797374 		.ascii	"systime_t\000"
- 5576      696D655F 
- 5576      7400
- 5577              	.LASF40:
- 5578 0489 705F7265 		.ascii	"p_realprio\000"
- 5578      616C7072 
- 5578      696F00
- 5579              	.LASF48:
- 5580 0494 76746675 		.ascii	"vtfunc_t\000"
- 5580      6E635F74 
- 5580      00
- 5581              	.LASF125:
- 5582 049d 70617474 		.ascii	"patterndyn\000"
- 5582      65726E64 
- 5582      796E00
- 5583              	.LASF47:
- 5584 04a8 636F6E74 		.ascii	"context\000"
- 5584      65787400 
- 5585              	.LASF37:
- 5586 04b0 705F6D73 		.ascii	"p_msg\000"
- 5586      6700
- 5587              	.LASF46:
- 5588 04b6 696E7463 		.ascii	"intctx\000"
- 5588      747800
- 5589              	.LASF54:
- 5590 04bd 76745F70 		.ascii	"vt_par\000"
- 5590      617200
- 5591              	.LASF137:
- 5592 04c4 74657374 		.ascii	"test_buffers\000"
- 5592      5F627566 
- 5592      66657273 
- 5592      00
- 5593              	.LASF30:
- 5594 04d1 705F6E61 		.ascii	"p_name\000"
- 5594      6D6500
- 5595              	.LASF33:
- 5596 04d8 705F7265 		.ascii	"p_refs\000"
- 5596      667300
- 5597              	.LASF64:
- 5598 04df 52656164 		.ascii	"ReadyList\000"
- 5598      794C6973 
- 5598      7400
- 5599              	.LASF92:
- 5600 04e9 65786563 		.ascii	"execute_test\000"
- 5600      7574655F 
- 5600      74657374 
- 5600      00
- 5601              	.LASF112:
- 5602 04f6 726C6973 		.ascii	"rlist\000"
- 5602      7400
- 5603              	.LASF3:
-ARM GAS  /tmp/ccFueNYe.s 			page 107
+ 5574 0461 73797374 		.ascii	"systime_t\000"
+ 5574      696D655F 
+ 5574      7400
+ 5575              	.LASF40:
+ 5576 046b 705F7265 		.ascii	"p_realprio\000"
+ 5576      616C7072 
+ 5576      696F00
+ 5577              	.LASF48:
+ 5578 0476 76746675 		.ascii	"vtfunc_t\000"
+ 5578      6E635F74 
+ 5578      00
+ 5579              	.LASF125:
+ 5580 047f 70617474 		.ascii	"patterndyn\000"
+ 5580      65726E64 
+ 5580      796E00
+ 5581              	.LASF47:
+ 5582 048a 636F6E74 		.ascii	"context\000"
+ 5582      65787400 
+ 5583              	.LASF37:
+ 5584 0492 705F6D73 		.ascii	"p_msg\000"
+ 5584      6700
+ 5585              	.LASF46:
+ 5586 0498 696E7463 		.ascii	"intctx\000"
+ 5586      747800
+ 5587              	.LASF54:
+ 5588 049f 76745F70 		.ascii	"vt_par\000"
+ 5588      617200
+ 5589              	.LASF137:
+ 5590 04a6 74657374 		.ascii	"test_buffers\000"
+ 5590      5F627566 
+ 5590      66657273 
+ 5590      00
+ 5591              	.LASF30:
+ 5592 04b3 705F6E61 		.ascii	"p_name\000"
+ 5592      6D6500
+ 5593              	.LASF33:
+ 5594 04ba 705F7265 		.ascii	"p_refs\000"
+ 5594      667300
+ 5595              	.LASF64:
+ 5596 04c1 52656164 		.ascii	"ReadyList\000"
+ 5596      794C6973 
+ 5596      7400
+ 5597              	.LASF92:
+ 5598 04cb 65786563 		.ascii	"execute_test\000"
+ 5598      7574655F 
+ 5598      74657374 
+ 5598      00
+ 5599              	.LASF112:
+ 5600 04d8 726C6973 		.ascii	"rlist\000"
+ 5600      7400
+ 5601              	.LASF3:
+ 5602 04de 75696E74 		.ascii	"uint8_t\000"
+ 5602      385F7400 
+ 5603              	.LASF131:
+ 5604 04e6 6661696C 		.ascii	"failpoint\000"
+ 5604      706F696E 
+ 5604      7400
+ARM GAS  /tmp/cc4Xt1TY.s 			page 107
 
 
- 5604 04fc 75696E74 		.ascii	"uint8_t\000"
- 5604      385F7400 
- 5605              	.LASF131:
- 5606 0504 6661696C 		.ascii	"failpoint\000"
- 5606      706F696E 
- 5606      7400
- 5607              	.LASF85:
- 5608 050e 74656172 		.ascii	"teardown\000"
- 5608      646F776E 
+ 5605              	.LASF85:
+ 5606 04f0 74656172 		.ascii	"teardown\000"
+ 5606      646F776E 
+ 5606      00
+ 5607              	.LASF138:
+ 5608 04f9 636C6561 		.ascii	"clear_tokens\000"
+ 5608      725F746F 
+ 5608      6B656E73 
  5608      00
- 5609              	.LASF138:
- 5610 0517 636C6561 		.ascii	"clear_tokens\000"
- 5610      725F746F 
- 5610      6B656E73 
- 5610      00
- 5611              	.LASF71:
- 5612 0524 77746F62 		.ascii	"wtobjp\000"
- 5612      6A7000
- 5613              	.LASF89:
- 5614 052b 5F746573 		.ascii	"_test_assert\000"
- 5614      745F6173 
- 5614      73657274 
- 5614      00
- 5615              	.LASF55:
- 5616 0538 76745F73 		.ascii	"vt_systime\000"
- 5616      79737469 
- 5616      6D6500
- 5617              	.LASF135:
- 5618 0543 2E2E2F6C 		.ascii	"../libs/ChibiOS_2.4.0/test/test.c\000"
- 5618      6962732F 
- 5618      43686962 
- 5618      694F535F 
- 5618      322E342E 
- 5619              	.LASF78:
- 5620 0565 67657477 		.ascii	"getwouldblock\000"
- 5620      6F756C64 
- 5620      626C6F63 
- 5620      6B00
- 5621              	.LASF104:
- 5622 0573 73746172 		.ascii	"start\000"
- 5622      7400
- 5623              	.LASF56:
- 5624 0579 56544C69 		.ascii	"VTList\000"
- 5624      737400
- 5625              	.LASF81:
- 5626 0580 42617365 		.ascii	"BaseChannel\000"
- 5626      4368616E 
- 5626      6E656C00 
- 5627              	.LASF62:
- 5628 058c 725F7072 		.ascii	"r_preempt\000"
- 5628      65656D70 
- 5628      7400
- 5629              	.LASF67:
- 5630 0596 6D5F6F77 		.ascii	"m_owner\000"
- 5630      6E657200 
- 5631              	.LASF121:
- 5632 059e 70617474 		.ascii	"patternmbox\000"
-ARM GAS  /tmp/ccFueNYe.s 			page 108
+ 5609              	.LASF71:
+ 5610 0506 77746F62 		.ascii	"wtobjp\000"
+ 5610      6A7000
+ 5611              	.LASF89:
+ 5612 050d 5F746573 		.ascii	"_test_assert\000"
+ 5612      745F6173 
+ 5612      73657274 
+ 5612      00
+ 5613              	.LASF55:
+ 5614 051a 76745F73 		.ascii	"vt_systime\000"
+ 5614      79737469 
+ 5614      6D6500
+ 5615              	.LASF135:
+ 5616 0525 2E2E2F6C 		.ascii	"../libs/ChibiOS_2.4.0/test/test.c\000"
+ 5616      6962732F 
+ 5616      43686962 
+ 5616      694F535F 
+ 5616      322E342E 
+ 5617              	.LASF78:
+ 5618 0547 67657477 		.ascii	"getwouldblock\000"
+ 5618      6F756C64 
+ 5618      626C6F63 
+ 5618      6B00
+ 5619              	.LASF104:
+ 5620 0555 73746172 		.ascii	"start\000"
+ 5620      7400
+ 5621              	.LASF56:
+ 5622 055b 56544C69 		.ascii	"VTList\000"
+ 5622      737400
+ 5623              	.LASF81:
+ 5624 0562 42617365 		.ascii	"BaseChannel\000"
+ 5624      4368616E 
+ 5624      6E656C00 
+ 5625              	.LASF62:
+ 5626 056e 725F7072 		.ascii	"r_preempt\000"
+ 5626      65656D70 
+ 5626      7400
+ 5627              	.LASF67:
+ 5628 0578 6D5F6F77 		.ascii	"m_owner\000"
+ 5628      6E657200 
+ 5629              	.LASF121:
+ 5630 0580 70617474 		.ascii	"patternmbox\000"
+ 5630      65726E6D 
+ 5630      626F7800 
+ 5631              	.LASF136:
+ 5632 058c 2F686F6D 		.ascii	"/home/stm32/Workspace/FirmwareSpykee\000"
+ 5632      652F7374 
+ 5632      6D33322F 
+ARM GAS  /tmp/cc4Xt1TY.s 			page 108
 
 
- 5632      65726E6D 
- 5632      626F7800 
+ 5632      576F726B 
+ 5632      73706163 
  5633              		.ident	"GCC: (Sourcery G++ Lite 2011.03-42) 4.5.2"
-ARM GAS  /tmp/ccFueNYe.s 			page 109
+ARM GAS  /tmp/cc4Xt1TY.s 			page 109
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 test.c
-     /tmp/ccFueNYe.s:26     .text.tmr:00000000 $t
-     /tmp/ccFueNYe.s:31     .text.tmr:00000000 tmr
-     /tmp/ccFueNYe.s:49     .text.tmr:00000008 $d
-     /tmp/ccFueNYe.s:54     .text.print_line:00000000 $t
-     /tmp/ccFueNYe.s:59     .text.print_line:00000000 print_line
-     /tmp/ccFueNYe.s:115    .text.print_line:00000048 $d
-     /tmp/ccFueNYe.s:120    .text.test_printn:00000000 $t
-     /tmp/ccFueNYe.s:126    .text.test_printn:00000000 test_printn
-     /tmp/ccFueNYe.s:225    .text.test_printn:0000008c $d
-     /tmp/ccFueNYe.s:231    .text.test_print:00000000 $t
-     /tmp/ccFueNYe.s:237    .text.test_print:00000000 test_print
-     /tmp/ccFueNYe.s:273    .text.test_print:00000020 $d
-     /tmp/ccFueNYe.s:278    .text.test_println:00000000 $t
-     /tmp/ccFueNYe.s:284    .text.test_println:00000000 test_println
-     /tmp/ccFueNYe.s:320    .text.test_println:00000028 $d
-     /tmp/ccFueNYe.s:325    .text.test_emit_token:00000000 $t
-     /tmp/ccFueNYe.s:331    .text.test_emit_token:00000000 test_emit_token
-     /tmp/ccFueNYe.s:373    .text.test_emit_token:00000018 $d
-     /tmp/ccFueNYe.s:378    .text._test_fail:00000000 $t
-     /tmp/ccFueNYe.s:384    .text._test_fail:00000000 _test_fail
-     /tmp/ccFueNYe.s:411    .text._test_fail:00000014 $d
-     /tmp/ccFueNYe.s:418    .text._test_assert:00000000 $t
-     /tmp/ccFueNYe.s:424    .text._test_assert:00000000 _test_assert
-     /tmp/ccFueNYe.s:467    .text._test_assert:00000018 $d
-     /tmp/ccFueNYe.s:474    .text._test_assert_sequence:00000000 $t
-     /tmp/ccFueNYe.s:480    .text._test_assert_sequence:00000000 _test_assert_sequence
-     /tmp/ccFueNYe.s:582    .text._test_assert_sequence:0000006c $d
-     /tmp/ccFueNYe.s:591    .text._test_assert_time_window:00000000 $t
-     /tmp/ccFueNYe.s:597    .text._test_assert_time_window:00000000 _test_assert_time_window
-     /tmp/ccFueNYe.s:654    .text._test_assert_time_window:00000024 $d
-     /tmp/ccFueNYe.s:661    .text.test_terminate_threads:00000000 $t
-     /tmp/ccFueNYe.s:667    .text.test_terminate_threads:00000000 test_terminate_threads
-     /tmp/ccFueNYe.s:720    .text.test_terminate_threads:00000034 $d
-     /tmp/ccFueNYe.s:725    .text.test_wait_threads:00000000 $t
-     /tmp/ccFueNYe.s:731    .text.test_wait_threads:00000000 test_wait_threads
-     /tmp/ccFueNYe.s:802    .text.test_wait_threads:0000004c $d
-     /tmp/ccFueNYe.s:807    .text.test_cpu_pulse:00000000 $t
-     /tmp/ccFueNYe.s:813    .text.test_cpu_pulse:00000000 test_cpu_pulse
-     /tmp/ccFueNYe.s:879    .text.test_cpu_pulse:00000040 $d
-     /tmp/ccFueNYe.s:885    .text.test_wait_tick:00000000 $t
-     /tmp/ccFueNYe.s:891    .text.test_wait_tick:00000000 test_wait_tick
-     /tmp/ccFueNYe.s:913    .text.test_wait_tick:00000010 $d
-     /tmp/ccFueNYe.s:918    .text.test_start_timer:00000000 $t
-     /tmp/ccFueNYe.s:924    .text.test_start_timer:00000000 test_start_timer
-     /tmp/ccFueNYe.s:985    .text.test_start_timer:00000038 $d
-     /tmp/ccFueNYe.s:993    .text.TestThread:00000000 $t
-     /tmp/ccFueNYe.s:999    .text.TestThread:00000000 TestThread
-     /tmp/ccFueNYe.s:1308   .text.TestThread:000001b4 $d
-     /tmp/ccFueNYe.s:1385   .rodata.wa:00000000 wa
-     /tmp/ccFueNYe.s:1505   .bss.threads:00000000 threads
-     /tmp/ccFueNYe.s:1358   .bss.test:00000000 test
-     /tmp/ccFueNYe.s:1379   .bss.test_timer_done:00000000 test_timer_done
-     /tmp/ccFueNYe.s:1355   .bss.test:00000000 $d
-     /tmp/ccFueNYe.s:1361   .bss.failpoint:00000000 $d
-     /tmp/ccFueNYe.s:1365   .bss.failpoint:00000000 failpoint
-ARM GAS  /tmp/ccFueNYe.s 			page 110
+     /tmp/cc4Xt1TY.s:26     .text.tmr:00000000 $t
+     /tmp/cc4Xt1TY.s:31     .text.tmr:00000000 tmr
+     /tmp/cc4Xt1TY.s:49     .text.tmr:00000008 $d
+     /tmp/cc4Xt1TY.s:54     .text.print_line:00000000 $t
+     /tmp/cc4Xt1TY.s:59     .text.print_line:00000000 print_line
+     /tmp/cc4Xt1TY.s:115    .text.print_line:00000048 $d
+     /tmp/cc4Xt1TY.s:120    .text.test_printn:00000000 $t
+     /tmp/cc4Xt1TY.s:126    .text.test_printn:00000000 test_printn
+     /tmp/cc4Xt1TY.s:225    .text.test_printn:0000008c $d
+     /tmp/cc4Xt1TY.s:231    .text.test_print:00000000 $t
+     /tmp/cc4Xt1TY.s:237    .text.test_print:00000000 test_print
+     /tmp/cc4Xt1TY.s:273    .text.test_print:00000020 $d
+     /tmp/cc4Xt1TY.s:278    .text.test_println:00000000 $t
+     /tmp/cc4Xt1TY.s:284    .text.test_println:00000000 test_println
+     /tmp/cc4Xt1TY.s:320    .text.test_println:00000028 $d
+     /tmp/cc4Xt1TY.s:325    .text.test_emit_token:00000000 $t
+     /tmp/cc4Xt1TY.s:331    .text.test_emit_token:00000000 test_emit_token
+     /tmp/cc4Xt1TY.s:373    .text.test_emit_token:00000018 $d
+     /tmp/cc4Xt1TY.s:378    .text._test_fail:00000000 $t
+     /tmp/cc4Xt1TY.s:384    .text._test_fail:00000000 _test_fail
+     /tmp/cc4Xt1TY.s:411    .text._test_fail:00000014 $d
+     /tmp/cc4Xt1TY.s:418    .text._test_assert:00000000 $t
+     /tmp/cc4Xt1TY.s:424    .text._test_assert:00000000 _test_assert
+     /tmp/cc4Xt1TY.s:467    .text._test_assert:00000018 $d
+     /tmp/cc4Xt1TY.s:474    .text._test_assert_sequence:00000000 $t
+     /tmp/cc4Xt1TY.s:480    .text._test_assert_sequence:00000000 _test_assert_sequence
+     /tmp/cc4Xt1TY.s:582    .text._test_assert_sequence:0000006c $d
+     /tmp/cc4Xt1TY.s:591    .text._test_assert_time_window:00000000 $t
+     /tmp/cc4Xt1TY.s:597    .text._test_assert_time_window:00000000 _test_assert_time_window
+     /tmp/cc4Xt1TY.s:654    .text._test_assert_time_window:00000024 $d
+     /tmp/cc4Xt1TY.s:661    .text.test_terminate_threads:00000000 $t
+     /tmp/cc4Xt1TY.s:667    .text.test_terminate_threads:00000000 test_terminate_threads
+     /tmp/cc4Xt1TY.s:720    .text.test_terminate_threads:00000034 $d
+     /tmp/cc4Xt1TY.s:725    .text.test_wait_threads:00000000 $t
+     /tmp/cc4Xt1TY.s:731    .text.test_wait_threads:00000000 test_wait_threads
+     /tmp/cc4Xt1TY.s:802    .text.test_wait_threads:0000004c $d
+     /tmp/cc4Xt1TY.s:807    .text.test_cpu_pulse:00000000 $t
+     /tmp/cc4Xt1TY.s:813    .text.test_cpu_pulse:00000000 test_cpu_pulse
+     /tmp/cc4Xt1TY.s:879    .text.test_cpu_pulse:00000040 $d
+     /tmp/cc4Xt1TY.s:885    .text.test_wait_tick:00000000 $t
+     /tmp/cc4Xt1TY.s:891    .text.test_wait_tick:00000000 test_wait_tick
+     /tmp/cc4Xt1TY.s:913    .text.test_wait_tick:00000010 $d
+     /tmp/cc4Xt1TY.s:918    .text.test_start_timer:00000000 $t
+     /tmp/cc4Xt1TY.s:924    .text.test_start_timer:00000000 test_start_timer
+     /tmp/cc4Xt1TY.s:985    .text.test_start_timer:00000038 $d
+     /tmp/cc4Xt1TY.s:993    .text.TestThread:00000000 $t
+     /tmp/cc4Xt1TY.s:999    .text.TestThread:00000000 TestThread
+     /tmp/cc4Xt1TY.s:1308   .text.TestThread:000001b4 $d
+     /tmp/cc4Xt1TY.s:1385   .rodata.wa:00000000 wa
+     /tmp/cc4Xt1TY.s:1505   .bss.threads:00000000 threads
+     /tmp/cc4Xt1TY.s:1358   .bss.test:00000000 test
+     /tmp/cc4Xt1TY.s:1379   .bss.test_timer_done:00000000 test_timer_done
+     /tmp/cc4Xt1TY.s:1355   .bss.test:00000000 $d
+     /tmp/cc4Xt1TY.s:1361   .bss.failpoint:00000000 $d
+     /tmp/cc4Xt1TY.s:1365   .bss.failpoint:00000000 failpoint
+ARM GAS  /tmp/cc4Xt1TY.s 			page 110
 
 
-     /tmp/ccFueNYe.s:1368   .bss.local_fail:00000000 $d
-     /tmp/ccFueNYe.s:1372   .bss.local_fail:00000000 local_fail
-     /tmp/ccFueNYe.s:1375   .bss.test_timer_done:00000000 $d
-     /tmp/ccFueNYe.s:1382   .rodata.wa:00000000 $d
-     /tmp/ccFueNYe.s:1392   .bss.tokp:00000000 $d
-     /tmp/ccFueNYe.s:1396   .bss.tokp:00000000 tokp
-     /tmp/ccFueNYe.s:1399   .bss.global_fail:00000000 $d
-     /tmp/ccFueNYe.s:1403   .bss.global_fail:00000000 global_fail
-     /tmp/ccFueNYe.s:1406   .rodata.str1.4:00000000 $d
-     /tmp/ccFueNYe.s:1494   .bss.vt:00000000 $d
-     /tmp/ccFueNYe.s:1498   .bss.vt:00000000 vt
-     /tmp/ccFueNYe.s:1501   .bss.threads:00000000 $d
-     /tmp/ccFueNYe.s:1508   .rodata.patterns:00000000 $d
-     /tmp/ccFueNYe.s:1512   .rodata.patterns:00000000 patterns
-     /tmp/ccFueNYe.s:1526   .bss.chp:00000000 $d
-     /tmp/ccFueNYe.s:1530   .bss.chp:00000000 chp
-     /tmp/ccFueNYe.s:1533   .bss.tokens_buffer:00000000 $d
-     /tmp/ccFueNYe.s:1537   .bss.tokens_buffer:00000000 tokens_buffer
+     /tmp/cc4Xt1TY.s:1368   .bss.local_fail:00000000 $d
+     /tmp/cc4Xt1TY.s:1372   .bss.local_fail:00000000 local_fail
+     /tmp/cc4Xt1TY.s:1375   .bss.test_timer_done:00000000 $d
+     /tmp/cc4Xt1TY.s:1382   .rodata.wa:00000000 $d
+     /tmp/cc4Xt1TY.s:1392   .bss.tokp:00000000 $d
+     /tmp/cc4Xt1TY.s:1396   .bss.tokp:00000000 tokp
+     /tmp/cc4Xt1TY.s:1399   .bss.global_fail:00000000 $d
+     /tmp/cc4Xt1TY.s:1403   .bss.global_fail:00000000 global_fail
+     /tmp/cc4Xt1TY.s:1406   .rodata.str1.4:00000000 $d
+     /tmp/cc4Xt1TY.s:1494   .bss.vt:00000000 $d
+     /tmp/cc4Xt1TY.s:1498   .bss.vt:00000000 vt
+     /tmp/cc4Xt1TY.s:1501   .bss.threads:00000000 $d
+     /tmp/cc4Xt1TY.s:1508   .rodata.patterns:00000000 $d
+     /tmp/cc4Xt1TY.s:1512   .rodata.patterns:00000000 patterns
+     /tmp/cc4Xt1TY.s:1526   .bss.chp:00000000 $d
+     /tmp/cc4Xt1TY.s:1530   .bss.chp:00000000 chp
+     /tmp/cc4Xt1TY.s:1533   .bss.tokens_buffer:00000000 $d
+     /tmp/cc4Xt1TY.s:1537   .bss.tokens_buffer:00000000 tokens_buffer
                      .debug_frame:00000010 $d
-     /tmp/ccFueNYe.s:53     .text.tmr:0000000c $t
-     /tmp/ccFueNYe.s:119    .text.print_line:0000004c $t
-     /tmp/ccFueNYe.s:230    .text.test_printn:00000094 $t
-     /tmp/ccFueNYe.s:277    .text.test_print:00000024 $t
-     /tmp/ccFueNYe.s:324    .text.test_println:0000002c $t
-     /tmp/ccFueNYe.s:377    .text.test_emit_token:0000001c $t
-     /tmp/ccFueNYe.s:473    .text._test_assert:00000024 $t
-     /tmp/ccFueNYe.s:724    .text.test_terminate_threads:00000038 $t
-     /tmp/ccFueNYe.s:884    .text.test_cpu_pulse:00000048 $t
-     /tmp/ccFueNYe.s:917    .text.test_wait_tick:00000014 $t
-     /tmp/ccFueNYe.s:992    .text.test_start_timer:00000048 $t
+     /tmp/cc4Xt1TY.s:53     .text.tmr:0000000c $t
+     /tmp/cc4Xt1TY.s:119    .text.print_line:0000004c $t
+     /tmp/cc4Xt1TY.s:230    .text.test_printn:00000094 $t
+     /tmp/cc4Xt1TY.s:277    .text.test_print:00000024 $t
+     /tmp/cc4Xt1TY.s:324    .text.test_println:0000002c $t
+     /tmp/cc4Xt1TY.s:377    .text.test_emit_token:0000001c $t
+     /tmp/cc4Xt1TY.s:473    .text._test_assert:00000024 $t
+     /tmp/cc4Xt1TY.s:724    .text.test_terminate_threads:00000038 $t
+     /tmp/cc4Xt1TY.s:884    .text.test_cpu_pulse:00000048 $t
+     /tmp/cc4Xt1TY.s:917    .text.test_wait_tick:00000014 $t
+     /tmp/cc4Xt1TY.s:992    .text.test_start_timer:00000048 $t
 
 UNDEFINED SYMBOLS
 chTimeIsWithin

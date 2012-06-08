@@ -1,4 +1,4 @@
-build/obj/main.o: main.c \
+build/obj/shell.o: ../libs/ChibiOS_2.4.0/os/various/shell.c \
  /opt/stm32/arm-none-eabi-2011.03/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/include/string.h \
  /opt/stm32/arm-none-eabi-2011.03/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/include/_ansi.h \
  /opt/stm32/arm-none-eabi-2011.03/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/include/newlib.h \
@@ -77,7 +77,8 @@ build/obj/main.o: main.c \
  ../libs/ChibiOS_2.4.0/os/hal/include/usb.h \
  ../libs/ChibiOS_2.4.0/os/hal/include/mmc_spi.h \
  ../libs/ChibiOS_2.4.0/os/hal/include/serial_usb.h \
- ../libs/ChibiOS_2.4.0/os/various/shell.h
+ ../libs/ChibiOS_2.4.0/os/various/shell.h \
+ ../libs/ChibiOS_2.4.0/os/various/chprintf.h
 
 /opt/stm32/arm-none-eabi-2011.03/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/include/string.h:
 
@@ -244,3 +245,5 @@ mcuconf.h:
 ../libs/ChibiOS_2.4.0/os/hal/include/serial_usb.h:
 
 ../libs/ChibiOS_2.4.0/os/various/shell.h:
+
+../libs/ChibiOS_2.4.0/os/various/chprintf.h:

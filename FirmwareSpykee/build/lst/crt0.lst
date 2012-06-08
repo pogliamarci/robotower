@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cchu4qNL.s 			page 1
+ARM GAS  /tmp/cc82Vjk8.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  /tmp/cchu4qNL.s 			page 1
   48              		.weak	__late_init
   49              		.thumb
   50              		.thumb_func
-ARM GAS  /tmp/cchu4qNL.s 			page 2
+ARM GAS  /tmp/cc82Vjk8.s 			page 2
 
 
   51              		.type	__late_init, %function
@@ -118,7 +118,7 @@ ARM GAS  /tmp/cchu4qNL.s 			page 1
   99 0000 72B6     		cpsid   i
  100              	@ 0 "" 2
  101              	.LVL0:
-ARM GAS  /tmp/cchu4qNL.s 			page 3
+ARM GAS  /tmp/cc82Vjk8.s 			page 3
 
 
  102              		.loc 1 267 0
@@ -178,7 +178,7 @@ ARM GAS  /tmp/cchu4qNL.s 			page 1
  156 004a 8342     		cmp	r3, r0
  157 004c F8D3     		bcc	.L7
  158              	.L6:
-ARM GAS  /tmp/cchu4qNL.s 			page 4
+ARM GAS  /tmp/cc82Vjk8.s 			page 4
 
 
  159              	.LVL5:
@@ -238,7 +238,7 @@ ARM GAS  /tmp/cchu4qNL.s 			page 1
  213 009a CD43     		mvns	r5, r1
  214 009c 04EB050C 		add	ip, r4, r5
  215              		.loc 1 294 0
-ARM GAS  /tmp/cchu4qNL.s 			page 5
+ARM GAS  /tmp/cc82Vjk8.s 			page 5
 
 
  216 00a0 A342     		cmp	r3, r4
@@ -298,7 +298,7 @@ ARM GAS  /tmp/cchu4qNL.s 			page 1
  270              		.loc 1 249 0
  271 00f6 8342     		cmp	r3, r0
  272 00f8 06D2     		bcs	.L12
-ARM GAS  /tmp/cchu4qNL.s 			page 6
+ARM GAS  /tmp/cc82Vjk8.s 			page 6
 
 
  273              	.L13:
@@ -358,7 +358,7 @@ ARM GAS  /tmp/cchu4qNL.s 			page 1
  327              		.loc 1 312 0
  328 0142 8047     		blx	r0
  329              		.loc 1 311 0
-ARM GAS  /tmp/cchu4qNL.s 			page 7
+ARM GAS  /tmp/cc82Vjk8.s 			page 7
 
 
  330 0144 B442     		cmp	r4, r6
@@ -418,7 +418,7 @@ ARM GAS  /tmp/cchu4qNL.s 			page 1
  384              		.loc 1 333 0
  385 018a FFF7FEBF 		b	_default_exit
  386              	.L56:
-ARM GAS  /tmp/cchu4qNL.s 			page 8
+ARM GAS  /tmp/cc82Vjk8.s 			page 8
 
 
  387 018e 00BF     		.align	2
@@ -478,7 +478,7 @@ ARM GAS  /tmp/cchu4qNL.s 			page 1
  439 0050 32010000 		.4byte	.LVL16
  440 0054 0100     		.2byte	0x1
  441 0056 55       		.byte	0x55
-ARM GAS  /tmp/cchu4qNL.s 			page 9
+ARM GAS  /tmp/cc82Vjk8.s 			page 9
 
 
  442 0057 00000000 		.4byte	0x0
@@ -508,7 +508,7 @@ ARM GAS  /tmp/cchu4qNL.s 			page 1
  466 0029 02       		.uleb128 0x2
  467 002a 01       		.byte	0x1
  468 002b 06       		.byte	0x6
- 469 002c C8010000 		.4byte	.LASF0
+ 469 002c CF010000 		.4byte	.LASF0
  470 0030 03       		.uleb128 0x3
  471 0031 45010000 		.4byte	.LASF5
  472 0035 02       		.byte	0x2
@@ -538,7 +538,7 @@ ARM GAS  /tmp/cchu4qNL.s 			page 1
  496 0062 02       		.uleb128 0x2
  497 0063 04       		.byte	0x4
  498 0064 07       		.byte	0x7
-ARM GAS  /tmp/cchu4qNL.s 			page 10
+ARM GAS  /tmp/cc82Vjk8.s 			page 10
 
 
  499 0065 BB000000 		.4byte	.LASF7
@@ -598,7 +598,7 @@ ARM GAS  /tmp/cchu4qNL.s 			page 1
  553 00d1 01       		.byte	0x1
  554 00d2 F7       		.byte	0xf7
  555 00d3 57000000 		.4byte	0x57
-ARM GAS  /tmp/cchu4qNL.s 			page 11
+ARM GAS  /tmp/cc82Vjk8.s 			page 11
 
 
  556 00d7 00       		.byte	0x0
@@ -658,7 +658,7 @@ ARM GAS  /tmp/cchu4qNL.s 			page 1
  610 013f 0D       		.uleb128 0xd
  611 0140 63746C00 		.ascii	"ctl\000"
  612 0144 01       		.byte	0x1
-ARM GAS  /tmp/cchu4qNL.s 			page 12
+ARM GAS  /tmp/cc82Vjk8.s 			page 12
 
 
  613 0145 0401     		.2byte	0x104
@@ -718,7 +718,7 @@ ARM GAS  /tmp/cchu4qNL.s 			page 1
  667 01d5 01       		.byte	0x1
  668 01d6 2D01     		.2byte	0x12d
  669 01d8 F0010000 		.4byte	0x1f0
-ARM GAS  /tmp/cchu4qNL.s 			page 13
+ARM GAS  /tmp/cc82Vjk8.s 			page 13
 
 
  670 01dc 10       		.uleb128 0x10
@@ -757,7 +757,7 @@ ARM GAS  /tmp/cchu4qNL.s 			page 1
  703 022c 01       		.byte	0x1
  704 022d 01       		.byte	0x1
  705 022e 16       		.uleb128 0x16
- 706 022f FD010000 		.4byte	.LASF19
+ 706 022f 04020000 		.4byte	.LASF19
  707 0233 01       		.byte	0x1
  708 0234 7D       		.byte	0x7d
  709 0235 57000000 		.4byte	0x57
@@ -771,14 +771,14 @@ ARM GAS  /tmp/cchu4qNL.s 			page 1
  717 0246 01       		.byte	0x1
  718 0247 01       		.byte	0x1
  719 0248 16       		.uleb128 0x16
- 720 0249 D4010000 		.4byte	.LASF21
+ 720 0249 DB010000 		.4byte	.LASF21
  721 024d 01       		.byte	0x1
  722 024e 8B       		.byte	0x8b
  723 024f 57000000 		.4byte	0x57
  724 0253 01       		.byte	0x1
  725 0254 01       		.byte	0x1
  726 0255 16       		.uleb128 0x16
-ARM GAS  /tmp/cchu4qNL.s 			page 14
+ARM GAS  /tmp/cc82Vjk8.s 			page 14
 
 
  727 0256 4D010000 		.4byte	.LASF22
@@ -816,7 +816,7 @@ ARM GAS  /tmp/cchu4qNL.s 			page 1
  759 0294 01       		.byte	0x1
  760 0295 01       		.byte	0x1
  761 0296 16       		.uleb128 0x16
- 762 0297 EA010000 		.4byte	.LASF27
+ 762 0297 F1010000 		.4byte	.LASF27
  763 029b 01       		.byte	0x1
  764 029c AF       		.byte	0xaf
  765 029d 85000000 		.4byte	0x85
@@ -838,7 +838,7 @@ ARM GAS  /tmp/cchu4qNL.s 			page 1
  781 02bc 01       		.byte	0x1
  782 02bd 16       		.uleb128 0x16
  783 02be 3C000000 		.4byte	.LASF30
-ARM GAS  /tmp/cchu4qNL.s 			page 15
+ARM GAS  /tmp/cc82Vjk8.s 			page 15
 
 
  784 02c2 01       		.byte	0x1
@@ -854,7 +854,7 @@ ARM GAS  /tmp/cchu4qNL.s 			page 1
  794 02d5 01       		.byte	0x1
  795 02d6 01       		.byte	0x1
  796 02d7 16       		.uleb128 0x16
- 797 02d8 FD010000 		.4byte	.LASF19
+ 797 02d8 04020000 		.4byte	.LASF19
  798 02dc 01       		.byte	0x1
  799 02dd 7D       		.byte	0x7d
  800 02de 57000000 		.4byte	0x57
@@ -868,7 +868,7 @@ ARM GAS  /tmp/cchu4qNL.s 			page 1
  808 02ef 01       		.byte	0x1
  809 02f0 01       		.byte	0x1
  810 02f1 16       		.uleb128 0x16
- 811 02f2 D4010000 		.4byte	.LASF21
+ 811 02f2 DB010000 		.4byte	.LASF21
  812 02f6 01       		.byte	0x1
  813 02f7 8B       		.byte	0x8b
  814 02f8 57000000 		.4byte	0x57
@@ -898,7 +898,7 @@ ARM GAS  /tmp/cchu4qNL.s 			page 1
  838 0325 16       		.uleb128 0x16
  839 0326 00000000 		.4byte	.LASF25
  840 032a 01       		.byte	0x1
-ARM GAS  /tmp/cchu4qNL.s 			page 16
+ARM GAS  /tmp/cc82Vjk8.s 			page 16
 
 
  841 032b A3       		.byte	0xa3
@@ -913,7 +913,7 @@ ARM GAS  /tmp/cchu4qNL.s 			page 1
  850 033d 01       		.byte	0x1
  851 033e 01       		.byte	0x1
  852 033f 16       		.uleb128 0x16
- 853 0340 EA010000 		.4byte	.LASF27
+ 853 0340 F1010000 		.4byte	.LASF27
  854 0344 01       		.byte	0x1
  855 0345 AF       		.byte	0xaf
  856 0346 85000000 		.4byte	0x85
@@ -958,7 +958,7 @@ ARM GAS  /tmp/cchu4qNL.s 			page 1
  895 000d 52       		.uleb128 0x52
  896 000e 01       		.uleb128 0x1
  897 000f 55       		.uleb128 0x55
-ARM GAS  /tmp/cchu4qNL.s 			page 17
+ARM GAS  /tmp/cc82Vjk8.s 			page 17
 
 
  898 0010 06       		.uleb128 0x6
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/cchu4qNL.s 			page 1
  952 0046 00       		.byte	0x0
  953 0047 00       		.byte	0x0
  954 0048 07       		.uleb128 0x7
-ARM GAS  /tmp/cchu4qNL.s 			page 18
+ARM GAS  /tmp/cc82Vjk8.s 			page 18
 
 
  955 0049 2E       		.uleb128 0x2e
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/cchu4qNL.s 			page 1
  1009 007f 0C       		.uleb128 0xc
  1010 0080 11       		.uleb128 0x11
  1011 0081 01       		.uleb128 0x1
-ARM GAS  /tmp/cchu4qNL.s 			page 19
+ARM GAS  /tmp/cc82Vjk8.s 			page 19
 
 
  1012 0082 12       		.uleb128 0x12
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/cchu4qNL.s 			page 1
  1066 00b8 0B       		.uleb128 0xb
  1067 00b9 00       		.byte	0x0
  1068 00ba 00       		.byte	0x0
-ARM GAS  /tmp/cchu4qNL.s 			page 20
+ARM GAS  /tmp/cc82Vjk8.s 			page 20
 
 
  1069 00bb 0E       		.uleb128 0xe
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/cchu4qNL.s 			page 1
  1123 00f1 34       		.uleb128 0x34
  1124 00f2 00       		.byte	0x0
  1125 00f3 03       		.uleb128 0x3
-ARM GAS  /tmp/cchu4qNL.s 			page 21
+ARM GAS  /tmp/cc82Vjk8.s 			page 21
 
 
  1126 00f4 08       		.uleb128 0x8
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/cchu4qNL.s 			page 1
  1177      00
  1178 001f F2000000 		.4byte	0xf2
  1179 0023 5F5F6C61 		.ascii	"__late_init\000"
-ARM GAS  /tmp/cchu4qNL.s 			page 22
+ARM GAS  /tmp/cc82Vjk8.s 			page 22
 
 
  1179      74655F69 
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/cchu4qNL.s 			page 1
  1220 0004 0C010000 		.4byte	.LBE18
  1221 0008 10010000 		.4byte	.LBB19
  1222 000c 48010000 		.4byte	.LBE19
-ARM GAS  /tmp/cchu4qNL.s 			page 23
+ARM GAS  /tmp/cc82Vjk8.s 			page 23
 
 
  1223 0010 00000000 		.4byte	0x0
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/cchu4qNL.s 			page 1
  1256              	.LASF12:
  1257 008a 66756E63 		.ascii	"funcpp_t\000"
  1257      70705F74 
-ARM GAS  /tmp/cchu4qNL.s 			page 24
+ARM GAS  /tmp/cc82Vjk8.s 			page 24
 
 
  1257      00
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/cchu4qNL.s 			page 1
  1279      20696E74 
  1279      00
  1280              	.LASF9:
-ARM GAS  /tmp/cchu4qNL.s 			page 25
+ARM GAS  /tmp/cc82Vjk8.s 			page 25
 
 
  1281 012e 6C6F6E67 		.ascii	"long long unsigned int\000"
@@ -1488,53 +1488,53 @@ ARM GAS  /tmp/cchu4qNL.s 			page 1
  1303 01a4 5F646174 		.ascii	"_data\000"
  1303      6100
  1304              	.LASF33:
- 1305 01aa 2F686F6D 		.ascii	"/home/stm32/Workspace/demoarm\000"
+ 1305 01aa 2F686F6D 		.ascii	"/home/stm32/Workspace/FirmwareSpykee\000"
  1305      652F7374 
  1305      6D33322F 
  1305      576F726B 
  1305      73706163 
  1306              	.LASF0:
- 1307 01c8 7369676E 		.ascii	"signed char\000"
+ 1307 01cf 7369676E 		.ascii	"signed char\000"
  1307      65642063 
  1307      68617200 
  1308              	.LASF21:
-ARM GAS  /tmp/cchu4qNL.s 			page 26
+ARM GAS  /tmp/cc82Vjk8.s 			page 26
 
 
- 1309 01d4 5F5F7072 		.ascii	"__process_stack_end__\000"
+ 1309 01db 5F5F7072 		.ascii	"__process_stack_end__\000"
  1309      6F636573 
  1309      735F7374 
  1309      61636B5F 
  1309      656E645F 
  1310              	.LASF27:
- 1311 01ea 5F5F696E 		.ascii	"__init_array_start\000"
+ 1311 01f1 5F5F696E 		.ascii	"__init_array_start\000"
  1311      69745F61 
  1311      72726179 
  1311      5F737461 
  1311      727400
  1312              	.LASF19:
- 1313 01fd 5F5F6D61 		.ascii	"__main_stack_end__\000"
+ 1313 0204 5F5F6D61 		.ascii	"__main_stack_end__\000"
  1313      696E5F73 
  1313      7461636B 
  1313      5F656E64 
  1313      5F5F00
  1314              		.ident	"GCC: (Sourcery G++ Lite 2011.03-42) 4.5.2"
-ARM GAS  /tmp/cchu4qNL.s 			page 27
+ARM GAS  /tmp/cc82Vjk8.s 			page 27
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 crt0.c
-     /tmp/cchu4qNL.s:26     .text.__early_init:00000000 $t
-     /tmp/cchu4qNL.s:32     .text.__early_init:00000000 __early_init
-     /tmp/cchu4qNL.s:46     .text.__late_init:00000000 $t
-     /tmp/cchu4qNL.s:52     .text.__late_init:00000000 __late_init
-     /tmp/cchu4qNL.s:65     .text._default_exit:00000000 $t
-     /tmp/cchu4qNL.s:71     .text._default_exit:00000000 _default_exit
-     /tmp/cchu4qNL.s:84     .text.ResetHandler:00000000 $t
-     /tmp/cchu4qNL.s:90     .text.ResetHandler:00000000 ResetHandler
-     /tmp/cchu4qNL.s:389    .text.ResetHandler:00000190 $d
+     /tmp/cc82Vjk8.s:26     .text.__early_init:00000000 $t
+     /tmp/cc82Vjk8.s:32     .text.__early_init:00000000 __early_init
+     /tmp/cc82Vjk8.s:46     .text.__late_init:00000000 $t
+     /tmp/cc82Vjk8.s:52     .text.__late_init:00000000 __late_init
+     /tmp/cc82Vjk8.s:65     .text._default_exit:00000000 $t
+     /tmp/cc82Vjk8.s:71     .text._default_exit:00000000 _default_exit
+     /tmp/cc82Vjk8.s:84     .text.ResetHandler:00000000 $t
+     /tmp/cc82Vjk8.s:90     .text.ResetHandler:00000000 ResetHandler
+     /tmp/cc82Vjk8.s:389    .text.ResetHandler:00000190 $d
                      .debug_frame:00000010 $d
-     /tmp/cchu4qNL.s:405    .text.ResetHandler:000001c4 $t
+     /tmp/cc82Vjk8.s:405    .text.ResetHandler:000001c4 $t
 
 UNDEFINED SYMBOLS
 main

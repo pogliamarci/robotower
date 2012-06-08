@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccBALyD7.s 			page 1
+ARM GAS  /tmp/cc2qim6H.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccBALyD7.s 			page 1
   51              		.loc 1 67 0
   52 000c 8260     		str	r2, [r0, #8]
   53              		.loc 1 68 0
-ARM GAS  /tmp/ccBALyD7.s 			page 2
+ARM GAS  /tmp/cc2qim6H.s 			page 2
 
 
   54 000e 7047     		bx	lr
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccBALyD7.s 			page 1
  107              		.thumb_func
  108              		.type	chPoolAlloc, %function
  109              	chPoolAlloc:
-ARM GAS  /tmp/ccBALyD7.s 			page 3
+ARM GAS  /tmp/cc2qim6H.s 			page 3
 
 
  110              	.LFB9:
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccBALyD7.s 			page 1
  164 001a 9368     		ldr	r3, [r2, #8]
  165              	.LVL15:
  166 001c 002B     		cmp	r3, #0
-ARM GAS  /tmp/ccBALyD7.s 			page 4
+ARM GAS  /tmp/cc2qim6H.s 			page 4
 
 
  167 001e F8D0     		beq	.L8
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccBALyD7.s 			page 1
  220              	chPoolFree:
  221              	.LFB11:
  222              		.loc 1 145 0
-ARM GAS  /tmp/ccBALyD7.s 			page 5
+ARM GAS  /tmp/cc2qim6H.s 			page 5
 
 
  223              		.cfi_startproc
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccBALyD7.s 			page 1
  275 0000 00000000 		.4byte	.LVL0
  276 0004 02000000 		.4byte	.LVL1
  277 0008 0100     		.2byte	0x1
-ARM GAS  /tmp/ccBALyD7.s 			page 6
+ARM GAS  /tmp/cc2qim6H.s 			page 6
 
 
  278 000a 51       		.byte	0x51
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccBALyD7.s 			page 1
  332 0093 7D       		.byte	0x7d
  333 0094 08       		.sleb128 8
  334 0095 00000000 		.4byte	0x0
-ARM GAS  /tmp/ccBALyD7.s 			page 7
+ARM GAS  /tmp/cc2qim6H.s 			page 7
 
 
  335 0099 00000000 		.4byte	0x0
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccBALyD7.s 			page 1
  389 012b 53       		.byte	0x53
  390 012c 2A000000 		.4byte	.LVL17
  391 0130 2C000000 		.4byte	.LFE9
-ARM GAS  /tmp/ccBALyD7.s 			page 8
+ARM GAS  /tmp/cc2qim6H.s 			page 8
 
 
  392 0134 0100     		.2byte	0x1
@@ -473,12 +473,12 @@ ARM GAS  /tmp/ccBALyD7.s 			page 1
  441 0042 04       		.uleb128 0x4
  442 0043 01       		.byte	0x1
  443 0044 06       		.byte	0x6
- 444 0045 72010000 		.4byte	.LASF1
+ 444 0045 79010000 		.4byte	.LASF1
  445 0049 04       		.uleb128 0x4
  446 004a 01       		.byte	0x1
  447 004b 08       		.byte	0x8
  448 004c 6D000000 		.4byte	.LASF2
-ARM GAS  /tmp/ccBALyD7.s 			page 9
+ARM GAS  /tmp/cc2qim6H.s 			page 9
 
 
  449 0050 04       		.uleb128 0x4
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccBALyD7.s 			page 1
  503 00b9 05       		.byte	0x5
  504 00ba 2D       		.byte	0x2d
  505 00bb C3000000 		.4byte	0xc3
-ARM GAS  /tmp/ccBALyD7.s 			page 10
+ARM GAS  /tmp/cc2qim6H.s 			page 10
 
 
  506 00bf 02       		.byte	0x2
@@ -554,7 +554,7 @@ ARM GAS  /tmp/ccBALyD7.s 			page 1
  516 00cc 34       		.byte	0x34
  517 00cd FC000000 		.4byte	0xfc
  518 00d1 0A       		.uleb128 0xa
- 519 00d2 7E010000 		.4byte	.LASF13
+ 519 00d2 85010000 		.4byte	.LASF13
  520 00d6 05       		.byte	0x5
  521 00d7 35       		.byte	0x35
  522 00d8 C3000000 		.4byte	0xc3
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccBALyD7.s 			page 1
  560 011c 36010000 		.4byte	0x136
  561 0120 0D       		.uleb128 0xd
  562 0121 6D7000   		.ascii	"mp\000"
-ARM GAS  /tmp/ccBALyD7.s 			page 11
+ARM GAS  /tmp/cc2qim6H.s 			page 11
 
 
  563 0124 01       		.byte	0x1
@@ -639,7 +639,7 @@ ARM GAS  /tmp/ccBALyD7.s 			page 1
  598 016a 00       		.byte	0x0
  599 016b 12       		.uleb128 0x12
  600 016c 01       		.byte	0x1
- 601 016d 86010000 		.4byte	.LASF28
+ 601 016d 8D010000 		.4byte	.LASF28
  602 0171 01       		.byte	0x1
  603 0172 3D       		.byte	0x3d
  604 0173 01       		.byte	0x1
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccBALyD7.s 			page 1
  617 018e 50       		.byte	0x50
  618 018f 14       		.uleb128 0x14
  619 0190 2E000000 		.4byte	.LASF19
-ARM GAS  /tmp/ccBALyD7.s 			page 12
+ARM GAS  /tmp/cc2qim6H.s 			page 12
 
 
  620 0194 01       		.byte	0x1
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccBALyD7.s 			page 1
  674 021a 746D7000 		.ascii	"tmp\000"
  675 021e 01       		.byte	0x1
  676 021f 68       		.byte	0x68
-ARM GAS  /tmp/ccBALyD7.s 			page 13
+ARM GAS  /tmp/cc2qim6H.s 			page 13
 
 
  677 0220 65000000 		.4byte	0x65
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccBALyD7.s 			page 1
  731 029b 01       		.byte	0x1
  732 029c 91       		.byte	0x91
  733 029d 01       		.byte	0x1
-ARM GAS  /tmp/ccBALyD7.s 			page 14
+ARM GAS  /tmp/cc2qim6H.s 			page 14
 
 
  734 029e 00000000 		.4byte	.LFB11
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccBALyD7.s 			page 1
  788 030f 78000000 		.4byte	.Ldebug_ranges0+0x78
  789 0313 1D       		.uleb128 0x1d
  790 0314 746D7000 		.ascii	"tmp\000"
-ARM GAS  /tmp/ccBALyD7.s 			page 15
+ARM GAS  /tmp/cc2qim6H.s 			page 15
 
 
  791 0318 01       		.byte	0x1
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccBALyD7.s 			page 1
  845 002e 24       		.uleb128 0x24
  846 002f 00       		.byte	0x0
  847 0030 0B       		.uleb128 0xb
-ARM GAS  /tmp/ccBALyD7.s 			page 16
+ARM GAS  /tmp/cc2qim6H.s 			page 16
 
 
  848 0031 0B       		.uleb128 0xb
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccBALyD7.s 			page 1
  902 0067 00       		.byte	0x0
  903 0068 00       		.byte	0x0
  904 0069 0A       		.uleb128 0xa
-ARM GAS  /tmp/ccBALyD7.s 			page 17
+ARM GAS  /tmp/cc2qim6H.s 			page 17
 
 
  905 006a 0D       		.uleb128 0xd
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/ccBALyD7.s 			page 1
  959 00a0 0B       		.uleb128 0xb
  960 00a1 3B       		.uleb128 0x3b
  961 00a2 0B       		.uleb128 0xb
-ARM GAS  /tmp/ccBALyD7.s 			page 18
+ARM GAS  /tmp/cc2qim6H.s 			page 18
 
 
  962 00a3 49       		.uleb128 0x49
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/ccBALyD7.s 			page 1
  1016 00d9 3A       		.uleb128 0x3a
  1017 00da 0B       		.uleb128 0xb
  1018 00db 3B       		.uleb128 0x3b
-ARM GAS  /tmp/ccBALyD7.s 			page 19
+ARM GAS  /tmp/cc2qim6H.s 			page 19
 
 
  1019 00dc 0B       		.uleb128 0xb
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/ccBALyD7.s 			page 1
  1073 0112 02       		.uleb128 0x2
  1074 0113 06       		.uleb128 0x6
  1075 0114 00       		.byte	0x0
-ARM GAS  /tmp/ccBALyD7.s 			page 20
+ARM GAS  /tmp/cc2qim6H.s 			page 20
 
 
  1076 0115 00       		.byte	0x0
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/ccBALyD7.s 			page 1
  1130 014b 03       		.uleb128 0x3
  1131 014c 0E       		.uleb128 0xe
  1132 014d 3A       		.uleb128 0x3a
-ARM GAS  /tmp/ccBALyD7.s 			page 21
+ARM GAS  /tmp/cc2qim6H.s 			page 21
 
 
  1133 014e 0B       		.uleb128 0xb
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/ccBALyD7.s 			page 1
  1187 0184 01       		.uleb128 0x1
  1188 0185 13       		.uleb128 0x13
  1189 0186 00       		.byte	0x0
-ARM GAS  /tmp/ccBALyD7.s 			page 22
+ARM GAS  /tmp/cc2qim6H.s 			page 22
 
 
  1190 0187 00       		.byte	0x0
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/ccBALyD7.s 			page 1
  1244 01bd 00       		.byte	0x0
  1245 01be 21       		.uleb128 0x21
  1246 01bf 05       		.uleb128 0x5
-ARM GAS  /tmp/ccBALyD7.s 			page 23
+ARM GAS  /tmp/cc2qim6H.s 			page 23
 
 
  1247 01c0 00       		.byte	0x0
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/ccBALyD7.s 			page 1
  1295      6F6C416C 
  1295      6C6F6300 
  1296 003e 6B020000 		.4byte	0x26b
-ARM GAS  /tmp/ccBALyD7.s 			page 24
+ARM GAS  /tmp/cc2qim6H.s 			page 24
 
 
  1297 0042 6368506F 		.ascii	"chPoolFreeI\000"
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/ccBALyD7.s 			page 1
  1337              		.section	.debug_ranges,"",%progbits
  1338              	.Ldebug_ranges0:
  1339 0000 0A000000 		.4byte	.LBB11
-ARM GAS  /tmp/ccBALyD7.s 			page 25
+ARM GAS  /tmp/cc2qim6H.s 			page 25
 
 
  1340 0004 12000000 		.4byte	.LBE11
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/ccBALyD7.s 			page 1
  1391      352E3200 
  1392              	.LASF14:
  1393 0013 6D705F6F 		.ascii	"mp_object_size\000"
-ARM GAS  /tmp/ccBALyD7.s 			page 26
+ARM GAS  /tmp/cc2qim6H.s 			page 26
 
 
  1393      626A6563 
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/ccBALyD7.s 			page 1
  1417      6F6C416C 
  1417      6C6F6349 
  1417      00
-ARM GAS  /tmp/ccBALyD7.s 			page 27
+ARM GAS  /tmp/cc2qim6H.s 			page 27
 
 
  1418              	.LASF0:
@@ -1609,41 +1609,41 @@ ARM GAS  /tmp/ccBALyD7.s 			page 1
  1439      20696E74 
  1439      00
  1440              	.LASF25:
- 1441 0154 2F686F6D 		.ascii	"/home/stm32/Workspace/demoarm\000"
+ 1441 0154 2F686F6D 		.ascii	"/home/stm32/Workspace/FirmwareSpykee\000"
  1441      652F7374 
  1441      6D33322F 
  1441      576F726B 
  1441      73706163 
  1442              	.LASF1:
- 1443 0172 7369676E 		.ascii	"signed char\000"
+ 1443 0179 7369676E 		.ascii	"signed char\000"
  1443      65642063 
  1443      68617200 
-ARM GAS  /tmp/ccBALyD7.s 			page 28
+ARM GAS  /tmp/cc2qim6H.s 			page 28
 
 
  1444              	.LASF13:
- 1445 017e 6D705F6E 		.ascii	"mp_next\000"
+ 1445 0185 6D705F6E 		.ascii	"mp_next\000"
  1445      65787400 
  1446              	.LASF28:
- 1447 0186 6368506F 		.ascii	"chPoolInit\000"
+ 1447 018d 6368506F 		.ascii	"chPoolInit\000"
  1447      6F6C496E 
  1447      697400
  1448              		.ident	"GCC: (Sourcery G++ Lite 2011.03-42) 4.5.2"
-ARM GAS  /tmp/ccBALyD7.s 			page 29
+ARM GAS  /tmp/cc2qim6H.s 			page 29
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 chmempools.c
-     /tmp/ccBALyD7.s:26     .text.chPoolInit:00000000 $t
-     /tmp/ccBALyD7.s:32     .text.chPoolInit:00000000 chPoolInit
-     /tmp/ccBALyD7.s:59     .text.chPoolAllocI:00000000 $t
-     /tmp/ccBALyD7.s:65     .text.chPoolAllocI:00000000 chPoolAllocI
-     /tmp/ccBALyD7.s:103    .text.chPoolAlloc:00000000 $t
-     /tmp/ccBALyD7.s:109    .text.chPoolAlloc:00000000 chPoolAlloc
-     /tmp/ccBALyD7.s:189    .text.chPoolFreeI:00000000 $t
-     /tmp/ccBALyD7.s:195    .text.chPoolFreeI:00000000 chPoolFreeI
-     /tmp/ccBALyD7.s:214    .text.chPoolFree:00000000 $t
-     /tmp/ccBALyD7.s:220    .text.chPoolFree:00000000 chPoolFree
+     /tmp/cc2qim6H.s:26     .text.chPoolInit:00000000 $t
+     /tmp/cc2qim6H.s:32     .text.chPoolInit:00000000 chPoolInit
+     /tmp/cc2qim6H.s:59     .text.chPoolAllocI:00000000 $t
+     /tmp/cc2qim6H.s:65     .text.chPoolAllocI:00000000 chPoolAllocI
+     /tmp/cc2qim6H.s:103    .text.chPoolAlloc:00000000 $t
+     /tmp/cc2qim6H.s:109    .text.chPoolAlloc:00000000 chPoolAlloc
+     /tmp/cc2qim6H.s:189    .text.chPoolFreeI:00000000 $t
+     /tmp/cc2qim6H.s:195    .text.chPoolFreeI:00000000 chPoolFreeI
+     /tmp/cc2qim6H.s:214    .text.chPoolFree:00000000 $t
+     /tmp/cc2qim6H.s:220    .text.chPoolFree:00000000 chPoolFree
                      .debug_frame:00000010 $d
 
 NO UNDEFINED SYMBOLS

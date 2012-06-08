@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccpYw4wr.s 			page 1
+ARM GAS  /tmp/cc14bAYk.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccpYw4wr.s 			page 1
   49              		.global	boardInit
   50              		.thumb
   51              		.thumb_func
-ARM GAS  /tmp/ccpYw4wr.s 			page 2
+ARM GAS  /tmp/cc14bAYk.s 			page 2
 
 
   52              		.type	boardInit, %function
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccpYw4wr.s 			page 1
  103 0080 FFFFFFFF 		.word	-1
  104 0084 00000000 		.word	0
  105 0088 00000000 		.word	0
-ARM GAS  /tmp/ccpYw4wr.s 			page 3
+ARM GAS  /tmp/cc14bAYk.s 			page 3
 
 
  106 008c 00000000 		.word	0
@@ -178,11 +178,11 @@ ARM GAS  /tmp/ccpYw4wr.s 			page 1
  160 0033 3B000000 		.4byte	.LASF0
  161 0037 03       		.uleb128 0x3
  162 0038 01       		.byte	0x1
-ARM GAS  /tmp/ccpYw4wr.s 			page 4
+ARM GAS  /tmp/cc14bAYk.s 			page 4
 
 
  163 0039 06       		.byte	0x6
- 164 003a 78010000 		.4byte	.LASF1
+ 164 003a 7F010000 		.4byte	.LASF1
  165 003e 03       		.uleb128 0x3
  166 003f 01       		.byte	0x1
  167 0040 08       		.byte	0x8
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccpYw4wr.s 			page 1
  217 009f AC       		.byte	0xac
  218 00a0 65000000 		.4byte	0x65
  219 00a4 02       		.byte	0x2
-ARM GAS  /tmp/ccpYw4wr.s 			page 5
+ARM GAS  /tmp/cc14bAYk.s 			page 5
 
 
  220 00a5 23       		.byte	0x23
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccpYw4wr.s 			page 1
  274 0102 B9       		.byte	0xb9
  275 0103 91000000 		.4byte	0x91
  276 0107 06       		.uleb128 0x6
-ARM GAS  /tmp/ccpYw4wr.s 			page 6
+ARM GAS  /tmp/cc14bAYk.s 			page 6
 
 
  277 0108 FC       		.byte	0xfc
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccpYw4wr.s 			page 1
  331 0169 03       		.byte	0x3
  332 016a D5       		.byte	0xd5
  333 016b FC000000 		.4byte	0xfc
-ARM GAS  /tmp/ccpYw4wr.s 			page 7
+ARM GAS  /tmp/cc14bAYk.s 			page 7
 
 
  334 016f 03       		.byte	0x3
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccpYw4wr.s 			page 1
  388 01d3 0A       		.uleb128 0xa
  389 01d4 B8000000 		.4byte	.LASF31
  390 01d8 04       		.byte	0x4
-ARM GAS  /tmp/ccpYw4wr.s 			page 8
+ARM GAS  /tmp/cc14bAYk.s 			page 8
 
 
  391 01d9 1A05     		.2byte	0x51a
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccpYw4wr.s 			page 1
  445 0025 3E       		.uleb128 0x3e
  446 0026 0B       		.uleb128 0xb
  447 0027 03       		.uleb128 0x3
-ARM GAS  /tmp/ccpYw4wr.s 			page 9
+ARM GAS  /tmp/cc14bAYk.s 			page 9
 
 
  448 0028 0E       		.uleb128 0xe
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccpYw4wr.s 			page 1
  502 005e 03       		.uleb128 0x3
  503 005f 08       		.uleb128 0x8
  504 0060 3A       		.uleb128 0x3a
-ARM GAS  /tmp/ccpYw4wr.s 			page 10
+ARM GAS  /tmp/cc14bAYk.s 			page 10
 
 
  505 0061 0B       		.uleb128 0xb
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccpYw4wr.s 			page 1
  559 0097 3B       		.uleb128 0x3b
  560 0098 0B       		.uleb128 0xb
  561 0099 49       		.uleb128 0x49
-ARM GAS  /tmp/ccpYw4wr.s 			page 11
+ARM GAS  /tmp/cc14bAYk.s 			page 11
 
 
  562 009a 13       		.uleb128 0x13
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccpYw4wr.s 			page 1
  600 003e 92010000 		.4byte	0x192
  601 0042 50414C43 		.ascii	"PALConfig\000"
  601      6F6E6669 
-ARM GAS  /tmp/ccpYw4wr.s 			page 12
+ARM GAS  /tmp/cc14bAYk.s 			page 12
 
 
  601      6700
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccpYw4wr.s 			page 1
  640              	.LASF27:
  641 004f 50494461 		.ascii	"PIData\000"
  641      746100
-ARM GAS  /tmp/ccpYw4wr.s 			page 13
+ARM GAS  /tmp/cc14bAYk.s 			page 13
 
 
  642              	.LASF10:
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccpYw4wr.s 			page 1
  667 00ea 70757064 		.ascii	"pupdr\000"
  667      7200
  668              	.LASF24:
-ARM GAS  /tmp/ccpYw4wr.s 			page 14
+ARM GAS  /tmp/cc14bAYk.s 			page 14
 
 
  669 00f0 50464461 		.ascii	"PFData\000"
@@ -826,27 +826,27 @@ ARM GAS  /tmp/ccpYw4wr.s 			page 1
  693 0154 6D6F6465 		.ascii	"moder\000"
  693      7200
  694              	.LASF35:
- 695 015a 2F686F6D 		.ascii	"/home/stm32/Workspace/demoarm\000"
+ 695 015a 2F686F6D 		.ascii	"/home/stm32/Workspace/FirmwareSpykee\000"
  695      652F7374 
  695      6D33322F 
  695      576F726B 
  695      73706163 
  696              	.LASF1:
- 697 0178 7369676E 		.ascii	"signed char\000"
+ 697 017f 7369676E 		.ascii	"signed char\000"
  697      65642063 
  697      68617200 
  698              		.ident	"GCC: (Sourcery G++ Lite 2011.03-42) 4.5.2"
-ARM GAS  /tmp/ccpYw4wr.s 			page 15
+ARM GAS  /tmp/cc14bAYk.s 			page 15
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 board.c
-     /tmp/ccpYw4wr.s:26     .text.__early_init:00000000 $t
-     /tmp/ccpYw4wr.s:32     .text.__early_init:00000000 __early_init
-     /tmp/ccpYw4wr.s:47     .text.boardInit:00000000 $t
-     /tmp/ccpYw4wr.s:53     .text.boardInit:00000000 boardInit
-     /tmp/ccpYw4wr.s:70     .rodata.pal_default_config:00000000 pal_default_config
-     /tmp/ccpYw4wr.s:67     .rodata.pal_default_config:00000000 $d
+     /tmp/cc14bAYk.s:26     .text.__early_init:00000000 $t
+     /tmp/cc14bAYk.s:32     .text.__early_init:00000000 __early_init
+     /tmp/cc14bAYk.s:47     .text.boardInit:00000000 $t
+     /tmp/cc14bAYk.s:53     .text.boardInit:00000000 boardInit
+     /tmp/cc14bAYk.s:70     .rodata.pal_default_config:00000000 pal_default_config
+     /tmp/cc14bAYk.s:67     .rodata.pal_default_config:00000000 $d
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS

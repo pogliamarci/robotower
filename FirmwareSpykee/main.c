@@ -1,11 +1,28 @@
 #include <string.h>
 #include "ch.h"
 #include "hal.h"
+#include "shell.h"
 
 #define FACTORY_NUMBER 3
 #define BUFFER_SIZE 20
 
 static WORKING_AREA(apricancelliWorkingArea, 128);
+static WORKING_AREA(shellWorkingArea, 128);
+
+static eventmask_t maskApricancelliEvents = 0x03;
+
+static void cmd_reset(BaseChannel* channel, int argc, char** argv) {
+	chprintf(channel, "comando cmd_reset");
+}
+
+static void cmd_status(BaseChannel* channel, int argc, char** argv) {
+	chprintf(channel, "comando cmd_status");
+}
+
+static const ShellCommand commands[] = { { "reset", cmd_reset }, { "status",
+		cmd_status }, { NULL, NULL } };
+
+static const ShellConfig shellConfig = { (BaseChannel*) &SD2, commands };
 
 static msg_t apricancelliThread(void *arg) {
 
@@ -21,13 +38,16 @@ static msg_t apricancelliThread(void *arg) {
 	char status_buffer[BUFFER_SIZE];
 
 	char* hello =
-			" Firmware per leggere le uscite di un apricancelli. Davide Tateo, 2012\n\r";
+			"Firmware per leggere le uscite di un apricancelli. Davide Tateo, 2012\n\r";
 	char* factoryMessage = "Factory Destroyed\n\r";
 	char* towerMessage = "Tower Destroyed\n\r";
+	char* evento1 = "Bam giu nel canestro evento1\n\r";
+	char* evento2 = "Frocio chi legge l'evento2\n\r";
 
-	if(arg!=NULL) i=0; //TODO: eliminare inutilità a caso
+	eventmask_t eventiArrivati;
+	if (arg != NULL)
+		i = 0; //TODO: eliminare inutilità a caso
 	/*start seriale 2*/
-	sdStart(&SD2, NULL);
 	/* initialize buffers */
 	for (i = 0; i < BUFFER_SIZE; i++) {
 		command_buffer[i] = '\0';
@@ -39,15 +59,14 @@ static msg_t apricancelliThread(void *arg) {
 	}
 
 	/* My welcome message */
-	sdWrite(&SD2, (uint8_t *)hello, strlen(hello));
+	sdWrite(&SD2, (uint8_t *) hello, strlen(hello));
 
 	/* loop apricancelli */
-	while (cicla)
-	{
+	while (cicla) {
 		/* control if a factory has been destroyed */
 		for (i = 0; i < FACTORY_NUMBER; i++) {
-			if ((palReadPad(IOPORT4,i) == 0) && !destroyed[i]) {
-				sdWrite(&SD2, (uint8_t *)factoryMessage,
+			if ((palReadPad(IOPORT4, i) == 0) && !destroyed[i]) {
+				sdWrite(&SD2, (uint8_t *) factoryMessage,
 						strlen(factoryMessage));
 				if (num_factory > 0) {
 					destroyed[i] = TRUE;
@@ -57,69 +76,72 @@ static msg_t apricancelliThread(void *arg) {
 		}
 
 		/* control if the tower has been destroyed */
-		if ((palReadPad(IOPORT4,3) == 0) && !destroyedT) {
-			sdWrite(&SD2, (uint8_t *)towerMessage, strlen(towerMessage));
+		if ((palReadPad(IOPORT4, 3) == 0) && !destroyedT) {
+			sdWrite(&SD2, (uint8_t *) towerMessage, strlen(towerMessage));
 			if (num_tower > 0) {
 				destroyedT = TRUE;
 				num_tower--;
 			}
 		}
 
-		//TODO: sposta nel main
-		/* input processing */
-		/*if (arrived_char_usart1()) {
-		 read_string_usart1(command_buffer, '\r', BUFFER_SIZE); //TODO: togliere schifo per screen
+		eventiArrivati = chEvtWaitAnyTimeout(maskApricancelliEvents, 200);
+		if (eventiArrivati & 0x01) {
+			sdWrite(&SD2, (uint8_t *) evento1, strlen(evento1));
 
-		 if (strcmp(command_buffer, "status") == 0) {
-		 sprintf(status_buffer, "#F=%d; #D=%d\n\r", num_factory,
-		 num_tower); //TODO: togliere schifo per screen
-		 print_string_usart1(status_buffer);
-		 } else if (strcmp(command_buffer, "reset") == 0) {
-		 num_factory = 3;
-		 num_tower = 1;
-		 for (i = 0; i < FACTORY_NUMBER; i++)
-		 destroyed[i] = FALSE;
-		 destroyedT = FALSE;
-		 } else if (strcmp(command_buffer, "stop") == 0) {
-		 cicla = FALSE;
-		 print_string_usart1("Exit the main loop...\n\r"); //TODO: togliere schifo per screen
-		 } else {
-		 print_string_usart1("Command not found\n\r"); //TODO: togliere schifo per screen
-		 }
-		 }*/
+		}
 
+		if (eventiArrivati & 0x02) {
+			sdWrite(&SD2, (uint8_t *) evento2, strlen(evento2));
+		}
+
+		chEvtClearFlags(maskApricancelliEvents);
 	}
 	return 0;
 }
 
 int main(void) {
 
-	char hello[] = "Hello World!\n\r";
-
+	Thread *shelltp = NULL;
+	Thread *tp;
+	EventSource eventSource;
+	EventListener eventListener;
 	halInit();
 	chSysInit();
 
-	/* set up the serial port */
-	sdStart(&SD1, NULL);
-	//sdStart(&SD2, NULL);
-	sdStart(&SD3, NULL);
-	sdStart(&SD6, NULL);
+	sdStart(&SD2, NULL);
 
-	Thread *tp = chThdCreateStatic(apricancelliWorkingArea,
-				sizeof(apricancelliWorkingArea), NORMALPRIO, apricancelliThread,
-				NULL);
+	chEvtInit(&eventSource);
+	chEvtRegisterMask(&eventSource, &eventListener, maskApricancelliEvents);
 
-	tp++; //TODO: eliminare inutilità a caso
+	tp = chThdCreateStatic(apricancelliWorkingArea,
+	 sizeof(apricancelliWorkingArea), NORMALPRIO, apricancelliThread,
+	 NULL);
+
+	 chEvtSignalFlags(tp, maskApricancelliEvents);
+
+	shellInit();
+
 	while (TRUE) {
+		if (!shelltp) {
+			shelltp = shellCreate(&shellConfig, 1024, NORMALPRIO);
+		} else if (chThdTerminated(shelltp)) {
+			shelltp = NULL;
+		}
+		chEvtBroadcastFlags(&eventSource, 0x01);
+		palSetPad(IOPORT4, GPIOD_LED3);
 		palClearPad(IOPORT4, GPIOD_LED4);
-		palClearPad(IOPORT4, GPIOD_LED6);
+		chThdSleepMilliseconds(500);
+		palSetPad(IOPORT4, GPIOD_LED5);
+		palClearPad(IOPORT4, GPIOD_LED3);
+		chThdSleepMilliseconds(500);
+		palSetPad(IOPORT4, GPIOD_LED6);
+		palClearPad(IOPORT4, GPIOD_LED5);
 		chThdSleepMilliseconds(500);
 		palSetPad(IOPORT4, GPIOD_LED4);
-		palSetPad(IOPORT4, GPIOD_LED6);
-		sdWrite(&SD1, (uint8_t *) hello, 14);
-		//sdWrite(&SD2, (uint8_t *) hello, 14);
-		sdWrite(&SD3, (uint8_t *) hello, 14);
-		sdWrite(&SD6, (uint8_t *) hello, 14);
+		palClearPad(IOPORT4, GPIOD_LED6);
+		chEvtBroadcastFlags(&eventSource, 0x02);
 		chThdSleepMilliseconds(500);
+		chEvtSignalFlags(tp, maskApricancelliEvents);
+
 	}
 }

@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccDYMRzg.s 			page 1
+ARM GAS  /tmp/ccSLDVNz.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccDYMRzg.s 			page 1
   49              		.p2align 4,,15
   50              		.thumb
   51              		.thumb_func
-ARM GAS  /tmp/ccDYMRzg.s 			page 2
+ARM GAS  /tmp/ccSLDVNz.s 			page 2
 
 
   52              		.type	pools1_execute, %function
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccDYMRzg.s 			page 1
  106              	.LVL9:
  107 0056 1E48     		ldr	r0, .L6+4
  108 0058 FFF7FEFF 		bl	chPoolAlloc
-ARM GAS  /tmp/ccDYMRzg.s 			page 3
+ARM GAS  /tmp/ccSLDVNz.s 			page 3
 
 
  109 005c 011E     		subs	r1, r0, #0
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccDYMRzg.s 			page 1
  163 00c8 FFF7FEBF 		b	_test_assert
  164              	.L7:
  165              		.align	2
-ARM GAS  /tmp/ccDYMRzg.s 			page 4
+ARM GAS  /tmp/ccSLDVNz.s 			page 4
 
 
  166              	.L6:
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccDYMRzg.s 			page 1
  215              		.set	.LANCHOR0,. + 0
  216              		.type	mp1, %object
  217              		.size	mp1, 12
-ARM GAS  /tmp/ccDYMRzg.s 			page 5
+ARM GAS  /tmp/ccSLDVNz.s 			page 5
 
 
  218              	mp1:
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccDYMRzg.s 			page 1
  272 005b 24000000 		.4byte	.LVL6
  273 005f 0200     		.2byte	0x2
  274 0061 33       		.byte	0x33
-ARM GAS  /tmp/ccDYMRzg.s 			page 6
+ARM GAS  /tmp/ccSLDVNz.s 			page 6
 
 
  275 0062 9F       		.byte	0x9f
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccDYMRzg.s 			page 1
  329 0010 01       		.byte	0x1
  330 0011 D3000000 		.4byte	.LASF26
  331 0015 5D010000 		.4byte	.LASF27
-ARM GAS  /tmp/ccDYMRzg.s 			page 7
+ARM GAS  /tmp/ccSLDVNz.s 			page 7
 
 
  332 0019 00000000 		.4byte	0x0
@@ -381,7 +381,7 @@ ARM GAS  /tmp/ccDYMRzg.s 			page 1
  349 0042 04       		.uleb128 0x4
  350 0043 01       		.byte	0x1
  351 0044 06       		.byte	0x6
- 352 0045 7B010000 		.4byte	.LASF1
+ 352 0045 82010000 		.4byte	.LASF1
  353 0049 04       		.uleb128 0x4
  354 004a 01       		.byte	0x1
  355 004b 08       		.byte	0x8
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccDYMRzg.s 			page 1
  386 0082 2C       		.byte	0x2c
  387 0083 87000000 		.4byte	0x87
  388 0087 06       		.uleb128 0x6
-ARM GAS  /tmp/ccDYMRzg.s 			page 8
+ARM GAS  /tmp/ccSLDVNz.s 			page 8
 
 
  389 0088 04       		.byte	0x4
@@ -454,7 +454,7 @@ ARM GAS  /tmp/ccDYMRzg.s 			page 1
  419 00c1 34       		.byte	0x34
  420 00c2 F1000000 		.4byte	0xf1
  421 00c6 0A       		.uleb128 0xa
- 422 00c7 87010000 		.4byte	.LASF12
+ 422 00c7 8E010000 		.4byte	.LASF12
  423 00cb 04       		.byte	0x4
  424 00cc 35       		.byte	0x35
  425 00cd B8000000 		.4byte	0xb8
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccDYMRzg.s 			page 1
  443 00ee 23       		.byte	0x23
  444 00ef 08       		.uleb128 0x8
  445 00f0 00       		.byte	0x0
-ARM GAS  /tmp/ccDYMRzg.s 			page 9
+ARM GAS  /tmp/ccSLDVNz.s 			page 9
 
 
  446 00f1 03       		.uleb128 0x3
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccDYMRzg.s 			page 1
  500 0154 01       		.byte	0x1
  501 0155 06       		.uleb128 0x6
  502 0156 04       		.byte	0x4
-ARM GAS  /tmp/ccDYMRzg.s 			page 10
+ARM GAS  /tmp/ccSLDVNz.s 			page 10
 
 
  503 0157 53010000 		.4byte	0x153
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccDYMRzg.s 			page 1
  557 01cf B2       		.byte	0xb2
  558 01d0 D6010000 		.4byte	0x1d6
  559 01d4 01       		.byte	0x1
-ARM GAS  /tmp/ccDYMRzg.s 			page 11
+ARM GAS  /tmp/ccSLDVNz.s 			page 11
 
 
  560 01d5 01       		.byte	0x1
@@ -650,7 +650,7 @@ ARM GAS  /tmp/ccDYMRzg.s 			page 1
  606 0232 04       		.byte	0x4
  607 0233 F9010000 		.4byte	0x1f9
  608 0237 18       		.uleb128 0x18
- 609 0238 8F010000 		.4byte	.LASF24
+ 609 0238 96010000 		.4byte	.LASF24
  610 023c 01       		.byte	0x1
  611 023d 71       		.byte	0x71
  612 023e 49020000 		.4byte	0x249
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccDYMRzg.s 			page 1
  614 0243 05       		.byte	0x5
  615 0244 03       		.byte	0x3
  616 0245 00000000 		.4byte	patternpools
-ARM GAS  /tmp/ccDYMRzg.s 			page 12
+ARM GAS  /tmp/ccSLDVNz.s 			page 12
 
 
  617 0249 0C       		.uleb128 0xc
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccDYMRzg.s 			page 1
  671 0032 3E       		.uleb128 0x3e
  672 0033 0B       		.uleb128 0xb
  673 0034 03       		.uleb128 0x3
-ARM GAS  /tmp/ccDYMRzg.s 			page 13
+ARM GAS  /tmp/ccSLDVNz.s 			page 13
 
 
  674 0035 0E       		.uleb128 0xe
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccDYMRzg.s 			page 1
  728 006b 00       		.byte	0x0
  729 006c 03       		.uleb128 0x3
  730 006d 0E       		.uleb128 0xe
-ARM GAS  /tmp/ccDYMRzg.s 			page 14
+ARM GAS  /tmp/ccSLDVNz.s 			page 14
 
 
  731 006e 3A       		.uleb128 0x3a
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccDYMRzg.s 			page 1
  785 00a4 40       		.uleb128 0x40
  786 00a5 0A       		.uleb128 0xa
  787 00a6 01       		.uleb128 0x1
-ARM GAS  /tmp/ccDYMRzg.s 			page 15
+ARM GAS  /tmp/ccSLDVNz.s 			page 15
 
 
  788 00a7 13       		.uleb128 0x13
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccDYMRzg.s 			page 1
  842 00dd 12       		.uleb128 0x12
  843 00de 2E       		.uleb128 0x2e
  844 00df 00       		.byte	0x0
-ARM GAS  /tmp/ccDYMRzg.s 			page 16
+ARM GAS  /tmp/ccSLDVNz.s 			page 16
 
 
  845 00e0 03       		.uleb128 0x3
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccDYMRzg.s 			page 1
  899 0116 3B       		.uleb128 0x3b
  900 0117 0B       		.uleb128 0xb
  901 0118 49       		.uleb128 0x49
-ARM GAS  /tmp/ccDYMRzg.s 			page 17
+ARM GAS  /tmp/ccSLDVNz.s 			page 17
 
 
  902 0119 13       		.uleb128 0x13
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/ccDYMRzg.s 			page 1
  956 000e 0F020000 		.4byte	0x20f
  957 0012 74657374 		.ascii	"testpools1\000"
  957      706F6F6C 
-ARM GAS  /tmp/ccDYMRzg.s 			page 18
+ARM GAS  /tmp/ccSLDVNz.s 			page 18
 
 
  957      733100
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/ccDYMRzg.s 			page 1
  998 000c D8000000 		.4byte	.LFE9
  999 0010 00000000 		.4byte	.LFB8
  1000 0014 10000000 		.4byte	.LFE8
-ARM GAS  /tmp/ccDYMRzg.s 			page 19
+ARM GAS  /tmp/ccSLDVNz.s 			page 19
 
 
  1001 0018 00000000 		.4byte	0x0
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/ccDYMRzg.s 			page 1
  1029      7420756E 
  1029      7369676E 
  1029      65642069 
-ARM GAS  /tmp/ccDYMRzg.s 			page 20
+ARM GAS  /tmp/ccSLDVNz.s 			page 20
 
 
  1029      6E7400
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/ccDYMRzg.s 			page 1
  1053      726F7669 
  1053      64657200 
  1054              	.LASF3:
-ARM GAS  /tmp/ccDYMRzg.s 			page 21
+ARM GAS  /tmp/ccSLDVNz.s 			page 21
 
 
  1055 0145 73686F72 		.ascii	"short int\000"
@@ -1212,46 +1212,46 @@ ARM GAS  /tmp/ccDYMRzg.s 			page 1
  1059 0158 63686172 		.ascii	"char\000"
  1059      00
  1060              	.LASF27:
- 1061 015d 2F686F6D 		.ascii	"/home/stm32/Workspace/demoarm\000"
+ 1061 015d 2F686F6D 		.ascii	"/home/stm32/Workspace/FirmwareSpykee\000"
  1061      652F7374 
  1061      6D33322F 
  1061      576F726B 
  1061      73706163 
  1062              	.LASF1:
- 1063 017b 7369676E 		.ascii	"signed char\000"
+ 1063 0182 7369676E 		.ascii	"signed char\000"
  1063      65642063 
  1063      68617200 
  1064              	.LASF12:
- 1065 0187 6D705F6E 		.ascii	"mp_next\000"
+ 1065 018e 6D705F6E 		.ascii	"mp_next\000"
  1065      65787400 
  1066              	.LASF24:
- 1067 018f 70617474 		.ascii	"patternpools\000"
+ 1067 0196 70617474 		.ascii	"patternpools\000"
  1067      65726E70 
  1067      6F6F6C73 
  1067      00
  1068              		.ident	"GCC: (Sourcery G++ Lite 2011.03-42) 4.5.2"
-ARM GAS  /tmp/ccDYMRzg.s 			page 22
+ARM GAS  /tmp/ccSLDVNz.s 			page 22
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 testpools.c
-     /tmp/ccDYMRzg.s:26     .text.null_provider:00000000 $t
-     /tmp/ccDYMRzg.s:31     .text.null_provider:00000000 null_provider
-     /tmp/ccDYMRzg.s:48     .text.pools1_execute:00000000 $t
-     /tmp/ccDYMRzg.s:53     .text.pools1_execute:00000000 pools1_execute
-     /tmp/ccDYMRzg.s:167    .text.pools1_execute:000000cc $d
-     /tmp/ccDYMRzg.s:174    .text.pools1_setup:00000000 $t
-     /tmp/ccDYMRzg.s:179    .text.pools1_setup:00000000 pools1_setup
-     /tmp/ccDYMRzg.s:196    .text.pools1_setup:0000000c $d
-     /tmp/ccDYMRzg.s:226    .rodata.testpools1:00000000 testpools1
-     /tmp/ccDYMRzg.s:210    .rodata.patternpools:00000000 patternpools
-     /tmp/ccDYMRzg.s:203    .rodata.str1.4:00000000 $d
-     /tmp/ccDYMRzg.s:207    .rodata.patternpools:00000000 $d
-     /tmp/ccDYMRzg.s:214    .data.mp1:00000000 $d
-     /tmp/ccDYMRzg.s:218    .data.mp1:00000000 mp1
-     /tmp/ccDYMRzg.s:223    .rodata.testpools1:00000000 $d
+     /tmp/ccSLDVNz.s:26     .text.null_provider:00000000 $t
+     /tmp/ccSLDVNz.s:31     .text.null_provider:00000000 null_provider
+     /tmp/ccSLDVNz.s:48     .text.pools1_execute:00000000 $t
+     /tmp/ccSLDVNz.s:53     .text.pools1_execute:00000000 pools1_execute
+     /tmp/ccSLDVNz.s:167    .text.pools1_execute:000000cc $d
+     /tmp/ccSLDVNz.s:174    .text.pools1_setup:00000000 $t
+     /tmp/ccSLDVNz.s:179    .text.pools1_setup:00000000 pools1_setup
+     /tmp/ccSLDVNz.s:196    .text.pools1_setup:0000000c $d
+     /tmp/ccSLDVNz.s:226    .rodata.testpools1:00000000 testpools1
+     /tmp/ccSLDVNz.s:210    .rodata.patternpools:00000000 patternpools
+     /tmp/ccSLDVNz.s:203    .rodata.str1.4:00000000 $d
+     /tmp/ccSLDVNz.s:207    .rodata.patternpools:00000000 $d
+     /tmp/ccSLDVNz.s:214    .data.mp1:00000000 $d
+     /tmp/ccSLDVNz.s:218    .data.mp1:00000000 mp1
+     /tmp/ccSLDVNz.s:223    .rodata.testpools1:00000000 $d
                      .debug_frame:00000010 $d
-     /tmp/ccDYMRzg.s:173    .text.pools1_execute:000000d8 $t
+     /tmp/ccSLDVNz.s:173    .text.pools1_execute:000000d8 $t
 
 UNDEFINED SYMBOLS
 chPoolFree

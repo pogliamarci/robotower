@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccaECFX3.s 			page 1
+ARM GAS  /tmp/cc4ba0Zy.s 			page 1
 
 
    1              		.syntax unified
@@ -36,10 +36,10 @@ ARM GAS  /tmp/ccaECFX3.s 			page 1
   29 0006 00000000 		.4byte	.Ldebug_abbrev0
   30 000a 04       		.byte	0x4
   31 000b 01       		.uleb128 0x1
-  32 000c 94000000 		.4byte	.LASF10
+  32 000c 76000000 		.4byte	.LASF10
   33 0010 01       		.byte	0x1
-  34 0011 A5000000 		.4byte	.LASF11
-  35 0015 48000000 		.4byte	.LASF12
+  34 0011 AC000000 		.4byte	.LASF11
+  35 0015 82000000 		.4byte	.LASF12
   36 0019 00000000 		.4byte	.Ltext0
   37 001d 00000000 		.4byte	.Letext0
   38 0021 00000000 		.4byte	.Ldebug_line0
@@ -58,10 +58,10 @@ ARM GAS  /tmp/ccaECFX3.s 			page 1
   51 003a 03       		.uleb128 0x3
   52 003b 01       		.byte	0x1
   53 003c 08       		.byte	0x8
-ARM GAS  /tmp/ccaECFX3.s 			page 2
+ARM GAS  /tmp/cc4ba0Zy.s 			page 2
 
 
-  54 003d 7D000000 		.4byte	.LASF2
+  54 003d 5F000000 		.4byte	.LASF2
   55 0041 03       		.uleb128 0x3
   56 0042 02       		.byte	0x2
   57 0043 05       		.byte	0x5
@@ -73,7 +73,7 @@ ARM GAS  /tmp/ccaECFX3.s 			page 1
   63 004f 03       		.uleb128 0x3
   64 0050 04       		.byte	0x4
   65 0051 05       		.byte	0x5
-  66 0052 8B000000 		.4byte	.LASF5
+  66 0052 6D000000 		.4byte	.LASF5
   67 0056 03       		.uleb128 0x3
   68 0057 04       		.byte	0x4
   69 0058 07       		.byte	0x7
@@ -81,15 +81,15 @@ ARM GAS  /tmp/ccaECFX3.s 			page 1
   71 005d 03       		.uleb128 0x3
   72 005e 08       		.byte	0x8
   73 005f 05       		.byte	0x5
-  74 0060 D3000000 		.4byte	.LASF7
+  74 0060 DA000000 		.4byte	.LASF7
   75 0064 03       		.uleb128 0x3
   76 0065 08       		.byte	0x8
   77 0066 07       		.byte	0x7
-  78 0067 66000000 		.4byte	.LASF8
+  78 0067 48000000 		.4byte	.LASF8
   79 006b 03       		.uleb128 0x3
   80 006c 01       		.byte	0x1
   81 006d 08       		.byte	0x8
-  82 006e A0000000 		.4byte	.LASF9
+  82 006e A7000000 		.4byte	.LASF9
   83 0072 00       		.byte	0x0
   84              		.section	.debug_abbrev
   85 0000 01       		.uleb128 0x1
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccaECFX3.s 			page 1
  108 0017 0B       		.uleb128 0xb
  109 0018 3E       		.uleb128 0x3e
  110 0019 0B       		.uleb128 0xb
-ARM GAS  /tmp/ccaECFX3.s 			page 3
+ARM GAS  /tmp/cc4ba0Zy.s 			page 3
 
 
  111 001a 03       		.uleb128 0x3
@@ -169,50 +169,50 @@ ARM GAS  /tmp/ccaECFX3.s 			page 1
  143 003e 73686F72 		.ascii	"short int\000"
  143      7420696E 
  143      7400
- 144              	.LASF12:
- 145 0048 2F686F6D 		.ascii	"/home/stm32/Workspace/demoarm\000"
- 145      652F7374 
- 145      6D33322F 
- 145      576F726B 
- 145      73706163 
- 146              	.LASF8:
- 147 0066 6C6F6E67 		.ascii	"long long unsigned int\000"
- 147      206C6F6E 
-ARM GAS  /tmp/ccaECFX3.s 			page 4
+ 144              	.LASF8:
+ 145 0048 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 145      206C6F6E 
+ 145      6720756E 
+ 145      7369676E 
+ 145      65642069 
+ 146              	.LASF2:
+ 147 005f 756E7369 		.ascii	"unsigned char\000"
+ 147      676E6564 
+ARM GAS  /tmp/cc4ba0Zy.s 			page 4
 
 
- 147      6720756E 
- 147      7369676E 
- 147      65642069 
- 148              	.LASF2:
- 149 007d 756E7369 		.ascii	"unsigned char\000"
- 149      676E6564 
- 149      20636861 
- 149      7200
- 150              	.LASF5:
- 151 008b 6C6F6E67 		.ascii	"long int\000"
- 151      20696E74 
- 151      00
- 152              	.LASF10:
- 153 0094 474E5520 		.ascii	"GNU C 4.5.2\000"
- 153      4320342E 
- 153      352E3200 
+ 147      20636861 
+ 147      7200
+ 148              	.LASF5:
+ 149 006d 6C6F6E67 		.ascii	"long int\000"
+ 149      20696E74 
+ 149      00
+ 150              	.LASF10:
+ 151 0076 474E5520 		.ascii	"GNU C 4.5.2\000"
+ 151      4320342E 
+ 151      352E3200 
+ 152              	.LASF12:
+ 153 0082 2F686F6D 		.ascii	"/home/stm32/Workspace/FirmwareSpykee\000"
+ 153      652F7374 
+ 153      6D33322F 
+ 153      576F726B 
+ 153      73706163 
  154              	.LASF9:
- 155 00a0 63686172 		.ascii	"char\000"
+ 155 00a7 63686172 		.ascii	"char\000"
  155      00
  156              	.LASF11:
- 157 00a5 2E2E2F6C 		.ascii	"../libs/ChibiOS_2.4.0/os/kernel/src/chlists.c\000"
+ 157 00ac 2E2E2F6C 		.ascii	"../libs/ChibiOS_2.4.0/os/kernel/src/chlists.c\000"
  157      6962732F 
  157      43686962 
  157      694F535F 
  157      322E342E 
  158              	.LASF7:
- 159 00d3 6C6F6E67 		.ascii	"long long int\000"
+ 159 00da 6C6F6E67 		.ascii	"long long int\000"
  159      206C6F6E 
  159      6720696E 
  159      7400
  160              		.ident	"GCC: (Sourcery G++ Lite 2011.03-42) 4.5.2"
-ARM GAS  /tmp/ccaECFX3.s 			page 5
+ARM GAS  /tmp/cc4ba0Zy.s 			page 5
 
 
 DEFINED SYMBOLS

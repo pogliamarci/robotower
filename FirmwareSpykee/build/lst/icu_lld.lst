@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cccuSwRl.s 			page 1
+ARM GAS  /tmp/ccw2WPed.s 			page 1
 
 
    1              		.syntax unified
@@ -41,7 +41,7 @@ ARM GAS  /tmp/cccuSwRl.s 			page 1
   34 000c 21000000 		.4byte	.LASF11
   35 0010 01       		.byte	0x1
   36 0011 2D000000 		.4byte	.LASF12
-  37 0015 64000000 		.4byte	.LASF13
+  37 0015 8D000000 		.4byte	.LASF13
   38 0019 00000000 		.4byte	.Ltext0
   39 001d 00000000 		.4byte	.Letext0
   40 0021 00000000 		.4byte	.Ldebug_line0
@@ -52,39 +52,39 @@ ARM GAS  /tmp/cccuSwRl.s 			page 1
   45 002c 03       		.uleb128 0x3
   46 002d 04       		.byte	0x4
   47 002e 07       		.byte	0x7
-  48 002f E0000000 		.4byte	.LASF0
+  48 002f E7000000 		.4byte	.LASF0
   49 0033 03       		.uleb128 0x3
   50 0034 01       		.byte	0x1
   51 0035 06       		.byte	0x6
-  52 0036 D4000000 		.4byte	.LASF1
+  52 0036 DB000000 		.4byte	.LASF1
   53 003a 03       		.uleb128 0x3
-ARM GAS  /tmp/cccuSwRl.s 			page 2
+ARM GAS  /tmp/ccw2WPed.s 			page 2
 
 
   54 003b 01       		.byte	0x1
   55 003c 08       		.byte	0x8
-  56 003d AB000000 		.4byte	.LASF2
+  56 003d B2000000 		.4byte	.LASF2
   57 0041 03       		.uleb128 0x3
   58 0042 02       		.byte	0x2
   59 0043 05       		.byte	0x5
-  60 0044 ED000000 		.4byte	.LASF3
+  60 0044 F4000000 		.4byte	.LASF3
   61 0048 03       		.uleb128 0x3
   62 0049 02       		.byte	0x2
   63 004a 07       		.byte	0x7
   64 004b 0E000000 		.4byte	.LASF4
   65 004f 04       		.uleb128 0x4
-  66 0050 F7000000 		.4byte	.LASF14
+  66 0050 FE000000 		.4byte	.LASF14
   67 0054 02       		.byte	0x2
   68 0055 4F       		.byte	0x4f
   69 0056 5A000000 		.4byte	0x5a
   70 005a 03       		.uleb128 0x3
   71 005b 04       		.byte	0x4
   72 005c 05       		.byte	0x5
-  73 005d BE000000 		.4byte	.LASF5
+  73 005d C5000000 		.4byte	.LASF5
   74 0061 03       		.uleb128 0x3
   75 0062 04       		.byte	0x4
   76 0063 07       		.byte	0x7
-  77 0064 82000000 		.4byte	.LASF6
+  77 0064 64000000 		.4byte	.LASF6
   78 0068 03       		.uleb128 0x3
   79 0069 08       		.byte	0x8
   80 006a 05       		.byte	0x5
@@ -92,22 +92,22 @@ ARM GAS  /tmp/cccuSwRl.s 			page 1
   82 006f 03       		.uleb128 0x3
   83 0070 08       		.byte	0x8
   84 0071 07       		.byte	0x7
-  85 0072 94000000 		.4byte	.LASF8
+  85 0072 76000000 		.4byte	.LASF8
   86 0076 03       		.uleb128 0x3
   87 0077 01       		.byte	0x1
   88 0078 08       		.byte	0x8
-  89 0079 B9000000 		.4byte	.LASF9
+  89 0079 C0000000 		.4byte	.LASF9
   90 007d 05       		.uleb128 0x5
   91 007e 4F000000 		.4byte	0x4f
   92 0082 06       		.uleb128 0x6
-  93 0083 C7000000 		.4byte	.LASF10
+  93 0083 CE000000 		.4byte	.LASF10
   94 0087 01       		.byte	0x1
   95 0088 1A05     		.2byte	0x51a
   96 008a 7D000000 		.4byte	0x7d
   97 008e 01       		.byte	0x1
   98 008f 01       		.byte	0x1
   99 0090 06       		.uleb128 0x6
- 100 0091 C7000000 		.4byte	.LASF10
+ 100 0091 CE000000 		.4byte	.LASF10
  101 0095 01       		.byte	0x1
  102 0096 1A05     		.2byte	0x51a
  103 0098 7D000000 		.4byte	0x7d
@@ -118,7 +118,7 @@ ARM GAS  /tmp/cccuSwRl.s 			page 1
  108 0000 01       		.uleb128 0x1
  109 0001 11       		.uleb128 0x11
  110 0002 01       		.byte	0x1
-ARM GAS  /tmp/cccuSwRl.s 			page 3
+ARM GAS  /tmp/ccw2WPed.s 			page 3
 
 
  111 0003 25       		.uleb128 0x25
@@ -178,7 +178,7 @@ ARM GAS  /tmp/cccuSwRl.s 			page 1
  165 0039 49       		.uleb128 0x49
  166 003a 13       		.uleb128 0x13
  167 003b 00       		.byte	0x0
-ARM GAS  /tmp/cccuSwRl.s 			page 4
+ARM GAS  /tmp/ccw2WPed.s 			page 4
 
 
  168 003c 00       		.byte	0x0
@@ -232,62 +232,62 @@ ARM GAS  /tmp/cccuSwRl.s 			page 1
  203      694F535F 
  203      322E342E 
  204 0060 642E6300 		.ascii	"d.c\000"
- 205              	.LASF13:
- 206 0064 2F686F6D 		.ascii	"/home/stm32/Workspace/demoarm\000"
- 206      652F7374 
- 206      6D33322F 
- 206      576F726B 
- 206      73706163 
-ARM GAS  /tmp/cccuSwRl.s 			page 5
+ 205              	.LASF6:
+ 206 0064 6C6F6E67 		.ascii	"long unsigned int\000"
+ 206      20756E73 
+ 206      69676E65 
+ 206      6420696E 
+ 206      7400
+ARM GAS  /tmp/ccw2WPed.s 			page 5
 
 
- 207              	.LASF6:
- 208 0082 6C6F6E67 		.ascii	"long unsigned int\000"
- 208      20756E73 
- 208      69676E65 
- 208      6420696E 
- 208      7400
- 209              	.LASF8:
- 210 0094 6C6F6E67 		.ascii	"long long unsigned int\000"
- 210      206C6F6E 
- 210      6720756E 
- 210      7369676E 
- 210      65642069 
+ 207              	.LASF8:
+ 208 0076 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 208      206C6F6E 
+ 208      6720756E 
+ 208      7369676E 
+ 208      65642069 
+ 209              	.LASF13:
+ 210 008d 2F686F6D 		.ascii	"/home/stm32/Workspace/FirmwareSpykee\000"
+ 210      652F7374 
+ 210      6D33322F 
+ 210      576F726B 
+ 210      73706163 
  211              	.LASF2:
- 212 00ab 756E7369 		.ascii	"unsigned char\000"
+ 212 00b2 756E7369 		.ascii	"unsigned char\000"
  212      676E6564 
  212      20636861 
  212      7200
  213              	.LASF9:
- 214 00b9 63686172 		.ascii	"char\000"
+ 214 00c0 63686172 		.ascii	"char\000"
  214      00
  215              	.LASF5:
- 216 00be 6C6F6E67 		.ascii	"long int\000"
+ 216 00c5 6C6F6E67 		.ascii	"long int\000"
  216      20696E74 
  216      00
  217              	.LASF10:
- 218 00c7 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 218 00ce 49544D5F 		.ascii	"ITM_RxBuffer\000"
  218      52784275 
  218      66666572 
  218      00
  219              	.LASF1:
- 220 00d4 7369676E 		.ascii	"signed char\000"
+ 220 00db 7369676E 		.ascii	"signed char\000"
  220      65642063 
  220      68617200 
  221              	.LASF0:
- 222 00e0 756E7369 		.ascii	"unsigned int\000"
+ 222 00e7 756E7369 		.ascii	"unsigned int\000"
  222      676E6564 
  222      20696E74 
  222      00
  223              	.LASF3:
- 224 00ed 73686F72 		.ascii	"short int\000"
+ 224 00f4 73686F72 		.ascii	"short int\000"
  224      7420696E 
  224      7400
  225              	.LASF14:
- 226 00f7 696E7433 		.ascii	"int32_t\000"
+ 226 00fe 696E7433 		.ascii	"int32_t\000"
  226      325F7400 
  227              		.ident	"GCC: (Sourcery G++ Lite 2011.03-42) 4.5.2"
-ARM GAS  /tmp/cccuSwRl.s 			page 6
+ARM GAS  /tmp/ccw2WPed.s 			page 6
 
 
 DEFINED SYMBOLS

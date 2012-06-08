@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccwhAe9c.s 			page 1
+ARM GAS  /tmp/ccqZYWxH.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccwhAe9c.s 			page 1
   51              		.loc 1 54 0
   52 000e DA60     		str	r2, [r3, #12]
   53              		.loc 1 55 0
-ARM GAS  /tmp/ccwhAe9c.s 			page 2
+ARM GAS  /tmp/ccqZYWxH.s 			page 2
 
 
   54 0010 7047     		bx	lr
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccwhAe9c.s 			page 1
  107 0018 FAD3     		bcc	.L8
  108              	.L5:
  109              		.loc 1 92 0
-ARM GAS  /tmp/ccwhAe9c.s 			page 3
+ARM GAS  /tmp/ccqZYWxH.s 			page 3
 
 
  110 001a 6368     		ldr	r3, [r4, #4]
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccwhAe9c.s 			page 1
  163 000a 8268     		ldr	r2, [r0, #8]
  164 000c 8918     		adds	r1, r1, r2
  165 000e 9960     		str	r1, [r3, #8]
-ARM GAS  /tmp/ccwhAe9c.s 			page 4
+ARM GAS  /tmp/ccqZYWxH.s 			page 4
 
 
  166              	.L14:
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccwhAe9c.s 			page 1
  218 0010 0020     		movcs	r0, #0
  219              	.LVL11:
  220 0012 0120     		movcc	r0, #1
-ARM GAS  /tmp/ccwhAe9c.s 			page 5
+ARM GAS  /tmp/ccqZYWxH.s 			page 5
 
 
  221 0014 7047     		bx	lr
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccwhAe9c.s 			page 1
  271 0020 00000000 		.4byte	.LVL0
  272 0024 2C000000 		.4byte	.LVL6
  273 0028 0100     		.2byte	0x1
-ARM GAS  /tmp/ccwhAe9c.s 			page 6
+ARM GAS  /tmp/ccqZYWxH.s 			page 6
 
 
  274 002a 50       		.byte	0x50
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccwhAe9c.s 			page 1
  328 00ad 12000000 		.4byte	.LVL3
  329 00b1 0100     		.2byte	0x1
  330 00b3 54       		.byte	0x54
-ARM GAS  /tmp/ccwhAe9c.s 			page 7
+ARM GAS  /tmp/ccqZYWxH.s 			page 7
 
 
  331 00b4 14000000 		.4byte	.LVL4
@@ -393,7 +393,7 @@ ARM GAS  /tmp/ccwhAe9c.s 			page 1
  360 000b 01       		.uleb128 0x1
  361 000c 09000000 		.4byte	.LASF29
  362 0010 01       		.byte	0x1
- 363 0011 69010000 		.4byte	.LASF30
+ 363 0011 70010000 		.4byte	.LASF30
  364 0015 25010000 		.4byte	.LASF31
  365 0019 00000000 		.4byte	0x0
  366 001d 00000000 		.4byte	0x0
@@ -410,7 +410,7 @@ ARM GAS  /tmp/ccwhAe9c.s 			page 1
  377 0037 03       		.uleb128 0x3
  378 0038 01       		.byte	0x1
  379 0039 06       		.byte	0x6
- 380 003a 43010000 		.4byte	.LASF1
+ 380 003a 4A010000 		.4byte	.LASF1
  381 003e 03       		.uleb128 0x3
  382 003f 01       		.byte	0x1
  383 0040 08       		.byte	0x8
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccwhAe9c.s 			page 1
  385 0045 03       		.uleb128 0x3
  386 0046 02       		.byte	0x2
  387 0047 05       		.byte	0x5
-ARM GAS  /tmp/ccwhAe9c.s 			page 8
+ARM GAS  /tmp/ccqZYWxH.s 			page 8
 
 
  388 0048 F2000000 		.4byte	.LASF3
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccwhAe9c.s 			page 1
  442 00b4 08       		.uleb128 0x8
  443 00b5 9B000000 		.4byte	0x9b
  444 00b9 00       		.byte	0x0
-ARM GAS  /tmp/ccwhAe9c.s 			page 9
+ARM GAS  /tmp/ccqZYWxH.s 			page 9
 
 
  445 00ba 04       		.uleb128 0x4
@@ -493,7 +493,7 @@ ARM GAS  /tmp/ccwhAe9c.s 			page 1
  454 00cc 5F       		.byte	0x5f
  455 00cd 18010000 		.4byte	0x118
  456 00d1 0A       		.uleb128 0xa
- 457 00d2 56010000 		.4byte	.LASF15
+ 457 00d2 5D010000 		.4byte	.LASF15
  458 00d6 04       		.byte	0x4
  459 00d7 60       		.byte	0x60
  460 00d8 18010000 		.4byte	0x118
@@ -538,14 +538,14 @@ ARM GAS  /tmp/ccwhAe9c.s 			page 1
  499 011a BA000000 		.4byte	0xba
  500 011e 0B       		.uleb128 0xb
  501 011f 10       		.byte	0x10
-ARM GAS  /tmp/ccwhAe9c.s 			page 10
+ARM GAS  /tmp/ccqZYWxH.s 			page 10
 
 
  502 0120 04       		.byte	0x4
  503 0121 71       		.byte	0x71
  504 0122 5F010000 		.4byte	0x15f
  505 0126 0A       		.uleb128 0xa
- 506 0127 56010000 		.4byte	.LASF15
+ 506 0127 5D010000 		.4byte	.LASF15
  507 012b 04       		.byte	0x4
  508 012c 72       		.byte	0x72
  509 012d 18010000 		.4byte	0x118
@@ -580,7 +580,7 @@ ARM GAS  /tmp/ccwhAe9c.s 			page 1
  538 015f 0C       		.uleb128 0xc
  539 0160 90000000 		.4byte	0x90
  540 0164 04       		.uleb128 0x4
- 541 0165 4F010000 		.4byte	.LASF21
+ 541 0165 56010000 		.4byte	.LASF21
  542 0169 04       		.byte	0x4
  543 016a 78       		.byte	0x78
  544 016b 1E010000 		.4byte	0x11e
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccwhAe9c.s 			page 1
  556 0183 18000000 		.4byte	.LFE7
  557 0187 02       		.byte	0x2
  558 0188 7D       		.byte	0x7d
-ARM GAS  /tmp/ccwhAe9c.s 			page 11
+ARM GAS  /tmp/ccqZYWxH.s 			page 11
 
 
  559 0189 00       		.sleb128 0
@@ -646,7 +646,7 @@ ARM GAS  /tmp/ccwhAe9c.s 			page 1
  601 01ea 00       		.byte	0x0
  602 01eb 13       		.uleb128 0x13
  603 01ec 01       		.byte	0x1
- 604 01ed 5E010000 		.4byte	.LASF26
+ 604 01ed 65010000 		.4byte	.LASF26
  605 01f1 01       		.byte	0x1
  606 01f2 6B       		.byte	0x6b
  607 01f3 01       		.byte	0x1
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccwhAe9c.s 			page 1
  613 01ff 11020000 		.4byte	0x211
  614 0203 14       		.uleb128 0x14
  615 0204 76747000 		.ascii	"vtp\000"
-ARM GAS  /tmp/ccwhAe9c.s 			page 12
+ARM GAS  /tmp/ccqZYWxH.s 			page 12
 
 
  616 0208 01       		.byte	0x1
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccwhAe9c.s 			page 1
  670 0274 05       		.byte	0x5
  671 0275 03       		.byte	0x3
  672 0276 00000000 		.4byte	vtlist
-ARM GAS  /tmp/ccwhAe9c.s 			page 13
+ARM GAS  /tmp/ccqZYWxH.s 			page 13
 
 
  673 027a 00       		.byte	0x0
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccwhAe9c.s 			page 1
  727 0034 49       		.uleb128 0x49
  728 0035 13       		.uleb128 0x13
  729 0036 00       		.byte	0x0
-ARM GAS  /tmp/ccwhAe9c.s 			page 14
+ARM GAS  /tmp/ccqZYWxH.s 			page 14
 
 
  730 0037 00       		.byte	0x0
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccwhAe9c.s 			page 1
  784 006d 0B       		.uleb128 0xb
  785 006e 3B       		.uleb128 0x3b
  786 006f 0B       		.uleb128 0xb
-ARM GAS  /tmp/ccwhAe9c.s 			page 15
+ARM GAS  /tmp/ccqZYWxH.s 			page 15
 
 
  787 0070 49       		.uleb128 0x49
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccwhAe9c.s 			page 1
  841 00a6 3A       		.uleb128 0x3a
  842 00a7 0B       		.uleb128 0xb
  843 00a8 3B       		.uleb128 0x3b
-ARM GAS  /tmp/ccwhAe9c.s 			page 16
+ARM GAS  /tmp/ccqZYWxH.s 			page 16
 
 
  844 00a9 0B       		.uleb128 0xb
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccwhAe9c.s 			page 1
  898 00df 02       		.uleb128 0x2
  899 00e0 0A       		.uleb128 0xa
  900 00e1 00       		.byte	0x0
-ARM GAS  /tmp/ccwhAe9c.s 			page 17
+ARM GAS  /tmp/ccqZYWxH.s 			page 17
 
 
  901 00e2 00       		.byte	0x0
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/ccwhAe9c.s 			page 1
  955 0118 15       		.uleb128 0x15
  956 0119 2E       		.uleb128 0x2e
  957 011a 01       		.byte	0x1
-ARM GAS  /tmp/ccwhAe9c.s 			page 18
+ARM GAS  /tmp/ccqZYWxH.s 			page 18
 
 
  958 011b 3F       		.uleb128 0x3f
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/ccwhAe9c.s 			page 1
  1012 0151 18       		.uleb128 0x18
  1013 0152 34       		.uleb128 0x34
  1014 0153 00       		.byte	0x0
-ARM GAS  /tmp/ccwhAe9c.s 			page 19
+ARM GAS  /tmp/ccqZYWxH.s 			page 19
 
 
  1015 0154 03       		.uleb128 0x3
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/ccwhAe9c.s 			page 1
  1056 002b 626F6F6C 		.ascii	"bool_t\000"
  1056      5F7400
  1057 0032 90000000 		.4byte	0x90
-ARM GAS  /tmp/ccwhAe9c.s 			page 20
+ARM GAS  /tmp/ccqZYWxH.s 			page 20
 
 
  1058 0036 73797374 		.ascii	"systime_t\000"
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/ccwhAe9c.s 			page 1
  1100      53657449 
  1100      00
  1101              	.LASF29:
-ARM GAS  /tmp/ccwhAe9c.s 			page 21
+ARM GAS  /tmp/ccqZYWxH.s 			page 21
 
 
  1102 0009 474E5520 		.ascii	"GNU C 4.5.2\000"
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/ccwhAe9c.s 			page 1
  1125              	.LASF28:
  1126 00a2 76746C69 		.ascii	"vtlist\000"
  1126      737400
-ARM GAS  /tmp/ccwhAe9c.s 			page 22
+ARM GAS  /tmp/ccqZYWxH.s 			page 22
 
 
  1127              	.LASF23:
@@ -1312,58 +1312,58 @@ ARM GAS  /tmp/ccwhAe9c.s 			page 1
  1154      20696E74 
  1154      00
  1155              	.LASF31:
- 1156 0125 2F686F6D 		.ascii	"/home/stm32/Workspace/demoarm\000"
+ 1156 0125 2F686F6D 		.ascii	"/home/stm32/Workspace/FirmwareSpykee\000"
  1156      652F7374 
  1156      6D33322F 
  1156      576F726B 
  1156      73706163 
  1157              	.LASF1:
-ARM GAS  /tmp/ccwhAe9c.s 			page 23
+ARM GAS  /tmp/ccqZYWxH.s 			page 23
 
 
- 1158 0143 7369676E 		.ascii	"signed char\000"
+ 1158 014a 7369676E 		.ascii	"signed char\000"
  1158      65642063 
  1158      68617200 
  1159              	.LASF21:
- 1160 014f 56544C69 		.ascii	"VTList\000"
+ 1160 0156 56544C69 		.ascii	"VTList\000"
  1160      737400
  1161              	.LASF15:
- 1162 0156 76745F6E 		.ascii	"vt_next\000"
+ 1162 015d 76745F6E 		.ascii	"vt_next\000"
  1162      65787400 
  1163              	.LASF26:
- 1164 015e 63685654 		.ascii	"chVTResetI\000"
+ 1164 0165 63685654 		.ascii	"chVTResetI\000"
  1164      52657365 
  1164      744900
  1165              	.LASF30:
- 1166 0169 2E2E2F6C 		.ascii	"../libs/ChibiOS_2.4.0/os/kernel/src/chvt.c\000"
+ 1166 0170 2E2E2F6C 		.ascii	"../libs/ChibiOS_2.4.0/os/kernel/src/chvt.c\000"
  1166      6962732F 
  1166      43686962 
  1166      694F535F 
  1166      322E342E 
  1167              		.ident	"GCC: (Sourcery G++ Lite 2011.03-42) 4.5.2"
-ARM GAS  /tmp/ccwhAe9c.s 			page 24
+ARM GAS  /tmp/ccqZYWxH.s 			page 24
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 chvt.c
-     /tmp/ccwhAe9c.s:26     .text._vt_init:00000000 $t
-     /tmp/ccwhAe9c.s:32     .text._vt_init:00000000 _vt_init
-     /tmp/ccwhAe9c.s:58     .text._vt_init:00000014 $d
-     /tmp/ccwhAe9c.s:63     .text.chVTSetI:00000000 $t
-     /tmp/ccwhAe9c.s:69     .text.chVTSetI:00000000 chVTSetI
-     /tmp/ccwhAe9c.s:137    .text.chVTSetI:00000034 $d
-     /tmp/ccwhAe9c.s:142    .text.chVTResetI:00000000 $t
-     /tmp/ccwhAe9c.s:148    .text.chVTResetI:00000000 chVTResetI
-     /tmp/ccwhAe9c.s:183    .text.chVTResetI:00000020 $d
-     /tmp/ccwhAe9c.s:188    .text.chTimeIsWithin:00000000 $t
-     /tmp/ccwhAe9c.s:194    .text.chTimeIsWithin:00000000 chTimeIsWithin
-     /tmp/ccwhAe9c.s:241    .text.chTimeIsWithin:00000024 $d
-     /tmp/ccwhAe9c.s:251    .bss.vtlist:00000000 vtlist
-     /tmp/ccwhAe9c.s:247    .bss.vtlist:00000000 $d
+     /tmp/ccqZYWxH.s:26     .text._vt_init:00000000 $t
+     /tmp/ccqZYWxH.s:32     .text._vt_init:00000000 _vt_init
+     /tmp/ccqZYWxH.s:58     .text._vt_init:00000014 $d
+     /tmp/ccqZYWxH.s:63     .text.chVTSetI:00000000 $t
+     /tmp/ccqZYWxH.s:69     .text.chVTSetI:00000000 chVTSetI
+     /tmp/ccqZYWxH.s:137    .text.chVTSetI:00000034 $d
+     /tmp/ccqZYWxH.s:142    .text.chVTResetI:00000000 $t
+     /tmp/ccqZYWxH.s:148    .text.chVTResetI:00000000 chVTResetI
+     /tmp/ccqZYWxH.s:183    .text.chVTResetI:00000020 $d
+     /tmp/ccqZYWxH.s:188    .text.chTimeIsWithin:00000000 $t
+     /tmp/ccqZYWxH.s:194    .text.chTimeIsWithin:00000000 chTimeIsWithin
+     /tmp/ccqZYWxH.s:241    .text.chTimeIsWithin:00000024 $d
+     /tmp/ccqZYWxH.s:251    .bss.vtlist:00000000 vtlist
+     /tmp/ccqZYWxH.s:247    .bss.vtlist:00000000 $d
                      .debug_frame:00000010 $d
-     /tmp/ccwhAe9c.s:62     .text._vt_init:00000018 $t
-     /tmp/ccwhAe9c.s:141    .text.chVTSetI:00000038 $t
-     /tmp/ccwhAe9c.s:187    .text.chVTResetI:00000024 $t
-     /tmp/ccwhAe9c.s:246    .text.chTimeIsWithin:00000028 $t
+     /tmp/ccqZYWxH.s:62     .text._vt_init:00000018 $t
+     /tmp/ccqZYWxH.s:141    .text.chVTSetI:00000038 $t
+     /tmp/ccqZYWxH.s:187    .text.chVTResetI:00000024 $t
+     /tmp/ccqZYWxH.s:246    .text.chTimeIsWithin:00000028 $t
 
 NO UNDEFINED SYMBOLS
