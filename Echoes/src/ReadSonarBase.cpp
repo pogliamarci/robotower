@@ -19,6 +19,9 @@
 
 #include <iostream>
 
+#include <string>
+using namespace std;
+
 const char ReadSonarBase::response_ok_header[]="+OK ";
 const char ReadSonarBase::response_err_header[]="-ERR";
 const char ReadSonarBase::response_dbg_header[]="%DBG";
@@ -42,7 +45,8 @@ throw (ReadSonarDeviceException)
 	
 	measure=new float[ReadSonarBase::n_sonar];
 	tmp_buf=new char[ReadSonarBase::max_buf_tmp];
-	for(unsigned int i=0;i<ReadSonarBase::n_sonar;i++){
+	for(unsigned int i=0;i<ReadSonarBase::n_sonar;i++)
+	{
 		measure[i]=-1;
 	}
 	
@@ -65,6 +69,15 @@ float ReadSonarBase::getMeasure(unsigned int index)
 	if(index<0)return -1;
 	if(index>=n_sonar)return -1;
 	return measure[index];
+}
+
+string ReadSonarBase::getLine()
+{
+	if(buffer->getLineCount()<=0) return "Error";
+	int len=buffer->removeLine(tmp_buf,max_buf_tmp);
+	if(len<=0)return "Error";
+	if(tmp_buf[len-1]=='\n')tmp_buf[len-1]='\0';
+	return tmp_buf;
 }
 
 int ReadSonarBase::parseLine()

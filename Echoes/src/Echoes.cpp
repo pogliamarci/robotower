@@ -179,10 +179,9 @@ void EchoesManager::sendMessage(float north, float south, float east, float west
 	sonar_data_pub.publish(*msg);
 	delete msg;
 }
-
+/*
 int main(int argc, char** argv) 
 {
-    /* Initialise ROS */
     ros::init(argc, argv, "Echoes");
     try
 	{
@@ -201,3 +200,4 @@ int main(int argc, char** argv)
 	}
 	return EXIT_FAILURE;
 }
+*/

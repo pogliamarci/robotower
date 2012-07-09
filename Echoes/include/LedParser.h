@@ -17,6 +17,8 @@
 
 #include <iostream>
 #include "ReadSonar.h"
+#include "ros/ros.h"
+#include "Echoes/Led.h"
 
 #define NUMREDLED 4
 
@@ -40,9 +42,11 @@ class LedParser
 		bool GreenS;
 		//stato dei led gialli
 		bool YellowS[NUMREDLED];
+		bool ledCallback(Echoes::Led::Request& request, Echoes::Led::Response& response);
 	private:
 		//stato dei let binario
 		char C;
 		//oggetto per comunicare via zigbee
 		ReadSonar* Sender;
+		char buf[10];
 };

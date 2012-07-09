@@ -81,5 +81,40 @@ void LedParser::Yellow(bool y[NUMREDLED])
 void LedParser::SendToLed() 
 {
 	//manda il comando ai led come stringa di un carattere binario
-	(this->Sender)->sendStringCommand(&C, 1);
+	// (this->Sender)->sendStringCommand(&C, 1);
+}
+
+bool LedParser::ledCallback(Echoes::Led::Request& request, Echoes::Led::Response& response)
+{
+	bool yellow_on[4];
+
+	if (request.editGreen == true)
+	{
+		sprintf(buf, "led G 1 %c", request.greenIsOn ? '1' : '0');
+		(this->Sender)->sendStringCommand(buf, strlen(buf));
+		Green(request.greenIsOn);
+	}
+	if (request.editRed == true)
+	{
+		for(int i = 0; i < 4; i++)
+		{
+			sprintf(buf, "led R %c %c", (char) i + '0', i < request.redNumOn ? '1' : '0');
+			(this->Sender)->sendStringCommand(buf, strlen(buf));
+		}
+		Red(request.redNumOn);
+	}
+	if (request.editYellow == true)
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			if (request.yellowIsOn[i] == 1) yellow_on[i] = true;
+			else yellow_on[i] = false;
+			sprintf(buf, "led Y %c %c", (char) i + '0', i < request.yellowIsOn[i] ? '1' : '0');
+			(this->Sender)->sendStringCommand(buf, strlen(buf));
+		}
+		Yellow(yellow_on);
+	}
+	// SendToLed();
+	response.requestSuccessful = true;
+	return true;
 }

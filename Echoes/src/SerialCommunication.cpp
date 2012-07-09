@@ -48,7 +48,6 @@ int SerialCommunication::waitData(int msec_tout){
 			}
 		}
 		else if (v == 0){
-			//fprintf(stderr,"time out on read on file %d\n",fd);
 			return wait_tout;
 		}
 	}while(rexec);
@@ -59,24 +58,3 @@ void SerialCommunication::set_fd(int fd){
 	ufd[0].fd = fd;
 	ufd[0].events = POLLIN;		
 }
-/*int SerialCommunication::set_low_latency(){
-	int fd=ufd[0].fd;
-
-   struct serial_struct serial;
-   int result;
-   result=ioctl(fd, TIOCGSERIAL, &serial);
-
-   if (result) {
-		   return result;
-   } else {
-		   serial.flags |= ASYNC_LOW_LATENCY;
-		   serial.xmit_fifo_size = 1;
-		   ioctl(fd, TIOCSSERIAL, &serial);
-		   if (result) {
-				   return result;
-		   }
-   }
-   return result;
-
-	
-}*/

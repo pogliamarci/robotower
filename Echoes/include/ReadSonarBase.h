@@ -74,6 +74,7 @@ class ReadSonarBase
 		virtual int sendStop()=0;//to implement
 
 		virtual int parseLine();
+		virtual std::string getLine();
 
 		virtual unsigned int getLineToParseNum();
 

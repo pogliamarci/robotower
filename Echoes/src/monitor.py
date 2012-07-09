@@ -25,7 +25,6 @@ class LedManager():
 		else: self.green_status = False
 		rospy.wait_for_service('led_data')
 		led_data = rospy.ServiceProxy('led_data', Led)
-		print self.green_status
 		return led_data(editGreen = True,
 						editYellow = True,
 						editRed = True,

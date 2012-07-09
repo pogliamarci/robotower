@@ -17,6 +17,7 @@
 
 #include "ReadSonar.h"
 #include "sstream"
+#include <iostream>
 
 #define BAUDRATE 	B19200
 #define TOUT		300 //msec
@@ -132,6 +133,7 @@ int ReadSonar::sendStop()
 
 int ReadSonar::sendStringCommand(char *cmd,int len)
 {
+	std::cout << "Stringa: " << cmd << "Len> " << len << std::endl;
 	if(fd<0)return -1;
 	for(int i=0;i<len;i++)
 	{
