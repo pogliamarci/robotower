@@ -1,0 +1,37 @@
+# Se vuole andare dritto, cambiamo la direzione
+
+(ProposedAhead) 				=> (&DEL.RotSpeed ANY);
+
+# Va nella direzione opposta a quella dell'ostacolo, se e' definita
+
+(AND	(Obstacle_West) 
+	(NOT (Obstacle_East))) 			=> (&DEL.RotSpeed ANY) (RotSpeed VERY_FAST_RIGHT);
+
+(AND	(Obstacle_East) 
+	(NOT (Obstacle_West))) 			=> (&DEL.RotSpeed ANY) (RotSpeed VERY_FAST_LEFT);
+
+(AND 	(Obstacle_East) 
+	(Obstacle_West)) 			=> (RotSpeed AHEAD);
+
+
+# Se e' proposta una direzione, la mantiene, altrimenti la sceglie a caso
+
+(AND 	(AND	(ProposedAhead) 
+		(OR 	(Random_Search_Low) 
+			(Random_Search_VeryLow))) 
+	(NOT 	(Obstacle_East)))   		=> (RotSpeed VERY_FAST_RIGHT);
+
+(AND 	(AND 	(ProposedAhead) 
+		(OR 	(Random_Search_High) 
+			(Random_Search_VeryHigh))) 
+	(NOT 	(Obstacle_West))) 		=> (RotSpeed VERY_FAST_LEFT);
+
+# Se hai qualcosa sia a est che a ovest, torna indietro, altrimenti avanza nella direzione scelta
+
+(Obstacle_North) 				=> (&DEL.TanSpeed ANY);
+
+(AND 	(Obstacle_East) 
+	(Obstacle_West)) 			=> (TanSpeed BACKWARD);
+
+(OR 	(NOT 	(Obstacle_East)) 
+	(NOT 	(Obstacle_West))) 		=> (TanSpeed FORWARD);

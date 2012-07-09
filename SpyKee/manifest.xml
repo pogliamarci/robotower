@@ -1,0 +1,15 @@
+<package>
+  <description brief="SpyKee">
+
+     SpyKee, modulo per il controllo del movimento del robot
+
+  </description>
+  <author>Marcello Pogliani, Davide Tateo</author>
+  <license>GPLv2</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/SpyKee</url>
+  <depend package="roscpp"/>
+  <depend package="sensor_msgs"/>
+</package>
+
+

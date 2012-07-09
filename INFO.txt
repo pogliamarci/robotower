@@ -1,0 +1,54 @@
+####################
+#Informazioni Utili#
+####################
+
+Informazioni su come è strutturato un Package di Ros
+
+------------------------------------------------------------
+
+Ogni package ha un nome, che è lo stesso nome della cartella.
+
+-------------------------------------------------------------
+
+In ogni package troviamo le seguenti cartelle:
+
+src----------------------> File sorgenti
+include------------------> File degli header 
+bin----------------------> Binari compilati
+build--------------------> File per la compilazione
+msg----------------------> Cartella per i messaggi di ROS (messaggi per l'architettura publish/subscribe)
+srv----------------------> Cartella per i messaggi dei servizi di ROS (messaggi per l'architettura Client/server)
+msg_gen------------------> Cartella dei messaggi generati automaticamente a partire dalle descrizioni formali
+
+-------------------------------------------------------------
+
+Ogni package contiene inoltre i seguenti file
+
+manifest.xml-------------> Descrizione formale del package: nome, descrizione, licenza, autori
+Makefile-----------------> Makefile per la compilazione del package
+CMakeLists.txt-----------> File usato da CMake per la compilazione
+cmake_install.cmake------> Altro file CMake
+mainpage.dox-------------> Documentazione del package
+
+--------------------------------------------------------------
+
+Altre sotto/cartelle sono automaticamente generate da ROS. 
+Generalmente non sono di interesse per il programmatore.
+
+--------------------------------------------------------------
+
+###############################
+#Noti problemi di compilazione#
+###############################
+
+Se Ros fallisce una compilazione, in alcuni casi potrebbe cancellare il makefile.
+Il makefile dei package di ROS che viene sovrascritto in questi casi è costituito soltanto dalla riga
+
+include $(shell rospack find mk)/cmake.mk 
+
+È sufficiente pertanto creare un file di nome Makefile nella cartella del package che si vuole compilare, e dare il comando rosmake.
+
+Se si vuole utilizzare Eclipse come IDE, il comando
+   make eclipse-project
+crea i file necessari per fare in modo che Eclipse riconosca gli header di ROS - e dei package indicati come dipendenza - e quindi non segnali tutte le funzioni di ROS come errate.
+Dopo aver dato il comando, basta importare il package (ogni package) in Eclipse come progetto già esistente (File > Import > Existing project into Workspace)

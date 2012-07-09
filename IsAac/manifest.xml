@@ -1,0 +1,20 @@
+<package>
+  <description brief="IsAac">
+
+     IsAac "Is Another AI Controller" modulo per interfacciarsi all'intelligenza artificiale che sfrutta la libreria Mr.Brian
+
+  </description>
+  <author>Marcello Pogliani, Davide Tateo</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/IsAcc</url>
+  <depend package="brian"/>
+  <depend package="fuzzy"/>
+  <depend package="roscpp"/>
+  <depend package="Echoes"/>
+  <depend package="SpyKee"/>
+  <depend package="Vision"/>
+
+</package>
+
+

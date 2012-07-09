@@ -1,0 +1,11 @@
+# Assegna una direzione casuale
+(Random_Search_VeryLow)  => (RotSpeed LEFT);
+(Random_Search_Low) 	 => (RotSpeed SLOW_LEFT);
+(Random_Search_High) 	 => (RotSpeed SLOW_RIGHT);
+(Random_Search_VeryHigh) => (RotSpeed RIGHT);
+
+# Assegna una velocità di avanzamento casuale
+(Random_Ahead_VeryLow) 	 => (TanSpeed STEADY);
+(Random_Ahead_Low) 	 => (TanSpeed SLOW_FORWARD);
+(Random_Ahead_High) 	 => (TanSpeed FORWARD);
+(Random_Ahead_VeryHigh)  => (TanSpeed FAST_FORWARD);

@@ -1,0 +1,19 @@
+<package>
+  <description brief="LittleEndian">
+
+	  LittleEndian: tool per creare, selezionando le aree di interesse di un'immagine,
+	  un file .dts contenente le informazioni necessarie per generare il classificatore.
+
+  </description>
+  <author>Marcello Pogliani, Davide Tateo</author>
+  <license>GPLv2</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/LittleEndian</url>
+  <depend package="roscpp"/>
+  <depend package="opencv2"/>
+  <depend package="SpyKee"/>
+  <depend package="SpyKee"/>
+
+</package>
+
+

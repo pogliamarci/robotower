@@ -1,0 +1,18 @@
+<package>
+  <description brief="Echoes">
+
+     Package che si assume il compito di gestire i moduli hardware connessi tramite la connessione seriale Zigbee.
+     In partcolare viene gestita la ricezione dei dati dai sonar e le richieste di accensione dei led.	
+
+  </description>
+  <author>Marcello Pogliani, Davide Tateo</author>
+  <license>GPLv2</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/sonar</url>
+
+  <depend package="roscpp"/>
+  <depend package="rospy" />
+
+</package>
+
+

@@ -1,0 +1,3 @@
+(Factory_Center) => (TanSpeed FAST_FORWARD);
+(Factory_Left)   => (RotSpeed VERY_SLOW_LEFT);
+(Factory_Right)	 => (RotSpeed VERY_SLOW_RIGHT);

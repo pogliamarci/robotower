@@ -1,0 +1,17 @@
+(TowerDetected TRUE_FALSE)
+(FactoryDetected TRUE_FALSE)
+
+(DistanceNorth OBJECTDISTANCE)
+(DistanceSouth OBJECTDISTANCE)
+(DistanceEast OBJECTDISTANCE)
+(DistanceWest OBJECTDISTANCE)
+
+(TowerPosition OBJECTPOSITION)
+(FactoryPosition OBJECTPOSITION)
+
+(RandomSearch RANDOM_VAR)
+(RandomAhead RANDOM_VAR)
+
+(InvisibleObstacle TIMEOUT)
+
+(ProposedRotSpeed ROTSPEEDP)

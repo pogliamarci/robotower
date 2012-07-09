@@ -1,0 +1,8 @@
+bool editGreen
+bool editYellow
+bool editRed
+bool greenIsOn
+uint8 redNumOn
+bool[4] yellowIsOn
+---
+bool requestSuccessful
