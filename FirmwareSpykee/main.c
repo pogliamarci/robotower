@@ -55,9 +55,6 @@ typedef struct {
 // green led: PE15
 void setLed(int n, int setOn) {
 	if(n < 0 || n > 8) return; /* ensure the passed led ID is right... */
-	chMtxLock(&bufferMutex);
-	chprintf((BaseChannel*) &SD2, "OK LED\r\n");
-	chMtxUnlock();
 	const short firstPort = 7; //using GPIOs from PE7
 	if(setOn) {
 		palSetPad(IOPORT5, n + firstPort);
@@ -233,7 +230,7 @@ static msg_t sonarThread(void *arg) {
 		chMtxLock(&bufferMutex);
 		bufferPutString(&circularBuffer, buf);
 		chMtxUnlock();
-		chThdSleepMilliseconds(100);
+		chThdSleepMilliseconds(500);
 	}
 
 	return 0;
@@ -247,6 +244,7 @@ static msg_t rfidThread(void *arg) {
 	SerialConfig config = { rfidBitrate, 0, USART_CR2_STOP1_BITS | USART_CR2_LINEN, 0 };
 	char buf[rfidMessageSize + 1];
 	char buf2[rfidMessageSize + 9];
+	int k;
 
 	sdStart(&SD3, &config);
 	while (TRUE) {

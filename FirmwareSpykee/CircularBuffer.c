@@ -28,11 +28,6 @@ int bufferPut(CircularBuffer* buf, char ch) {
 		chprintf((BaseChannel*) &SD2, "BUFFER PIENO!!! ERRORE!!!");
 		return -1;
 	}
-	if(ch == 0x04 || ch == 0x03 || ch == 0x19 || ch == 0x17)
-	{
-		chprintf((BaseChannel*) &SD2, "END OF FILE TRASMESSO. PERCHE'?!?!?");
-		return 0;
-	}
 	buf->content[buf->end] = ch;
 	buf->end = (buf->end + 1) % BUFFER_LENGTH;
 	return 0;

@@ -78,7 +78,7 @@
 #define GPIOB_SCL               6
 #define GPIOB_SDA               9
 #define GPIOB_PB10_USART3_TX    10
-#define GPIOB_PB11_USART3_RX    11		/* RFID USART */
+#define GPIOB_PB11_USART3_RX    11
 
 #define GPIOC_OTG_FS_POWER_ON   0
 #define GPIOC_DOUT              3
