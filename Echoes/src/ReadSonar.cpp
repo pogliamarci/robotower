@@ -19,18 +19,26 @@
 #include "sstream"
 #include <iostream>
 
-#define BAUDRATE 	B19200
-#define TOUT		300 //msec
-#define MAX_C_RECV 	40
-#define CHAR_PAUSE 	3000 //usec
+#define BAUDRATE 		B19200
+#define TOUT			300 //msec
+#define MAX_C_RECV 		40
+#define CHAR_PAUSE 		3000 //usec
 #define MAX_BUF_CHAR	32767
 	
 using namespace std;
 
-ReadSonar::ReadSonar(std::string sdev,float to_meter) throw (ReadSonarDeviceException)
-:ReadSonarBase(to_meter){
+const char* ReadSonarDeviceException::what() const throw()
+{
+  return "Sonar port open error!";
+}
 
-	fd = open(sdev.c_str(), O_RDWR | O_NOCTTY );
+ReadSonar::ReadSonar(std::string serialDevice) throw (ReadSonarDeviceException)
+{
+
+	buffer = NULL; /* wtf? */
+	tmp_buf=NULL;
+	tmp_buf=new char[MAX_TMP_BUF];
+	fd = open(serialDevice.c_str(), O_RDWR | O_NOCTTY );
 	if(fd>=0)
 	{
 		tcgetattr(fd,&oldtio);
@@ -47,7 +55,7 @@ ReadSonar::ReadSonar(std::string sdev,float to_meter) throw (ReadSonarDeviceExce
 		tcflush(fd, TCIFLUSH);
 		tcsetattr(fd,TCSANOW,&newtio);
 	
-		buffer=new CharCircularBuffer(MAX_BUF_CHAR,'\r');
+		buffer = new CharCircularBuffer(MAX_BUF_CHAR,'\r');
 				
 	}
 	else
@@ -65,6 +73,10 @@ ReadSonar::~ReadSonar()
 	if(buffer)
 	{
 		delete buffer;
+	}
+	if(tmp_buf)
+	{
+		delete [] tmp_buf;
 	}
 }
 
@@ -88,7 +100,7 @@ int ReadSonar::readData()
 		switch(waitData(TOUT))
 		{
 			case SerialCommunication::wait_ok:
-				res = read(fd,tmp_buf,max_buf_tmp);
+				res = read(fd,tmp_buf,MAX_TMP_BUF);
 				if(res<=0)
 				{
 					cerr << "(1) Sonar READ Error on fileno " << fd << endl;
@@ -117,6 +129,20 @@ int ReadSonar::readData()
 	
 	if(res<=0)return -1;
 	return 0;
+}
+
+std::string ReadSonar::getLine()
+{
+	if(buffer->getLineCount()<=0) return "Error";
+	int len=buffer->removeLine(tmp_buf,MAX_TMP_BUF);
+	if(len<=0)return "Error";
+	if(tmp_buf[len-1]=='\n')tmp_buf[len-1]='\0';
+	return tmp_buf;
+}
+
+unsigned int ReadSonar::getLineToParseNum()
+{
+	return buffer->getLineCount();
 }
 
 int ReadSonar::sendStringCommand(char *cmd,int len)

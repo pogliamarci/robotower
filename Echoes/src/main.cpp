@@ -47,22 +47,20 @@ void parseItAll(ReadSonar& read_sonar, Dispatcher& d)
 
 int main(int argc, char** argv)
 {
+	char* sdfn = SERIAL_DEVICE_FILENAME;
+	if(argc == 2) {
+		sdfn = argv[1];
+	}
+
+	ReadSonar read_sonar(sdfn);
 	Dispatcher dispatcher;
-	ReadSonar read_sonar(SERIAL_DEVICE_FILENAME, 1);
+
 
 	/* Initialise ROS */
 	ros::init(argc, argv, "Echoes");
 
 	ros::NodeHandle ros_node;
 	ros::ServiceServer led_service;
-
-	/* a little bit of tests for the parser... */
-	dispatcher.dispatch("Questa e' una prova");
-	dispatcher.dispatch("Questa e' una altra prova");
-	dispatcher.dispatch("[RFID] Questo e' uno RFID");
-	dispatcher.dispatch("[SONAR] Questi sono dei sonar, finalmente");
-	dispatcher.dispatch("[SONAR] N:0,S:5,E:8,W:89");
-	dispatcher.dispatch("[RFID] 0F03182595A4");
 
 	LedParser lp(&read_sonar);
 

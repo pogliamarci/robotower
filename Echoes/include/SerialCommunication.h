@@ -34,7 +34,6 @@ class SerialCommunication
 		void set_fd(int fd);
 
 		int waitData(int msec_tout);
-		//int set_low_latency();
 };
 
 

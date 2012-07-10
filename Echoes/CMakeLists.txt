@@ -30,4 +30,4 @@ rosbuild_gensrv()
 #target_link_libraries(example ${PROJECT_NAME})
 
 
-rosbuild_add_executable(Echoes src/ReadSonar.cpp src/ReadSonarBase.cpp src/SerialCommunication.cpp src/CharCircularBuffer.cpp src/main.cpp src/Dispatcher.cpp src/RfidProcesser.cpp src/SonarProcesser.cpp src/LedParser.cpp)
+rosbuild_add_executable(Echoes src/ReadSonar.cpp src/SerialCommunication.cpp src/CharCircularBuffer.cpp src/main.cpp src/Dispatcher.cpp src/RfidProcesser.cpp src/SonarProcesser.cpp src/LedParser.cpp)

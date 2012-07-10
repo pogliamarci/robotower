@@ -18,22 +18,37 @@
 #ifndef READOSONAR_H_
 #define READOSONAR_H_
 
-#include "ReadSonarBase.h"
+#include <fcntl.h>
+#include <unistd.h>
+#include <termios.h>
+#include <exception>
+#include <vector>
+#include <string>
+#include "SerialCommunication.h"
+#include "CharCircularBuffer.h"
 
-class ReadSonar : public SerialCommunication, public ReadSonarBase
+class ReadSonarDeviceException: public std::exception
 {
-	int fd;  	//descrittore del file per leggere/scrivere sulla seriale
-	termios oldtio,newtio;
-
 	public:
+		virtual const char* what() const throw();
+};
+
+class ReadSonar : public SerialCommunication
+{
+	public:
+		ReadSonar(std::string serialDevice) throw (ReadSonarDeviceException);
 		int sendStringCommand(char *cmd,int len);
-	public:
-		ReadSonar(std::string sdev,float to_meter)
-		throw (ReadSonarDeviceException);
+		std::string getLine();
+		bool isReady();
+		int readData();
+		unsigned int getLineToParseNum();
 		~ReadSonar();
-
-		virtual bool isReady();
-		virtual int readData();
+	private:
+		int fd;  	//descrittore del file per leggere/scrivere sulla seriale
+		termios oldtio,newtio;
+		CharCircularBuffer * buffer;
+		char * tmp_buf;
+		static const int MAX_TMP_BUF = 256;
 };
 
 #endif
