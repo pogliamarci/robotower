@@ -24,7 +24,7 @@
 #define MAX_C_RECV 		40
 #define CHAR_PAUSE 		3000 //usec
 #define MAX_BUF_CHAR	32767
-	
+
 using namespace std;
 
 const char* ReadSonarDeviceException::what() const throw()

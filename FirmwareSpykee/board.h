@@ -78,7 +78,7 @@
 #define GPIOB_SCL               6
 #define GPIOB_SDA               9
 #define GPIOB_PB10_USART3_TX    10
-#define GPIOB_PB11_USART3_RX    11
+#define GPIOB_PB11_USART3_RX    11	/* USART interface to the RFID reader */
 
 #define GPIOC_OTG_FS_POWER_ON   0
 #define GPIOC_DOUT              3
@@ -87,7 +87,7 @@
 #define GPIOC_SCLK              10
 #define GPIOC_SDIN              12
 
-#define GPIOD_RESET             4	/* GPIO4 PA0 - PA1 - PA2 for the factories, PA3 for the tower */
+#define GPIOD_RESET             4	/* GPIO4 PD0 - PD1 - PD2 for the factories, PD3 for the tower */
 #define GPIOD_OVER_CURRENT      5
 #define GPIOD_LED4              12      /* Green LED.   */
 #define GPIOD_LED3              13      /* Orange LED.  */
