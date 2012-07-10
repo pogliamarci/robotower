@@ -87,7 +87,7 @@
 #define GPIOC_SCLK              10
 #define GPIOC_SDIN              12
 
-#define GPIOD_RESET             4
+#define GPIOD_RESET             4	/* GPIO4 PA0 - PA1 - PA2 for the factories, PA3 for the tower */
 #define GPIOD_OVER_CURRENT      5
 #define GPIOD_LED4              12      /* Green LED.   */
 #define GPIOD_LED3              13      /* Orange LED.  */
