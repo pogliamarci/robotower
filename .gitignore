@@ -70,3 +70,4 @@ build/CMakeFiles/
 CMakeFiles
 cmake_install.cmake
 Makefile
+.dep/*
