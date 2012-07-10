@@ -147,7 +147,6 @@ unsigned int ReadSonar::getLineToParseNum()
 
 int ReadSonar::sendStringCommand(char *cmd,int len)
 {
-	std::cout << "Stringa: " << cmd << "Len> " << len << std::endl;
 	if(fd<0)return -1;
 	for(int i=0;i<len;i++)
 	{

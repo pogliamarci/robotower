@@ -15,21 +15,12 @@
  * GNU General Public License for more details.
  */
 
-#include "SonarProcesser.h"
+#include "TowerProcesser.h"
 #include <iostream>
 #include <cstdlib>
 
-SonarProcesser::SonarProcesser(ros::Publisher pub)
-{
-	north = 0;
-	south = 0;
-	east = 0;
-	west = 0;
-	sonar_data_pub = pub;
-}
-
 // FIXME manca la gestione degli errori
-void SonarProcesser::process(string str)
+void TowerProcesser::process(string str)
 {
 	vector<string> tokens;
 	tokenize(str, tokens, ",");
@@ -41,25 +32,19 @@ void SonarProcesser::process(string str)
 			int n = atoi(tokens.at(i).c_str() + 2);
 			switch(t[0])
 			{
-			case 'N':
-				north = n;
+			case 'F':
+				factories = n;
 				break;
-			case 'S':
-				south = n;
-				break;
-			case 'E':
-				east = n;
-				break;
-			case 'W':
-				west = n;
+			case 'T':
+				towers = n;
 				break;
 			}
 		}
 	}
-	publishLast();
+	cout << "Towers: " << towers << " - Factories: " << factories << endl;
 }
 
-void SonarProcesser::tokenize(const string& str, vector<string>& tokens, const string& delimiters )
+void TowerProcesser::tokenize(const string& str, vector<string>& tokens, const string& delimiters )
 {
 	// Skip delimiters at beginning.
 	std::string::size_type lastPos = str.find_first_not_of(delimiters, 0);
@@ -77,6 +62,7 @@ void SonarProcesser::tokenize(const string& str, vector<string>& tokens, const s
 	}
 }
 
+/*
 void SonarProcesser::publishLast()
 {
 	Echoes::Sonar msg;
@@ -86,8 +72,9 @@ void SonarProcesser::publishLast()
 	msg.west = (float) west;
 	sonar_data_pub.publish(msg);
 }
+*/
 
-SonarProcesser::~SonarProcesser()
+TowerProcesser::~TowerProcesser()
 {
 	// TODO Auto-generated destructor stub
 }

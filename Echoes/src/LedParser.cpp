@@ -34,14 +34,14 @@ bool LedParser::ledCallback(Echoes::Led::Request& request, Echoes::Led::Response
 
 	if (request.editGreen == true)
 	{
-		sprintf(buf, "led G 1 %c", request.greenIsOn ? '1' : '0');
+		sprintf(buf, "led G 0 %c\r\n", request.greenIsOn ? '1' : '0');
 		sendCmd(buf);
 	}
 	if (request.editRed == true)
 	{
 		for(int i = 0; i < 4; i++)
 		{
-			sprintf(buf, "led R %c %c", (char) i + '0',
+			sprintf(buf, "led R %c %c\r\n", (char) i + '0',
 					i < request.redNumOn ? '1' : '0');
 			sendCmd(buf);
 		}
@@ -50,7 +50,7 @@ bool LedParser::ledCallback(Echoes::Led::Request& request, Echoes::Led::Response
 	{
 		for (int i = 0; i < 4; i++)
 		{
-			sprintf(buf, "led Y %c %c", (char) i + '0',
+			sprintf(buf, "led Y %c %c\r\n", (char) i + '0',
 					i < request.yellowIsOn[i] ? '1' : '0');
 			sendCmd(buf);
 		}

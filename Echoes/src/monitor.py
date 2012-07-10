@@ -23,14 +23,20 @@ class LedManager():
 		if self.green_status == False:
 			self.green_status = True
 		else: self.green_status = False
+		# TODO timeout
 		rospy.wait_for_service('led_data')
 		led_data = rospy.ServiceProxy('led_data', Led)
-		return led_data(editGreen = True,
-						editYellow = True,
+		return led_data(editGreen = True, editYellow = False, editRed = False, 
+					greenIsOn = self.green_status)
+	
+	def changeRed(self, n):
+		# TODO timeout
+		rospy.wait_for_service('led_data')
+		led_data = rospy.ServiceProxy('led_data', Led)
+		return led_data(editGreen = False,
+						editYellow = False,
 						editRed = True,
-						greenIsOn = self.green_status,
-						yellowIsOn = [False, False, self.green_status, False],
-						redNumOn = 2)
+						redNumOn = n)
 
 class SonarMonitorGui():
     def __init__(self): 
@@ -46,6 +52,10 @@ class SonarMonitorGui():
         self.west_d = QLCDNumber(self.widget)
         
         self.green_btn = QPushButton('Comanda led',self.widget)
+        self.red_btn = QLabel("Numero led rossi: ", self.widget)
+        self.red_btn_number = QSlider(Qt.Horizontal, self.widget)
+        self.red_btn_number.setMinimum(0);
+        self.red_btn_number.setMaximum(4);
         self.led = LedManager()
         
         # bind widgets to layout    
@@ -58,8 +68,15 @@ class SonarMonitorGui():
         layout.addWidget(QLabel('West:', self.widget), 4, 1, 1, 2)
         layout.addWidget(self.west_d, 4, 3, 1, 3)
     	layout.addWidget(self.green_btn, 5, 1, 1, 1)
+    	layout.addWidget(self.red_btn, 5, 2, 1, 1)
+    	layout.addWidget(self.red_btn_number, 5, 3, 1, 1)
     	
     	self.widget.connect(self.green_btn, SIGNAL("clicked()"), self.led.toggleGreen)
+    	self.widget.connect(self.red_btn_number, SIGNAL("sliderReleased()"), self.changeRedLed)
+    
+    def changeRedLed(self):
+    	print "Chiamato change red led"
+    	self.led.changeRed(self.red_btn_number.value())
     
     def start(self):
         self.widget.show()
