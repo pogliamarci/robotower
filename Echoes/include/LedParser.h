@@ -20,33 +20,16 @@
 #include "ros/ros.h"
 #include "Echoes/Led.h"
 
-#define NUMREDLED 4
-
 //classe per la gestione a basso livello dei led
 class LedParser
 {
 	public:
 		//costruttore
 		LedParser(ReadSonar* read_sonar);
-		//metodo per accendere i led verdi
-		void Green(bool g);
-		//metodo per accendere i led rossi
-		void Red(char r);
-		//metodo per accendere i led gialli
-		void Yellow(bool y[NUMREDLED]);
-		//metodo per inviare i dati ai led
-		void SendToLed();
-		//stato dei led rossi
-		char RedS;
-		//stato dei led verdi
-		bool GreenS;
-		//stato dei led gialli
-		bool YellowS[NUMREDLED];
 		bool ledCallback(Echoes::Led::Request& request, Echoes::Led::Response& response);
 	private:
-		//stato dei let binario
-		char C;
 		//oggetto per comunicare via zigbee
-		ReadSonar* Sender;
+		ReadSonar* sender;
 		char buf[10];
+		void sendCmd(char* buf);
 };

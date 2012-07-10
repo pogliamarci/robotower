@@ -41,7 +41,7 @@ throw (ReadSonarDeviceException)
 	measure=NULL;
 	buffer=NULL;
 	tmp_buf=NULL;
-	this->to_meter=to_meter;
+	// this->to_meter=to_meter;
 	
 	measure=new float[ReadSonarBase::n_sonar];
 	tmp_buf=new char[ReadSonarBase::max_buf_tmp];
@@ -63,14 +63,6 @@ unsigned int ReadSonarBase::getLastPackNum()
 	return pack_n;
 }
 
-float ReadSonarBase::getMeasure(unsigned int index)
-{
-	if(!measure)return -1;
-	if(index<0)return -1;
-	if(index>=n_sonar)return -1;
-	return measure[index];
-}
-
 string ReadSonarBase::getLine()
 {
 	if(buffer->getLineCount()<=0) return "Error";
@@ -80,102 +72,7 @@ string ReadSonarBase::getLine()
 	return tmp_buf;
 }
 
-int ReadSonarBase::parseLine()
-{
-	int parsed_type = ReadSonarBase::parse_err;
-	if(buffer->getLineCount()<=0)return parsed_type;
-	
-	int len=buffer->removeLine(tmp_buf,max_buf_tmp);
-	if(len<=0)return parsed_type;
-	if(tmp_buf[len-1]=='\n')tmp_buf[len-1]='\0';
-	
-	if(strncmp(tmp_buf,ReadSonarBase::response_err_header,ReadSonarBase::response_header_len)==0)
-	{
-		parsed_type = ReadSonarBase::parse_response_err;
-	}
-	else if(strncmp(tmp_buf,ReadSonarBase::response_dbg_header,ReadSonarBase::response_header_len)==0)
-	{
-		parsed_type = ReadSonarBase::parse_dbg;
-	}
-	else if(strncmp(tmp_buf,ReadSonarBase::response_meas_header,ReadSonarBase::response_header_len)==0)
-	{
-		std::vector<std::string> tokens;
-		tokenize(std::string(tmp_buf),tokens,",");
-		if(tokens.size()!=7)
-		{
-			parsed_type = ReadSonarBase::parse_err;
-			return parsed_type;
-		}
-		int bank,offset;
-		bank = atoi(tokens[2].c_str());
-		pack_n = atoi(tokens[1].c_str());
-
-		switch(bank)
-		{
-			case 1:
-				offset=0;
-				parsed_type=ReadSonarBase::parse_meas_b1;
-				break;
-			case 2:
-				offset=1;
-				parsed_type=ReadSonarBase::parse_meas_b2;
-				break;
-			case 4:
-				offset=2;
-				parsed_type=ReadSonarBase::parse_meas_b3;
-				break;
-			case 8:
-				offset = 4;
-				parsed_type=ReadSonarBase::parse_meas_b4;
-				break;
-			default:
-				parsed_type=ReadSonarBase::parse_err;
-				return parsed_type;
-				break;
-		}
-		
-		for (int i=0;i<4;i++)
-		{
-			if (offset != 4)
-			{
-				/* TODO: ignoring offset = 4 to avoid having two connectors
-				* pushing data to measure[WEST]...
-				*/
-				measure[i*3+offset]=to_meter*(float)atoi(tokens[i+3].c_str());
-			}
-		}
-	}
-	return parsed_type;
-}
-
-char * ReadSonarBase::getParsedLine()
-{
-	//call it only after parse line!!!
-	return tmp_buf;
-}
-
-
 unsigned int ReadSonarBase::getLineToParseNum()
 {
 	return buffer->getLineCount();
-}
-
-void ReadSonarBase::tokenize(const std::string& str,
-                      std::vector<std::string>& tokens,
-                      const std::string& delimiters )
-{
-	// Skip delimiters at beginning.
-	std::string::size_type lastPos = str.find_first_not_of(delimiters, 0);
-	// Find first "non-delimiter".
-	std::string::size_type pos     = str.find_first_of(delimiters, lastPos);
-
-	while (std::string::npos != pos || std::string::npos != lastPos)
-	{
-		// Found a token, add it to the vector.
-		tokens.push_back(str.substr(lastPos, pos - lastPos));
-		// Skip delimiters.  Note the "not_of"
-		lastPos = str.find_first_not_of(delimiters, pos);
-		// Find next "non-delimiter"
-		pos = str.find_first_of(delimiters, lastPos);
-	}
 }

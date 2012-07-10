@@ -60,7 +60,6 @@ ReadSonar::~ReadSonar()
 {
 	if(fd>=0) 
 	{
-		sendStop();
 		close(fd);
 	}
 	if(buffer)
@@ -92,22 +91,22 @@ int ReadSonar::readData()
 				res = read(fd,tmp_buf,max_buf_tmp);
 				if(res<=0)
 				{
-					fprintf(stderr,"(1) Sonar READ Error on fileno %d\n",fd);
+					cerr << "(1) Sonar READ Error on fileno " << fd << endl;
 					res=-1;
 				}
 				if(buffer->addNChar(tmp_buf,res)!=res)
 				{
 					count_c	= count_c+res;			
-					fprintf(stderr,"(1) Sonar BUF_FULL on fileno %d\n",fd);
+					cerr << "(1) Sonar BUF_FULL on fileno " << fd << endl;
 					res=-1;
 				}
 				break;
 			case SerialCommunication::wait_err: 
-				fprintf(stderr,"(1) Sonar Error on fileno %d\n",fd);
+				cerr << "(1) Sonar Error on fileno " << fd << endl;
 				res=-1;
 				break;
 			case SerialCommunication::wait_tout: 
-				fprintf(stderr,"(1) Sonar TOUT on fileno %d\n",fd);
+				cerr << "(1) Sonar TOUT on fileno " << fd << endl;
 				res=-1;
 				break;
 		}
@@ -118,17 +117,6 @@ int ReadSonar::readData()
 	
 	if(res<=0)return -1;
 	return 0;
-}
-
-int ReadSonar::sendRun()
-{
-	tcflush(fd, TCIFLUSH);
-	return sendStringCommand((char *)"R\r",2);
-}
-
-int ReadSonar::sendStop()
-{
-	return sendStringCommand((char *)"S\r", 2);
 }
 
 int ReadSonar::sendStringCommand(char *cmd,int len)

@@ -34,8 +34,6 @@ class ReadSonar : public SerialCommunication, public ReadSonarBase
 
 		virtual bool isReady();
 		virtual int readData();
-		virtual int sendRun();
-		virtual int sendStop();
 };
 
 #endif

@@ -50,10 +50,6 @@ class ReadSonarBase
 
 		bool ready;
 
-		float to_meter;
-
-		void tokenize(const std::string& str, std::vector<std::string>& tokens, const std::string& delimiters );
-
 		float * measure;
 		CharCircularBuffer * buffer;
 		char * tmp_buf;
@@ -64,21 +60,13 @@ class ReadSonarBase
 
 		virtual unsigned int getLastPackNum();
 
-		virtual float getMeasure(unsigned int index);
-
 		virtual bool isReady()=0; //to implement
 
 		virtual int readData()=0; //to implement
 
-		virtual int sendRun()=0;//to implement
-		virtual int sendStop()=0;//to implement
-
-		virtual int parseLine();
 		virtual std::string getLine();
 
 		virtual unsigned int getLineToParseNum();
-
-		virtual char * getParsedLine();
 
 		static const unsigned int n_sonar = 12;
 

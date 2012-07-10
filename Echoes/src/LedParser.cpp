@@ -18,103 +18,48 @@
 #include <iostream>
 #include <cstdio>
 #include "LedParser.h"
-#define ALL_OFF 0x00
-#define GREEN_ON 0x08
-#define GREEN_OFF 0xF7
-#define RED_OFF 0xF8
-#define FIRST_YELLOW 16
 
 //costruttore: inizializza le variabili, aggancia l'oggetto che invia dati al sonar
 LedParser::LedParser(ReadSonar* read_sonar)
 {
-	int i;
-	//inizializza lo stato dei led
-	this->RedS=0;
-	this->GreenS = false;
-	for(i=0;i<4; i++) this->YellowS[i] = false;
-	//inizializza lo stato binario
-	this->C=ALL_OFF;
-	//aggancia l'oggetto readsonar
-	this->Sender = read_sonar;
-	this->SendToLed();
+	this->sender = read_sonar;
 }
 
-//metodo per accendere la luce verde
-void LedParser::Green(bool g)
-{
-	this->GreenS = g;
-	if(GreenS==true) this->C = this->C|GREEN_ON;
-	else this->C=this->C&GREEN_OFF;
-}
-
-//metodo per accendere le luci rosse
-void LedParser::Red(char r)
-{
-	//aggiorna lo stato dei led rossi
-	if (r <= NUMREDLED && r >= 1)
-		this->RedS = r;
-	else if (r > NUMREDLED)
-		this->RedS = NUMREDLED;
-	else this->RedS = 0;
-
-	//aggiorna lo stato binario
-	this->C = (this->C & RED_OFF) | RedS;
-
-}
-
-//metodo per accendere le luci gialle
-void LedParser::Yellow(bool y[NUMREDLED])
-{
-	int i;
-	char l=FIRST_YELLOW; //inizializza la maschera
-	//aggiorna stato dei led gialli e stato binario bit a bit.
-	for(i=0; i<NUMREDLED; i++) 
-	{
-		this->YellowS[i]=y[i];
-		if(this->YellowS[i]==true) this->C=this->C|l;
-		else this->C=this->C&(~l);
-		l*=2; //shift a sinistra della maschera l 
-	}
-}
-
-//metodo per inviare i comandi effettuati via zigbee al robot
-void LedParser::SendToLed() 
-{
-	//manda il comando ai led come stringa di un carattere binario
-	// (this->Sender)->sendStringCommand(&C, 1);
-}
-
+/**
+ * ROS callback for the led service. Forwards the request to the
+ * board managing the leds.
+ */
 bool LedParser::ledCallback(Echoes::Led::Request& request, Echoes::Led::Response& response)
 {
-	bool yellow_on[4];
 
 	if (request.editGreen == true)
 	{
 		sprintf(buf, "led G 1 %c", request.greenIsOn ? '1' : '0');
-		(this->Sender)->sendStringCommand(buf, strlen(buf));
-		Green(request.greenIsOn);
+		sendCmd(buf);
 	}
 	if (request.editRed == true)
 	{
 		for(int i = 0; i < 4; i++)
 		{
-			sprintf(buf, "led R %c %c", (char) i + '0', i < request.redNumOn ? '1' : '0');
-			(this->Sender)->sendStringCommand(buf, strlen(buf));
+			sprintf(buf, "led R %c %c", (char) i + '0',
+					i < request.redNumOn ? '1' : '0');
+			sendCmd(buf);
 		}
-		Red(request.redNumOn);
 	}
 	if (request.editYellow == true)
 	{
 		for (int i = 0; i < 4; i++)
 		{
-			if (request.yellowIsOn[i] == 1) yellow_on[i] = true;
-			else yellow_on[i] = false;
-			sprintf(buf, "led Y %c %c", (char) i + '0', i < request.yellowIsOn[i] ? '1' : '0');
-			(this->Sender)->sendStringCommand(buf, strlen(buf));
+			sprintf(buf, "led Y %c %c", (char) i + '0',
+					i < request.yellowIsOn[i] ? '1' : '0');
+			sendCmd(buf);
 		}
-		Yellow(yellow_on);
 	}
-	// SendToLed();
 	response.requestSuccessful = true;
 	return true;
+}
+
+void LedParser::sendCmd(char* buf)
+{
+	sender->sendStringCommand(buf, strlen(buf));
 }
