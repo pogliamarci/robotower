@@ -17,7 +17,7 @@ Vision::Results ImageAnalyzer::analyze(cv::Mat& img)
 	}
 
 	/* compute distance to the tower */
-	towersize_filter.update(tower_result->getWidth());
+	towersize_filter.update(tower_result != NULL ? tower_result->getHeight() : 0);
 
 	return composeMessage();
 }
@@ -37,6 +37,10 @@ Vision::Results ImageAnalyzer::composeMessage()
 
 	msg.towerFound = tower != NULL;
 	msg.towerPos = tower != NULL ? tower->getPosition() : 0;
+
+	msg.towerBlobHeight = tower != NULL ? tower->getHeight() : 0;
+	cout << "tower size " << towersize_filter.curValue() << endl;
+	msg.towerSize = (int) towersize_filter.curValue();
 	/*
 	 * msg.towerSize = tower != NULL : getTowerDistance(towersize_filter.curValue()) : 0;
 	 * (meglio sarebbe qualcosa del tipo msg.towerSize = tower != NULL : tower->getSize : 0;)

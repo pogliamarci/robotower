@@ -45,6 +45,9 @@ class BlobInfo {
 		inline int getWidth() {
 			return this->b.x - this->a.x;
 		}
+		inline int getHeight() {
+			return this->a.y - this->b.y;
+		}
 };
 
 class BlobBuffer {

@@ -17,6 +17,16 @@
     :initarg :towerPos
     :type cl:integer
     :initform 0)
+   (towerBlobHeight
+    :reader towerBlobHeight
+    :initarg :towerBlobHeight
+    :type cl:integer
+    :initform 0)
+   (towerSize
+    :reader towerSize
+    :initarg :towerSize
+    :type cl:integer
+    :initform 0)
    (factoryFound
     :reader factoryFound
     :initarg :factoryFound
@@ -47,6 +57,16 @@
   (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader Vision-msg:towerPos-val is deprecated.  Use Vision-msg:towerPos instead.")
   (towerPos m))
 
+(cl:ensure-generic-function 'towerBlobHeight-val :lambda-list '(m))
+(cl:defmethod towerBlobHeight-val ((m <Results>))
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader Vision-msg:towerBlobHeight-val is deprecated.  Use Vision-msg:towerBlobHeight instead.")
+  (towerBlobHeight m))
+
+(cl:ensure-generic-function 'towerSize-val :lambda-list '(m))
+(cl:defmethod towerSize-val ((m <Results>))
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader Vision-msg:towerSize-val is deprecated.  Use Vision-msg:towerSize instead.")
+  (towerSize m))
+
 (cl:ensure-generic-function 'factoryFound-val :lambda-list '(m))
 (cl:defmethod factoryFound-val ((m <Results>))
   (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader Vision-msg:factoryFound-val is deprecated.  Use Vision-msg:factoryFound instead.")
@@ -60,6 +80,18 @@
   "Serializes a message object of type '<Results>"
   (cl:write-byte (cl:ldb (cl:byte 8 0) (cl:if (cl:slot-value msg 'towerFound) 1 0)) ostream)
   (cl:let* ((signed (cl:slot-value msg 'towerPos)) (unsigned (cl:if (cl:< signed 0) (cl:+ signed 4294967296) signed)))
+    (cl:write-byte (cl:ldb (cl:byte 8 0) unsigned) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 8) unsigned) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 16) unsigned) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 24) unsigned) ostream)
+    )
+  (cl:let* ((signed (cl:slot-value msg 'towerBlobHeight)) (unsigned (cl:if (cl:< signed 0) (cl:+ signed 4294967296) signed)))
+    (cl:write-byte (cl:ldb (cl:byte 8 0) unsigned) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 8) unsigned) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 16) unsigned) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 24) unsigned) ostream)
+    )
+  (cl:let* ((signed (cl:slot-value msg 'towerSize)) (unsigned (cl:if (cl:< signed 0) (cl:+ signed 4294967296) signed)))
     (cl:write-byte (cl:ldb (cl:byte 8 0) unsigned) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 8) unsigned) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 16) unsigned) ostream)
@@ -82,6 +114,18 @@
       (cl:setf (cl:ldb (cl:byte 8 16) unsigned) (cl:read-byte istream))
       (cl:setf (cl:ldb (cl:byte 8 24) unsigned) (cl:read-byte istream))
       (cl:setf (cl:slot-value msg 'towerPos) (cl:if (cl:< unsigned 2147483648) unsigned (cl:- unsigned 4294967296))))
+    (cl:let ((unsigned 0))
+      (cl:setf (cl:ldb (cl:byte 8 0) unsigned) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 8) unsigned) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 16) unsigned) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 24) unsigned) (cl:read-byte istream))
+      (cl:setf (cl:slot-value msg 'towerBlobHeight) (cl:if (cl:< unsigned 2147483648) unsigned (cl:- unsigned 4294967296))))
+    (cl:let ((unsigned 0))
+      (cl:setf (cl:ldb (cl:byte 8 0) unsigned) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 8) unsigned) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 16) unsigned) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 24) unsigned) (cl:read-byte istream))
+      (cl:setf (cl:slot-value msg 'towerSize) (cl:if (cl:< unsigned 2147483648) unsigned (cl:- unsigned 4294967296))))
     (cl:setf (cl:slot-value msg 'factoryFound) (cl:not (cl:zerop (cl:read-byte istream))))
     (cl:let ((unsigned 0))
       (cl:setf (cl:ldb (cl:byte 8 0) unsigned) (cl:read-byte istream))
@@ -99,19 +143,21 @@
   "Vision/Results")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<Results>)))
   "Returns md5sum for a message object of type '<Results>"
-  "d9fe852390cd4bb971b1dc4db0a336f9")
+  "5fb63429aaf2fdd1f1810340dee4cad4")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'Results)))
   "Returns md5sum for a message object of type 'Results"
-  "d9fe852390cd4bb971b1dc4db0a336f9")
+  "5fb63429aaf2fdd1f1810340dee4cad4")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<Results>)))
   "Returns full string definition for message of type '<Results>"
-  (cl:format cl:nil "bool towerFound~%int32  towerPos~%bool factoryFound~%int32  factoryPos~%~%"))
+  (cl:format cl:nil "bool towerFound~%int32  towerPos~%int32 towerBlobHeight~%int32 towerSize~%bool factoryFound~%int32  factoryPos~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql 'Results)))
   "Returns full string definition for message of type 'Results"
-  (cl:format cl:nil "bool towerFound~%int32  towerPos~%bool factoryFound~%int32  factoryPos~%~%"))
+  (cl:format cl:nil "bool towerFound~%int32  towerPos~%int32 towerBlobHeight~%int32 towerSize~%bool factoryFound~%int32  factoryPos~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:serialization-length ((msg <Results>))
   (cl:+ 0
      1
+     4
+     4
      4
      1
      4
@@ -121,6 +167,8 @@
   (cl:list 'Results
     (cl:cons ':towerFound (towerFound msg))
     (cl:cons ':towerPos (towerPos msg))
+    (cl:cons ':towerBlobHeight (towerBlobHeight msg))
+    (cl:cons ':towerSize (towerSize msg))
     (cl:cons ':factoryFound (factoryFound msg))
     (cl:cons ':factoryPos (factoryPos msg))
 ))

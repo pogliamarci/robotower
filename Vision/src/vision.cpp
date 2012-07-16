@@ -32,6 +32,8 @@ using namespace cv;
 ros::Publisher results_publisher;
 ImageAnalyzer* analyzer;
 
+VideoWriter* record;
+
 void sendMessage(Vision::Results message)
 {
 	results_publisher.publish(message);
@@ -44,14 +46,17 @@ void imageAction(Mat& frame)
 		sendMessage(analyzer->analyze(frame));
 		imshow("SpyKeeView", frame);
 		char c = waitKey(5);
-		if((c == 'c') || (c == EXIT_FROM_WINDOW))
+		/*// This appears not to work anymore with the latest openCV, boh =)
+		if((c == 'c') || (c == EXIT_FROM_WINDOW));
 			exit(EXIT_SUCCESS);
+		*/
 	}
 }
 
 void imageMessageCallback(const sensor_msgs::CompressedImage::ConstPtr& message)
 {
 	cv::Mat f = imdecode(message->data, CV_LOAD_IMAGE_ANYCOLOR);
+	*record << f;
 	imageAction(f);
 }
 
@@ -140,6 +145,30 @@ int main (int argc, char** argv)
 		imageAction(frame);
 	}
 
+	// WARNING -- Temporary FIXME
+	Size frameSize(320,240);
+	record = new VideoWriter("RobotVideo.avi", CV_FOURCC('D','I','V','X'), 20, frameSize, true);
+	if(!record->isOpened()) {
+		cerr << "Error opening videofile" << endl;
+	}
+
 	/* let's start it all */
 	ros::spin();
+
+	// This code analyzes images from a pre-recorded video
+	/*
+	VideoCapture capture("RobotVideoPlay.avi");
+	double rate = capture.get(CV_CAP_PROP_FPS);
+	int delay = 1000/rate;
+	while(capture.grab()) {
+		Mat img;
+		capture.retrieve(img);
+		imageAction(img);
+		if(waitKey(delay)>=0)
+			break;
+	}
+	*/
+
+	/* NEEDED TO FINALIZE THE FILE */
+	delete record;
 }

@@ -4,16 +4,19 @@ import struct
 
 
 class Results(roslib.message.Message):
-  _md5sum = "d9fe852390cd4bb971b1dc4db0a336f9"
+  _md5sum = "5fb63429aaf2fdd1f1810340dee4cad4"
   _type = "Vision/Results"
   _has_header = False #flag to mark the presence of a Header object
   _full_text = """bool towerFound
 int32  towerPos
+int32 towerBlobHeight
+int32 towerSize
 bool factoryFound
 int32  factoryPos
+
 """
-  __slots__ = ['towerFound','towerPos','factoryFound','factoryPos']
-  _slot_types = ['bool','int32','bool','int32']
+  __slots__ = ['towerFound','towerPos','towerBlobHeight','towerSize','factoryFound','factoryPos']
+  _slot_types = ['bool','int32','int32','int32','bool','int32']
 
   def __init__(self, *args, **kwds):
     """
@@ -23,7 +26,7 @@ int32  factoryPos
     changes.  You cannot mix in-order arguments and keyword arguments.
     
     The available fields are:
-       towerFound,towerPos,factoryFound,factoryPos
+       towerFound,towerPos,towerBlobHeight,towerSize,factoryFound,factoryPos
     
     @param args: complete set of field values, in .msg order
     @param kwds: use keyword arguments corresponding to message field names
@@ -36,6 +39,10 @@ int32  factoryPos
         self.towerFound = False
       if self.towerPos is None:
         self.towerPos = 0
+      if self.towerBlobHeight is None:
+        self.towerBlobHeight = 0
+      if self.towerSize is None:
+        self.towerSize = 0
       if self.factoryFound is None:
         self.factoryFound = False
       if self.factoryPos is None:
@@ -43,6 +50,8 @@ int32  factoryPos
     else:
       self.towerFound = False
       self.towerPos = 0
+      self.towerBlobHeight = 0
+      self.towerSize = 0
       self.factoryFound = False
       self.factoryPos = 0
 
@@ -60,7 +69,7 @@ int32  factoryPos
     """
     try:
       _x = self
-      buff.write(_struct_BiBi.pack(_x.towerFound, _x.towerPos, _x.factoryFound, _x.factoryPos))
+      buff.write(_struct_B3iBi.pack(_x.towerFound, _x.towerPos, _x.towerBlobHeight, _x.towerSize, _x.factoryFound, _x.factoryPos))
     except struct.error as se: self._check_types(se)
     except TypeError as te: self._check_types(te)
 
@@ -74,8 +83,8 @@ int32  factoryPos
       end = 0
       _x = self
       start = end
-      end += 10
-      (_x.towerFound, _x.towerPos, _x.factoryFound, _x.factoryPos,) = _struct_BiBi.unpack(str[start:end])
+      end += 18
+      (_x.towerFound, _x.towerPos, _x.towerBlobHeight, _x.towerSize, _x.factoryFound, _x.factoryPos,) = _struct_B3iBi.unpack(str[start:end])
       self.towerFound = bool(self.towerFound)
       self.factoryFound = bool(self.factoryFound)
       return self
@@ -93,7 +102,7 @@ int32  factoryPos
     """
     try:
       _x = self
-      buff.write(_struct_BiBi.pack(_x.towerFound, _x.towerPos, _x.factoryFound, _x.factoryPos))
+      buff.write(_struct_B3iBi.pack(_x.towerFound, _x.towerPos, _x.towerBlobHeight, _x.towerSize, _x.factoryFound, _x.factoryPos))
     except struct.error as se: self._check_types(se)
     except TypeError as te: self._check_types(te)
 
@@ -109,8 +118,8 @@ int32  factoryPos
       end = 0
       _x = self
       start = end
-      end += 10
-      (_x.towerFound, _x.towerPos, _x.factoryFound, _x.factoryPos,) = _struct_BiBi.unpack(str[start:end])
+      end += 18
+      (_x.towerFound, _x.towerPos, _x.towerBlobHeight, _x.towerSize, _x.factoryFound, _x.factoryPos,) = _struct_B3iBi.unpack(str[start:end])
       self.towerFound = bool(self.towerFound)
       self.factoryFound = bool(self.factoryFound)
       return self
@@ -118,4 +127,4 @@ int32  factoryPos
       raise roslib.message.DeserializationError(e) #most likely buffer underfill
 
 _struct_I = roslib.message.struct_I
-_struct_BiBi = struct.Struct("<BiBi")
+_struct_B3iBi = struct.Struct("<B3iBi")
