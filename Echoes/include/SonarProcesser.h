@@ -21,7 +21,6 @@
 #include "Processer.h"
 #include "ros/ros.h"
 #include "Echoes/Sonar.h"
-#include <vector>
 
 class SonarProcesser : public Processer
 {
@@ -36,9 +35,6 @@ class SonarProcesser : public Processer
 		int east;
 		int west;
 		void publishLast();
-		void tokenize(const std::string& str,
-		                std::vector<std::string>& tokens,
-		                const std::string& delimiters);
 };
 
 #endif /* SONARPROCESSER_H_ */

@@ -33,7 +33,7 @@ void SonarProcesser::process(string str)
 {
 	vector<string> tokens;
 	tokenize(str, tokens, ",");
-	for(int i=0; i < tokens.size(); i++)
+	for(unsigned int i=0; i < tokens.size(); i++)
 	{
 		const char* t = tokens.at(i).c_str();
 		if(t[0] != '\0' && t[1] != '\0')
@@ -59,31 +59,13 @@ void SonarProcesser::process(string str)
 	publishLast();
 }
 
-void SonarProcesser::tokenize(const string& str, vector<string>& tokens, const string& delimiters )
-{
-	// Skip delimiters at beginning.
-	std::string::size_type lastPos = str.find_first_not_of(delimiters, 0);
-	// Find first "non-delimiter".
-	std::string::size_type pos     = str.find_first_of(delimiters, lastPos);
-
-	while (std::string::npos != pos || std::string::npos != lastPos)
-	{
-		// Found a token, add it to the vector.
-		tokens.push_back(str.substr(lastPos, pos - lastPos));
-		// Skip delimiters.  Note the "not_of"
-		lastPos = str.find_first_not_of(delimiters, pos);
-		// Find next "non-delimiter"
-		pos = str.find_first_of(delimiters, lastPos);
-	}
-}
-
 void SonarProcesser::publishLast()
 {
 	Echoes::Sonar msg;
-	msg.north = (float) north;
-	msg.south = (float) south;
-	msg.east = (float) east;
-	msg.west = (float) west;
+	msg.north = north;
+	msg.south = south;
+	msg.east = east;
+	msg.west = west;
 	sonar_data_pub.publish(msg);
 }
 

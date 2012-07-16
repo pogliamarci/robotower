@@ -16,6 +16,7 @@
  */
 
 #include "Dispatcher.h"
+#include "TowerProcesser.h"
 #include "SonarProcesser.h"
 #include "RfidProcesser.h"
 #include "ReadSonar.h"
@@ -24,19 +25,17 @@
 
 #include "ros/ros.h"
 #include "Echoes/Sonar.h"
+#include "Echoes/Rfid.h"
+#include "Echoes/Towers.h"
 #include "Echoes/Led.h"
-
-#define SERIAL_DEVICE_FILENAME "/dev/ttyUSB0"
 
 using namespace std;
 
 void parseItAll(ReadSonar& read_sonar, Dispatcher& d)
 {
-	static int line_readed=0;
 	if(read_sonar.readData()==0)
 	{
 		unsigned int n_line = read_sonar.getLineToParseNum();
-		line_readed += n_line;
 
 		for(unsigned int i=0;i<n_line;i++)
 		{
@@ -47,12 +46,12 @@ void parseItAll(ReadSonar& read_sonar, Dispatcher& d)
 
 int main(int argc, char** argv)
 {
-	char* sdfn = SERIAL_DEVICE_FILENAME;
+	char* serialFilename = "/dev/ttyUSB0";
 	if(argc == 2) {
-		sdfn = argv[1];
+		serialFilename = argv[1];
 	}
 
-	ReadSonar read_sonar(sdfn);
+	ReadSonar read_sonar(serialFilename);
 	Dispatcher dispatcher;
 
 
@@ -66,13 +65,17 @@ int main(int argc, char** argv)
 
 	/* Initialisation as publisher of sonar_data msgs */
 	ros::Publisher sonar_data_pub = ros_node.advertise<Echoes::Sonar>("sonar_data", 1000);
+	ros::Publisher rfid_data_pub = ros_node.advertise<Echoes::Rfid>("rfid_data", 1000);
+	ros::Publisher towers_data_pub = ros_node.advertise<Echoes::Towers>("towers_data", 1000);
 	led_service = ros_node.advertiseService("led_data", &LedParser::ledCallback, &lp);
 
 	/* configuration */
 	SonarProcesser spr(sonar_data_pub);
-	RfidProcesser rpr;
+	RfidProcesser rpr(rfid_data_pub);
+	TowerProcesser tpr(towers_data_pub);
 	dispatcher.addProcesser(&spr, "[SONAR]");
 	dispatcher.addProcesser(&rpr, "[RFID]");
+	dispatcher.addProcesser(&tpr, "[TOWER]");
 
 	/* the great loop! */
     while (ros::ok())

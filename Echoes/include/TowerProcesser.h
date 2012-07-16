@@ -15,29 +15,22 @@
  * GNU General Public License for more details.
  */
 
-#ifndef SONARPROCESSER_H_
-#define SONARPROCESSER_H_
+#ifndef TOWERPROCESSER_H_
+#define TOWERPROCESSER_H_
 
 #include "Processer.h"
 #include "ros/ros.h"
-#include "Echoes/Sonar.h"
-#include <vector>
 
 class TowerProcesser : public Processer
 {
 	public:
-		TowerProcesser(); // TODO publish to ROS
-		// SonarProcesser(ros::Publisher pub);
+		TowerProcesser(ros::Publisher pub);
 		void process(string str);
 		~TowerProcesser();
 	private:
-		// void publishLast();
-		// TODO share between functions FIXME
-		void tokenize(const std::string& str,
-		                std::vector<std::string>& tokens,
-		                const std::string& delimiters);
-		int factories = 0;
-		int towers = 0;
+		int factories;
+		int towers;
+		ros::Publisher publisher;
 };
 
-#endif /* SONARPROCESSER_H_ */
+#endif /* TOWERPROCESSER_H_ */

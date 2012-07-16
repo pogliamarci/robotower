@@ -14,10 +14,6 @@ from sensor_msgs.msg import CompressedImage
 
 mutex = QMutex()
 
-class DataMatrixThread(QThread):  
-    def run(self):
-        os.system("dmtxread -n frame.jpg -m 300 || echo non riconosciuto")
-
 class MessageListenerThread(QThread):  
     def run(self):
         rospy.spin()
@@ -108,8 +104,6 @@ class SonarMonitorGui():
         rot_speed = self.computeSpeed( self.rot_speed_box.value() )
         self.pub.publish(tanSpeed = tan_speed, rotSpeed = rot_speed)
 
-t = DataMatrixThread()
-
 class ImageSubscriber():
     def __init__(self, widget_obj, filename = "frame.jpg"):
         self._widget_obj = widget_obj
@@ -121,8 +115,6 @@ class ImageSubscriber():
         myfile.write(img.data)
         myfile.close()
         mutex.unlock()
-        if not t.isRunning():
-            t.start()
         self._widget_obj.new_frame_sig.emit(QImage(self._filename))
 
 if __name__ == "__main__":  

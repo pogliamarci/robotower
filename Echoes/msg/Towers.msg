@@ -1,0 +1,2 @@
+int8 isTowerDestroyed
+int8 destroyedFactories

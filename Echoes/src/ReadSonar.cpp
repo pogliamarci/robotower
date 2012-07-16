@@ -47,7 +47,7 @@ ReadSonar::ReadSonar(std::string serialDevice) throw (ReadSonarDeviceException)
 		newtio.c_iflag = IGNPAR;
 		newtio.c_oflag = 0;
 		newtio.c_lflag &= ~ICANON;
-			 
+
 		set_fd(fd);
 		
 		newtio.c_cc[VTIME]    = 0;

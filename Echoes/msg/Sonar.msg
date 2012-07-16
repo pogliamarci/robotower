@@ -1,4 +1,4 @@
-float32 north
-float32 south
-float32 east
-float32 west
+int32 north
+int32 south
+int32 east
+int32 west
