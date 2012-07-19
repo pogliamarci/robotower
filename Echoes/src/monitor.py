@@ -14,49 +14,49 @@ from Echoes.msg import Towers
 from Echoes.srv import Led
 
 class MessageListenerThread(QThread):
-	def run(self):
-		rospy.spin()
+    def run(self):
+        rospy.spin()
 
 class LedManager():
-	def __init__(self):
-		self.green_status = False
-		self.yellowIsOn = [False, False, False, False]
+    def __init__(self):
+        self.green_status = False
+        self.yellowIsOn = [False, False, False, False]
+    
+    def toggleGreen(self):
+        if self.green_status == False:
+            self.green_status = True
+        else: self.green_status = False
+        # TODO timeout
+        rospy.wait_for_service('led_data')
+        led_data = rospy.ServiceProxy('led_data', Led)
+        return led_data(editGreen = True, editYellow = False, editRed = False, 
+                        greenIsOn = self.green_status)
 
-	def toggleGreen(self):
-		if self.green_status == False:
-			self.green_status = True
-		else: self.green_status = False
-		# TODO timeout
-		rospy.wait_for_service('led_data')
-		led_data = rospy.ServiceProxy('led_data', Led)
-		return led_data(editGreen = True, editYellow = False, editRed = False, 
-					greenIsOn = self.green_status)
-	
-	def changeRed(self, n):
-		# TODO timeout
-		rospy.wait_for_service('led_data')
-		led_data = rospy.ServiceProxy('led_data', Led)
-		return led_data(editGreen = False,
-						editYellow = False,
-						editRed = True,
-						redNumOn = n)
-	
-	def toggleYellow(self, num):
-		if self.yellowIsOn[num] == False:
-			self.yellowIsOn[num] = True
-		else:
-			self.yellowIsOn[num] = False
-		# TODO timeout
-		rospy.wait_for_service('led_data')
-		led_data = rospy.ServiceProxy('led_data', Led)
-		return led_data(editGreen = False,
-						editYellow = True,
-						editRed = false,
-						yellowIsOn = self.yellowIsOn)
+    def changeRed(self, n):
+        print n
+        print "ok, waiting for service"
+        # TODO timeout
+        rospy.wait_for_service('led_data')
+        led_data = rospy.ServiceProxy('led_data', Led)
+        return led_data(editGreen = False, editYellow = False,
+                        editRed = True, redNumOn = n)
+
+    def toggleYellow(self, num):
+        print num
+        if self.yellowIsOn[num] == False:
+            self.yellowIsOn[num] = True
+        else:
+            self.yellowIsOn[num] = False
+        print self.yellowIsOn
+        print "ok, waiting for service"
+        # TODO timeout
+        rospy.wait_for_service('led_data')
+        led_data = rospy.ServiceProxy('led_data', Led)
+        return led_data(editGreen = False, editYellow = True, editRed = False, yellowIsOn = self.yellowIsOn)
 
 class SonarMonitorGui():
     def __init__(self): 
-    	# general stuff
+        # general stuff
         self.app = QApplication(sys.argv)
         self.widget = QWidget()
         self.widget.setWindowTitle('Sonar GUI monitor')
@@ -96,24 +96,25 @@ class SonarMonitorGui():
         layout.addWidget(self.east_d, 3, 3, 1, 2)
         layout.addWidget(QLabel('West:', self.widget), 4, 1, 1, 2)
         layout.addWidget(self.west_d, 4, 3, 1, 2)
-    	layout.addWidget(self.green_btn, 5, 1, 1, 1)
-    	# led
-    	layout.addWidget(QLabel("Num. led rossi: ", self.widget), 5, 2, 1, 1)
-    	layout.addWidget(self.red_btn_number, 5, 3, 1, 2)
-    	layout.addWidget(QLabel('Led gialli:', self.widget), 6,1,1,1)
-    	for i in range(4):
-    		layout.addWidget(self.yellow_btn[i], 7, i+1, 1, 1)
-    	# towers, factories
-    	layout.addWidget(self.towerStatus, 8, 1, 1, 2)
-    	layout.addWidget(self.factoriesStatus, 8, 3, 1, 2)
-    	
-    	# connection btw signals and slots
-    	self.green_btn.clicked.connect(self.led.toggleGreen)
-    	callback = lambda n = self.red_btn_number.value() : self.led.changeRed(n)
-    	self.red_btn_number.sliderReleased.connect(callback)
-    	for i in range(4):
-    		self.yellow_btn[i].clicked.connect(lambda num = i : self.led.toggleYellow(num))
-    
+        layout.addWidget(self.green_btn, 5, 1, 1, 1)
+        # led
+        layout.addWidget(QLabel("Num. led rossi: ", self.widget), 5, 2, 1, 1)
+        layout.addWidget(self.red_btn_number, 5, 3, 1, 2)
+        layout.addWidget(QLabel('Led gialli:', self.widget), 6,1,1,1)
+        for i in range(4):
+            layout.addWidget(self.yellow_btn[i], 7, i+1, 1, 1)
+        # towers, factories
+        layout.addWidget(self.towerStatus, 8, 1, 1, 2)
+        layout.addWidget(self.factoriesStatus, 8, 3, 1, 2)
+
+        # connection btw signals and slots
+        self.green_btn.clicked.connect(self.led.toggleGreen)
+        self.red_btn_number.sliderReleased.connect(lambda : self.led.changeRed(self.red_btn_number.value()))
+        self.yellow_btn[0].clicked.connect(lambda : self.led.toggleYellow(0))
+        self.yellow_btn[1].clicked.connect(lambda : self.led.toggleYellow(1))
+        self.yellow_btn[2].clicked.connect(lambda : self.led.toggleYellow(2))
+        self.yellow_btn[3].clicked.connect(lambda : self.led.toggleYellow(3))   
+
     def start(self):
         self.widget.show()
         sys.exit(self.app.exec_())
