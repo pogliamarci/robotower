@@ -102,9 +102,18 @@ static void cmd_led(BaseChannel* channel, int argc, char** argv) {
 	setLed(offset + NUMERIC_CHAR_TO_INT(*argv[1]), NUMERIC_CHAR_TO_INT(*argv[2]));
 }
 
+static void cmd_infrared(BaseChannel* channel, int argc, char** argv) {
+	if(argc ==  1 && argv[0][0] == 'o' && argv[0][1] == 'n') {
+		palSetPad(IOPORT4, GPIOD_IRLED);
+	} else {
+		palClearPad(IOPORT4, GPIOD_IRLED);
+	}
+}
+
 /* shell configuration */
 static const ShellCommand commands[] = { { "reset", cmd_reset }, { "status",
-		cmd_status }, {"led", cmd_led}, {"resetled", cmd_resetled}, { NULL, NULL } };
+		cmd_status }, {"led", cmd_led}, {"resetled", cmd_resetled},
+		{"infrared", cmd_infrared}, { NULL, NULL } };
 
 static const ShellConfig shellConfig = { (BaseChannel*) &SD2, commands };
 
@@ -299,7 +308,8 @@ int main(void) {
 	chEvtInit(&eventSource);
 
 	/* led initialization*/
-	resetLed();
+	resetLed(); /* reset the leds on the robot shoulders */
+	palClearPad(IOPORT4, GPIOD_IRLED); /* ensure the IR led are turned off */
 
 	/* thread initialization */
 	apricancelliTp = chThdCreateStatic(apricancelliWorkingArea,

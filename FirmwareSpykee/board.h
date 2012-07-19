@@ -78,7 +78,7 @@
 #define GPIOB_SCL               6
 #define GPIOB_SDA               9
 #define GPIOB_PB10_USART3_TX    10
-#define GPIOB_PB11_USART3_RX    11	/* USART interface to the RFID reader */
+#define GPIOB_PB11_USART3_RX    11		/* USART interface to the RFID reader */
 
 #define GPIOC_OTG_FS_POWER_ON   0
 #define GPIOC_DOUT              3
@@ -87,8 +87,10 @@
 #define GPIOC_SCLK              10
 #define GPIOC_SDIN              12
 
-#define GPIOD_RESET             4	/* GPIO4 PD0 - PD1 - PD2 for the factories, PD3 for the tower */
+/* GPIO4 PD0 - PD1 - PD2 for the factories, PD3 for the tower */
+#define GPIOD_RESET             4
 #define GPIOD_OVER_CURRENT      5
+#define GPIOD_IRLED             11      /* Infrared LEDs */
 #define GPIOD_LED4              12      /* Green LED.   */
 #define GPIOD_LED3              13      /* Orange LED.  */
 #define GPIOD_LED5              14      /* Red LED.     */
@@ -302,6 +304,7 @@
  * All input with pull-up except:
  * PD4  - GPIOD_RESET           (output push-pull).
  * PD5  - GPIOD_OVER_CURRENT    (input floating).
+ * PD11 - GPIOD_IRLED			(output push-pull).
  * PD12 - GPIOD_LED4            (output push-pull).
  * PD13 - GPIOD_LED3            (output push-pull).
  * PD14 - GPIOD_LED5            (output push-pull).
@@ -318,7 +321,7 @@
                                      PIN_MODE_INPUT(8) |                    \
                                      PIN_MODE_INPUT(9) |                    \
                                      PIN_MODE_INPUT(10) |                   \
-                                     PIN_MODE_INPUT(11) |                   \
+                                     PIN_MODE_OUTPUT(GPIOD_IRLED) |                   \
                                      PIN_MODE_OUTPUT(GPIOD_LED4) |          \
                                      PIN_MODE_OUTPUT(GPIOD_LED3) |          \
                                      PIN_MODE_OUTPUT(GPIOD_LED5) |          \
@@ -336,7 +339,7 @@
                                      PIN_PUDR_PULLUP(8) |                   \
                                      PIN_PUDR_PULLUP(9) |                   \
                                      PIN_PUDR_PULLUP(10) |                  \
-                                     PIN_PUDR_PULLUP(11) |                  \
+                                     PIN_PUDR_FLOATING(GPIOD_IRLED) |                  \
                                      PIN_PUDR_FLOATING(GPIOD_LED4) |        \
                                      PIN_PUDR_FLOATING(GPIOD_LED3) |        \
                                      PIN_PUDR_FLOATING(GPIOD_LED5) |        \
