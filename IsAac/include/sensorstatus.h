@@ -15,6 +15,9 @@
  * GNU General Public License for more details.
  */
 
+#ifndef SENSORSTATUS_H
+#define SENSORSTATUS_H
+
 #define CARDINAL_POINTS 4
 
 #include "Echoes/Sonar.h"
@@ -78,3 +81,5 @@ class SensorStatus
 		void populateMapWithLine(std::string configLine);
 		RfidAction strToAction(std::string token);
 };
+
+#endif
