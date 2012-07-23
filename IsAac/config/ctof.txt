@@ -15,3 +15,5 @@
 (InvisibleObstacle TIMEOUT)
 
 (ProposedRotSpeed ROTSPEEDP)
+
+(SensorMatches SENSORDATA)

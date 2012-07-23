@@ -37,3 +37,7 @@
 (TRA (AHEAD -15 -5 5 15))
 (TOR (RIGHT  15  5))
 )
+
+(SENSORDATA
+(TRI (T -500 0 500))
+)
