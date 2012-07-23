@@ -15,26 +15,26 @@
  * GNU General Public License for more details.
  */
 
-#ifndef SONARPROCESSER_H_
-#define SONARPROCESSER_H_
+#include <cmath>
 
-#include "Processer.h"
-#include "ros/ros.h"
-#include "Echoes/Sonar.h"
-#include "MovingAverageFilter.h"
+#define MAXCAMPIONI 20
+#define THRESHOLD 80
 
-class SonarProcesser : public Processer
+class SonarBuffer 
 {
 	public:
-		SonarProcesser(ros::Publisher pub);
-		void process(std::string str);
+		SonarBuffer();
+		void insert(int element);
+		void setTempoBloccato();
+		int getTempoBloccato();
+		float calcolaVarianza();
+		float calcolaMedia();
+		inline float calcolaStdDev()
+		{
+			return sqrt(this->calcolaVarianza());
+		}
 	private:
-		ros::Publisher sonar_data_pub;
-		MovingAverageFilter north;
-		MovingAverageFilter south;
-		MovingAverageFilter east;
-		MovingAverageFilter west;
-		void publishLast();
-};
-
-#endif /* SONARPROCESSER_H_ */
+		int data[MAXCAMPIONI];
+		int index;
+		int tempo;
+}; 

@@ -15,26 +15,19 @@
  * GNU General Public License for more details.
  */
 
-#ifndef SONARPROCESSER_H_
-#define SONARPROCESSER_H_
-
-#include "Processer.h"
 #include "ros/ros.h"
-#include "Echoes/Sonar.h"
-#include "MovingAverageFilter.h"
+#include "SpyKee/Motion.h"
+#include "Echoes/Led.h"
+#include "IsAac/MediaVarianza.h"
 
-class SonarProcesser : public Processer
+class Sender 
 {
-	public:
-		SonarProcesser(ros::Publisher pub);
-		void process(std::string str);
 	private:
-		ros::Publisher sonar_data_pub;
-		MovingAverageFilter north;
-		MovingAverageFilter south;
-		MovingAverageFilter east;
-		MovingAverageFilter west;
-		void publishLast();
+		ros::Publisher motion;
+		ros::Publisher debug_mediavarianza;
+	public:
+		Sender(ros::NodeHandle& n);
+		void sendMotionMessage(int rot, int tan);
+		void sendDebugMessage(float avg, float var, int time);
 };
 
-#endif /* SONARPROCESSER_H_ */
