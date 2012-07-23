@@ -30,6 +30,7 @@
    PE13 --> Giallo (Y) 2
    PE14 --> Giallo (Y) 3
    PE15 --> Verde
+   PD11 --> infrarossi
 
 -> [Rfid]
-   PB11 --> RX (@9600 bps)
+   PB11 --> RX (@9600 bps)   
