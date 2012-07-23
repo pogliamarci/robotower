@@ -1,4 +1,3 @@
-time: 5
 id: 4400F56CD1	action: lock_all
 id: 4400F59195	action: disable_vision
 id: 4400F58B6D	action: force_rotate_left

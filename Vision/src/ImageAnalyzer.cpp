@@ -17,7 +17,10 @@ Vision::Results ImageAnalyzer::analyze(cv::Mat& img)
 	}
 
 	/* compute distance to the tower */
-	towersize_filter.update(tower_result != NULL ? tower_result->getHeight() : 0);
+	towerwidth_filter.update(tower_result != NULL ? tower_result->getWidth() : 0);
+	towerheight_filter.update(tower_result != NULL ? tower_result->getHeight() : 0);
+	factorywidth_filter.update(factory_result != NULL ? factory_result->getWidth() : 0);
+	factoryheight_filter.update(factory_result != NULL ? factory_result->getHeight() : 0);
 
 	return composeMessage();
 }
@@ -38,13 +41,14 @@ Vision::Results ImageAnalyzer::composeMessage()
 	msg.towerFound = tower != NULL;
 	msg.towerPos = tower != NULL ? tower->getPosition() : 0;
 
-	msg.towerBlobHeight = tower != NULL ? tower->getHeight() : 0;
-	cout << "tower size " << towersize_filter.curValue() << endl;
-	msg.towerSize = (int) towersize_filter.curValue();
-	/*
-	 * msg.towerSize = tower != NULL : getTowerDistance(towersize_filter.curValue()) : 0;
-	 * (meglio sarebbe qualcosa del tipo msg.towerSize = tower != NULL : tower->getSize : 0;)
-	 */
+	msg.towerBlobHeight = (int) towerheight_filter.curValue();
+	msg.towerBlobWidth = (int) towerwidth_filter.curValue();
+	msg.factoryBlobHeight = (int) factorywidth_filter.curValue();
+	msg.factoryBlobWidth = (int) factoryheight_filter.curValue();
+
+	msg.towerDistance = (int) towerheight_filter.curValue() * 2;
+	msg.factoryDistance = (int) factoryheight_filter.curValue() * 2;
+
 	msg.factoryFound = factory != NULL;
 	msg.factoryPos = factory != NULL ? factory->getPosition() : 0;
 

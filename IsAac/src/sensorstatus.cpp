@@ -17,6 +17,8 @@
 
 #include "sensorstatus.h"
 
+#include <fstream>
+
 SensorStatus::SensorStatus()
 {
 	for (int i=0; i < CARDINAL_POINTS; i++)
@@ -25,6 +27,38 @@ SensorStatus::SensorStatus()
 	tower_position = 0;
 	factory_found = false;
 	factory_position = 0;
+}
+
+SensorStatus::SensorStatus(std::string configFile) {
+	SensorStatus();
+
+	std::fstream config;
+	config.open(configFile.c_str(), std::ios::in);
+	if(!config.is_open()) {
+		std::cerr << "Error opening the configuration file, "
+				"no action will be assigned to RFID tags!" << std::endl;
+		return;
+	}
+	while(config.good()) {
+		std::string st;
+		getline(config, st);
+		populateMapWithLine(st);
+	}
+}
+
+void SensorStatus::populateMapWithLine(std::string configLine) {
+    size_t idindex = configLine.find("id:") + 4;
+    size_t actionStartIndex = configLine.find("action:");
+    size_t actionindex = actionStartIndex + 8;
+    if(configLine.size() >= actionindex) {
+      std::string id = configLine.substr(idindex, actionStartIndex - idindex);
+      id.erase(id.find_last_not_of(" \n\r\t") + 1);	 // trim trailing whitespace
+
+      std::string action = configLine.substr(actionindex);
+      action.erase(action.find_last_not_of(" \n\r\t") + 1);
+
+      idToAction.insert(std::make_pair(id, strToAction(action)));
+    }
 }
 
 void SensorStatus::fromSonarCallback(const Echoes::Sonar& message)
@@ -41,4 +75,27 @@ void SensorStatus::fromVisionCallback(const Vision::Results& message)
 	tower_position = message.towerPos;
 	factory_found = message.factoryFound;
 	factory_position = message.factoryPos;
+}
+
+void SensorStatus::fromRfidCallback(const Echoes::Rfid& message)
+{
+	if(idToAction.count(message.id) > 0) {
+		lastAction = idToAction[message.id];
+	}
+	lastAction = nothing;
+}
+
+RfidAction SensorStatus::strToAction(std::string token) {
+	if(token.compare("lock_all") == 0) {
+		return lock_all;
+	} else if(token.compare("disable_vision") == 0) {
+		return disable_vision;
+	} else if(token.compare("force_rotate_left") == 0) {
+		return force_rotate_left;
+	} else if(token.compare("force_rotate_right") == 0) {
+		return force_rotate_right;
+	}
+	std::cout << "Fallback to default action, token "
+			<< token << " not recognized" << std::endl;
+	return nothing;
 }

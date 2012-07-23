@@ -18,12 +18,18 @@
 #define CARDINAL_POINTS 4
 
 #include "Echoes/Sonar.h"
+#include "Echoes/Rfid.h"
 #include "Vision/Results.h"
 
 typedef enum
 {
 	NORTH, SOUTH, EAST, WEST
 } CardinalPoint;
+
+typedef enum
+{
+	lock_all, disable_vision, force_rotate_right, force_rotate_left, nothing
+} RfidAction;
 
 class SensorStatus 
 {
@@ -33,9 +39,13 @@ class SensorStatus
 		int tower_position;
 		bool factory_found;
 		int factory_position;
+		RfidAction lastAction;
+		std::map<std::string, RfidAction> idToAction;
 	public:
 		SensorStatus();
+		SensorStatus(std::string configFile);
 		void fromSonarCallback(const Echoes::Sonar& message);
+		void fromRfidCallback(const Echoes::Rfid& message);
 		void fromVisionCallback(const Vision::Results& message);
 		/* some getters (declared here as inline) */
 		inline bool isTowerDetected() 
@@ -58,4 +68,13 @@ class SensorStatus
 		{
 			return sonar[p];
 		}
+		inline RfidAction consumeLastAction()
+		{
+			RfidAction a = lastAction;
+			lastAction = nothing;
+			return a;
+		}
+	private:
+		void populateMapWithLine(std::string configLine);
+		RfidAction strToAction(std::string token);
 };

@@ -49,7 +49,10 @@ class ImageAnalyzer {
 		ColorDataset* cd;
 		BlobBuffer tower_buffer;
 		BlobBuffer factory_buffer;
-		MovingAverageFilter towersize_filter;
+		MovingAverageFilter towerwidth_filter;
+		MovingAverageFilter towerheight_filter;
+		MovingAverageFilter factorywidth_filter;
+		MovingAverageFilter factoryheight_filter;
 		float getTowerDistance(float size);
 		void findObjects(cv::Mat& img);
 		Vision::Results composeMessage();
