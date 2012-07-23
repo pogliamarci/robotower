@@ -21,33 +21,38 @@
 
 using namespace std;
 
-BlobInfo::BlobInfo(char new_class) {
+BlobInfo::BlobInfo(char new_class)
+{
 	this->blob_class = new_class;
-	this->num_pixel=0;
-	this->a.x=-1;
-	this->a.y=-1;
-	this->b.x=-1;
-	this->b.y=-1;
-	this->center.x=-1;
-	this->center.y=-1;
+	this->num_pixel = 0;
+	this->a.x = -1;
+	this->a.y = -1;
+	this->b.x = -1;
+	this->b.y = -1;
+	this->center.x = -1;
+	this->center.y = -1;
 }
 
-void BlobInfo::save(int num_pix, cv::Point point_1, cv::Point point_2) {
+void BlobInfo::save(int num_pix, cv::Point point_1, cv::Point point_2)
+{
 	this->num_pixel = num_pix;
 	this->a = point_1;
 	this->b = point_2;
-	this->center.x = (point_2.x-point_1.x)/2 + point_1.x;
-	this->center.y = (point_2.y-point_1.y)/2 + point_1.y;
+	this->center.x = (point_2.x - point_1.x) / 2 + point_1.x;
+	this->center.y = (point_2.y - point_1.y) / 2 + point_1.y;
 }
 
-BlobInfo* BlobBuffer::lastValidBlob() {
+BlobInfo* BlobBuffer::lastValidBlob()
+{
 	int current_index = index;
 	BlobInfo* current_element;
 	for (int i = 0; i < size; i++)
 	{
 		/* put current_index to the previous element */
-		if (current_index == 0) current_index = size - 1;
-		else current_index -= 1;
+		if (current_index == 0)
+			current_index = size - 1;
+		else
+			current_index -= 1;
 		/* returns the element if doesn't belong to the class 'U' */
 		current_element = &(data->at(current_index));
 		if (current_element->getClass() != 'U')
@@ -58,19 +63,22 @@ BlobInfo* BlobBuffer::lastValidBlob() {
 	return NULL; /* found no valid blob */
 }
 
-BlobBuffer::BlobBuffer(int buffer_size) {
+BlobBuffer::BlobBuffer(int buffer_size)
+{
 	index = 0;
 	size = buffer_size;
 	data = new vector<BlobInfo>(buffer_size);
 }
 
-void BlobBuffer::insert(BlobInfo element) {
+void BlobBuffer::insert(BlobInfo element)
+{
 	data->at(index) = element;
 	index += 1;
 	if (index >= size) index = 0;
 }
 
-void BlobBuffer::addIfPresent(BlobInfo blob) {
+void BlobBuffer::addIfPresent(BlobInfo blob)
+{
 	if (blob.getNumPix() > 0)
 	{
 		this->insert(blob);

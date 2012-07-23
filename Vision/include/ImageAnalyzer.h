@@ -1,10 +1,3 @@
-/*
- * ImageAnalyzer.h
- *
- *  Created on: 14 Apr 2012
- *      Author: marcello
- */
-
 #ifndef IMAGEANALYZER_H_
 #define IMAGEANALYZER_H_
 
@@ -25,24 +18,29 @@
 #define MIN_BLOB_RATIO 0.2
 #define MAX_BLOB_RATIO 0.8
 
-class MovingAverageFilter {
+class MovingAverageFilter
+{
 	private:
 		float alpha;
 		float x_k;
 	public:
-		MovingAverageFilter() {
+		MovingAverageFilter()
+		{
 			alpha = 0.125;
 		}
-		inline float update(float x_knew) {
-			x_k = alpha*x_knew + (1-alpha)*x_k;
+		inline float update(float x_knew)
+		{
+			x_k = alpha * x_knew + (1 - alpha) * x_k;
 			return x_k;
 		}
-		inline float curValue() {
+		inline float curValue()
+		{
 			return x_k;
 		}
 };
 
-class ImageAnalyzer {
+class ImageAnalyzer
+{
 	private:
 		KnnColorClassifier* cc;
 		PixelMap* pm;
