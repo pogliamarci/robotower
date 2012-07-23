@@ -35,7 +35,7 @@
 /* working areas declarations for the threads */
 static WORKING_AREA(apricancelliWorkingArea, 256);
 static WORKING_AREA(sonarWorkingArea, 1024);
-static WORKING_AREA(rfidWorkingArea, 2048);
+static WORKING_AREA(rfidWorkingArea, 1024);
 static WORKING_AREA(blinkerWorkingArea, 128);
 
 CircularBuffer circularBuffer;
@@ -239,7 +239,7 @@ static msg_t sonarThread(void *arg) {
 		chMtxLock(&bufferMutex);
 		bufferPutString(&circularBuffer, buf);
 		chMtxUnlock();
-		chThdSleepMilliseconds(500);
+		chThdSleepMilliseconds(100);
 	}
 
 	return 0;
