@@ -1,6 +1,6 @@
-#line 2 "/home/dave/RoboTower/Brian/checker/src/shapeflex.cpp"
+#line 2 "/home/marcello/robotower/Brian/checker/src/shapeflex.cpp"
 
-#line 4 "/home/dave/RoboTower/Brian/checker/src/shapeflex.cpp"
+#line 4 "/home/marcello/robotower/Brian/checker/src/shapeflex.cpp"
 
 #define  YY_INT_ALIGNED short int
 
@@ -506,7 +506,7 @@ char *shapetext;
 #include "shapegram.tab.h"
 
 extern int linenum;
-#line 510 "/home/dave/RoboTower/Brian/checker/src/shapeflex.cpp"
+#line 510 "/home/marcello/robotower/Brian/checker/src/shapeflex.cpp"
 
 #define INITIAL 0
 
@@ -696,7 +696,7 @@ YY_DECL
 #line 14 "prs/shapeflex.l"
 
 
-#line 700 "/home/dave/RoboTower/Brian/checker/src/shapeflex.cpp"
+#line 700 "/home/marcello/robotower/Brian/checker/src/shapeflex.cpp"
 
 	if ( !(yy_init) )
 		{
@@ -857,7 +857,7 @@ YY_RULE_SETUP
 #line 33 "prs/shapeflex.l"
 ECHO;
 	YY_BREAK
-#line 861 "/home/dave/RoboTower/Brian/checker/src/shapeflex.cpp"
+#line 861 "/home/marcello/robotower/Brian/checker/src/shapeflex.cpp"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 

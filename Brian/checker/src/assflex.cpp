@@ -1,6 +1,6 @@
-#line 2 "/home/dave/RoboTower/Brian/checker/src/assflex.cpp"
+#line 2 "/home/marcello/robotower/Brian/checker/src/assflex.cpp"
 
-#line 4 "/home/dave/RoboTower/Brian/checker/src/assflex.cpp"
+#line 4 "/home/marcello/robotower/Brian/checker/src/assflex.cpp"
 
 #define  YY_INT_ALIGNED short int
 
@@ -494,7 +494,7 @@ char *asstext;
 #include "assgram.tab.h"
 
 extern int linenum;
-#line 498 "/home/dave/RoboTower/Brian/checker/src/assflex.cpp"
+#line 498 "/home/marcello/robotower/Brian/checker/src/assflex.cpp"
 
 #define INITIAL 0
 
@@ -683,7 +683,7 @@ YY_DECL
     
 #line 14 "prs/assflex.l"
 
-#line 687 "/home/dave/RoboTower/Brian/checker/src/assflex.cpp"
+#line 687 "/home/marcello/robotower/Brian/checker/src/assflex.cpp"
 
 	if ( !(yy_init) )
 		{
@@ -814,7 +814,7 @@ YY_RULE_SETUP
 #line 26 "prs/assflex.l"
 ECHO;
 	YY_BREAK
-#line 818 "/home/dave/RoboTower/Brian/checker/src/assflex.cpp"
+#line 818 "/home/marcello/robotower/Brian/checker/src/assflex.cpp"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 

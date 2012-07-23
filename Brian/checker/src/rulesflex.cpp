@@ -1,6 +1,6 @@
-#line 2 "/home/dave/RoboTower/Brian/checker/src/rulesflex.cpp"
+#line 2 "/home/marcello/robotower/Brian/checker/src/rulesflex.cpp"
 
-#line 4 "/home/dave/RoboTower/Brian/checker/src/rulesflex.cpp"
+#line 4 "/home/marcello/robotower/Brian/checker/src/rulesflex.cpp"
 
 #define  YY_INT_ALIGNED short int
 
@@ -526,7 +526,7 @@ char *rulestext;
 
 extern int linenum;
 
-#line 530 "/home/dave/RoboTower/Brian/checker/src/rulesflex.cpp"
+#line 530 "/home/marcello/robotower/Brian/checker/src/rulesflex.cpp"
 
 #define INITIAL 0
 
@@ -716,7 +716,7 @@ YY_DECL
 #line 14 "prs/rulesflex.l"
 
 
-#line 720 "/home/dave/RoboTower/Brian/checker/src/rulesflex.cpp"
+#line 720 "/home/marcello/robotower/Brian/checker/src/rulesflex.cpp"
 
 	if ( !(yy_init) )
 		{
@@ -888,7 +888,7 @@ YY_RULE_SETUP
 #line 34 "prs/rulesflex.l"
 ECHO;
 	YY_BREAK
-#line 892 "/home/dave/RoboTower/Brian/checker/src/rulesflex.cpp"
+#line 892 "/home/marcello/robotower/Brian/checker/src/rulesflex.cpp"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
