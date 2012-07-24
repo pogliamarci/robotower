@@ -18,16 +18,13 @@
 #include "ros/ros.h"
 #include "SpyKee/Motion.h"
 #include "Echoes/Led.h"
-#include "IsAac/MediaVarianza.h"
 
 class Sender 
 {
 	private:
 		ros::Publisher motion;
-		ros::Publisher debug_mediavarianza;
 	public:
 		Sender(ros::NodeHandle& n);
 		void sendMotionMessage(int rot, int tan);
-		void sendDebugMessage(float avg, float var, int time);
 };
 

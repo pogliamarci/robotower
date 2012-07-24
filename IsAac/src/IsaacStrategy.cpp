@@ -95,10 +95,9 @@ void IsaacStrategy::useBrian()
 {
 	/* reliability (not used ==> set to 1) */
 	const int reliability = 1;
-	crisp_data_list* cdl;
 
 	/* let's get (a pointer to) the input data list and clear it */
-	cdl = (brian->getFuzzy())->get_crisp_data_list();
+	crisp_data_list* cdl = (brian->getFuzzy())->get_crisp_data_list();
 	cdl->clear();
 
 	/* update inputs */
@@ -108,7 +107,8 @@ void IsaacStrategy::useBrian()
 	cdl->add(new crisp_data("DistanceEast", sonar[EAST], reliability));
 	cdl->add(new crisp_data("DistanceWest", sonar[WEST], reliability));
 	cdl->add(new crisp_data("InvisibleObstacle", blockedTime, reliability));
-	//sensor (difference betweeen north sonar distance and vision distance) //FIXME errore! non è vero che fa così
+	//sensor (difference betweeen north sonar distance and vision distance)
+	//FIXME errore! non è vero che fa così
 	cdl->add(
 			new crisp_data("SensorMatches", sonar[NORTH] - sonar[NORTH],
 					reliability));

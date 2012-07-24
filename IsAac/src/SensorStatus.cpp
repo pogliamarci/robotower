@@ -44,6 +44,7 @@ SensorStatus::SensorStatus(std::string configFile) {
 		getline(config, st);
 		populateMapWithLine(st);
 	}
+	config.close();
 }
 
 void SensorStatus::populateMapWithLine(std::string configLine) {

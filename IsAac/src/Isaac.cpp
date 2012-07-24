@@ -27,20 +27,23 @@
 
 int main(int argc, char** argv)
 {
+	//ros initialization
+	ros::init(argc, argv, "isaac");
+	ros::NodeHandle ros_node = ros::NodeHandle();
+
 	srand((unsigned)time(NULL));
 	
 	//sonar variable
 	SonarBuffer sonarBuffer;
 
 	//data
-	SensorStatus sensors;
+	const char* filename = "rfidconfig.txt";
+	SensorStatus sensors(filename);
 	
 	//reasoning Strategy
 	IsaacStrategy isaacStrategy;
 	
-	//ros initialization
-	ros::init(argc, argv, "isaac");
-	ros::NodeHandle ros_node = ros::NodeHandle();
+	// definition of msg\srv handlerss
 	ros::Subscriber sonar_sub = ros_node.subscribe("sonar_data", 1,
 			&SensorStatus::fromSonarCallback, &sensors);
 	ros::Subscriber vision_sub = ros_node.subscribe("vision_results", 1,
