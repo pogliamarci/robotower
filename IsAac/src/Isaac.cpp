@@ -20,7 +20,6 @@
 #include "brian.h"
 #include "ros/ros.h"
 
-#include "SonarBuffer.h"
 #include "IsaacStrategy.h"
 #include "SensorStatus.h"
 #include "Sender.h"
@@ -32,12 +31,9 @@ int main(int argc, char** argv)
 	ros::NodeHandle ros_node = ros::NodeHandle();
 
 	srand((unsigned)time(NULL));
-	
-	//sonar variable
-	SonarBuffer sonarBuffer;
 
 	//data
-	const char* filename = "rfidconfig.txt";
+	const char* filename = "../../rfidconfig.txt";
 	SensorStatus sensors(filename);
 	
 	//reasoning Strategy
@@ -48,6 +44,8 @@ int main(int argc, char** argv)
 			&SensorStatus::fromSonarCallback, &sensors);
 	ros::Subscriber vision_sub = ros_node.subscribe("vision_results", 1,
 				&SensorStatus::fromVisionCallback, &sensors);
+	ros::Subscriber rfid_sub = ros_node.subscribe("rfid_data", 1,
+					&SensorStatus::fromRfidCallback, &sensors);
 	ros::ServiceClient client = ros_node.serviceClient<Echoes::Led>("led_data");
 
 	ros::Rate loop_rate(LOOPRATE);
@@ -56,10 +54,7 @@ int main(int argc, char** argv)
 
 	while (ros::ok())
 	{
-		sonarBuffer.insert(sensors.getSonar(NORTH));
-		sonarBuffer.setTempoBloccato();
-		
-		isaacStrategy.activateStrategy(sensors, sonarBuffer.getTempoBloccato());
+		isaacStrategy.activateStrategy(sensors);
 		
 		message_sender.sendMotionMessage(isaacStrategy.getTanSpeed(), isaacStrategy.getRotSpeed());
 		

@@ -20,6 +20,7 @@
 
 #include "brian.h"
 #include "SensorStatus.h"
+#include "BlockedTimeCalculator.h"
 
 #define FUZZYASSOC (char *) "../config/ctof.txt"
 #define FUZZYSHAPES (char *) "../config/shape_ctof.txt"
@@ -47,7 +48,7 @@ class IsaacStrategy
 		bool factory_found;
 		int factory_position;
 		
-		int blockedTime;
+		BlockedTimeCalculator sonarBuffer;
 		int detectedTime;
 		int randomTime;
 		
@@ -60,7 +61,7 @@ class IsaacStrategy
 		int timer;
 	public:
 		IsaacStrategy();
-		void activateStrategy(SensorStatus sensorStatus, int blockedTime);
+		void activateStrategy(SensorStatus& sensorStatus);
 		inline int getRotSpeed()
 		{
 			return rotSpeed;
@@ -74,11 +75,11 @@ class IsaacStrategy
 		void modifySensors(RfidAction action);
 		void modifyActuators(RfidAction action);
 		void useBrian();
-		void updateSensors(SensorStatus sensorStatus, int blockedTime);
+		void updateSensors(SensorStatus& sensorStatus);
 		void parseBrianResults();
 		void resetVision();
 		void updateRandomValues();
-		void getAction(SensorStatus sensorStatus);
+		void getAction(SensorStatus& sensorStatus);
 };
 
 #endif

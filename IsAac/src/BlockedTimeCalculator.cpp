@@ -15,10 +15,10 @@
  * GNU General Public License for more details.
  */
 
-#include "SonarBuffer.h"
+#include "BlockedTimeCalculator.h"
 #include <iostream>
 
-SonarBuffer::SonarBuffer()
+BlockedTimeCalculator::BlockedTimeCalculator()
 {
 	int i;
 	for(i=0; i<MAXCAMPIONI; i++)
@@ -28,7 +28,7 @@ SonarBuffer::SonarBuffer()
 	this->index=0;
 }
 
-void SonarBuffer::setTempoBloccato()
+void BlockedTimeCalculator::setTempoBloccato()
 {
 	if( this->calcolaVarianza() > THRESHOLD )
 	{
@@ -40,19 +40,20 @@ void SonarBuffer::setTempoBloccato()
 	}
 }
 
-int SonarBuffer::getTempoBloccato()
+int BlockedTimeCalculator::getTempoBloccato()
 {
 	return this->tempo;
 }
 
-void SonarBuffer::insert(int element)
+void BlockedTimeCalculator::insert(int element)
 {
 	this->data[this->index]=element;
 	this->index++;
 	if(this->index == MAXCAMPIONI) this->index=0;
+	setTempoBloccato();
 }
 
-float SonarBuffer::calcolaVarianza()
+float BlockedTimeCalculator::calcolaVarianza()
 {
 	float media=0, mediaquadra=0;
 	for(int i=0; i<MAXCAMPIONI; i++)
@@ -65,7 +66,7 @@ float SonarBuffer::calcolaVarianza()
 	return (mediaquadra-media*media);
 }
 
-float SonarBuffer::calcolaMedia()
+float BlockedTimeCalculator::calcolaMedia()
 {
 	float media=0;
 	for(int i=0; i<MAXCAMPIONI; i++)

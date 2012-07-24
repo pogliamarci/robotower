@@ -1,0 +1,7 @@
+#Se troppo vicino a un ostacolo a destra, correggi la traiettoria a sinistra
+(AND	(Too_Near_East) 
+	(NOT (Too_Near_West)))	=> 	(RotSpeed SLOW_LEFT);
+
+#Se troppo vicino a un ostacolo a destra, correggi la traiettoria a sinistra
+(AND	(Too_Near_West) 
+	(NOT (Too_Near_East)))	=> 	(RotSpeed SLOW_RIGHT);

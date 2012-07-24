@@ -20,20 +20,20 @@
 #define MAXCAMPIONI 20
 #define THRESHOLD 80
 
-class SonarBuffer 
+class BlockedTimeCalculator 
 {
 	public:
-		SonarBuffer();
+		BlockedTimeCalculator();
 		void insert(int element);
-		void setTempoBloccato();
 		int getTempoBloccato();
+	private:
+		void setTempoBloccato();
 		float calcolaVarianza();
 		float calcolaMedia();
 		inline float calcolaStdDev()
 		{
 			return sqrt(this->calcolaVarianza());
 		}
-	private:
 		int data[MAXCAMPIONI];
 		int index;
 		int tempo;

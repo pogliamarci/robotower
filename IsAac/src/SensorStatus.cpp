@@ -27,6 +27,7 @@ SensorStatus::SensorStatus()
 	tower_position = 0;
 	factory_found = false;
 	factory_position = 0;
+	lastAction = nothing;
 }
 
 SensorStatus::SensorStatus(std::string configFile) {
@@ -34,6 +35,7 @@ SensorStatus::SensorStatus(std::string configFile) {
 
 	std::fstream config;
 	config.open(configFile.c_str(), std::ios::in);
+	std::cerr << "Trying to open file: " << configFile << std::endl;
 	if(!config.is_open()) {
 		std::cerr << "Error opening the configuration file, "
 				"no action will be assigned to RFID tags!" << std::endl;
@@ -80,10 +82,13 @@ void SensorStatus::fromVisionCallback(const Vision::Results& message)
 
 void SensorStatus::fromRfidCallback(const Echoes::Rfid& message)
 {
+	std::cerr << "RFID RICEVUTO: " << message.id << std::endl;;
 	if(idToAction.count(message.id) > 0) {
 		lastAction = idToAction[message.id];
+	} else {
+		std::cerr << "Nessuna azione associata" << std::endl;
+		lastAction = nothing;
 	}
-	lastAction = nothing;
 }
 
 RfidAction SensorStatus::strToAction(std::string token) {

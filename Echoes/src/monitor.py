@@ -126,8 +126,7 @@ class SonarMonitorGui():
         self.west_d.display(sonar_data.west)
 
     def rfidCallback(self, rfid_data):
-        self.popup = QLabel("RFID: " + rfid_data.id)
-        self.popup.show()
+        pass
 
     def towerCallback(self, tower_data):
         if tower_data.isTowerDestroyed == 1:

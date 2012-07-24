@@ -39,7 +39,9 @@ void parseItAll(ReadSonar& read_sonar, Dispatcher& d)
 
 		for(unsigned int i=0;i<n_line;i++)
 		{
-			d.dispatch(read_sonar.getLine());
+			string l = read_sonar.getLine();
+			cerr << "Letta riga - " << l << endl;
+			d.dispatch(l);
 		}
 	}
 }

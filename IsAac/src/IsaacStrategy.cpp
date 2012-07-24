@@ -28,7 +28,8 @@ IsaacStrategy::IsaacStrategy()
 	resetVision();
 
 	detectedTime = 0;
-	blockedTime = 0;
+
+	lastAction = nothing;
 
 	tanSpeed = 0;
 	rotSpeed = 0;
@@ -36,21 +37,39 @@ IsaacStrategy::IsaacStrategy()
 	timer = 0;
 }
 
-void IsaacStrategy::activateStrategy(SensorStatus sensorStatus, int blockedTime)
+void IsaacStrategy::activateStrategy(SensorStatus& sensorStatus)
 {
 	getAction(sensorStatus);
-	updateSensors(sensorStatus, blockedTime);
+	updateSensors(sensorStatus);
 	modifySensors(lastAction);
 	useBrian();
-	modifyActuators(lastAction);
 	parseBrianResults();
+	modifyActuators(lastAction);
 }
 
-void IsaacStrategy::getAction(SensorStatus sensorStatus)
+void IsaacStrategy::getAction(SensorStatus& sensorStatus)
 {
 	if(timer == 0)
 	{
 		lastAction = sensorStatus.consumeLastAction();
+		if(lastAction != nothing) {
+			switch(lastAction) {
+			case lock_all:
+				cerr << "Lock all" << endl;
+				break;
+			case disable_vision:
+				cerr << "Disable vision" << endl;
+				break;
+			case force_rotate_left:
+			case force_rotate_right:
+				cerr << "Force rotate" << endl;
+				break;
+			case nothing:
+				cerr << "NOTHING ERROR ERROR ERROR" << endl;
+				break;
+			}
+			timer = 5 * LOOPRATE;
+		}
 	}
 }
 
@@ -97,6 +116,7 @@ void IsaacStrategy::modifyActuators(RfidAction action)
 
 	tanSpeed = (right_track + left_track) / 2;
 	rotSpeed = (left_track - right_track) / 2;
+
 }
 
 void IsaacStrategy::useBrian()
@@ -114,7 +134,7 @@ void IsaacStrategy::useBrian()
 	cdl->add(new crisp_data("DistanceSouth", sonar[SOUTH], reliability));
 	cdl->add(new crisp_data("DistanceEast", sonar[EAST], reliability));
 	cdl->add(new crisp_data("DistanceWest", sonar[WEST], reliability));
-	cdl->add(new crisp_data("InvisibleObstacle", blockedTime, reliability));
+	cdl->add(new crisp_data("InvisibleObstacle", sonarBuffer.getTempoBloccato(), reliability));
 	//sensor (difference betweeen north sonar distance and vision distance)
 	//FIXME errore! non è vero che fa così
 	cdl->add(
@@ -134,7 +154,7 @@ void IsaacStrategy::useBrian()
 
 }
 
-void IsaacStrategy::updateSensors(SensorStatus sensorStatus, int blockedTime)
+void IsaacStrategy::updateSensors(SensorStatus& sensorStatus)
 {
 	for (int i = 0; i < CARDINAL_POINTS; i++)
 		sonar[i] = sensorStatus.getSonar((CardinalPoint) i);
@@ -143,9 +163,10 @@ void IsaacStrategy::updateSensors(SensorStatus sensorStatus, int blockedTime)
 	factory_found = sensorStatus.isFactoryDetected();
 	factory_position = sensorStatus.getFactoryPosition();
 	updateRandomValues();
+
 	if (timer > 0)
 		timer--;
-	this->blockedTime = blockedTime;
+	sonarBuffer.insert(sensorStatus.getSonar(NORTH));
 }
 
 void IsaacStrategy::updateRandomValues()
