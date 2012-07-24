@@ -38,12 +38,20 @@ IsaacStrategy::IsaacStrategy()
 
 void IsaacStrategy::activateStrategy(SensorStatus sensorStatus, int blockedTime)
 {
-	RfidAction action = sensorStatus.consumeLastAction();
+	getAction(sensorStatus);
 	updateSensors(sensorStatus, blockedTime);
-	modifySensors(action);
+	modifySensors(lastAction);
 	useBrian();
-	modifyActuators(action);
+	modifyActuators(lastAction);
 	parseBrianResults();
+}
+
+void IsaacStrategy::getAction(SensorStatus sensorStatus)
+{
+	if(timer == 0)
+	{
+		lastAction = sensorStatus.consumeLastAction();
+	}
 }
 
 void IsaacStrategy::resetVision()
@@ -180,36 +188,27 @@ void IsaacStrategy::parseBrianResults()
 		return;
 	}
 
-	/*
-	 Echoes::Led led_service;
-	 */
-
 	for (command_list::iterator it = cl->begin(); it != cl->end(); it++)
 	{
 		std::string temp = it->first;
 
 		if (temp.compare("TanSpeed") == 0)
 		{
-			cout << "Ricevuta tan speed" << endl;
 			tanSpeed = it->second->get_set_point();
 		}
 		else if (temp.compare("RotSpeed") == 0)
 		{
-			cout << "Ricevuta rot speed" << endl;
 			rotSpeed = it->second->get_set_point();
 		}
 		else if (temp.compare("GreenLed") == 0)
 		{
 			cout << "Green led posto a " << it->second->get_set_point() << endl;
 			/*
+			 Echoes::Led led_service;
 			 led_service.request.editGreen = true;
 			 led_service.request.greenIsOn = it->second->get_set_point();
 			 client.call(led_service);
 			 */
-		}
-		else
-		{
-			cout << "Ricevuto qualcos'altro" << endl;
 		}
 	}
 

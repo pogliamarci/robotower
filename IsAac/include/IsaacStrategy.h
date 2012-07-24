@@ -38,6 +38,8 @@ class IsaacStrategy
 	private:
 		MrBrian* brian;
 		
+		RfidAction lastAction;
+
 		int sonar[CARDINAL_POINTS];
 		
 		bool tower_found;
@@ -76,6 +78,7 @@ class IsaacStrategy
 		void parseBrianResults();
 		void resetVision();
 		void updateRandomValues();
+		void getAction(SensorStatus sensorStatus);
 };
 
 #endif
