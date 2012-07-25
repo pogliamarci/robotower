@@ -98,14 +98,15 @@ void ImageAnalyzer::findObjects(cv::Mat& img)
 				/* is the blob shape similar to the expected one? */
 				/* save the biggest found blob for each colour class */
 				if(BlobsItr1->first == TOWER_CLASS &&
-						tower_blob.getNumPix() <  BlobsItr2->second->GetNumPix())
+						BlobsItr2->second->GetNumPix() > tower_blob.getNumPix() &&
+						checkShape(blob_width, blob_heigth) )
 				{
-					tower_blob.save(BlobsItr2->second->GetNumPix(), pt1, pt2);
+						tower_blob.save(BlobsItr2->second->GetNumPix(), pt1, pt2);
 				}
 				if(BlobsItr1->first == FACTORY_CLASS &&
-						factory_blob.getNumPix() <  BlobsItr2->second->GetNumPix())
+						BlobsItr2->second->GetNumPix() > factory_blob.getNumPix() &&
+						checkShape(blob_width, blob_heigth) )
 				{
-					if (checkShape(blob_width, blob_heigth))
 						factory_blob.save(BlobsItr2->second->GetNumPix(), pt1, pt2);
 				}
 			}
@@ -118,7 +119,7 @@ void ImageAnalyzer::findObjects(cv::Mat& img)
 }
 
 bool ImageAnalyzer::checkShape(int width, int heigth) {
-	/* Shape control -> must be rectangular with height > width */
+	// Shape control -> must be rectangular with height > width
 	float ratio = ((float) width) / ((float) heigth);
 	cout << "Factory ratio" << ratio << endl;
 	if (ratio > MIN_BLOB_RATIO && ratio < MAX_BLOB_RATIO)

@@ -21,7 +21,7 @@
 #include "opencv2/opencv.hpp"
 #include "opencv2/highgui/highgui.hpp"
 
-#define BLOB_LIST_SIZE	10
+#define BLOB_LIST_SIZE	5
 
 class BlobInfo {
 	private:

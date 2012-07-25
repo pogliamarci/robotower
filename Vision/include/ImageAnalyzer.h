@@ -13,10 +13,9 @@
 #define TOWER_CLASS 'R'
 #define FACTORY_CLASS 'G'
 
-#define MIN_BLOB_SIZE 100
-#define NUM_FRAME_TO_SEARCH 5
-#define MIN_BLOB_RATIO 0.2
-#define MAX_BLOB_RATIO 0.8
+#define MIN_BLOB_SIZE 200
+#define MIN_BLOB_RATIO 0.17
+#define MAX_BLOB_RATIO 0.63
 
 class MovingAverageFilter
 {
