@@ -99,7 +99,7 @@ aggregation_tree *ptrule=NULL;
 
 
 /* Line 268 of yacc.c  */
-#line 103 "/home/dave/RoboTower/Brian/brian/src/rulesgram.tab.cpp"
+#line 103 "/home/marcello/robotower/Brian/brian/src/rulesgram.tab.cpp"
 
 /* Enabling traces.  */
 #ifndef YYDEBUG
@@ -154,7 +154,7 @@ typedef union YYSTYPE
 
 
 /* Line 293 of yacc.c  */
-#line 158 "/home/dave/RoboTower/Brian/brian/src/rulesgram.tab.cpp"
+#line 158 "/home/marcello/robotower/Brian/brian/src/rulesgram.tab.cpp"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
@@ -166,7 +166,7 @@ typedef union YYSTYPE
 
 
 /* Line 343 of yacc.c  */
-#line 170 "/home/dave/RoboTower/Brian/brian/src/rulesgram.tab.cpp"
+#line 170 "/home/marcello/robotower/Brian/brian/src/rulesgram.tab.cpp"
 
 #ifdef short
 # undef short
@@ -1472,7 +1472,7 @@ yyreduce:
 
 
 /* Line 1806 of yacc.c  */
-#line 1476 "/home/dave/RoboTower/Brian/brian/src/rulesgram.tab.cpp"
+#line 1476 "/home/marcello/robotower/Brian/brian/src/rulesgram.tab.cpp"
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires

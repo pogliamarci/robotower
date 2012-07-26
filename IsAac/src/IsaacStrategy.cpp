@@ -22,19 +22,23 @@ IsaacStrategy::IsaacStrategy()
 	brian = new MrBrian(FUZZYASSOC, FUZZYSHAPES, PRIES, PRIESACTIONS, CANDOES,
 			BEHAVIORS, WANTERS, DEFUZZYASSOC, DEFUZZYSHAPES);
 
+	lastAction = nothing;
+
 	for (int i = 0; i < CARDINAL_POINTS; i++)
 		sonar[i] = 0;
 
-	resetVision();
-
 	detectedTime = 0;
+	randomTime = 0;
 
-	lastAction = nothing;
+	randomAhead = 0;
+	randomSearch = 0;
 
 	tanSpeed = 0;
 	rotSpeed = 0;
 
 	timer = 0;
+
+	resetVision();
 }
 
 void IsaacStrategy::activateStrategy(SensorStatus& sensorStatus)

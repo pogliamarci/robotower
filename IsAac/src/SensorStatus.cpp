@@ -19,7 +19,7 @@
 
 #include <fstream>
 
-SensorStatus::SensorStatus()
+SensorStatus::SensorStatus(std::string configFile)
 {
 	for (int i=0; i < CARDINAL_POINTS; i++)
 		sonar[i] = 0;
@@ -28,11 +28,11 @@ SensorStatus::SensorStatus()
 	factory_found = false;
 	factory_position = 0;
 	lastAction = nothing;
+	initializeRfidConfiguration(configFile);
 }
 
-SensorStatus::SensorStatus(std::string configFile) {
-	SensorStatus();
-
+void SensorStatus::initializeRfidConfiguration(std::string configFile)
+{
 	std::fstream config;
 	config.open(configFile.c_str(), std::ios::in);
 	std::cerr << "Trying to open file: " << configFile << std::endl;

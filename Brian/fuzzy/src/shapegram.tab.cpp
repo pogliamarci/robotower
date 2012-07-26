@@ -97,7 +97,7 @@ fuzzy_set * fs;
 
 
 /* Line 268 of yacc.c  */
-#line 101 "/home/dave/RoboTower/Brian/fuzzy/src/shapegram.tab.cpp"
+#line 101 "/home/marcello/robotower/Brian/fuzzy/src/shapegram.tab.cpp"
 
 /* Enabling traces.  */
 #ifndef YYDEBUG
@@ -153,7 +153,7 @@ typedef union YYSTYPE
 
 
 /* Line 293 of yacc.c  */
-#line 157 "/home/dave/RoboTower/Brian/fuzzy/src/shapegram.tab.cpp"
+#line 157 "/home/marcello/robotower/Brian/fuzzy/src/shapegram.tab.cpp"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
@@ -165,7 +165,7 @@ typedef union YYSTYPE
 
 
 /* Line 343 of yacc.c  */
-#line 169 "/home/dave/RoboTower/Brian/fuzzy/src/shapegram.tab.cpp"
+#line 169 "/home/marcello/robotower/Brian/fuzzy/src/shapegram.tab.cpp"
 
 #ifdef short
 # undef short
@@ -1500,7 +1500,7 @@ yyreduce:
 
 
 /* Line 1806 of yacc.c  */
-#line 1504 "/home/dave/RoboTower/Brian/fuzzy/src/shapegram.tab.cpp"
+#line 1504 "/home/marcello/robotower/Brian/fuzzy/src/shapegram.tab.cpp"
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
