@@ -45,7 +45,6 @@ class SensorStatus
 		RfidAction lastAction;
 		std::map<std::string, RfidAction> idToAction;
 	public:
-		SensorStatus();
 		SensorStatus(std::string configFile);
 		void fromSonarCallback(const Echoes::Sonar& message);
 		void fromRfidCallback(const Echoes::Rfid& message);
@@ -78,6 +77,7 @@ class SensorStatus
 			return a;
 		}
 	private:
+		void initializeRfidConfiguration(std::string configFile);
 		void populateMapWithLine(std::string configLine);
 		RfidAction strToAction(std::string token);
 };
