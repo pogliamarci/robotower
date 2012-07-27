@@ -1,3 +1,20 @@
+/*
+ * RoboTower, Hi-CoRG based on ROS
+ *
+ * Copyright (C) 2012 Politecnico di Milano
+ * Copyright (C) 2012 Marcello Pogliani, Davide Tateo
+ * Versione 1.0
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation, version 2 of the License.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ */
+
 #include "ImageAnalyzer.h"
 
 Vision::Results ImageAnalyzer::analyze(cv::Mat& img)
@@ -16,8 +33,13 @@ Vision::Results ImageAnalyzer::analyze(cv::Mat& img)
 		cv::rectangle(img, factory_result->a, factory_result->b, CV_RGB(254,0,0), 2, 8, 0);
 	}
 
-	/* compute distance to the tower */
-	towersize_filter.update(tower_result != NULL ? tower_result->getHeight() : 0);
+	towerwidth_filter.update(tower_result != NULL ? tower_result->getWidth() : 0);
+	towerheight_filter.update(tower_result != NULL ? tower_result->getHeight() : 0);
+	factorywidth_filter.update(factory_result != NULL ? factory_result->getWidth() : 0);
+	factoryheight_filter.update(factory_result != NULL ? factory_result->getHeight() : 0);
+	distanceCalculator.insertDatiFabbrica((int)factoryheight_filter.curValue(), (int) factorywidth_filter.curValue());
+	distanceCalculator.insertDatiTorre((int)towerheight_filter.curValue(), (int) towerwidth_filter.curValue());
+
 
 	return composeMessage();
 }
@@ -38,13 +60,14 @@ Vision::Results ImageAnalyzer::composeMessage()
 	msg.towerFound = tower != NULL;
 	msg.towerPos = tower != NULL ? tower->getPosition() : 0;
 
-	msg.towerBlobHeight = tower != NULL ? tower->getHeight() : 0;
-	cout << "tower size " << towersize_filter.curValue() << endl;
-	msg.towerSize = (int) towersize_filter.curValue();
-	/*
-	 * msg.towerSize = tower != NULL : getTowerDistance(towersize_filter.curValue()) : 0;
-	 * (meglio sarebbe qualcosa del tipo msg.towerSize = tower != NULL : tower->getSize : 0;)
-	 */
+	msg.towerBlobHeight = (int) towerheight_filter.curValue();
+	msg.towerBlobWidth = (int) towerwidth_filter.curValue();
+	msg.factoryBlobHeight = (int) factorywidth_filter.curValue();
+	msg.factoryBlobWidth = (int) factoryheight_filter.curValue();
+
+	msg.towerDistance = distanceCalculator.getDistanzaTorre();
+	msg.factoryDistance = distanceCalculator.getDistanzaFabbrica();
+
 	msg.factoryFound = factory != NULL;
 	msg.factoryPos = factory != NULL ? factory->getPosition() : 0;
 
@@ -94,14 +117,15 @@ void ImageAnalyzer::findObjects(cv::Mat& img)
 				/* is the blob shape similar to the expected one? */
 				/* save the biggest found blob for each colour class */
 				if(BlobsItr1->first == TOWER_CLASS &&
-						tower_blob.getNumPix() <  BlobsItr2->second->GetNumPix())
+						BlobsItr2->second->GetNumPix() > tower_blob.getNumPix() &&
+						checkShape(blob_width, blob_heigth) )
 				{
-					tower_blob.save(BlobsItr2->second->GetNumPix(), pt1, pt2);
+						tower_blob.save(BlobsItr2->second->GetNumPix(), pt1, pt2);
 				}
 				if(BlobsItr1->first == FACTORY_CLASS &&
-						factory_blob.getNumPix() <  BlobsItr2->second->GetNumPix())
+						BlobsItr2->second->GetNumPix() > factory_blob.getNumPix() &&
+						checkShape(blob_width, blob_heigth) )
 				{
-					if (checkShape(blob_width, blob_heigth))
 						factory_blob.save(BlobsItr2->second->GetNumPix(), pt1, pt2);
 				}
 			}
@@ -114,7 +138,7 @@ void ImageAnalyzer::findObjects(cv::Mat& img)
 }
 
 bool ImageAnalyzer::checkShape(int width, int heigth) {
-	/* Shape control -> must be rectangular with height > width */
+	// Shape control -> must be rectangular with height > width
 	float ratio = ((float) width) / ((float) heigth);
 	cout << "Factory ratio" << ratio << endl;
 	if (ratio > MIN_BLOB_RATIO && ratio < MAX_BLOB_RATIO)

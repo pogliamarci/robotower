@@ -21,19 +21,19 @@
 #include "Processer.h"
 #include "ros/ros.h"
 #include "Echoes/Sonar.h"
+#include "MovingAverageFilter.h"
 
 class SonarProcesser : public Processer
 {
 	public:
 		SonarProcesser(ros::Publisher pub);
-		void process(string str);
-		~SonarProcesser();
+		void process(std::string str);
 	private:
 		ros::Publisher sonar_data_pub;
-		int north;
-		int south;
-		int east;
-		int west;
+		MovingAverageFilter north;
+		MovingAverageFilter south;
+		MovingAverageFilter east;
+		MovingAverageFilter west;
 		void publishLast();
 };
 

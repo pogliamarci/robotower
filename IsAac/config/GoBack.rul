@@ -12,7 +12,11 @@
 
 #Se sei bloccato,ma non vedi nulla, torna indietro veloce
 
-(Invisible_Obstacle) 	=> (TanSpeed VERY_FAST_BACKWARD);
+(AND 	(Invisible_Obstacle)
+     	(Free_South))	=> (TanSpeed FAST_BACKWARD);
+
+(AND	(Invisible_Obstacle)
+	(Less_Free_South)) => (TanSpeed VERY_SLOW_BACKWARD); 
 
 #Disimpegnati dall'angolo verso il lato libero
 

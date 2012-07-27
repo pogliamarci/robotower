@@ -39,17 +39,16 @@ void parseItAll(ReadSonar& read_sonar, Dispatcher& d)
 
 		for(unsigned int i=0;i<n_line;i++)
 		{
-			d.dispatch(read_sonar.getLine());
+			string l = read_sonar.getLine();
+			cerr << "Letta riga - " << l << endl;
+			d.dispatch(l);
 		}
 	}
 }
 
 int main(int argc, char** argv)
 {
-	char* serialFilename = "/dev/ttyUSB0";
-	if(argc == 2) {
-		serialFilename = argv[1];
-	}
+	const char* serialFilename = argc == 2 ? argv[1] : "/dev/ttyUSB0";
 
 	ReadSonar read_sonar(serialFilename);
 	Dispatcher dispatcher;

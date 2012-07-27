@@ -3,6 +3,7 @@
 ( level 1 GoToTower 	../config/GoToTower.rul )
 
 ( level 2 AvoidObstacle ../config/AvoidObstacle.rul )
+( level 2 KeepDistance ../config/KeepDistance.rul )
 ( level 2 GoBack	../config/GoBack.rul )
 
 ( level 3 Destroy       ../config/Destroy.rul )

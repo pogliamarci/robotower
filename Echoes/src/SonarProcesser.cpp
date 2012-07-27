@@ -21,10 +21,6 @@
 
 SonarProcesser::SonarProcesser(ros::Publisher pub)
 {
-	north = 0;
-	south = 0;
-	east = 0;
-	west = 0;
 	sonar_data_pub = pub;
 }
 
@@ -42,16 +38,16 @@ void SonarProcesser::process(string str)
 			switch(t[0])
 			{
 			case 'N':
-				north = n;
+				north.update(n);
 				break;
 			case 'S':
-				south = n;
+				south.update(n);
 				break;
 			case 'E':
-				east = n;
+				east.update(n);
 				break;
 			case 'W':
-				west = n;
+				west.update(n);
 				break;
 			}
 		}
@@ -62,14 +58,9 @@ void SonarProcesser::process(string str)
 void SonarProcesser::publishLast()
 {
 	Echoes::Sonar msg;
-	msg.north = north;
-	msg.south = south;
-	msg.east = east;
-	msg.west = west;
+	msg.north = (int) north.curValue();
+	msg.south = (int) south.curValue();
+	msg.east = (int) east.curValue();
+	msg.west = (int) west.curValue();
 	sonar_data_pub.publish(msg);
-}
-
-SonarProcesser::~SonarProcesser()
-{
-	// TODO Auto-generated destructor stub
 }

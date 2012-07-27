@@ -56,7 +56,7 @@ void imageAction(Mat& frame)
 void imageMessageCallback(const sensor_msgs::CompressedImage::ConstPtr& message)
 {
 	cv::Mat f = imdecode(message->data, CV_LOAD_IMAGE_ANYCOLOR);
-	*record << f;
+	// *record << f;
 	imageAction(f);
 }
 
@@ -146,11 +146,13 @@ int main (int argc, char** argv)
 	}
 
 	// WARNING -- Temporary FIXME
+	/*	// per registrare video
 	Size frameSize(320,240);
 	record = new VideoWriter("RobotVideo.avi", CV_FOURCC('D','I','V','X'), 20, frameSize, true);
 	if(!record->isOpened()) {
 		cerr << "Error opening videofile" << endl;
 	}
+	*/
 
 	/* let's start it all */
 	ros::spin();

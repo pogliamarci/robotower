@@ -1,0 +1,5 @@
+id: 4400F56CD1	action: lock_all
+id: 4400F59195	action: disable_vision
+id: 4400F58B6D	action: force_rotate_left
+id: 4400BDB1D9	action: force_rotate_right
+id: 4400BDC253	action: lock_all
