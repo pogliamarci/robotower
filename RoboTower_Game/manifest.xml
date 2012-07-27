@@ -1,0 +1,14 @@
+<package>
+  <description brief="RoboTower_Game">
+	Interfaccia grafica e regole base del gioco RoboTower:
+	Calcola il tempo, gli input e quant'altro del gioco.
+  </description>
+  <author>Marcello Pogliani, Davide Tateo</author>
+  <license>GPLv2</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/RoboTower_Game</url>
+  <rosdep name="libqt4-dev"/>
+
+</package>
+
+

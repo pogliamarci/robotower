@@ -1,4 +1,4 @@
-DIRS = Echoes SpyKee Vision LittleEndian Brian/brian Brian/fuzzy Brian/checker IsAac
+DIRS = Echoes SpyKee Vision LittleEndian Brian/brian Brian/fuzzy Brian/checker IsAac RoboTower_Game
 
 NO_COLOR=\033[0m
 OK_COLOR=\033[0;31m

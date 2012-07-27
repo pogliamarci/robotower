@@ -95,7 +95,7 @@ extern void data_exists(char * name1, char * name2);
 
 
 /* Line 268 of yacc.c  */
-#line 99 "/home/marcello/robotower/Brian/checker/src/predgram.tab.cpp"
+#line 99 "/home/dave/RoboTower/Brian/checker/src/predgram.tab.cpp"
 
 /* Enabling traces.  */
 #ifndef YYDEBUG
@@ -150,7 +150,7 @@ typedef union YYSTYPE
 
 
 /* Line 293 of yacc.c  */
-#line 154 "/home/marcello/robotower/Brian/checker/src/predgram.tab.cpp"
+#line 154 "/home/dave/RoboTower/Brian/checker/src/predgram.tab.cpp"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
@@ -162,7 +162,7 @@ typedef union YYSTYPE
 
 
 /* Line 343 of yacc.c  */
-#line 166 "/home/marcello/robotower/Brian/checker/src/predgram.tab.cpp"
+#line 166 "/home/dave/RoboTower/Brian/checker/src/predgram.tab.cpp"
 
 #ifdef short
 # undef short
@@ -1425,7 +1425,7 @@ yyreduce:
 
 
 /* Line 1806 of yacc.c  */
-#line 1429 "/home/marcello/robotower/Brian/checker/src/predgram.tab.cpp"
+#line 1429 "/home/dave/RoboTower/Brian/checker/src/predgram.tab.cpp"
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires

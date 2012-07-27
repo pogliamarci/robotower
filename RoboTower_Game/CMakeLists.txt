@@ -11,17 +11,26 @@ include($ENV{ROS_ROOT}/core/rosbuild/rosbuild.cmake)
 
 rosbuild_init()
 
+#Search for Qt libraries
+cmake_minimum_required(VERSION 2.4.0)
+
+#Find and setup Qt4 for this project
+find_package(Qt4 REQUIRED)
+include(${QT_USE_FILE}) 
+
 #set the default path for built executables to the "bin" directory
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 #set the default path for built libraries to the "lib" directory
 set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 
 #uncomment if you have defined messages
-rosbuild_genmsg()
+#rosbuild_genmsg()
 #uncomment if you have defined services
 #rosbuild_gensrv()
 
-#common commands for building c++ executables and libraries
-rosbuild_add_executable(isaac src/Isaac.cpp src/BlockedTimeCalculator.cpp src/SensorStatus.cpp src/Sender.cpp src/IsaacStrategy.cpp)
+#commands for building c++ executables
+rosbuild_add_executable(roboTower src/main.cpp)
 
-
+#linking delle librerie Qt
+INCLUDE_DIRECTORIES(roboTower ${QT_INCLUDE_DIR})
+TARGET_LINK_LIBRARIES(roboTower ${QT_LIBRARIES})
