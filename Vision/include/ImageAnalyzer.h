@@ -9,6 +9,7 @@
 #include "ColorDataset.h"
 #include "Blob.h"
 #include "PixelMap.h"
+#include "DistanceCalculator.h"
 
 #define TOWER_CLASS 'R'
 #define FACTORY_CLASS 'G'
@@ -50,6 +51,7 @@ class ImageAnalyzer
 		MovingAverageFilter towerheight_filter;
 		MovingAverageFilter factorywidth_filter;
 		MovingAverageFilter factoryheight_filter;
+		DistanceCalculator distanceCalculator;
 		float getTowerDistance(float size);
 		void findObjects(cv::Mat& img);
 		Vision::Results composeMessage();

@@ -33,6 +33,9 @@ IsaacStrategy::IsaacStrategy()
 	randomAhead = 0;
 	randomSearch = 0;
 
+	towerDistance = 0;
+	factoryDistance = 0;
+
 	tanSpeed = 0;
 	rotSpeed = 0;
 
@@ -53,11 +56,13 @@ void IsaacStrategy::activateStrategy(SensorStatus& sensorStatus)
 
 void IsaacStrategy::getAction(SensorStatus& sensorStatus)
 {
-	if(timer == 0)
+	if (timer == 0)
 	{
 		lastAction = sensorStatus.consumeLastAction();
-		if(lastAction != nothing) {
-			switch(lastAction) {
+		if (lastAction != nothing)
+		{
+			switch (lastAction)
+			{
 			case lock_all:
 				cerr << "Lock all" << endl;
 				break;
@@ -138,11 +143,12 @@ void IsaacStrategy::useBrian()
 	cdl->add(new crisp_data("DistanceSouth", sonar[SOUTH], reliability));
 	cdl->add(new crisp_data("DistanceEast", sonar[EAST], reliability));
 	cdl->add(new crisp_data("DistanceWest", sonar[WEST], reliability));
-	cdl->add(new crisp_data("InvisibleObstacle", sonarBuffer.getTempoBloccato(), reliability));
-	//sensor (difference betweeen north sonar distance and vision distance)
-	//FIXME errore! non è vero che fa così
 	cdl->add(
-			new crisp_data("SensorMatches", sonar[NORTH] - sonar[NORTH],
+			new crisp_data("InvisibleObstacle", sonarBuffer.getTempoBloccato(),
+					reliability));
+	//sensor (difference betweeen north sonar distance and vision distance)
+	cdl->add(
+			new crisp_data("SensorMatches", sonar[NORTH] - ,
 					reliability));
 	//vision
 	cdl->add(new crisp_data("TowerDetected", tower_found, reliability));
@@ -161,11 +167,16 @@ void IsaacStrategy::useBrian()
 void IsaacStrategy::updateSensors(SensorStatus& sensorStatus)
 {
 	for (int i = 0; i < CARDINAL_POINTS; i++)
+	{
 		sonar[i] = sensorStatus.getSonar((CardinalPoint) i);
+	}
 	tower_found = sensorStatus.isTowerDetected();
 	tower_position = sensorStatus.getTowerPosition();
 	factory_found = sensorStatus.isFactoryDetected();
 	factory_position = sensorStatus.getFactoryPosition();
+	towerDistance = sensorStatus.getTowerDistance();
+	factoryDistance = sensorStatus.getFactoryDistance();
+
 	updateRandomValues();
 
 	if (timer > 0)

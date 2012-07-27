@@ -1,3 +1,20 @@
+/*
+ * RoboTower, Hi-CoRG based on ROS
+ *
+ * Copyright (C) 2012 Politecnico di Milano
+ * Copyright (C) 2012 Marcello Pogliani, Davide Tateo
+ * Versione 1.0
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation, version 2 of the License.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ */
+
 #include "ImageAnalyzer.h"
 
 Vision::Results ImageAnalyzer::analyze(cv::Mat& img)
@@ -16,11 +33,13 @@ Vision::Results ImageAnalyzer::analyze(cv::Mat& img)
 		cv::rectangle(img, factory_result->a, factory_result->b, CV_RGB(254,0,0), 2, 8, 0);
 	}
 
-	/* compute distance to the tower */
 	towerwidth_filter.update(tower_result != NULL ? tower_result->getWidth() : 0);
 	towerheight_filter.update(tower_result != NULL ? tower_result->getHeight() : 0);
 	factorywidth_filter.update(factory_result != NULL ? factory_result->getWidth() : 0);
 	factoryheight_filter.update(factory_result != NULL ? factory_result->getHeight() : 0);
+	distanceCalculator.insertDatiFabbrica((int)factoryheight_filter.curValue(), (int) factorywidth_filter.curValue());
+	distanceCalculator.insertDatiTorre((int)towerheight_filter.curValue(), (int) towerwidth_filter.curValue());
+
 
 	return composeMessage();
 }
@@ -46,8 +65,8 @@ Vision::Results ImageAnalyzer::composeMessage()
 	msg.factoryBlobHeight = (int) factorywidth_filter.curValue();
 	msg.factoryBlobWidth = (int) factoryheight_filter.curValue();
 
-	msg.towerDistance = (int) towerheight_filter.curValue() * 2;
-	msg.factoryDistance = (int) factoryheight_filter.curValue() * 2;
+	msg.towerDistance = distanceCalculator.getDistanzaTorre();
+	msg.factoryDistance = distanceCalculator.getDistanzaFabbrica();
 
 	msg.factoryFound = factory != NULL;
 	msg.factoryPos = factory != NULL ? factory->getPosition() : 0;

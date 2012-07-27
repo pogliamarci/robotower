@@ -27,6 +27,8 @@ SensorStatus::SensorStatus(std::string configFile)
 	tower_position = 0;
 	factory_found = false;
 	factory_position = 0;
+	factory_distance = 0;
+	tower_distance = 0;
 	lastAction = nothing;
 	initializeRfidConfiguration(configFile);
 }
@@ -78,6 +80,8 @@ void SensorStatus::fromVisionCallback(const Vision::Results& message)
 	tower_position = message.towerPos;
 	factory_found = message.factoryFound;
 	factory_position = message.factoryPos;
+	factory_distance = message.factoryDistance;
+	tower_distance = message.towerDistance;
 }
 
 void SensorStatus::fromRfidCallback(const Echoes::Rfid& message)

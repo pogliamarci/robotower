@@ -42,6 +42,8 @@ class SensorStatus
 		int tower_position;
 		bool factory_found;
 		int factory_position;
+		int factory_distance;
+		int tower_distance;
 		RfidAction lastAction;
 		std::map<std::string, RfidAction> idToAction;
 	public:
@@ -69,6 +71,14 @@ class SensorStatus
 		inline int getSonar(CardinalPoint p)
 		{
 			return sonar[p];
+		}
+		inline int getTowerDistance()
+		{
+			return tower_distance;
+		}
+		inline int getFactoryDistance()
+		{
+			return factory_distance;
 		}
 		inline RfidAction consumeLastAction()
 		{

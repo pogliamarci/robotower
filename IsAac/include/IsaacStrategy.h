@@ -52,6 +52,9 @@ class IsaacStrategy
 		int detectedTime;
 		int randomTime;
 		
+		int towerDistance;
+		int factoryDistance;
+
 		int randomAhead;
 		int randomSearch;
 		
