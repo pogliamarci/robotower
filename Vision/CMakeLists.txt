@@ -26,4 +26,13 @@ rosbuild_genmsg()
 #target_link_libraries(${PROJECT_NAME} another_library)
 #rosbuild_add_boost_directories()
 #rosbuild_link_boost(${PROJECT_NAME} thread)
-rosbuild_add_executable(vision src/vision.cpp src/SupportDataStructures.cpp src/ImageAnalyzer.cpp src/libvision/Blob.cpp src/libvision/ColorClassifier.cpp src/libvision/ColorDataset.cpp src/libvision/PixelMap.cpp src/libvision/MrtMisc.cpp )
+rosbuild_add_executable	(vision src/vision.cpp 
+				src/SupportDataStructures.cpp 
+				src/ImageAnalyzer.cpp 
+				src/DistanceCalculator.cpp
+				src/libvision/Blob.cpp 
+				src/libvision/ColorClassifier.cpp 
+				src/libvision/ColorDataset.cpp 
+				src/libvision/PixelMap.cpp 
+				src/libvision/MrtMisc.cpp 
+			)
