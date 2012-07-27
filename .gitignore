@@ -17,6 +17,7 @@ Brian/checker/bin/checker
 Brian/gmbte/bin/gmbte
 Foxtrot/bin/foxtrot
 FirmwareSpykee/build
+FirmwareSpykee/.dep
 
 # Python precompiled files #
 ############################
