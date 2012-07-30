@@ -44,12 +44,6 @@ Vision::Results ImageAnalyzer::analyze(cv::Mat& img)
 	return composeMessage();
 }
 
-float ImageAnalyzer::getTowerDistance(float size) {
-	const float real_twrsize = 1.0;
-	const float focal_length = 1.0;
-	return size * real_twrsize / focal_length;
-}
-
 Vision::Results ImageAnalyzer::composeMessage()
 {
 	Vision::Results msg;

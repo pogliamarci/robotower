@@ -15,48 +15,21 @@
  * GNU General Public License for more details.
  */
 
-#ifndef VISION_H
-#define VISION_H
+#ifndef BLOBBUFFER_H
+#define BLOBBUFFER_H
 
-#include "opencv2/opencv.hpp"
-#include "opencv2/highgui/highgui.hpp"
+#include "BlobInfo.h"
 
-#define BLOB_LIST_SIZE	5
+#define DEFAULT_BLOB_LIST_SIZE	5
 
-class BlobInfo {
-	private:
-		int num_pixel;
-		char blob_class;
-		cv::Point center;
-	public:
-		cv::Point a;
-		cv::Point b;
-		BlobInfo(char new_class = 'U');
-		void save(int num_pix, cv::Point point_1, cv::Point point_2);
-		inline char getClass() {
-			return this->blob_class;
-		}
-		inline int getNumPix() {
-			return this->num_pixel;
-		}
-		inline int getPosition() {
-			return this->center.x;
-		}
-		inline int getWidth() {
-			return this->b.x - this->a.x;
-		}
-		inline int getHeight() {
-			return this->a.y - this->b.y;
-		}
-};
-
-class BlobBuffer {
+class BlobBuffer
+{
 	private:
 		std::vector<BlobInfo>* data;
 		int size;
 		int index;
 	public:
-		BlobBuffer(int buffer_size = BLOB_LIST_SIZE);
+		BlobBuffer(int buffer_size = DEFAULT_BLOB_LIST_SIZE);
 		void insert(BlobInfo element);
 		BlobInfo* lastValidBlob();
 		void addIfPresent(BlobInfo blob);

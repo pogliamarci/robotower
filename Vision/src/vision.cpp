@@ -21,26 +21,60 @@
 #include "sensor_msgs/CompressedImage.h"
 #include "Vision/Results.h"
 
+#include "opencv2/opencv.hpp"
+#include "opencv2/highgui/highgui.hpp"
+
 #include "ImageAnalyzer.h"
 
 using namespace std;
 using namespace cv;
 
-/* variabili globali in cerca di sistemazione... */
+class VisionParameters {
+	private:
+		KnnColorClassifier cc;
+		PixelMap pm;
+		ColorDataset cd;
+		ImageAnalyzer analyzer;
+		char* dataset;
+		char* classifier;
+	public:
+		VisionParameters() : analyzer(&cc, &pm, &cd) {
+			/* default file paths */
+			char defaultDataset[] = "DataSet.dts";
+			char defaultClassifier[] = "classifier[5-17].kcc";
+			dataset = defaultDataset;
+			classifier = defaultClassifier;
+		}
+		void buildClassifier() {
+			cd.load(dataset);
+			cout << "----> Color Data set  [OK]" << "caricato file:" << dataset << endl;
+			//Creazione del classificatore colore
+			cc.fast_build(&cd, 5, 17, false);
+			cc.save_matrix(classifier);
+		}
+		void loadClassifier() {
+			cout << "----> No classifier loaded, loading default classifier" << endl;
+			cc.load_matrix(classifier);
+			cout << "----> Classifier loaded  [OK]"<<endl;
+		}
+		Vision::Results startAnalysis(Mat& frame) {
+			return analyzer.analyze(frame);
+		}
+		void setDataset(char* dataset) {
+			this->dataset = dataset;
+		}
+		void setClassifier(char* classifier) {
+			this->classifier = classifier;
+		}
+};
+
 ros::Publisher results_publisher;
-ImageAnalyzer* analyzer;
-
-VideoWriter* record;
-
-void sendMessage(Vision::Results message)
-{
-	results_publisher.publish(message);
-}
+VisionParameters* vision;
 
 void imageAction(Mat& frame)
 {
 	if (frame.empty()) return;
-	sendMessage(analyzer->analyze(frame));
+	results_publisher.publish(vision->startAnalysis(frame));
 	imshow("SpyKeeView", frame);
 	char c = waitKey(10);
 	if(c == 'c' || c == 27) /* 27 is the ESC character ASCII code */
@@ -52,27 +86,14 @@ void imageAction(Mat& frame)
 void imageMessageCallback(const sensor_msgs::CompressedImage::ConstPtr& message)
 {
 	cv::Mat f = imdecode(message->data, CV_LOAD_IMAGE_ANYCOLOR);
-	// *record << f;
 	imageAction(f);
 }
 
 int main (int argc, char** argv)
 {
-	/* variables to parse CLI arguments */
-	bool classifier_loaded = false;
+	/* variables to read from file the frame to analyze */
 	bool from_file = false;
-	
-	/* file paths */
-	char DefaultDataset[] = "DataSet.dts";
-	char DefaultClassifier[] = "classifier[5-17].kcc";
-	
-	/* vision algorithm variables */
-	KnnColorClassifier* cc = new KnnColorClassifier();
-	PixelMap* pm = new PixelMap();
-	ColorDataset* cd = new ColorDataset();
-
-	/* initialize image analyzer */
-	analyzer = new ImageAnalyzer(cc, pm, cd);
+	Mat frameFromFile;
 
 	/* ROS variables */
 	ros::init(argc, argv, "vision");
@@ -80,93 +101,52 @@ int main (int argc, char** argv)
 	ros::Subscriber source = ros_node.subscribe("spykee_camera", 1, imageMessageCallback);
 	results_publisher = ros_node.advertise<Vision::Results>("vision_results", 10);
 
-	/* opencv variables */
-	Mat frame;
-	
+	/* OpenCV init */
 	namedWindow("SpyKeeView", CV_WINDOW_AUTOSIZE);
-	
+
+	/* Command line argument parsing */
 	for(int i=1; i<argc; i++)
 	{
 		if(strcmp(argv[i],"-h") == 0)
 		{
-			cout 	<< "Utilizzo:\n"
+		   cout << "Utilizzo:\n"
 				<< "-h\t\t visualizza questo messaggio\n"
-				<< "-f [filename]\t carica il frame da analizzare da file\n"
 				<< "-l\t\t Carica il file DataSet.dts e genera il file .kcc\n"
 				<< "-L [filename]\t carica il Color Data Set da file e genera il file .kcc\n"
 				<< "-k [filename]\t carica il file .kcc da file\n"
+				<< "-f [filename]\t carica il frame da analizzare da file\n"
 				<< endl;
 			exit(EXIT_SUCCESS);
 		}
-		else if((strcmp(argv[i],"-f") == 0) && (argc > (i+1)))
+		else if((strcmp(argv[i], "-l") == 0))
 		{
-			frame = imread(argv[++i], CV_LOAD_IMAGE_ANYCOLOR);
-			from_file = true;
+			vision->buildClassifier();
 		}
-		else if(strcmp(argv[i],"-l") == 0)
+		else if(strcmp(argv[i],"-L" ) == 0 && argc > (i+1))
 		{
-			cd->load(DefaultDataset);
-			cout << "----> Color Data set  [OK]" << endl;
-			//Creazione del classificatore colore
-			cc->fast_build(cd, 5, 17, false);
-			cc->save_matrix(DefaultClassifier);
-		}
-		else if((strcmp(argv[i],"-L" ) == 0) && (argc > (i+1)))
-		{
-			cd->load(argv[++i]);
-			cout << "----> Color Data set  [OK]" << "caricato file:" << argv[i] << endl;
-			//Creazione del classificatore colore
-			cc->fast_build(cd, 5, 17, false);
-			cc->save_matrix(DefaultClassifier);
+			vision->setDataset(argv[++i]);
+			vision->buildClassifier();
 		}
 		else if((strcmp(argv[i], "-k") == 0) && (argc > (i+1)))
 		{
-			/* load classifier */
-			cc->load_matrix(argv[++i]);
-			cout << "----> Classifier loaded  [OK]" << endl;
-			classifier_loaded = true;
+			vision->setClassifier(argv[++i]);
+		}
+		else if((strcmp(argv[i],"-f") == 0) && (argc > (i+1)))
+		{
+			frameFromFile = imread(argv[++i], CV_LOAD_IMAGE_ANYCOLOR);
+			from_file = true;
 		}
 	}
-	
-	if (!classifier_loaded)
-	{
-		/* load classifier */
-		cout << "----> No classifier loaded, loading default classifier" << endl;
-		cc->load_matrix("classifier[5-17].kcc");
-		cout << "----> Classifier loaded  [OK]"<<endl;
-	}
-	
+	/* load classifier */
+	vision->loadClassifier();
+
 	if(from_file)
 	{
-		imageAction(frame);
+		imageAction(frameFromFile);
 	}
-
-	// WARNING -- Temporary FIXME
-	/*	// per registrare video
-	Size frameSize(320,240);
-	record = new VideoWriter("RobotVideo.avi", CV_FOURCC('D','I','V','X'), 20, frameSize, true);
-	if(!record->isOpened()) {
-		cerr << "Error opening videofile" << endl;
-	}
-	*/
 
 	/* let's start it all */
 	ros::spin();
 
-	// This code analyzes images from a pre-recorded video
-	/*
-	VideoCapture capture("RobotVideoPlay.avi");
-	double rate = capture.get(CV_CAP_PROP_FPS);
-	int delay = 1000/rate;
-	while(capture.grab()) {
-		Mat img;
-		capture.retrieve(img);
-		imageAction(img);
-		if(waitKey(delay)>=0)
-			break;
-	}
-	*/
-
-	/* NEEDED TO FINALIZE THE FILE */
-	delete record;
+	delete vision;
 }

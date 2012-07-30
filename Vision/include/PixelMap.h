@@ -21,7 +21,7 @@ class PixelMap
  // PixelMap (ColorClassifier*,unsigned char*);
  PixelMap();
  PixelMap (unsigned char*,int,int,ColorClassifier*, int ppb=3); 
- ~PixelMap();
+ //~PixelMap();  // TODO - possible memory leak!!! write the destructor!
 
  map < char, map< int,Blob* > >* GetBlobs() {return &mBlobs;};
  map <int, Blob*>* GetBlobs(char c) {return &mBlobs[c]; };

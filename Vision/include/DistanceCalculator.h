@@ -26,11 +26,11 @@ typedef struct s_expWeight
 	float d;
 } ExpWeights;
 
-const ExpWeights weightsAltezzaF = {7.527, -0.03944, 2.278, -0.007077};
-const ExpWeights weightsLarghezzaF = {5.111, -0.1401, 1.939 , -0.02379 };
+const ExpWeights factoryHeightW = {7.527, -0.03944, 2.278, -0.007077};
+const ExpWeights factoryWidthW = {5.111, -0.1401, 1.939 , -0.02379 };
 
-const ExpWeights weightsAltezzaT = {6.628, -0.03021, 2.694, -0.006427};
-const ExpWeights weightsLarghezzaT = {7.008, -0.07823, 0.895, -0.01019};
+const ExpWeights towerHeightW = {6.628, -0.03021, 2.694, -0.006427};
+const ExpWeights towerWidthW = {7.008, -0.07823, 0.895, -0.01019};
 
 class DistanceCalculator {
 private:
