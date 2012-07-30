@@ -6,7 +6,6 @@
 #include <map>
 #include <set>
 
-#include "MrtMisc.h"
 #include "Blob.h"
 #include "ColorClassifier.h"
 

@@ -147,9 +147,9 @@ void IsaacStrategy::useBrian()
 			new crisp_data("InvisibleObstacle", sonarBuffer.getTempoBloccato(),
 					reliability));
 	//sensor (difference betweeen north sonar distance and vision distance)
+	int difference = sonar[NORTH] -	(tower_found)? (towerDistance) : (factoryDistance);
 	cdl->add(
-			new crisp_data("SensorMatches", sonar[NORTH] - ,
-					reliability));
+			new crisp_data("SensorMatches", difference , reliability));
 	//vision
 	cdl->add(new crisp_data("TowerDetected", tower_found, reliability));
 	cdl->add(new crisp_data("TowerPosition", tower_position, reliability));

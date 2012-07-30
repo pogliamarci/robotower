@@ -34,5 +34,4 @@ rosbuild_add_executable	(vision src/vision.cpp
 				src/libvision/ColorClassifier.cpp 
 				src/libvision/ColorDataset.cpp 
 				src/libvision/PixelMap.cpp 
-				src/libvision/MrtMisc.cpp 
 			)
