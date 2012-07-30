@@ -23,8 +23,6 @@
 
 #include "ImageAnalyzer.h"
 
-#define EXIT_FROM_WINDOW -1
-
 using namespace std;
 using namespace cv;
 
@@ -41,15 +39,13 @@ void sendMessage(Vision::Results message)
 
 void imageAction(Mat& frame)
 {
-	if (!frame.empty())
+	if (frame.empty()) return;
+	sendMessage(analyzer->analyze(frame));
+	imshow("SpyKeeView", frame);
+	char c = waitKey(10);
+	if(c == 'c' || c == 27) /* 27 is the ESC character ASCII code */
 	{
-		sendMessage(analyzer->analyze(frame));
-		imshow("SpyKeeView", frame);
-		char c = waitKey(5);
-		/*// This appears not to work anymore with the latest openCV, boh =)
-		if((c == 'c') || (c == EXIT_FROM_WINDOW));
-			exit(EXIT_SUCCESS);
-		*/
+		exit(EXIT_SUCCESS);
 	}
 }
 
