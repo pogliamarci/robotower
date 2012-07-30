@@ -1,3 +1,7 @@
+#Punta la torre
 (Tower_Center) => (TanSpeed FAST_FORWARD);
 (Tower_Left)   => (RotSpeed VERY_SLOW_LEFT);
 (Tower_Right)  => (RotSpeed VERY_SLOW_RIGHT);
+#Se stavi ruotando veloce, controbilancia
+(ProposedRight) => (RotSpeed LEFT);
+(ProposedLeft) => (RotSpeed RIGHT);

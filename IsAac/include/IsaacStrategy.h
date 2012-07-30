@@ -32,7 +32,7 @@
 #define DEFUZZYASSOC (char *) "../config/s_ftoc.txt"
 #define DEFUZZYSHAPES (char *) "../config/s_shape.txt"
 
-const int LOOPRATE = 20;
+const int LOOPRATE = 15;
 
 class IsaacStrategy
 {
