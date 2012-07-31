@@ -3,6 +3,7 @@
 
 #include <QtGui>
 #include "RTCurrentGameWidget.h"
+#include "RTCards.h"
 
 class RTMainWindow : public QMainWindow
 {
@@ -14,6 +15,7 @@ class RTMainWindow : public QMainWindow
 		QWidget* mainWidget;
 		/* internal widgets */
 		RTCurrentGameWidget* currentGame;
+		RTCards* cardsLayout;
 		/* buttons (center left) */
 		QVBoxLayout* btnLayout;
 		QPushButton* startBtn;

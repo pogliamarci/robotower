@@ -42,12 +42,13 @@ void RTMainWindow::setupLayout()
 	leftLayout = new QGridLayout();
 	setCentralWidget(mainWidget);
 
+	/* Children widgets */
+	currentGame = new RTCurrentGameWidget();
+	cardsLayout = new RTCards();
+
 	mainWidget->setLayout(mainLayout);
 	mainLayout->addLayout(leftLayout);
-	mainLayout->addWidget(new QPushButton("Widget a destra"));
-
-	/* Score */
-	currentGame = new RTCurrentGameWidget();
+	mainLayout->addLayout(cardsLayout);
 
 	/* add all to the main layout */
 	leftLayout->addWidget(currentGame, 1, 1, 2, 4);
