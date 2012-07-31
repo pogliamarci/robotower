@@ -19,6 +19,7 @@
 #include <QThread>
 
 #include "RosPublisher.h"
+#include "RTMainWindow.h"
  
 int main(int argc, char **argv)
 {
@@ -26,11 +27,12 @@ int main(int argc, char **argv)
 	RosPublisher rosPublisher;
 	rosPublisher.start();
 	QApplication app(argc, argv);
+
 	QObject::connect(&app, SIGNAL(aboutToQuit()), &rosPublisher, SLOT(quitNow()));
 	QObject::connect(&rosPublisher, SIGNAL(rosQuits()), &app, SLOT(quit()));
-	
-	
-	QTextEdit textEdit;
-	textEdit.show();
+
+	RTMainWindow mainWindow;
+
+	mainWindow.show();
 	return app.exec();
 } 

@@ -47,7 +47,6 @@ void RosPublisher::quitNow()
 	hasToQuit = true;
 }
  
- 
 void RosPublisher::resetRobot()
 {
 	std_msgs::Bool message;
