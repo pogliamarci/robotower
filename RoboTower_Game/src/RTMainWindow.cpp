@@ -8,24 +8,58 @@ void RTMainWindow::setupToolbar()
 	addToolBar(Qt::TopToolBarArea, fileToolBar);
 }
 
+void RTMainWindow::setupButtons()
+{
+	btnLayout = new QVBoxLayout();
+	startBtn = new QPushButton("Start");
+	stopBtn = new QPushButton("Stop");
+	btnLayout->addWidget(startBtn);
+	btnLayout->addWidget(stopBtn);
+}
+
+void RTMainWindow::setupStats()
+{
+	statsGroupBox = new QGroupBox();
+	statsLayout = new QGridLayout();
+	statWon = new QLabel("0");
+	statTotalScore = new QLabel("0");
+	statLost = new QLabel("0");
+	statsGroupBox->setTitle("Stats");
+	statsGroupBox->setLayout(statsLayout);
+
+	statsLayout->addWidget(new QLabel("Won matches: "), 1, 1);
+	statsLayout->addWidget(statWon, 1, 2);
+	statsLayout->addWidget(new QLabel("Total score: "), 2, 1);
+	statsLayout->addWidget(statTotalScore, 2, 2);
+	statsLayout->addWidget(new QLabel("Lost matches: "), 3, 1);
+	statsLayout->addWidget(statLost, 3, 2);
+}
+
 void RTMainWindow::setupLayout()
 {
+	mainWidget = new QWidget();
 	mainLayout = new QHBoxLayout();
 	leftLayout = new QGridLayout();
-	mainWidget = new QWidget();
 	setCentralWidget(mainWidget);
+
 	mainWidget->setLayout(mainLayout);
 	mainLayout->addLayout(leftLayout);
 	mainLayout->addWidget(new QPushButton("Widget a destra"));
-	leftLayout->addWidget(new QPushButton("Punteggio"), 1, 1, 1, 4);
-	leftLayout->addWidget(new QPushButton("Bottoni"), 2, 1, 2, 1);
-	leftLayout->addWidget(new QPushButton("Time to live"), 2, 2, 2, 3);
-	leftLayout->addWidget(new QPushButton("Torri e fabbriche"), 4, 1, 1, 2);
-	leftLayout->addWidget(new QPushButton("Risultati totali"), 4, 3, 1, 2);
+
+	/* Score */
+	currentGame = new RTCurrentGameWidget();
+
+	/* add all to the main layout */
+	leftLayout->addWidget(currentGame, 1, 1, 2, 4);
+	leftLayout->addLayout(btnLayout, 3, 1, 1, 2);
+	leftLayout->addWidget(statsGroupBox, 3, 3, 1, 2);
 }
 
 RTMainWindow::RTMainWindow(QWidget* parent) : QMainWindow(parent)
 {
+	setupButtons();
+	setupStats();
 	setupToolbar();
 	setupLayout();
+	setWindowTitle(QString("RoboTower GUI"));
 }

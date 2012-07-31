@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'RosPublisher.h'
 **
-** Created: Tue Jul 31 14:52:59 2012
+** Created: Tue Jul 31 17:48:48 2012
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.2)
 **
 ** WARNING! All changes made in this file will be lost!
