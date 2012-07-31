@@ -19,10 +19,18 @@
 #include <string>
 #include "brian.h"
 #include "ros/ros.h"
+#include "std_msgs/Bool.h"
 
 #include "IsaacStrategy.h"
 #include "SensorStatus.h"
 #include "Sender.h"
+
+bool isEnabled = false;
+
+void enabler(const std_msgs::Bool& msg)
+{
+	isEnabled = msg.data;
+}
 
 int main(int argc, char** argv)
 {
@@ -39,24 +47,32 @@ int main(int argc, char** argv)
 	//reasoning Strategy
 	IsaacStrategy isaacStrategy;
 	
-	// definition of msg\srv handlerss
+	// definition of messages\services handlers
+	ros::Subscriber enable_sub = ros_node.subscribe("isaac_enable", 1, enabler);
 	ros::Subscriber sonar_sub = ros_node.subscribe("sonar_data", 1,
 			&SensorStatus::fromSonarCallback, &sensors);
 	ros::Subscriber vision_sub = ros_node.subscribe("vision_results", 1,
 				&SensorStatus::fromVisionCallback, &sensors);
 	ros::Subscriber rfid_sub = ros_node.subscribe("rfid_data", 1,
 					&SensorStatus::fromRfidCallback, &sensors);
+	ros::Subscriber disablerfid_sub = ros_node.subscribe("rfid_disable", 1,
+			&SensorStatus::enableRfidCallback, &sensors);
 	ros::ServiceClient client = ros_node.serviceClient<Echoes::Led>("led_data");
 
 	ros::Rate loop_rate(LOOPRATE);
 
 	Sender message_sender(ros_node);
 
+	cout << "Isaac OK. Waiting for the enable message" << endl;
+
 	while (ros::ok())
 	{
-		isaacStrategy.activateStrategy(sensors);
-		
-		message_sender.sendMotionMessage(isaacStrategy.getTanSpeed(), isaacStrategy.getRotSpeed());
+		if(isEnabled)
+		{
+			isaacStrategy.activateStrategy(sensors);
+			message_sender.sendMotionMessage(isaacStrategy.getTanSpeed(),
+					isaacStrategy.getRotSpeed());
+		}
 		
 		ros::spinOnce();
 		loop_rate.sleep();

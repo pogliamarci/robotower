@@ -55,14 +55,16 @@ void SensorStatus::populateMapWithLine(std::string configLine) {
     size_t idindex = configLine.find("id:") + 4;
     size_t actionStartIndex = configLine.find("action:");
     size_t actionindex = actionStartIndex + 8;
-    if(configLine.size() >= actionindex) {
-      std::string id = configLine.substr(idindex, actionStartIndex - idindex);
-      id.erase(id.find_last_not_of(" \n\r\t") + 1);	 // trim trailing whitespace
+    if(configLine.size() >= actionindex)
+    {
+    	std::string id = configLine.substr(idindex, actionStartIndex - idindex);
+    	id.erase(id.find_last_not_of(" \n\r\t") + 1);	 // trim trailing whitespace
 
-      std::string action = configLine.substr(actionindex);
-      action.erase(action.find_last_not_of(" \n\r\t") + 1);
+    	std::string action = configLine.substr(actionindex);
+    	action.erase(action.find_last_not_of(" \n\r\t") + 1);
 
-      idToAction.insert(std::make_pair(id, strToAction(action)));
+    	idToAction.insert(std::make_pair(id, strToAction(action)));
+    	enabledRfid.insert(std::make_pair(id, true));
     }
 }
 
@@ -86,13 +88,20 @@ void SensorStatus::fromVisionCallback(const Vision::Results& message)
 
 void SensorStatus::fromRfidCallback(const Echoes::Rfid& message)
 {
-	std::cerr << "RFID RICEVUTO: " << message.id << std::endl;;
+	std::cerr << "RFID RICEVUTO: " << message.id << std::endl;
 	if(idToAction.count(message.id) > 0) {
 		lastAction = idToAction[message.id];
+		enabledRfid[message.id] = false;
 	} else {
 		std::cerr << "Nessuna azione associata" << std::endl;
 		lastAction = nothing;
 	}
+}
+
+void SensorStatus::enableRfidCallback(const std_msgs::String& message)
+{
+	enabledRfid[message.data] = true;
+	std::cerr << "Rfid enabled again - id: " << message.data << std::endl;
 }
 
 RfidAction SensorStatus::strToAction(std::string token) {

@@ -23,6 +23,7 @@
 #include "Echoes/Sonar.h"
 #include "Echoes/Rfid.h"
 #include "Vision/Results.h"
+#include "std_msgs/String.h"
 
 typedef enum
 {
@@ -46,11 +47,13 @@ class SensorStatus
 		int tower_distance;
 		RfidAction lastAction;
 		std::map<std::string, RfidAction> idToAction;
+		std::map<std::string, bool> enabledRfid;
 	public:
 		SensorStatus(std::string configFile);
 		void fromSonarCallback(const Echoes::Sonar& message);
 		void fromRfidCallback(const Echoes::Rfid& message);
 		void fromVisionCallback(const Vision::Results& message);
+		void enableRfidCallback(const std_msgs::String& message);
 		/* some getters (declared here as inline) */
 		inline bool isTowerDetected() 
 		{
