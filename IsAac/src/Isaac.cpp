@@ -55,7 +55,7 @@ int main(int argc, char** argv)
 				&SensorStatus::fromVisionCallback, &sensors);
 	ros::Subscriber rfid_sub = ros_node.subscribe("rfid_data", 1,
 					&SensorStatus::fromRfidCallback, &sensors);
-	ros::Subscriber disablerfid_sub = ros_node.subscribe("rfid_disable", 1,
+	ros::Subscriber disablerfid_sub = ros_node.subscribe("rfid_enable", 1,
 			&SensorStatus::enableRfidCallback, &sensors);
 	ros::ServiceClient client = ros_node.serviceClient<Echoes::Led>("led_data");
 
