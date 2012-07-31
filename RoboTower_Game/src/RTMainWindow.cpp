@@ -1,4 +1,5 @@
 #include "RTMainWindow.h"
+#include "RTCards.h"
 
 void RTMainWindow::setupToolbar()
 {
@@ -16,7 +17,7 @@ void RTMainWindow::setupLayout()
 	setCentralWidget(mainWidget);
 	mainWidget->setLayout(mainLayout);
 	mainLayout->addLayout(leftLayout);
-	mainLayout->addWidget(new QPushButton("Widget a destra"));
+	mainLayout->addLayout(new RTCards());
 	leftLayout->addWidget(new QPushButton("Punteggio"), 1, 1, 1, 4);
 	leftLayout->addWidget(new QPushButton("Bottoni"), 2, 1, 2, 1);
 	leftLayout->addWidget(new QPushButton("Time to live"), 2, 2, 2, 3);
