@@ -17,13 +17,17 @@
 
 class RTCard : public QLabel
 {
+	Q_OBJECT
 public:
 	RTCard(int number);
 	void setCardStatus(bool cardStatus);
+private:
+	void setTextWhite();
 };
 
 class RTCards : public QVBoxLayout
 {
+	Q_OBJECT
 private:
 	QLabel* label;
 	QGridLayout* cardGrid;

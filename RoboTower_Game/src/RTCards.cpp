@@ -28,10 +28,21 @@ void RTCards::setCardStatus(int cardNumber, bool cardStatus)
 	cardList[cardNumber]->setCardStatus(cardStatus);
 }
 
+void RTCard::setTextWhite()
+{
+	QBrush brush(QColor(255, 255, 255, 255));
+	brush.setStyle(Qt::SolidPattern);
+	QPalette palette(this->palette());
+	palette.setBrush(QPalette::Active, QPalette::WindowText, brush);
+}
+
 RTCard::RTCard(int number) : QLabel()
 {
+	const int borderWidht =2;
 	QString labelText = QString::number(number);
-	this->setText(labelText);
+	setText(labelText);
+	setTextWhite();
+	setFrameStyle(borderWidht);
 	setCardStatus(true);
 }
 void RTCard::setCardStatus(bool isActive)
