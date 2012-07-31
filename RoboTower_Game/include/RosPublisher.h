@@ -15,22 +15,36 @@
  * GNU General Public License for more details.
  */
 
-#include <QtGui>
-#include <QThread>
+#ifndef ROS_PUBLISHER_H
+#define ROS_PUBLISHER_H
 
-#include "RosPublisher.h"
+#include "ros/ros.h"
+#include <string>
+#include <QThread>
+#include <QObject>
+
+using namespace ros;
  
-int main(int argc, char **argv)
+class RosPublisher : public QThread
 {
-	init(argc, argv, "Robotower_Game");
-	RosPublisher rosPublisher;
-	rosPublisher.start();
-	QApplication app(argc, argv);
-	QObject::connect(&app, SIGNAL(aboutToQuit()), &rosPublisher, SLOT(quitNow()));
-	QObject::connect(&rosPublisher, SIGNAL(rosQuits()), &app, SLOT(quit()));
-	
-	
-	QTextEdit textEdit;
-	textEdit.show();
-	return app.exec();
-} 
+Q_OBJECT
+
+private:
+	NodeHandle n;
+	Publisher enableIsaacPublisher;
+	Publisher enableCardPublisher;
+	Publisher resetRobotPublisher;
+	bool hasToQuit;
+public:
+	RosPublisher();
+	void run();
+	void resetRobot();
+	void enableRFID(std::string id);
+	void enableIsaac(bool isEnabled);
+public slots:
+	void quitNow(); // stops the thread when the application is quitting
+signals:
+	void rosQuits(); // triggered if ros::ok() is not true anymore
+};
+
+#endif

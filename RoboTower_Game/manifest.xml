@@ -7,7 +7,10 @@
   <license>GPLv2</license>
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/RoboTower_Game</url>
-  <rosdep name="libqt4-dev"/>
+
+  <depend package="roscpp"/>
+
+
 
 </package>
 
