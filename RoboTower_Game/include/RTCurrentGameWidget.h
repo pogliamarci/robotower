@@ -22,6 +22,7 @@
 
 class RTCurrentGameWidget : public QGroupBox
 {
+	Q_OBJECT
 private:
 	QGridLayout* theLayout;
 	QPushButton* pauseBtn;

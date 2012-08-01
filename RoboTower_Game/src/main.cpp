@@ -18,20 +18,32 @@
 #include <QtGui>
 #include <QThread>
 
-#include "RosPublisher.h"
+#include "RosComunication.h"
+#include "GameControl.h"
 #include "RTMainWindow.h"
+
+Q_DECLARE_METATYPE (std::string)
  
 int main(int argc, char **argv)
 {
+	qRegisterMetaType<std::string>("string");
 	init(argc, argv, "Robotower_Game");
-	RosPublisher rosPublisher;
-	rosPublisher.start();
+	RosComunication rosPublisher;
+	GameControl gameControl(3,1);
 	QApplication app(argc, argv);
+	RTMainWindow mainWindow;
 
+	rosPublisher.start();
+	gameControl.start();
+
+	/* when the main app is quitting make the spawned thread to quit, otherwise there's an error */
 	QObject::connect(&app, SIGNAL(aboutToQuit()), &rosPublisher, SLOT(quitNow()));
+	QObject::connect(&app, SIGNAL(aboutToQuit()), &gameControl, SLOT(quitNow()));
 	QObject::connect(&rosPublisher, SIGNAL(rosQuits()), &app, SLOT(quit()));
 
-	RTMainWindow mainWindow;
+	QObject::connect(&gameControl, SIGNAL(updatedTimeAndPoints(int,int)), &mainWindow, SLOT(updateData(int,int)));
+	QObject::connect(&rosPublisher, SIGNAL(rfidRecieved(std::string)), &gameControl, SLOT(disableRFID(std::string)));
+	QObject::connect(&gameControl, SIGNAL(updatedRfidStatus(int, bool)), &mainWindow, SLOT(updateCardStatus(int,bool)));
 
 	mainWindow.show();
 	return app.exec();

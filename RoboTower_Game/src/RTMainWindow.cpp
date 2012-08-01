@@ -17,6 +17,7 @@
 
 #include "RTMainWindow.h"
 
+#include <iostream>
 void RTMainWindow::setupToolbar()
 {
 	fileToolBar = addToolBar(tr("MainBar"));
@@ -73,7 +74,8 @@ void RTMainWindow::setupLayout()
 	leftLayout->addWidget(statsGroupBox, 3, 3, 1, 2);
 }
 
-RTMainWindow::RTMainWindow(QWidget* parent) : QMainWindow(parent)
+RTMainWindow::RTMainWindow(QWidget* parent) :
+		QMainWindow(parent)
 {
 	setupButtons();
 	setupStats();
@@ -82,8 +84,13 @@ RTMainWindow::RTMainWindow(QWidget* parent) : QMainWindow(parent)
 	setWindowTitle(QString("RoboTower GUI"));
 }
 
-
-void RTMainWindow::setCardStatus(int cardNumber, bool status)
+void RTMainWindow::updateCardStatus(int cardNumber, bool status)
 {
 	cardsLayout->setCardStatus(cardNumber, status);
+}
+
+void RTMainWindow::updateData(int timeToLive, int score)
+{
+	currentGame->updateTimer(timeToLive);
+	currentGame->updateScore(score);
 }

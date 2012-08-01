@@ -20,39 +20,69 @@
 
 #include <QThread>
 #include <QObject>
-#include <QTimer>
+#include <QMutex>
+#include <QWaitCondition>
+#include <fstream>
+#include <string>
+#include <map>
 
-#include "Echoes/Rfid.h"
-
-class GameControl :  public QThread
+typedef struct rfid_entry
 {
-	Q_OBJECT
+	int number;
+	int status;
+} RfidEntry;
+
+class GameControl: public QThread
+{
+Q_OBJECT
 private:
 	int timeToLive;
 	int points;
 	int factoryNumber;
 	int towerNumber;
+	bool isQuitting;
+	std::map<std::string, RfidEntry> rfidMap;
+	QMutex waitConditionMutex;
+	QWaitCondition timeout;
+private:
+	static const int gameMaxTime = 300;
+	static const int towerPoints = 100;
+	static const int factoryPoints = 20;
 
 public:
-	  GameControl();
-	  void fromRfidCallback(const Echoes::Rfid& message);
-	  inline int getTimeToLive()
-	  {
-		  return timeToLive;
-	  }
-	  inline int getPoints()
-	  {
-		  return points;
-	  }
-	  inline int getFactoryNumber()
-	  {
-		  return factoryNumber;
-	  }
-	  inline int getTowerNumber()
-	  {
-		  return towerNumber;
-	  }
-};
+	GameControl(int factoryNumber, int towerNumber);
+	void run();
+	inline int getTimeToLive()
+	{
+		return timeToLive;
+	}
+	inline int getPoints()
+	{
+		return points;
+	}
+	inline int getFactoryNumber()
+	{
+		return factoryNumber;
+	}
+	inline int getTowerNumber()
+	{
+		return towerNumber;
+	}
+private:
+	void initializeRfidConfiguration(std::string configFile);
+	void populateMapWithLine(std::string configLine, int index);
+	void updateGamePoints();
 
+public slots:
+	void disableRFID(std::string id);
+	void quitNow();
+	/*
+	void stop(); // stops the update
+	void pause(); //pause the update*/
+signals:
+	void updatedTimeAndPoints(int timeToLive, int score); //emitted at the end of each iteration
+	void updatedRfidStatus(int rfid, bool status); //emitted when RFID status changes
+	void endGame(); //emitted when the game ends
+};
 
 #endif /* GAMECONTROL_H_ */

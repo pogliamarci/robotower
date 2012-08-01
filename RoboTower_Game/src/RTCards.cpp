@@ -18,34 +18,40 @@
 #include "RTCards.h"
 #include <string>
 
+void RTCards::setRowsAndColsDim()
+{
+	for (int i = 0; i < ROWS; i++)
+	{
+		cardGrid->setRowMinimumHeight(i, 60);
+		cardGrid->setRowStretch(i, 2);
+	}
+	for (int i = 0; i < COLS; i++)
+	{
+		cardGrid->setColumnMinimumWidth(i, 30);
+		cardGrid->setColumnStretch(i, 1);
+	}
+}
+
+void RTCards::addCards()
+{
+	for (int i = 0; i < ROWS * COLS; i++)
+	{
+		RTCard* card = new RTCard(i);
+		cardGrid->addWidget(card, i % ROWS, i / ROWS, 1, 1, Qt::AlignCenter);
+		cardList.push_back(card);
+	}
+}
+
 RTCards::RTCards() :
 		QVBoxLayout()
 {
 	label = new QLabel("Carte Attive");
 	addWidget(label);
 	cardGrid = new QGridLayout();
-	for (int i = 0; i < ROWS * COLS; i++)
-	{
-		RTCard* card = new RTCard(i);
-		cardGrid->addWidget(card, i % ROWS, i / ROWS, 1, 1,Qt::AlignCenter);
-		cardList.push_back(card);
-	}
-
-	for (int i = 0; i < ROWS; i++)
-	{
-		cardGrid->setRowMinimumHeight(i, 60);
-		cardGrid->setRowStretch(i, 2);
-	}
-
-	for (int i = 0; i < COLS; i++)
-	{
-		cardGrid->setColumnMinimumWidth(i, 30);
-		cardGrid->setColumnStretch(i, 1);
-	}
-
+	addCards();
+	setRowsAndColsDim();
 	addLayout(cardGrid);
 	setAlignment(Qt::AlignTop);
-	cardGrid->setAlignment(Qt::AlignRight);
 }
 
 void RTCards::setCardStatus(int cardNumber, bool cardStatus)
@@ -71,6 +77,7 @@ RTCard::RTCard(int number) :
 	setFrameStyle(borderWidht);
 	setCardStatus(true);
 }
+
 void RTCard::setCardStatus(bool isActive)
 {
 	QColor color = (isActive) ? Qt::blue : Qt::red;
@@ -81,7 +88,7 @@ void RTCard::setCardStatus(bool isActive)
 	setMinimumSize(QSize(30,60));
 }
 
-int RTCards::heightForWidth(int w)
+int RTCard::heightForWidth(int w) const
 {
 	return 2 * w;
 }

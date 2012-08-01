@@ -15,20 +15,21 @@
  * GNU General Public License for more details.
  */
 
-#include "RosPublisher.h"
+#include "RosComunication.h"
 
 #include "std_msgs/String.h"
 #include "std_msgs/Bool.h"
 
-RosPublisher::RosPublisher()
+RosComunication::RosComunication()
 {
 	hasToQuit = false;
 	enableIsaacPublisher = n.advertise<std_msgs::Bool>("isac_enable", 1000);
 	enableCardPublisher = n.advertise<std_msgs::String>("rfid_enable", 1000);
 	resetRobotPublisher = n.advertise<std_msgs::Bool>("echoes_reset", 1000);
+	rfidCardSubscriber = n.subscribe("rfid_data", 1, &RosComunication::fromRfidCallback, this);
 }
 
-void RosPublisher::run()
+void RosComunication::run()
 {
 	ros::Rate rate(15);
 	while(ros::ok() && !hasToQuit)
@@ -42,28 +43,33 @@ void RosPublisher::run()
 	}
 }
  
-void RosPublisher::quitNow()
+void RosComunication::quitNow()
 {
 	hasToQuit = true;
 }
  
-void RosPublisher::resetRobot()
+void RosComunication::resetRobot()
 {
 	std_msgs::Bool message;
 	message.data = true;
 	enableIsaacPublisher.publish(message);
 }
 
-void RosPublisher::enableRFID(std::string id)
+void RosComunication::enableRFID(std::string id)
 {
 	std_msgs::String message;
 	message.data = id;
 	enableCardPublisher.publish(message);
 }
 
-void RosPublisher::enableIsaac(bool isEnabled)
+void RosComunication::enableIsaac(bool isEnabled)
 {
 	std_msgs::Bool message;
 	message.data = isEnabled;
 	enableIsaacPublisher.publish(message);
+}
+
+void RosComunication::fromRfidCallback(const Echoes::Rfid& message)
+{
+	emit rfidRecieved(message.id);
 }

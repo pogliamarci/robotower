@@ -24,29 +24,30 @@
 #define ROWS 5
 #define COLS 3
 
-
-class RTCard : public QLabel
+class RTCard: public QLabel
 {
-	Q_OBJECT
+Q_OBJECT
 public:
 	RTCard(int number);
 	void setCardStatus(bool cardStatus);
+	int heightForWidth(int w) const;
 private:
 	void setTextWhite();
 };
 
-
-class RTCards : public QVBoxLayout
+class RTCards: public QVBoxLayout
 {
-	Q_OBJECT
+Q_OBJECT
 private:
 	QLabel* label;
 	QGridLayout* cardGrid;
 	std::vector<RTCard*> cardList;
 public:
 	RTCards();
-	virtual int heightForWidth( int w );
 	void setCardStatus(int cardNumber, bool cardStatus);
+private:
+	void setRowsAndColsDim();
+	void addCards();
 };
 
 #endif /* RTCARDS_H_ */

@@ -19,13 +19,16 @@
 #define ROS_PUBLISHER_H
 
 #include "ros/ros.h"
-#include <string>
+#include "Echoes/Rfid.h"
+
 #include <QThread>
 #include <QObject>
 
+#include <string>
+
 using namespace ros;
  
-class RosPublisher : public QThread
+class RosComunication : public QThread
 {
 Q_OBJECT
 
@@ -34,17 +37,20 @@ private:
 	Publisher enableIsaacPublisher;
 	Publisher enableCardPublisher;
 	Publisher resetRobotPublisher;
+	Subscriber rfidCardSubscriber;
 	bool hasToQuit;
 public:
-	RosPublisher();
+	RosComunication();
 	void run();
 	void resetRobot();
 	void enableRFID(std::string id);
 	void enableIsaac(bool isEnabled);
+	void fromRfidCallback(const Echoes::Rfid& message);
 public slots:
 	void quitNow(); // stops the thread when the application is quitting
 signals:
 	void rosQuits(); // triggered if ros::ok() is not true anymore
+	void rfidRecieved(std::string id); //triggered when arrives a RFID tag
 };
 
 #endif
