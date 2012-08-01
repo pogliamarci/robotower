@@ -22,9 +22,11 @@
 #include <QObject>
 #include <QMutex>
 #include <QWaitCondition>
+
 #include <fstream>
 #include <string>
 #include <map>
+#include <queue>
 
 typedef struct rfid_entry
 {
@@ -41,7 +43,9 @@ private:
 	int factoryNumber;
 	int towerNumber;
 	bool isQuitting;
+	int cardRecharge;
 	std::map<std::string, RfidEntry> rfidMap;
+	std::queue<std::string> disabledRfid;
 	QMutex waitConditionMutex;
 	QWaitCondition timeout;
 private:
@@ -72,13 +76,15 @@ private:
 	void initializeRfidConfiguration(std::string configFile);
 	void populateMapWithLine(std::string configLine, int index);
 	void updateGamePoints();
+	void rechargeCard();
 
 public slots:
 	void disableRFID(std::string id);
+	void updateTowers(int factoryNumber, bool destroyedTower);
 	void quitNow();
 	/*
-	void stop(); // stops the update
-	void pause(); //pause the update*/
+	 void stop(); // stops the update
+	 void pause(); //pause the update*/
 signals:
 	void updatedTimeAndPoints(int timeToLive, int score); //emitted at the end of each iteration
 	void updatedRfidStatus(int rfid, bool status); //emitted when RFID status changes

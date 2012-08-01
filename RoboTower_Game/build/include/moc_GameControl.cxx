@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'GameControl.h'
 **
-** Created: Wed Aug 1 17:35:42 2012
+** Created: Wed Aug 1 18:30:46 2012
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.2)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_GameControl[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-       5,   14, // methods
+       6,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -37,7 +37,8 @@ static const uint qt_meta_data_GameControl[] = {
 
  // slots: signature, parameters, type, tag, flags
      113,  110,   12,   12, 0x0a,
-     138,   12,   12,   12, 0x0a,
+     167,  138,   12,   12, 0x0a,
+     190,   12,   12,   12, 0x0a,
 
        0        // eod
 };
@@ -46,7 +47,9 @@ static const char qt_meta_stringdata_GameControl[] = {
     "GameControl\0\0timeToLive,score\0"
     "updatedTimeAndPoints(int,int)\0rfid,status\0"
     "updatedRfidStatus(int,bool)\0endGame()\0"
-    "id\0disableRFID(std::string)\0quitNow()\0"
+    "id\0disableRFID(std::string)\0"
+    "factoryNumber,destroyedTower\0"
+    "updateTowers(int,bool)\0quitNow()\0"
 };
 
 void GameControl::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -59,7 +62,8 @@ void GameControl::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 1: _t->updatedRfidStatus((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2]))); break;
         case 2: _t->endGame(); break;
         case 3: _t->disableRFID((*reinterpret_cast< std::string(*)>(_a[1]))); break;
-        case 4: _t->quitNow(); break;
+        case 4: _t->updateTowers((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2]))); break;
+        case 5: _t->quitNow(); break;
         default: ;
         }
     }
@@ -97,9 +101,9 @@ int GameControl::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 5)
+        if (_id < 6)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 5;
+        _id -= 6;
     }
     return _id;
 }

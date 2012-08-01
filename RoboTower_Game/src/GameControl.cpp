@@ -22,6 +22,7 @@ GameControl::GameControl(int factoryNumber, int towerNumber)
 {
 	timeToLive = gameMaxTime;
 	points = 0;
+	cardRecharge = 0;
 	isQuitting = false;
 	this->factoryNumber = factoryNumber;
 	this->towerNumber = towerNumber;
@@ -31,9 +32,10 @@ GameControl::GameControl(int factoryNumber, int towerNumber)
 void GameControl::disableRFID(std::string id)
 {
 	RfidEntry &entry = rfidMap[id];
-	if(entry.status)
+	if (entry.status)
 	{
 		entry.status = false;
+		disabledRfid.push(id);
 		emit updatedRfidStatus(entry.number, entry.status);
 	}
 }
@@ -67,29 +69,31 @@ void GameControl::populateMapWithLine(std::string configLine, int index)
 	{
 		std::string id = configLine.substr(idindex, actionStartIndex - idindex);
 		id.erase(id.find_last_not_of(" \n\r\t") + 1); // trim trailing whitespace
-		RfidEntry entry = {index, true};
+		RfidEntry entry =
+		{ index, true };
 		rfidMap.insert(std::make_pair(id, entry));
 	}
 }
 
 void GameControl::updateGamePoints()
 {
-	points += towerNumber*towerPoints+factoryNumber*factoryPoints;
+	points += towerNumber * towerPoints + factoryNumber * factoryPoints;
 }
-
 
 void GameControl::run()
 {
-	while(timeToLive > 0 && !isQuitting)
+	while (timeToLive > 0 && !isQuitting)
 	{
 		waitConditionMutex.lock();
 		timeout.wait(&waitConditionMutex, 1000);
 		waitConditionMutex.unlock();
 		updateGamePoints();
 		timeToLive--;
+		rechargeCard();
 		emit updatedTimeAndPoints(timeToLive, points);
 	}
-	if(!isQuitting) emit endGame();
+	if (!isQuitting)
+		emit endGame();
 }
 
 void GameControl::quitNow()
@@ -100,5 +104,28 @@ void GameControl::quitNow()
 	isQuitting = true;
 }
 
+void GameControl::updateTowers(int factoryNumber, bool destroyedTower)
+{
+	this->factoryNumber = factoryNumber;
+	this->towerNumber = destroyedTower ? 0 : 1;
+	if(destroyedTower) emit endGame();
+}
 
+void GameControl::rechargeCard()
+{
+	if (disabledRfid.size() > 0)
+	{
+		int increment = 100 / (30 - 5 * factoryNumber);
+		cardRecharge += increment;
+		if (cardRecharge >= 100)
+		{
+			std::string card = disabledRfid.front();
+			disabledRfid.pop();
+			RfidEntry entry = rfidMap[card];
+			entry.status = true;
+			emit updatedRfidStatus(entry.number, entry.status);
+			cardRecharge = 0;
+		}
+	}
+}
 

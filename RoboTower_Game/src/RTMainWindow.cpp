@@ -94,3 +94,8 @@ void RTMainWindow::updateData(int timeToLive, int score)
 	currentGame->updateTimer(timeToLive);
 	currentGame->updateScore(score);
 }
+
+void RTMainWindow::updateTowers(int factoryNumber, bool destroyedTower)
+{
+	currentGame->updateCounter(destroyedTower?0:1,factoryNumber);
+}

@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'RTMainWindow.h'
 **
-** Created: Wed Aug 1 17:09:29 2012
+** Created: Wed Aug 1 18:30:47 2012
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.2)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_RTMainWindow[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-       2,   14, // methods
+       3,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -31,14 +31,16 @@ static const uint qt_meta_data_RTMainWindow[] = {
        0,       // signalCount
 
  // slots: signature, parameters, type, tag, flags
-      31,   14,   13,   13, 0x0a,
-      63,   51,   13,   13, 0x0a,
+      43,   14,   13,   13, 0x0a,
+      83,   66,   13,   13, 0x0a,
+     115,  103,   13,   13, 0x0a,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_RTMainWindow[] = {
-    "RTMainWindow\0\0timeToLive,score\0"
+    "RTMainWindow\0\0factoryNumber,destroyedTower\0"
+    "updateTowers(int,bool)\0timeToLive,score\0"
     "updateData(int,int)\0card,status\0"
     "updateCardStatus(int,bool)\0"
 };
@@ -49,8 +51,9 @@ void RTMainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         Q_ASSERT(staticMetaObject.cast(_o));
         RTMainWindow *_t = static_cast<RTMainWindow *>(_o);
         switch (_id) {
-        case 0: _t->updateData((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 1: _t->updateCardStatus((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2]))); break;
+        case 0: _t->updateTowers((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2]))); break;
+        case 1: _t->updateData((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 2: _t->updateCardStatus((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2]))); break;
         default: ;
         }
     }
@@ -88,9 +91,9 @@ int RTMainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 2)
+        if (_id < 3)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 2;
+        _id -= 3;
     }
     return _id;
 }

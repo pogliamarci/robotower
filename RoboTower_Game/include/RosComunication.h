@@ -20,6 +20,7 @@
 
 #include "ros/ros.h"
 #include "Echoes/Rfid.h"
+#include "Echoes/Towers.h"
 
 #include <QThread>
 #include <QObject>
@@ -38,6 +39,7 @@ private:
 	Publisher enableCardPublisher;
 	Publisher resetRobotPublisher;
 	Subscriber rfidCardSubscriber;
+	Subscriber towerSubscriber;
 	bool hasToQuit;
 public:
 	RosComunication();
@@ -46,11 +48,13 @@ public:
 	void enableRFID(std::string id);
 	void enableIsaac(bool isEnabled);
 	void fromRfidCallback(const Echoes::Rfid& message);
+	void fromTowersCallback(const Echoes::Towers& message);
 public slots:
 	void quitNow(); // stops the thread when the application is quitting
 signals:
 	void rosQuits(); // triggered if ros::ok() is not true anymore
 	void rfidRecieved(std::string id); //triggered when arrives a RFID tag
+	void towersUpdate(int destroyedFactories, bool isTowerDestroyed);
 };
 
 #endif
