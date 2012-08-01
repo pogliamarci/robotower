@@ -1,8 +1,18 @@
 /*
- * RTCards.cpp
+ * RoboTower, Hi-CoRG based on ROS
  *
- *  Created on: 31/lug/2012
- *      Author: dave
+ * Copyright (C) 2012 Politecnico di Milano
+ * Copyright (C) 2012 Marcello Pogliani, Davide Tateo
+ * Versione 1.0
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation, version 2 of the License.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  */
 
 #include "RTCards.h"
@@ -17,10 +27,25 @@ RTCards::RTCards() :
 	for (int i = 0; i < ROWS * COLS; i++)
 	{
 		RTCard* card = new RTCard(i);
-		cardGrid->addWidget(card,i%ROWS, i/ROWS, 1,1);
+		cardGrid->addWidget(card, i % ROWS, i / ROWS, 1, 1,Qt::AlignCenter);
 		cardList.push_back(card);
 	}
+
+	for (int i = 0; i < ROWS; i++)
+	{
+		cardGrid->setRowMinimumHeight(i, 60);
+		cardGrid->setRowStretch(i, 2);
+	}
+
+	for (int i = 0; i < COLS; i++)
+	{
+		cardGrid->setColumnMinimumWidth(i, 30);
+		cardGrid->setColumnStretch(i, 1);
+	}
+
 	addLayout(cardGrid);
+	setAlignment(Qt::AlignTop);
+	cardGrid->setAlignment(Qt::AlignRight);
 }
 
 void RTCards::setCardStatus(int cardNumber, bool cardStatus)
@@ -36,9 +61,10 @@ void RTCard::setTextWhite()
 	palette.setBrush(QPalette::Active, QPalette::WindowText, brush);
 }
 
-RTCard::RTCard(int number) : QLabel()
+RTCard::RTCard(int number) :
+		QLabel()
 {
-	const int borderWidht =2;
+	const int borderWidht = 2;
 	QString labelText = QString::number(number);
 	setText(labelText);
 	setTextWhite();
@@ -52,5 +78,11 @@ void RTCard::setCardStatus(bool isActive)
 	Pal.setColor(QPalette::Window, color);
 	setPalette(Pal);
 	setAutoFillBackground(true);
+	setMinimumSize(QSize(30,60));
+}
+
+int RTCards::heightForWidth(int w)
+{
+	return 2 * w;
 }
 

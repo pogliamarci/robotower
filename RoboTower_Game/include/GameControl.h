@@ -15,28 +15,44 @@
  * GNU General Public License for more details.
  */
 
-#ifndef RTCURRENTGAMEWIDGET_H_
-#define RTCURRENTGAMEWIDGET_H_
+#ifndef GAMECONTROL_H_
+#define GAMECONTROL_H_
 
-#include <QtGui>
+#include <QThread>
+#include <QObject>
+#include <QTimer>
 
-class RTCurrentGameWidget : public QGroupBox
+#include "Echoes/Rfid.h"
+
+class GameControl :  public QThread
 {
+	Q_OBJECT
 private:
-	QGridLayout* theLayout;
-	QPushButton* pauseBtn;
-	QLCDNumber* currentScore;
-	QLCDNumber* currentTTL;
-	QGroupBox* goalsBox;
-	QGridLayout* innerGoalsLayout;
-	QLabel* towersCnt;
-	QLabel* factoriesCnt;
+	int timeToLive;
+	int points;
+	int factoryNumber;
+	int towerNumber;
+
 public:
-	RTCurrentGameWidget(QWidget* parent = 0);
-	void updateCounter(int towers, int factories);
-	void updateScore(int newScore);
-	void updateTimer(int newTtl);
+	  GameControl();
+	  void fromRfidCallback(const Echoes::Rfid& message);
+	  inline int getTimeToLive()
+	  {
+		  return timeToLive;
+	  }
+	  inline int getPoints()
+	  {
+		  return points;
+	  }
+	  inline int getFactoryNumber()
+	  {
+		  return factoryNumber;
+	  }
+	  inline int getTowerNumber()
+	  {
+		  return towerNumber;
+	  }
 };
 
 
-#endif /* CURRENTGAMEWIDGET_H_ */
+#endif /* GAMECONTROL_H_ */
