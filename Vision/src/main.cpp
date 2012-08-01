@@ -25,56 +25,19 @@
 #include "opencv2/highgui/highgui.hpp"
 
 #include "ImageAnalyzer.h"
+#include "VisionParameters.h"
 
 using namespace std;
 using namespace cv;
 
-class VisionParameters {
-	private:
-		KnnColorClassifier cc;
-		PixelMap pm;
-		ColorDataset cd;
-		ImageAnalyzer analyzer;
-		char* dataset;
-		char* classifier;
-	public:
-		VisionParameters() : analyzer(&cc, &pm, &cd) {
-			/* default file paths */
-			char defaultDataset[] = "DataSet.dts";
-			char defaultClassifier[] = "classifier[5-17].kcc";
-			dataset = defaultDataset;
-			classifier = defaultClassifier;
-		}
-		void buildClassifier() {
-			cd.load(dataset);
-			cout << "----> Color Data set  [OK]" << "caricato file:" << dataset << endl;
-			//Creazione del classificatore colore
-			cc.fast_build(&cd, 5, 17, false);
-			cc.save_matrix(classifier);
-		}
-		void loadClassifier() {
-			cout << "----> No classifier loaded, loading default classifier" << endl;
-			cc.load_matrix(classifier);
-			cout << "----> Classifier loaded  [OK]"<<endl;
-		}
-		Vision::Results startAnalysis(Mat& frame) {
-			return analyzer.analyze(frame);
-		}
-		void setDataset(char* dataset) {
-			this->dataset = dataset;
-		}
-		void setClassifier(char* classifier) {
-			this->classifier = classifier;
-		}
-};
-
 ros::Publisher results_publisher;
-VisionParameters* vision;
+/* The structure containing the parameters needed for the algorithm to analyze the image */
+VisionParameters vision;
 
 void imageAction(Mat& frame)
 {
 	if (frame.empty()) return;
-	results_publisher.publish(vision->startAnalysis(frame));
+	results_publisher.publish(vision.startAnalysis(frame));
 	imshow("SpyKeeView", frame);
 	char c = waitKey(10);
 	if(c == 'c' || c == 27) /* 27 is the ESC character ASCII code */
@@ -109,27 +72,26 @@ int main (int argc, char** argv)
 	{
 		if(strcmp(argv[i],"-h") == 0)
 		{
-		   cout << "Utilizzo:\n"
-				<< "-h\t\t visualizza questo messaggio\n"
-				<< "-l\t\t Carica il file DataSet.dts e genera il file .kcc\n"
-				<< "-L [filename]\t carica il Color Data Set da file e genera il file .kcc\n"
-				<< "-k [filename]\t carica il file .kcc da file\n"
-				<< "-f [filename]\t carica il frame da analizzare da file\n"
-				<< endl;
+			cout 	<< "Usage:" << endl
+					<< "-h\t\t display this message" << endl
+					<< "-l\t\t load the dataset from the default location (DataSet.dts), building the classifier (.kcc file)" << endl
+					<< "-L [filename]\t load the color dataset from the specified file, building the .kcc file" << endl
+					<< "-k [filename]\t load the classifier (.kcc file) from the specified file" << endl
+					<< "-f [filename]\t analyze the image from the specified file" << endl;
 			exit(EXIT_SUCCESS);
 		}
 		else if((strcmp(argv[i], "-l") == 0))
 		{
-			vision->buildClassifier();
+			vision.buildClassifier();
 		}
 		else if(strcmp(argv[i],"-L" ) == 0 && argc > (i+1))
 		{
-			vision->setDataset(argv[++i]);
-			vision->buildClassifier();
+			vision.setDataset(argv[++i]);
+			vision.buildClassifier();
 		}
 		else if((strcmp(argv[i], "-k") == 0) && (argc > (i+1)))
 		{
-			vision->setClassifier(argv[++i]);
+			vision.setClassifier(argv[++i]);
 		}
 		else if((strcmp(argv[i],"-f") == 0) && (argc > (i+1)))
 		{
@@ -138,7 +100,7 @@ int main (int argc, char** argv)
 		}
 	}
 	/* load classifier */
-	vision->loadClassifier();
+	vision.loadClassifier();
 
 	if(from_file)
 	{
@@ -147,6 +109,4 @@ int main (int argc, char** argv)
 
 	/* let's start it all */
 	ros::spin();
-
-	delete vision;
 }
