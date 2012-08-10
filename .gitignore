@@ -81,3 +81,6 @@ Makefile
 .dep/
 msg_gen/
 srv_gen/
+
+# this is a little dirty, but it should do its work ;)
+msg/_*.py
