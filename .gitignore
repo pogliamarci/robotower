@@ -8,8 +8,11 @@
 *.so
 *.a
 # generated {flex, bison} files
-*.tab.h
-*.tab.cpp
+*gram.tab.h
+*gram.tab.cpp
+*flex.cpp
+*flex.h
+
 # Binary files
 Echoes/bin/Echoes
 SpyKee/bin/spykee
@@ -70,12 +73,10 @@ desktop.ini
 # ROS\RoboTower specific #
 ##########################
 CMakeCache.txt
-Echoes/build/
-SpyKee/build/
-SpyKee/CMakeFiles/
-build/CMakeFiles/
-CMakeFiles
+*/build/
+*/bin/
+*/CMakeFiles/
 cmake_install.cmake
 Makefile
 .dep/*
-msg_gen/
+*/msg_gen/
