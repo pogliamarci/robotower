@@ -7,6 +7,9 @@
 *.o
 *.so
 *.a
+# generated {flex, bison} files
+*.tab.h
+*.tab.cpp
 # Binary files
 Echoes/bin/Echoes
 SpyKee/bin/spykee
@@ -16,6 +19,8 @@ LittleEndian/bin/littleendian
 Brian/checker/bin/checker
 Brian/gmbte/bin/gmbte
 Foxtrot/bin/foxtrot
+
+# build files in the Spykee firmware
 FirmwareSpykee/build
 FirmwareSpykee/.dep
 
@@ -53,6 +58,7 @@ Thumbs.db
 desktop.ini
 *~
 *.swp
+# Eclipse metadata
 .directory
 .cproject
 .project
@@ -72,3 +78,4 @@ CMakeFiles
 cmake_install.cmake
 Makefile
 .dep/*
+msg_gen/
