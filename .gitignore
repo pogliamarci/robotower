@@ -73,10 +73,10 @@ desktop.ini
 # ROS\RoboTower specific #
 ##########################
 CMakeCache.txt
-*/build/
-*/bin/
-*/CMakeFiles/
+build/
+bin/
+CMakeFiles/
 cmake_install.cmake
 Makefile
-.dep/*
-*/msg_gen/
+.dep/
+msg_gen/
