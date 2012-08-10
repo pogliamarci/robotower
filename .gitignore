@@ -80,3 +80,4 @@ cmake_install.cmake
 Makefile
 .dep/
 msg_gen/
+srv_gen/
