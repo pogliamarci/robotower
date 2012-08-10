@@ -13,20 +13,6 @@
 *flex.cpp
 *flex.h
 
-# Binary files
-Echoes/bin/Echoes
-SpyKee/bin/spykee
-Vision/bin/vision
-IsAac/bin/isaac
-LittleEndian/bin/littleendian
-Brian/checker/bin/checker
-Brian/gmbte/bin/gmbte
-Foxtrot/bin/foxtrot
-
-# build files in the Spykee firmware
-FirmwareSpykee/build
-FirmwareSpykee/.dep
-
 # Python precompiled files #
 ############################
 *.pyc
@@ -77,7 +63,6 @@ build/
 bin/
 CMakeFiles/
 cmake_install.cmake
-Makefile
 .dep/
 msg_gen/
 srv_gen/

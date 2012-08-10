@@ -1,3 +1,6 @@
+#### Put here the path to ChibiOS sources ###
+CHIBIOS = /home/marcello/chibios/ChibiOS_2.4.2
+
 ##############################################################################
 # Build global options
 # NOTE: Can be overridden externally.
@@ -58,7 +61,6 @@ endif
 PROJECT = ch
 
 # Imported source files and paths
-CHIBIOS = /home/stm32/Workspace/libs/ChibiOS_2.4.1
 include board.mk
 include $(CHIBIOS)/os/hal/platforms/STM32F4xx/platform.mk
 include $(CHIBIOS)/os/hal/hal.mk
