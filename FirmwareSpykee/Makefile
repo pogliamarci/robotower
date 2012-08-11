@@ -1,5 +1,5 @@
 #### Put here the path to ChibiOS sources ###
-CHIBIOS = /home/marcello/chibios/ChibiOS_2.4.2
+CHIBIOS = /opt/ChibiOS/ChibiOS_2.4.2
 
 ##############################################################################
 # Build global options

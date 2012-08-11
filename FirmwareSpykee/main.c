@@ -42,7 +42,8 @@ CircularBuffer circularBuffer;
 Mutex bufferMutex;
 EventSource eventSource;
 
-typedef struct {
+typedef struct
+{
 	icucnt_t north;
 	icucnt_t south;
 	icucnt_t west;
@@ -53,80 +54,119 @@ typedef struct {
 // red leds: PE7 - PE8 - PE9 - PE10
 // yellow leds: PE11 - PE12 - PE13 - PE14
 // green led: PE15
-void setLed(int n, int setOn) {
-	if(n < 0 || n > 8) return; /* ensure the passed led ID is right... */
+void setLed(int n, int setOn)
+{
+	if (n < 0 || n > 8)
+		return; /* ensure the passed led ID is right... */
 	const short firstPort = 7; //using GPIOs from PE7
-	if(setOn) {
+	if (setOn)
+	{
 		palSetPad(IOPORT5, n + firstPort);
-	} else {
+	}
+	else
+	{
 		palClearPad(IOPORT5, n + firstPort);
 	}
 }
 
 /* Led Initialization */
-void resetLed(void) {
+void resetLed(void)
+{
 	const int numLed = 9;
 	int i;
-	for (i = 0; i < numLed; i++) {
+	for (i = 0; i < numLed; i++)
+	{
 		setLed(i, FALSE);
 	}
 }
 
 /* shell command handlers */
-static void cmd_reset(BaseChannel* channel, int argc, char** argv) {
+static void cmd_reset(BaseChannel* channel, int argc, char** argv)
+{
+	(void) channel;
+	(void) argc;
+	(void) argv;
 	chEvtBroadcastFlags(&eventSource, RESET_EVENT_MASK);
 }
 
-static void cmd_status(BaseChannel* channel, int argc, char** argv) {
+static void cmd_status(BaseChannel* channel, int argc, char** argv)
+{
+	(void) channel;
+	(void) argc;
+	(void) argv;
 	chEvtBroadcastFlags(&eventSource, STATUS_EVENT_MASK);
 }
 
-static void cmd_resetled(BaseChannel* channel, int argc, char** argv) {
+static void cmd_resetled(BaseChannel* channel, int argc, char** argv)
+{
+	(void) channel;
+	(void) argc;
+	(void) argv;
 	resetLed();
 }
 
-static void cmd_led(BaseChannel* channel, int argc, char** argv) {
+static void cmd_led(BaseChannel* channel, int argc, char** argv)
+{
+	(void) channel;
 	short offset = 0;
-	if(argc < 3) return;
-	switch(argv[0][0]) {
-		case 'R':
-			offset = 0;
-			break;
-		case 'Y':
-			offset = 4;
-			break;
-		case 'G':
-			offset = 8;
-			break;
+	if (argc < 3)
+		return;
+	switch (argv[0][0])
+	{
+	case 'R':
+		offset = 0;
+		break;
+	case 'Y':
+		offset = 4;
+		break;
+	case 'G':
+		offset = 8;
+		break;
 	}
-	setLed(offset + NUMERIC_CHAR_TO_INT(*argv[1]), NUMERIC_CHAR_TO_INT(*argv[2]));
+	setLed(offset + NUMERIC_CHAR_TO_INT(*argv[1]),
+			NUMERIC_CHAR_TO_INT(*argv[2]));
 }
 
-static void cmd_infrared(BaseChannel* channel, int argc, char** argv) {
-	if(argc ==  1 && argv[0][0] == 'o' && argv[0][1] == 'n') {
+static void cmd_infrared(BaseChannel* channel, int argc, char** argv)
+{
+	(void) channel;
+	if (argc == 1 && argv[0][0] == 'o' && argv[0][1] == 'n')
+	{
 		palSetPad(IOPORT4, GPIOD_IRLED);
-	} else {
+	}
+	else
+	{
 		palClearPad(IOPORT4, GPIOD_IRLED);
 	}
 }
 
 /* shell configuration */
-static const ShellCommand commands[] = { { "reset", cmd_reset }, { "status",
-		cmd_status }, {"led", cmd_led}, {"resetled", cmd_resetled},
-		{"infrared", cmd_infrared}, { NULL, NULL } };
+static const ShellCommand commands[] =
+{
+{ "reset", cmd_reset },
+{ "status", cmd_status },
+{ "led", cmd_led },
+{ "resetled", cmd_resetled },
+{ "infrared", cmd_infrared },
+{ NULL, NULL } };
 
-static const ShellConfig shellConfig = { (BaseChannel*) &SD2, commands };
+static const ShellConfig shellConfig =
+{ (BaseChannel*) &SD2, commands };
 
-void writeStatusToBuffer(int num_factory, int tower_destroyed) {
+void writeStatusToBuffer(int num_factory, int tower_destroyed)
+{
 	char statusMessage[20];
-	chsprintf(statusMessage, "[TOWER] F:%d,T:%d", num_factory, tower_destroyed ? 0 : 1);
+	chsprintf(statusMessage, "[TOWER] F:%d,T:%d", num_factory,
+			tower_destroyed ? 0 : 1);
 	chMtxLock(&bufferMutex);
 	bufferPutString(&circularBuffer, statusMessage);
 	chMtxUnlock();
 }
 
 /* thread that manages gate opener signals */
-static msg_t towerFactoriesThread(void *arg) {
+static msg_t towerFactoriesThread(void *arg)
+{
+	(void) arg;
 	int i;
 	int num_factory = FACTORY_NUMBER;
 	int destroyed[FACTORY_NUMBER];
@@ -138,15 +178,19 @@ static msg_t towerFactoriesThread(void *arg) {
 	/* initialize the event listener */
 	chEvtRegisterMask(&eventSource, &eventListener, 0);
 
-	for (i = 0; i < FACTORY_NUMBER; i++) {
+	for (i = 0; i < FACTORY_NUMBER; i++)
+	{
 		destroyed[i] = FALSE;
 	}
 
 	/* loop apricancelli */
-	while (TRUE) {
+	while (TRUE)
+	{
 		/* control if a factory has been destroyed */
-		for (i = 0; i < FACTORY_NUMBER; i++) {
-			if ((palReadPad(IOPORT4, i) == 0) && !destroyed[i]) {
+		for (i = 0; i < FACTORY_NUMBER; i++)
+		{
+			if ((palReadPad(IOPORT4, i) == 0) && !destroyed[i])
+			{
 				destroyed[i] = TRUE;
 				num_factory--;
 				writeStatusToBuffer(num_factory, tower_destroyed);
@@ -154,21 +198,25 @@ static msg_t towerFactoriesThread(void *arg) {
 		}
 
 		/* control if the tower has been destroyed */
-		if ((palReadPad(IOPORT4, 3) == 0) && !tower_destroyed) {
+		if ((palReadPad(IOPORT4, 3) == 0) && !tower_destroyed)
+		{
 			tower_destroyed = TRUE;
 			writeStatusToBuffer(num_factory, tower_destroyed);
 		}
 
 		/* event management, for now timeout has been set to 500 ms */
 		eventiArrivati = chEvtWaitAnyTimeout(ALL_EVENTS, 500);
-		if (eventiArrivati & RESET_EVENT_MASK) { /* reset event */
-			for (i = 0; i < FACTORY_NUMBER; i++) {
+		if (eventiArrivati & RESET_EVENT_MASK)
+		{ /* reset event */
+			for (i = 0; i < FACTORY_NUMBER; i++)
+			{
 				destroyed[i] = FALSE;
 			}
 			tower_destroyed = FALSE;
 			num_factory = FACTORY_NUMBER;
 		}
-		if (eventiArrivati & STATUS_EVENT_MASK) { /* status event */
+		if (eventiArrivati & STATUS_EVENT_MASK)
+		{ /* status event */
 			writeStatusToBuffer(num_factory, tower_destroyed);
 		}
 	}
@@ -176,8 +224,11 @@ static msg_t towerFactoriesThread(void *arg) {
 }
 
 /* Thread that blink sequentially the four integrated leds of the STM32F4Discovery */
-static msg_t blinkerThread(void *arg) {
-	while (TRUE) {
+static msg_t blinkerThread(void *arg)
+{
+	(void) arg;
+	while (TRUE)
+	{
 		palSetPad(IOPORT4, GPIOD_LED3);
 		palClearPad(IOPORT4, GPIOD_LED4);
 		chThdSleepMilliseconds(500);
@@ -196,29 +247,39 @@ static msg_t blinkerThread(void *arg) {
 
 /* ICU callbacks and data to be used with sonars */
 
-SonarData sonar_data = {0,0,0,0};
+SonarData sonar_data =
+{ 0, 0, 0, 0 };
 
-static void icuwidthcb(ICUDriver *icup) {
+static void icuwidthcb(ICUDriver *icup)
+{
 	/* compute the measured distance */
 	const int scaleFactor = 5787; //5,7874 us/mm
 	icucnt_t width = icuGetWidthI(icup) * 1000 / scaleFactor;
 	/* set the right variable */
-	if (icup == &ICUD1) sonar_data.north = width;
-	else if (icup == &ICUD3) sonar_data.south = width;
-	else if (icup == &ICUD5) sonar_data.west = width;
-	else if (icup == &ICUD8) sonar_data.east = width;
+	if (icup == &ICUD1)
+		sonar_data.north = width;
+	else if (icup == &ICUD3)
+		sonar_data.south = width;
+	else if (icup == &ICUD5)
+		sonar_data.west = width;
+	else if (icup == &ICUD8)
+		sonar_data.east = width;
 }
 
-static void icuperiodcb(ICUDriver *icup) {
+static void icuperiodcb(ICUDriver *icup)
+{
+	(void) icup;
 	// does absolutely nothing!!!
 }
 
 /* Thread used for read data from sonar */
-static msg_t sonarThread(void *arg) {
+static msg_t sonarThread(void *arg)
+{
+	(void) arg;
 	char buf[40];
 	const int frequenzaTimer = 1000000; //T = 1uS // ???
-	ICUConfig icucfg = { ICU_INPUT_ACTIVE_HIGH, frequenzaTimer, icuwidthcb,
-			icuperiodcb };
+	ICUConfig icucfg =
+	{ ICU_INPUT_ACTIVE_HIGH, frequenzaTimer, icuwidthcb, icuperiodcb };
 	icuStart(&ICUD1, &icucfg); //PA8, ICDU1
 	icuStart(&ICUD3, &icucfg); //PB4, ICDU3
 	icuStart(&ICUD5, &icucfg); //PA0, ICDU5
@@ -228,9 +289,10 @@ static msg_t sonarThread(void *arg) {
 	icuEnable(&ICUD3);
 	icuEnable(&ICUD5);
 	icuEnable(&ICUD8);
-	while (TRUE) {
-		chsprintf(buf, "[SONAR] N:%d,S:%d,W:%d,E:%d",
-				sonar_data.north, sonar_data.south, sonar_data.west, sonar_data.east);
+	while (TRUE)
+	{
+		chsprintf(buf, "[SONAR] N:%d,S:%d,W:%d,E:%d", sonar_data.north,
+				sonar_data.south, sonar_data.west, sonar_data.east);
 		/* let's "consume" the data in the buffer... */
 		sonar_data.north = 0;
 		sonar_data.south = 0;
@@ -246,18 +308,21 @@ static msg_t sonarThread(void *arg) {
 }
 
 /* Thread used to manage rfid Reader*/
-static msg_t rfidThread(void *arg) {
+static msg_t rfidThread(void *arg)
+{
+	(void) arg;
 	const int rfidMessageSize = 16;
 	const int rfidBitrate = 9600;
 
-	SerialConfig config = { rfidBitrate, 0, USART_CR2_STOP1_BITS | USART_CR2_LINEN, 0 };
+	SerialConfig config =
+	{ rfidBitrate, 0, USART_CR2_STOP1_BITS | USART_CR2_LINEN, 0 };
 	char buf[rfidMessageSize + 1];
 	char buf2[rfidMessageSize + 9];
-	int k;
 
 	sdStart(&SD3, &config);
-	while (TRUE) {
-		sdRead(&SD3, buf, sizeof(buf)-1);
+	while (TRUE)
+	{
+		sdRead(&SD3, (uint8_t*) buf, sizeof(buf)-1);
 		/* Specification of the ID-12 output data format (ASCII):
 		 * STX (0x02) | DATA (10 ASCII chars) | CHECKSUM (2 ASCII) | CR | LF | ETX (0x03)
 		 * We transmit from here only the data and the checksum. The checksum is not checked
@@ -276,23 +341,28 @@ static msg_t rfidThread(void *arg) {
 }
 
 /* create and starts the shell (thread waiting for user commands) */
-void shellInitControl(Thread** shell) {
-	if (!*shell) {
+void shellInitControl(Thread** shell)
+{
+	if (!*shell)
+	{
 		*shell = shellCreate(&shellConfig, 1024, NORMALPRIO);
-	} else if (chThdTerminated(*shell)) {
+	}
+	else if (chThdTerminated(*shell))
+	{
 		*shell = NULL;
 	}
 }
 
-int main(void) {
+int main(void)
+{
 	Thread *shellTp = NULL;
 	Thread *apricancelliTp;
 	Thread *blinkerTp;
 	Thread *sonarTp;
 	Thread *rfidTp;
 
-	SerialConfig sd2Config = { SERIAL_OUT_BITRATE, 0, USART_CR2_STOP1_BITS
-			| USART_CR2_LINEN, 0 };
+	SerialConfig sd2Config =
+	{ SERIAL_OUT_BITRATE, 0, USART_CR2_STOP1_BITS | USART_CR2_LINEN, 0 };
 
 	/* hardware initialization */
 	halInit();
@@ -309,24 +379,38 @@ int main(void) {
 
 	/* led initialization*/
 	resetLed(); /* reset the leds on the robot shoulders */
-	palClearPad(IOPORT4, GPIOD_IRLED); /* ensure the IR led are turned off */
+	palClearPad(IOPORT4, GPIOD_IRLED);
+	/* ensure the IR led are turned off */
 
 	/* thread initialization */
 	apricancelliTp = chThdCreateStatic(apricancelliWorkingArea,
 			sizeof(apricancelliWorkingArea), NORMALPRIO, towerFactoriesThread,
-			NULL);
+			NULL );
 	blinkerTp = chThdCreateStatic(blinkerWorkingArea,
-			sizeof(blinkerWorkingArea), NORMALPRIO, blinkerThread, NULL);
+			sizeof(blinkerWorkingArea), NORMALPRIO, blinkerThread, NULL );
 	sonarTp = chThdCreateStatic(sonarWorkingArea, sizeof(sonarWorkingArea),
-			NORMALPRIO, sonarThread, NULL);
+			NORMALPRIO, sonarThread, NULL );
 	rfidTp = chThdCreateStatic(rfidWorkingArea, sizeof(rfidWorkingArea),
-			NORMALPRIO, rfidThread, NULL);
+			NORMALPRIO, rfidThread, NULL );
 	shellInit();
-	chprintf((BaseChannel*)&SD2, "The firmware is ready!\n\r");
-	while (TRUE) {
+
+	/* Firmware start message*/
+	chprintf((BaseChannel*) &SD2, "The firmware is ready!\n\r");
+
+	/* Useless code to avoid warnings*/
+	(void) apricancelliTp;
+	(void) blinkerTp;
+	(void) sonarTp;
+	(void) rfidTp;
+	/* end of useless code */
+
+	/* main application loop. Ensures that the shell is alive*/
+	while (TRUE)
+	{
 		shellInitControl(&shellTp);
 		chMtxLock(&bufferMutex);
-		while (!bufferIsEmpty(&circularBuffer)) {
+		while (!bufferIsEmpty(&circularBuffer))
+		{
 			chprintf((BaseChannel*) &SD2, "%c", bufferRemove(&circularBuffer));
 		}
 		chMtxUnlock();

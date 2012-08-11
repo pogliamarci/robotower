@@ -66,6 +66,8 @@ cmake_install.cmake
 .dep/
 msg_gen/
 srv_gen/
+setup.sh
 
 # this is a little dirty, but it should do its work ;)
-msg/_*.py
+*/*/*/msg/
+*/*/*/srv/
