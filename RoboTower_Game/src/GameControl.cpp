@@ -155,12 +155,14 @@ void GameControl::startGame()
 		waitConditionMutex.lock();
 		timeout.wakeAll();
 		waitConditionMutex.unlock();
+		emit robotIsEnabled(true);
 	}
 }
 
 void GameControl::stopGame()
 {
 	status = STOPPED;
+	emit robotIsEnabled(false);
 }
 
 void GameControl::togglePause()
@@ -171,8 +173,13 @@ void GameControl::togglePause()
 		waitConditionMutex.lock();
 		timeout.wakeAll();
 		waitConditionMutex.unlock();
+		emit robotIsEnabled(true);
 	}
-	else if(status==STARTED) status = PAUSED;
+	else if(status==STARTED)
+	{
+		status = PAUSED;
+		emit robotIsEnabled(false);
+	}
 }
 
 void GameControl::resetGame()

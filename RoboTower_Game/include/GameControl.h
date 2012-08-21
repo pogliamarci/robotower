@@ -101,6 +101,7 @@ signals:
 	void hasToResetRobot(); //emitted when the robot should be resetted
 	void endGame(int won,int lost,int score); //emitted when the game ends
 	void towersUpdate(int factoriesNumber, int towersNumber);
+	void robotIsEnabled(bool enabled);
 };
 
 #endif /* GAMECONTROL_H_ */

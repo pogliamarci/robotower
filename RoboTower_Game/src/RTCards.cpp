@@ -45,7 +45,7 @@ void RTCards::addCards()
 RTCards::RTCards() :
 		QVBoxLayout()
 {
-	label = new QLabel("Carte Attive");
+	label = new QLabel("Active Cards");
 	addWidget(label);
 	cardGrid = new QGridLayout();
 	addCards();
