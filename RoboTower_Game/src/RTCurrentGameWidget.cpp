@@ -19,8 +19,10 @@
 
 RTCurrentGameWidget::RTCurrentGameWidget(QWidget* parent) : QGroupBox(parent)
 {
+	isPaused = false;
 	theLayout = new QGridLayout();
 	pauseBtn = new QPushButton("Pause");
+	pauseBtn->setEnabled(false);
 	currentScore = new QLCDNumber();
 	currentTTL = new QLCDNumber();
 	goalsBox = new QGroupBox();
@@ -46,7 +48,28 @@ RTCurrentGameWidget::RTCurrentGameWidget(QWidget* parent) : QGroupBox(parent)
 	theLayout->addWidget(currentTTL, 3, 3, 2, 2);
 	setLayout(theLayout);
 
-	QObject::connect(pauseBtn, SIGNAL(clicked()), this, SIGNAL(togglePause()));
+	QObject::connect(pauseBtn, SIGNAL(clicked()), this, SLOT(onPauseClick()));
+}
+
+void RTCurrentGameWidget::setPauseEnabled(bool isPauseEnabled)
+{
+	pauseBtn->setEnabled(isPauseEnabled);
+	if(isPauseEnabled) {
+		pauseBtn->setText("Pause");
+		isPaused = false;
+	}
+}
+
+void RTCurrentGameWidget::onPauseClick()
+{
+	if(isPaused){
+		pauseBtn->setText("Pause");
+		isPaused = false;
+	} else {
+		pauseBtn->setText("Resume");
+		isPaused = true;
+	}
+	emit togglePause();
 }
 
 void RTCurrentGameWidget::updateCounter(int towers, int factories)

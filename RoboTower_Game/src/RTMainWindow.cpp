@@ -33,6 +33,7 @@ void RTMainWindow::setupButtons()
 	stopBtn = new QPushButton("Stop");
 	btnLayout->addWidget(startBtn);
 	btnLayout->addWidget(stopBtn);
+	stopBtn->setEnabled(false);
 }
 
 void RTMainWindow::setupStats()
@@ -82,10 +83,26 @@ RTMainWindow::RTMainWindow(QWidget* parent) :
 	setupToolbar();
 	setupLayout();
 	setWindowTitle(QString("RoboTower GUI"));
-	QObject::connect(startBtn, SIGNAL(clicked()), this, SIGNAL(start()));
-	QObject::connect(stopBtn, SIGNAL(clicked()), this, SIGNAL(stop()));
+	QObject::connect(startBtn, SIGNAL(clicked()), this, SLOT(startOnClick()));//(start()));
+	QObject::connect(stopBtn, SIGNAL(clicked()), this, SLOT(stopOnClick()));//()));
 	QObject::connect(newGameAction, SIGNAL(triggered()), this, SIGNAL(newGame()));
 	QObject::connect(currentGame, SIGNAL(togglePause()), this, SIGNAL(togglePause()));
+}
+
+void RTMainWindow::startOnClick()
+{
+	emit start();
+	currentGame->setPauseEnabled(true);
+	startBtn->setEnabled(false);
+	stopBtn->setEnabled(true);
+}
+
+void RTMainWindow::stopOnClick()
+{
+	emit stop();
+	currentGame->setPauseEnabled(false);
+	startBtn->setEnabled(true);
+	stopBtn->setEnabled(false);
 }
 
 void RTMainWindow::updateCardStatus(int cardNumber, bool status)

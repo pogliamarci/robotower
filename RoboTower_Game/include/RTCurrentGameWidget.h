@@ -32,11 +32,15 @@ private:
 	QGridLayout* innerGoalsLayout;
 	QLabel* towersCnt;
 	QLabel* factoriesCnt;
+	bool isPaused;
 public:
 	RTCurrentGameWidget(QWidget* parent = 0);
 	void updateCounter(int towers, int factories);
 	void updateScore(int newScore);
 	void updateTimer(int newTtl);
+	void setPauseEnabled(bool isPauseEnabled);
+private slots:
+	void onPauseClick();
 signals:
 	void togglePause();
 };

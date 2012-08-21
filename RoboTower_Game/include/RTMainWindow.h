@@ -57,6 +57,9 @@ private:
 	void setupStats();
 	void setupToolbar();
 	void setupLayout();
+private slots:
+	void startOnClick();
+	void stopOnClick();
 signals:
 	void start();
 	void stop();
