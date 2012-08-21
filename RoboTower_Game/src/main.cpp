@@ -46,6 +46,7 @@ int main(int argc, char **argv)
 	QObject::connect(&gameControl, SIGNAL(updatedRfidStatus(int, bool)), &mainWindow, SLOT(updateCardStatus(int,bool)));
 	QObject::connect(&rosPublisher, SIGNAL(towersUpdate(int, bool)), &gameControl, SLOT(updateTowers(int, bool)));
 	QObject::connect(&gameControl, SIGNAL(towersUpdate(int, int)), &mainWindow, SLOT(updateTowers(int, int)));
+	QObject::connect(&gameControl, SIGNAL(endGame(int,int,int)), &mainWindow, SLOT(updateHistory(int,int,int)));
 
 	QObject::connect(&mainWindow, SIGNAL(start()), &gameControl, SLOT(startGame()));
 	QObject::connect(&mainWindow, SIGNAL(stop()), &gameControl, SLOT(stopGame()));
