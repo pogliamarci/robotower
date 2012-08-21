@@ -53,7 +53,7 @@ void RosComunication::resetRobot()
 {
 	std_msgs::Bool message;
 	message.data = true;
-	enableIsaacPublisher.publish(message);
+	resetRobotPublisher.publish(message);
 }
 
 void RosComunication::enableRFID(std::string id)
