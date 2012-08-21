@@ -57,9 +57,11 @@ private:
 	void setupStats();
 	void setupToolbar();
 	void setupLayout();
+	void setButtonStatus(bool isRunning);
 private slots:
 	void startOnClick();
 	void stopOnClick();
+	void newGameClicked();
 signals:
 	void start();
 	void stop();

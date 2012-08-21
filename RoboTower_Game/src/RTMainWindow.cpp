@@ -85,24 +85,33 @@ RTMainWindow::RTMainWindow(QWidget* parent) :
 	setWindowTitle(QString("RoboTower GUI"));
 	QObject::connect(startBtn, SIGNAL(clicked()), this, SLOT(startOnClick()));//(start()));
 	QObject::connect(stopBtn, SIGNAL(clicked()), this, SLOT(stopOnClick()));//()));
-	QObject::connect(newGameAction, SIGNAL(triggered()), this, SIGNAL(newGame()));
+	QObject::connect(newGameAction, SIGNAL(triggered()), this, SLOT(newGameClicked()));
 	QObject::connect(currentGame, SIGNAL(togglePause()), this, SIGNAL(togglePause()));
 }
 
 void RTMainWindow::startOnClick()
 {
+	setButtonStatus(true);
 	emit start();
-	currentGame->setPauseEnabled(true);
-	startBtn->setEnabled(false);
-	stopBtn->setEnabled(true);
 }
 
 void RTMainWindow::stopOnClick()
 {
+	setButtonStatus(false);
 	emit stop();
-	currentGame->setPauseEnabled(false);
-	startBtn->setEnabled(true);
-	stopBtn->setEnabled(false);
+}
+
+void RTMainWindow::newGameClicked()
+{
+	setButtonStatus(false);
+	emit newGame();
+}
+
+void RTMainWindow::setButtonStatus(bool isRunning)
+{
+	currentGame->setPauseEnabled(isRunning);
+	startBtn->setEnabled(!isRunning);
+	stopBtn->setEnabled(isRunning);
 }
 
 void RTMainWindow::updateCardStatus(int cardNumber, bool status)
@@ -123,6 +132,7 @@ void RTMainWindow::updateTowers(int factoryNumber, int towersNumber)
 
 void RTMainWindow::updateHistory(int won, int lost, int score)
 {
+	setButtonStatus(false);
 	statWon->setText(QString::number(won));
 	statLost->setText(QString::number(lost));
 	statTotalScore->setText(QString::number(score));
