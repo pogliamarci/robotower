@@ -48,6 +48,7 @@ int main(int argc, char **argv)
 	QObject::connect(&gameControl, SIGNAL(towersUpdate(int, int)), &mainWindow, SLOT(updateTowers(int, int)));
 	QObject::connect(&gameControl, SIGNAL(endGame(int,int,int)), &mainWindow, SLOT(updateHistory(int,int,int)));
 	QObject::connect(&gameControl, SIGNAL(robotIsEnabled(bool)), &rosPublisher, SLOT(enableIsaac(bool)));
+	QObject::connect(&gameControl, SIGNAL(rfidEnableNotification(std::string)), &rosPublisher, SLOT(enableRFID(std::string)));
 
 	QObject::connect(&mainWindow, SIGNAL(start()), &gameControl, SLOT(startGame()));
 	QObject::connect(&mainWindow, SIGNAL(stop()), &gameControl, SLOT(stopGame()));

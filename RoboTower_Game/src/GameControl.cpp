@@ -42,6 +42,18 @@ void GameControl::disableRFID(std::string id)
 	}
 }
 
+void GameControl::resetRFID()
+{
+	while(!disabledRfid.empty())
+	{
+		std::string rfid = disabledRfid.front();
+		disabledRfid.pop();
+		rfidMap[rfid].status = true;
+		emit updatedRfidStatus(rfidMap[rfid].number, rfidMap[rfid].status);
+		emit rfidEnableNotification(rfid);
+	}
+}
+
 void GameControl::initializeRfidConfiguration(std::string configFile)
 {
 	std::fstream config;
@@ -196,6 +208,7 @@ void GameControl::resetRound()
 	cardRecharge = 0;
 	emit updatedTimeAndPoints(timeToLive, score);
 	emit towersUpdate(factoryNumber, towerNumber);
+	emit hasToResetRobot();
 }
 
 GameControl::~GameControl()
