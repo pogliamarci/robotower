@@ -100,7 +100,7 @@ void GameControl::run()
 	{
 		while(status != STARTED && !isQuitting)
 		{
-			if(status==STOPPED) resetRound();
+			if(status == STOPPED) resetRound();
 			waitConditionMutex.lock();
 			timeout.wait(&waitConditionMutex);
 			waitConditionMutex.unlock();
@@ -173,6 +173,7 @@ void GameControl::startGame()
 
 void GameControl::stopGame()
 {
+	if(status == PAUSED) resetRound(); // FIXME
 	status = STOPPED;
 	emit robotIsEnabled(false);
 }
