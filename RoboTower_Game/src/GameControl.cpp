@@ -21,12 +21,13 @@
 GameControl::GameControl(int factoryNumber, int towerNumber)
 {
 	timeToLive = gameMaxTime;
-	points = 0;
+	score = 0;
 	cardRecharge = 0;
 	isQuitting = false;
 	status = STOPPED;
 	this->factoryNumber = factoryNumber;
 	this->towerNumber = towerNumber;
+	history = new GameHistory();
 	initializeRfidConfiguration("../../rfidconfig.txt");
 }
 
@@ -78,7 +79,7 @@ void GameControl::populateMapWithLine(std::string configLine, int index)
 
 void GameControl::updateGamePoints()
 {
-	points += towerNumber * towerPoints + factoryNumber * factoryPoints;
+	score += towerNumber * towerPoints + factoryNumber * factoryPoints;
 }
 
 void GameControl::run()
@@ -99,7 +100,7 @@ void GameControl::run()
 			updateGamePoints();
 			timeToLive--;
 			rechargeCard();
-			emit updatedTimeAndPoints(timeToLive, points);
+			emit updatedTimeAndPoints(timeToLive, score);
 		}
 		if(timeToLive <= 0)
 		{
@@ -121,7 +122,12 @@ void GameControl::updateTowers(int factoryNumber, bool destroyedTower)
 {
 	this->factoryNumber = factoryNumber;
 	this->towerNumber = destroyedTower ? 0 : 1;
-	if(destroyedTower) emit endGame();
+	if(destroyedTower)
+	{
+		history->addLost();
+		history->addScore(score);
+		emit endGame();
+	}
 }
 
 void GameControl::rechargeCard()
@@ -174,13 +180,18 @@ void GameControl::togglePause()
 void GameControl::resetGame()
 {
 	stopGame();
-	// FIXME resettare statistiche
+	delete history;
+	history = new GameHistory();
 }
 
 void GameControl::resetRound()
 {
 	timeToLive = gameMaxTime;
-	points = 0;
+	score = 0;
 	cardRecharge = 0;
-	// FIXME reset factory and towers
+}
+
+GameControl::~GameControl()
+{
+	delete history;
 }

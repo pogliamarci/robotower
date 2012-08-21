@@ -28,6 +28,8 @@
 #include <map>
 #include <queue>
 
+#include "GameHistory.h"
+
 typedef struct rfid_entry
 {
 	int number;
@@ -41,7 +43,7 @@ class GameControl: public QThread
 Q_OBJECT
 private:
 	int timeToLive;
-	int points;
+	int score;
 	int factoryNumber;
 	int towerNumber;
 	bool isQuitting;
@@ -51,6 +53,7 @@ private:
 	QMutex waitConditionMutex;
 	QWaitCondition timeout;
 	GameStatus status;
+	GameHistory* history;
 private:
 	static const int gameMaxTime = 300;
 	static const int towerPoints = 100;
@@ -58,6 +61,7 @@ private:
 
 public:
 	GameControl(int factoryNumber, int towerNumber);
+	~GameControl();
 	void run();
 	inline int getTimeToLive()
 	{
@@ -65,7 +69,7 @@ public:
 	}
 	inline int getPoints()
 	{
-		return points;
+		return score;
 	}
 	inline int getFactoryNumber()
 	{
@@ -94,6 +98,7 @@ public slots:
 signals:
 	void updatedTimeAndPoints(int timeToLive, int score); //emitted at the end of each iteration
 	void updatedRfidStatus(int rfid, bool status); //emitted when RFID status changes
+	void hasToResetRobot(); //emitted when the robot should be resetted
 	void endGame(); //emitted when the game ends
 };
 
