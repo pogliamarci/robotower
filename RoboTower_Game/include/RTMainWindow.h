@@ -51,6 +51,7 @@ public slots:
 	void updateTowers(int factoryNumber, int towersNumber); //Updates tower counter
 	void updateData(int timeToLive, int score); //Updates time to live and score
 	void updateCardStatus(int card, bool status); //Updates Rfid status
+	void updateHistory(int won, int lost, int score);
 private:
 	void setupButtons();
 	void setupStats();

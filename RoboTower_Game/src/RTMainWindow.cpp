@@ -103,3 +103,10 @@ void RTMainWindow::updateTowers(int factoryNumber, int towersNumber)
 {
 	currentGame->updateCounter(towersNumber, factoryNumber);
 }
+
+void RTMainWindow::updateHistory(int won, int lost, int score)
+{
+	statWon->setText(QString::number(won));
+	statLost->setText(QString::number(lost));
+	statTotalScore->setText(QString::number(score));
+}

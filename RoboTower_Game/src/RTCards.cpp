@@ -71,7 +71,7 @@ RTCard::RTCard(int number) :
 		QLabel()
 {
 	const int borderWidht = 2;
-	QString labelText = QString::number(number);
+	QString labelText = QString::number(number+1);
 	setText(labelText);
 	setTextWhite();
 	setFrameStyle(borderWidht);
