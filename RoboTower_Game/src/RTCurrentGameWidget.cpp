@@ -46,6 +46,7 @@ RTCurrentGameWidget::RTCurrentGameWidget(QWidget* parent) : QGroupBox(parent)
 	theLayout->addWidget(currentTTL, 3, 3, 2, 2);
 	setLayout(theLayout);
 
+	QObject::connect(pauseBtn, SIGNAL(clicked()), this, SIGNAL(togglePause()));
 }
 
 void RTCurrentGameWidget::updateCounter(int towers, int factories)

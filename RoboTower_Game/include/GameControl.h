@@ -34,6 +34,8 @@ typedef struct rfid_entry
 	int status;
 } RfidEntry;
 
+enum GameStatus {STARTED, STOPPED, PAUSED};
+
 class GameControl: public QThread
 {
 Q_OBJECT
@@ -48,6 +50,7 @@ private:
 	std::queue<std::string> disabledRfid;
 	QMutex waitConditionMutex;
 	QWaitCondition timeout;
+	GameStatus status;
 private:
 	static const int gameMaxTime = 300;
 	static const int towerPoints = 100;
@@ -77,14 +80,17 @@ private:
 	void populateMapWithLine(std::string configLine, int index);
 	void updateGamePoints();
 	void rechargeCard();
+	void resetRound();
 
 public slots:
 	void disableRFID(std::string id);
 	void updateTowers(int factoryNumber, bool destroyedTower);
 	void quitNow();
-	/*
-	 void stop(); // stops the update
-	 void pause(); //pause the update*/
+
+	void startGame();
+	void stopGame();
+	void togglePause();
+	void resetGame();
 signals:
 	void updatedTimeAndPoints(int timeToLive, int score); //emitted at the end of each iteration
 	void updatedRfidStatus(int rfid, bool status); //emitted when RFID status changes

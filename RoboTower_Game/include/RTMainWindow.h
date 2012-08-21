@@ -56,6 +56,11 @@ private:
 	void setupStats();
 	void setupToolbar();
 	void setupLayout();
+signals:
+	void start();
+	void stop();
+	void togglePause();
+	void newGame();
 };
 
 #endif /* MAINWINDOW_H_ */

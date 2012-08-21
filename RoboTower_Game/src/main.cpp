@@ -47,6 +47,11 @@ int main(int argc, char **argv)
 	QObject::connect(&rosPublisher, SIGNAL(towersUpdate(int, bool)), &gameControl, SLOT(updateTowers(int, bool)));
 	QObject::connect(&rosPublisher, SIGNAL(towersUpdate(int, bool)), &mainWindow, SLOT(updateTowers(int, bool)));
 
+	QObject::connect(&mainWindow, SIGNAL(start()), &gameControl, SLOT(startGame()));
+	QObject::connect(&mainWindow, SIGNAL(stop()), &gameControl, SLOT(stopGame()));
+	QObject::connect(&mainWindow, SIGNAL(togglePause()), &gameControl, SLOT(togglePause()));
+	QObject::connect(&mainWindow, SIGNAL(newGame()), &gameControl, SLOT(resetGame()));
+
 	mainWindow.show();
 	return app.exec();
 } 

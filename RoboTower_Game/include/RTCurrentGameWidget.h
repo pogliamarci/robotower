@@ -37,6 +37,8 @@ public:
 	void updateCounter(int towers, int factories);
 	void updateScore(int newScore);
 	void updateTimer(int newTtl);
+signals:
+	void togglePause();
 };
 
 

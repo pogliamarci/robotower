@@ -47,10 +47,10 @@ void RTMainWindow::setupStats()
 
 	statsLayout->addWidget(new QLabel("Won matches: "), 1, 1);
 	statsLayout->addWidget(statWon, 1, 2);
-	statsLayout->addWidget(new QLabel("Total score: "), 2, 1);
-	statsLayout->addWidget(statTotalScore, 2, 2);
-	statsLayout->addWidget(new QLabel("Lost matches: "), 3, 1);
-	statsLayout->addWidget(statLost, 3, 2);
+	statsLayout->addWidget(new QLabel("Lost matches: "), 2, 1);
+	statsLayout->addWidget(statLost, 2, 2);
+	statsLayout->addWidget(new QLabel("Total score: "), 3, 1);
+	statsLayout->addWidget(statTotalScore, 3, 2);
 }
 
 void RTMainWindow::setupLayout()
@@ -82,6 +82,10 @@ RTMainWindow::RTMainWindow(QWidget* parent) :
 	setupToolbar();
 	setupLayout();
 	setWindowTitle(QString("RoboTower GUI"));
+	QObject::connect(startBtn, SIGNAL(clicked()), this, SIGNAL(start()));
+	QObject::connect(stopBtn, SIGNAL(clicked()), this, SIGNAL(stop()));
+	QObject::connect(newGameAction, SIGNAL(triggered()), this, SIGNAL(newGame()));
+	QObject::connect(currentGame, SIGNAL(togglePause()), this, SIGNAL(togglePause()));
 }
 
 void RTMainWindow::updateCardStatus(int cardNumber, bool status)

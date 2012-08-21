@@ -24,6 +24,7 @@ GameControl::GameControl(int factoryNumber, int towerNumber)
 	points = 0;
 	cardRecharge = 0;
 	isQuitting = false;
+	status = STOPPED;
 	this->factoryNumber = factoryNumber;
 	this->towerNumber = towerNumber;
 	initializeRfidConfiguration("../../rfidconfig.txt");
@@ -82,18 +83,30 @@ void GameControl::updateGamePoints()
 
 void GameControl::run()
 {
-	while (timeToLive > 0 && !isQuitting)
+	while(!isQuitting)
 	{
-		waitConditionMutex.lock();
-		timeout.wait(&waitConditionMutex, 1000);
-		waitConditionMutex.unlock();
-		updateGamePoints();
-		timeToLive--;
-		rechargeCard();
-		emit updatedTimeAndPoints(timeToLive, points);
+		while(status != STARTED && !isQuitting)
+		{
+			waitConditionMutex.lock();
+			timeout.wait(&waitConditionMutex);
+			waitConditionMutex.unlock();
+		}
+		if (timeToLive > 0 && !isQuitting)
+		{
+			waitConditionMutex.lock();
+			timeout.wait(&waitConditionMutex, 1000);
+			waitConditionMutex.unlock();
+			updateGamePoints();
+			timeToLive--;
+			rechargeCard();
+			emit updatedTimeAndPoints(timeToLive, points);
+		}
+		if(timeToLive <= 0)
+		{
+			status = STOPPED;
+			emit endGame();
+		}
 	}
-	if (!isQuitting)
-		emit endGame();
 }
 
 void GameControl::quitNow()
@@ -129,3 +142,45 @@ void GameControl::rechargeCard()
 	}
 }
 
+void GameControl::startGame()
+{
+	if(status == STOPPED)
+	{
+		resetRound();
+		status = STARTED;
+		waitConditionMutex.lock();
+		timeout.wakeAll();
+		waitConditionMutex.unlock();
+	}
+}
+
+void GameControl::stopGame()
+{
+	status = STOPPED;
+}
+
+void GameControl::togglePause()
+{
+	if(status==PAUSED)
+	{
+		status = STARTED;
+		waitConditionMutex.lock();
+		timeout.wakeAll();
+		waitConditionMutex.unlock();
+	}
+	else if(status==STARTED) status = PAUSED;
+}
+
+void GameControl::resetGame()
+{
+	stopGame();
+	// FIXME resettare statistiche
+}
+
+void GameControl::resetRound()
+{
+	timeToLive = gameMaxTime;
+	points = 0;
+	cardRecharge = 0;
+	// FIXME reset factory and towers
+}
