@@ -37,17 +37,11 @@ public:
 	{
 		return score;
 	}
-	inline void addScore(int score)
+	inline void addGame(bool hasWon, int score)
 	{
+		if(hasWon) won++;
+		else lost++;
 		this->score += score;
-	}
-	inline void addLost()
-	{
-		lost++;
-	}
-	inline void addWon()
-	{
-		won++;
 	}
 
 };

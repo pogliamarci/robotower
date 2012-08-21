@@ -88,6 +88,7 @@ void GameControl::run()
 	{
 		while(status != STARTED && !isQuitting)
 		{
+			resetRound();
 			waitConditionMutex.lock();
 			timeout.wait(&waitConditionMutex);
 			waitConditionMutex.unlock();
@@ -102,10 +103,13 @@ void GameControl::run()
 			rechargeCard();
 			emit updatedTimeAndPoints(timeToLive, score);
 		}
-		if(timeToLive <= 0)
+		if(timeToLive <= 0 || towerNumber == 0)
 		{
 			status = STOPPED;
-			emit endGame();
+			bool hasWon = towerNumber > 0;
+			history->addGame(hasWon, score);
+			emit endGame(history->getWon(),
+					history->getLost(), history->getScore());
 		}
 	}
 }
@@ -122,12 +126,7 @@ void GameControl::updateTowers(int factoryNumber, bool destroyedTower)
 {
 	this->factoryNumber = factoryNumber;
 	this->towerNumber = destroyedTower ? 0 : 1;
-	if(destroyedTower)
-	{
-		history->addLost();
-		history->addScore(score);
-		emit endGame();
-	}
+	emit towersUpdate(factoryNumber, towerNumber);
 }
 
 void GameControl::rechargeCard()
@@ -152,7 +151,6 @@ void GameControl::startGame()
 {
 	if(status == STOPPED)
 	{
-		resetRound();
 		status = STARTED;
 		waitConditionMutex.lock();
 		timeout.wakeAll();
@@ -189,6 +187,8 @@ void GameControl::resetRound()
 	timeToLive = gameMaxTime;
 	score = 0;
 	cardRecharge = 0;
+	emit updatedTimeAndPoints(timeToLive, score);
+	emit towersUpdate(factoryNumber, towerNumber);
 }
 
 GameControl::~GameControl()

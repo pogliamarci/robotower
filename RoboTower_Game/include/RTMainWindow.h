@@ -48,7 +48,7 @@ private:
 public:
 	RTMainWindow(QWidget* parent = 0);
 public slots:
-	void updateTowers(int factoryNumber, bool destroyedTower); //Updates tower counter
+	void updateTowers(int factoryNumber, int towersNumber); //Updates tower counter
 	void updateData(int timeToLive, int score); //Updates time to live and score
 	void updateCardStatus(int card, bool status); //Updates Rfid status
 private:

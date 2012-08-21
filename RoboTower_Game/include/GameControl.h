@@ -99,7 +99,8 @@ signals:
 	void updatedTimeAndPoints(int timeToLive, int score); //emitted at the end of each iteration
 	void updatedRfidStatus(int rfid, bool status); //emitted when RFID status changes
 	void hasToResetRobot(); //emitted when the robot should be resetted
-	void endGame(); //emitted when the game ends
+	void endGame(int won,int lost,int score); //emitted when the game ends
+	void towersUpdate(int factoriesNumber, int towersNumber);
 };
 
 #endif /* GAMECONTROL_H_ */
