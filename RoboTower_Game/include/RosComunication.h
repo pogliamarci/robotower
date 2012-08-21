@@ -44,12 +44,13 @@ private:
 public:
 	RosComunication();
 	void run();
-	void resetRobot();
-	void enableRFID(std::string id);
-	void enableIsaac(bool isEnabled);
+private:
 	void fromRfidCallback(const Echoes::Rfid& message);
 	void fromTowersCallback(const Echoes::Towers& message);
 public slots:
+	void resetRobot();
+	void enableRFID(std::string id);
+	void enableIsaac(bool isEnabled);
 	void quitNow(); // stops the thread when the application is quitting
 signals:
 	void rosQuits(); // triggered if ros::ok() is not true anymore
