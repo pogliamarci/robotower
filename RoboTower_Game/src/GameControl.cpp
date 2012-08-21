@@ -200,6 +200,8 @@ void GameControl::resetGame()
 	stopGame();
 	delete history;
 	history = new GameHistory();
+	emit endGame(history->getWon(),
+			history->getLost(), history->getScore());
 }
 
 void GameControl::resetRound()
