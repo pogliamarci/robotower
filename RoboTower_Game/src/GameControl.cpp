@@ -88,7 +88,7 @@ void GameControl::run()
 	{
 		while(status != STARTED && !isQuitting)
 		{
-			resetRound();
+			if(status==STOPPED) resetRound();
 			waitConditionMutex.lock();
 			timeout.wait(&waitConditionMutex);
 			waitConditionMutex.unlock();
