@@ -61,10 +61,9 @@ void RTCards::setCardStatus(int cardNumber, bool cardStatus)
 
 void RTCard::setTextWhite()
 {
-	QBrush brush(QColor(255, 255, 255, 255));
-	brush.setStyle(Qt::SolidPattern);
 	QPalette palette(this->palette());
-	palette.setBrush(QPalette::Active, QPalette::WindowText, brush);
+	palette.setBrush(QPalette::Active, QPalette::WindowText, Qt::white);
+	this->setPalette(palette);
 }
 
 RTCard::RTCard(int number) :
