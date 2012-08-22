@@ -89,6 +89,10 @@ RTMainWindow::RTMainWindow(QWidget* parent) :
 			SLOT(newGameClicked()));
 	QObject::connect(currentGame, SIGNAL(togglePause()), this,
 			SIGNAL(togglePause()));
+	QFont font(this->font());
+	font.setBold(true);
+	font.setPointSize(font.pointSize()+2);
+	this->setFont(font);
 }
 
 void RTMainWindow::startOnClick()
