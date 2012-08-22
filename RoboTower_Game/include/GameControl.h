@@ -88,6 +88,7 @@ private:
 	void rechargeCard();
 	void resetRound();
 	void resetRFID();
+	void performMatchOneStepUpdate();
 
 public slots:
 	void disableRFID(std::string id);

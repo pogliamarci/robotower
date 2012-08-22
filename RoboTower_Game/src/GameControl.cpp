@@ -96,59 +96,56 @@ void GameControl::updateGamePoints()
 
 void GameControl::run()
 {
-	/*
-	while(!isQuitting)
+	while (!isQuitting)
 	{
-		currentStatus->doAction();
-		if(currentStatus->hasToChange())
+		while ((status == STOPPED || status == PAUSED) && !isQuitting)
 		{
-			Status newStt = currentStatus->nextStatus();
-			delete currentStatus();
-			currentStatus = netStt;
-		}
-	}
-	*/
-
-	while(!isQuitting)
-	{
-		while((status == STOPPED || status == PAUSED) && !isQuitting)
-		{
-			if(status == STOPPED) resetRound();
+			if (status == STOPPED)
+				resetRound();
 			waitConditionMutex.lock();
 			timeout.wait(&waitConditionMutex);
 			waitConditionMutex.unlock();
 		}
+		// now the game is neither stopped nor in pause.
+		// We should wait one second (that is needed both from
+		// the waiting and running states), and then make the relevant
+		// checks (the check about the status is done after the wait,
+		// so if the game is stopped or paused during the wait
+		// timer don't get decremented...)
+		if(!isQuitting) // isQuitting here is set if the application
+						// is closed while the game is stopped
+						// (inside the previous while()...)
+		{
+			waitConditionMutex.lock();
+			timeout.wait(&waitConditionMutex, 1000);
+			waitConditionMutex.unlock();
+		}
 		if (status == WAITING)
 		{
-			waitConditionMutex.lock();
-			timeout.wait(&waitConditionMutex, 1000);
-			waitConditionMutex.unlock();
 			timeToStart--;
 			emit updateRemainingTime(timeToStart);
-			if(timeToStart <= 0)
-			{
-				timeToStart = gameSetupTime;
+			if (timeToStart <= 0)
 				status = STARTED;
-			}
+		} else if (status == STARTED) {
+			// now let's do all the updates, checks, whatever
+			// as the game is really started...
+			performMatchOneStepUpdate();
 		}
-		else if (status == STARTED && timeToLive > 0)
-		{
-			waitConditionMutex.lock();
-			timeout.wait(&waitConditionMutex, 1000);
-			waitConditionMutex.unlock();
-			updateGamePoints();
-			timeToLive--;
-			rechargeCard();
-			emit updatedTimeAndPoints(timeToLive, score);
-		}
-		if(timeToLive <= 0 || towerNumber == 0)
-		{
-			status = STOPPED;
-			bool hasWon = towerNumber > 0;
-			history->addGame(hasWon, score);
-			emit endGame(history->getWon(),
-					history->getLost(), history->getScore());
-		}
+	}
+}
+
+void GameControl::performMatchOneStepUpdate() {
+	updateGamePoints();
+	timeToLive--;
+	rechargeCard();
+	emit updatedTimeAndPoints(timeToLive, score);
+	if(timeToLive <= 0 || towerNumber == 0)
+	{
+		status = STOPPED;
+		bool hasWon = towerNumber > 0;
+		history->addGame(hasWon, score);
+		emit endGame(history->getWon(),
+				history->getLost(), history->getScore());
 	}
 }
 
