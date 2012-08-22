@@ -17,10 +17,11 @@
 
 #include "RTCurrentGameWidget.h"
 
-RTCurrentGameWidget::RTCurrentGameWidget(QWidget* parent) : QGroupBox(parent)
+RTCurrentGameWidget::RTCurrentGameWidget(QWidget* parent) :
+		QGroupBox(parent)
 {
 	isPaused = false;
-	theLayout = new QGridLayout();
+	theLayout = new QVBoxLayout();
 	pauseBtn = new QPushButton("Pause");
 	pauseBtn->setEnabled(false);
 	currentScore = new QLCDNumber();
@@ -40,12 +41,23 @@ RTCurrentGameWidget::RTCurrentGameWidget(QWidget* parent) : QGroupBox(parent)
 	goalsBox->setLayout(innerGoalsLayout);
 
 	/* main layout */
-	theLayout->addWidget(pauseBtn, 1, 1, 1, 1);
-	theLayout->addWidget(new QLabel("Score:"), 1, 2, 1, 1);
-	theLayout->addWidget(currentScore, 1, 3, 1, 2);
-	theLayout->addWidget(goalsBox, 2, 1, 3, 2);
-	theLayout->addWidget(new QLabel("Time to live:"), 2, 3, 1, 2);
-	theLayout->addWidget(currentTTL, 3, 3, 2, 2);
+	theLayout->addWidget(pauseBtn);
+
+	/* add score */
+	QHBoxLayout* hBox1 = new QHBoxLayout();
+	hBox1->addWidget(new QLabel("Score:"));
+	hBox1->addWidget(currentScore);
+	theLayout->addLayout(hBox1);
+
+	/* add time to live */
+	QHBoxLayout* hBox2 = new QHBoxLayout();
+	hBox2->addWidget(new QLabel("Time to live:"));
+	hBox2->addWidget(currentTTL);
+	theLayout->addLayout(hBox2);
+
+	/* add goals*/
+	theLayout->addWidget(goalsBox);
+
 	setLayout(theLayout);
 
 	QObject::connect(pauseBtn, SIGNAL(clicked()), this, SLOT(onPauseClick()));
@@ -54,7 +66,8 @@ RTCurrentGameWidget::RTCurrentGameWidget(QWidget* parent) : QGroupBox(parent)
 void RTCurrentGameWidget::setPauseEnabled(bool isPauseEnabled)
 {
 	pauseBtn->setEnabled(isPauseEnabled);
-	if(isPauseEnabled) {
+	if (isPauseEnabled)
+	{
 		pauseBtn->setText("Pause");
 		isPaused = false;
 	}
@@ -62,10 +75,13 @@ void RTCurrentGameWidget::setPauseEnabled(bool isPauseEnabled)
 
 void RTCurrentGameWidget::onPauseClick()
 {
-	if(isPaused){
+	if (isPaused)
+	{
 		pauseBtn->setText("Pause");
 		isPaused = false;
-	} else {
+	}
+	else
+	{
 		pauseBtn->setText("Resume");
 		isPaused = true;
 	}

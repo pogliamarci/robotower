@@ -24,7 +24,7 @@ class RTCurrentGameWidget : public QGroupBox
 {
 	Q_OBJECT
 private:
-	QGridLayout* theLayout;
+	QVBoxLayout* theLayout;
 	QPushButton* pauseBtn;
 	QLCDNumber* currentScore;
 	QLCDNumber* currentTTL;
