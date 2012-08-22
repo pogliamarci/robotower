@@ -17,18 +17,17 @@
 
 #include "RTCards.h"
 #include <string>
+#include <iostream>
 
 void RTCards::setRowsAndColsDim()
 {
 	for (int i = 0; i < ROWS; i++)
 	{
-		cardGrid->setRowMinimumHeight(i, 60);
-		cardGrid->setRowStretch(i, 2);
+		this->setRowMinimumHeight(i, 60); // TODO
 	}
 	for (int i = 0; i < COLS; i++)
 	{
-		cardGrid->setColumnMinimumWidth(i, 30);
-		cardGrid->setColumnStretch(i, 1);
+		this->setColumnMinimumWidth(i, 30); // TODO
 	}
 }
 
@@ -37,21 +36,46 @@ void RTCards::addCards()
 	for (int i = 0; i < ROWS * COLS; i++)
 	{
 		RTCard* card = new RTCard(i);
-		cardGrid->addWidget(card, i % ROWS, i / ROWS, 1, 1, Qt::AlignCenter);
+		//cardGrid->addWidget(card, i % ROWS, i / ROWS, 1, 1, Qt::AlignCenter);
+		this->addWidget(card, i % ROWS, i / ROWS, 1, 1); // TODO
 		cardList.push_back(card);
 	}
 }
 
 RTCards::RTCards() :
-		QVBoxLayout()
+		QGridLayout()
 {
-	label = new QLabel("Active Cards");
-	addWidget(label);
-	cardGrid = new QGridLayout();
+	//abel = new QLabel("Active Cards");
+	//addWidget(label);
+	//cardGrid = new QGridLayout();
 	addCards();
 	setRowsAndColsDim();
-	addLayout(cardGrid);
+	//addLayout(cardGrid);
 	setAlignment(Qt::AlignTop);
+}
+
+void RTCards::setGeometry(const QRect& rect)
+{
+	QGridLayout::setGeometry(rect);
+
+	int w = rect.width() / columnCount() - spacing();
+	int h = rect.height() / rowCount() - spacing();
+
+	if(h<1.5*w) w = h/1.5;
+	else h = 1.5*w;
+
+	int squareWidth = (w+spacing())*columnCount() - spacing();
+	int squareHeight = (h+spacing())*rowCount() - spacing();
+	int rectStartx = (rect.width() - squareWidth) / 2 + rect.x();
+	int rectStarty = (rect.height() - squareHeight) / 2 + rect.y();
+
+	for(int i=0; i < rowCount(); i++) {
+		for(int j=0; j<columnCount(); j++) {
+			QLayoutItem* o = this->itemAtPosition(i,j);
+			QRect geom(rectStartx + j*(w+spacing()), rectStarty + i*(h+spacing()), w, h);
+			o->setGeometry(geom);
+		}
+	}
 }
 
 void RTCards::setCardStatus(int cardNumber, bool cardStatus)
@@ -64,10 +88,14 @@ void RTCard::setTextWhite()
 	QPalette palette(this->palette());
 	palette.setBrush(QPalette::Active, QPalette::WindowText, Qt::white);
 	this->setPalette(palette);
+	this->setAlignment(Qt::AlignCenter);
+	QFont font(this->font());
+	font.setBold(true);
+	font.setPointSize(font.pointSize()+2);
+	this->setFont(font);
 }
 
-RTCard::RTCard(int number) :
-		QLabel()
+RTCard::RTCard(int number) : QLabel()
 {
 	const int borderWidht = 2;
 	QString labelText = QString::number(number+1);
@@ -84,11 +112,5 @@ void RTCard::setCardStatus(bool isActive)
 	Pal.setColor(QPalette::Window, color);
 	setPalette(Pal);
 	setAutoFillBackground(true);
-	setMinimumSize(QSize(30,60));
-}
-
-int RTCard::heightForWidth(int w) const
-{
-	return 2 * w;
 }
 

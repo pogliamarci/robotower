@@ -30,12 +30,11 @@ Q_OBJECT
 public:
 	RTCard(int number);
 	void setCardStatus(bool cardStatus);
-	int heightForWidth(int w) const;
 private:
 	void setTextWhite();
 };
 
-class RTCards: public QVBoxLayout
+class RTCards: public QGridLayout
 {
 Q_OBJECT
 private:
@@ -45,6 +44,7 @@ private:
 public:
 	RTCards();
 	void setCardStatus(int cardNumber, bool cardStatus);
+	void setGeometry(const QRect& rect);
 private:
 	void setRowsAndColsDim();
 	void addCards();
