@@ -46,7 +46,6 @@ public:
 	void setCardStatus(int cardNumber, bool cardStatus);
 	void setGeometry(const QRect& rect);
 private:
-	void setRowsAndColsDim();
 	void addCards();
 };
 

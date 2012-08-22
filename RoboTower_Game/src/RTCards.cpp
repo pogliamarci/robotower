@@ -19,25 +19,12 @@
 #include <string>
 #include <iostream>
 
-void RTCards::setRowsAndColsDim()
-{
-	for (int i = 0; i < ROWS; i++)
-	{
-		this->setRowMinimumHeight(i, 60); // TODO
-	}
-	for (int i = 0; i < COLS; i++)
-	{
-		this->setColumnMinimumWidth(i, 30); // TODO
-	}
-}
-
 void RTCards::addCards()
 {
 	for (int i = 0; i < ROWS * COLS; i++)
 	{
 		RTCard* card = new RTCard(i);
-		//cardGrid->addWidget(card, i % ROWS, i / ROWS, 1, 1, Qt::AlignCenter);
-		this->addWidget(card, i % ROWS, i / ROWS, 1, 1); // TODO
+		addWidget(card, i % ROWS, i / ROWS, 1, 1);
 		cardList.push_back(card);
 	}
 }
@@ -45,24 +32,23 @@ void RTCards::addCards()
 RTCards::RTCards() :
 		QGridLayout()
 {
-	//abel = new QLabel("Active Cards");
-	//addWidget(label);
-	//cardGrid = new QGridLayout();
 	addCards();
-	setRowsAndColsDim();
-	//addLayout(cardGrid);
 	setAlignment(Qt::AlignTop);
 }
 
 void RTCards::setGeometry(const QRect& rect)
 {
+	const float aspectRatioFactor = 1.5;
+
 	QGridLayout::setGeometry(rect);
+
+	if(spacing() < 0) setSpacing(5);
 
 	int w = rect.width() / columnCount() - spacing();
 	int h = rect.height() / rowCount() - spacing();
 
-	if(h<1.5*w) w = h/1.5;
-	else h = 1.5*w;
+	if(h<aspectRatioFactor*w) w = h/aspectRatioFactor;
+	else h = aspectRatioFactor*w;
 
 	int squareWidth = (w+spacing())*columnCount() - spacing();
 	int squareHeight = (h+spacing())*rowCount() - spacing();
@@ -103,6 +89,7 @@ RTCard::RTCard(int number) : QLabel()
 	setTextWhite();
 	setFrameStyle(borderWidht);
 	setCardStatus(true);
+	setMinimumSize(QSize(40,60));
 }
 
 void RTCard::setCardStatus(bool isActive)
