@@ -73,6 +73,7 @@ void RTCard::setTextWhite()
 {
 	QPalette palette(this->palette());
 	palette.setBrush(QPalette::Active, QPalette::WindowText, Qt::white);
+	palette.setBrush(QPalette::Inactive, QPalette::WindowText, Qt::white);
 	this->setPalette(palette);
 	this->setAlignment(Qt::AlignCenter);
 	QFont font(this->font());
