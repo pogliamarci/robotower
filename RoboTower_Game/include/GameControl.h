@@ -36,13 +36,14 @@ typedef struct rfid_entry
 	int status;
 } RfidEntry;
 
-enum GameStatus {STARTED, STOPPED, PAUSED};
+enum GameStatus {STARTED, STOPPED, PAUSED, WAITING};
 
 class GameControl: public QThread
 {
 Q_OBJECT
 private:
 	int timeToLive;
+	int timeToStart;
 	int score;
 	int factoryNumber;
 	int towerNumber;
@@ -56,6 +57,7 @@ private:
 	GameHistory* history;
 private:
 	static const int gameMaxTime = 300;
+	static const int gameSetupTime = 30;
 	static const int towerPoints = 100;
 	static const int factoryPoints = 20;
 
@@ -104,6 +106,7 @@ signals:
 	void endGame(int won,int lost,int score); //emitted when the game ends
 	void towersUpdate(int factoriesNumber, int towersNumber);
 	void robotIsEnabled(bool enabled);
+	void updateRemainingTime(int remainingTime);
 };
 
 #endif /* GAMECONTROL_H_ */

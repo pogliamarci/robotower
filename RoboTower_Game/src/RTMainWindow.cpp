@@ -76,17 +76,19 @@ void RTMainWindow::setupLayout()
 }
 
 RTMainWindow::RTMainWindow(QWidget* parent) :
-		QMainWindow(parent)
+		QMainWindow(parent), popupTimer(NULL)
 {
 	setupButtons();
 	setupStats();
 	setupToolbar();
 	setupLayout();
 	setWindowTitle(QString("RoboTower GUI"));
-	QObject::connect(startBtn, SIGNAL(clicked()), this, SLOT(startOnClick()));//(start()));
-	QObject::connect(stopBtn, SIGNAL(clicked()), this, SLOT(stopOnClick()));//()));
-	QObject::connect(newGameAction, SIGNAL(triggered()), this, SLOT(newGameClicked()));
-	QObject::connect(currentGame, SIGNAL(togglePause()), this, SIGNAL(togglePause()));
+	QObject::connect(startBtn, SIGNAL(clicked()), this, SLOT(startOnClick())); //(start()));
+	QObject::connect(stopBtn, SIGNAL(clicked()), this, SLOT(stopOnClick())); //()));
+	QObject::connect(newGameAction, SIGNAL(triggered()), this,
+			SLOT(newGameClicked()));
+	QObject::connect(currentGame, SIGNAL(togglePause()), this,
+			SIGNAL(togglePause()));
 }
 
 void RTMainWindow::startOnClick()
@@ -136,4 +138,33 @@ void RTMainWindow::updateHistory(int won, int lost, int score)
 	statWon->setText(QString::number(won));
 	statLost->setText(QString::number(lost));
 	statTotalScore->setText(QString::number(score));
+}
+
+void RTMainWindow::updateSetupPopup(int remainingTime)
+{
+	if (popupTimer == NULL)
+	{
+		const int width = 200;
+		const int height = 60;
+		int xAlign = x() + this->width() / 2 - width / 2;
+		int yAlign = y() + this->height() / 2 - height / 2;
+		popupTimer = new RTPopupTimer();
+		popupTimer->setWindowModality(Qt::ApplicationModal);
+		popupTimer->setGeometry(xAlign, yAlign, width, height);
+		popupTimer->show();
+	}
+	else if (remainingTime == 0)
+	{
+		delete popupTimer;
+		popupTimer = NULL;
+	}
+	else
+	{
+		popupTimer->update(remainingTime);
+	}
+}
+
+RTMainWindow::~RTMainWindow()
+{
+	delete popupTimer;
 }

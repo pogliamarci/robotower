@@ -96,16 +96,42 @@ void GameControl::updateGamePoints()
 
 void GameControl::run()
 {
+	/*
 	while(!isQuitting)
 	{
-		while(status != STARTED && !isQuitting)
+		currentStatus->doAction();
+		if(currentStatus->hasToChange())
+		{
+			Status newStt = currentStatus->nextStatus();
+			delete currentStatus();
+			currentStatus = netStt;
+		}
+	}
+	*/
+
+	while(!isQuitting)
+	{
+		while((status == STOPPED || status == PAUSED) && !isQuitting)
 		{
 			if(status == STOPPED) resetRound();
 			waitConditionMutex.lock();
 			timeout.wait(&waitConditionMutex);
 			waitConditionMutex.unlock();
 		}
-		if (timeToLive > 0 && !isQuitting)
+		if (status == WAITING)
+		{
+			waitConditionMutex.lock();
+			timeout.wait(&waitConditionMutex, 1000);
+			waitConditionMutex.unlock();
+			timeToStart--;
+			emit updateRemainingTime(timeToStart);
+			if(timeToStart <= 0)
+			{
+				timeToStart = gameSetupTime;
+				status = STARTED;
+			}
+		}
+		else if (status == STARTED && timeToLive > 0)
 		{
 			waitConditionMutex.lock();
 			timeout.wait(&waitConditionMutex, 1000);
@@ -163,7 +189,7 @@ void GameControl::startGame()
 {
 	if(status == STOPPED)
 	{
-		status = STARTED;
+		status = WAITING;
 		waitConditionMutex.lock();
 		timeout.wakeAll();
 		waitConditionMutex.unlock();
@@ -207,6 +233,7 @@ void GameControl::resetGame()
 void GameControl::resetRound()
 {
 	timeToLive = gameMaxTime;
+	timeToStart = gameSetupTime;
 	score = 0;
 	cardRecharge = 0;
 	emit updatedTimeAndPoints(timeToLive, score);
