@@ -148,24 +148,27 @@ void RTMainWindow::updateSetupPopup(int remainingTime)
 {
 	if (popupTimer == NULL)
 	{
-		const int width = 200;
-		const int height = 60;
-		int xAlign = x() + this->width() / 2 - width / 2;
-		int yAlign = y() + this->height() / 2 - height / 2;
-		popupTimer = new RTPopupTimer();
-		popupTimer->setWindowModality(Qt::ApplicationModal);
-		popupTimer->setGeometry(xAlign, yAlign, width, height);
-		popupTimer->show();
+		buildSetupPopup();
 	}
-	else if (remainingTime == 0)
+	popupTimer->update(remainingTime);
+	if (remainingTime == 0)
 	{
 		delete popupTimer;
 		popupTimer = NULL;
 	}
-	else
-	{
-		popupTimer->update(remainingTime);
-	}
+}
+
+void RTMainWindow::buildSetupPopup() {
+	const int popupWidth = 200;
+	const int popupHeight = 60;
+	int xAlign = x() + width() / 2 - popupWidth / 2;
+	int yAlign = y() + height() / 2 - popupHeight / 2;
+	popupTimer = new RTPopupTimer();
+	popupTimer->setWindowModality(Qt::ApplicationModal);
+	popupTimer->setGeometry(xAlign, yAlign, popupWidth, popupHeight);
+	popupTimer->setWindowTitle("Starting...");
+	popupTimer->setFont(font());
+	popupTimer->show();
 }
 
 RTMainWindow::~RTMainWindow()
