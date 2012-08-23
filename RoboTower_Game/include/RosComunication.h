@@ -51,7 +51,7 @@ public slots:
 	void resetRobot();
 	void enableRFID(std::string id);
 	void enableIsaac(bool isEnabled);
-	void quitNow(); // stops the thread when the application is quitting
+	void quitNow(); // stops the thread when the application is quitting, reset the robot and stop IsAac
 signals:
 	void rosQuits(); // triggered if ros::ok() is not true anymore
 	void rfidRecieved(std::string id); //triggered when arrives a RFID tag

@@ -16,6 +16,7 @@
  */
 
 #include <iostream>
+#include <QMutexLocker>
 #include "GameControl.h"
 
 GameControl::GameControl(int factoryNumber, int towerNumber)
@@ -35,27 +36,30 @@ void GameControl::run()
 {
 	while (!isQuitting)
 	{
+		QMutexLocker locker(&waitConditionMutex);
 		// We should wait one second (that is needed both from
 		// the waiting and running states), and AFTER THAT make the relevant
 		// checks (if the game is stopped or paused during the wait
 		// timer don't get decremented...)
-		waitConditionMutex.lock();
 		if(status != STOPPED) timeout.wait(&waitConditionMutex, 1000);
-		waitConditionMutex.unlock();
+		locker.unlock();
 		switch(status)
 		{
 		case STOPPED:
 			resetRound();
 		case PAUSED:
-			waitConditionMutex.lock();
+			locker.relock();
 			timeout.wait(&waitConditionMutex);
-			waitConditionMutex.unlock();
 			break;
 		case WAITING:
 			timeToStart--;
 			emit updateRemainingTime(timeToStart);
-			if (timeToStart <= 0)
+			if (timeToStart <= 0) // enable the robot when timeToStart == -1,
+					// (GUI expects timeToStart == 0 to hide the dialog window)
+			{
+				emit robotIsEnabled(true);
 				status = STARTED;
+			}
 			break;
 		case STARTED:
 			performMatchOneStepUpdate();
@@ -97,8 +101,8 @@ void GameControl::startGame()
 	if(status == STOPPED)
 	{
 		status = WAITING;
+		emit updateRemainingTime(timeToStart);
 		wakeup();
-		emit robotIsEnabled(true);
 	}
 }
 
@@ -222,7 +226,7 @@ void GameControl::performMatchOneStepUpdate()
 	emit updatedTimeAndPoints(timeToLive, score);
 	if(timeToLive <= 0 || towerNumber == 0)
 	{
-		status = STOPPED;
+		stopGame();
 		bool hasWon = towerNumber > 0;
 		history->addGame(hasWon, score);
 		emit endGame(history->getWon(),
@@ -232,9 +236,8 @@ void GameControl::performMatchOneStepUpdate()
 
 void GameControl::wakeup()
 {
-	waitConditionMutex.lock();
+	QMutexLocker locker(&waitConditionMutex);
 	timeout.wakeAll();
-	waitConditionMutex.unlock();
 }
 
 GameControl::~GameControl()

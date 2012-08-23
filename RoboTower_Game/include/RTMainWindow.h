@@ -67,6 +67,8 @@ private slots:
 	void startOnClick();
 	void stopOnClick();
 	void newGameClicked();
+	void buildSetupPopup();
+
 signals:
 	void start();
 	void stop();
