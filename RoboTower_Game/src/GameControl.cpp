@@ -98,43 +98,41 @@ void GameControl::run()
 {
 	while (!isQuitting)
 	{
-		while ((status == STOPPED || status == PAUSED) && !isQuitting)
+		// We should wait one second (that is needed both from
+		// the waiting and running states), and AFTER THAT make the relevant
+		// checks (if the game is stopped or paused during the wait
+		// timer don't get decremented...)
+		waitConditionMutex.lock();
+		if(status != STOPPED) timeout.wait(&waitConditionMutex, 1000);
+		waitConditionMutex.unlock();
+		switch(status)
 		{
-			if (status == STOPPED)
-				resetRound();
+		case STOPPED:
+			resetRound();
+		case PAUSED:
 			waitConditionMutex.lock();
 			timeout.wait(&waitConditionMutex);
 			waitConditionMutex.unlock();
-		}
-		// now the game is neither stopped nor in pause.
-		// We should wait one second (that is needed both from
-		// the waiting and running states), and then make the relevant
-		// checks (the check about the status is done after the wait,
-		// so if the game is stopped or paused during the wait
-		// timer don't get decremented...)
-		if(!isQuitting) // isQuitting here is set if the application
-						// is closed while the game is stopped
-						// (inside the previous while()...)
-		{
-			waitConditionMutex.lock();
-			timeout.wait(&waitConditionMutex, 1000);
-			waitConditionMutex.unlock();
-		}
-		if (status == WAITING)
-		{
+			break;
+		case WAITING:
 			timeToStart--;
 			emit updateRemainingTime(timeToStart);
 			if (timeToStart <= 0)
 				status = STARTED;
-		} else if (status == STARTED) {
-			// now let's do all the updates, checks, whatever
-			// as the game is really started...
+			break;
+		case STARTED:
 			performMatchOneStepUpdate();
+			break;
+		default:
+			std::cerr << "BUG!" << std::endl;
+			abort();
+			break;
 		}
 	}
 }
 
-void GameControl::performMatchOneStepUpdate() {
+void GameControl::performMatchOneStepUpdate()
+{
 	updateGamePoints();
 	timeToLive--;
 	rechargeCard();
@@ -151,9 +149,7 @@ void GameControl::performMatchOneStepUpdate() {
 
 void GameControl::quitNow()
 {
-	waitConditionMutex.lock();
-	timeout.wakeAll();
-	waitConditionMutex.unlock();
+	wakeup();
 	isQuitting = true;
 }
 
@@ -187,17 +183,14 @@ void GameControl::startGame()
 	if(status == STOPPED)
 	{
 		status = WAITING;
-		waitConditionMutex.lock();
-		timeout.wakeAll();
-		waitConditionMutex.unlock();
+		wakeup();
 		emit robotIsEnabled(true);
 	}
 }
 
 void GameControl::stopGame()
 {
-	if(status == PAUSED) resetRound(); // FIXME
-	status = STOPPED;
+	wakeup();
 	emit robotIsEnabled(false);
 }
 
@@ -206,9 +199,6 @@ void GameControl::togglePause()
 	if(status==PAUSED)
 	{
 		status = STARTED;
-		waitConditionMutex.lock();
-		timeout.wakeAll();
-		waitConditionMutex.unlock();
 		emit robotIsEnabled(true);
 	}
 	else if(status==STARTED)

@@ -89,7 +89,12 @@ private:
 	void resetRound();
 	void resetRFID();
 	void performMatchOneStepUpdate();
-
+	inline void GameControl::wakeup()
+	{
+		waitConditionMutex.lock();
+		timeout.wakeAll();
+		waitConditionMutex.unlock();
+	}
 public slots:
 	void disableRFID(std::string id);
 	void updateTowers(int factoryNumber, bool destroyedTower);
