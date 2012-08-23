@@ -55,7 +55,10 @@ void GameControl::run()
 			timeToStart--;
 			emit updateRemainingTime(timeToStart);
 			if (timeToStart <= 0)
+			{
+				emit robotIsEnabled(true);
 				status = STARTED;
+			}
 			break;
 		case STARTED:
 			performMatchOneStepUpdate();
@@ -98,7 +101,6 @@ void GameControl::startGame()
 	{
 		status = WAITING;
 		wakeup();
-		emit robotIsEnabled(true);
 	}
 }
 
@@ -222,7 +224,7 @@ void GameControl::performMatchOneStepUpdate()
 	emit updatedTimeAndPoints(timeToLive, score);
 	if(timeToLive <= 0 || towerNumber == 0)
 	{
-		status = STOPPED;
+		stopGame();
 		bool hasWon = towerNumber > 0;
 		history->addGame(hasWon, score);
 		emit endGame(history->getWon(),
