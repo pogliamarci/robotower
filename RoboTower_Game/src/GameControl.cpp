@@ -31,6 +31,43 @@ GameControl::GameControl(int factoryNumber, int towerNumber)
 	initializeRfidConfiguration("../../rfidconfig.txt");
 }
 
+void GameControl::run()
+{
+	while (!isQuitting)
+	{
+		// We should wait one second (that is needed both from
+		// the waiting and running states), and AFTER THAT make the relevant
+		// checks (if the game is stopped or paused during the wait
+		// timer don't get decremented...)
+		waitConditionMutex.lock();
+		if(status != STOPPED) timeout.wait(&waitConditionMutex, 1000);
+		waitConditionMutex.unlock();
+		switch(status)
+		{
+		case STOPPED:
+			resetRound();
+		case PAUSED:
+			waitConditionMutex.lock();
+			timeout.wait(&waitConditionMutex);
+			waitConditionMutex.unlock();
+			break;
+		case WAITING:
+			timeToStart--;
+			emit updateRemainingTime(timeToStart);
+			if (timeToStart <= 0)
+				status = STARTED;
+			break;
+		case STARTED:
+			performMatchOneStepUpdate();
+			break;
+		default:
+			std::cerr << "BUG!" << std::endl;
+			abort();
+			break;
+		}
+	}
+}
+
 void GameControl::disableRFID(std::string id)
 {
 	RfidEntry &entry = rfidMap[id];
@@ -42,16 +79,56 @@ void GameControl::disableRFID(std::string id)
 	}
 }
 
-void GameControl::resetRFID()
+void GameControl::updateTowers(int factoryNumber, bool destroyedTower)
 {
-	while(!disabledRfid.empty())
+	this->factoryNumber = factoryNumber;
+	this->towerNumber = destroyedTower ? 0 : 1;
+	emit towersUpdate(factoryNumber, towerNumber);
+}
+
+void GameControl::quitNow()
+{
+	wakeup();
+	isQuitting = true;
+}
+
+void GameControl::startGame()
+{
+	if(status == STOPPED)
 	{
-		std::string rfid = disabledRfid.front();
-		disabledRfid.pop();
-		rfidMap[rfid].status = true;
-		emit updatedRfidStatus(rfidMap[rfid].number, rfidMap[rfid].status);
-		emit rfidEnableNotification(rfid);
+		status = WAITING;
+		wakeup();
+		emit robotIsEnabled(true);
 	}
+}
+
+void GameControl::stopGame()
+{
+	wakeup();
+	emit robotIsEnabled(false);
+}
+
+void GameControl::togglePause()
+{
+	if(status==PAUSED)
+	{
+		status = STARTED;
+		emit robotIsEnabled(true);
+	}
+	else if(status==STARTED)
+	{
+		status = PAUSED;
+		emit robotIsEnabled(false);
+	}
+}
+
+void GameControl::resetGame()
+{
+	stopGame();
+	delete history;
+	history = new GameHistory();
+	emit endGame(history->getWon(),
+			history->getLost(), history->getScore());
 }
 
 void GameControl::initializeRfidConfiguration(std::string configFile)
@@ -94,40 +171,44 @@ void GameControl::updateGamePoints()
 	score += towerNumber * towerPoints + factoryNumber * factoryPoints;
 }
 
-void GameControl::run()
+void GameControl::rechargeCard()
 {
-	while (!isQuitting)
+	if (disabledRfid.size() > 0)
 	{
-		// We should wait one second (that is needed both from
-		// the waiting and running states), and AFTER THAT make the relevant
-		// checks (if the game is stopped or paused during the wait
-		// timer don't get decremented...)
-		waitConditionMutex.lock();
-		if(status != STOPPED) timeout.wait(&waitConditionMutex, 1000);
-		waitConditionMutex.unlock();
-		switch(status)
+		int increment = 100 / (30 - 5 * factoryNumber);
+		cardRecharge += increment;
+		if (cardRecharge >= 100)
 		{
-		case STOPPED:
-			resetRound();
-		case PAUSED:
-			waitConditionMutex.lock();
-			timeout.wait(&waitConditionMutex);
-			waitConditionMutex.unlock();
-			break;
-		case WAITING:
-			timeToStart--;
-			emit updateRemainingTime(timeToStart);
-			if (timeToStart <= 0)
-				status = STARTED;
-			break;
-		case STARTED:
-			performMatchOneStepUpdate();
-			break;
-		default:
-			std::cerr << "BUG!" << std::endl;
-			abort();
-			break;
+			std::string card = disabledRfid.front();
+			disabledRfid.pop();
+			RfidEntry entry = rfidMap[card];
+			entry.status = true;
+			emit updatedRfidStatus(entry.number, entry.status);
+			cardRecharge = 0;
 		}
+	}
+}
+
+void GameControl::resetRound()
+{
+	timeToLive = gameMaxTime;
+	timeToStart = gameSetupTime;
+	score = 0;
+	cardRecharge = 0;
+	emit updatedTimeAndPoints(timeToLive, score);
+	emit towersUpdate(factoryNumber, towerNumber);
+	emit hasToResetRobot();
+}
+
+void GameControl::resetRFID()
+{
+	while(!disabledRfid.empty())
+	{
+		std::string rfid = disabledRfid.front();
+		disabledRfid.pop();
+		rfidMap[rfid].status = true;
+		emit updatedRfidStatus(rfidMap[rfid].number, rfidMap[rfid].status);
+		emit rfidEnableNotification(rfid);
 	}
 }
 
@@ -147,85 +228,11 @@ void GameControl::performMatchOneStepUpdate()
 	}
 }
 
-void GameControl::quitNow()
+void GameControl::wakeup()
 {
-	wakeup();
-	isQuitting = true;
-}
-
-void GameControl::updateTowers(int factoryNumber, bool destroyedTower)
-{
-	this->factoryNumber = factoryNumber;
-	this->towerNumber = destroyedTower ? 0 : 1;
-	emit towersUpdate(factoryNumber, towerNumber);
-}
-
-void GameControl::rechargeCard()
-{
-	if (disabledRfid.size() > 0)
-	{
-		int increment = 100 / (30 - 5 * factoryNumber);
-		cardRecharge += increment;
-		if (cardRecharge >= 100)
-		{
-			std::string card = disabledRfid.front();
-			disabledRfid.pop();
-			RfidEntry entry = rfidMap[card];
-			entry.status = true;
-			emit updatedRfidStatus(entry.number, entry.status);
-			cardRecharge = 0;
-		}
-	}
-}
-
-void GameControl::startGame()
-{
-	if(status == STOPPED)
-	{
-		status = WAITING;
-		wakeup();
-		emit robotIsEnabled(true);
-	}
-}
-
-void GameControl::stopGame()
-{
-	wakeup();
-	emit robotIsEnabled(false);
-}
-
-void GameControl::togglePause()
-{
-	if(status==PAUSED)
-	{
-		status = STARTED;
-		emit robotIsEnabled(true);
-	}
-	else if(status==STARTED)
-	{
-		status = PAUSED;
-		emit robotIsEnabled(false);
-	}
-}
-
-void GameControl::resetGame()
-{
-	stopGame();
-	delete history;
-	history = new GameHistory();
-	emit endGame(history->getWon(),
-			history->getLost(), history->getScore());
-}
-
-void GameControl::resetRound()
-{
-	timeToLive = gameMaxTime;
-	timeToStart = gameSetupTime;
-	score = 0;
-	cardRecharge = 0;
-	emit updatedTimeAndPoints(timeToLive, score);
-	emit towersUpdate(factoryNumber, towerNumber);
-	emit hasToResetRobot();
+	waitConditionMutex.lock();
+	timeout.wakeAll();
+	waitConditionMutex.unlock();
 }
 
 GameControl::~GameControl()

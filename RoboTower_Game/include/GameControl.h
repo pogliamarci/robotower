@@ -81,20 +81,6 @@ public:
 	{
 		return towerNumber;
 	}
-private:
-	void initializeRfidConfiguration(std::string configFile);
-	void populateMapWithLine(std::string configLine, int index);
-	void updateGamePoints();
-	void rechargeCard();
-	void resetRound();
-	void resetRFID();
-	void performMatchOneStepUpdate();
-	inline void GameControl::wakeup()
-	{
-		waitConditionMutex.lock();
-		timeout.wakeAll();
-		waitConditionMutex.unlock();
-	}
 public slots:
 	void disableRFID(std::string id);
 	void updateTowers(int factoryNumber, bool destroyedTower);
@@ -104,6 +90,15 @@ public slots:
 	void stopGame();
 	void togglePause();
 	void resetGame();
+private:
+	void initializeRfidConfiguration(std::string configFile);
+	void populateMapWithLine(std::string configLine, int index);
+	void updateGamePoints();
+	void rechargeCard();
+	void resetRound();
+	void resetRFID();
+	void performMatchOneStepUpdate();
+	void wakeup();
 signals:
 	void updatedTimeAndPoints(int timeToLive, int score); //emitted at the end of each iteration
 	void updatedRfidStatus(int rfid, bool status); //emitted when RFID status changes
