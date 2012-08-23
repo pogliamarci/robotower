@@ -104,6 +104,7 @@ void GameControl::startGame()
 
 void GameControl::stopGame()
 {
+	status = STOPPED;
 	wakeup();
 	emit robotIsEnabled(false);
 }
@@ -120,6 +121,7 @@ void GameControl::togglePause()
 		status = PAUSED;
 		emit robotIsEnabled(false);
 	}
+	wakeup();
 }
 
 void GameControl::resetGame()
