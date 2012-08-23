@@ -58,7 +58,6 @@ int main(int argc, char** argv)
 	ros::init(argc, argv, "Echoes");
 
 	ros::NodeHandle ros_node;
-	ros::ServiceServer led_service;
 
 	LedParser lp(&read_sonar);
 
@@ -66,7 +65,10 @@ int main(int argc, char** argv)
 	ros::Publisher sonar_data_pub = ros_node.advertise<Echoes::Sonar>("sonar_data", 1000);
 	ros::Publisher rfid_data_pub = ros_node.advertise<Echoes::Rfid>("rfid_data", 1000);
 	ros::Publisher towers_data_pub = ros_node.advertise<Echoes::Towers>("towers_data", 1000);
-	led_service = ros_node.advertiseService("led_data", &LedParser::ledCallback, &lp);
+
+	/* Initialization of Led services */
+	ros::ServiceServer led_service = ros_node.advertiseService("led_data", &LedParser::ledCallback, &lp);
+	ros::ServiceServer resetLed_service = ros_node.advertiseService("resetLed_data", &LedParser::ledCallback, &lp);
 
 	/* configuration */
 	SonarProcesser spr(sonar_data_pub);
@@ -76,11 +78,20 @@ int main(int argc, char** argv)
 	dispatcher.addProcesser(&rpr, "[RFID]");
 	dispatcher.addProcesser(&tpr, "[TOWER]");
 
+	const int blinkingTimer = 20;
+	int timer = blinkingTimer;
 	/* the great loop! */
     while (ros::ok())
     {
     	parseItAll(read_sonar, dispatcher);
 		ros::spinOnce();
+		timer--;
+		if (timer == 0)
+		{
+			timer = blinkingTimer;
+			lp.sendCommands();
+		}
+
     }
 	return EXIT_SUCCESS;
 

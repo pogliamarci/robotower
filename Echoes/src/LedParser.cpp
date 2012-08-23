@@ -23,43 +23,98 @@
 LedParser::LedParser(ReadSonar* read_sonar)
 {
 	this->sender = read_sonar;
+	greenOn = false;
+	yellowOn = 0;
+	greenLedBlink = false;
+	yellowLedsBlink = false;
+	redLedNumber = 0;
 }
 
 /**
  * ROS callback for the led service. Forwards the request to the
  * board managing the leds.
  */
-bool LedParser::ledCallback(Echoes::Led::Request& request, Echoes::Led::Response& response)
+bool LedParser::ledCallback(Echoes::Led::Request& request,
+		Echoes::Led::Response& response)
 {
+	if (request.editRed)
+	{
+		redLedNumber = request.redNumOn;
+	}
+	if (request.editGreen)
+	{
+		greenLedBlink = request.greenBlinks;
+	}
+	if (request.editYellow)
+	{
+		yellowLedsBlink = request.yellowBlinks;
+	}
 
-	if (request.editGreen == true)
-	{
-		sprintf(buf, "led G 0 %c\r\n", request.greenIsOn ? '1' : '0');
-		sendCmd(buf);
-	}
-	if (request.editRed == true)
-	{
-		for(int i = 0; i < 4; i++)
-		{
-			sprintf(buf, "led R %c %c\r\n", (char) i + '0',
-					i < request.redNumOn ? '1' : '0');
-			sendCmd(buf);
-		}
-	}
-	if (request.editYellow == true)
-	{
-		for (int i = 0; i < 4; i++)
-		{
-			sprintf(buf, "led Y %c %c\r\n", (char) i + '0',
-					i < request.yellowIsOn[i] ? '1' : '0');
-			sendCmd(buf);
-		}
-	}
+	bool green = request.editGreen && !greenLedBlink;
+	bool red = request.editRed;
+	bool yellow = request.editYellow && !yellowLedsBlink;
+	sendOnOffCommands(green, red, yellow, true);
+
 	response.requestSuccessful = true;
 	return true;
 }
 
-void LedParser::sendCmd(char* buf)
+bool LedParser::resetledCallback(Echoes::Led::Request& request,
+		Echoes::Led::Response& response)
 {
-	sender->sendStringCommand(buf, strlen(buf));
+	greenLedBlink = false;
+	yellowLedsBlink = false;
+	redLedNumber = 0;
+	sendOnOffCommands(true, true, true, false);
+	response.requestSuccessful = true;
+	return true;
 }
+
+void LedParser::sendCommands()
+{
+	char buf[10];
+	if (greenLedBlink)
+	{
+		greenOn = !greenOn;
+		sprintf(buf, "led G 0 %c\r\n", greenOn ? '1' : '0');
+		sender->sendStringCommand(buf, strlen(buf));
+	}
+	if (yellowLedsBlink)
+	{
+		yellowOn = yellowOn == 3 ? 0 : yellowOn + 1;
+		for (int i = 0; i < 4; i++)
+		{
+			sprintf(buf, "led Y %c %c\r\n", (char) i + '0',
+					(i == yellowOn) ? '1' : '0');
+			sender->sendStringCommand(buf, strlen(buf));
+		}
+	}
+}
+
+void LedParser::sendOnOffCommands(bool green, bool red, bool yellow, bool isOn)
+{
+	char buf[10];
+	if (red)
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			sprintf(buf, "led R %c %c\r\n", (char) i + '0',
+					i < redLedNumber ? '1' : '0');
+			sender->sendStringCommand(buf, strlen(buf));
+		}
+	}
+	if (green)
+	{
+		sprintf(buf, "led G 0 %c\r\n", isOn ? '1' : '0');
+		sender->sendStringCommand(buf, strlen(buf));
+	}
+	if (yellow)
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			sprintf(buf, "led Y %c %c\r\n", (char) i + '0', isOn ? '1' : '0');
+			sender->sendStringCommand(buf, strlen(buf));
+		}
+	}
+}
+

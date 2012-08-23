@@ -20,6 +20,7 @@
 
 #include <fcntl.h>
 #include <unistd.h>
+#include <pthread.h>
 #include <termios.h>
 #include <exception>
 #include <vector>
@@ -49,6 +50,7 @@ class ReadSonar : public SerialCommunication
 		CharCircularBuffer * buffer;
 		char * tmp_buf;
 		static const int MAX_TMP_BUF = 256;
+		pthread_mutex_t mutex;
 };
 
 #endif

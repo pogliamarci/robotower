@@ -15,21 +15,33 @@
  * GNU General Public License for more details.
  */
 
+#ifndef LED_PARSER_H
+#define LED_PARSER_H
+
 #include <iostream>
 #include "ReadSonar.h"
 #include "ros/ros.h"
 #include "Echoes/Led.h"
 
-//classe per la gestione a basso livello dei led
 class LedParser
 {
-	public:
-		//costruttore
-		LedParser(ReadSonar* read_sonar);
-		bool ledCallback(Echoes::Led::Request& request, Echoes::Led::Response& response);
-	private:
-		//oggetto per comunicare via zigbee
-		ReadSonar* sender;
-		char buf[10];
-		void sendCmd(char* buf);
+private:
+	ReadSonar* sender;
+	bool greenOn;
+	int redLedNumber;
+	int yellowOn;
+	bool greenLedBlink;
+	bool yellowLedsBlink;
+
+public:
+	LedParser(ReadSonar* read_sonar);
+	bool ledCallback(Echoes::Led::Request& request,
+			Echoes::Led::Response& response);
+	bool resetledCallback(Echoes::Led::Request& request, Echoes::Led::Response& response);
+	void sendCommands();
+
+private:
+	void sendOnOffCommands(bool green, bool red, bool yellow, bool isOn);
 };
+
+#endif

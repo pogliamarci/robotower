@@ -29,32 +29,39 @@
 #include <stdio.h>
 #include <strings.h> 
 
-int SerialCommunication::waitData(int msec_tout){
+int SerialCommunication::waitData(int msec_tout)
+{
 	bool rexec;
 	int v;
-	int fd=ufd[0].fd;
-	
-	do{
-		rexec=false;
-		v = poll (ufd, 1, msec_tout);
-		if (v < 0){
-			if(errno==EINTR){
-				fprintf(stderr,"poll EINTR on file %d\n",fd);
-				rexec=true;
+	int fd = ufd[0].fd;
+
+	do
+	{
+		rexec = false;
+		v = poll(ufd, 1, msec_tout);
+		if (v < 0)
+		{
+			if (errno == EINTR)
+			{
+				fprintf(stderr, "poll EINTR on file %d\n", fd);
+				rexec = true;
 			}
-			else {
-				fprintf(stderr, "poll error on file %d,errno=%d\n",fd,errno);
+			else
+			{
+				fprintf(stderr, "poll error on file %d,errno=%d\n", fd, errno);
 				return wait_err;
 			}
 		}
-		else if (v == 0){
+		else if (v == 0)
+		{
 			return wait_tout;
 		}
-	}while(rexec);
+	} while (rexec);
 	return wait_ok;
 }
 
-void SerialCommunication::set_fd(int fd){
+void SerialCommunication::set_fd(int fd)
+{
 	ufd[0].fd = fd;
-	ufd[0].events = POLLIN;		
+	ufd[0].events = POLLIN;
 }

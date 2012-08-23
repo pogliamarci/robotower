@@ -34,7 +34,7 @@ const char* ReadSonarDeviceException::what() const throw()
 
 ReadSonar::ReadSonar(std::string serialDevice) throw (ReadSonarDeviceException)
 {
-
+	mutex = PTHREAD_MUTEX_INITIALIZER;
 	buffer = NULL; /* wtf? */
 	tmp_buf=NULL;
 	tmp_buf=new char[MAX_TMP_BUF];
@@ -61,7 +61,7 @@ ReadSonar::ReadSonar(std::string serialDevice) throw (ReadSonarDeviceException)
 	else
 	{
 		throw ReadSonarDeviceException();
-	}	
+	}
 }
 
 ReadSonar::~ReadSonar()
@@ -147,11 +147,13 @@ unsigned int ReadSonar::getLineToParseNum()
 
 int ReadSonar::sendStringCommand(char *cmd,int len)
 {
+	pthread_mutex_lock(&mutex);
 	if(fd<0)return -1;
 	for(int i=0;i<len;i++)
 	{
 		if(write(fd,&cmd[i],1)!=1)return -1;
 		usleep(CHAR_PAUSE);
 	}
+	pthread_mutex_unlock(&mutex);
 	return 0;
 }

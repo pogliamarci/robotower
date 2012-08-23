@@ -1,8 +1,11 @@
 bool editGreen
 bool editYellow
 bool editRed
-bool greenIsOn
+bool greenBlinks
+bool greenOn
+bool yellowBlinks
+bool yellowOn
 uint8 redNumOn
-bool[4] yellowIsOn
+
 ---
 bool requestSuccessful
