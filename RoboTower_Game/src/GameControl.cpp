@@ -197,6 +197,7 @@ void GameControl::rechargeCard()
 
 void GameControl::resetRound()
 {
+	resetRFID();
 	timeToLive = gameMaxTime;
 	timeToStart = gameSetupTime;
 	score = 0;

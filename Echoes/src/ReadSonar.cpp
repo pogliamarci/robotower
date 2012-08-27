@@ -34,7 +34,7 @@ const char* ReadSonarDeviceException::what() const throw()
 
 ReadSonar::ReadSonar(std::string serialDevice) throw (ReadSonarDeviceException)
 {
-	mutex = PTHREAD_MUTEX_INITIALIZER;
+	pthread_mutex_init(&mutex, NULL);
 	buffer = NULL; /* wtf? */
 	tmp_buf=NULL;
 	tmp_buf=new char[MAX_TMP_BUF];
@@ -78,6 +78,7 @@ ReadSonar::~ReadSonar()
 	{
 		delete [] tmp_buf;
 	}
+	pthread_mutex_destroy(&mutex);
 }
 
 bool ReadSonar::isReady(){
