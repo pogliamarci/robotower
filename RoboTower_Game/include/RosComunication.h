@@ -55,7 +55,7 @@ public slots:
 signals:
 	void rosQuits(); // triggered if ros::ok() is not true anymore
 	void rfidRecieved(std::string id); //triggered when arrives a RFID tag
-	void towersUpdate(int destroyedFactories, bool isTowerDestroyed);
+	void towersUpdate(int factories, int towers);
 };
 
 #endif

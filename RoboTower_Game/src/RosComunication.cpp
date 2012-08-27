@@ -80,5 +80,5 @@ void RosComunication::fromRfidCallback(const Echoes::Rfid& message)
 
 void RosComunication::fromTowersCallback(const Echoes::Towers& message)
 {
-	emit towersUpdate(message.destroyedFactories, message.isTowerDestroyed);
+	emit towersUpdate(message.factories, message.towers);
 }

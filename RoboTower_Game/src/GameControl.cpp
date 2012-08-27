@@ -83,10 +83,10 @@ void GameControl::disableRFID(std::string id)
 	}
 }
 
-void GameControl::updateTowers(int factoryNumber, bool destroyedTower)
+void GameControl::updateTowers(int factories, int towers)
 {
-	this->factoryNumber = factoryNumber;
-	this->towerNumber = destroyedTower ? 0 : 1;
+	this->factoryNumber = factories;
+	this->towerNumber = towers;
 	emit towersUpdate(factoryNumber, towerNumber);
 }
 

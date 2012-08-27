@@ -52,8 +52,8 @@ void TowerProcesser::process(string str)
 
 	/* publish the message to ROS */
 	Echoes::Towers msg;
-	msg.isTowerDestroyed = towers;
-	msg.destroyedFactories = factories;
+	msg.towers = towers;
+	msg.factories = factories;
 	publisher.publish(msg);
 }
 

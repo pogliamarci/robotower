@@ -1,2 +1,2 @@
-int8 isTowerDestroyed
-int8 destroyedFactories
+int8 towers
+int8 factories

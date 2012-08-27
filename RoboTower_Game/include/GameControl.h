@@ -83,7 +83,7 @@ public:
 	}
 public slots:
 	void disableRFID(std::string id);
-	void updateTowers(int factoryNumber, bool destroyedTower);
+	void updateTowers(int factories, int towers);
 	void quitNow();
 
 	void startGame();
