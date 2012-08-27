@@ -160,8 +160,15 @@ void IsaacStrategy::useBrian()
 	cdl->add(new crisp_data("RandomAhead", randomAhead, reliability));
 
 	brian->run();
-	brian->debug();
+	brian->debug(); // print on stdout debug information
 
+	/* deallocate what has been allocated!,
+	 * this is quite ugly but _should_ avoid some mem leaks...
+	 * The list itself will be cleared out at the _next_ iteration ;)*/
+	crisp_data_list::iterator itr;
+	for(itr = cdl->begin(); itr != cdl->end(); itr++){
+		delete (*itr).second;
+	}
 }
 
 void IsaacStrategy::updateSensors(SensorStatus& sensorStatus)
