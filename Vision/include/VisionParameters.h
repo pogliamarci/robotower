@@ -6,7 +6,7 @@
 class VisionParameters {
 	private:
 		KnnColorClassifier cc;
-		PixelMap pm;
+		/* PixelMap pm; */
 		ColorDataset cd;
 		ImageAnalyzer analyzer;
 		char* dataset;
@@ -14,7 +14,7 @@ class VisionParameters {
 		static char defaultDataset[];
 		static char defaultClassifier[];
 	public:
-		VisionParameters() : analyzer(&cc, &pm, &cd),
+		VisionParameters() : analyzer(&cc, &cd),
 					dataset(defaultDataset), classifier(defaultClassifier) {}
 		void buildClassifier();
 		void loadClassifier();

@@ -23,7 +23,6 @@ class ImageAnalyzer
 {
 	private:
 		KnnColorClassifier* cc;
-		PixelMap* pm;
 		ColorDataset* cd;
 		BlobBuffer tower_buffer;
 		BlobBuffer factory_buffer;
@@ -33,7 +32,7 @@ class ImageAnalyzer
 		MovingAverageFilter factoryheight_filter;
 		DistanceCalculator distanceCalculator;
 	public:
-		ImageAnalyzer(KnnColorClassifier* cc, PixelMap* pm, ColorDataset* cd);
+		ImageAnalyzer(KnnColorClassifier* cc, ColorDataset* cd);
 		Vision::Results analyze(cv::Mat& img);
 	private:
 		void findObjects(cv::Mat& img);

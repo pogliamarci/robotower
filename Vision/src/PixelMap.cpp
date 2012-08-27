@@ -22,7 +22,7 @@ PixelMap::PixelMap()
 PixelMap::PixelMap(unsigned char* img ,int width, int height, ColorClassifier* cc, int ppb)
 {
   mImage=img;
-  mColorImage=(unsigned char*)malloc(width*height*sizeof(unsigned char));
+  mColorImage = new unsigned char[width*height];
   mWidth=width; 
   mHeight=height;
   curr_line.reserve(width);
@@ -38,26 +38,22 @@ PixelMap::PixelMap(unsigned char* img ,int width, int height, ColorClassifier* c
 //  BallX = BallY = BallZ = 0.0;
 }
 
-void PixelMap::SetImage(unsigned char* img,int width,int height, ColorClassifier* cc, int ppb)
-{
-
-
-  
-  mImage=img; 
-  mColorImage=(unsigned char*)malloc(width*height*sizeof(unsigned char));
-  mWidth=width; 
-  mHeight=height;
-  curr_line.reserve(width);
-  prev_line.reserve(width);
-  Pixel4Byte=ppb;
-  mColor=cc;
-  PxLabel0=PxLabel1=PxLabel2=PxLabel3=PxLabel4='U';
-  mBlobs.clear();
-  nextBlobId=1;
-  mBlobColorList.clear();  
-  
+PixelMap::~PixelMap() {
+	delete[] mColorImage;
+	/* free all the dynamically allocated memory in the map */
+	/* WARNING: DON'T USE ANY POINTER RETURNED FROM THE PIXELMAP
+	 * OBJECT AFTER CALLING THE DESTRUCTOR! (e.g. the Blobs...)
+	 */
+	map < char, map< int,Blob* > >::iterator it;
+	for ( it=mBlobs.begin() ; it != mBlobs.end(); it++ ) {
+		map< int,Blob* >::iterator internalItr;
+		for(internalItr = (*it).second.begin();
+				internalItr != (*it).second.end(); internalItr++) {
+			delete (*internalItr).second;
+		}
+	}
+	mBlobs.clear();
 }
-
 
 void PixelMap::BlobGrowing(int step, int StartWindowX, int StartWindowY, int EndWindowX, int EndWindowY)
 {  
@@ -234,7 +230,7 @@ for(int i=StartWindowY; i < EndWindowY; i+=step)
 		    }
 		  }
 		  if(PxLabel0 != PxLabel3 && PxLabel0 != PxLabel4){
-		    mBlobs[PxLabel0][nextBlobId] = new Blob(nextBlobId,i,j);
+			mBlobs[PxLabel0][nextBlobId] = new Blob(nextBlobId,i,j);
 		    curr_line[j]=nextBlobId++;
 		  }
 		}

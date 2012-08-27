@@ -82,14 +82,14 @@ void ImageAnalyzer::findObjects(cv::Mat& img)
 	BlobInfo factory_blob(FACTORY_CLASS);
 
 	/* Blob parameters, PixMap object initialisation */
-	pm->SetImage((unsigned char*)img.data, img.cols, img.rows, cc, 3);
+	PixelMap pixmap((unsigned char*)img.data, img.cols, img.rows, cc, 3);
 
 	/* Start blob growing algorithm: parameters from the 2nd to the 5th
 	 * identify the region of the image in which blobs are to be searched for
 	 * (2nd to 5th params are set to -1 ==> search blobs over the whole image)
 	 */
-	pm->BlobGrowing(1,-1,-1,-1,-1);
-	for(BlobsItr1=pm->GetBlobs()->begin();BlobsItr1!=pm->GetBlobs()->end();BlobsItr1++)
+	pixmap.BlobGrowing(1,-1,-1,-1,-1);
+	for(BlobsItr1=pixmap.GetBlobs()->begin();BlobsItr1!=pixmap.GetBlobs()->end();BlobsItr1++)
 	{
    		for(BlobsItr2 = BlobsItr1->second.begin();BlobsItr2!=BlobsItr1->second.end();BlobsItr2++)
    		{
@@ -142,10 +142,9 @@ bool ImageAnalyzer::checkShape(int width, int heigth) {
 	return false;
 }
 
-
-ImageAnalyzer::ImageAnalyzer(KnnColorClassifier* cc, PixelMap* pm, ColorDataset* cd)
+/*ImageAnalyzer::ImageAnalyzer(KnnColorClassifier* cc, PixelMap* pm, ColorDataset* cd)*/
+ImageAnalyzer::ImageAnalyzer(KnnColorClassifier* cc, ColorDataset* cd)
 {
 	this->cc = cc;
-	this->pm = pm;
 	this->cd = cd;
 }
