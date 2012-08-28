@@ -151,6 +151,7 @@ unsigned int SerialReader::getLineToParseNum()
 
 int SerialReader::sendStringCommand(char *cmd,int len)
 {
+	std::cerr << cmd << std::endl;
 	pthread_mutex_lock(&mutex);
 	if(fd<0)return -1;
 	for(int i=0;i<len;i++)

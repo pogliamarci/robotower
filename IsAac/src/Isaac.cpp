@@ -38,7 +38,7 @@ void enabler(const std_msgs::Bool& msg)
 		service.request.editYellow = true;
 		service.request.editRed = false;
 		service.request.editGreen = false;
-		service.request.yellowOn = false;
+		service.request.yellowOn = true;
 		service.request.yellowBlinks = true;
 		ledServiceHandle->call(service);
 	}
@@ -56,7 +56,6 @@ void enabler(const std_msgs::Bool& msg)
 
 void setLed(bool isTrapped, bool seenSomething)
 {
-	static bool ledOn = false;
 	static bool ledBlinking = false;
 	static bool greenLedBlinks = false;
 
@@ -68,9 +67,19 @@ void setLed(bool isTrapped, bool seenSomething)
 		service.request.editGreen = false;
 		service.request.editRed = false;
 		service.request.yellowOn = true;
+		service.request.yellowBlinks = false;
+		ledServiceHandle->call(service);
+	} else if(!isTrapped && !ledBlinking) {
+		ledBlinking = true;
+		Echoes::Led service;
+		service.request.editYellow = true;
+		service.request.editGreen = false;
+		service.request.editRed = false;
+		service.request.yellowOn = true;
 		service.request.yellowBlinks = true;
 		ledServiceHandle->call(service);
 	}
+
 	if (seenSomething && !greenLedBlinks)
 	{
 		greenLedBlinks = true;
