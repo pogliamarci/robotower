@@ -20,16 +20,80 @@
 #include "brian.h"
 #include "ros/ros.h"
 #include "std_msgs/Bool.h"
+#include "Echoes/Led.h"
 
 #include "IsaacStrategy.h"
 #include "SensorStatus.h"
 #include "Sender.h"
 
 bool isEnabled = false;
+ros::ServiceClient* ledServiceHandle;
 
 void enabler(const std_msgs::Bool& msg)
 {
 	isEnabled = msg.data;
+	if (isEnabled)
+	{
+		Echoes::Led service;
+		service.request.editYellow = true;
+		service.request.editRed = false;
+		service.request.editGreen = false;
+		service.request.yellowOn = false;
+		service.request.yellowBlinks = true;
+		ledServiceHandle->call(service);
+	}
+	else
+	{
+		Echoes::Led service;
+		service.request.editYellow = true;
+		service.request.editRed = false;
+		service.request.yellowOn = false;
+		service.request.editGreen = true;
+		service.request.greenOn = false;
+		ledServiceHandle->call(service);
+	}
+}
+
+void setLed(bool isTrapped, bool seenSomething)
+{
+	static bool ledOn = false;
+	static bool ledBlinking = false;
+	static bool greenLedBlinks = false;
+
+	if (isTrapped && ledBlinking)
+	{
+		ledBlinking = false;
+		Echoes::Led service;
+		service.request.editYellow = true;
+		service.request.editGreen = false;
+		service.request.editRed = false;
+		service.request.yellowOn = true;
+		service.request.yellowBlinks = true;
+		ledServiceHandle->call(service);
+	}
+	if (seenSomething && !greenLedBlinks)
+	{
+		greenLedBlinks = true;
+		Echoes::Led service;
+		service.request.editYellow = false;
+		service.request.editGreen = true;
+		service.request.editRed = false;
+		service.request.greenOn = true;
+		service.request.greenBlinks = true;
+		ledServiceHandle->call(service);
+
+	}
+	else if (!seenSomething && greenLedBlinks)
+	{
+		greenLedBlinks = false;
+		Echoes::Led service;
+		service.request.editYellow = false;
+		service.request.editGreen = true;
+		service.request.editRed = false;
+		service.request.greenOn = false;
+		service.request.greenBlinks = false;
+		ledServiceHandle->call(service);
+	}
 }
 
 int main(int argc, char** argv)
@@ -38,17 +102,16 @@ int main(int argc, char** argv)
 	ros::init(argc, argv, "isaac");
 	ros::NodeHandle ros_node = ros::NodeHandle();
 
-	srand((unsigned)time(NULL));
+	srand((unsigned) time(NULL));
 
 	//data
 	const char* filename = "../../rfidconfig.txt";
 	SensorStatus sensors(filename);
-	
+
 	//reasoning Strategy
 	IsaacStrategy isaacStrategy;
-	
+
 	// definition of messages\services handlers
-	ros::Subscriber enable_sub = ros_node.subscribe("isaac_enable", 1, enabler);
 	ros::Subscriber sonar_sub = ros_node.subscribe("sonar_data", 1,
 			&SensorStatus::fromSonarCallback, &sensors);
 	ros::Subscriber vision_sub = ros_node.subscribe("vision_results", 1,
@@ -58,6 +121,8 @@ int main(int argc, char** argv)
 	ros::Subscriber disablerfid_sub = ros_node.subscribe("rfid_enable", 1,
 			&SensorStatus::enableRfidCallback, &sensors);
 	ros::ServiceClient client = ros_node.serviceClient<Echoes::Led>("led_data");
+	ledServiceHandle = &client;
+	ros::Subscriber enable_sub = ros_node.subscribe("isaac_enable", 1, enabler);
 
 	ros::Rate loop_rate(LOOPRATE);
 
@@ -67,13 +132,13 @@ int main(int argc, char** argv)
 
 	while (ros::ok())
 	{
-		if(isEnabled)
+		if (isEnabled)
 		{
 			isaacStrategy.activateStrategy(sensors);
 			message_sender.sendMotionMessage(isaacStrategy.getTanSpeed(),
 					isaacStrategy.getRotSpeed());
+			setLed(isaacStrategy.isTrapped(), isaacStrategy.hasSeenSomething());
 		}
-		
 		ros::spinOnce();
 		loop_rate.sleep();
 	}

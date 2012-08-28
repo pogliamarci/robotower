@@ -36,53 +36,62 @@ const int LOOPRATE = 15;
 
 class IsaacStrategy
 {
-	private:
-		MrBrian* brian;
-		
-		RfidAction lastAction;
+private:
+	MrBrian* brian;
 
-		int sonar[CARDINAL_POINTS];
-		
-		bool tower_found;
-		int tower_position;
-		bool factory_found;
-		int factory_position;
-		
-		BlockedTimeCalculator sonarBuffer;
-		int detectedTime;
-		int randomTime;
-		
-		int towerDistance;
-		int factoryDistance;
+	RfidAction lastAction;
 
-		int randomAhead;
-		int randomSearch;
-		
-		int tanSpeed;
-		int rotSpeed;
-		
-		int timer;
-	public:
-		IsaacStrategy();
-		void activateStrategy(SensorStatus& sensorStatus);
-		inline int getRotSpeed()
-		{
-			return rotSpeed;
-		}
-		inline int getTanSpeed()
-		{
-			return tanSpeed;
-		}
-		~IsaacStrategy();
-	private:
-		void modifySensors(RfidAction action);
-		void modifyActuators(RfidAction action);
-		void useBrian();
-		void updateSensors(SensorStatus& sensorStatus);
-		void parseBrianResults();
-		void resetVision();
-		void updateRandomValues();
-		void getAction(SensorStatus& sensorStatus);
+	int sonar[CARDINAL_POINTS];
+
+	bool tower_found;
+	int tower_position;
+	bool factory_found;
+	int factory_position;
+
+	BlockedTimeCalculator sonarBuffer;
+	int detectedTime;
+	int randomTime;
+
+	int towerDistance;
+	int factoryDistance;
+
+	int randomAhead;
+	int randomSearch;
+
+	int tanSpeed;
+	int rotSpeed;
+
+	int timer;
+
+public:
+	IsaacStrategy();
+	void activateStrategy(SensorStatus& sensorStatus);
+	inline int getRotSpeed()
+	{
+		return rotSpeed;
+	}
+	inline int getTanSpeed()
+	{
+		return tanSpeed;
+	}
+	inline bool isTrapped()
+	{
+		return lastAction != nothing;
+	}
+	inline bool hasSeenSomething()
+	{
+		return tower_found || factory_found;
+	}
+	~IsaacStrategy();
+private:
+	void modifySensors(RfidAction action);
+	void modifyActuators(RfidAction action);
+	void useBrian();
+	void updateSensors(SensorStatus& sensorStatus);
+	void parseBrianResults();
+	void resetVision();
+	void updateRandomValues();
+	void getAction(SensorStatus& sensorStatus);
 };
 
 #endif
