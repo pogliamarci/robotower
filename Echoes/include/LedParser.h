@@ -28,7 +28,6 @@ class LedParser
 private:
 	SerialReader* sender;
 	bool greenOn;
-	int redLedNumber;
 	int yellowOn;
 	bool greenLedBlink;
 	bool yellowLedsBlink;
@@ -41,7 +40,10 @@ public:
 	void sendCommands();
 
 private:
-	void sendOnOffCommands(bool green, bool red, bool yellow, bool isOn);
+	void toggleGreen(bool isOn, bool blinking);
+	void toggleRed(int num);
+	void toggleYellow(bool isOn, bool blinking);
+	/*void sendOnOffCommands(bool green, bool red, bool yellow, bool isOn);*/
 };
 
 #endif

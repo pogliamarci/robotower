@@ -29,6 +29,7 @@
 #include "Echoes/Led.h"
 
 #include <iostream>
+#include <pthread.h>
 
 using namespace std;
 
@@ -47,6 +48,16 @@ void parseItAll(SerialReader& read_sonar, Dispatcher& d)
 	}
 }
 
+void* ledThread(void* arg)
+{
+	LedParser* obj = (LedParser*) arg;
+	while(1) {
+		obj->sendCommands();
+		sleep(1);
+	}
+	pthread_exit(NULL);
+}
+
 int main(int argc, char** argv)
 {
 	const char* serialFilename = argc == 2 ? argv[1] : "/dev/ttyUSB0";
@@ -54,10 +65,8 @@ int main(int argc, char** argv)
 	SerialReader read_sonar(serialFilename);
 	Dispatcher dispatcher;
 
-
 	/* Initialise ROS */
 	ros::init(argc, argv, "Echoes");
-
 	ros::NodeHandle ros_node;
 
 	LedParser lp(&read_sonar);
@@ -79,21 +88,16 @@ int main(int argc, char** argv)
 	dispatcher.addProcesser(&rpr, "[RFID]");
 	dispatcher.addProcesser(&tpr, "[TOWER]");
 
-	const int blinkingTimer = 20;
-	int timer = blinkingTimer;
+	pthread_t led_thread;
+	pthread_create(&led_thread, NULL, ledThread, (void*) &lp);
+
 	/* the great loop! */
     while (ros::ok())
     {
     	parseItAll(read_sonar, dispatcher);
 		ros::spinOnce();
-		timer--;
-		if (timer == 0)
-		{
-			timer = blinkingTimer;
-			lp.sendCommands();
-		}
-
     }
-	return EXIT_SUCCESS;
 
+    pthread_exit(NULL);
+	return EXIT_SUCCESS;
 }

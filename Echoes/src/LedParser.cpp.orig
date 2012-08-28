@@ -36,8 +36,13 @@ LedParser::LedParser(SerialReader* read_sonar)
 bool LedParser::ledCallback(Echoes::Led::Request& request,
 		Echoes::Led::Response& response)
 {
-
+<<<<<<< HEAD
+	std::cerr << "red " << request.editRed << "yellow " << request.editYellow
+			<< "green " << request.editGreen << std::endl;
+	if (request.editRed)
+=======
 	if(request.editRed)
+>>>>>>> dcf1b3062c5fcbb80e35f189cc6248d6729ae003
 	{
 		toggleRed(request.redNumOn);
 	}
