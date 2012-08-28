@@ -27,7 +27,6 @@ LedParser::LedParser(SerialReader* read_sonar)
 	yellowOn = 0;
 	greenLedBlink = false;
 	yellowLedsBlink = false;
-	redLedNumber = 0;
 }
 
 /**
@@ -37,24 +36,18 @@ LedParser::LedParser(SerialReader* read_sonar)
 bool LedParser::ledCallback(Echoes::Led::Request& request,
 		Echoes::Led::Response& response)
 {
-	if (request.editRed)
+	if(request.editRed)
 	{
-		redLedNumber = request.redNumOn;
+		toggleRed(request.redNumOn);
 	}
-	if (request.editGreen)
+	if(request.editYellow)
 	{
-		greenLedBlink = request.greenBlinks;
+		toggleYellow(request.yellowOn, request.yellowBlinks);
 	}
-	if (request.editYellow)
+	if(request.editGreen)
 	{
-		yellowLedsBlink = request.yellowBlinks;
+		toggleGreen(request.greenOn, request.greenBlinks);
 	}
-
-	bool green = request.editGreen && !greenLedBlink;
-	bool red = request.editRed;
-	bool yellow = request.editYellow && !yellowLedsBlink;
-	sendOnOffCommands(green, red, yellow, true);
-
 	response.requestSuccessful = true;
 	return true;
 }
@@ -64,8 +57,11 @@ bool LedParser::resetledCallback(Echoes::Led::Request& request,
 {
 	greenLedBlink = false;
 	yellowLedsBlink = false;
-	redLedNumber = 0;
-	sendOnOffCommands(true, true, true, false);
+
+	toggleGreen(false, false);
+	toggleYellow(false, false);
+	toggleRed(0);
+
 	response.requestSuccessful = true;
 	return true;
 }
@@ -84,37 +80,45 @@ void LedParser::sendCommands()
 		yellowOn = yellowOn == 3 ? 0 : yellowOn + 1;
 		for (int i = 0; i < 4; i++)
 		{
-			sprintf(buf, "led Y %c %c\r\n", (char) i + '0',
+			char c = i + '0';
+			sprintf(buf, "led Y %c %c\r\n", c,
 					(i == yellowOn) ? '1' : '0');
 			sender->sendStringCommand(buf, strlen(buf));
 		}
 	}
 }
 
-void LedParser::sendOnOffCommands(bool green, bool red, bool yellow, bool isOn)
+void LedParser::toggleGreen(bool isOn, bool blinking)
 {
-	char buf[10];
-	if (red)
+	greenLedBlink = blinking && isOn;
+	if(!greenLedBlink)
 	{
-		for (int i = 0; i < 4; i++)
-		{
-			sprintf(buf, "led R %c %c\r\n", (char) i + '0',
-					i < redLedNumber ? '1' : '0');
-			sender->sendStringCommand(buf, strlen(buf));
-		}
-	}
-	if (green)
-	{
+		char buf[10];
 		sprintf(buf, "led G 0 %c\r\n", isOn ? '1' : '0');
 		sender->sendStringCommand(buf, strlen(buf));
 	}
-	if (yellow)
+}
+
+void LedParser::toggleRed(int num)
+{
+	char buf[10];
+	for (int i = 0; i < 4; i++)
 	{
-		for (int i = 0; i < 4; i++)
+		sprintf(buf, "led R %c %c\r\n", (char) i + '0',
+				i < num ? '1' : '0');
+		sender->sendStringCommand(buf, strlen(buf));
+	}
+}
+
+void LedParser::toggleYellow(bool isOn, bool blinking) {
+	yellowLedsBlink = blinking && isOn;
+	if(!yellowLedsBlink)
+	{
+		char buf[10];
+		for (char c = '0'; c < '4'; c++)
 		{
-			sprintf(buf, "led Y %c %c\r\n", (char) i + '0', isOn ? '1' : '0');
+			sprintf(buf, "led Y %c %c\r\n", c, isOn ? '1' : '0');
 			sender->sendStringCommand(buf, strlen(buf));
 		}
 	}
 }
-
