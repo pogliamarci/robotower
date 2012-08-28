@@ -20,7 +20,7 @@
 #include "LedParser.h"
 
 //costruttore: inizializza le variabili, aggancia l'oggetto che invia dati al sonar
-LedParser::LedParser(ReadSonar* read_sonar)
+LedParser::LedParser(SerialReader* read_sonar)
 {
 	this->sender = read_sonar;
 	greenOn = false;

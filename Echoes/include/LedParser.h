@@ -19,14 +19,14 @@
 #define LED_PARSER_H
 
 #include <iostream>
-#include "ReadSonar.h"
+#include "SerialCommunication.h"
 #include "ros/ros.h"
 #include "Echoes/Led.h"
 
 class LedParser
 {
 private:
-	ReadSonar* sender;
+	SerialReader* sender;
 	bool greenOn;
 	int redLedNumber;
 	int yellowOn;
@@ -34,7 +34,7 @@ private:
 	bool yellowLedsBlink;
 
 public:
-	LedParser(ReadSonar* read_sonar);
+	LedParser(SerialReader* read_sonar);
 	bool ledCallback(Echoes::Led::Request& request,
 			Echoes::Led::Response& response);
 	bool resetledCallback(Echoes::Led::Request& request, Echoes::Led::Response& response);

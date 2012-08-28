@@ -19,9 +19,8 @@
 #include "TowerProcesser.h"
 #include "SonarProcesser.h"
 #include "RfidProcesser.h"
-#include "ReadSonar.h"
+#include "SerialCommunication.h"
 #include "LedParser.h"
-#include <iostream>
 
 #include "ros/ros.h"
 #include "Echoes/Sonar.h"
@@ -29,9 +28,11 @@
 #include "Echoes/Towers.h"
 #include "Echoes/Led.h"
 
+#include <iostream>
+
 using namespace std;
 
-void parseItAll(ReadSonar& read_sonar, Dispatcher& d)
+void parseItAll(SerialReader& read_sonar, Dispatcher& d)
 {
 	if(read_sonar.readData()==0)
 	{
@@ -50,7 +51,7 @@ int main(int argc, char** argv)
 {
 	const char* serialFilename = argc == 2 ? argv[1] : "/dev/ttyUSB0";
 
-	ReadSonar read_sonar(serialFilename);
+	SerialReader read_sonar(serialFilename);
 	Dispatcher dispatcher;
 
 

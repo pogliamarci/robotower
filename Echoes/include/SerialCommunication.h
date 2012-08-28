@@ -15,26 +15,50 @@
  * GNU General Public License for more details.
  */
 
-#ifndef SERIAL_COMMUNICATION_H
-#define SERIAL_COMMUNICATION_H
+#ifndef READOSONAR_H_
+#define READOSONAR_H_
 
+#include "CharCircularBuffer.h"
+
+#include <fcntl.h>
+#include <unistd.h>
+#include <pthread.h>
 #include <poll.h>
-#include <stdio.h>
-#include <errno.h>
+#include <termios.h>
+#include <exception>
+#include <vector>
+#include <string>
 
-class SerialCommunication
+class SerialDeviceException: public std::exception
 {
-	struct pollfd ufd[1];
-
 	public:
+		virtual const char* what() const throw();
+};
+
+class SerialReader
+{
+	public:
+		SerialReader(std::string serialDevice) throw (SerialDeviceException);
+		int sendStringCommand(char *cmd,int len);
+		std::string getLine();
+		bool isReady();
+		int readData();
+		unsigned int getLineToParseNum();
+		~SerialReader();
+	private:
+		int fd;  	//descrittore del file per leggere/scrivere sulla seriale
+		termios oldtio,newtio;
+		CharCircularBuffer * buffer;
+		char * tmp_buf;
+		static const int MAX_TMP_BUF = 256;
+		pthread_mutex_t mutex;
+		/* the following were in SerialCommunication class */
 		static const int wait_ok=1;
 		static const int wait_tout=0;
 		static const int wait_err=-1;
-
+		struct pollfd ufd[1];
 		void set_fd(int fd);
-
 		int waitData(int msec_tout);
 };
-
 
 #endif

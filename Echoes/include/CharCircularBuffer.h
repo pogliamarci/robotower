@@ -18,10 +18,9 @@
 #ifndef CharCircularBuffer_h_
 #define CharCircularBuffer_h_
 
-#include <stdio.h>
-#include <string>
-
+#include <cstdio>
 #include <string.h>
+#include <string>
 
 
 class CharCircularBuffer
