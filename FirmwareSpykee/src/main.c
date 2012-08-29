@@ -41,6 +41,7 @@ static WORKING_AREA(spykeeLedBlinkerWorkingArea, 128);
 
 CircularBuffer circularBuffer;
 Mutex bufferMutex;
+Mutex spykeeLedMutex;
 EventSource eventSource;
 
 /* enable the blinking mode for the three groups of leds on the robot
@@ -141,11 +142,14 @@ static void cmd_led(BaseChannel* channel, int argc, char** argv)
 	}
 	else
 	{
+
 		blinking[offset/4] = FALSE;
+		chMtxLock(&spykeeLedMutex);
 		while (argv[1][x] != '\0')
 		{
 			setLed(offset + x, NUMERIC_CHAR_TO_INT(argv[1][x]));
 		}
+		chMtxUnlock();
 	}
 }
 
@@ -280,6 +284,7 @@ static msg_t spykeeLedBlinkerThread(void *arg)
 	(void) arg;
 	while (TRUE)
 	{
+		chMtxLock(&spykeeLedMutex);
 		if(blinking[0])
 		{
 			setLed(redStat, FALSE);
@@ -297,6 +302,8 @@ static msg_t spykeeLedBlinkerThread(void *arg)
 			setLed(8, greenStat);
 			greenStat = !greenStat;
 		}
+		chMtxUnlock();
+		chThdSleepMilliseconds(500);
 	}
 	return 0;
 }
@@ -322,20 +329,14 @@ static void icuwidthcb(ICUDriver *icup)
 		sonar_data.east = width;
 }
 
-static void icuperiodcb(ICUDriver *icup)
-{
-	(void) icup;
-	// does absolutely nothing!!!
-}
-
 /* Thread used for read data from sonar */
 static msg_t sonarThread(void *arg)
 {
 	(void) arg;
 	char buf[40];
-	const int frequenzaTimer = 1000000; //T = 1uS // ???
+	const int frequenzaTimer = 1000000; //T = 1uS
 	ICUConfig icucfg =
-	{ ICU_INPUT_ACTIVE_HIGH, frequenzaTimer, icuwidthcb, icuperiodcb };
+	{ ICU_INPUT_ACTIVE_HIGH, frequenzaTimer, icuwidthcb, NULL };
 	icuStart(&ICUD1, &icucfg); //PA8, ICDU1
 	icuStart(&ICUD3, &icucfg); //PB4, ICDU3
 	icuStart(&ICUD5, &icucfg); //PA0, ICDU5
