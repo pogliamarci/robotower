@@ -82,10 +82,10 @@ CSRC = $(PORTSRC) \
        $(BOARDSRC) \
        $(CHIBIOS)/os/various/lis302dl.c \
        $(CHIBIOS)/os/various/chprintf.c \
-       shell.c \
-       main.c \
-       CircularBuffer.c \
-       chsprintf.c
+       src/shell.c \
+       src/main.c \
+       src/CircularBuffer.c \
+       src/chsprintf.c
 
 # C++ sources that can be compiled in ARM or THUMB mode depending on the global
 # setting.
@@ -193,7 +193,7 @@ UDEFS =
 UADEFS =
 
 # List all user directories here
-UINCDIR =
+UINCDIR = include
 
 # List the user directory to look for the libraries here
 ULIBDIR =

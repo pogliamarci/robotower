@@ -69,7 +69,7 @@ int main(int argc, char** argv)
 	ros::init(argc, argv, "Echoes");
 	ros::NodeHandle ros_node;
 
-	LedParser lp(&read_sonar);
+	LedParser ledParser(&read_sonar);
 
 	/* Initialisation as publisher of sonar_data msgs */
 	ros::Publisher sonar_data_pub = ros_node.advertise<Echoes::Sonar>("sonar_data", 1000);
@@ -77,8 +77,8 @@ int main(int argc, char** argv)
 	ros::Publisher towers_data_pub = ros_node.advertise<Echoes::Towers>("towers_data", 1000);
 
 	/* Initialization of Led services */
-	ros::ServiceServer led_service = ros_node.advertiseService("led_data", &LedParser::ledCallback, &lp);
-	ros::ServiceServer resetLed_service = ros_node.advertiseService("resetLed_data", &LedParser::ledCallback, &lp);
+	ros::ServiceServer led_service = ros_node.advertiseService("led_data", &LedParser::ledCallback, &ledParser);
+	ros::ServiceServer resetLed_service = ros_node.advertiseService("resetLed_data", &LedParser::ledCallback, &ledParser);
 
 	/* configuration */
 	SonarProcesser spr(sonar_data_pub);
@@ -89,7 +89,9 @@ int main(int argc, char** argv)
 	dispatcher.addProcesser(&tpr, "[TOWER]");
 
 	pthread_t led_thread;
-	pthread_create(&led_thread, NULL, ledThread, (void*) &lp);
+	pthread_create(&led_thread, NULL, ledThread, (void*) &ledParser);
+
+	ledParser.toggleYellow(true, true);
 
 	/* the great loop! */
     while (ros::ok())

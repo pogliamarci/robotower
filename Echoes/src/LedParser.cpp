@@ -38,6 +38,7 @@ LedParser::LedParser(SerialReader* read_sonar)
 bool LedParser::ledCallback(Echoes::Led::Request& request,
 		Echoes::Led::Response& response)
 {
+
 	if(request.editRed)
 	{
 		toggleRed(request.redNumOn);
