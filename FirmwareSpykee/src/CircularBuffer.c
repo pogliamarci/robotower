@@ -16,25 +16,28 @@
  */
 
 #include "CircularBuffer.h"
-#include "ch.h"
-#include "hal.h"
 #include "chprintf.h"
 
-Mutex bufferMutex;
+static char bufferRemove(CircularBuffer* buf);
+static int bufferPut(CircularBuffer* buf, char ch);
+static int bufferIsFull(const CircularBuffer* buf);
+static int bufferIsEmpty(const CircularBuffer* buf);
 
 void bufferInit(CircularBuffer* buf) {
 	buf->start = 0;
 	buf->end = 0;
+	chMtxInit(&(buf->mutex));
 }
 
-char bufferRemove(CircularBuffer* buf) {
+static char bufferRemove(CircularBuffer* buf)
+{
 	if (bufferIsEmpty(buf)) return '\0';
 	char carattere = buf->content[buf->start];
 	buf->start = (buf->start + 1) % BUFFER_LENGTH;
 	return carattere;
 }
 
-int bufferPut(CircularBuffer* buf, char ch) {
+static int bufferPut(CircularBuffer* buf, char ch) {
 	if (bufferIsFull(buf))
 	{
 		chprintf((BaseChannel*) &SD2, "BUFFER PIENO!!! ERRORE!!!");
@@ -46,6 +49,7 @@ int bufferPut(CircularBuffer* buf, char ch) {
 }
 
 int bufferPutString(CircularBuffer* buf, const char str[]) {
+	chMtxLock(&(buf->mutex));
 	int i = 0;
 	int esito = 0;
 	for (i = 0; str[i] != '\0' && esito == 0; i++) {
@@ -55,13 +59,26 @@ int bufferPutString(CircularBuffer* buf, const char str[]) {
 		bufferPut(buf, '\n');
 		esito = bufferPut(buf, '\r');
 	}
+	chMtxUnlock();
 	return esito;
 }
 
-int bufferIsFull(const CircularBuffer* buf) {
+static int bufferIsFull(const CircularBuffer* buf)
+{
 	return (buf->end + 1) % BUFFER_LENGTH == buf->start;
 }
 
-int bufferIsEmpty(const CircularBuffer* buf) {
+static int bufferIsEmpty(const CircularBuffer* buf)
+{
 	return buf->start == buf->end;
+}
+
+void writeContentOnBaseChannel(CircularBuffer* buf, BaseChannel* bc)
+{
+	chMtxLock(&(buf->mutex));
+	while (!bufferIsEmpty(buf))
+	{
+		chprintf(bc, "%c", bufferRemove(buf));
+	}
+	chMtxUnlock();
 }

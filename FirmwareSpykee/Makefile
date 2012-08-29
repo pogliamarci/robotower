@@ -87,6 +87,7 @@ CSRC = $(PORTSRC) \
        src/Rfid.c \
        src/TowersAndFactories.c \
        src/Sonar.c \
+       src/SpykeeShell.c \
        src/CircularBuffer.c \
        src/chsprintf.c
 

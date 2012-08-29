@@ -16,12 +16,13 @@
  */
 
 #ifndef FIRMWARESPIKEE_H_
-#define FIRMWARESPIKEE_H_
+#define FIRMWARESPYKEE_H_
 
 #include <string.h>
 #include "ch.h"
 #include "hal.h"
 #include "shell.h"
+
 #include "chsprintf.h"
 #include "chprintf.h"
 #include "CircularBuffer.h"
@@ -43,12 +44,12 @@ void resetLed(void);
 void startTowersAndFactoriesThread(void);
 void startRfidThread(void);
 void startSonarThread(void);
+void shellInitControl(Thread** shell);
 
 /* Global Variables */
 extern bool_t blinking[];
-extern Mutex bufferMutex;
 extern Mutex spykeeLedMutex;
 extern EventSource eventSource;
 extern CircularBuffer circularBuffer;
 
-#endif /* FIRMWARESPIKEE_H_ */
+#endif /* FIRMWARESPYKEE_H_ */

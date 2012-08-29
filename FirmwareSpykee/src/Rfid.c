@@ -15,7 +15,8 @@
  * GNU General Public License for more details.
  */
 
-#include "FirmwareSpikee.h"
+#include "FirmwareSpykee.h"
+
 static WORKING_AREA(rfidWorkingArea, 1024);
 
 /* Thread used to manage rfid Reader*/
@@ -44,9 +45,7 @@ static msg_t rfidThread(void *arg)
 		buf[rfidMessageSize - 3] = '\0'; // strip the trailing CR, LF, ETX
 		chsprintf(buf2, "[RFID] %s", buf + 1); // +1 to strip the leading STX char
 
-		chMtxLock(&bufferMutex);
 		bufferPutString(&circularBuffer, buf2);
-		chMtxUnlock();
 	}
 	return 0;
 }

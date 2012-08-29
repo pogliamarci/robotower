@@ -15,24 +15,16 @@
  * GNU General Public License for more details.
  */
 
-#include "FirmwareSpikee.h"
+#include "FirmwareSpykee.h"
 
 static WORKING_AREA(TowersAndFactoriesWorkingArea, 256);
-
-/* enable the blinking mode for the three groups of leds on the robot
- * -> blinking[0] controls the red leds
- * -> blinking[1] controls the yellow leds,
- * -> blinking[2] controls the green led */
-bool_t blinking[] = {FALSE, FALSE, FALSE};
 
 void writeStatusToBuffer(int num_factory, int tower_destroyed)
 {
 	char statusMessage[20];
 	chsprintf(statusMessage, "[TOWER] F:%d,T:%d", num_factory,
 			tower_destroyed ? 0 : 1);
-	chMtxLock(&bufferMutex);
 	bufferPutString(&circularBuffer, statusMessage);
-	chMtxUnlock();
 }
 
 /* thread that manages gate opener signals */
@@ -100,7 +92,3 @@ void startTowersAndFactoriesThread(void)
 	chThdCreateStatic(TowersAndFactoriesWorkingArea, sizeof(TowersAndFactoriesWorkingArea),
 				NORMALPRIO, towerFactoriesThread, NULL );
 }
-
-
-
-

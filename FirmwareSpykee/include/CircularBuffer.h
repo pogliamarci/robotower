@@ -8,19 +8,20 @@
 #ifndef CIRCULARBUFFER_H_
 #define CIRCULARBUFFER_H_
 
+#include "ch.h"
+#include "hal.h"
+
 #define BUFFER_LENGTH 100
 
 typedef struct CircularBuffer_s {
 	int start;
 	int end;
 	char content[BUFFER_LENGTH];
+	Mutex mutex;
 } CircularBuffer;
 
 void bufferInit(CircularBuffer* buf);
-char bufferRemove(CircularBuffer* buf);
-int bufferPut(CircularBuffer* buf, char ch);
 int bufferPutString(CircularBuffer* buf, const char str[]);
-int bufferIsFull(const CircularBuffer* buf);
-int bufferIsEmpty(const CircularBuffer* buf);
+void writeContentOnBaseChannel(CircularBuffer* buf, BaseChannel* bc);
 
 #endif /* CIRCULARBUFFER_H_ */

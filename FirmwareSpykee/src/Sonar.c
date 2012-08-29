@@ -15,7 +15,7 @@
  * GNU General Public License for more details.
  */
 
-#include "FirmwareSpikee.h"
+#include "FirmwareSpykee.h"
 
 typedef struct
 {
@@ -74,9 +74,7 @@ static msg_t sonarThread(void *arg)
 		sonar_data.south = 0;
 		sonar_data.west = 0;
 		sonar_data.east = 0;
-		chMtxLock(&bufferMutex);
 		bufferPutString(&circularBuffer, buf);
-		chMtxUnlock();
 		chThdSleepMilliseconds(100);
 	}
 

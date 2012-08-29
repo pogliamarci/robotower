@@ -15,12 +15,18 @@
  * GNU General Public License for more details.
  */
 
-#include "FirmwareSpikee.h"
+#include "FirmwareSpykee.h"
 
 Mutex spykeeLedMutex;
 
 static WORKING_AREA(blinkerWorkingArea, 128);
 static WORKING_AREA(spykeeLedBlinkerWorkingArea, 128);
+
+/* enable the blinking mode for the three groups of leds on the robot
+ * -> blinking[0] controls the red leds
+ * -> blinking[1] controls the yellow leds,
+ * -> blinking[2] controls the green led */
+bool_t blinking[] = {FALSE, FALSE, FALSE};
 
 /* Led Management */
 // red leds: PE7 - PE8 - PE9 - PE10
@@ -55,8 +61,8 @@ void resetLed(void)
 /* Thread that blink sequentially the four integrated leds of the STM32F4Discovery */
 static msg_t spykeeLedBlinkerThread(void *arg)
 {
-	short redStat = 0;
-	short yellowStat = 0;
+	short redStat = 3;
+	short yellowStat = 3;
 	bool_t greenStat = FALSE;
 
 	(void) arg;
@@ -66,14 +72,14 @@ static msg_t spykeeLedBlinkerThread(void *arg)
 		if (blinking[0])
 		{
 			setLed(redStat, FALSE);
-			redStat = redStat == 3 ? 1 : redStat + 1;
+			redStat = redStat == 3 ? 0 : redStat + 1;
 			setLed(redStat, TRUE);
 		}
 		if (blinking[1])
 		{
 			setLed(4 + yellowStat, FALSE);
-			yellowStat = yellowStat == 3 ? 1 : yellowStat + 1;
-			setLed(yellowStat, TRUE);
+			yellowStat = yellowStat == 3 ? 0 : yellowStat + 1;
+			setLed(4 + yellowStat, TRUE);
 		}
 		if (blinking[2])
 		{
