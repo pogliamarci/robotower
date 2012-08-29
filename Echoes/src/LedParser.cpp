@@ -23,10 +23,6 @@
 LedParser::LedParser(SerialReader* read_sonar)
 {
 	this->sender = read_sonar;
-	greenOn = false;
-	yellowOn = 0;
-	greenLedBlink = false;
-	yellowLedsBlink = false;
 	toggleYellow(true, true);
 	toggleGreen(true, true);
 }
@@ -39,15 +35,15 @@ bool LedParser::ledCallback(Echoes::Led::Request& request,
 		Echoes::Led::Response& response)
 {
 
-	if(request.editRed)
+	if (request.editRed)
 	{
 		toggleRed(request.redNumOn);
 	}
-	if(request.editYellow)
+	if (request.editYellow)
 	{
 		toggleYellow(request.yellowOn, request.yellowBlinks);
 	}
-	if(request.editGreen)
+	if (request.editGreen)
 	{
 		toggleGreen(request.greenOn, request.greenBlinks);
 	}
@@ -69,59 +65,49 @@ bool LedParser::resetledCallback(Echoes::Led::Request& request,
 	return true;
 }
 
-void LedParser::sendCommands()
-{
-	char buf[20];
-	if (greenLedBlink)
-	{
-		greenOn = !greenOn;
-		sprintf(buf, "led G 0 %c\r\n", greenOn ? '1' : '0');
-		sender->sendStringCommand(buf, strlen(buf));
-	}
-	if (yellowLedsBlink)
-	{
-		yellowOn = yellowOn == 3 ? 0 : yellowOn + 1;
-		for (int i = 0; i < 4; i++)
-		{
-			char c = i + '0';
-			sprintf(buf, "led Y %c %c\r\n", c,
-					(i == yellowOn) ? '1' : '0');
-			sender->sendStringCommand(buf, strlen(buf));
-		}
-	}
-}
-
 void LedParser::toggleGreen(bool isOn, bool blinking)
 {
-	greenLedBlink = blinking && isOn;
-	if(!greenLedBlink)
+	char buf[10];
+	if (blinking && isOn)
 	{
-		char buf[10];
-		sprintf(buf, "led G 0 %c\r\n", isOn ? '1' : '0');
-		sender->sendStringCommand(buf, strlen(buf));
+		sprintf(buf, "led G B\r\n");
 	}
+	else
+	{
+		sprintf(buf, "led G %c\r\n", isOn ? '1' : '0');
+	}
+	sender->sendStringCommand(buf, strlen(buf));
 }
 
 void LedParser::toggleRed(int num)
 {
 	char buf[10];
-	for (int i = 0; i < 4; i++)
-	{
-		sprintf(buf, "led R %c %c\r\n", (char) i + '0',
-				i < num ? '1' : '0');
-		sender->sendStringCommand(buf, strlen(buf));
-	}
+	char binaryNum[5];
+	toBinaryString(binaryNum, num);
+	sprintf(buf, "led R %s\r\n", binaryNum);
+	sender->sendStringCommand(buf, strlen(buf));
 }
 
-void LedParser::toggleYellow(bool isOn, bool blinking) {
-	yellowLedsBlink = blinking && isOn;
-	if(!yellowLedsBlink)
+void LedParser::toggleYellow(bool isOn, bool blinking)
+{
+	char buf[10];
+	if (blinking && isOn)
 	{
-		for (char c = '0'; c < '1'; c++)
-		{
-			char buf[10];
-			sprintf(buf, "led Y %c %c\r\n", c, isOn ? '1' : '0');
-			sender->sendStringCommand(buf, strlen(buf));
-		}
+		sprintf(buf, "led Y B\r\n");
 	}
+	else
+	{
+		sprintf(buf, "led Y %s\r\n", isOn ? "1111" : "0000");
+	}
+	sender->sendStringCommand(buf, strlen(buf));
 }
+
+void LedParser::toBinaryString(char *binaryNum, int num)
+{
+	for (int i = 0; i < 4; i++)
+	{
+		binaryNum[0] = (i < num) ? '1' : '0';
+	}
+	binaryNum[4] = '\0';
+}
+

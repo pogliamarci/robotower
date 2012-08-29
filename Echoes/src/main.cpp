@@ -29,7 +29,6 @@
 #include "Echoes/Led.h"
 
 #include <iostream>
-#include <pthread.h>
 
 using namespace std;
 
@@ -42,20 +41,9 @@ void parseItAll(SerialReader& read_sonar, Dispatcher& d)
 		for(unsigned int i=0;i<n_line;i++)
 		{
 			string l = read_sonar.getLine();
-			// cerr << "Letta riga - " << l << endl;
 			d.dispatch(l);
 		}
 	}
-}
-
-void* ledThread(void* arg)
-{
-	LedParser* obj = (LedParser*) arg;
-	while(1) {
-		obj->sendCommands();
-		sleep(1);
-	}
-	pthread_exit(NULL);
 }
 
 int main(int argc, char** argv)
@@ -88,18 +76,11 @@ int main(int argc, char** argv)
 	dispatcher.addProcesser(&rpr, "[RFID]");
 	dispatcher.addProcesser(&tpr, "[TOWER]");
 
-	pthread_t led_thread;
-	pthread_create(&led_thread, NULL, ledThread, (void*) &ledParser);
-
-	ledParser.toggleYellow(true, true);
-
 	/* the great loop! */
     while (ros::ok())
     {
     	parseItAll(read_sonar, dispatcher);
 		ros::spinOnce();
     }
-
-    pthread_exit(NULL);
 	return EXIT_SUCCESS;
 }

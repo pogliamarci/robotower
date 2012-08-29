@@ -38,12 +38,12 @@ public:
 			Echoes::Led::Response& response);
 	bool resetledCallback(Echoes::Led::Request& request, Echoes::Led::Response& response);
 	void sendCommands();
-	void toggleYellow(bool isOn, bool blinking);
 
 private:
 	void toggleGreen(bool isOn, bool blinking);
 	void toggleRed(int num);
-	//void toggleYellow(bool isOn, bool blinking);
+	void toggleYellow(bool isOn, bool blinking);
+	void toBinaryString(char *binaryNum, int num);
 };
 
 #endif
