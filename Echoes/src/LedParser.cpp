@@ -27,6 +27,8 @@ LedParser::LedParser(SerialReader* read_sonar)
 	yellowOn = 0;
 	greenLedBlink = false;
 	yellowLedsBlink = false;
+	toggleYellow(true, true);
+	toggleGreen(true, true);
 }
 
 /**
@@ -68,7 +70,7 @@ bool LedParser::resetledCallback(Echoes::Led::Request& request,
 
 void LedParser::sendCommands()
 {
-	char buf[10];
+	char buf[20];
 	if (greenLedBlink)
 	{
 		greenOn = !greenOn;
@@ -114,9 +116,9 @@ void LedParser::toggleYellow(bool isOn, bool blinking) {
 	yellowLedsBlink = blinking && isOn;
 	if(!yellowLedsBlink)
 	{
-		char buf[10];
-		for (char c = '0'; c < '4'; c++)
+		for (char c = '0'; c < '1'; c++)
 		{
+			char buf[10];
 			sprintf(buf, "led Y %c %c\r\n", c, isOn ? '1' : '0');
 			sender->sendStringCommand(buf, strlen(buf));
 		}

@@ -36,17 +36,13 @@ const char* SerialDeviceException::what() const throw()
 
 SerialReader::SerialReader(std::string serialDevice) throw (SerialDeviceException)
 {
-	pthread_mutex_init(&mutex, NULL);
-	buffer = NULL; /* wtf? */
-	tmp_buf=NULL;
-	tmp_buf=new char[MAX_TMP_BUF];
 	fd = open(serialDevice.c_str(), O_RDWR | O_NOCTTY );
 	if(fd>=0)
 	{
 		tcgetattr(fd,&oldtio);
 		bzero(&newtio, sizeof(termios));
-		newtio.c_cflag = BAUDRATE  | CS8 | CLOCAL | CREAD | CLOCAL ;
-		newtio.c_iflag = IGNPAR;
+		newtio.c_cflag = BAUDRATE | CS8 | CLOCAL | CREAD | CLOCAL;
+		newtio.c_iflag = 0;
 		newtio.c_oflag = 0;
 		newtio.c_lflag &= ~ICANON;
 
@@ -54,16 +50,20 @@ SerialReader::SerialReader(std::string serialDevice) throw (SerialDeviceExceptio
 		
 		newtio.c_cc[VTIME]    = 0;
 		newtio.c_cc[VMIN]     = 1;   
+
 		tcflush(fd, TCIFLUSH);
 		tcsetattr(fd,TCSANOW,&newtio);
 	
-		buffer = new CharCircularBuffer(MAX_BUF_CHAR,'\r');
-				
+
 	}
 	else
 	{
 		throw SerialDeviceException();
 	}
+
+	pthread_mutex_init(&mutex, NULL);
+	tmp_buf = new char[MAX_TMP_BUF];
+	buffer = new CharCircularBuffer(MAX_BUF_CHAR,'\r');
 }
 
 SerialReader::~SerialReader()
@@ -85,7 +85,7 @@ SerialReader::~SerialReader()
 
 bool SerialReader::isReady()
 {
-	return (fd>=0);
+	return fd >= 0;
 }
 
 int SerialReader::readData()
@@ -95,10 +95,8 @@ int SerialReader::readData()
 		return -1;
 	}
 
-	int res;
-	unsigned int count_c=0;
-	
-	res=0;
+	int res = 0;
+	unsigned int count_c = 0;
 
 	do {
 		switch(waitData(TOUT))
@@ -155,9 +153,13 @@ int SerialReader::sendStringCommand(char *cmd,int len)
 	if(fd<0)return -1;
 	for(int i=0;i<len;i++)
 	{
-		if(write(fd,&cmd[i],1)!=1)return -1;
+		if(write(fd,&cmd[i],1) == -1) {
+			return -1;
+			perror("Error writing to the serial port!");
+		}
 		usleep(CHAR_PAUSE);
 	}
+	cout << cmd << endl;
 	pthread_mutex_unlock(&mutex);
 	return 0;
 }
