@@ -313,7 +313,7 @@ static msg_t spykeeLedBlinkerThread(void *arg)
 SonarData sonar_data =
 { 0, 0, 0, 0 };
 
-static void icuwidthcb(ICUDriver *icup)
+static void icuWidthCB(ICUDriver *icup)
 {
 	/* compute the measured distance */
 	const int scaleFactor = 5787; //5,7874 us/mm
@@ -336,7 +336,7 @@ static msg_t sonarThread(void *arg)
 	char buf[40];
 	const int frequenzaTimer = 1000000; //T = 1uS
 	ICUConfig icucfg =
-	{ ICU_INPUT_ACTIVE_HIGH, frequenzaTimer, icuwidthcb, NULL };
+	{ ICU_INPUT_ACTIVE_HIGH, frequenzaTimer, icuWidthCB, NULL };
 	icuStart(&ICUD1, &icucfg); //PA8, ICDU1
 	icuStart(&ICUD3, &icucfg); //PB4, ICDU3
 	icuStart(&ICUD5, &icucfg); //PA0, ICDU5
@@ -423,6 +423,7 @@ int main(void)
 
 	/* Mutex initialization */
 	chMtxInit(&bufferMutex);
+	chMtxInit(&spykeeLedMutex);
 
 	/* Buffer initialization*/
 	bufferInit(&circularBuffer);
