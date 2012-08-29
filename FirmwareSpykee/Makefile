@@ -83,6 +83,10 @@ CSRC = $(PORTSRC) \
        $(CHIBIOS)/os/various/chprintf.c \
        src/shell.c \
        src/main.c \
+       src/Led.c \
+       src/Rfid.c \
+       src/TowersAndFactories.c \
+       src/Sonar.c \
        src/CircularBuffer.c \
        src/chsprintf.c
 

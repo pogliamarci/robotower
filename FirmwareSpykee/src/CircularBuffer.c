@@ -1,14 +1,26 @@
 /*
- * CircularBuffer.c
+ * Firmware for the robot Spykee, for the STM32F4xx board
  *
- *  Created on: Jun 20, 2012
- *      Author: stm32
+ * Copyright (C) 2012 Politecnico di Milano
+ * Copyright (C) 2012 Marcello Pogliani, Davide Tateo
+ * Versione 1.0
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation, version 2 of the License.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  */
 
 #include "CircularBuffer.h"
 #include "ch.h"
 #include "hal.h"
 #include "chprintf.h"
+
+Mutex bufferMutex;
 
 void bufferInit(CircularBuffer* buf) {
 	buf->start = 0;
