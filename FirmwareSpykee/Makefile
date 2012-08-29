@@ -1,4 +1,3 @@
-#### Put here the path to ChibiOS sources ###
 CHIBIOS = /opt/ChibiOS/ChibiOS_2.4.2
 
 ##############################################################################
