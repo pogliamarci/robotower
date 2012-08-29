@@ -1,5 +1,5 @@
 # List of all the board related files.
-BOARDSRC = ./board.c
+BOARDSRC = ./src/board.c
 
 # Required include directories
-BOARDINC = .
+BOARDINC = ./include

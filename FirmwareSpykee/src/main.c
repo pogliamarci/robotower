@@ -37,10 +37,17 @@ static WORKING_AREA(apricancelliWorkingArea, 256);
 static WORKING_AREA(sonarWorkingArea, 1024);
 static WORKING_AREA(rfidWorkingArea, 1024);
 static WORKING_AREA(blinkerWorkingArea, 128);
+static WORKING_AREA(spykeeLedBlinkerWorkingArea, 128);
 
 CircularBuffer circularBuffer;
 Mutex bufferMutex;
 EventSource eventSource;
+
+/* enable the blinking mode for the three groups of leds on the robot
+ * -> blinking[0] controls the red leds
+ * -> blinking[1] controls the yellow leds,
+ * -> blinking[2] controls the green led */
+bool_t blinking[] = {FALSE, FALSE, FALSE};
 
 typedef struct
 {
@@ -54,7 +61,7 @@ typedef struct
 // red leds: PE7 - PE8 - PE9 - PE10
 // yellow leds: PE11 - PE12 - PE13 - PE14
 // green led: PE15
-void setLed(int n, int setOn)
+void setLed(int n, bool_t setOn)
 {
 	if (n < 0 || n > 8)
 		return; /* ensure the passed led ID is right... */
@@ -109,8 +116,11 @@ static void cmd_led(BaseChannel* channel, int argc, char** argv)
 {
 	(void) channel;
 	short offset = 0;
+	int x = 0;
+
 	if (argc < 3)
 		return;
+
 	switch (argv[0][0])
 	{
 	case 'R':
@@ -123,8 +133,20 @@ static void cmd_led(BaseChannel* channel, int argc, char** argv)
 		offset = 8;
 		break;
 	}
-	setLed(offset + NUMERIC_CHAR_TO_INT(*argv[1]),
-			NUMERIC_CHAR_TO_INT(*argv[2]));
+
+	// are we setting the led to the BLINK status?
+	if (argv[1][0] == 'B')
+	{
+		blinking[offset/4] = TRUE;
+	}
+	else
+	{
+		blinking[offset/4] = FALSE;
+		while (argv[1][x] != '\0')
+		{
+			setLed(offset + x, NUMERIC_CHAR_TO_INT(argv[1][x]));
+		}
+	}
 }
 
 static void cmd_infrared(BaseChannel* channel, int argc, char** argv)
@@ -149,6 +171,9 @@ static const ShellCommand commands[] =
 { "resetled", cmd_resetled },
 { "infrared", cmd_infrared },
 { NULL, NULL } };
+
+// led {Y, R} {mask, blink}
+// led G {0,1,blink}
 
 static const ShellConfig shellConfig =
 { (BaseChannel*) &SD2, commands };
@@ -241,6 +266,37 @@ static msg_t blinkerThread(void *arg)
 		palSetPad(IOPORT4, GPIOD_LED4);
 		palClearPad(IOPORT4, GPIOD_LED6);
 		chThdSleepMilliseconds(500);
+	}
+	return 0;
+}
+
+/* Thread that blink sequentially the four integrated leds of the STM32F4Discovery */
+static msg_t spykeeLedBlinkerThread(void *arg)
+{
+	short redStat = 0;
+	short yellowStat = 0;
+	bool_t greenStat = FALSE;
+
+	(void) arg;
+	while (TRUE)
+	{
+		if(blinking[0])
+		{
+			setLed(redStat, FALSE);
+			redStat = redStat == 3 ? 1 : redStat + 1;
+			setLed(redStat, TRUE);
+		}
+		if(blinking[1])
+		{
+			setLed(4 + yellowStat, FALSE);
+			yellowStat = yellowStat == 3 ? 1 : yellowStat + 1;
+			setLed(yellowStat, TRUE);
+		}
+		if(blinking[2])
+		{
+			setLed(8, greenStat);
+			greenStat = !greenStat;
+		}
 	}
 	return 0;
 }
@@ -356,11 +412,6 @@ void shellInitControl(Thread** shell)
 int main(void)
 {
 	Thread *shellTp = NULL;
-	Thread *apricancelliTp;
-	Thread *blinkerTp;
-	Thread *sonarTp;
-	Thread *rfidTp;
-
 	SerialConfig sd2Config =
 	{ SERIAL_OUT_BITRATE, 0, USART_CR2_STOP1_BITS | USART_CR2_LINEN, 0 };
 
@@ -383,26 +434,20 @@ int main(void)
 	/* ensure the IR led are turned off */
 
 	/* thread initialization */
-	apricancelliTp = chThdCreateStatic(apricancelliWorkingArea,
-			sizeof(apricancelliWorkingArea), NORMALPRIO, towerFactoriesThread,
-			NULL );
-	blinkerTp = chThdCreateStatic(blinkerWorkingArea,
-			sizeof(blinkerWorkingArea), NORMALPRIO, blinkerThread, NULL );
-	sonarTp = chThdCreateStatic(sonarWorkingArea, sizeof(sonarWorkingArea),
-			NORMALPRIO, sonarThread, NULL );
-	rfidTp = chThdCreateStatic(rfidWorkingArea, sizeof(rfidWorkingArea),
-			NORMALPRIO, rfidThread, NULL );
+	chThdCreateStatic(apricancelliWorkingArea, sizeof(apricancelliWorkingArea),
+			NORMALPRIO, towerFactoriesThread, NULL );
+	chThdCreateStatic(blinkerWorkingArea, sizeof(blinkerWorkingArea),
+			NORMALPRIO, blinkerThread, NULL );
+	chThdCreateStatic(sonarWorkingArea, sizeof(sonarWorkingArea), NORMALPRIO,
+			sonarThread, NULL );
+	chThdCreateStatic(rfidWorkingArea, sizeof(rfidWorkingArea), NORMALPRIO,
+			rfidThread, NULL );
+	chThdCreateStatic(spykeeLedBlinkerWorkingArea, sizeof(spykeeLedBlinkerWorkingArea),
+			NORMALPRIO, spykeeLedBlinkerThread, NULL);
 	shellInit();
 
 	/* Firmware start message*/
 	chprintf((BaseChannel*) &SD2, "The firmware is ready!\n\r");
-
-	/* Useless code to avoid warnings*/
-	(void) apricancelliTp;
-	(void) blinkerTp;
-	(void) sonarTp;
-	(void) rfidTp;
-	/* end of useless code */
 
 	/* main application loop. Ensures that the shell is alive*/
 	while (TRUE)
