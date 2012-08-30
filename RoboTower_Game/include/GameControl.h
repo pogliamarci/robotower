@@ -36,17 +36,27 @@ typedef struct rfid_entry
 	int status;
 } RfidEntry;
 
-enum GameStatus {STARTED, STOPPED, PAUSED, WAITING};
+enum GameStatus
+{
+	STARTED, STOPPED, PAUSED, WAITING
+};
 
 class GameControl: public QThread
 {
 Q_OBJECT
+
+private:
+	static const int gameMaxTime = 300;
+	static const int gameSetupTime = 30;
+	static const int towerPoints = 100;
+	static const int factoryPoints = 20;
+	static const int mainTower = 4;
+	static const int towersNumber = 4;
 private:
 	int timeToLive;
 	int timeToStart;
 	int score;
-	int factoryNumber;
-	int towerNumber;
+	bool towers[towersNumber];
 	bool isQuitting;
 	int cardRecharge;
 	std::map<std::string, RfidEntry> rfidMap;
@@ -55,15 +65,9 @@ private:
 	QWaitCondition timeout;
 	GameStatus status;
 	GameHistory* history;
-private:
-	static const int gameMaxTime = 300;
-	static const int gameSetupTime = 30;
-	static const int towerPoints = 100;
-	static const int factoryPoints = 20;
-	static const int mainTower = 4;
 
 public:
-	GameControl(int factoryNumber, int towerNumber);
+	GameControl();
 	~GameControl();
 	void run();
 	inline int getTimeToLive()
@@ -76,11 +80,15 @@ public:
 	}
 	inline int getFactoryNumber()
 	{
-		return factoryNumber;
+		int count = 0;
+		for (int i = 0; i < towersNumber; i++)
+			if (towers[i] && i != mainTower)
+				count++;
+		return count;
 	}
 	inline int getTowerNumber()
 	{
-		return towerNumber;
+		return towers[mainTower-1] ? 1 : 0;
 	}
 public slots:
 	void disableRFID(std::string id);
@@ -100,11 +108,13 @@ private:
 	void resetRFID();
 	void performMatchOneStepUpdate();
 	void wakeup();
+	void resetTowers();
+
 signals:
 	void updatedTimeAndPoints(int timeToLive, int score); //emitted at the end of each iteration
 	void updatedRfidStatus(int rfid, bool status); //emitted when RFID status changes
 	void rfidEnableNotification(std::string id);
-	void endGame(int won,int lost,int score); //emitted when the game ends
+	void endGame(int won, int lost, int score); //emitted when the game ends
 	void towersUpdate(int factoriesNumber, int towersNumber);
 	void robotIsEnabled(bool enabled);
 	void updateRemainingTime(int remainingTime);

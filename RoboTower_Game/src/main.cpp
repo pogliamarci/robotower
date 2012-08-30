@@ -29,7 +29,7 @@ int main(int argc, char **argv)
 	qRegisterMetaType<std::string>("string");
 	init(argc, argv, "Robotower_Game");
 	RosComunication rosPublisher;
-	GameControl gameControl(3,1);
+	GameControl gameControl;
 	QApplication app(argc, argv);
 	RTMainWindow mainWindow;
 

@@ -19,15 +19,14 @@
 #include <QMutexLocker>
 #include "GameControl.h"
 
-GameControl::GameControl(int factoryNumber, int towerNumber)
+GameControl::GameControl()
 {
 	timeToLive = gameMaxTime;
 	score = 0;
 	cardRecharge = 0;
 	isQuitting = false;
 	status = STOPPED;
-	this->factoryNumber = factoryNumber;
-	this->towerNumber = towerNumber;
+	resetTowers();
 	history = new GameHistory();
 	initializeRfidConfiguration("../../rfidconfig.txt");
 }
@@ -85,9 +84,8 @@ void GameControl::disableRFID(std::string id)
 
 void GameControl::updateTowers(int tower)
 {
-	if(tower == mainTower) towerNumber--;
-	else factoryNumber--;
-	emit towersUpdate(factoryNumber, towerNumber);
+	towers[tower-1] = false;
+	emit towersUpdate(getFactoryNumber(), getTowerNumber());
 }
 
 void GameControl::quitNow()
@@ -174,14 +172,14 @@ void GameControl::populateMapWithLine(std::string configLine, int index)
 
 void GameControl::updateGamePoints()
 {
-	score += towerNumber * towerPoints + factoryNumber * factoryPoints;
+	score += getTowerNumber() * towerPoints + getFactoryNumber() * factoryPoints;
 }
 
 void GameControl::rechargeCard()
 {
 	if (disabledRfid.size() > 0)
 	{
-		int increment = 100 / (30 - 5 * factoryNumber);
+		int increment = 100 / (30 - 5 * getFactoryNumber());
 		cardRecharge += increment;
 		if (cardRecharge >= 100)
 		{
@@ -198,12 +196,21 @@ void GameControl::rechargeCard()
 void GameControl::resetRound()
 {
 	resetRFID();
+	resetTowers();
 	timeToLive = gameMaxTime;
 	timeToStart = gameSetupTime;
 	score = 0;
 	cardRecharge = 0;
 	emit updatedTimeAndPoints(timeToLive, score);
-	emit towersUpdate(factoryNumber, towerNumber);
+	emit towersUpdate(getFactoryNumber(), getTowerNumber());
+}
+
+void GameControl::resetTowers()
+{
+	for (int i = 0; i < towersNumber; i++)
+	{
+		towers[i] = true;
+	}
 }
 
 void GameControl::resetRFID()
@@ -224,10 +231,10 @@ void GameControl::performMatchOneStepUpdate()
 	timeToLive--;
 	rechargeCard();
 	emit updatedTimeAndPoints(timeToLive, score);
-	if(timeToLive <= 0 || towerNumber == 0)
+	if(timeToLive <= 0 || towers == 0)
 	{
 		stopGame();
-		bool hasWon = towerNumber > 0;
+		bool hasWon = towers > 0;
 		history->addGame(hasWon, score);
 		emit endGame(history->getWon(),
 				history->getLost(), history->getScore());
