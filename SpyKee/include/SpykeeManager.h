@@ -18,7 +18,11 @@ class SpykeeManager
 {
 	private:
 		TCPSocket* tcp;
-	public:
+
+	bool containsNewImage(unsigned char buffer[SPYKEE_MAX_IMAGE]);
+	int getImageSize(unsigned char buffer[SPYKEE_MAX_IMAGE]);
+
+public:
 
 	SpykeeManager(char* username, char* password) throw(SpykeeException);
 
