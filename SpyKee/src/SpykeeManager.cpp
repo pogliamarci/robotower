@@ -22,6 +22,7 @@
 #include <string.h>
 
 /* #define DEBUG_SPYKEE */
+#define SPYKEE_MAX_IMAGE 10000
 
 using namespace std;
 
