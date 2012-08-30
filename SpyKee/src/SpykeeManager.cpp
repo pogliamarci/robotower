@@ -27,15 +27,17 @@ using namespace std;
 
 SpykeeManager::SpykeeManager(char* username, char* password) throw(SpykeeException)
 {
-#ifdef DEBUG_SPYKEE
+	#ifdef DEBUG_SPYKEE
 	cout << "Nome utente: " << username << endl;
 	cout << "Password: " << password << endl;
-#endif
+	#endif
 
 	/* initialize variables to connect */
+	const char UDPMessage[] = { 68, 83, 67, 86, 01 };
+	const char message[] = { 80, 75, 10, 00, 12 };
+
 	UDPSocket udp;
-	char UDPMessage[] = { 68, 83, 67, 86, 01 }, respString[100];
-	char message[] = { 80, 75, 10, 00, 12 };
+	char respString[100];
 	char messageAuthentication[strlen(username) + strlen(password) + 2];
 	string sourceAddress;
 	unsigned short port;
@@ -71,132 +73,104 @@ SpykeeManager::SpykeeManager(char* username, char* password) throw(SpykeeExcepti
 			printf("%s\n", (respString + 7));
 
 	} catch (SocketException& e) {
-#ifdef DEBUG_SPYKEE
+		#ifdef DEBUG_SPYKEE
 		cerr << e.what() << endl;
-#endif
+		#endif
 		throw SpykeeException();
 	}
 
-#ifdef DEBUG_SPYKEE
+	#ifdef DEBUG_SPYKEE
 	cout << "Connessione effettuata" << endl;
-#endif
+	#endif
 }
 
 void SpykeeManager::startCamera()
 {
-	//dico a Spykee di inizializzare la telecamera
-	char firstMessage[] = { 80, 75, 15, 0, 2 };
-	char secondMessage[] = { 1, 1, 80, 75, 15, 0, 2, 2, 1 };
+	const char firstMessage[] = { 80, 75, 15, 0, 2 };
+	const char secondMessage[] = { 1, 1, 80, 75, 15, 0, 2, 2, 1 };
 	tcp->send(firstMessage, 5);
 	tcp->send(secondMessage, 9);
 
-#ifdef DEBUG_SPYKEE
+	#ifdef DEBUG_SPYKEE
 	cout << "Camera accesa" << endl;
-#endif
+	#endif
 }
 
 /* returns a pointer to a dynamically allocated vector containing the image data */
 /* waits the image to be sent from the robot... if no img is sent, the method doesn't return */
 vector<unsigned char>* SpykeeManager::getImage()
 {
+	enum ImageStatuses { NOT_FOUND, ACQUIRING, COMPLETELY_ACQUIRED };
+	ImageStatuses image_status = NOT_FOUND;
 	unsigned char buffer[SPYKEE_MAX_IMAGE];
-	int recvMsgSize;
-	enum stati { IMAGE_NOT_FOUND, ACQUIRING_IMAGE, IMAGE_COMPLETELY_ACQUIRED };
-	int stato = IMAGE_NOT_FOUND;
 	vector<unsigned char>* image_data = NULL;
 
 	unsigned int current_position = 0;
 	unsigned int image_length = 0;
 
-	while (stato != IMAGE_COMPLETELY_ACQUIRED)
+	while (image_status != COMPLETELY_ACQUIRED)
 	{
-		/* receive data from tcp */
-		recvMsgSize = tcp->recv(buffer, SPYKEE_MAX_IMAGE);
-		recvMsgSize = (recvMsgSize > SPYKEE_MAX_IMAGE) ? SPYKEE_MAX_IMAGE : recvMsgSize;
+		int message_size;
+		message_size = tcp->recv(buffer, SPYKEE_MAX_IMAGE);
+		message_size = (message_size > SPYKEE_MAX_IMAGE) ? SPYKEE_MAX_IMAGE : message_size;
 		#ifdef DEBUG_SPYKEE
-		cout << "Messaggio arrivato di " << recvMsgSize << " byte." << endl;
+		cout << "Processing a new packet. Size: " << message_size << " byte." << endl;
 		#endif
 
-		if (stato == ACQUIRING_IMAGE) /* This is a part of the previous image */
+		/* if we are looking for a new image, check whether it's arrived */
+		if (image_status == NOT_FOUND && containsNewImage(buffer))
 		{
-			#ifdef DEBUG_SPYKEE
-			cout << "Continuazione dell'acquisizione" << endl;
-			cout << "La posizione corrente di riempimento del buffer è partita da " << current_position;
-			#endif
-
-			for (register int i = 0;
-					((i < recvMsgSize) && (current_position < image_length));
-					i++)
-			{
-				image_data->at(current_position) = buffer[i];
-				current_position++;
-			}
-
-			#ifdef DEBUG_SPYKEE
-			cout << " ed è finita a " << current_position << endl;
-			#endif
-
-			/* update the status */
-			if (current_position >= image_length)
-				stato = IMAGE_COMPLETELY_ACQUIRED;
-			else stato = ACQUIRING_IMAGE;
-
-			#ifdef DEBUG_SPYKEE
-			cout <<"Ci sono ancora: " << (image_length - current_position) << " byte"<< endl;
-			cout <<"Ricordo che la dimensione totale dell'immagine è di " << image_length << " byte" << endl;
-			#endif
-		}
-		/* check whether data contain a new image */
-		if (((buffer[0] == 80) && (buffer[1] == 75) && (buffer[2] == 2))
-				&& (stato == IMAGE_NOT_FOUND))
-		{
-			#ifdef DEBUG_SPYKEE
-			cout << "Il messaggio contine una nuova immagine" << endl;
-			#endif
-
-			/* get image length */
-			image_length = (buffer[3] << 8) + buffer[4];
+			/* Processing image metadata. By setting the status to ACQUIRING we will enter
+			 * the next if branch, that will process the image bytes of the packet */
+			image_status = ACQUIRING;
+			image_length = getImageSize(buffer);
 			image_data = new vector<unsigned char>(image_length);
+			current_position = 0;
 
 			#ifdef DEBUG_SPYKEE
-			cout << "L'immagine contenuta nel pacchetto è lunga " << image_length << " byte" << endl;
+			cout << "New image found. Size: " << image_length << " byte" << endl;
+			#endif
+		}
+
+		if (image_status == ACQUIRING)
+		{
+			#ifdef DEBUG_SPYKEE
+			cout << "Acquiring image. Current buffer position = " << current_position << endl;
 			#endif
 
-			/* copy the received data into the current image*/
-			current_position = 0; /* new image => reset current_position */
-			for (register int i = 5;
-					((i < recvMsgSize) && (current_position < image_length));
-					i++)
+			register int i = current_position == 0 ? 5 : 0; /* skip first 5 bytes (metadata), already processed in the NOT_FOUND status */
+			for (;(i < message_size) && (current_position < image_length); i++)
 			{
 				image_data->at(current_position) = buffer[i];
 				current_position++;
 			}
+			if (current_position >= image_length)
+			{
+				image_status = COMPLETELY_ACQUIRED;
+			}
 
 			#ifdef DEBUG_SPYKEE
-			cout << "La posizione corrente di riempimento del buffer è partita da 0 ed è finita a " << current_position << endl;
+			cout <<"Finished processing the packet. Current buffer position = " << current_position << endl;
+			cout <<"Remaining bytes in the image : " << (image_length - current_position) << endl;
 			#endif
-
-			/* update the status */
-			if (current_position < image_length)
-				stato = ACQUIRING_IMAGE;
-			else stato = IMAGE_COMPLETELY_ACQUIRED;
 		}
-		#ifdef DEBUG_SPYKEE
-		cout << "Il pacchetto è stato  processato"<<endl;
-		#endif
 	}
-
-	/* end of image acquisition */
-	#ifdef DEBUG_SPYKEE
-	cout << "Immagine acquisita";
-	#endif
-
 	return image_data;
+}
+
+int SpykeeManager::getImageSize(unsigned char buffer[SPYKEE_MAX_IMAGE])
+{
+	return (buffer[3] << 8) + buffer[4];
+}
+
+bool SpykeeManager::containsNewImage(unsigned char buffer[SPYKEE_MAX_IMAGE])
+{
+	return (buffer[0] == 80) && (buffer[1] == 75) && (buffer[2] == 2);
 }
 
 void SpykeeManager::move(char leftSpeed, char rightSpeed)
 {
-	char message[] = { 80, 75, 5, 0, 2 };
+	const char message[] = { 80, 75, 5, 0, 2 };
 	char speedMessage[] = { leftSpeed, rightSpeed, 0 };
 
 #ifdef DEBUG_SPYKEE
