@@ -29,7 +29,6 @@ class RfidProcesser : public Processer
 	public:
 		RfidProcesser(ros::Publisher pub);
 		void process(string str);
-		virtual ~RfidProcesser();
 	private:
 		uint8_t checksum(const char* in, size_t len);
 		uint8_t decodeByte(char msb, char lsb);

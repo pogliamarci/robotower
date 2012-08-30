@@ -1,2 +1,1 @@
-int8 towers
-int8 factories
+int8 towerId

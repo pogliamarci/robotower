@@ -26,10 +26,7 @@ class TowerProcesser : public Processer
 	public:
 		TowerProcesser(ros::Publisher pub);
 		void process(string str);
-		~TowerProcesser();
 	private:
-		int factories;
-		int towers;
 		ros::Publisher publisher;
 };
 

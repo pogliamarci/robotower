@@ -50,11 +50,6 @@ void RfidProcesser::process(string str)
 	}
 }
 
-RfidProcesser::~RfidProcesser()
-{
-	// TODO Auto-generated destructor stub
-}
-
 uint8_t RfidProcesser::checksum(const char* in, size_t len)
 {
 	uint8_t checksum = 0;

@@ -22,42 +22,17 @@
 
 TowerProcesser::TowerProcesser(ros::Publisher pub)
 {
-	factories = 0;
-	towers = 0;
 	publisher = pub;
 }
 
 // FIXME manca la gestione degli errori
 void TowerProcesser::process(string str)
 {
-	vector<string> tokens;
-	tokenize(str, tokens, ",");
-	for(unsigned int i=0; i < tokens.size(); i++)
-	{
-		const char* t = tokens.at(i).c_str();
-		if(t[0] != '\0' && t[1] != '\0')
-		{
-			int n = atoi(tokens.at(i).c_str() + 2);
-			switch(t[0])
-			{
-			case 'F':
-				factories = n;
-				break;
-			case 'T':
-				towers = n;
-				break;
-			}
-		}
-	}
-
+	const string destroyed = "destroyed ";
+	int index = str.find(destroyed) + destroyed.length();
+	int tower = atoi(str.substr(index).c_str());
 	/* publish the message to ROS */
 	Echoes::Towers msg;
-	msg.towers = towers;
-	msg.factories = factories;
+	msg.towerId = tower;
 	publisher.publish(msg);
-}
-
-TowerProcesser::~TowerProcesser()
-{
-	// TODO Auto-generated destructor stub
 }

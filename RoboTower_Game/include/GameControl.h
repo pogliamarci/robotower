@@ -60,6 +60,7 @@ private:
 	static const int gameSetupTime = 30;
 	static const int towerPoints = 100;
 	static const int factoryPoints = 20;
+	static const int mainTower = 4;
 
 public:
 	GameControl(int factoryNumber, int towerNumber);
@@ -83,7 +84,7 @@ public:
 	}
 public slots:
 	void disableRFID(std::string id);
-	void updateTowers(int factories, int towers);
+	void updateTowers(int towerNumber);
 	void quitNow();
 
 	void startGame();
