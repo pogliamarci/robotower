@@ -17,34 +17,29 @@
 
 #include "FirmwareSpykee.h"
 
+#define LED_FIRST_INDEX 7 // led are using GPIOs from PE7
+#define LED_BLINKING_PERIOD 500 // milliseconds
+
 Mutex spykeeLedMutex;
 
 static WORKING_AREA(blinkerWorkingArea, 128);
 static WORKING_AREA(spykeeLedBlinkerWorkingArea, 128);
 
-/* enable the blinking mode for the three groups of leds on the robot
- * -> blinking[0] controls the red leds
- * -> blinking[1] controls the yellow leds,
- * -> blinking[2] controls the green led */
+/* enable the blinking mode for the three groups of leds on the robot */
 bool_t blinking[] = {FALSE, FALSE, FALSE};
 
-/* Led Management */
-// red leds: PE7 - PE8 - PE9 - PE10
-// yellow leds: PE11 - PE12 - PE13 - PE14
-// green led: PE15
+/* Led Management. GPIOs are triggered as follows (in order, from n=0 to n=8):
+ *  --> red leds: PE7 - PE8 - PE9 - PE10
+ *  --> yellow leds: PE11 - PE12 - PE13 - PE14
+ *  --> green led: PE15
+ */
 void setLed(int n, bool_t setOn)
 {
-	if (n < 0 || n > 8)
-		return; /* ensure the passed led ID is right... */
-	const short firstPort = 7; //using GPIOs from PE7
+	if (n < 0 || n > 8) return;
 	if (setOn)
-	{
-		palSetPad(IOPORT5, n + firstPort);
-	}
+		palSetPad(IOPORT5, n + LED_FIRST_INDEX);
 	else
-	{
-		palClearPad(IOPORT5, n + firstPort);
-	}
+		palClearPad(IOPORT5, n + LED_FIRST_INDEX);
 }
 
 /* Led Initialization */
@@ -59,12 +54,14 @@ void resetLed(void)
 	palClearPad(IOPORT4, GPIOD_IRLED); /* reset infrared leds */
 }
 
-/* Thread that blink sequentially the four integrated leds of the STM32F4Discovery */
+/* Blinks sequentially the leds on the robot shoulders that are on the 'blinking' status.
+ * For the groups of more than one led, blinking is done by cycling sequentially the led
+ * that is currently turned on, to produce a 'loading bar' effect */
 static msg_t spykeeLedBlinkerThread(void *arg)
 {
-	short redStat = 3;
-	short yellowStat = 3;
-	bool_t greenStat = FALSE;
+	short redCurrentIndex = 3;
+	short yellowCurrentIndex = 3;
+	bool_t greenIsOn = FALSE;
 
 	(void) arg;
 	while (TRUE)
@@ -72,23 +69,23 @@ static msg_t spykeeLedBlinkerThread(void *arg)
 		chMtxLock(&spykeeLedMutex);
 		if (blinking[0])
 		{
-			setLed(redStat, FALSE);
-			redStat = redStat == 3 ? 0 : redStat + 1;
-			setLed(redStat, TRUE);
+			setLed(redCurrentIndex, FALSE);
+			redCurrentIndex = redCurrentIndex == 3 ? 0 : redCurrentIndex + 1;
+			setLed(redCurrentIndex, TRUE);
 		}
 		if (blinking[1])
 		{
-			setLed(4 + yellowStat, FALSE);
-			yellowStat = yellowStat == 3 ? 0 : yellowStat + 1;
-			setLed(4 + yellowStat, TRUE);
+			setLed(4 + yellowCurrentIndex, FALSE);
+			yellowCurrentIndex = yellowCurrentIndex == 3 ? 0 : yellowCurrentIndex + 1;
+			setLed(4 + yellowCurrentIndex, TRUE);
 		}
 		if (blinking[2])
 		{
-			setLed(8, greenStat);
-			greenStat = !greenStat;
+			setLed(8, greenIsOn);
+			greenIsOn = !greenIsOn;
 		}
 		chMtxUnlock();
-		chThdSleepMilliseconds(500);
+		chThdSleepMilliseconds(LED_BLINKING_PERIOD);
 	}
 	return 0;
 }
@@ -101,21 +98,21 @@ static msg_t blinkerThread(void *arg)
 	{
 		palSetPad(IOPORT4, GPIOD_LED3);
 		palClearPad(IOPORT4, GPIOD_LED4);
-		chThdSleepMilliseconds(500);
+		chThdSleepMilliseconds(LED_BLINKING_PERIOD);
 		palSetPad(IOPORT4, GPIOD_LED5);
 		palClearPad(IOPORT4, GPIOD_LED3);
-		chThdSleepMilliseconds(500);
+		chThdSleepMilliseconds(LED_BLINKING_PERIOD);
 		palSetPad(IOPORT4, GPIOD_LED6);
 		palClearPad(IOPORT4, GPIOD_LED5);
-		chThdSleepMilliseconds(500);
+		chThdSleepMilliseconds(LED_BLINKING_PERIOD);
 		palSetPad(IOPORT4, GPIOD_LED4);
 		palClearPad(IOPORT4, GPIOD_LED6);
-		chThdSleepMilliseconds(500);
+		chThdSleepMilliseconds(LED_BLINKING_PERIOD);
 	}
 	return 0;
 }
 
-void startLedTreads(void)
+void startLedBlinkerTreads(void)
 {
 	chMtxInit(&spykeeLedMutex);
 

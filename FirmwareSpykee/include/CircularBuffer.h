@@ -13,6 +13,11 @@
 
 #define BUFFER_LENGTH 100
 
+/* A fixed-length circular buffer, used to synchronize writes onto a BaseChannel,
+ * usually the serial port. Reads and writes to the buffer are synchronised
+ * using the mutex contained in the struct.
+ * NOTE: the synchronisation is automatically performed when using the functions
+ * contained in this header to read from\write to the buffer. */
 typedef struct CircularBuffer_s {
 	int start;
 	int end;

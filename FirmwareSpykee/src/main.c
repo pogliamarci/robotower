@@ -18,19 +18,18 @@
 #include "FirmwareSpykee.h"
 #include "chprintf.h"
 
+#define SERIAL_OUT_BITRATE 19200
+
 CircularBuffer outputBuffer;
 
 int main(void)
 {
-	Thread *shellTp = NULL;
+	Thread *shellThreadPointer = NULL;
 	SerialConfig sd2Config = {
 			SERIAL_OUT_BITRATE,
-			0,
-			USART_CR2_STOP1_BITS | USART_CR2_LINEN,
-			0
+			0, USART_CR2_STOP1_BITS | USART_CR2_LINEN, 0
 	};
 
-	/* hardware initialization */
 	halInit();
 	chSysInit();
 
@@ -38,20 +37,19 @@ int main(void)
 	bufferInit(&outputBuffer);
 	resetLed();
 
-	/* thread initialization */
-	startLedTreads();
+	startLedBlinkerTreads();
 	startTowersAndFactoriesThread();
 	startSonarThread();
 	startRfidThread();
 	shellInit();
 
-	/* Firmware start message*/
 	chprintf((BaseChannel*) &SD2, "The firmware is ready!\n\r");
 
-	/* main application loop. Ensures that the shell is alive*/
+	/* Main application loop. Ensures that the shell is alive, and writes
+	 * to the serial port the (whole) content of the output buffer */
 	while (TRUE)
 	{
-		shellInitControl(&shellTp);
+		shellInitControl(&shellThreadPointer);
 		writeContentOnBaseChannel(&outputBuffer, (BaseChannel*) &SD2);
 	}
 }
