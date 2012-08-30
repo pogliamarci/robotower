@@ -99,109 +99,94 @@ void SpykeeManager::startCamera()
 /* waits the image to be sent from the robot... if no img is sent, the method doesn't return */
 vector<unsigned char>* SpykeeManager::getImage()
 {
-	//inizializzo le variabili per leggere le immagini
 	unsigned char buffer[SPYKEE_MAX_IMAGE];
 	int recvMsgSize;
-	enum stati
-	{
-		nonTrovata, acquisizione, immagineFinita
-	};
-	int stato = nonTrovata;
+	enum stati { IMAGE_NOT_FOUND, ACQUIRING_IMAGE, IMAGE_COMPLETELY_ACQUIRED };
+	int stato = IMAGE_NOT_FOUND;
 	vector<unsigned char>* image_data = NULL;
 
-	unsigned int posizioneCorrente = 0;
+	unsigned int current_position = 0;
 	unsigned int image_length = 0;
 
-	//inizio ciclo acquisizione
-	while (!(stato == immagineFinita))
+	while (stato != IMAGE_COMPLETELY_ACQUIRED)
 	{
+		/* receive data from tcp */
 		recvMsgSize = tcp->recv(buffer, SPYKEE_MAX_IMAGE);
 		recvMsgSize = (recvMsgSize > SPYKEE_MAX_IMAGE) ? SPYKEE_MAX_IMAGE : recvMsgSize;
 		#ifdef DEBUG_SPYKEE
-		cout << endl << endl << endl << endl << "Messaggio arrivato di " << recvMsgSize << " byte." << endl;
+		cout << "Messaggio arrivato di " << recvMsgSize << " byte." << endl;
 		#endif
 
-		if (stato == acquisizione)
+		if (stato == ACQUIRING_IMAGE) /* This is a part of the previous image */
 		{
 			#ifdef DEBUG_SPYKEE
 			cout << "Continuazione dell'acquisizione" << endl;
-			cout << "La posizione corrente di riempimento del buffer è partita da " << posizioneCorrente;
+			cout << "La posizione corrente di riempimento del buffer è partita da " << current_position;
 			#endif
 
 			for (register int i = 0;
-					((i < recvMsgSize) && (posizioneCorrente < image_length));
+					((i < recvMsgSize) && (current_position < image_length));
 					i++)
 			{
-				image_data->at(posizioneCorrente) = buffer[i];
-
-				if ((i < recvMsgSize) && (posizioneCorrente < image_length))
-					posizioneCorrente++;
+				image_data->at(current_position) = buffer[i];
+				current_position++;
 			}
 
 			#ifdef DEBUG_SPYKEE
-			cout << " ed è finita a " << posizioneCorrente << endl;
+			cout << " ed è finita a " << current_position << endl;
 			#endif
 
-			if (posizioneCorrente >= image_length)
-			{
-				stato = immagineFinita;
-			}
-			else
-			{
-				stato = acquisizione;
-			}
+			/* update the status */
+			if (current_position >= image_length)
+				stato = IMAGE_COMPLETELY_ACQUIRED;
+			else stato = ACQUIRING_IMAGE;
 
 			#ifdef DEBUG_SPYKEE
-			cout <<"Ci sono ancora: " << (image_length - posizioneCorrente) << " byte"<< endl;
+			cout <<"Ci sono ancora: " << (image_length - current_position) << " byte"<< endl;
 			cout <<"Ricordo che la dimensione totale dell'immagine è di " << image_length << " byte" << endl;
 			#endif
 		}
-		//controllo se è arrivata una nuova immagine
+		/* check whether data contain a new image */
 		if (((buffer[0] == 80) && (buffer[1] == 75) && (buffer[2] == 2))
-				&& (stato == nonTrovata))
+				&& (stato == IMAGE_NOT_FOUND))
 		{
 			#ifdef DEBUG_SPYKEE
 			cout << "Il messaggio contine una nuova immagine" << endl;
 			#endif
 
-			//ottengo la lunghezza dell'immagine
+			/* get image length */
 			image_length = (buffer[3] << 8) + buffer[4];
-
 			image_data = new vector<unsigned char>(image_length);
 
 			#ifdef DEBUG_SPYKEE
 			cout << "L'immagine contenuta nel pacchetto è lunga " << image_length << " byte" << endl;
 			#endif
 
-			register int i;
-
-			//scrivo l'immagine ricevuta nella mia in locale
-			for (i = 5, posizioneCorrente = 0;
-					((i < recvMsgSize) && (posizioneCorrente < image_length));
-					i++, posizioneCorrente++)
+			/* copy the received data into the current image*/
+			current_position = 0; /* new image => reset current_position */
+			for (register int i = 5;
+					((i < recvMsgSize) && (current_position < image_length));
+					i++)
 			{
-				image_data->at(posizioneCorrente) = buffer[i];
+				image_data->at(current_position) = buffer[i];
+				current_position++;
 			}
 
 			#ifdef DEBUG_SPYKEE
-			cout << "La posizione corrente di riempimento del buffer è partita da 0 ed è finita a " << posizioneCorrente << endl;
+			cout << "La posizione corrente di riempimento del buffer è partita da 0 ed è finita a " << current_position << endl;
 			#endif
 
-			if (posizioneCorrente < image_length)
-			{
-				stato = acquisizione;
-			}
-			else
-			{
-				stato = immagineFinita;
-			}
+			/* update the status */
+			if (current_position < image_length)
+				stato = ACQUIRING_IMAGE;
+			else stato = IMAGE_COMPLETELY_ACQUIRED;
 		}
 		#ifdef DEBUG_SPYKEE
 		cout << "Il pacchetto è stato  processato"<<endl;
 		#endif
 	}
 
-	//fine acquisizione immagine
+	/* end of image acquisition */
 	#ifdef DEBUG_SPYKEE
 	cout << "Immagine acquisita";
 	#endif
