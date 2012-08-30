@@ -21,7 +21,7 @@
 #include <stdio.h>
 #include <string.h>
 
-//#define DEBUG_SPYKEE
+/* #define DEBUG_SPYKEE */
 
 using namespace std;
 
@@ -107,8 +107,7 @@ vector<unsigned char>* SpykeeManager::getImage()
 		nonTrovata, acquisizione, immagineFinita
 	};
 	int stato = nonTrovata;
-
-	vector<unsigned char>* image_data;
+	vector<unsigned char>* image_data = NULL;
 
 	unsigned int posizioneCorrente = 0;
 	unsigned int image_length = 0;
@@ -210,13 +209,13 @@ vector<unsigned char>* SpykeeManager::getImage()
 	return image_data;
 }
 
-void SpykeeManager::move(int leftSpeed, int rightSpeed)
+void SpykeeManager::move(char leftSpeed, char rightSpeed)
 {
 	char message[] = { 80, 75, 5, 0, 2 };
 	char speedMessage[] = { leftSpeed, rightSpeed, 0 };
 
 #ifdef DEBUG_SPYKEE
-	printf("\nLeftMotor: %d, RightMotor: %d", leftSpeed, rightSpeed);
+	cout << "LeftMotor: " << leftSpeed << ", RightMotor: " << rightSpeed << endl;
 #endif
 
 	tcp->send(message, 5);

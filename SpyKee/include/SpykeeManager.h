@@ -29,7 +29,7 @@ class SpykeeManager
 	~SpykeeManager()
 	{}
 
-	void move(int leftSpeed, int rightSpeed);
+	void move(char leftSpeed, char rightSpeed);
 
 	void unplug();
 };
