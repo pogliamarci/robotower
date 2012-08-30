@@ -16,10 +16,9 @@
  */
 
 #include "FirmwareSpykee.h"
+#include "chprintf.h"
 
-CircularBuffer circularBuffer;
-
-EventSource eventSource;
+CircularBuffer outputBuffer;
 
 int main(void)
 {
@@ -34,14 +33,10 @@ int main(void)
 	/* hardware initialization */
 	halInit();
 	chSysInit();
+
 	sdStart(&SD2, &sd2Config);
-
-	chMtxInit(&spykeeLedMutex);
-	bufferInit(&circularBuffer);
-	chEvtInit(&eventSource);
-
-	resetLed(); 		/* reset the leds on the robot shoulders */
-	palClearPad(IOPORT4, GPIOD_IRLED);	/* ensure the IR led are turned off */
+	bufferInit(&outputBuffer);
+	resetLed();
 
 	/* thread initialization */
 	startLedTreads();
@@ -57,6 +52,6 @@ int main(void)
 	while (TRUE)
 	{
 		shellInitControl(&shellTp);
-		writeContentOnBaseChannel(&circularBuffer, (BaseChannel*) &SD2);
+		writeContentOnBaseChannel(&outputBuffer, (BaseChannel*) &SD2);
 	}
 }

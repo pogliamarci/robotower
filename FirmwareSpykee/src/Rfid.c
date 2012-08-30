@@ -45,7 +45,7 @@ static msg_t rfidThread(void *arg)
 		buf[rfidMessageSize - 3] = '\0'; // strip the trailing CR, LF, ETX
 		chsprintf(buf2, "[RFID] %s", buf + 1); // +1 to strip the leading STX char
 
-		bufferPutString(&circularBuffer, buf2);
+		bufferPutString(&outputBuffer, buf2);
 	}
 	return 0;
 }

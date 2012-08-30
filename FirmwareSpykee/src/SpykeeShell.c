@@ -1,23 +1,11 @@
 #include "FirmwareSpykee.h"
 
-#define CMD_AVOID_UNUSEDVARS_WARNINGS() { (void) channel;(void) argc; (void) argv; }
-
 /* shell command handlers */
 static void cmd_reset(BaseChannel* channel, int argc, char** argv)
 {
-	CMD_AVOID_UNUSEDVARS_WARNINGS();
-	chEvtBroadcastFlags(&eventSource, RESET_EVENT_MASK);
-}
-
-static void cmd_status(BaseChannel* channel, int argc, char** argv)
-{
-	CMD_AVOID_UNUSEDVARS_WARNINGS();
-	chEvtBroadcastFlags(&eventSource, STATUS_EVENT_MASK);
-}
-
-static void cmd_resetled(BaseChannel* channel, int argc, char** argv)
-{
-	CMD_AVOID_UNUSEDVARS_WARNINGS();
+	(void) channel;
+	(void) argc;
+	(void) argv;
 	resetLed();
 }
 
@@ -71,9 +59,7 @@ static void cmd_infrared(BaseChannel* channel, int argc, char** argv)
 static const ShellCommand commands[] =
 {
 	{ "reset", cmd_reset },
-	{ "status", cmd_status },
 	{ "led", cmd_led },
-	{ "resetled", cmd_resetled },
 	{ "infrared", cmd_infrared },
 	{ NULL, NULL }
 };

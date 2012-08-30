@@ -17,32 +17,28 @@
 
 #include "FirmwareSpykee.h"
 
+#define REFRESH_INTERVAL 100 // milliseconds
+#define TOWER_NUMBER 4
+
 static WORKING_AREA(TowersAndFactoriesWorkingArea, 256);
 
-void writeStatusToBuffer(int num_factory, int tower_destroyed)
+void writeTowerEventToBuffer(int tower)
 {
 	char statusMessage[20];
-	chsprintf(statusMessage, "[TOWER] F:%d,T:%d", num_factory,
-			tower_destroyed ? 0 : 1);
-	bufferPutString(&circularBuffer, statusMessage);
+	chsprintf(statusMessage, "[TOWER] destroyed %d", tower+1);
+	bufferPutString(&outputBuffer, statusMessage);
 }
 
 /* thread that manages gate opener signals */
 static msg_t towerFactoriesThread(void *arg)
 {
 	(void) arg;
+
 	int i;
-	int num_factory = FACTORY_NUMBER;
-	int destroyed[FACTORY_NUMBER];
-	int tower_destroyed = 0;
+	bool_t destroyed[TOWER_NUMBER];
+	bool_t curIsDestroyed;
 
-	EventListener eventListener;
-	eventmask_t eventiArrivati;
-
-	/* initialize the event listener */
-	chEvtRegisterMask(&eventSource, &eventListener, 0);
-
-	for (i = 0; i < FACTORY_NUMBER; i++)
+	for (i = 0; i < TOWER_NUMBER; i++)
 	{
 		destroyed[i] = FALSE;
 	}
@@ -50,45 +46,27 @@ static msg_t towerFactoriesThread(void *arg)
 	/* loop apricancelli */
 	while (TRUE)
 	{
-		/* control if a factory has been destroyed */
-		for (i = 0; i < FACTORY_NUMBER; i++)
+		for (i = 0; i < TOWER_NUMBER; i++)
 		{
-			if ((palReadPad(IOPORT4, i) == 0) && !destroyed[i])
+			curIsDestroyed = (palReadPad(IOPORT4, i) == 0);
+			if (curIsDestroyed && !destroyed[i])
 			{
 				destroyed[i] = TRUE;
-				num_factory--;
-				writeStatusToBuffer(num_factory, tower_destroyed);
+				writeTowerEventToBuffer(i);
 			}
-		}
-
-		/* control if the tower has been destroyed */
-		if ((palReadPad(IOPORT4, 3) == 0) && !tower_destroyed)
-		{
-			tower_destroyed = TRUE;
-			writeStatusToBuffer(num_factory, tower_destroyed);
-		}
-
-		/* event management, for now timeout has been set to 500 ms */
-		eventiArrivati = chEvtWaitAnyTimeout(ALL_EVENTS, 500);
-		if (eventiArrivati & RESET_EVENT_MASK)
-		{ /* reset event */
-			for (i = 0; i < FACTORY_NUMBER; i++)
+			else if (!curIsDestroyed && destroyed[i])
 			{
 				destroyed[i] = FALSE;
 			}
-			tower_destroyed = FALSE;
-			num_factory = FACTORY_NUMBER;
 		}
-		if (eventiArrivati & STATUS_EVENT_MASK)
-		{ /* status event */
-			writeStatusToBuffer(num_factory, tower_destroyed);
-		}
+		chThdSleepMilliseconds(REFRESH_INTERVAL);
 	}
 	return 0;
 }
 
 void startTowersAndFactoriesThread(void)
 {
-	chThdCreateStatic(TowersAndFactoriesWorkingArea, sizeof(TowersAndFactoriesWorkingArea),
-				NORMALPRIO, towerFactoriesThread, NULL );
+	chThdCreateStatic(TowersAndFactoriesWorkingArea,
+			sizeof(TowersAndFactoriesWorkingArea), NORMALPRIO,
+			towerFactoriesThread, NULL );
 }

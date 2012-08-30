@@ -74,7 +74,7 @@ static msg_t sonarThread(void *arg)
 		sonar_data.south = 0;
 		sonar_data.west = 0;
 		sonar_data.east = 0;
-		bufferPutString(&circularBuffer, buf);
+		bufferPutString(&outputBuffer, buf);
 		chThdSleepMilliseconds(100);
 	}
 

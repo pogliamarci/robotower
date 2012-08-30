@@ -56,6 +56,7 @@ void resetLed(void)
 	{
 		setLed(i, FALSE);
 	}
+	palClearPad(IOPORT4, GPIOD_IRLED); /* reset infrared leds */
 }
 
 /* Thread that blink sequentially the four integrated leds of the STM32F4Discovery */
@@ -116,6 +117,8 @@ static msg_t blinkerThread(void *arg)
 
 void startLedTreads(void)
 {
+	chMtxInit(&spykeeLedMutex);
+
 	chThdCreateStatic(spykeeLedBlinkerWorkingArea,
 			sizeof(spykeeLedBlinkerWorkingArea), NORMALPRIO,
 			spykeeLedBlinkerThread, NULL );

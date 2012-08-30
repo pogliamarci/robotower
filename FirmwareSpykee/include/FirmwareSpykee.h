@@ -18,16 +18,14 @@
 #ifndef FIRMWARESPIKEE_H_
 #define FIRMWARESPYKEE_H_
 
-#include <string.h>
+
 #include "ch.h"
 #include "hal.h"
 #include "shell.h"
 
 #include "chsprintf.h"
-#include "chprintf.h"
 #include "CircularBuffer.h"
 
-#define FACTORY_NUMBER 3
 #define SERIAL_OUT_BITRATE 19200
 
 #define NUMERIC_CHAR_TO_INT(c) ((char) (c) - '0')
@@ -49,7 +47,6 @@ void shellInitControl(Thread** shell);
 /* Global Variables */
 extern bool_t blinking[];
 extern Mutex spykeeLedMutex;
-extern EventSource eventSource;
-extern CircularBuffer circularBuffer;
+extern CircularBuffer outputBuffer;
 
 #endif /* FIRMWARESPYKEE_H_ */
