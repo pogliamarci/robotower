@@ -27,10 +27,6 @@ class LedParser
 {
 private:
 	SerialReader* sender;
-	bool greenOn;
-	int yellowOn;
-	bool greenLedBlink;
-	bool yellowLedsBlink;
 
 public:
 	LedParser(SerialReader* read_sonar);

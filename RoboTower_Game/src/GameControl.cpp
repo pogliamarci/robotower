@@ -204,7 +204,6 @@ void GameControl::resetRound()
 	cardRecharge = 0;
 	emit updatedTimeAndPoints(timeToLive, score);
 	emit towersUpdate(factoryNumber, towerNumber);
-	emit hasToResetRobot();
 }
 
 void GameControl::resetRFID()

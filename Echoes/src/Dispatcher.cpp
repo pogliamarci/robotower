@@ -1,11 +1,6 @@
 #include "Dispatcher.h"
 #include <iostream>
 
-Dispatcher::Dispatcher()
-{
-	// TODO Auto-generated constructor stub
-}
-
 void Dispatcher::addProcesser(Processer* pr, string initial)
 {
 	processers[initial] = pr;
@@ -24,9 +19,4 @@ void Dispatcher::dispatch(string str)
 	}
 	// default dispatching: print str to stderr
 	cerr << str << endl;
-}
-
-Dispatcher::~Dispatcher()
-{
-	// TODO Auto-generated destructor stub
 }

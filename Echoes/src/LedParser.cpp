@@ -23,8 +23,6 @@
 LedParser::LedParser(SerialReader* read_sonar)
 {
 	this->sender = read_sonar;
-	toggleYellow(true, true);
-	toggleGreen(true, true);
 }
 
 /**
@@ -54,13 +52,8 @@ bool LedParser::ledCallback(Echoes::Led::Request& request,
 bool LedParser::resetledCallback(Echoes::Led::Request& request,
 		Echoes::Led::Response& response)
 {
-	greenLedBlink = false;
-	yellowLedsBlink = false;
-
-	toggleGreen(false, false);
-	toggleYellow(false, false);
-	toggleRed(0);
-
+	char buf[] = "reset";
+	sender->sendStringCommand(buf, strlen(buf));
 	response.requestSuccessful = true;
 	return true;
 }

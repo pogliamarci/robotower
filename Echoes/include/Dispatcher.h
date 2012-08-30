@@ -17,10 +17,8 @@ using namespace std;
 class Dispatcher
 {
 	public:
-		Dispatcher();
 		void addProcesser(Processer* pr, string initial);
 		void dispatch(string str);
-		virtual ~Dispatcher();
 	private:
 		map<string, Processer*> processers;
 };
