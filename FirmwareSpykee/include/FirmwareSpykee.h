@@ -15,9 +15,8 @@
  * GNU General Public License for more details.
  */
 
-#ifndef FIRMWARESPIKEE_H_
+#ifndef FIRMWARESPYKEE_H_
 #define FIRMWARESPYKEE_H_
-
 
 #include "ch.h"
 #include "hal.h"
@@ -26,16 +25,8 @@
 #include "chsprintf.h"
 #include "CircularBuffer.h"
 
-#define SERIAL_OUT_BITRATE 19200
-
-#define NUMERIC_CHAR_TO_INT(c) ((char) (c) - '0')
-
-/* events declaration */
-#define RESET_EVENT_MASK 0x01
-#define STATUS_EVENT_MASK 0x02
-
 /* Functions */
-void startLedTreads(void);
+void startLedBlinkerTreads(void);
 void setLed(int n, bool_t setOn);
 void resetLed(void);
 
@@ -44,9 +35,15 @@ void startRfidThread(void);
 void startSonarThread(void);
 void shellInitControl(Thread** shell);
 
-/* Global Variables */
+/* Set the mode of a group of leds to 'blinking'.
+ * Indexes are 0 for, 1 for and 2 for */
 extern bool_t blinking[];
+
+/* used to synchronize read\writes to the leds (gpios),
+ * to avoid race conditions with the blinker thread */
 extern Mutex spykeeLedMutex;
+
+/* The buffer used to write on the serial port connected to the PC */
 extern CircularBuffer outputBuffer;
 
 #endif /* FIRMWARESPYKEE_H_ */

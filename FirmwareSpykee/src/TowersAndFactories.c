@@ -43,11 +43,11 @@ static msg_t towerFactoriesThread(void *arg)
 		destroyed[i] = FALSE;
 	}
 
-	/* loop apricancelli */
 	while (TRUE)
 	{
 		for (i = 0; i < TOWER_NUMBER; i++)
 		{
+			// towers are from PD0 to PD4
 			curIsDestroyed = (palReadPad(IOPORT4, i) == 0);
 			if (curIsDestroyed && !destroyed[i])
 			{
