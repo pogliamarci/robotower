@@ -40,9 +40,10 @@ void GameControl::run()
 		// the waiting and running states), and AFTER THAT make the relevant
 		// checks (if the game is stopped or paused during the wait
 		// timer don't get decremented...)
-		if(status != STOPPED) timeout.wait(&waitConditionMutex, 1000);
+		if (status != STOPPED)
+			timeout.wait(&waitConditionMutex, 1000);
 		locker.unlock();
-		switch(status)
+		switch (status)
 		{
 		case STOPPED:
 			resetRound();
@@ -54,7 +55,7 @@ void GameControl::run()
 			timeToStart--;
 			emit updateRemainingTime(timeToStart);
 			if (timeToStart <= 0) // enable the robot when timeToStart == -1,
-					// (GUI expects timeToStart == 0 to hide the dialog window)
+			// (GUI expects timeToStart == 0 to hide the dialog window)
 			{
 				emit robotIsEnabled(true);
 				status = STARTED;
@@ -84,7 +85,7 @@ void GameControl::disableRFID(std::string id)
 
 void GameControl::updateTowers(int tower)
 {
-	towers[tower-1] = false;
+	towers[tower - 1] = false;
 	emit towersUpdate(getFactoryNumber(), getTowerNumber());
 }
 
@@ -96,7 +97,7 @@ void GameControl::quitNow()
 
 void GameControl::startGame()
 {
-	if(status == STOPPED)
+	if (status == STOPPED)
 	{
 		status = WAITING;
 		emit updateRemainingTime(timeToStart);
@@ -113,12 +114,12 @@ void GameControl::stopGame()
 
 void GameControl::togglePause()
 {
-	if(status==PAUSED)
+	if (status == PAUSED)
 	{
 		status = STARTED;
 		emit robotIsEnabled(true);
 	}
-	else if(status==STARTED)
+	else if (status == STARTED)
 	{
 		status = PAUSED;
 		emit robotIsEnabled(false);
@@ -131,8 +132,7 @@ void GameControl::resetGame()
 	stopGame();
 	delete history;
 	history = new GameHistory();
-	emit endGame(history->getWon(),
-			history->getLost(), history->getScore());
+	emit endGame(history->getWon(), history->getLost(), history->getScore());
 }
 
 void GameControl::initializeRfidConfiguration(std::string configFile)
@@ -172,7 +172,8 @@ void GameControl::populateMapWithLine(std::string configLine, int index)
 
 void GameControl::updateGamePoints()
 {
-	score += getTowerNumber() * towerPoints + getFactoryNumber() * factoryPoints;
+	score += getTowerNumber() * towerPoints
+			+ getFactoryNumber() * factoryPoints;
 }
 
 void GameControl::rechargeCard()
@@ -215,7 +216,7 @@ void GameControl::resetTowers()
 
 void GameControl::resetRFID()
 {
-	while(!disabledRfid.empty())
+	while (!disabledRfid.empty())
 	{
 		std::string rfid = disabledRfid.front();
 		disabledRfid.pop();
@@ -231,13 +232,13 @@ void GameControl::performMatchOneStepUpdate()
 	timeToLive--;
 	rechargeCard();
 	emit updatedTimeAndPoints(timeToLive, score);
-	if(timeToLive <= 0 || towers == 0)
+	bool hasWon = getTowerNumber() > 0;
+	if (timeToLive <= 0 || hasWon)
 	{
 		stopGame();
-		bool hasWon = towers > 0;
 		history->addGame(hasWon, score);
-		emit endGame(history->getWon(),
-				history->getLost(), history->getScore());
+		emit endGame(history->getWon(), history->getLost(),
+				history->getScore());
 	}
 }
 
