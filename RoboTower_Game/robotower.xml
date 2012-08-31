@@ -13,33 +13,33 @@
 	<rfid>
 		<!-- definisce i tag per ciascuna azione -->
 		<action name="lock_all">
-			<tag id="4400F56CD1" num="1" action="lock_all" />
-			<tag id="4400F59195" num="2" action="disable_vision" />
-			<tag id="4400F58B6D" num="3" action="force_rotate_left" />
+			<tag id="4400F56CD1" num="1" />
+			<tag id="4400F59195" num="2" />
+			<tag id="4400F58B6D" num="3" />
 		</action>
 		
 		<action name="disable_vision">
-			<tag id="4400BDB1D9" num="4" action="force_rotate_right" />
-			<tag id="4400BDC253" num="5" action="lock_all" />
-			<tag id="4B00DA3279" num="6" action="disable_vision" />
+			<tag id="4400BDB1D9" num="4" />
+			<tag id="4400BDC253" num="5" />
+			<tag id="4B00DA3279" num="6" />
 		</action>
 		
 		<action name="force_rotate">
-			<tag id="4800E51699" num="7" action="force_rotate_left" />
-			<tag id="4B00DA20B7" num="8" action="force_rotate_right" />
-			<tag id="4800E52FB3" num="9" action="lock_all" />
+			<tag id="4800E51699" num="7" />
+			<tag id="4B00DA20B7" num="8" />
+			<tag id="4800E52FB3" num="9" />
 		</action>
 		
 		<action name="go_back">
-			<tag id="4800E4F181" num="10" action="disable_vision" />
-			<tag id="4B00DA4547" num="11" action="force_rotate_left" />
-			<tag id="4C00210BA3" num="12" action="force_rotate_right" />
+			<tag id="4800E4F181" num="10" />
+			<tag id="4B00DA4547" num="11" />
+			<tag id="4C00210BA3" num="12" />
 		</action>
 		
 		<action name="modify_time">
-			<tag id="4800E4FEB4" num="13" action="lock_all" />
-			<tag id="4800E4D047" num="14" action="disable_vision" />
-			<tag id="4B00DA12A4" num="15" action="force_rotate_left" />
+			<tag id="4800E4FEB4" num="13" />
+			<tag id="4800E4D047" num="14" />
+			<tag id="4B00DA12A4" num="15" />
 		</action>
 
 	</rfid>
