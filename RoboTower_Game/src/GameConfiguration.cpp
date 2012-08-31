@@ -22,7 +22,7 @@ using namespace std;
 
 GameConfiguration::GameConfiguration(std::string filePath)
 {
-	RTConfigHandler handler;
+	ConfigHandler handler;
 	QString path = QString::fromStdString(filePath);
 	QFile file(path);
 
@@ -32,39 +32,4 @@ GameConfiguration::GameConfiguration(std::string filePath)
 	reader.parse(inputSource);
 	configuration = handler.getMainConfiguration();
 	rfidList = handler.getRfidList();
-
-	cout << "Configuration parsed" << endl;
-	cout << "timetolive : " << configuration.timetolive << endl;
-	cout << "setuptime : " << configuration.setuptime << endl;
-	cout << " tower : " << configuration.tower << endl;
-	cout << " factory: " << configuration.factory << endl;
-	cout << " towerid: " << configuration.towerid << endl;
-	cout << " factories: " << configuration.factories << endl;
-	cout << endl << endl;
-	cout << "RFID" << endl;
-	for(int i = 0; i < rfidList.size(); i++)
-	{
-		cout << "id: " << rfidList.at(i).id << endl;
-		cout << "num: " << rfidList.at(i).num << endl;
-		cout << "action: " << rfidList.at(i).action << endl;
-	}
-
-}
-
-RTConfigGeneral GameConfiguration::getMainConfiguration()
-{
-	return this->configuration;
-}
-
-int GameConfiguration::getNumActions() {
-	return rand() % 5 + 1;
-}
-
-std::vector<int> GameConfiguration::getRfidList(int actionId) {
-	std::vector<int> ret;
-	int x = rand() % 8 + 1;
-	for(int i = 0; i < x; i++) {
-		ret.push_back(actionId*3+i);
-	}
-	return ret;
 }

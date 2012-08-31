@@ -16,7 +16,7 @@
  */
 
 #include "RTMainWindow.h"
-#include "RTConfigHandler.h"
+#include "ConfigHandler.h"
 
 #include <iostream>
 void RTMainWindow::setupToolbar()
@@ -55,7 +55,7 @@ void RTMainWindow::setupStats()
 	statsLayout->addWidget(statTotalScore, 3, 2);
 }
 
-void RTMainWindow::setupLayout()
+void RTMainWindow::setupLayout(GameConfiguration config)
 {
 	mainWidget = new QWidget();
 	mainLayout = new QHBoxLayout();
@@ -64,7 +64,6 @@ void RTMainWindow::setupLayout()
 
 	/* Children widgets */
 	currentGame = new RTCurrentGameWidget();
-	GameConfiguration config("../robotower.xml");			// FIXME
 	cardsLayout = new RTCards(config);
 
 	mainWidget->setLayout(mainLayout);
@@ -77,13 +76,13 @@ void RTMainWindow::setupLayout()
 	leftLayout->addWidget(statsGroupBox, 3, 3, 1, 2);
 }
 
-RTMainWindow::RTMainWindow(QWidget* parent) :
+RTMainWindow::RTMainWindow(GameConfiguration config,QWidget* parent) :
 		QMainWindow(parent), popupTimer(NULL)
 {
 	setupButtons();
 	setupStats();
 	setupToolbar();
-	setupLayout();
+	setupLayout(config);
 	setWindowTitle(QString("RoboTower GUI"));
 	QObject::connect(startBtn, SIGNAL(clicked()), this, SLOT(startOnClick())); //(start()));
 	QObject::connect(stopBtn, SIGNAL(clicked()), this, SLOT(stopOnClick())); //()));

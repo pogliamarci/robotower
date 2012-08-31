@@ -22,6 +22,7 @@
 #include "RTCurrentGameWidget.h"
 #include "RTCards.h"
 #include "RTPopupTimer.h"
+#include "GameConfiguration.h"
 
 class RTMainWindow: public QMainWindow
 {
@@ -49,7 +50,7 @@ private:
 	RTPopupTimer* popupTimer;
 
 public:
-	RTMainWindow(QWidget* parent = 0);
+	RTMainWindow(GameConfiguration config, QWidget* parent = 0);
 	~RTMainWindow();
 public slots:
 	void updateTowers(int factoryNumber, int towersNumber); //Updates tower counter
@@ -61,7 +62,7 @@ private:
 	void setupButtons();
 	void setupStats();
 	void setupToolbar();
-	void setupLayout();
+	void setupLayout(GameConfiguration config);
 	void setButtonStatus(bool isRunning);
 private slots:
 	void startOnClick();

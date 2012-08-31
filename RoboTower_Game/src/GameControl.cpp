@@ -1,5 +1,6 @@
 /*
  * RoboTower, Hi-CoRG based on ROS
+
  *
  * Copyright (C) 2012 Politecnico di Milano
  * Copyright (C) 2012 Marcello Pogliani, Davide Tateo
@@ -19,16 +20,22 @@
 #include <QMutexLocker>
 #include "GameControl.h"
 
-GameControl::GameControl()
+GameControl::GameControl(GameConfiguration config) :
+		gameMaxTime(config.getGameMaxTime()), gameSetupTime(
+				config.getGameSetupTime()), towerPoints(
+				config.getTowerPoints()), factoryPoints(
+				config.getTowerPoints()), mainTower(config.getMainTower()), towersNumber(
+				config.getTowersNumber())
 {
+	towers = new bool[towersNumber];
 	timeToLive = gameMaxTime;
 	score = 0;
 	cardRecharge = 0;
 	isQuitting = false;
 	status = STOPPED;
-	resetTowers();
 	history = new GameHistory();
-	initializeRfidConfiguration("../../rfidconfig.txt");
+	resetTowers();
+	initializeRfidConfiguration(config);
 }
 
 void GameControl::run()
@@ -136,24 +143,20 @@ void GameControl::resetGame()
 	emit endGame(history->getWon(), history->getLost(), history->getScore());
 }
 
-void GameControl::initializeRfidConfiguration(std::string configFile)
+void GameControl::initializeRfidConfiguration(GameConfiguration config)
 {
-	std::fstream config;
-	config.open(configFile.c_str(), std::ios::in);
-	std::cerr << "Trying to open file: " << configFile << std::endl;
-	if (!config.is_open())
+	for (int i = 0; i < config.getNumActions(); i++)
 	{
-		std::cerr << "Error opening the configuration file, "
-				"no action will be assigned to RFID tags!" << std::endl;
-		return;
+		std::vector<ConfigRfidEntry> groupList(config.getRfidList(i));
+		for (size_t j; j < groupList.size(); j++)
+		{
+			RfidEntry entry;
+			entry.action = groupList.at(j).action;
+			entry.number = groupList.at(j).num;
+			entry.status = true;
+			rfidMap.insert(std::make_pair(groupList.at(j).id, entry));
+		}
 	}
-	for (int i = 0; config.good(); i++)
-	{
-		std::string st;
-		getline(config, st);
-		populateMapWithLine(st, i);
-	}
-	config.close();
 }
 
 void GameControl::populateMapWithLine(std::string configLine, int index)
@@ -252,5 +255,6 @@ void GameControl::wakeup()
 
 GameControl::~GameControl()
 {
+	delete[] towers;
 	delete history;
 }

@@ -15,7 +15,6 @@
  * GNU General Public License for more details.
  */
 
-
 #ifndef GAMECONFIGURATION_H_
 #define GAMECONFIGURATION_H_
 
@@ -26,19 +25,58 @@
 #include<vector>
 #include<iostream>
 #include<cstdlib>
-#include"RTConfigHandler.h"
+#include"ConfigHandler.h"
 
-class GameConfiguration {
+class GameConfiguration
+{
 private:
-	RTConfigGeneral configuration;
-	std::vector<RTConfigRfidEntry> rfidList;
+	ConfigGeneral configuration;
+	std::vector<std::vector<ConfigRfidEntry> > rfidList;
 
 public:
 	GameConfiguration(std::string filePath);
-	RTConfigGeneral getMainConfiguration();
-	int getNumActions();
-	std::vector<int> getRfidList(int actionId);
-};
 
+	inline ConfigGeneral getMainConfiguration()
+	{
+		return this->configuration;
+	}
+
+	inline int getGameMaxTime()
+	{
+		return configuration.timeToLive;
+	}
+	inline int getGameSetupTime()
+	{
+		return configuration.setupTime;
+	}
+	inline int getTowerPoints()
+	{
+		return configuration.towerPoints;
+	}
+	inline int getFactoryPoints()
+	{
+		return configuration.factoryPoints;
+	}
+	inline int getMainTower()
+	{
+		return configuration.towerId;
+	}
+
+	inline int getTowersNumber()
+	{
+		return configuration.factories + 1;
+	}
+
+	inline int getNumActions()
+	{
+		return rfidList.size();
+	}
+
+	inline std::vector<ConfigRfidEntry> getRfidList(int actionId)
+	{
+		return rfidList.at(actionId);
+	}
+
+};
 
 #endif /* GAMECONFIGURATION_H_ */

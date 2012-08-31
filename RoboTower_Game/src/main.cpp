@@ -21,6 +21,7 @@
 #include "RosComunication.h"
 #include "GameControl.h"
 #include "RTMainWindow.h"
+#include "GameConfiguration.h"
 
 Q_DECLARE_METATYPE (std::string)
  
@@ -28,10 +29,11 @@ int main(int argc, char **argv)
 {
 	qRegisterMetaType<std::string>("string");
 	init(argc, argv, "Robotower_Game");
+	GameConfiguration configuration("../robotower.xml");
 	RosComunication rosPublisher;
-	GameControl gameControl;
+	GameControl gameControl(configuration);
 	QApplication app(argc, argv);
-	RTMainWindow mainWindow;
+	RTMainWindow mainWindow(configuration);
 
 	rosPublisher.start();
 	gameControl.start();

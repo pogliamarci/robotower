@@ -29,6 +29,7 @@
 #include <queue>
 
 #include "GameHistory.h"
+#include "GameConfiguration.h"
 
 typedef struct rfid_entry
 {
@@ -47,17 +48,17 @@ class GameControl: public QThread
 Q_OBJECT
 
 private:
-	static const int gameMaxTime = 300;
-	static const int gameSetupTime = 30;
-	static const int towerPoints = 100;
-	static const int factoryPoints = 20;
-	static const int mainTower = 4;
-	static const int towersNumber = 4;
+	const int gameMaxTime;
+	const int gameSetupTime;
+	const int towerPoints;
+	const int factoryPoints;
+	const int mainTower;
+	const int towersNumber;
 private:
 	int timeToLive;
 	int timeToStart;
 	int score;
-	bool towers[towersNumber];
+	bool* towers;
 	bool isQuitting;
 	int cardRecharge;
 	std::map<std::string, RfidEntry> rfidMap;
@@ -68,7 +69,7 @@ private:
 	GameHistory* history;
 
 public:
-	GameControl();
+	GameControl(GameConfiguration config);
 	~GameControl();
 	void run();
 	inline int getTimeToLive()
@@ -89,7 +90,7 @@ public:
 	}
 	inline int getTowerNumber()
 	{
-		return towers[mainTower-1] ? 1 : 0;
+		return towers[mainTower - 1] ? 1 : 0;
 	}
 public slots:
 	void manageRfid(std::string id);
@@ -101,7 +102,7 @@ public slots:
 	void togglePause();
 	void resetGame();
 private:
-	void initializeRfidConfiguration(std::string configFile);
+	void initializeRfidConfiguration(GameConfiguration config);
 	void populateMapWithLine(std::string configLine, int index);
 	void updateGamePoints();
 	void rechargeCard();

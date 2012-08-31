@@ -26,12 +26,12 @@ void RTCards::addCards(GameConfiguration& config)
 	for(int i = 0; i < na; i++)
 	{
 		// std::string action = config.getAction(i);
-		std::vector<int> rfidList = config.getRfidList(i);
+		std::vector<ConfigRfidEntry> rfidList = config.getRfidList(i);
 		for(size_t j = 0; j < rfidList.size(); j++)
 		{
-			RTCard* card = new RTCard(rfidList.at(j));
+			RTCard* card = new RTCard(rfidList.at(j).num);
 			addWidget(card, j, i, 1, 1);
-			cardList.push_back(card); /* TODO cambiare in una mappa */
+			cardList.push_back(card);
 		}
 
 	}
@@ -95,7 +95,7 @@ void RTCard::setTextWhite()
 RTCard::RTCard(int number) : QLabel()
 {
 	const int borderWidht = 2;
-	QString labelText = QString::number(number+1);
+	QString labelText = QString::number(number);
 	setText(labelText);
 	setTextWhite();
 	setFrameStyle(borderWidht);
