@@ -189,7 +189,7 @@ void GameControl::rechargeCard()
 		{
 			std::string card = disabledRfid.front();
 			disabledRfid.pop();
-			RfidEntry entry = rfidMap[card];
+			RfidEntry& entry = rfidMap[card];
 			entry.status = true;
 			emit updatedRfidStatus(entry.number, entry.status);
 			cardRecharge = 0;
@@ -234,7 +234,7 @@ void GameControl::performMatchOneStepUpdate()
 	timeToLive--;
 	rechargeCard();
 	emit updatedTimeAndPoints(timeToLive, score);
-	bool hasWon = getTowerNumber() > 0;
+	bool hasWon = getTowerNumber() <= 0;
 	if (timeToLive <= 0 || hasWon)
 	{
 		stopGame();

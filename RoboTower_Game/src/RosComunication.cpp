@@ -49,7 +49,6 @@ void RosComunication::quitNow()
 	hasToQuit = true;
 	resetRobot();
 	enableIsaac(false);
-	std::cout << "Bye bye" << std::endl;
 }
  
 void RosComunication::resetRobot()

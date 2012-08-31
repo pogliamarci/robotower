@@ -21,11 +21,13 @@ set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 #uncomment if you have defined services
 #rosbuild_gensrv()
 
-find_package(Qt4 REQUIRED)
+find_package(Qt4 COMPONENTS QtCore QtXml QtGui REQUIRED)
 include(${QT_USE_FILE})
 # This is necessary as all ui files etc will get dumped in the bottom of the
 # binary directory.
-include_directories(${CMAKE_CURRENT_BINARY_DIR}) 
+include_directories(${CMAKE_CURRENT_BINARY_DIR})
+include_directories(${QT_QTXML_INCLUDE_DIR})
+set (QT_USE_QTXML TRUE)
 ##############################################################################
 # Sections
 ##############################################################################

@@ -18,21 +18,29 @@
 #include "RTCards.h"
 #include <string>
 #include <iostream>
+#include <vector>
 
-void RTCards::addCards()
+void RTCards::addCards(GameConfiguration& config)
 {
-	for (int i = 0; i < ROWS * COLS; i++)
+	int na = config.getNumActions();
+	for(int i = 0; i < na; i++)
 	{
-		RTCard* card = new RTCard(i);
-		addWidget(card, i % ROWS, i / ROWS, 1, 1);
-		cardList.push_back(card);
+		// std::string action = config.getAction(i);
+		std::vector<int> rfidList = config.getRfidList(i);
+		for(size_t j = 0; j < rfidList.size(); j++)
+		{
+			RTCard* card = new RTCard(rfidList.at(j));
+			addWidget(card, j, i, 1, 1);
+			cardList.push_back(card); /* TODO cambiare in una mappa */
+		}
+
 	}
 }
 
-RTCards::RTCards() :
+RTCards::RTCards(GameConfiguration& config) :
 		QGridLayout()
 {
-	addCards();
+	addCards(config);
 	setAlignment(Qt::AlignTop);
 }
 
@@ -57,9 +65,11 @@ void RTCards::setGeometry(const QRect& rect)
 
 	for(int i=0; i < rowCount(); i++) {
 		for(int j=0; j<columnCount(); j++) {
-			QLayoutItem* o = this->itemAtPosition(i,j);
-			QRect geom(rectStartx + j*(w+spacing()), rectStarty + i*(h+spacing()), w, h);
-			o->setGeometry(geom);
+			QLayoutItem* item = this->itemAtPosition(i,j);
+			if(item != NULL) {
+				QRect geom(rectStartx + j*(w+spacing()), rectStarty + i*(h+spacing()), w, h);
+				item->setGeometry(geom);
+			}
 		}
 	}
 }

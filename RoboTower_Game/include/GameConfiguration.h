@@ -15,39 +15,30 @@
  * GNU General Public License for more details.
  */
 
-#ifndef RTCARDS_H_
-#define RTCARDS_H_
 
-#include "GameConfiguration.h"
-#include <QtGui>
-#include <vector>
+#ifndef GAMECONFIGURATION_H_
+#define GAMECONFIGURATION_H_
 
-#define ROWS 3
-#define COLS 5
+#include<QFile>
+#include<QXmlSimpleReader>
+#include<QXmlInputSource>
 
-class RTCard: public QLabel
-{
-Q_OBJECT
-public:
-	RTCard(int number);
-	void setCardStatus(bool cardStatus);
+#include<vector>
+#include<iostream>
+#include<cstdlib>
+#include"RTConfigHandler.h"
+
+class GameConfiguration {
 private:
-	void setTextWhite();
+	RTConfigGeneral configuration;
+	std::vector<RTConfigRfidEntry> rfidList;
+
+public:
+	GameConfiguration(std::string filePath);
+	RTConfigGeneral getMainConfiguration();
+	int getNumActions();
+	std::vector<int> getRfidList(int actionId);
 };
 
-class RTCards: public QGridLayout
-{
-Q_OBJECT
-private:
-	QLabel* label;
-	QGridLayout* cardGrid;
-	std::vector<RTCard*> cardList;
-public:
-	RTCards(GameConfiguration& config);
-	void setCardStatus(int cardNumber, bool cardStatus);
-	void setGeometry(const QRect& rect);
-private:
-	void addCards(GameConfiguration& config);
-};
 
-#endif /* RTCARDS_H_ */
+#endif /* GAMECONFIGURATION_H_ */

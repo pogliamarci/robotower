@@ -42,7 +42,7 @@ int main(int argc, char **argv)
 	QObject::connect(&rosPublisher, SIGNAL(rosQuits()), &app, SLOT(quit()));
 
 	QObject::connect(&gameControl, SIGNAL(updatedTimeAndPoints(int,int)), &mainWindow, SLOT(updateData(int,int)));
-	QObject::connect(&rosPublisher, SIGNAL(rfidRecieved(std::string)), &gameControl, SLOT(disableRFID(std::string)));
+	QObject::connect(&rosPublisher, SIGNAL(rfidRecieved(std::string)), &gameControl, SLOT(manageRfid(std::string)));
 	QObject::connect(&gameControl, SIGNAL(updatedRfidStatus(int, bool)), &mainWindow, SLOT(updateCardStatus(int,bool)));
 	QObject::connect(&rosPublisher, SIGNAL(towersUpdate(int)), &gameControl, SLOT(updateTowers(int)));
 	QObject::connect(&gameControl, SIGNAL(towersUpdate(int, int)), &mainWindow, SLOT(updateTowers(int, int)));

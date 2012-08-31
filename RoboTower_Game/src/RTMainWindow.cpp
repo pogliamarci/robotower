@@ -16,6 +16,7 @@
  */
 
 #include "RTMainWindow.h"
+#include "RTConfigHandler.h"
 
 #include <iostream>
 void RTMainWindow::setupToolbar()
@@ -63,7 +64,8 @@ void RTMainWindow::setupLayout()
 
 	/* Children widgets */
 	currentGame = new RTCurrentGameWidget();
-	cardsLayout = new RTCards();
+	GameConfiguration config("../robotower.xml");			// FIXME
+	cardsLayout = new RTCards(config);
 
 	mainWidget->setLayout(mainLayout);
 	mainLayout->addLayout(leftLayout);
