@@ -25,6 +25,8 @@
 #include "chsprintf.h"
 #include "CircularBuffer.h"
 
+#define NUM_LED_GROUPS 3
+
 /* Functions */
 void startLedBlinkerTreads(void);
 void setLed(int n, bool_t setOn);
@@ -37,7 +39,7 @@ void shellInitControl(Thread** shell);
 
 /* Set the mode of a group of leds to 'blinking'.
  * Indexes are 0 for, 1 for and 2 for */
-extern bool_t blinking[];
+extern bool_t blinking[NUM_LED_GROUPS];
 
 /* used to synchronize read\writes to the leds (gpios),
  * to avoid race conditions with the blinker thread */

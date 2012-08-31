@@ -53,15 +53,12 @@ SerialReader::SerialReader(std::string serialDevice) throw (SerialDeviceExceptio
 
 		tcflush(fd, TCIFLUSH);
 		tcsetattr(fd,TCSANOW,&newtio);
-	
-
 	}
 	else
 	{
 		throw SerialDeviceException();
 	}
 
-	pthread_mutex_init(&mutex, NULL);
 	tmp_buf = new char[MAX_TMP_BUF];
 	buffer = new CharCircularBuffer(MAX_BUF_CHAR,'\r');
 }
@@ -80,7 +77,6 @@ SerialReader::~SerialReader()
 	{
 		delete [] tmp_buf;
 	}
-	pthread_mutex_destroy(&mutex);
 }
 
 bool SerialReader::isReady()
@@ -150,7 +146,6 @@ unsigned int SerialReader::getLineToParseNum()
 int SerialReader::sendStringCommand(char *cmd,int len)
 {
 	std::cerr << cmd << std::endl;
-	pthread_mutex_lock(&mutex);
 	if(fd<0)return -1;
 	for(int i=0;i<len;i++)
 	{
@@ -160,8 +155,6 @@ int SerialReader::sendStringCommand(char *cmd,int len)
 		}
 		usleep(CHAR_PAUSE);
 	}
-	cout << cmd << endl;
-	pthread_mutex_unlock(&mutex);
 	return 0;
 }
 

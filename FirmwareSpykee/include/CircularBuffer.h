@@ -11,7 +11,7 @@
 #include "ch.h"
 #include "hal.h"
 
-#define BUFFER_LENGTH 100
+#define BUFFER_LENGTH 150
 
 /* A fixed-length circular buffer, used to synchronize writes onto a BaseChannel,
  * usually the serial port. Reads and writes to the buffer are synchronised
