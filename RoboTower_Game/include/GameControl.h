@@ -34,6 +34,7 @@ typedef struct rfid_entry
 {
 	int number;
 	int status;
+	std::string action;
 } RfidEntry;
 
 enum GameStatus
@@ -91,7 +92,7 @@ public:
 		return towers[mainTower-1] ? 1 : 0;
 	}
 public slots:
-	void disableRFID(std::string id);
+	void manageRfid(std::string id);
 	void updateTowers(int towerNumber);
 	void quitNow();
 
@@ -113,7 +114,7 @@ private:
 signals:
 	void updatedTimeAndPoints(int timeToLive, int score); //emitted at the end of each iteration
 	void updatedRfidStatus(int rfid, bool status); //emitted when RFID status changes
-	void rfidEnableNotification(std::string id);
+	void rfidActionNotification(std::string id);
 	void endGame(int won, int lost, int score); //emitted when the game ends
 	void towersUpdate(int factoriesNumber, int towersNumber);
 	void robotIsEnabled(bool enabled);

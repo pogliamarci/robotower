@@ -59,11 +59,11 @@ void RosComunication::resetRobot()
 	resetRobotPublisher.publish(message);
 }
 
-void RosComunication::enableRFID(std::string id)
+void RosComunication::sendAction(std::string action)
 {
 	std_msgs::String message;
-	message.data = id;
-	enableCardPublisher.publish(message);
+	message.data = action;
+	rfidActionPublisher.publish(message);
 }
 
 void RosComunication::enableIsaac(bool isEnabled)

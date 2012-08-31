@@ -22,7 +22,7 @@ IsaacStrategy::IsaacStrategy()
 	brian = new MrBrian(FUZZYASSOC, FUZZYSHAPES, PRIES, PRIESACTIONS, CANDOES,
 			BEHAVIORS, WANTERS, DEFUZZYASSOC, DEFUZZYSHAPES);
 
-	lastAction = nothing;
+	lastAction = "";
 
 	for (int i = 0; i < CARDINAL_POINTS; i++)
 		sonar[i] = 0;
@@ -97,7 +97,7 @@ void IsaacStrategy::modifyActuators()
 	{
 		if(action_rand_direction == 1)
 			left_track = 0;
-		else right_track;
+		else right_track = 0;
 	}
 
 	tanSpeed = (right_track + left_track) / 2;

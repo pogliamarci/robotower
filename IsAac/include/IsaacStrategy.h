@@ -62,7 +62,7 @@ private:
 	/* variables to manage the action triggered by RFIDs */
 	std::string lastAction;
 	int timer;
-	char action_rand_direction
+	char action_rand_direction;
 
 public:
 	IsaacStrategy();
@@ -77,7 +77,7 @@ public:
 	}
 	inline bool isTrapped()
 	{
-		return lastAction != nothing;
+		return lastAction != "";
 	}
 	inline bool hasSeenSomething()
 	{
@@ -85,8 +85,8 @@ public:
 	}
 	~IsaacStrategy();
 private:
-	void modifySensors(std::string action);
-	void modifyActuators(std::string action);
+	void modifySensors();
+	void modifyActuators();
 	void useBrian();
 	void updateSensors(SensorStatus& sensorStatus);
 	void parseBrianResults();

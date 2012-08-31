@@ -47,8 +47,7 @@ class SensorStatus
 		void fromSonarCallback(const Echoes::Sonar& message);
 		void fromVisionCallback(const Vision::Results& message);
 		void rfidActionCallback(const std_msgs::String& message);
-		void rfidActionCallback(const std_msgs::String& message);
-		std::string consumeLastAction()
+		std::string consumeLastAction();
 		/* some getters (declared here as inline) */
 		inline bool isTowerDetected() 
 		{
@@ -78,7 +77,7 @@ class SensorStatus
 		{
 			return factory_distance;
 		}
-		inline bool SensorStatus::hasValidAction()
+		inline bool hasValidAction()
 		{
 			return actionIsValid;
 		}

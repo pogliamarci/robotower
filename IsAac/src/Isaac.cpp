@@ -125,7 +125,7 @@ int main(int argc, char** argv)
 	ros::Subscriber vision_sub = ros_node.subscribe("vision_results", 1,
 			&SensorStatus::fromVisionCallback, &sensors);
 	ros::Subscriber disablerfid_sub = ros_node.subscribe("rfid_action", 1,
-			&SensorStatus::enableRfidCallback, &sensors);
+			&SensorStatus::rfidActionCallback, &sensors);
 	ros::ServiceClient client = ros_node.serviceClient<Echoes::Led>("led_data");
 	ledServiceHandle = &client;
 	ros::Subscriber enable_sub = ros_node.subscribe("isaac_enable", 1, enabler);

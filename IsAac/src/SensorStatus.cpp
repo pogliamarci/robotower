@@ -53,7 +53,7 @@ void SensorStatus::fromVisionCallback(const Vision::Results& message)
 void SensorStatus::rfidActionCallback(const std_msgs::String& message)
 {
 	lastAction = message.data;
-	hasValidAction = true;
+	actionIsValid = true;
 }
 
 std::string SensorStatus::consumeLastAction()

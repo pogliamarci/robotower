@@ -72,7 +72,7 @@ void GameControl::run()
 	}
 }
 
-void GameControl::disableRFID(std::string id)
+void GameControl::manageRfid(std::string id)
 {
 	RfidEntry &entry = rfidMap[id];
 	if (entry.status)
@@ -80,6 +80,7 @@ void GameControl::disableRFID(std::string id)
 		entry.status = false;
 		disabledRfid.push(id);
 		emit updatedRfidStatus(entry.number, entry.status);
+		emit rfidActionNotification(entry.action);
 	}
 }
 
@@ -163,9 +164,11 @@ void GameControl::populateMapWithLine(std::string configLine, int index)
 	if (configLine.size() >= actionindex)
 	{
 		std::string id = configLine.substr(idindex, actionStartIndex - idindex);
+		std::string action = configLine.substr(actionindex);
+
 		id.erase(id.find_last_not_of(" \n\r\t") + 1); // trim trailing whitespace
 		RfidEntry entry =
-		{ index, true };
+		{ index, true, action };
 		rfidMap.insert(std::make_pair(id, entry));
 	}
 }
@@ -222,7 +225,6 @@ void GameControl::resetRFID()
 		disabledRfid.pop();
 		rfidMap[rfid].status = true;
 		emit updatedRfidStatus(rfidMap[rfid].number, rfidMap[rfid].status);
-		emit rfidEnableNotification(rfid);
 	}
 }
 

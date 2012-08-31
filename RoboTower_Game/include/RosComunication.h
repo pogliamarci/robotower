@@ -36,7 +36,7 @@ Q_OBJECT
 private:
 	NodeHandle n;
 	Publisher enableIsaacPublisher;
-	Publisher enableCardPublisher;
+	Publisher rfidActionPublisher;
 	Publisher resetRobotPublisher;
 	Subscriber rfidCardSubscriber;
 	Subscriber towerSubscriber;
@@ -49,7 +49,7 @@ private:
 	void fromTowersCallback(const Echoes::Towers& message);
 public slots:
 	void resetRobot();
-	void enableRFID(std::string id);
+	void sendAction(std::string id);
 	void enableIsaac(bool isEnabled);
 	void quitNow(); // stops the thread when the application is quitting, reset the robot and stop IsAac
 signals:
