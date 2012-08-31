@@ -116,8 +116,6 @@ static msg_t blinkerThread(void *arg)
 
 void startLedBlinkerTreads(void)
 {
-	chMtxInit(&spykeeLedMutex);
-
 	chThdCreateStatic(spykeeLedBlinkerWorkingArea,
 			sizeof(spykeeLedBlinkerWorkingArea), NORMALPRIO,
 			spykeeLedBlinkerThread, NULL );
