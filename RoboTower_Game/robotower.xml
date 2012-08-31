@@ -1,0 +1,32 @@
+<robotower>
+	<config>
+		<time timetolive="300" setuptime="30" />
+		<!-- Definisce i punti assegnati dalla torre o da ogni fabbrica per ogni secondo di vita -->
+		<points tower="100" factory="30" />
+		<!-- ID dell'obiettivo definito come torre e numero di fabbriche -->
+		<goals towerid="4" factories="3" />
+	</config>
+	<rfid>
+		<tag id="4400F56CD1" num="1" action="lock_all" />
+		<tag id="4400F59195" num="2" action="disable_vision" />
+		<tag id="4400F58B6D" num="3" action="force_rotate_left" />
+		<tag id="4400BDB1D9" num="4" action="force_rotate_right" />
+		<tag id="4400BDC253" num="5" action="lock_all" />
+		<tag id="4B00DA3279" num="6" action="disable_vision" />
+		<tag id="4800E51699" num="7" action="force_rotate_left" />
+		<tag id="4B00DA20B7" num="8" action="force_rotate_right" />
+		<tag id="4800E52FB3" num="9" action="lock_all" />
+		<tag id="4800E4F181" num="10" action="disable_vision" />
+		<tag id="4B00DA4547" num="11" action="force_rotate_left" />
+		<tag id="4C00210BA3" num="12" action="force_rotate_right" />
+		<tag id="4800E4FEB4" num="13" action="lock_all" />
+		<tag id="4800E4D047" num="14" action="disable_vision" />
+		<tag id="4B00DA12A4" num="15" action="force_rotate_left" />
+	</rfid>
+</robotower>
+
+<!--
+	<action id="force_rotate">
+		<tag id="4B00DA12A4" num="8" subaction="left" />
+	</action>
+-->

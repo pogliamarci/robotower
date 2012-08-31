@@ -39,8 +39,6 @@ class IsaacStrategy
 private:
 	MrBrian* brian;
 
-	RfidAction lastAction;
-
 	int sonar[CARDINAL_POINTS];
 
 	bool tower_found;
@@ -61,7 +59,10 @@ private:
 	int tanSpeed;
 	int rotSpeed;
 
+	/* variables to manage the action triggered by RFIDs */
+	std::string lastAction;
 	int timer;
+	char action_rand_direction
 
 public:
 	IsaacStrategy();
@@ -84,8 +85,8 @@ public:
 	}
 	~IsaacStrategy();
 private:
-	void modifySensors(RfidAction action);
-	void modifyActuators(RfidAction action);
+	void modifySensors(std::string action);
+	void modifyActuators(std::string action);
 	void useBrian();
 	void updateSensors(SensorStatus& sensorStatus);
 	void parseBrianResults();

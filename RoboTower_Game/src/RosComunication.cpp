@@ -24,7 +24,7 @@ RosComunication::RosComunication()
 {
 	hasToQuit = false;
 	enableIsaacPublisher = n.advertise<std_msgs::Bool>("isaac_enable", 1000);
-	enableCardPublisher = n.advertise<std_msgs::String>("rfid_enable", 1000);
+	rfidActionPublisher = n.advertise<std_msgs::String>("rfid_action", 1000);
 	resetRobotPublisher = n.advertise<std_msgs::Bool>("echoes_reset", 1000);
 	rfidCardSubscriber = n.subscribe("rfid_data", 1, &RosComunication::fromRfidCallback, this);
 	towerSubscriber = n.subscribe("towers_data", 1, &RosComunication::fromTowersCallback, this);

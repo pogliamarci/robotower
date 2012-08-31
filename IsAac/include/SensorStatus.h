@@ -30,11 +30,6 @@ typedef enum
 	NORTH, SOUTH, EAST, WEST
 } CardinalPoint;
 
-typedef enum
-{
-	lock_all, disable_vision, force_rotate_right, force_rotate_left, nothing
-} RfidAction;
-
 class SensorStatus 
 {
 	private:
@@ -45,15 +40,15 @@ class SensorStatus
 		int factory_position;
 		int factory_distance;
 		int tower_distance;
-		RfidAction lastAction;
-		std::map<std::string, RfidAction> idToAction;
-		std::map<std::string, bool> enabledRfid;
+		std::string lastAction;
+		bool actionIsValid;
 	public:
-		SensorStatus(std::string configFile);
+		SensorStatus();
 		void fromSonarCallback(const Echoes::Sonar& message);
-		void fromRfidCallback(const Echoes::Rfid& message);
 		void fromVisionCallback(const Vision::Results& message);
-		void enableRfidCallback(const std_msgs::String& message);
+		void rfidActionCallback(const std_msgs::String& message);
+		void rfidActionCallback(const std_msgs::String& message);
+		std::string consumeLastAction()
 		/* some getters (declared here as inline) */
 		inline bool isTowerDetected() 
 		{
@@ -83,16 +78,10 @@ class SensorStatus
 		{
 			return factory_distance;
 		}
-		inline RfidAction consumeLastAction()
+		inline bool SensorStatus::hasValidAction()
 		{
-			RfidAction a = lastAction;
-			lastAction = nothing;
-			return a;
+			return actionIsValid;
 		}
-	private:
-		void initializeRfidConfiguration(std::string configFile);
-		void populateMapWithLine(std::string configLine);
-		RfidAction strToAction(std::string token);
 };
 
 #endif

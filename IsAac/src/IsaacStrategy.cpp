@@ -48,38 +48,23 @@ void IsaacStrategy::activateStrategy(SensorStatus& sensorStatus)
 {
 	getAction(sensorStatus);
 	updateSensors(sensorStatus);
-	modifySensors(lastAction);
+	modifySensors();
 	useBrian();
 	parseBrianResults();
-	modifyActuators(lastAction);
+	modifyActuators();
 }
 
 void IsaacStrategy::getAction(SensorStatus& sensorStatus)
 {
-	if (timer == 0)
+	if (timer != 0)
+		return;
+	
+	if(sensorStatus.hasValidAction())
 	{
 		lastAction = sensorStatus.consumeLastAction();
-		if (lastAction != nothing)
-		{
-			switch (lastAction)
-			{
-			case lock_all:
-				cerr << "Lock all" << endl;
-				break;
-			case disable_vision:
-				cerr << "Disable vision" << endl;
-				break;
-			case force_rotate_left:
-			case force_rotate_right:
-				cerr << "Force rotate" << endl;
-				break;
-			case nothing:
-				cerr << "NOTHING ERROR ERROR ERROR" << endl;
-				break;
-			}
-			timer = 5 * LOOPRATE;
-		}
-	}
+		action_rand_direction = rand() % 2;
+		timer = 5 * LOOPRATE;
+	} else lastAction = "";
 }
 
 void IsaacStrategy::resetVision()
@@ -90,42 +75,33 @@ void IsaacStrategy::resetVision()
 	factory_position = 0;
 }
 
-void IsaacStrategy::modifySensors(RfidAction action)
+void IsaacStrategy::modifySensors()
 {
-	switch (action)
+	if(lastAction == "disable_vision")
 	{
-	case disable_vision:
 		resetVision();
-		break;
-	default:
-		break;
 	}
 }
 
-void IsaacStrategy::modifyActuators(RfidAction action)
+void IsaacStrategy::modifyActuators()
 {
 	int right_track = tanSpeed - rotSpeed;
 	int left_track = tanSpeed + rotSpeed;
 
-	switch (action)
+	if(lastAction == "lock_all")
 	{
-	case lock_all:
 		right_track = 0;
 		left_track = 0;
-		break;
-	case force_rotate_left:
-		left_track = 0;
-		break;
-	case force_rotate_right:
-		right_track = 0;
-		break;
-	default:
-		break;
+	} 
+	else if(lastAction == "force_rotate") 
+	{
+		if(action_rand_direction == 1)
+			left_track = 0;
+		else right_track;
 	}
 
 	tanSpeed = (right_track + left_track) / 2;
 	rotSpeed = (left_track - right_track) / 2;
-
 }
 
 void IsaacStrategy::useBrian()
@@ -193,23 +169,19 @@ void IsaacStrategy::updateSensors(SensorStatus& sensorStatus)
 
 void IsaacStrategy::updateRandomValues()
 {
-	//Updates detectedTime
 	if (tower_found)
 	{
 		cout << "tower detected: pos = " << tower_position << endl;
 		detectedTime = 0;
 	}
-	else
-		detectedTime++;
+	else detectedTime++;
 
-	//updates Random Ahead
 	if (detectedTime == LOOPRATE)
 	{
 		randomAhead = rand() % 100;
 		detectedTime = 0;
 	}
 
-	//updates random Search
 	if ((randomTime++) == 4 * LOOPRATE)
 	{
 		randomSearch = rand() % 100;
@@ -242,16 +214,6 @@ void IsaacStrategy::parseBrianResults()
 		else if (temp.compare("RotSpeed") == 0)
 		{
 			rotSpeed = it->second->get_set_point();
-		}
-		else if (temp.compare("GreenLed") == 0)
-		{
-			cout << "Green led posto a " << it->second->get_set_point() << endl;
-			/*
-			 Echoes::Led led_service;
-			 led_service.request.editGreen = true;
-			 led_service.request.greenIsOn = it->second->get_set_point();
-			 client.call(led_service);
-			 */
 		}
 	}
 
