@@ -46,11 +46,13 @@ void setLed(int n, bool_t setOn)
 void resetLed(void)
 {
 	const int numLed = 9;
-	int i;
+	short i;
+	chMtxLock(&spykeeLedMutex);
+	for(i = 0; i < NUM_LED_GROUPS; i++)
+		blinking[i] = FALSE;
 	for (i = 0; i < numLed; i++)
-	{
 		setLed(i, FALSE);
-	}
+	chMtxUnlock();
 	palClearPad(IOPORT4, GPIOD_IRLED); /* reset infrared leds */
 }
 
@@ -114,8 +116,6 @@ static msg_t blinkerThread(void *arg)
 
 void startLedBlinkerTreads(void)
 {
-	chMtxInit(&spykeeLedMutex);
-
 	chThdCreateStatic(spykeeLedBlinkerWorkingArea,
 			sizeof(spykeeLedBlinkerWorkingArea), NORMALPRIO,
 			spykeeLedBlinkerThread, NULL );

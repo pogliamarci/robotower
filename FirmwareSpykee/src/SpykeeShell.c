@@ -32,7 +32,8 @@ static void cmd_reset(BaseChannel* channel, int argc, char** argv)
 static void cmd_led(BaseChannel* channel, int argc, char** argv)
 {
 	(void) channel;
-	short offset = 0;
+	short ledgroup = 0;
+	// short offset = 0;
 	int x = 0;
 
 	if (argc < 2) return;
@@ -40,28 +41,28 @@ static void cmd_led(BaseChannel* channel, int argc, char** argv)
 	switch (argv[0][0])
 	{
 	case 'R':
-		offset = 0;
+		ledgroup = 0;
 		break;
 	case 'Y':
-		offset = 4;
+		ledgroup = 1;
 		break;
 	case 'G':
-		offset = 8;
+		ledgroup = 2;
 		break;
 	}
 
 	// are we setting the led to the BLINK status?
 	if (argv[1][0] == 'B')
 	{
-		blinking[offset/4] = TRUE;
+		blinking[ledgroup] = TRUE;
 	}
 	else
 	{
-		blinking[offset/4] = FALSE;
+		blinking[ledgroup] = FALSE;
 		chMtxLock(&spykeeLedMutex);
 		for(x = 0; argv[1][x] != '\0'; x++)
 		{
-			setLed(offset + x, NUMERIC_CHAR_TO_INT(argv[1][x]));
+			setLed(ledgroup * 4 + x, NUMERIC_CHAR_TO_INT(argv[1][x]));
 		}
 		chMtxUnlock();
 	}

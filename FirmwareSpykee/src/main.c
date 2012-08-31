@@ -34,6 +34,7 @@ int main(void)
 	chSysInit();
 
 	sdStart(&SD2, &sd2Config);
+	chMtxInit(&spykeeLedMutex);
 	bufferInit(&outputBuffer);
 	resetLed();
 

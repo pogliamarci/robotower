@@ -22,7 +22,6 @@
 
 #include <fcntl.h>
 #include <unistd.h>
-#include <pthread.h>
 #include <poll.h>
 #include <termios.h>
 #include <exception>
@@ -51,7 +50,6 @@ class SerialReader
 		CharCircularBuffer * buffer;
 		char * tmp_buf;
 		static const int MAX_TMP_BUF = 256;
-		pthread_mutex_t mutex;
 		/* the following were in SerialCommunication class */
 		static const int wait_ok=1;
 		static const int wait_tout=0;
