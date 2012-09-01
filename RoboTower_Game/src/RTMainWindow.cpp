@@ -83,9 +83,10 @@ RTMainWindow::RTMainWindow(GameConfiguration config,QWidget* parent) :
 	setupStats();
 	setupToolbar();
 	setupLayout(config);
+	setWindowIcon(QIcon("../img/logo.png"));
 	setWindowTitle(QString("RoboTower GUI"));
-	QObject::connect(startBtn, SIGNAL(clicked()), this, SLOT(startOnClick())); //(start()));
-	QObject::connect(stopBtn, SIGNAL(clicked()), this, SLOT(stopOnClick())); //()));
+	QObject::connect(startBtn, SIGNAL(clicked()), this, SLOT(startOnClick()));
+	QObject::connect(stopBtn, SIGNAL(clicked()), this, SLOT(stopOnClick()));
 	QObject::connect(newGameAction, SIGNAL(triggered()), this,
 			SLOT(newGameClicked()));
 	QObject::connect(currentGame, SIGNAL(togglePause()), this,

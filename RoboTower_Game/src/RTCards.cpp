@@ -23,15 +23,16 @@
 void RTCards::addCards(GameConfiguration& config)
 {
 	int na = config.getNumActions();
-	for(int i = 0; i < na; i++)
+	for (int i = 0; i < na; i++)
 	{
 		// std::string action = config.getAction(i);
 		std::vector<ConfigRfidEntry> rfidList = config.getRfidList(i);
-		for(size_t j = 0; j < rfidList.size(); j++)
+		for (size_t j = 0; j < rfidList.size(); j++)
 		{
-			RTCard* card = new RTCard(rfidList.at(j).num);
+			int cardNumber = rfidList.at(j).num;
+			RTCard* card = new RTCard(cardNumber);
 			addWidget(card, j, i, 1, 1);
-			cardList.push_back(card);
+			cardMap[cardNumber] = card;
 		}
 
 	}
@@ -50,24 +51,31 @@ void RTCards::setGeometry(const QRect& rect)
 
 	QGridLayout::setGeometry(rect);
 
-	if(spacing() < 0) setSpacing(5);
+	if (spacing() < 0)
+		setSpacing(5);
 
 	int w = rect.width() / columnCount() - spacing();
 	int h = rect.height() / rowCount() - spacing();
 
-	if(h<aspectRatioFactor*w) w = h/aspectRatioFactor;
-	else h = aspectRatioFactor*w;
+	if (h < aspectRatioFactor * w)
+		w = h / aspectRatioFactor;
+	else
+		h = aspectRatioFactor * w;
 
-	int squareWidth = (w+spacing())*columnCount() - spacing();
-	int squareHeight = (h+spacing())*rowCount() - spacing();
+	int squareWidth = (w + spacing()) * columnCount() - spacing();
+	int squareHeight = (h + spacing()) * rowCount() - spacing();
 	int rectStartx = (rect.width() - squareWidth) / 2 + rect.x();
 	int rectStarty = (rect.height() - squareHeight) / 2 + rect.y();
 
-	for(int i=0; i < rowCount(); i++) {
-		for(int j=0; j<columnCount(); j++) {
-			QLayoutItem* item = this->itemAtPosition(i,j);
-			if(item != NULL) {
-				QRect geom(rectStartx + j*(w+spacing()), rectStarty + i*(h+spacing()), w, h);
+	for (int i = 0; i < rowCount(); i++)
+	{
+		for (int j = 0; j < columnCount(); j++)
+		{
+			QLayoutItem* item = this->itemAtPosition(i, j);
+			if (item != NULL)
+			{
+				QRect geom(rectStartx + j * (w + spacing()),
+						rectStarty + i * (h + spacing()), w, h);
 				item->setGeometry(geom);
 			}
 		}
@@ -76,7 +84,7 @@ void RTCards::setGeometry(const QRect& rect)
 
 void RTCards::setCardStatus(int cardNumber, bool cardStatus)
 {
-	cardList[cardNumber]->setCardStatus(cardStatus);
+	cardMap[cardNumber]->setCardStatus(cardStatus);
 }
 
 void RTCard::setTextWhite()
@@ -88,11 +96,12 @@ void RTCard::setTextWhite()
 	this->setAlignment(Qt::AlignCenter);
 	QFont font(this->font());
 	font.setBold(true);
-	font.setPointSize(font.pointSize()+2);
+	font.setPointSize(font.pointSize() + 2);
 	this->setFont(font);
 }
 
-RTCard::RTCard(int number) : QLabel()
+RTCard::RTCard(int number) :
+		QLabel()
 {
 	const int borderWidht = 2;
 	QString labelText = QString::number(number);
@@ -100,7 +109,7 @@ RTCard::RTCard(int number) : QLabel()
 	setTextWhite();
 	setFrameStyle(borderWidht);
 	setCardStatus(true);
-	setMinimumSize(QSize(40,60));
+	setMinimumSize(QSize(40, 60));
 }
 
 void RTCard::setCardStatus(bool isActive)

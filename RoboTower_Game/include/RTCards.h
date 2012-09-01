@@ -20,7 +20,7 @@
 
 #include "GameConfiguration.h"
 #include <QtGui>
-#include <vector>
+#include <map>
 
 #define ROWS 3
 #define COLS 5
@@ -41,7 +41,7 @@ Q_OBJECT
 private:
 	QLabel* label;
 	QGridLayout* cardGrid;
-	std::vector<RTCard*> cardList;
+	std::map<int, RTCard*> cardMap;
 public:
 	RTCards(GameConfiguration& config);
 	void setCardStatus(int cardNumber, bool cardStatus);
