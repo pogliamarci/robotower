@@ -77,6 +77,17 @@ public:
 		return rfidList.at(actionId);
 	}
 
+	inline int getTowerRechargeIncrement()
+	{
+		return 0;
+	}
+
+
+	inline int getFactoryRechargeIncrement()
+	{
+		return 0;
+	}
+
 };
 
 #endif /* GAMECONFIGURATION_H_ */

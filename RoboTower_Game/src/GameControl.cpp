@@ -25,7 +25,9 @@ GameControl::GameControl(GameConfiguration config) :
 				config.getGameSetupTime()), towerPoints(
 				config.getTowerPoints()), factoryPoints(
 				config.getTowerPoints()), mainTower(config.getMainTower()), towersNumber(
-				config.getTowersNumber())
+				config.getTowersNumber(),
+				towerRechargeIncrement(config.getTowerRechargeIncrement()),
+				factoryRechargeIncrement(config.getFactoryRechargeIncrement()))
 {
 	towers = new bool[towersNumber];
 	timeToLive = gameMaxTime;
@@ -186,7 +188,8 @@ void GameControl::rechargeCard()
 {
 	if (disabledRfid.size() > 0)
 	{
-		int increment = 100 / (30 - 5 * getFactoryNumber());
+		int increment = towerRechargeIncrement * getTowerNumber()
+				+ factoryRechargeIncrement * getFactoryNumber();
 		cardRecharge += increment;
 		if (cardRecharge >= 100)
 		{
