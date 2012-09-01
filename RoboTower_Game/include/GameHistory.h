@@ -25,6 +25,7 @@ private:
 	int lost;
 	int score;
 public:
+	GameHistory() : won(0), lost(0), score(0) {};
 	inline int getWon()
 	{
 		return won;
@@ -42,6 +43,10 @@ public:
 		if(hasWon) won++;
 		else lost++;
 		this->score += score;
+	}
+	inline void reset()
+	{
+		won = lost = score = 0;
 	}
 
 };

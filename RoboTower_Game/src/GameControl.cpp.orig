@@ -24,10 +24,14 @@ GameControl::GameControl(GameConfiguration config) :
 		gameMaxTime(config.getGameMaxTime()), gameSetupTime(
 				config.getGameSetupTime()), towerPoints(
 				config.getTowerPoints()), factoryPoints(
-				config.getTowerPoints()), mainTower(config.getMainTower())
+<<<<<<< HEAD
+				config.getTowerPoints()), mainTower(config.getMainTower()), towersNumber(
 				config.getTowersNumber(),
 				towerRechargeIncrement(config.getTowerRechargeIncrement()),
 				factoryRechargeIncrement(config.getFactoryRechargeIncrement()))
+=======
+				config.getTowerPoints()), mainTower(config.getMainTower())
+>>>>>>> b5ead63a6112b495e33b3cff93202cbb26156f69
 {
 	towers.resize(config.getTowersNumber(), false); // FIXME what if mainTower >= towersNumber?
 	timeToLive = gameMaxTime;

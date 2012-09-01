@@ -36,11 +36,6 @@ private:
 public:
 	GameConfiguration(std::string filePath);
 
-	inline ConfigGeneral getMainConfiguration()
-	{
-		return this->configuration;
-	}
-
 	inline int getGameMaxTime()
 	{
 		return configuration.timeToLive;

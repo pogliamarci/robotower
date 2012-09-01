@@ -52,8 +52,12 @@ private:
 	const int towerPoints;
 	const int factoryPoints;
 	const int mainTower;
+<<<<<<< HEAD
+	const int towersNumber;
 	const int towerRechargeIncrement;
 	const int factoryRechargeIncrement;
+=======
+>>>>>>> b5ead63a6112b495e33b3cff93202cbb26156f69
 private:
 	int timeToLive;
 	int timeToStart;
