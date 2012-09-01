@@ -33,7 +33,6 @@ GameControl::GameControl(GameConfiguration config) :
 	cardRecharge = 0;
 	isQuitting = false;
 	status = STOPPED;
-	history = new GameHistory();
 	resetTowers();
 	initializeRfidConfiguration(config);
 }
@@ -138,9 +137,8 @@ void GameControl::togglePause()
 void GameControl::resetGame()
 {
 	stopGame();
-	delete history;
-	history = new GameHistory();
-	emit endGame(history->getWon(), history->getLost(), history->getScore());
+	history.reset();
+	emit endGame(history.getWon(), history.getLost(), history.getScore());
 }
 
 void GameControl::initializeRfidConfiguration(GameConfiguration config)
@@ -156,23 +154,6 @@ void GameControl::initializeRfidConfiguration(GameConfiguration config)
 			entry.status = true;
 			rfidMap.insert(std::make_pair(groupList.at(j).id, entry));
 		}
-	}
-}
-
-void GameControl::populateMapWithLine(std::string configLine, int index)
-{
-	size_t idindex = configLine.find("id:") + 4;
-	size_t actionStartIndex = configLine.find("action:");
-	size_t actionindex = actionStartIndex + 8;
-	if (configLine.size() >= actionindex)
-	{
-		std::string id = configLine.substr(idindex, actionStartIndex - idindex);
-		std::string action = configLine.substr(actionindex);
-
-		id.erase(id.find_last_not_of(" \n\r\t") + 1); // trim trailing whitespace
-		RfidEntry entry =
-		{ index, true, action };
-		rfidMap.insert(std::make_pair(id, entry));
 	}
 }
 
@@ -241,9 +222,9 @@ void GameControl::performMatchOneStepUpdate()
 	if (timeToLive <= 0 || hasWon)
 	{
 		stopGame();
-		history->addGame(hasWon, score);
-		emit endGame(history->getWon(), history->getLost(),
-				history->getScore());
+		history.addGame(hasWon, score);
+		emit endGame(history.getWon(), history.getLost(),
+				history.getScore());
 	}
 }
 
@@ -256,5 +237,4 @@ void GameControl::wakeup()
 GameControl::~GameControl()
 {
 	delete[] towers;
-	delete history;
 }

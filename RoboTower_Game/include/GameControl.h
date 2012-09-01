@@ -23,7 +23,6 @@
 #include <QMutex>
 #include <QWaitCondition>
 
-#include <fstream>
 #include <string>
 #include <map>
 #include <queue>
@@ -66,7 +65,7 @@ private:
 	QMutex waitConditionMutex;
 	QWaitCondition timeout;
 	GameStatus status;
-	GameHistory* history;
+	GameHistory history;
 
 public:
 	GameControl(GameConfiguration config);
@@ -103,7 +102,6 @@ public slots:
 	void resetGame();
 private:
 	void initializeRfidConfiguration(GameConfiguration config);
-	void populateMapWithLine(std::string configLine, int index);
 	void updateGamePoints();
 	void rechargeCard();
 	void resetRound();
