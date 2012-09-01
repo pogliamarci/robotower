@@ -24,10 +24,9 @@ GameControl::GameControl(GameConfiguration config) :
 		gameMaxTime(config.getGameMaxTime()), gameSetupTime(
 				config.getGameSetupTime()), towerPoints(
 				config.getTowerPoints()), factoryPoints(
-				config.getTowerPoints()), mainTower(config.getMainTower()), towersNumber(
-				config.getTowersNumber())
+				config.getTowerPoints()), mainTower(config.getMainTower())
 {
-	towers = new bool[towersNumber];
+	towers.resize(config.getTowersNumber(), false); // FIXME what if mainTower >= towersNumber?
 	timeToLive = gameMaxTime;
 	score = 0;
 	cardRecharge = 0;
@@ -92,7 +91,7 @@ void GameControl::manageRfid(std::string id)
 
 void GameControl::updateTowers(int tower)
 {
-	towers[tower - 1] = false;
+	towers.at(tower - 1) = false;
 	emit towersUpdate(getFactoryNumber(), getTowerNumber());
 }
 
@@ -195,9 +194,9 @@ void GameControl::resetRound()
 
 void GameControl::resetTowers()
 {
-	for (int i = 0; i < towersNumber; i++)
+	for (size_t i = 0; i < towers.size(); i++)
 	{
-		towers[i] = true;
+		towers.at(i) = true;
 	}
 }
 
@@ -232,9 +231,4 @@ void GameControl::wakeup()
 {
 	QMutexLocker locker(&waitConditionMutex);
 	timeout.wakeAll();
-}
-
-GameControl::~GameControl()
-{
-	delete[] towers;
 }

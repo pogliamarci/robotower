@@ -52,12 +52,11 @@ private:
 	const int towerPoints;
 	const int factoryPoints;
 	const int mainTower;
-	const int towersNumber;
 private:
 	int timeToLive;
 	int timeToStart;
 	int score;
-	bool* towers;
+	std::vector<bool> towers;
 	bool isQuitting;
 	int cardRecharge;
 	std::map<std::string, RfidEntry> rfidMap;
@@ -69,7 +68,6 @@ private:
 
 public:
 	GameControl(GameConfiguration config);
-	~GameControl();
 	void run();
 	inline int getTimeToLive()
 	{
@@ -82,14 +80,14 @@ public:
 	inline int getFactoryNumber()
 	{
 		int count = 0;
-		for (int i = 0; i < towersNumber; i++)
-			if (towers[i] && i != mainTower)
+		for (size_t i = 0; i < towers.size(); i++)
+			if (towers.at(i) && i != (size_t) mainTower)
 				count++;
 		return count;
 	}
 	inline int getTowerNumber()
 	{
-		return towers[mainTower - 1] ? 1 : 0;
+		return towers.at(mainTower - 1) ? 1 : 0;
 	}
 public slots:
 	void manageRfid(std::string id);
