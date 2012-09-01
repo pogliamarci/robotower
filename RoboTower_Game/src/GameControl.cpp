@@ -24,10 +24,9 @@ GameControl::GameControl(GameConfiguration config) :
 		gameMaxTime(config.getGameMaxTime()), gameSetupTime(
 				config.getGameSetupTime()), towerPoints(
 				config.getTowerPoints()), factoryPoints(
-				config.getTowerPoints()), mainTower(config.getMainTower())
-				config.getTowersNumber(),
-				towerRechargeIncrement(config.getTowerRechargeIncrement()),
-				factoryRechargeIncrement(config.getFactoryRechargeIncrement()))
+				config.getTowerPoints()), mainTower(config.getMainTower()), towerRechargeIncrement(
+				config.getTowerRechargeIncrement()), factoryRechargeIncrement(
+				config.getFactoryRechargeIncrement())
 {
 	towers.resize(config.getTowersNumber(), false); // FIXME what if mainTower >= towersNumber?
 	timeToLive = gameMaxTime;
@@ -226,8 +225,7 @@ void GameControl::performMatchOneStepUpdate()
 	{
 		stopGame();
 		history.addGame(hasWon, score);
-		emit endGame(history.getWon(), history.getLost(),
-				history.getScore());
+		emit endGame(history.getWon(), history.getLost(), history.getScore());
 	}
 }
 
