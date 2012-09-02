@@ -1,4 +1,4 @@
-/*
+/*,
  * RoboTower, Hi-CoRG based on ROS
  *
  * Copyright (C) 2012 Politecnico di Milano
@@ -74,12 +74,11 @@ void RTCards::addCards(GameConfiguration& config)
 	int na = config.getNumActions();
 	for (int i = 0; i < na; i++)
 	{
-		// std::string action = config.getAction(i);
 		std::vector<ConfigRfidEntry> rfidList = config.getRfidList(i);
 		for (size_t j = 0; j < rfidList.size(); j++)
 		{
 			int cardNumber = rfidList.at(j).num;
-			QString action = rfidList.at(j).action.c_str();
+			QString action = QString::fromStdString(rfidList.at(j).action);
 			RTCard* card = new RTCard(cardNumber, action);
 			addWidget(card, j, i, 1, 1);
 			cardMap[cardNumber] = card;
@@ -91,16 +90,12 @@ void RTCards::addCards(GameConfiguration& config)
 RTCard::RTCard(int number, QString action) :
 		QLabel()
 {
-	const int borderWidht = 2;
+	const int borderWidth = 2;
 	num = number;
-	QString labelText = "../img/actions/" + action + ".png";
-	std::cout << labelText.toStdString() << std::endl;
-	image.load(labelText);
+	image.load("../img/actions/" + action + ".png");
 	setScaledContents(true);
-	setFrameStyle(borderWidht);
+	setFrameStyle(borderWidth);
 	setCardStatus(true);
-	if (number == 6)
-		setCardStatus(false);
 	setMinimumSize(QSize(40, 60));
 }
 
@@ -135,14 +130,19 @@ void RTCard::paintEvent(QPaintEvent * event)
 	QString number = QString::number(num);
 	QLabel::paintEvent(event);
 	QPainter p(this);
-	int x, y, w, h;
-	this->geometry().getRect(&x, &y, &w, &h);
-	int fontSize = w/6;
-	QFont f(p.font());
-	f.setBold(true);
-	f.setPointSize(fontSize);
-	p.setFont(f);
 	p.setPen(QColor::fromRgb(0, 0, 0, 255));
-	p.drawText(w/2- number.length()*fontSize/2,11*h/12 , number);
+	/* set the font size relative to the card width */
+	QFont f = p.font();
+	f.setPointSize(geometry().width() / 6.3);
+	p.setFont(f);
+	register int textWidth =  p.fontMetrics().width(number);
+	register int textHeight = p.fontMetrics().height();
+	/* (123px + 57px/2) / 180px = 0.841667
+	 * where 57px is the card base (the green area) when card height = 180px
+	 * and 123 = 180 - 57 is the drawing height */
+	register int verticalPos = 0.841667 * geometry().height() - textHeight / 2;
+	register int horizontalPos = (geometry().width() - textWidth) / 2;
+	p.drawText(QRect(horizontalPos, verticalPos,
+			textWidth, textHeight), Qt::AlignCenter, number);
 }
 
