@@ -29,7 +29,7 @@ class RTCard: public QLabel
 {
 Q_OBJECT
 public:
-	RTCard(int number);
+	RTCard(int number, QString action);
 	void setCardStatus(bool cardStatus);
 private:
 	void setTextWhite();

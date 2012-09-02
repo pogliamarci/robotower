@@ -20,24 +20,6 @@
 #include <iostream>
 #include <vector>
 
-void RTCards::addCards(GameConfiguration& config)
-{
-	int na = config.getNumActions();
-	for (int i = 0; i < na; i++)
-	{
-		// std::string action = config.getAction(i);
-		std::vector<ConfigRfidEntry> rfidList = config.getRfidList(i);
-		for (size_t j = 0; j < rfidList.size(); j++)
-		{
-			int cardNumber = rfidList.at(j).num;
-			RTCard* card = new RTCard(cardNumber);
-			addWidget(card, j, i, 1, 1);
-			cardMap[cardNumber] = card;
-		}
-
-	}
-}
-
 RTCards::RTCards(GameConfiguration& config) :
 		QGridLayout()
 {
@@ -87,25 +69,31 @@ void RTCards::setCardStatus(int cardNumber, bool cardStatus)
 	cardMap[cardNumber]->setCardStatus(cardStatus);
 }
 
-void RTCard::setTextWhite()
+void RTCards::addCards(GameConfiguration& config)
 {
-	QPalette palette(this->palette());
-	palette.setBrush(QPalette::Active, QPalette::WindowText, Qt::white);
-	palette.setBrush(QPalette::Inactive, QPalette::WindowText, Qt::white);
-	this->setPalette(palette);
-	this->setAlignment(Qt::AlignCenter);
-	QFont font(this->font());
-	font.setBold(true);
-	font.setPointSize(font.pointSize() + 2);
-	this->setFont(font);
+	int na = config.getNumActions();
+	for (int i = 0; i < na; i++)
+	{
+		// std::string action = config.getAction(i);
+		std::vector<ConfigRfidEntry> rfidList = config.getRfidList(i);
+		for (size_t j = 0; j < rfidList.size(); j++)
+		{
+			int cardNumber = rfidList.at(j).num;
+			QString action = rfidList.at(j).action.c_str();
+			RTCard* card = new RTCard(cardNumber, action);
+			addWidget(card, j, i, 1, 1);
+			cardMap[cardNumber] = card;
+		}
+
+	}
 }
 
-RTCard::RTCard(int number) :
+RTCard::RTCard(int number, QString action) :
 		QLabel()
 {
 	const int borderWidht = 2;
 	num = number;
-	QString labelText = "../img/" + QString::number(number) + ".png";
+	QString labelText = "../img/actions/" + action + ".png";
 	std::cout << labelText.toStdString() << std::endl;
 	image.load(labelText);
 	setScaledContents(true);
@@ -118,13 +106,6 @@ RTCard::RTCard(int number) :
 
 void RTCard::setCardStatus(bool isActive)
 {
-	/*
-	 QColor color = (isActive) ? Qt::blue : Qt::red;
-	 QPalette Pal(this->palette());
-	 Pal.setColor(QPalette::Window, color);
-	 setPalette(Pal);
-	 setAutoFillBackground(true);*/
-
 	if (isActive)
 	{
 		setPixmap(QPixmap::fromImage(image));
@@ -151,17 +132,17 @@ void RTCard::setCardStatus(bool isActive)
 
 void RTCard::paintEvent(QPaintEvent * event)
 {
-	int fontSize = 20;
 	QString number = QString::number(num);
 	QLabel::paintEvent(event);
 	QPainter p(this);
+	int x, y, w, h;
+	this->geometry().getRect(&x, &y, &w, &h);
+	int fontSize = w/6;
 	QFont f(p.font());
 	f.setBold(true);
 	f.setPointSize(fontSize);
 	p.setFont(f);
-	int x, y, w, h;
-	this->geometry().getRect(&x, &y, &w, &h);
 	p.setPen(QColor::fromRgb(0, 0, 0, 255));
-	p.drawText(w/2- number.length()*fontSize/2,5*h/6 , number);
+	p.drawText(w/2- number.length()*fontSize/2,11*h/12 , number);
 }
 

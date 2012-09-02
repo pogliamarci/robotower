@@ -28,8 +28,8 @@ ConfigHandler::ConfigHandler()
 	configuration.factoryPoints = 0;
 	configuration.towerId = 0;
 	configuration.factories = 0;
-	configuration.towerRechargeIncrement;
-	configuration.factoryRechargeIncrement;
+	configuration.towerRechargeIncrement = 0;
+	configuration.factoryRechargeIncrement = 0;
 }
 
 bool ConfigHandler::startElement(const QString& namespaceURI,
