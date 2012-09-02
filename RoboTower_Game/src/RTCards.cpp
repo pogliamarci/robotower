@@ -104,20 +104,64 @@ RTCard::RTCard(int number) :
 		QLabel()
 {
 	const int borderWidht = 2;
-	QString labelText = QString::number(number);
-	setText(labelText);
-	setTextWhite();
+	num = number;
+	QString labelText = "../img/" + QString::number(number) + ".png";
+	std::cout << labelText.toStdString() << std::endl;
+	image.load(labelText);
+	setScaledContents(true);
 	setFrameStyle(borderWidht);
 	setCardStatus(true);
+	if (number == 6)
+		setCardStatus(false);
 	setMinimumSize(QSize(40, 60));
 }
 
 void RTCard::setCardStatus(bool isActive)
 {
-	QColor color = (isActive) ? Qt::blue : Qt::red;
-	QPalette Pal(this->palette());
-	Pal.setColor(QPalette::Window, color);
-	setPalette(Pal);
-	setAutoFillBackground(true);
+	/*
+	 QColor color = (isActive) ? Qt::blue : Qt::red;
+	 QPalette Pal(this->palette());
+	 Pal.setColor(QPalette::Window, color);
+	 setPalette(Pal);
+	 setAutoFillBackground(true);*/
+
+	if (isActive)
+	{
+		setPixmap(QPixmap::fromImage(image));
+	}
+	else
+	{
+		QImage img(image);
+		QRgb col;
+		int gray;
+		int width = img.width();
+		int height = img.height();
+		for (int i = 0; i < width; ++i)
+		{
+			for (int j = 0; j < height; ++j)
+			{
+				col = img.pixel(i, j);
+				gray = qGray(col);
+				img.setPixel(i, j, qRgb(gray, gray, gray));
+			}
+		}
+		setPixmap(QPixmap::fromImage(img));
+	}
+}
+
+void RTCard::paintEvent(QPaintEvent * event)
+{
+	int fontSize = 20;
+	QString number = QString::number(num);
+	QLabel::paintEvent(event);
+	QPainter p(this);
+	QFont f(p.font());
+	f.setBold(true);
+	f.setPointSize(fontSize);
+	p.setFont(f);
+	int x, y, w, h;
+	this->geometry().getRect(&x, &y, &w, &h);
+	p.setPen(QColor::fromRgb(0, 0, 0, 255));
+	p.drawText(w/2- number.length()*fontSize/2,5*h/6 , number);
 }
 

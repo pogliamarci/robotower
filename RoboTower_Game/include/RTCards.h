@@ -33,6 +33,10 @@ public:
 	void setCardStatus(bool cardStatus);
 private:
 	void setTextWhite();
+	void paintEvent(QPaintEvent * event);
+private:
+	int num;
+	QImage image;
 };
 
 class RTCards: public QGridLayout

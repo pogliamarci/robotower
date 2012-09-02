@@ -21,22 +21,27 @@
 #include <QXmlDefaultHandler>
 #include <vector>
 
-typedef struct rt_config {
+typedef struct rt_config
+{
 	int timeToLive;
 	int setupTime;
 	int towerPoints;
 	int factoryPoints;
 	int towerId;
 	int factories;
+	int towerRechargeIncrement;
+	int factoryRechargeIncrement;
 } ConfigGeneral;
 
-typedef struct rt_config_rfid {
+typedef struct rt_config_rfid
+{
 	std::string id;
 	int num;
 	std::string action;
 } ConfigRfidEntry;
 
-class ConfigHandler : public QXmlDefaultHandler {
+class ConfigHandler: public QXmlDefaultHandler
+{
 
 private:
 	QString currentAction;
@@ -44,7 +49,7 @@ private:
 	std::vector<std::vector<ConfigRfidEntry> > rfids;
 public:
 	ConfigHandler();
-	bool startElement (const QString& namespaceURI, const QString& localName,
+	bool startElement(const QString& namespaceURI, const QString& localName,
 			const QString& qName, const QXmlAttributes& atts);
 	ConfigGeneral getMainConfiguration();
 	std::vector<std::vector<ConfigRfidEntry> > getRfidList();

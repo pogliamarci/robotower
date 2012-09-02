@@ -74,13 +74,13 @@ public:
 
 	inline int getTowerRechargeIncrement()
 	{
-		return 0;
+		return configuration.towerRechargeIncrement;
 	}
 
 
 	inline int getFactoryRechargeIncrement()
 	{
-		return 0;
+		return configuration.factoryRechargeIncrement;
 	}
 
 };

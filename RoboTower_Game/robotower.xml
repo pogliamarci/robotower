@@ -8,7 +8,7 @@
 		<!-- ID dell'obiettivo definito come torre e numero di fabbriche -->
 		<goals towerid="4" factories="3" />
 		<!-- Definisce la percentale di ricarica al secondo delle carte -->
-		<recharge towerRecharge="3" factoryrecharge="2" />
+		<recharge tower="3" factory="2" />
 	</config>
 	
 	<!-- configurazione dei tag -->

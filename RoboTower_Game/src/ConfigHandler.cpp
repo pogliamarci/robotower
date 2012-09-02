@@ -28,6 +28,8 @@ ConfigHandler::ConfigHandler()
 	configuration.factoryPoints = 0;
 	configuration.towerId = 0;
 	configuration.factories = 0;
+	configuration.towerRechargeIncrement;
+	configuration.factoryRechargeIncrement;
 }
 
 bool ConfigHandler::startElement(const QString& namespaceURI,
@@ -66,6 +68,11 @@ bool ConfigHandler::startElement(const QString& namespaceURI,
 		entry.num = atts.value("num").toInt();
 		entry.action = currentAction.toStdString();
 		rfids.back().push_back(entry);
+	}
+	else if(localName == "recharge")
+	{
+		configuration.factoryRechargeIncrement = atts.value("factory").toInt();
+		configuration.towerRechargeIncrement = atts.value("tower").toInt();
 	}
 	return true;
 }
