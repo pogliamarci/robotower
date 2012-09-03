@@ -62,6 +62,7 @@ void RTCards::setGeometry(const QRect& rect)
 			}
 		}
 	}
+
 }
 
 void RTCards::setCardStatus(int cardNumber, bool cardStatus)
