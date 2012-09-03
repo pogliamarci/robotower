@@ -4,7 +4,7 @@
 	<config>
 		<time timetolive="300" setuptime="30" />
 		<!-- Definisce i punti assegnati dalla torre o da ogni fabbrica per ogni secondo di vita -->
-		<points tower="100" factory="30" />
+		<points tower="100" factory="20" />
 		<!-- ID dell'obiettivo definito come torre e numero di fabbriche -->
 		<goals towerid="4" factories="3" />
 		<!-- Definisce la percentale di ricarica al secondo delle carte -->

@@ -84,7 +84,7 @@ public:
 	{
 		int count = 0;
 		for (size_t i = 0; i < towers.size(); i++)
-			if (towers.at(i) && i != (size_t) mainTower)
+			if (towers.at(i) && i != ((size_t) mainTower - 1))
 				count++;
 		return count;
 	}

@@ -24,7 +24,7 @@ GameControl::GameControl(GameConfiguration config) :
 		gameMaxTime(config.getGameMaxTime()), gameSetupTime(
 				config.getGameSetupTime()), towerPoints(
 				config.getTowerPoints()), factoryPoints(
-				config.getTowerPoints()), mainTower(config.getMainTower()), towerRechargeIncrement(
+				config.getFactoryPoints()), mainTower(config.getMainTower()), towerRechargeIncrement(
 				config.getTowerRechargeIncrement()), factoryRechargeIncrement(
 				config.getFactoryRechargeIncrement())
 {
@@ -61,8 +61,7 @@ void GameControl::run()
 		case WAITING:
 			timeToStart--;
 			emit updateRemainingTime(timeToStart);
-			if (timeToStart <= 0) // enable the robot when timeToStart == -1,
-			// (GUI expects timeToStart == 0 to hide the dialog window)
+			if (timeToStart <= 0)
 			{
 				emit robotIsEnabled(true);
 				status = STARTED;
