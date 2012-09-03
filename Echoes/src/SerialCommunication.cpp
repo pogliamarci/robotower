@@ -155,6 +155,7 @@ int SerialReader::sendStringCommand(char *cmd,int len)
 		}
 		usleep(CHAR_PAUSE);
 	}
+	usleep(500000);
 	return 0;
 }
 
