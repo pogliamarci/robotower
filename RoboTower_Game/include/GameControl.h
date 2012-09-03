@@ -64,6 +64,7 @@ private:
 	std::map<std::string, RfidEntry> rfidMap;
 	std::queue<std::string> disabledRfid;
 	QMutex waitConditionMutex;
+	QMutex timeMutex;
 	QWaitCondition timeout;
 	GameStatus status;
 	GameHistory history;

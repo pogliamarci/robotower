@@ -81,13 +81,25 @@ void GameControl::run()
 
 void GameControl::manageRfid(std::string id)
 {
+	if(status != STARTED) return;
 	RfidEntry &entry = rfidMap[id];
 	if (entry.status)
 	{
 		entry.status = false;
 		disabledRfid.push(id);
 		emit updatedRfidStatus(entry.number, entry.status);
-		emit rfidActionNotification(entry.action);
+		if (entry.action == "modify_time")
+		{
+			int randomTimevariation = rand() % (gameMaxTime / 5) + 10;
+			int signum = rand() % 2 == 0 ? -1 : 1;
+			QMutexLocker locker(&timeMutex);
+			timeToLive += randomTimevariation * signum;
+			if(timeToLive < 0) timeToLive = 0;
+			emit updatedTimeAndPoints(timeToLive, score);
+		}
+		else {
+			emit rfidActionNotification(entry.action);
+		}
 	}
 }
 
@@ -146,8 +158,8 @@ void GameControl::initializeRfidConfiguration(GameConfiguration config)
 {
 	for (int i = 0; i < config.getNumActions(); i++)
 	{
-		std::vector<ConfigRfidEntry> groupList(config.getRfidList(i));
-		for (size_t j; j < groupList.size(); j++)
+		std::vector<ConfigRfidEntry> groupList = config.getRfidList(i);
+		for (size_t j = 0; j < groupList.size(); j++)
 		{
 			RfidEntry entry;
 			entry.action = groupList.at(j).action;
@@ -216,6 +228,7 @@ void GameControl::resetRFID()
 
 void GameControl::performMatchOneStepUpdate()
 {
+	QMutexLocker lock(&timeMutex);
 	updateGamePoints();
 	timeToLive--;
 	rechargeCard();
