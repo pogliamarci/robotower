@@ -53,9 +53,10 @@ public:
 	RTMainWindow(GameConfiguration config, QWidget* parent = 0);
 	~RTMainWindow();
 public slots:
-	void updateTowers(int factoryNumber, int towersNumber); //Updates tower counter
-	void updateData(int timeToLive, int score); //Updates time to live and score
-	void updateCardStatus(int card, bool status); //Updates Rfid status
+	void updateTowers(int factoryNumber, int towersNumber);
+	void updateTime(int timeToLive);
+	void updatePoints(int score);
+	void updateCardStatus(int card, bool status);
 	void updateHistory(int won, int lost, int score);
 	void updateSetupPopup(int remainingTime);
 private:

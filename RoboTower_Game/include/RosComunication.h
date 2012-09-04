@@ -40,6 +40,7 @@ private:
 	Publisher resetRobotPublisher;
 	Subscriber rfidCardSubscriber;
 	Subscriber towerSubscriber;
+	ServiceClient ledClient;
 	bool hasToQuit;
 public:
 	RosComunication();
@@ -51,6 +52,7 @@ public slots:
 	void resetRobot();
 	void sendAction(std::string id);
 	void enableIsaac(bool isEnabled);
+	void setRedLeds(int num);
 	void quitNow(); // stops the thread when the application is quitting, reset the robot and stop IsAac
 signals:
 	void rosQuits(); // triggered if ros::ok() is not true anymore

@@ -80,7 +80,8 @@ void GameControl::run()
 
 void GameControl::manageRfid(std::string id)
 {
-	if(status != STARTED) return;
+	if (status != STARTED)
+		return;
 	RfidEntry &entry = rfidMap[id];
 	if (entry.status)
 	{
@@ -91,14 +92,10 @@ void GameControl::manageRfid(std::string id)
 		{
 			int randomTimevariation = rand() % (gameMaxTime / 5) + 10;
 			int signum = rand() % 2 == 0 ? -1 : 1;
-			QMutexLocker locker(&timeMutex);
-			timeToLive += randomTimevariation * signum;
-			if(timeToLive < 0) timeToLive = 0;
-			emit updatedTimeAndPoints(timeToLive, score);
+			updateTime(signum * randomTimevariation);
 		}
-		else {
+		else
 			emit rfidActionNotification(entry.action);
-		}
 	}
 }
 
@@ -173,6 +170,7 @@ void GameControl::updateGamePoints()
 {
 	score += getTowerNumber() * towerPoints
 			+ getFactoryNumber() * factoryPoints;
+	emit pointsAreUpdated(score);
 }
 
 void GameControl::rechargeCard()
@@ -202,7 +200,9 @@ void GameControl::resetRound()
 	timeToStart = gameSetupTime;
 	score = 0;
 	cardRecharge = 0;
-	emit updatedTimeAndPoints(timeToLive, score);
+	emit pointsAreUpdated(score);
+	emit timeIsUpdated(timeToLive);
+	emit mustSetLeds(0);
 	emit towersUpdate(getFactoryNumber(), getTowerNumber());
 }
 
@@ -227,11 +227,9 @@ void GameControl::resetRFID()
 
 void GameControl::performMatchOneStepUpdate()
 {
-	QMutexLocker lock(&timeMutex);
+	updateTime();
 	updateGamePoints();
-	timeToLive--;
 	rechargeCard();
-	emit updatedTimeAndPoints(timeToLive, score);
 	bool hasWon = getTowerNumber() <= 0;
 	if (timeToLive <= 0 || hasWon)
 	{
@@ -245,4 +243,20 @@ void GameControl::wakeup()
 {
 	QMutexLocker locker(&waitConditionMutex);
 	timeout.wakeAll();
+}
+
+void GameControl::updateTime(int increment)
+{
+	QMutexLocker lock(&timeMutex);
+	int oldnumleds = (timeToLive % (gameMaxTime / 4)) + 1;
+	timeToLive += increment;
+	if (timeToLive < 0)
+		timeToLive = 0;
+	int newnumleds = (timeToLive % (gameMaxTime / 4)) + 1;
+	std::cout << "accendo " << newnumleds << " erano accesi " << oldnumleds << std::endl;
+	if (oldnumleds != newnumleds)
+	{
+		emit mustSetLeds(newnumleds);
+	}
+	emit timeIsUpdated(timeToLive);
 }

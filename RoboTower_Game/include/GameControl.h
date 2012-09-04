@@ -103,6 +103,7 @@ public slots:
 	void resetGame();
 private:
 	void initializeRfidConfiguration(GameConfiguration config);
+	void updateTime(int increment  = -1);
 	void updateGamePoints();
 	void rechargeCard();
 	void resetRound();
@@ -112,12 +113,14 @@ private:
 	void resetTowers();
 
 signals:
-	void updatedTimeAndPoints(int timeToLive, int score); //emitted at the end of each iteration
+	void timeIsUpdated(int timeToLive);
+	void pointsAreUpdated(int score); //emitted at the end of each iteration
 	void updatedRfidStatus(int rfid, bool status); //emitted when RFID status changes
 	void rfidActionNotification(std::string id);
 	void endGame(int won, int lost, int score); //emitted when the game ends
 	void towersUpdate(int factoriesNumber, int towersNumber);
 	void robotIsEnabled(bool enabled);
+	void mustSetLeds(int numLeds);
 	void updateRemainingTime(int remainingTime);
 };
 

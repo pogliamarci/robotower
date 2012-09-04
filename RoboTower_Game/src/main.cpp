@@ -43,7 +43,8 @@ int main(int argc, char **argv)
 	QObject::connect(&app, SIGNAL(aboutToQuit()), &gameControl, SLOT(quitNow()));
 	QObject::connect(&rosPublisher, SIGNAL(rosQuits()), &app, SLOT(quit()));
 
-	QObject::connect(&gameControl, SIGNAL(updatedTimeAndPoints(int,int)), &mainWindow, SLOT(updateData(int,int)));
+	QObject::connect(&gameControl, SIGNAL(timeIsUpdated(int)), &mainWindow, SLOT(updateTime(int)));
+	QObject::connect(&gameControl, SIGNAL(pointsAreUpdated(int)), &mainWindow, SLOT(updatePoints(int)));
 	QObject::connect(&rosPublisher, SIGNAL(rfidRecieved(std::string)), &gameControl, SLOT(manageRfid(std::string)));
 	QObject::connect(&gameControl, SIGNAL(updatedRfidStatus(int, bool)), &mainWindow, SLOT(updateCardStatus(int,bool)));
 	QObject::connect(&rosPublisher, SIGNAL(towersUpdate(int)), &gameControl, SLOT(updateTowers(int)));
@@ -52,6 +53,7 @@ int main(int argc, char **argv)
 	QObject::connect(&gameControl, SIGNAL(robotIsEnabled(bool)), &rosPublisher, SLOT(enableIsaac(bool)));
 	QObject::connect(&gameControl, SIGNAL(rfidActionNotification(std::string)), &rosPublisher, SLOT(sendAction(std::string)));
 	QObject::connect(&gameControl, SIGNAL(updateRemainingTime(int)), &mainWindow, SLOT(updateSetupPopup(int)));
+	QObject::connect(&gameControl, SIGNAL(mustSetLeds(int)), &rosPublisher, SLOT(setRedLeds(int)));
 
 	QObject::connect(&mainWindow, SIGNAL(start()), &gameControl, SLOT(startGame()));
 	QObject::connect(&mainWindow, SIGNAL(stop()), &gameControl, SLOT(stopGame()));
