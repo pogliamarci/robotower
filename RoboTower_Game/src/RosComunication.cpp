@@ -32,7 +32,7 @@ RosComunication::RosComunication()
 			&RosComunication::fromRfidCallback, this);
 	towerSubscriber = n.subscribe("towers_data", 1,
 			&RosComunication::fromTowersCallback, this);
-	redLedClient = n.serviceClient<Echoes::ResetLed>("red_led");
+	redLedClient = n.serviceClient<Echoes::FixedLed>("red_led");
 	redResetClient = n.serviceClient<Echoes::ResetLed>("reset_led");
 }
 
