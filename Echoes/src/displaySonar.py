@@ -11,8 +11,14 @@ from PyQt4.Qt import *
 from Echoes.msg import Sonar
 
 class MessageListenerThread(QThread):
+    sonar_updated = pyqtSignal(int, int, int, int)
+        
+    def sonarCallback(self, data):
+        self.sonar_updated.emit(data.north, data.south, data.east, data.west)
+
     def run(self):
         rospy.spin()
+        print 'ROS: uscito da spin()'
 
 class SonarMonitorGui():
     def __init__(self): 
@@ -49,23 +55,28 @@ class SonarMonitorGui():
         self.widget.show()
         sys.exit(self.app.exec_())
         
-    def sonarDataCallback(self, sonar_data):
-        self.north_d.display(sonar_data.north)
-        self.south_d.display(sonar_data.south)
-        self.east_d.display(sonar_data.east)
-        self.west_d.display(sonar_data.west)
+    @pyqtSlot(int, int, int, int)
+    def callback(self, north, south, east, west):
+        self.north_d.display(north)
+        self.south_d.display(south)
+        self.east_d.display(east)
+        self.west_d.display(west)
 
 if __name__ == "__main__":
     # ROS initialization
     rospy.init_node('sonar_monitor', anonymous=True)
+   
     
     # Catch SIGINT (otherwise app won't exit on Ctrl+C)
     signal.signal(signal.SIGINT, signal.SIG_DFL)
     
     # GUI initialization
+    QCoreApplication.setApplicationName("Sonar monitor");
     gui = SonarMonitorGui()
-    rospy.Subscriber("sonar_data", Sonar, gui.sonarDataCallback)
-    
     thr = MessageListenerThread()
+    
+    rospy.Subscriber("sonar_data", Sonar, thr.sonarCallback)
+    thr.sonar_updated.connect(gui.callback)
+    
     thr.start()
     gui.start()
