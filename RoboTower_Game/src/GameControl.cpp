@@ -254,8 +254,6 @@ void GameControl::updateTime(int increment)
 	if (timeToLive < 0)
 		timeToLive = 0;
 	int newnumleds = ledsFromTime();
-	std::cout << "accendo " << newnumleds << " erano accesi " << oldnumleds
-			<< std::endl;
 	if (oldnumleds != newnumleds)
 	{
 		emit mustSetLeds(newnumleds);

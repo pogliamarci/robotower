@@ -171,7 +171,6 @@ void IsaacStrategy::updateRandomValues()
 {
 	if (tower_found)
 	{
-		cout << "tower detected: pos = " << tower_position << endl;
 		detectedTime = 0;
 	}
 	else detectedTime++;

@@ -58,7 +58,7 @@ void Sender::sendGreen()
 	Echoes::BlinkingLed service;
 	service.request.on = greenBlinks;
 	service.request.blinks = greenBlinks;
-	yellowled.call(service);
+	greenled.call(service);
 }
 
 void Sender::setLed(bool isTrapped, bool seenSomething)

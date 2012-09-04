@@ -60,7 +60,7 @@ void RosComunication::quitNow()
 void RosComunication::resetRobot()
 {
 	Echoes::ResetLed service;
-	redLedClient.call(service);
+	redResetClient.call(service);
 }
 
 void RosComunication::sendAction(std::string action)
