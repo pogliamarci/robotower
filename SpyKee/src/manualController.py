@@ -48,7 +48,7 @@ class SonarMonitorGui():
         self.i = 0
         self.app = QApplication(sys.argv)
         self.widget = QWidget()
-        self.widget.setWindowTitle('SpyKee GUI Control')
+        self.widget.setWindowTitle('SpyKee GUI Controller')
         self.widget.resize(300, 400)
         layout = QGridLayout(self.widget)
         self.widget.setLayout(layout)
@@ -66,7 +66,7 @@ class SonarMonitorGui():
         self.rot_speed_box.setMaximum(100)
         self.rot_speed_box.setValue(0)
         
-        self.commit_btn = QPushButton('Manda i comandi al robot',self.widget)
+        self.commit_btn = QPushButton('Send commands to SpyKee!',self.widget)
 
         self.camera_widget = ImageWidget(320, 240, self.widget)
 
