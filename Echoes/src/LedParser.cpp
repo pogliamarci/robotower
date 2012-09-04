@@ -40,7 +40,7 @@ bool LedParser::redLedCallback(Echoes::FixedLed::Request& request,
 bool LedParser::greenLedCallback(Echoes::BlinkingLed::Request& request,
 		Echoes::BlinkingLed::Response& response)
 {
-	toggleYellow(request.on, request.blinks);
+	toggleGreen(request.on, request.blinks);
 	response.requestSuccessful = true;
 	return true;
 }
@@ -48,7 +48,7 @@ bool LedParser::greenLedCallback(Echoes::BlinkingLed::Request& request,
 bool LedParser::yellowLedCallback(Echoes::BlinkingLed::Request& request,
 		Echoes::BlinkingLed::Response& response)
 {
-	toggleGreen(request.on, request.blinks);
+	toggleYellow(request.on, request.blinks);
 	response.requestSuccessful = true;
 	return true;
 }
