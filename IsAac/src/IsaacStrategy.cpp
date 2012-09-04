@@ -85,28 +85,26 @@ void IsaacStrategy::modifySensors()
 
 void IsaacStrategy::modifyActuators()
 {
-	int right_track = tanSpeed - rotSpeed;
-	int left_track = tanSpeed + rotSpeed;
-
 	if(lastAction == "lock_all")
 	{
-		right_track = 0;
-		left_track = 0;
+		tanSpeed = 0;
+		rotSpeed = 0;
 	} 
 	else if(lastAction == "force_rotate") 
 	{
+		int right_track = tanSpeed - rotSpeed;
+		int left_track = tanSpeed + rotSpeed;
 		if(action_rand_direction == 1)
 			left_track = 0;
 		else right_track = 0;
+		tanSpeed = (right_track + left_track) / 2;
+		rotSpeed = (left_track - right_track) / 2;
 	}
 	else if(lastAction == "go_back" && canGoBack)
 	{
-		tanSpeed *= (tanSpeed < 0) ? 1 : -1;
+		if(tanSpeed > 0) tanSpeed = -tanSpeed;
 		rotSpeed = 0;
 	}
-
-	tanSpeed = (right_track + left_track) / 2;
-	rotSpeed = (left_track - right_track) / 2;
 }
 
 void IsaacStrategy::useBrian()

@@ -120,7 +120,9 @@ char LittleObject::showImage()
 		ros::spinOnce();
 	}
 	if(!(this->img.empty()))
+	{
 		imshow("Little Endian Interface",this->img);
+	}
 	if(this->mode_r)
 	{
 		char c = waitKey(1);
