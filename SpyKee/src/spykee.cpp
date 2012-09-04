@@ -25,14 +25,25 @@
 #define SPYKEE_USER "admin"
 #define SPYKEE_PWD "admin"
 
-SpykeeManager* robot_ptr;
+SpykeeManager* spykee;
 bool started;
 
 void move(const SpyKee::Motion::ConstPtr& message)
 {
 	int right_track = message->tanSpeed - message->rotSpeed;
 	int left_track = message->tanSpeed + message->rotSpeed;
-	robot_ptr->move(left_track, right_track);
+	spykee->move(left_track, right_track);
+}
+
+void publishFrame(ros::Publisher& img_pub)
+{
+	vector<unsigned char>* image = spykee->getImage();
+
+	sensor_msgs::CompressedImage image_msg;
+	image_msg.data = *image;
+	image_msg.format = "jpeg";
+	img_pub.publish(image_msg);
+	delete image;
 }
 
 int main(int argc, char** argv)
@@ -44,37 +55,29 @@ int main(int argc, char** argv)
 	ros::NodeHandle ros_node;
 
 	/* try to connect to the robot... */
-	char user[] = SPYKEE_USER;
-	char pwd[] = SPYKEE_PWD;
-	try {
-		robot_ptr = new SpykeeManager(user, pwd);
-	} catch (exception& e) {
+	try
+	{
+		spykee = new SpykeeManager(SPYKEE_USER, SPYKEE_PWD);
+	}
+	catch (SpykeeException& e)
+	{
 		cerr << "Error connecting with the robot" << endl;
 		cerr << "Make sure that Spykee is turned on and " <<
 				"that your wireless network is working" << endl;
 		exit(EXIT_FAILURE);
 	}
 
-	/* subscribe to motion messages */
 	ros::Subscriber sub = ros_node.subscribe("spykee_motion", 1000, move);
 	ros::Publisher img_pub = ros_node.advertise<sensor_msgs::CompressedImage>("spykee_camera", 3);
 
-	/* start camera... */
-	robot_ptr->unplug();
-	robot_ptr->startCamera();
+	spykee->unplug();
+	spykee->startCamera();
 
 	while (ros::ok())
 	{
-		vector<unsigned char>* image = robot_ptr->getImage();
-		sensor_msgs::CompressedImage image_msg;
-		image_msg.data = *image;
-		image_msg.format = "jpeg";
-
-		img_pub.publish(image_msg);
-
+		publishFrame(img_pub);
 		ros::spinOnce();
-		delete image;
 	}
-	delete robot_ptr;
+	delete spykee;
 	return EXIT_SUCCESS;
 }

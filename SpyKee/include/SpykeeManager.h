@@ -3,6 +3,7 @@
 
 #include "PracticalSocket.h"
 #include <vector>
+#include <string>
 
 class SpykeeException: public exception
 {
@@ -20,7 +21,7 @@ class SpykeeManager
 		int getImageSize(unsigned char buffer[]);
 
 	public:
-		SpykeeManager(char* username, char* password) throw(SpykeeException);
+		SpykeeManager(std::string username, std::string password) throw(SpykeeException);
 		void startCamera();
 		std::vector<unsigned char>* getImage();
 		void move(char leftSpeed, char rightSpeed);

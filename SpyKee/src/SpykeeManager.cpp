@@ -16,21 +16,18 @@
  */
 
 #include "SpykeeManager.h"
-#include <vector>
 #include <iostream>
-#include <stdio.h>
-#include <string.h>
 
-/* #define DEBUG_SPYKEE */
+// #define DEBUG_SPYKEE
 #define SPYKEE_MAX_IMAGE 10000
 
 using namespace std;
 
-SpykeeManager::SpykeeManager(char* username, char* password) throw(SpykeeException)
+SpykeeManager::SpykeeManager(string username, string password) throw(SpykeeException)
 {
 	#ifdef DEBUG_SPYKEE
-	cout << "Nome utente: " << username << endl;
-	cout << "Password: " << password << endl;
+	cerr << "Nome utente: " << username << endl;
+	cerr << "Password: " << password << endl;
 	#endif
 
 	/* initialize variables to connect */
@@ -39,49 +36,48 @@ SpykeeManager::SpykeeManager(char* username, char* password) throw(SpykeeExcepti
 
 	UDPSocket udp;
 	char respString[100];
-	char messageAuthentication[strlen(username) + strlen(password) + 2];
+	char messageAuthentication[username.length() + password.length() + 2];
 	string sourceAddress;
 	unsigned short port;
 
 	/* build authentication message */
 	messageAuthentication[0] = 5;
-	for (unsigned int i = 0; i < strlen(username); i++)
+	for (unsigned int i = 0; i < username.length(); i++)
 	{
-		messageAuthentication[1 + i] = username[i];
+		messageAuthentication[1 + i] = username.at(i);
 	}
 
-	messageAuthentication[1 + strlen(username)] = 5;
-	for (unsigned int i = 0; i < strlen(password); i++)
+	messageAuthentication[1 + username.length()] = 5;
+	for (unsigned int i = 0; i < password.length(); i++)
 	{
-		messageAuthentication[2 + strlen(username) + i] = password[i];
+		messageAuthentication[2 + username.length() + i] = password.at(i);
 	}
 
-	/* connection */
-	try {
+	try
+	{
 		/* search for a turned on robot and gets its address */
 		udp.sendTo(UDPMessage, 5, "172.17.6.255", 9000);
 
 		if (udp.recvFrom(respString, 100, sourceAddress, port) > 0)
-			printf("%s\n", (respString + 7));
+			cout << (respString + 7) << endl;
 
 		/* start TCP connection with the robot */
 		tcp = new TCPSocket(sourceAddress, 9000);
 		tcp->send(message, 5);
 
 		/* authentication */
-		tcp->send(messageAuthentication, strlen(username) + strlen(password) + 2);
+		tcp->send(messageAuthentication, username.length() + password.length() + 2);
 		if (tcp->recv(respString, 100) > 0)
-			printf("%s\n", (respString + 7));
+			cout << (respString + 7) << endl;
 
-	} catch (SocketException& e) {
-		#ifdef DEBUG_SPYKEE
-		cerr << e.what() << endl;
-		#endif
+	}
+	catch (SocketException& e)
+	{
 		throw SpykeeException();
 	}
 
 	#ifdef DEBUG_SPYKEE
-	cout << "Connessione effettuata" << endl;
+	cerr << "Connessione effettuata" << endl;
 	#endif
 }
 
@@ -115,7 +111,7 @@ vector<unsigned char>* SpykeeManager::getImage()
 		message_size = tcp->recv(buffer, SPYKEE_MAX_IMAGE);
 		message_size = (message_size > SPYKEE_MAX_IMAGE) ? SPYKEE_MAX_IMAGE : message_size;
 		#ifdef DEBUG_SPYKEE
-		cout << "Processing a new packet. Size: " << message_size << " byte." << endl;
+		cerr << "Processing a new packet. Size: " << message_size << " byte." << endl;
 		#endif
 
 		/* if we are looking for a new image, check whether it's arrived */
@@ -129,14 +125,14 @@ vector<unsigned char>* SpykeeManager::getImage()
 			current_position = 0;
 
 			#ifdef DEBUG_SPYKEE
-			cout << "New image found. Size: " << image_length << " byte" << endl;
+			cerr << "New image found. Size: " << image_length << " byte" << endl;
 			#endif
 		}
 
 		if (image_status == ACQUIRING)
 		{
 			#ifdef DEBUG_SPYKEE
-			cout << "Acquiring image. Current buffer position = " << current_position << endl;
+			cerr << "Acquiring image. Current buffer position = " << current_position << endl;
 			#endif
 
 			register int i = current_position == 0 ? 5 : 0; /* skip first 5 bytes (metadata), already processed in the NOT_FOUND status */
@@ -151,8 +147,8 @@ vector<unsigned char>* SpykeeManager::getImage()
 			}
 
 			#ifdef DEBUG_SPYKEE
-			cout <<"Finished processing the packet. Current buffer position = " << current_position << endl;
-			cout <<"Remaining bytes in the image : " << (image_length - current_position) << endl;
+			cerr <<"Finished processing the packet. Current buffer position = " << current_position << endl;
+			cerr <<"Remaining bytes in the image : " << (image_length - current_position) << endl;
 			#endif
 		}
 	}
@@ -175,7 +171,7 @@ void SpykeeManager::move(char leftSpeed, char rightSpeed)
 	char speedMessage[] = { leftSpeed, rightSpeed, 0 };
 
 #ifdef DEBUG_SPYKEE
-	cout << "LeftMotor: " << leftSpeed << ", RightMotor: " << rightSpeed << endl;
+	cerr << "LeftMotor: " << leftSpeed << ", RightMotor: " << rightSpeed << endl;
 #endif
 
 	tcp->send(message, 5);
