@@ -26,7 +26,8 @@
 (SNG (VERY_FAST_LEFT -40))
 )
 
-(LED
-(SNG (ON 1))
-(SNG (OFF 0))
+(BOOL
+(SNG (TRUE 1))
+(SNG (FALSE 0))
 )
+

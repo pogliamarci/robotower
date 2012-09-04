@@ -58,6 +58,7 @@ private:
 
 	int tanSpeed;
 	int rotSpeed;
+	bool canGoBack;
 
 	/* variables to manage the action triggered by RFIDs */
 	std::string lastAction;

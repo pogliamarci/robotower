@@ -99,6 +99,11 @@ void IsaacStrategy::modifyActuators()
 			left_track = 0;
 		else right_track = 0;
 	}
+	else if(lastAction == "go_back" && canGoBack)
+	{
+		tanSpeed *= (tanSpeed < 0) ? 1 : -1;
+		rotSpeed = 0;
+	}
 
 	tanSpeed = (right_track + left_track) / 2;
 	rotSpeed = (left_track - right_track) / 2;
@@ -136,7 +141,7 @@ void IsaacStrategy::useBrian()
 	cdl->add(new crisp_data("RandomAhead", randomAhead, reliability));
 
 	brian->run();
-	//brian->debug(); // print on stdout debug information
+	brian->debug(); // print on stdout debug information
 
 	/* deallocate what has been allocated!,
 	 * this is quite ugly but _should_ avoid some mem leaks...
@@ -213,6 +218,10 @@ void IsaacStrategy::parseBrianResults()
 		else if (temp.compare("RotSpeed") == 0)
 		{
 			rotSpeed = it->second->get_set_point();
+		}
+		else if(temp.compare("CanGoBack") == 0)
+		{
+			canGoBack = it->second->get_set_point();
 		}
 	}
 
