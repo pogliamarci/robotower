@@ -17,9 +17,14 @@
 
 #include "Sender.h"
 
-Sender::Sender(ros::NodeHandle& n) 
+#include "Echoes/BlinkingLed.h"
+#include "SpyKee/Motion.h"
+
+Sender::Sender(ros::NodeHandle& n) : yellowBlinking(false), greenBlinks(false), ledEnabled(false)
 {
 	motion = n.advertise<SpyKee::Motion>("spykee_motion", 1000);
+	yellowled = n.serviceClient<Echoes::BlinkingLed>("yellow_led");
+	greenled = n.serviceClient<Echoes::BlinkingLed>("green_led");
 }
 
 void Sender::sendMotionMessage(int tanSpeed, int rotSpeed)
@@ -28,4 +33,56 @@ void Sender::sendMotionMessage(int tanSpeed, int rotSpeed)
 	msg.rotSpeed = rotSpeed;
 	msg.tanSpeed = tanSpeed;
 	this->motion.publish(msg);
+}
+
+void Sender::disableLed()
+{
+	if(!ledEnabled) return;
+	ledEnabled = false;
+	yellowBlinking = false;
+	greenBlinks = false;
+	sendYellow();
+	sendGreen();
+}
+
+void Sender::sendYellow()
+{
+	Echoes::BlinkingLed service;
+	service.request.on = ledEnabled;
+	service.request.blinks = yellowBlinking;
+	yellowled.call(service);
+}
+
+void Sender::sendGreen()
+{
+	Echoes::BlinkingLed service;
+	service.request.on = greenBlinks;
+	service.request.blinks = greenBlinks;
+	yellowled.call(service);
+}
+
+void Sender::setLed(bool isTrapped, bool seenSomething)
+{
+	if (isTrapped && (yellowBlinking || !ledEnabled))
+	{
+		yellowBlinking = false;
+		ledEnabled = true;
+		sendYellow();
+	} else if(!isTrapped && !yellowBlinking) {
+		yellowBlinking = true;
+		ledEnabled = true;
+		sendYellow();
+	}
+
+	if (seenSomething && !greenBlinks)
+	{
+		greenBlinks = true;
+		sendGreen();
+
+	}
+	else if (!seenSomething && greenBlinks)
+	{
+		greenBlinks = false;
+		sendGreen();
+	}
 }

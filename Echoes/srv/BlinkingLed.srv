@@ -1,0 +1,5 @@
+bool on
+bool blinks
+
+---
+bool requestSuccessful

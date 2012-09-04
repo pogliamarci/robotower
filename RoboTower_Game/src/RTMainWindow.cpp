@@ -127,9 +127,13 @@ void RTMainWindow::updateCardStatus(int cardNumber, bool status)
 	cardsLayout->setCardStatus(cardNumber, status);
 }
 
-void RTMainWindow::updateData(int timeToLive, int score)
+void RTMainWindow::updateTime(int timeToLive)
 {
 	currentGame->updateTimer(timeToLive);
+}
+
+void RTMainWindow::updatePoints(int score)
+{
 	currentGame->updateScore(score);
 }
 

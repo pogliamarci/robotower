@@ -21,7 +21,9 @@
 #include <iostream>
 #include "SerialCommunication.h"
 #include "ros/ros.h"
-#include "Echoes/Led.h"
+#include "Echoes/BlinkingLed.h"
+#include "Echoes/FixedLed.h"
+#include "Echoes/ResetLed.h"
 
 class LedParser
 {
@@ -30,9 +32,13 @@ private:
 
 public:
 	LedParser(SerialReader* read_sonar);
-	bool ledCallback(Echoes::Led::Request& request,
-			Echoes::Led::Response& response);
-	bool resetledCallback(Echoes::Led::Request& request, Echoes::Led::Response& response);
+	bool redLedCallback(Echoes::FixedLed::Request& request,
+			Echoes::FixedLed::Response& response);
+	bool greenLedCallback(Echoes::BlinkingLed::Request& request,
+				Echoes::BlinkingLed::Response& response);
+	bool yellowLedCallback(Echoes::BlinkingLed::Request& request,
+				Echoes::BlinkingLed::Response& response);
+	bool resetLedCallback(Echoes::ResetLed::Request& request, Echoes::ResetLed::Response& response);
 	void sendCommands();
 
 private:
