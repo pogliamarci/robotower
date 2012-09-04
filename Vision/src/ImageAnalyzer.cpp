@@ -25,21 +25,24 @@ Vision::Results ImageAnalyzer::analyze(cv::Mat& img)
 	BlobInfo* tower_result = tower_buffer.lastValidBlob();
 	if (tower_result != NULL && tower_result->getClass() == TOWER_CLASS)
 	{
-		cv::rectangle(img, tower_result->a, tower_result->b, CV_RGB(254,254,0), 2, 8, 0);
+		cv::rectangle(img, tower_result->a, tower_result->b,
+				CV_RGB(254,254,0), 2, 8, 0);
 	}
 	BlobInfo* factory_result = factory_buffer.lastValidBlob();
 	if (factory_result != NULL && factory_result->getClass() == FACTORY_CLASS)
 	{
-		cv::rectangle(img, factory_result->a, factory_result->b, CV_RGB(254,0,0), 2, 8, 0);
+		cv::rectangle(img, factory_result->a, factory_result->b,
+				CV_RGB(254,0,0), 2, 8, 0);
 	}
 
 	towerwidth_filter.update(tower_result != NULL ? tower_result->getWidth() : 0);
 	towerheight_filter.update(tower_result != NULL ? tower_result->getHeight() : 0);
 	factorywidth_filter.update(factory_result != NULL ? factory_result->getWidth() : 0);
 	factoryheight_filter.update(factory_result != NULL ? factory_result->getHeight() : 0);
-	distanceCalculator.insertDatiFabbrica((int)factoryheight_filter.curValue(), (int) factorywidth_filter.curValue());
-	distanceCalculator.insertDatiTorre((int)towerheight_filter.curValue(), (int) towerwidth_filter.curValue());
-
+	distanceCalculator.insertDatiFabbrica((int)factoryheight_filter.curValue(),
+			(int) factorywidth_filter.curValue());
+	distanceCalculator.insertDatiTorre((int)towerheight_filter.curValue(),
+			(int) towerwidth_filter.curValue());
 
 	return composeMessage();
 }
@@ -102,7 +105,6 @@ void ImageAnalyzer::findObjects(cv::Mat& img)
 				/* bottom right point */
 				pt2.x = BlobsItr2->second->GetMaxX();
 				pt2.y = BlobsItr2->second->GetMinY();
-				cout << "Blob found: " << BlobsItr1->first << endl;
 
 				/* compute width and height to perform some check... */
 				int blob_width = pt2.x - pt1.x;
@@ -134,7 +136,6 @@ void ImageAnalyzer::findObjects(cv::Mat& img)
 bool ImageAnalyzer::checkShape(int width, int heigth) {
 	// Shape control -> must be rectangular with height > width
 	float ratio = ((float) width) / ((float) heigth);
-	cout << "Factory ratio" << ratio << endl;
 	if (ratio > MIN_BLOB_RATIO && ratio < MAX_BLOB_RATIO)
 	{
 		return true;
