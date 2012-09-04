@@ -29,28 +29,32 @@ LedParser::LedParser(SerialReader* read_sonar)
  * ROS callback for the led service. Forwards the request to the
  * board managing the leds.
  */
-bool LedParser::ledCallback(Echoes::Led::Request& request,
-		Echoes::Led::Response& response)
+bool LedParser::redLedCallback(Echoes::FixedLed::Request& request,
+		Echoes::FixedLed::Response& response)
 {
-
-	if (request.editRed)
-	{
-		toggleRed(request.redNumOn);
-	}
-	if (request.editYellow)
-	{
-		toggleYellow(request.yellowOn, request.yellowBlinks);
-	}
-	if (request.editGreen)
-	{
-		toggleGreen(request.greenOn, request.greenBlinks);
-	}
+	toggleRed(request.numOn);
 	response.requestSuccessful = true;
 	return true;
 }
 
-bool LedParser::resetledCallback(Echoes::Led::Request& request,
-		Echoes::Led::Response& response)
+bool LedParser::greenLedCallback(Echoes::BlinkingLed::Request& request,
+		Echoes::BlinkingLed::Response& response)
+{
+	toggleYellow(request.on, request.blinks);
+	response.requestSuccessful = true;
+	return true;
+}
+
+bool LedParser::yellowLedCallback(Echoes::BlinkingLed::Request& request,
+		Echoes::BlinkingLed::Response& response)
+{
+	toggleGreen(request.on, request.blinks);
+	response.requestSuccessful = true;
+	return true;
+}
+
+bool LedParser::resetLedCallback(Echoes::ResetLed::Request& request,
+		Echoes::ResetLed::Response& response)
 {
 	char buf[] = "reset";
 	sender->sendStringCommand(buf, strlen(buf));
@@ -99,7 +103,7 @@ void LedParser::toBinaryString(char *binaryNum, int num)
 {
 	for (int i = 0; i < 4; i++)
 	{
-		binaryNum[0] = (i < num) ? '1' : '0';
+		binaryNum[i] = (i < num) ? '1' : '0';
 	}
 	binaryNum[4] = '\0';
 }

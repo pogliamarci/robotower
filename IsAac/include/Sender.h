@@ -16,15 +16,22 @@
  */
 
 #include "ros/ros.h"
-#include "SpyKee/Motion.h"
-#include "Echoes/Led.h"
 
 class Sender 
 {
 	private:
 		ros::Publisher motion;
+		ros::ServiceClient yellowled;
+		ros::ServiceClient greenled;
+		bool yellowBlinking;
+		bool greenBlinks;
+		bool ledEnabled;
+		void sendYellow();
+		void sendGreen();
 	public:
 		Sender(ros::NodeHandle& n);
 		void sendMotionMessage(int rot, int tan);
+		void setLed(bool isTrapped, bool seenSomething);
+		void disableLed();
 };
 

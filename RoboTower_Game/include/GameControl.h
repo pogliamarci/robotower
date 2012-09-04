@@ -54,6 +54,7 @@ private:
 	const int mainTower;
 	const int towerRechargeIncrement;
 	const int factoryRechargeIncrement;
+	static const int maxRedLeds = 4;
 private:
 	int timeToLive;
 	int timeToStart;

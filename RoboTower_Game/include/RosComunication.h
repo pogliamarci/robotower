@@ -37,10 +37,10 @@ private:
 	NodeHandle n;
 	Publisher enableIsaacPublisher;
 	Publisher rfidActionPublisher;
-	Publisher resetRobotPublisher;
 	Subscriber rfidCardSubscriber;
 	Subscriber towerSubscriber;
-	ServiceClient ledClient;
+	ServiceClient redLedClient;
+	ServiceClient redResetClient;
 	bool hasToQuit;
 public:
 	RosComunication();

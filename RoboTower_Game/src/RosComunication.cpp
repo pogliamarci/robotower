@@ -17,7 +17,8 @@
 
 #include "RosComunication.h"
 
-#include "Echoes/Led.h"
+#include "Echoes/FixedLed.h"
+#include "Echoes/ResetLed.h"
 
 #include "std_msgs/String.h"
 #include "std_msgs/Bool.h"
@@ -27,12 +28,12 @@ RosComunication::RosComunication()
 	hasToQuit = false;
 	enableIsaacPublisher = n.advertise<std_msgs::Bool>("isaac_enable", 1000);
 	rfidActionPublisher = n.advertise<std_msgs::String>("rfid_action", 1000);
-	resetRobotPublisher = n.advertise<std_msgs::Bool>("echoes_reset", 1000);
 	rfidCardSubscriber = n.subscribe("rfid_data", 1,
 			&RosComunication::fromRfidCallback, this);
 	towerSubscriber = n.subscribe("towers_data", 1,
 			&RosComunication::fromTowersCallback, this);
-	ledClient = n.serviceClient<Echoes::Led>("led_data");
+	redLedClient = n.serviceClient<Echoes::ResetLed>("red_led");
+	redResetClient = n.serviceClient<Echoes::ResetLed>("reset_led");
 }
 
 void RosComunication::run()
@@ -58,9 +59,8 @@ void RosComunication::quitNow()
 
 void RosComunication::resetRobot()
 {
-	std_msgs::Bool message;
-	message.data = true;
-	resetRobotPublisher.publish(message);
+	Echoes::ResetLed service;
+	redLedClient.call(service);
 }
 
 void RosComunication::sendAction(std::string action)
@@ -89,10 +89,7 @@ void RosComunication::fromTowersCallback(const Echoes::Towers& message)
 
 void RosComunication::setRedLeds(int num)
 {
-	Echoes::Led service;
-	service.request.editYellow = false;
-	service.request.editGreen = false;
-	service.request.editRed = true;
-	service.request.redNumOn = num;
-	ledClient.call(service);
+	Echoes::FixedLed service;
+	service.request.numOn = num;
+	redLedClient.call(service);
 }

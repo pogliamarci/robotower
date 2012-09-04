@@ -26,7 +26,6 @@
 #include "Echoes/Sonar.h"
 #include "Echoes/Rfid.h"
 #include "Echoes/Towers.h"
-#include "Echoes/Led.h"
 
 #include <iostream>
 
@@ -65,8 +64,10 @@ int main(int argc, char** argv)
 	ros::Publisher towers_data_pub = ros_node.advertise<Echoes::Towers>("towers_data", 1000);
 
 	/* Initialization of Led services */
-	ros::ServiceServer led_service = ros_node.advertiseService("led_data", &LedParser::ledCallback, &ledParser);
-	ros::ServiceServer resetLed_service = ros_node.advertiseService("resetLed_data", &LedParser::ledCallback, &ledParser);
+	ros::ServiceServer redLed_service = ros_node.advertiseService("red_led", &LedParser::redLedCallback, &ledParser);
+	ros::ServiceServer greenLed_service = ros_node.advertiseService("green_led", &LedParser::greenLedCallback, &ledParser);
+	ros::ServiceServer yellowLed_service = ros_node.advertiseService("yellow_led", &LedParser::yellowLedCallback, &ledParser);
+	ros::ServiceServer resetLed_service = ros_node.advertiseService("reset_led", &LedParser::resetLedCallback, &ledParser);
 
 	/* configuration */
 	SonarProcesser spr(sonar_data_pub);

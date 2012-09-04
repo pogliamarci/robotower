@@ -117,6 +117,7 @@ void GameControl::startGame()
 	{
 		status = WAITING;
 		emit updateRemainingTime(timeToStart);
+		emit mustSetLeds(maxRedLeds);
 		wakeup();
 	}
 }
@@ -264,7 +265,6 @@ void GameControl::updateTime(int increment)
 
 int GameControl::ledsFromTime()
 {
-	const int maxRedLeds = 4;
 	if (timeToLive == 0)
 		return 0;
 	else
