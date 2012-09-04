@@ -111,6 +111,7 @@ private:
 	void performMatchOneStepUpdate();
 	void wakeup();
 	void resetTowers();
+	int ledsFromTime();
 
 signals:
 	void timeIsUpdated(int timeToLive);

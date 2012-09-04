@@ -248,15 +248,31 @@ void GameControl::wakeup()
 void GameControl::updateTime(int increment)
 {
 	QMutexLocker lock(&timeMutex);
-	int oldnumleds = (timeToLive % (gameMaxTime / 4)) + 1;
+	int oldnumleds = ledsFromTime();
 	timeToLive += increment;
 	if (timeToLive < 0)
 		timeToLive = 0;
-	int newnumleds = (timeToLive % (gameMaxTime / 4)) + 1;
-	std::cout << "accendo " << newnumleds << " erano accesi " << oldnumleds << std::endl;
+	int newnumleds = ledsFromTime();
+	std::cout << "accendo " << newnumleds << " erano accesi " << oldnumleds
+			<< std::endl;
 	if (oldnumleds != newnumleds)
 	{
 		emit mustSetLeds(newnumleds);
 	}
 	emit timeIsUpdated(timeToLive);
+}
+
+int GameControl::ledsFromTime()
+{
+	const int maxRedLeds = 4;
+	if (timeToLive == 0)
+		return 0;
+	else
+	{
+		int numLeds = maxRedLeds * timeToLive / gameMaxTime + 1;
+		if (numLeds > maxRedLeds)
+			numLeds = maxRedLeds;
+		return numLeds;
+	}
+
 }
