@@ -38,8 +38,10 @@ public:
 				Echoes::BlinkingLed::Response& response);
 	bool yellowLedCallback(Echoes::BlinkingLed::Request& request,
 				Echoes::BlinkingLed::Response& response);
-	bool resetLedCallback(Echoes::ResetLed::Request& request, Echoes::ResetLed::Response& response);
+	bool resetLedCallback(Echoes::ResetLed::Request& request,
+			Echoes::ResetLed::Response& response);
 	void sendCommands();
+	~LedParser();
 
 private:
 	void toggleGreen(bool isOn, bool blinking);

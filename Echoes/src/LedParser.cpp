@@ -108,3 +108,10 @@ void LedParser::toBinaryString(char *binaryNum, int num)
 	binaryNum[4] = '\0';
 }
 
+LedParser::~LedParser()
+{
+	Echoes::ResetLed::Request rqs;
+	Echoes::ResetLed::Response res;
+	resetLedCallback(rqs, res);
+}
+
