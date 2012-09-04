@@ -27,8 +27,6 @@
 #include "ImageAnalyzer.h"
 #include "VisionParameters.h"
 
-#define ISAAC_DEBUG
-
 using namespace std;
 using namespace cv;
 
@@ -40,14 +38,12 @@ void imageAction(Mat& frame)
 {
 	if (frame.empty()) return;
 	results_publisher.publish(vision.startAnalysis(frame));
-#ifdef DEBUG
 	imshow("SpyKeeView", frame);
 	char c = waitKey(10);
 	if(c == 'c' || c == 27) /* 27 is the ESC character ASCII code */
 	{
 		exit(EXIT_SUCCESS);
 	}
-#endif
 }
 
 void imageMessageCallback(const sensor_msgs::CompressedImage::ConstPtr& message)
