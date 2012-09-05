@@ -28,9 +28,12 @@ private:
 
 protected:
 	void closeEvent(QCloseEvent* e);
+	void keyPressEvent(QKeyEvent *e);
 public:
 	RTPopupTimer(QWidget* parent = 0);
 	void update(int remainingTime);
+signals:
+	void closed();
 };
 
 #endif /* RTPOPUPTIMER_H_ */

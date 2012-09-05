@@ -24,12 +24,9 @@ class RTCurrentGameWidget : public QGroupBox
 {
 	Q_OBJECT
 private:
-	QVBoxLayout* theLayout;
 	QPushButton* pauseBtn;
 	QLCDNumber* currentScore;
 	QLCDNumber* currentTTL;
-	QGroupBox* goalsBox;
-	QGridLayout* innerGoalsLayout;
 	QLabel* towersCnt;
 	QLabel* factoriesCnt;
 	bool isPaused;

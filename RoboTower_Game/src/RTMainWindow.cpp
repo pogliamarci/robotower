@@ -16,31 +16,35 @@
  */
 
 #include "RTMainWindow.h"
+#include "RTPopupTimer.h"
+#include "RTCurrentGameWidget.h"
+#include "RTCards.h"
 
 #include <iostream>
 
 void RTMainWindow::setupToolbar()
 {
-	fileToolBar = addToolBar(tr("MainBar"));
+	QToolBar* fileToolBar = addToolBar(tr("MainBar"));
 	newGameAction = new QAction(tr("&New game"), this);
 	fileToolBar->addAction(newGameAction);
 	addToolBar(Qt::TopToolBarArea, fileToolBar);
 }
 
-void RTMainWindow::setupButtons()
+QLayout* RTMainWindow::setupButtons()
 {
-	btnLayout = new QVBoxLayout();
-	startBtn = new QPushButton("Start");
-	stopBtn = new QPushButton("Stop");
+	QVBoxLayout* btnLayout = new QVBoxLayout();
+	startBtn = new QPushButton("&Start");
+	stopBtn = new QPushButton("St&op");
 	btnLayout->addWidget(startBtn);
 	btnLayout->addWidget(stopBtn);
 	stopBtn->setEnabled(false);
+	return btnLayout;
 }
 
-void RTMainWindow::setupStats()
+QWidget* RTMainWindow::setupStats()
 {
-	statsGroupBox = new QGroupBox();
-	statsLayout = new QGridLayout();
+	QGroupBox* statsGroupBox = new QGroupBox();
+	QGridLayout* statsLayout = new QGridLayout();
 	statWon = new QLabel("0");
 	statTotalScore = new QLabel("0");
 	statLost = new QLabel("0");
@@ -53,13 +57,15 @@ void RTMainWindow::setupStats()
 	statsLayout->addWidget(statLost, 2, 2);
 	statsLayout->addWidget(new QLabel("Total score: "), 3, 1);
 	statsLayout->addWidget(statTotalScore, 3, 2);
+
+	return statsGroupBox;
 }
 
 void RTMainWindow::setupLayout(GameConfiguration& config)
 {
-	mainWidget = new QWidget();
-	mainLayout = new QHBoxLayout();
-	leftLayout = new QGridLayout();
+	QWidget* mainWidget = new QWidget();
+	QHBoxLayout* mainLayout = new QHBoxLayout();
+	QGridLayout* leftLayout = new QGridLayout();
 	setCentralWidget(mainWidget);
 
 	/* Children widgets */
@@ -72,15 +78,15 @@ void RTMainWindow::setupLayout(GameConfiguration& config)
 
 	/* add all to the main layout */
 	leftLayout->addWidget(currentGame, 1, 1, 2, 4);
-	leftLayout->addLayout(btnLayout, 3, 1, 1, 2);
-	leftLayout->addWidget(statsGroupBox, 3, 3, 1, 2);
+	leftLayout->addLayout(setupButtons(), 3, 1, 1, 2);
+	leftLayout->addWidget(setupStats(), 3, 3, 1, 2);
 }
 
 RTMainWindow::RTMainWindow(GameConfiguration& config, QWidget* parent) :
-		QMainWindow(parent), popupTimer(NULL)
+		QMainWindow(parent), popupTimer(NULL), popupNeedsRebuilding(true)
 {
 	setupButtons();
-	setupStats();
+	//setupStats();
 	setupToolbar();
 	setupLayout(config);
 	setWindowIcon(QIcon("../img/logo.png"));
@@ -105,6 +111,7 @@ void RTMainWindow::startOnClick()
 
 void RTMainWindow::stopOnClick()
 {
+	popupNeedsRebuilding = true;
 	setButtonStatus(false);
 	emit stop();
 }
@@ -152,14 +159,16 @@ void RTMainWindow::updateHistory(int won, int lost, int score)
 
 void RTMainWindow::updateSetupPopup(int remainingTime)
 {
-	if (popupTimer == NULL)
+	if (popupNeedsRebuilding)
 	{
+		delete popupTimer;
 		buildSetupPopup();
 	}
 	popupTimer->update(remainingTime);
 	if (remainingTime == 0)
 	{
-		delete popupTimer;
+		popupNeedsRebuilding = true;
+		delete popupTimer; // maybe this isn't necessary anymore...
 		popupTimer = NULL;
 		soundmanager.play(SoundManager::Start);
 	}
@@ -172,11 +181,14 @@ void RTMainWindow::buildSetupPopup()
 	int xAlign = x() + width() / 2 - popupWidth / 2;
 	int yAlign = y() + height() / 2 - popupHeight / 2;
 	popupTimer = new RTPopupTimer();
+	popupNeedsRebuilding = false; // ok, we have it!
 	popupTimer->setWindowModality(Qt::ApplicationModal);
 	popupTimer->setGeometry(xAlign, yAlign, popupWidth, popupHeight);
 	popupTimer->setWindowTitle("Starting...");
 	popupTimer->setFont(font());
 	popupTimer->show();
+	/* make close the popup shut down the entire application */
+	QObject::connect(popupTimer, SIGNAL(closed()), this, SLOT(stopOnClick()));
 }
 
 RTMainWindow::~RTMainWindow()

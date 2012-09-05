@@ -16,24 +16,36 @@
  */
 
 #include "RTPopupTimer.h"
+#include <iostream>
 
 void RTPopupTimer::update(int remainingTime)
 {
 	text->setText(QString::number(remainingTime));
 }
 
-RTPopupTimer::RTPopupTimer(QWidget* parent) : QWidget(parent)
+RTPopupTimer::RTPopupTimer(QWidget* parent) : QWidget(parent, Qt::Dialog)
 {
+	QFont f = this->font();
+	f.setPointSize(f.pointSize() * 1.8);
+	QLabel* description = new QLabel("Time to start: ");
+	description->setFont(f);
 	text = new QLabel("--");
+	text->setFont(f);
 	QHBoxLayout* lyt = new QHBoxLayout();
-	lyt->addWidget(new QLabel("Time to start: "));
+	lyt->addWidget(description);
 	lyt->addWidget(text);
-	this->setLayout(lyt);
+	setLayout(lyt);
 }
 
 void RTPopupTimer::closeEvent(QCloseEvent* e)
 {
-	e->ignore();
+	emit closed();
 }
 
+
+void RTPopupTimer::keyPressEvent(QKeyEvent *e)
+{
+	if(e->key() == Qt::Key_Escape)
+		close();
+}
 

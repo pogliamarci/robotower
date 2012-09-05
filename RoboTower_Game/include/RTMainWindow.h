@@ -19,36 +19,30 @@
 #define MAINWINDOW_H_
 
 #include <QtGui>
-#include "RTCurrentGameWidget.h"
-#include "RTCards.h"
-#include "RTPopupTimer.h"
+
 #include "GameConfiguration.h"
 #include "SoundManager.h"
+
+class RTCurrentGameWidget;
+class RTCards;
+class RTPopupTimer;
 
 class RTMainWindow: public QMainWindow
 {
 	Q_OBJECT
 private:
-	QToolBar* fileToolBar;
-	QAction* newGameAction;
-	QHBoxLayout* mainLayout;
-	QGridLayout* leftLayout;
-	QWidget* mainWidget;
-	/* internal widgets */
 	RTCurrentGameWidget* currentGame;
 	RTCards* cardsLayout;
-	/* buttons (center left) */
-	QVBoxLayout* btnLayout;
+	QAction* newGameAction;
 	QPushButton* startBtn;
 	QPushButton* stopBtn;
 	/* Stats */
-	QGridLayout* statsLayout;
-	QGroupBox* statsGroupBox;
 	QLabel* statWon;
 	QLabel* statTotalScore;
 	QLabel* statLost;
 	/* PopUp*/
 	RTPopupTimer* popupTimer;
+	bool popupNeedsRebuilding;
 	SoundManager soundmanager;
 
 public:
@@ -62,8 +56,8 @@ public slots:
 	void updateHistory(int won, int lost, int score);
 	void updateSetupPopup(int remainingTime);
 private:
-	void setupButtons();
-	void setupStats();
+	QLayout* setupButtons();
+	QWidget* setupStats();
 	void setupToolbar();
 	void setupLayout(GameConfiguration& config);
 	void setButtonStatus(bool isRunning);
