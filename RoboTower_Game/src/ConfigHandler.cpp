@@ -56,14 +56,14 @@ bool ConfigHandler::startElement(const QString& namespaceURI,
 		QString action = atts.value("name");
 		if(action != currentAction)
 		{
-			std::vector<ConfigRfidEntry> actionGroup;
+			std::vector<RfidEntry> actionGroup;
 			rfids.push_back(actionGroup);
 			currentAction = action;
 		}
 	}
 	else if (localName == "tag")
 	{
-		ConfigRfidEntry entry;
+		RfidEntry entry;
 		entry.id = atts.value("id").toStdString();
 		entry.num = atts.value("num").toInt();
 		entry.action = currentAction.toStdString();
@@ -77,12 +77,12 @@ bool ConfigHandler::startElement(const QString& namespaceURI,
 	return true;
 }
 
-ConfigGeneral ConfigHandler::getMainConfiguration()
+ConfigHandler::GeneralData ConfigHandler::getMainConfiguration()
 {
 	return configuration;
 }
 
-std::vector<std::vector<ConfigRfidEntry> > ConfigHandler::getRfidList()
+std::vector<std::vector<ConfigHandler::RfidEntry> > ConfigHandler::getRfidList()
 {
 	return rfids;
 }

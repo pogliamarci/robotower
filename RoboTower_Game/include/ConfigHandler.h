@@ -21,38 +21,38 @@
 #include <QXmlDefaultHandler>
 #include <vector>
 
-typedef struct rt_config
-{
-	int timeToLive;
-	int setupTime;
-	int towerPoints;
-	int factoryPoints;
-	int towerId;
-	int factories;
-	int towerRechargeIncrement;
-	int factoryRechargeIncrement;
-} ConfigGeneral;
-
-typedef struct rt_config_rfid
-{
-	std::string id;
-	int num;
-	std::string action;
-} ConfigRfidEntry;
-
 class ConfigHandler: public QXmlDefaultHandler
 {
+public:
+	struct GeneralData
+	{
+		int timeToLive;
+		int setupTime;
+		int towerPoints;
+		int factoryPoints;
+		int towerId;
+		int factories;
+		int towerRechargeIncrement;
+		int factoryRechargeIncrement;
+	};
 
+	struct RfidEntry
+	{
+		std::string id;
+		int num;
+		std::string action;
+	};
 private:
 	QString currentAction;
-	ConfigGeneral configuration;
-	std::vector<std::vector<ConfigRfidEntry> > rfids;
+	GeneralData configuration;
+	std::vector<std::vector<RfidEntry> > rfids;
 public:
+
 	ConfigHandler();
 	bool startElement(const QString& namespaceURI, const QString& localName,
 			const QString& qName, const QXmlAttributes& atts);
-	ConfigGeneral getMainConfiguration();
-	std::vector<std::vector<ConfigRfidEntry> > getRfidList();
+	GeneralData getMainConfiguration();
+	std::vector<std::vector<RfidEntry> > getRfidList();
 };
 
 #endif /* RTCONFIGHANDLER_H_ */

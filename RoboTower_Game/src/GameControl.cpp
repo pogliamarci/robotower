@@ -155,7 +155,7 @@ void GameControl::initializeRfidConfiguration(GameConfiguration config)
 {
 	for (int i = 0; i < config.getNumActions(); i++)
 	{
-		std::vector<ConfigRfidEntry> groupList = config.getRfidList(i);
+		std::vector<ConfigHandler::RfidEntry> groupList = config.getRfidList(i);
 		for (size_t j = 0; j < groupList.size(); j++)
 		{
 			RfidEntry entry;

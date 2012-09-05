@@ -30,8 +30,8 @@
 class GameConfiguration
 {
 private:
-	ConfigGeneral configuration;
-	std::vector<std::vector<ConfigRfidEntry> > rfidList;
+	ConfigHandler::GeneralData configuration;
+	std::vector<std::vector<ConfigHandler::RfidEntry> > rfidList;
 
 public:
 	GameConfiguration(std::string filePath);
@@ -67,7 +67,7 @@ public:
 		return rfidList.size();
 	}
 
-	inline std::vector<ConfigRfidEntry> getRfidList(int actionId)
+	inline std::vector<ConfigHandler::RfidEntry> getRfidList(int actionId)
 	{
 		return rfidList.at(actionId);
 	}
