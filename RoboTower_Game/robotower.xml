@@ -11,39 +11,41 @@
 		<recharge tower="3" factory="2" />
 	</config>
 	
-	<!-- configurazione dei tag -->
+	<!-- Associate RFID tags with actions and num"s (the ones printed on the stickers)
+	"num"s should be unique among *all* the tags.
+	Notice: IDs for new tags can be retrieved by directly connetting the RFID reader 
+	to the pc via a serial to USB adapter (serial port speed: 9600 bps, remember not to include
+	the checksum in the ID!), or by intercepting messages sent by Echoes on ROS (these don't include
+	the checksum) -->
 	<rfid>
-		<!-- definisce i tag per ciascuna azione -->
 		<action name="lock_all">
 			<tag id="4400F56CD1" num="1" />
-			<tag id="4400F59195" num="6" />
-			<tag id="4400F58B6D" num="11" />
+			<tag id="4B00DA3279" num="6" />
+			<tag id="4B00DA4547" num="11" />
 		</action>
 		
 		<action name="disable_vision">
-			<tag id="4400BDB1D9" num="2" />
-			<tag id="4400BDC253" num="7" />
-			<tag id="4B00DA3279" num="12" />
+			<tag id="4400F59195" num="2" />
+			<tag id="4800E51699" num="7" />
+			<tag id="4C00210BA3" num="12" />
 		</action>
 		
 		<action name="force_rotate">
-			<tag id="4800E51699" num="3" />
+			<tag id="4400F58B6D" num="3" />
 			<tag id="4B00DA20B7" num="8" />
-			<tag id="4800E52FB3" num="13" />
+			<tag id="4800E4FEB4" num="13" />	
 		</action>
 		
 		<action name="go_back">
-			<tag id="4800E4F181" num="4" />
-			<tag id="4B00DA4547" num="9" />
-			<tag id="4C00210BA3" num="14" />
+			<tag id="4400BDB1D9" num="4" />
+			<tag id="4800E52FB3" num="9" />
+			<tag id="4800E4D047" num="14" />
 		</action>
 		
 		<action name="modify_time">
-			<tag id="4800E4FEB4" num="5" />
-			<tag id="4800E4D047" num="10" />
+			<tag id="4400BDC253" num="5" />
+			<tag id="4800E4F181" num="10" />
 			<tag id="4B00DA12A4" num="15" />
 		</action>
-
 	</rfid>
-	
 </robotower>
