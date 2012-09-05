@@ -23,6 +23,7 @@
 #include "RTCards.h"
 #include "RTPopupTimer.h"
 #include "GameConfiguration.h"
+#include "SoundManager.h"
 
 class RTMainWindow: public QMainWindow
 {
@@ -48,6 +49,7 @@ private:
 	QLabel* statLost;
 	/* PopUp*/
 	RTPopupTimer* popupTimer;
+	SoundManager soundmanager;
 
 public:
 	RTMainWindow(GameConfiguration config, QWidget* parent = 0);

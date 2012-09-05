@@ -27,7 +27,13 @@ include(${QT_USE_FILE})
 # binary directory.
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 include_directories(${QT_QTXML_INCLUDE_DIR})
+include_directories("${QT_INCLUDE_DIR}/../QtMobility")
+include_directories("${QT_INCLUDE_DIR}/../QtMultimediaKit")
+
 set (QT_USE_QTXML TRUE)
+set(QT_USE_QTMULTIMEDIA TRUE)
+set(QT_LIBRARIES "${QT_LIBRARIES};-lQtMultimediaKit")
+
 ##############################################################################
 # Sections
 ##############################################################################

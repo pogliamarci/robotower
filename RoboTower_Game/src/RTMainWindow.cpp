@@ -19,6 +19,7 @@
 #include "ConfigHandler.h"
 
 #include <iostream>
+
 void RTMainWindow::setupToolbar()
 {
 	fileToolBar = addToolBar(tr("MainBar"));
@@ -76,7 +77,7 @@ void RTMainWindow::setupLayout(GameConfiguration config)
 	leftLayout->addWidget(statsGroupBox, 3, 3, 1, 2);
 }
 
-RTMainWindow::RTMainWindow(GameConfiguration config,QWidget* parent) :
+RTMainWindow::RTMainWindow(GameConfiguration config, QWidget* parent) :
 		QMainWindow(parent), popupTimer(NULL)
 {
 	setupButtons();
@@ -93,7 +94,7 @@ RTMainWindow::RTMainWindow(GameConfiguration config,QWidget* parent) :
 			SIGNAL(togglePause()));
 	QFont font(this->font());
 	font.setBold(true);
-	font.setPointSize(font.pointSize()+2);
+	font.setPointSize(font.pointSize() + 2);
 	this->setFont(font);
 }
 
@@ -161,10 +162,12 @@ void RTMainWindow::updateSetupPopup(int remainingTime)
 	{
 		delete popupTimer;
 		popupTimer = NULL;
+		soundmanager.play(SoundManager::Start);
 	}
 }
 
-void RTMainWindow::buildSetupPopup() {
+void RTMainWindow::buildSetupPopup()
+{
 	const int popupWidth = 200;
 	const int popupHeight = 60;
 	int xAlign = x() + width() / 2 - popupWidth / 2;
