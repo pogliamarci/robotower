@@ -70,7 +70,7 @@ private:
 	GameHistory history;
 
 public:
-	GameControl(GameConfiguration config);
+	GameControl(GameConfiguration& config);
 	void run();
 	inline int getTimeToLive()
 	{
@@ -102,7 +102,7 @@ public slots:
 	void togglePause();
 	void resetGame();
 private:
-	void initializeRfidConfiguration(GameConfiguration config);
+	void initializeRfidConfiguration(GameConfiguration& config);
 	void updateTime(int increment  = -1);
 	void updateGamePoints();
 	void rechargeCard();

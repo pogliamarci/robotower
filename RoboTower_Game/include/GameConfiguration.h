@@ -20,22 +20,41 @@
 
 #include<QFile>
 #include<QXmlSimpleReader>
+#include<QXmlDefaultHandler>
 #include<QXmlInputSource>
 
 #include<vector>
-#include<iostream>
-#include<cstdlib>
-#include"ConfigHandler.h"
 
-class GameConfiguration
+class GameConfiguration : public QXmlDefaultHandler
 {
+public:
+	struct RfidEntry
+	{
+		std::string id;
+		int num;
+		std::string action;
+	};
 private:
-	ConfigHandler::GeneralData configuration;
-	std::vector<std::vector<ConfigHandler::RfidEntry> > rfidList;
+	struct GeneralData
+	{
+		int timeToLive;
+		int setupTime;
+		int towerPoints;
+		int factoryPoints;
+		int towerId;
+		int factories;
+		int towerRechargeIncrement;
+		int factoryRechargeIncrement;
+	};
+	GeneralData configuration;
+	QString currentAction;
+	std::vector<std::vector<RfidEntry> > rfidList;
 
 public:
 	GameConfiguration(std::string filePath);
-
+	bool startElement(const QString& namespaceURI,
+			const QString& localName, const QString& qName,
+			const QXmlAttributes& atts);
 	inline int getGameMaxTime()
 	{
 		return configuration.timeToLive;
@@ -62,25 +81,24 @@ public:
 		return configuration.factories + 1;
 	}
 
-	inline int getNumActions()
-	{
-		return rfidList.size();
-	}
-
-	inline std::vector<ConfigHandler::RfidEntry> getRfidList(int actionId)
-	{
-		return rfidList.at(actionId);
-	}
-
 	inline int getTowerRechargeIncrement()
 	{
 		return configuration.towerRechargeIncrement;
 	}
 
-
 	inline int getFactoryRechargeIncrement()
 	{
 		return configuration.factoryRechargeIncrement;
+	}
+
+	inline int getNumActions()
+	{
+		return rfidList.size();
+	}
+
+	inline std::vector<RfidEntry> getRfidList(int actionId)
+	{
+		return rfidList.at(actionId);
 	}
 
 };

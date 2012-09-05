@@ -20,7 +20,7 @@
 #include <QMutexLocker>
 #include "GameControl.h"
 
-GameControl::GameControl(GameConfiguration config) :
+GameControl::GameControl(GameConfiguration& config) :
 		gameMaxTime(config.getGameMaxTime()), gameSetupTime(
 				config.getGameSetupTime()), towerPoints(
 				config.getTowerPoints()), factoryPoints(
@@ -151,11 +151,11 @@ void GameControl::resetGame()
 	emit endGame(history.getWon(), history.getLost(), history.getScore());
 }
 
-void GameControl::initializeRfidConfiguration(GameConfiguration config)
+void GameControl::initializeRfidConfiguration(GameConfiguration& config)
 {
 	for (int i = 0; i < config.getNumActions(); i++)
 	{
-		std::vector<ConfigHandler::RfidEntry> groupList = config.getRfidList(i);
+		std::vector<GameConfiguration::RfidEntry> groupList = config.getRfidList(i);
 		for (size_t j = 0; j < groupList.size(); j++)
 		{
 			RfidEntry entry;

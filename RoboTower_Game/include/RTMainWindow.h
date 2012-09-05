@@ -52,7 +52,7 @@ private:
 	SoundManager soundmanager;
 
 public:
-	RTMainWindow(GameConfiguration config, QWidget* parent = 0);
+	RTMainWindow(GameConfiguration& config, QWidget* parent = 0);
 	~RTMainWindow();
 public slots:
 	void updateTowers(int factoryNumber, int towersNumber);
@@ -65,7 +65,7 @@ private:
 	void setupButtons();
 	void setupStats();
 	void setupToolbar();
-	void setupLayout(GameConfiguration config);
+	void setupLayout(GameConfiguration& config);
 	void setButtonStatus(bool isRunning);
 private slots:
 	void startOnClick();

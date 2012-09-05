@@ -16,7 +16,6 @@
  */
 
 #include "RTMainWindow.h"
-#include "ConfigHandler.h"
 
 #include <iostream>
 
@@ -56,7 +55,7 @@ void RTMainWindow::setupStats()
 	statsLayout->addWidget(statTotalScore, 3, 2);
 }
 
-void RTMainWindow::setupLayout(GameConfiguration config)
+void RTMainWindow::setupLayout(GameConfiguration& config)
 {
 	mainWidget = new QWidget();
 	mainLayout = new QHBoxLayout();
@@ -77,7 +76,7 @@ void RTMainWindow::setupLayout(GameConfiguration config)
 	leftLayout->addWidget(statsGroupBox, 3, 3, 1, 2);
 }
 
-RTMainWindow::RTMainWindow(GameConfiguration config, QWidget* parent) :
+RTMainWindow::RTMainWindow(GameConfiguration& config, QWidget* parent) :
 		QMainWindow(parent), popupTimer(NULL)
 {
 	setupButtons();
