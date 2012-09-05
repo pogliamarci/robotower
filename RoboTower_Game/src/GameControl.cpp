@@ -101,6 +101,8 @@ void GameControl::manageRfid(std::string id)
 
 void GameControl::updateTowers(int tower)
 {
+	if (status != STARTED)
+			return;
 	towers.at(tower - 1) = false;
 	emit towersUpdate(getFactoryNumber(), getTowerNumber());
 }

@@ -126,7 +126,7 @@ void RTMainWindow::setButtonStatus(bool isRunning)
 void RTMainWindow::updateCardStatus(int cardNumber, bool status)
 {
 	cardsLayout->setCardStatus(cardNumber, status);
-	if(status)
+	if (status)
 		soundmanager.play(SoundManager::Recharged);
 	else
 		soundmanager.play(SoundManager::Trapped);
@@ -135,8 +135,13 @@ void RTMainWindow::updateCardStatus(int cardNumber, bool status)
 void RTMainWindow::updateTime(int timeToLive)
 {
 	currentGame->updateTimer(timeToLive);
-	if(timeToLive == 0)
+	if (timeToLive == 0)
+	{
 		soundmanager.play(SoundManager::Win);
+		QMessageBox message;
+		message.setText("Hai Battuto il Robot!");
+		message.exec();
+	}
 }
 
 void RTMainWindow::updatePoints(int score)
@@ -148,7 +153,12 @@ void RTMainWindow::updateTowers(int factoryNumber, int towersNumber)
 {
 	currentGame->updateCounter(towersNumber, factoryNumber);
 	if (towersNumber == 0)
+	{
 		soundmanager.play(SoundManager::Lose);
+		QMessageBox message;
+		message.setText("Il robot ha abbattuto la torre! Tutto " + QString::fromUtf8("è") + " perduto!");
+		message.exec();
+	}
 }
 
 void RTMainWindow::updateHistory(int won, int lost, int score)
