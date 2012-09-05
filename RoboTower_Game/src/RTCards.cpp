@@ -75,7 +75,7 @@ void RTCards::addCards(GameConfiguration& config)
 	int na = config.getNumActions();
 	for (int i = 0; i < na; i++)
 	{
-		std::vector<ConfigRfidEntry> rfidList = config.getRfidList(i);
+		std::vector<GameConfiguration::RfidEntry> rfidList = config.getRfidList(i);
 		for (size_t j = 0; j < rfidList.size(); j++)
 		{
 			int cardNumber = rfidList.at(j).num;
@@ -97,7 +97,7 @@ RTCard::RTCard(int number, QString action) :
 	setScaledContents(true);
 	setFrameStyle(borderWidth);
 	setCardStatus(true);
-	setMinimumSize(QSize(40, 60));
+	setMinimumSize(QSize(60,90));
 }
 
 void RTCard::setCardStatus(bool isActive)

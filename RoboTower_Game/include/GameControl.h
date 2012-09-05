@@ -30,23 +30,22 @@
 #include "GameHistory.h"
 #include "GameConfiguration.h"
 
-typedef struct rfid_entry
-{
-	int number;
-	int status;
-	std::string action;
-} RfidEntry;
-
-enum GameStatus
-{
-	STARTED, STOPPED, PAUSED, WAITING
-};
-
 class GameControl: public QThread
 {
 Q_OBJECT
 
 private:
+	struct RfidEntry
+	{
+		int number;
+		int status;
+		std::string action;
+	};
+
+	enum GameStatus
+	{
+		STARTED, STOPPED, PAUSED, WAITING
+	};
 	const int gameMaxTime;
 	const int gameSetupTime;
 	const int towerPoints;
@@ -71,7 +70,7 @@ private:
 	GameHistory history;
 
 public:
-	GameControl(GameConfiguration config);
+	GameControl(GameConfiguration& config);
 	void run();
 	inline int getTimeToLive()
 	{
@@ -103,7 +102,7 @@ public slots:
 	void togglePause();
 	void resetGame();
 private:
-	void initializeRfidConfiguration(GameConfiguration config);
+	void initializeRfidConfiguration(GameConfiguration& config);
 	void updateTime(int increment  = -1);
 	void updateGamePoints();
 	void rechargeCard();

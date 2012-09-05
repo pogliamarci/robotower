@@ -17,19 +17,22 @@
 
 #include "RTCurrentGameWidget.h"
 
+#define PAUSE_STRING "&Pause"
+#define RESUME_STRING "&Resume"
+
 RTCurrentGameWidget::RTCurrentGameWidget(QWidget* parent) :
 		QGroupBox(parent)
 {
 	isPaused = false;
-	theLayout = new QVBoxLayout();
-	pauseBtn = new QPushButton("Pause");
+	QVBoxLayout* theLayout = new QVBoxLayout();
+	pauseBtn = new QPushButton(PAUSE_STRING);
 	pauseBtn->setEnabled(false);
 	currentScore = new QLCDNumber();
 	currentTTL = new QLCDNumber();
-	goalsBox = new QGroupBox();
+	QGroupBox* goalsBox = new QGroupBox();
 	towersCnt = new QLabel("0");
 	factoriesCnt = new QLabel("0");
-	innerGoalsLayout = new QGridLayout();
+	QGridLayout* innerGoalsLayout = new QGridLayout();
 
 	setTitle("Current Game");
 
@@ -68,7 +71,7 @@ void RTCurrentGameWidget::setPauseEnabled(bool isPauseEnabled)
 	pauseBtn->setEnabled(isPauseEnabled);
 	if (isPauseEnabled)
 	{
-		pauseBtn->setText("Pause");
+		pauseBtn->setText(PAUSE_STRING);
 		isPaused = false;
 	}
 }
@@ -77,12 +80,12 @@ void RTCurrentGameWidget::onPauseClick()
 {
 	if (isPaused)
 	{
-		pauseBtn->setText("Pause");
+		pauseBtn->setText(PAUSE_STRING);
 		isPaused = false;
 	}
 	else
 	{
-		pauseBtn->setText("Resume");
+		pauseBtn->setText(RESUME_STRING);
 		isPaused = true;
 	}
 	emit togglePause();

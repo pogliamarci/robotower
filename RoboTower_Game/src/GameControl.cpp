@@ -20,13 +20,14 @@
 #include <QMutexLocker>
 #include "GameControl.h"
 
-GameControl::GameControl(GameConfiguration config) :
-		gameMaxTime(config.getGameMaxTime()), gameSetupTime(
-				config.getGameSetupTime()), towerPoints(
-				config.getTowerPoints()), factoryPoints(
-				config.getFactoryPoints()), mainTower(config.getMainTower()), towerRechargeIncrement(
-				config.getTowerRechargeIncrement()), factoryRechargeIncrement(
-				config.getFactoryRechargeIncrement())
+GameControl::GameControl(GameConfiguration& config) :
+		gameMaxTime(config.getGameMaxTime()),
+		gameSetupTime(config.getGameSetupTime()),
+		towerPoints(config.getTowerPoints()),
+		factoryPoints(config.getFactoryPoints()),
+		mainTower(config.getMainTower()),
+		towerRechargeIncrement(config.getTowerRechargeIncrement()),
+		factoryRechargeIncrement(config.getFactoryRechargeIncrement())
 {
 	towers.resize(config.getTowersNumber(), false); // FIXME what if mainTower >= towersNumber?
 	timeToLive = gameMaxTime;
@@ -153,11 +154,11 @@ void GameControl::resetGame()
 	emit endGame(history.getWon(), history.getLost(), history.getScore());
 }
 
-void GameControl::initializeRfidConfiguration(GameConfiguration config)
+void GameControl::initializeRfidConfiguration(GameConfiguration& config)
 {
 	for (int i = 0; i < config.getNumActions(); i++)
 	{
-		std::vector<ConfigRfidEntry> groupList = config.getRfidList(i);
+		std::vector<GameConfiguration::RfidEntry> groupList = config.getRfidList(i);
 		for (size_t j = 0; j < groupList.size(); j++)
 		{
 			RfidEntry entry;

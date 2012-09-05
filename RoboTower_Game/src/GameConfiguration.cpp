@@ -20,16 +20,72 @@
 #include <iostream>
 using namespace std;
 
-GameConfiguration::GameConfiguration(std::string filePath)
+GameConfiguration::GameConfiguration(std::string filePath) : QXmlDefaultHandler()
 {
-	ConfigHandler handler;
+	// ConfigHandler handler;
 	QString path = QString::fromStdString(filePath);
 	QFile file(path);
 
+	currentAction = "";
+	configuration.timeToLive = 0;
+	configuration.setupTime = 0;
+	configuration.towerPoints = 0;
+	configuration.factoryPoints = 0;
+	configuration.towerId = 0;
+	configuration.factories = 0;
+	configuration.towerRechargeIncrement = 0;
+	configuration.factoryRechargeIncrement = 0;
+
 	QXmlInputSource inputSource(&file);
 	QXmlSimpleReader reader;
-	reader.setContentHandler(&handler);
+	//reader.setContentHandler(&handler);
+	reader.setContentHandler(this);
 	reader.parse(inputSource);
-	configuration = handler.getMainConfiguration();
-	rfidList = handler.getRfidList();
+	//configuration = handler.getMainConfiguration();
+	//rfidList = handler.getRfidList();
+}
+
+bool GameConfiguration::startElement(const QString& namespaceURI,
+		const QString& localName, const QString& qName,
+		const QXmlAttributes& atts)
+{
+	if (localName == "time")
+	{
+		configuration.timeToLive = atts.value("timetolive").toInt();
+		configuration.setupTime = atts.value("setuptime").toInt();
+	}
+	else if (localName == "points")
+	{
+		configuration.towerPoints = atts.value("tower").toInt();
+		configuration.factoryPoints = atts.value("factory").toInt();
+	}
+	else if (localName == "goals")
+	{
+		configuration.towerId = atts.value("towerid").toInt();
+		configuration.factories = atts.value("factories").toInt();
+	}
+	else if(localName == "action")
+	{
+		QString action = atts.value("name");
+		if(action != currentAction)
+		{
+			std::vector<RfidEntry> actionGroup;
+			rfidList.push_back(actionGroup);
+			currentAction = action;
+		}
+	}
+	else if (localName == "tag")
+	{
+		RfidEntry entry;
+		entry.id = atts.value("id").toStdString();
+		entry.num = atts.value("num").toInt();
+		entry.action = currentAction.toStdString();
+		rfidList.back().push_back(entry);
+	}
+	else if(localName == "recharge")
+	{
+		configuration.factoryRechargeIncrement = atts.value("factory").toInt();
+		configuration.towerRechargeIncrement = atts.value("tower").toInt();
+	}
+	return true;
 }
