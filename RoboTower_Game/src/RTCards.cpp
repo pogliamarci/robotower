@@ -97,7 +97,7 @@ RTCard::RTCard(int number, QString action) :
 	setScaledContents(true);
 	setFrameStyle(borderWidth);
 	setCardStatus(true);
-	setMinimumSize(QSize(40, 60));
+	setMinimumSize(QSize(60,90));
 }
 
 void RTCard::setCardStatus(bool isActive)

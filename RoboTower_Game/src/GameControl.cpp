@@ -21,12 +21,13 @@
 #include "GameControl.h"
 
 GameControl::GameControl(GameConfiguration& config) :
-		gameMaxTime(config.getGameMaxTime()), gameSetupTime(
-				config.getGameSetupTime()), towerPoints(
-				config.getTowerPoints()), factoryPoints(
-				config.getFactoryPoints()), mainTower(config.getMainTower()), towerRechargeIncrement(
-				config.getTowerRechargeIncrement()), factoryRechargeIncrement(
-				config.getFactoryRechargeIncrement())
+		gameMaxTime(config.getGameMaxTime()),
+		gameSetupTime(config.getGameSetupTime()),
+		towerPoints(config.getTowerPoints()),
+		factoryPoints(config.getFactoryPoints()),
+		mainTower(config.getMainTower()),
+		towerRechargeIncrement(config.getTowerRechargeIncrement()),
+		factoryRechargeIncrement(config.getFactoryRechargeIncrement())
 {
 	towers.resize(config.getTowersNumber(), false); // FIXME what if mainTower >= towersNumber?
 	timeToLive = gameMaxTime;
