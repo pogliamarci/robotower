@@ -27,7 +27,7 @@ class SoundManager
 public:
 	enum Sound
 	{
-		Start, Stop, Win, Lose, Trapped, Recharged
+		Start, Win, Lose, Trapped, Recharged
 	};
 
 public:
@@ -35,8 +35,8 @@ public:
 			player(NULL, QMediaPlayer::LowLatency)
 	{
 		sounds[Start] = getSound("start.wav");
-		sounds[Stop] = getSound("win.wav");
-		sounds[Win] = getSound("lose.wav");
+		sounds[Win] = getSound("win.wav");
+		sounds[Lose] = getSound("lose.wav");
 		sounds[Trapped] = getSound("trapped.wav");
 		sounds[Recharged] = getSound("recharged.wav");
 	}

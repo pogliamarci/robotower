@@ -126,11 +126,17 @@ void RTMainWindow::setButtonStatus(bool isRunning)
 void RTMainWindow::updateCardStatus(int cardNumber, bool status)
 {
 	cardsLayout->setCardStatus(cardNumber, status);
+	if(status)
+		soundmanager.play(SoundManager::Recharged);
+	else
+		soundmanager.play(SoundManager::Trapped);
 }
 
 void RTMainWindow::updateTime(int timeToLive)
 {
 	currentGame->updateTimer(timeToLive);
+	if(timeToLive == 0)
+		soundmanager.play(SoundManager::Win);
 }
 
 void RTMainWindow::updatePoints(int score)
@@ -141,6 +147,8 @@ void RTMainWindow::updatePoints(int score)
 void RTMainWindow::updateTowers(int factoryNumber, int towersNumber)
 {
 	currentGame->updateCounter(towersNumber, factoryNumber);
+	if (towersNumber == 0)
+		soundmanager.play(SoundManager::Lose);
 }
 
 void RTMainWindow::updateHistory(int won, int lost, int score)
