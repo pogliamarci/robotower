@@ -93,7 +93,8 @@ RTCard::RTCard(int number, QString action) :
 {
 	const int borderWidth = 2;
 	num = number;
-	image.load("../img/actions/" + action + ".png");
+	image.load(QCoreApplication::applicationDirPath() +
+			"/../img/actions/" + action + ".png");
 	setScaledContents(true);
 	setFrameStyle(borderWidth);
 	setCardStatus(true);

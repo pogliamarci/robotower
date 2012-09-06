@@ -51,7 +51,7 @@ private:
 	std::vector<std::vector<RfidEntry> > rfidList;
 
 public:
-	GameConfiguration(std::string filePath);
+	GameConfiguration(QString path);
 	bool startElement(const QString& namespaceURI,
 			const QString& localName, const QString& qName,
 			const QXmlAttributes& atts);

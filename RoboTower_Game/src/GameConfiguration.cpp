@@ -20,10 +20,9 @@
 #include <iostream>
 using namespace std;
 
-GameConfiguration::GameConfiguration(std::string filePath) : QXmlDefaultHandler()
+GameConfiguration::GameConfiguration(QString path) : QXmlDefaultHandler()
 {
 	// ConfigHandler handler;
-	QString path = QString::fromStdString(filePath);
 	QFile file(path);
 
 	currentAction = "";

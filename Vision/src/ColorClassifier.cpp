@@ -102,7 +102,7 @@ ColorClassifier::~ColorClassifier()
 	this->Delete_Matrix();
 }
 
-void ColorClassifier::save_matrix(char *filename)
+void ColorClassifier::save_matrix(const char *filename)
 {
 	FILE *myfile = fopen(filename, "w");
 

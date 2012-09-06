@@ -36,6 +36,10 @@ public:
 	void updateScore(int newScore);
 	void updateTimer(int newTtl);
 	void setPauseEnabled(bool isPauseEnabled);
+	inline int getFactoriesNumber()
+	{
+		return factoriesCnt->text().toInt();
+	}
 private slots:
 	void onPauseClick();
 signals:
