@@ -27,12 +27,12 @@ Q_DECLARE_METATYPE (std::string)
  
 int main(int argc, char **argv)
 {
+	QApplication app(argc, argv);
 	qRegisterMetaType<std::string>("string");
 	init(argc, argv, "Robotower_Game");
-	GameConfiguration configuration("../robotower.xml");
+	GameConfiguration configuration(QCoreApplication::applicationDirPath() + "/../robotower.xml");
 	RosComunication rosPublisher;
 	GameControl gameControl(configuration);
-	QApplication app(argc, argv);
 	RTMainWindow mainWindow(configuration);
 
 	/* when the main app is quitting ensure all threads quit immediately,

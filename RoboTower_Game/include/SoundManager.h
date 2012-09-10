@@ -27,7 +27,7 @@ class SoundManager
 public:
 	enum Sound
 	{
-		Start, Win, Lose, Trapped, Recharged
+		Start, Win, Lose, Trapped, Factory, Recharged
 	};
 
 public:
@@ -38,11 +38,13 @@ public:
 		sounds[Win] = getSound("win.wav");
 		sounds[Lose] = getSound("lose.wav");
 		sounds[Trapped] = getSound("trapped.wav");
+		sounds[Factory] = getSound("factory.wav");
 		sounds[Recharged] = getSound("recharged.wav");
 	}
 
 	inline void play(Sound event)
 	{
+		if(event == Win || event == Lose) player.stop();
 		player.setMedia(sounds[event]);
 		player.play();
 	}

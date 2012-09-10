@@ -180,7 +180,7 @@ void ColorDataset::save(char* filename)
   File.close();
     	 
 }
-void ColorDataset::load(char* filename)
+void ColorDataset::load(const char* filename)
 {
   unsigned int size;//temp;
   unsigned char  Class;

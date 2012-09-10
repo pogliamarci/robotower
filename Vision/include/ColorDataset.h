@@ -63,7 +63,7 @@ class ColorDataset{
   set<ColorSample>::iterator end() /*const*/ { return Samples.end(); };
   void print(ostream&);
   void save(char* filename);
-  void load(char* filename);
+  void load(const char* filename);
 };
 
 #endif

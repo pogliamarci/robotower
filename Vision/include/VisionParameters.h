@@ -9,10 +9,10 @@ class VisionParameters {
 		/* PixelMap pm; */
 		ColorDataset cd;
 		ImageAnalyzer analyzer;
-		char* dataset;
-		char* classifier;
-		static char defaultDataset[];
-		static char defaultClassifier[];
+		std::string dataset;
+		std::string classifier;
+		static std::string defaultDataset;
+		static std::string defaultClassifier;
 	public:
 		VisionParameters() : analyzer(&cc, &cd),
 					dataset(defaultDataset), classifier(defaultClassifier) {}

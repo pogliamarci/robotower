@@ -89,7 +89,7 @@ RTMainWindow::RTMainWindow(GameConfiguration& config, QWidget* parent) :
 	//setupStats();
 	setupToolbar();
 	setupLayout(config);
-	setWindowIcon(QIcon("../img/logo.png"));
+	setWindowIcon(QIcon(QCoreApplication::applicationDirPath() +"/../img/logo.png"));
 	setWindowTitle(QString("RoboTower GUI"));
 	QObject::connect(startBtn, SIGNAL(clicked()), this, SLOT(startOnClick()));
 	QObject::connect(stopBtn, SIGNAL(clicked()), this, SLOT(stopOnClick()));
@@ -157,6 +157,7 @@ void RTMainWindow::updatePoints(int score)
 
 void RTMainWindow::updateTowers(int factoryNumber, int towersNumber)
 {
+	int oldFactoriesNumber = currentGame->getFactoriesNumber();
 	currentGame->updateCounter(towersNumber, factoryNumber);
 	if (towersNumber == 0)
 	{
@@ -164,6 +165,10 @@ void RTMainWindow::updateTowers(int factoryNumber, int towersNumber)
 		QMessageBox message;
 		message.setText("Il robot ha abbattuto la torre! Tutto " + QString::fromUtf8("è") + " perduto!");
 		message.exec();
+	}
+	else if(factoryNumber < oldFactoriesNumber)
+	{
+		soundmanager.play(SoundManager::Factory);
 	}
 }
 

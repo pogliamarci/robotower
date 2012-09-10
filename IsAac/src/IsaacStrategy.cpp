@@ -139,7 +139,7 @@ void IsaacStrategy::useBrian()
 	cdl->add(new crisp_data("RandomAhead", randomAhead, reliability));
 
 	brian->run();
-	brian->debug(); // print on stdout debug information
+	//brian->debug(); // print on stdout debug information
 
 	/* deallocate what has been allocated!,
 	 * this is quite ugly but _should_ avoid some mem leaks...

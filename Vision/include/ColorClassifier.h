@@ -122,7 +122,7 @@ class ColorClassifier
 		 *witch path is passed as the input parameter.
 		 * @param filename is the name with the path of the file
 		 */
-		void save_matrix(char* filename);
+		void save_matrix(const char* filename);
 
 		/**This function load the color matrix from a txt file.
 		 *This method inizializes the color matrix with the characters writter in file
