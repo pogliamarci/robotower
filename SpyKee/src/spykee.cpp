@@ -26,7 +26,6 @@
 #define SPYKEE_PWD "admin"
 
 SpykeeManager* spykee;
-bool started;
 
 void move(const SpyKee::Motion::ConstPtr& message)
 {
@@ -48,23 +47,25 @@ void publishFrame(ros::Publisher& img_pub)
 
 int main(int argc, char** argv)
 {
-	started = false;
-
-	/* ROS initialization */
 	ros::init(argc, argv, "spykee");
 	ros::NodeHandle ros_node;
 
-	/* try to connect to the robot... */
-	try
+	bool connectionSuccessful = false;
+	while(!connectionSuccessful)
 	{
-		spykee = new SpykeeManager(SPYKEE_USER, SPYKEE_PWD);
-	}
-	catch (SpykeeException& e)
-	{
-		cerr << "Error connecting with the robot" << endl;
-		cerr << "Make sure that Spykee is turned on and " <<
-				"that your wireless network is working" << endl;
-		exit(EXIT_FAILURE);
+		try
+		{
+			spykee = new SpykeeManager(SPYKEE_USER, SPYKEE_PWD);
+			connectionSuccessful = true;
+		}
+		catch (SpykeeException& e)
+		{
+			cerr << "Error connecting with the robot" << endl;
+			cerr << "Make sure that Spykee is turned on and " <<
+					"that your wireless network is working! " <<
+					"(Retrying in 7 seconds...)" << endl;
+			sleep(7);
+		}
 	}
 
 	ros::Subscriber sub = ros_node.subscribe("spykee_motion", 1000, move);
