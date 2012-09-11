@@ -65,21 +65,18 @@ SpykeeManager::SpykeeManager(string username, string password) throw(SpykeeExcep
 	{
 		/* search for a robot and get its address */
 		UDPSocket udp;
-		cout << "invio discov mess" << endl;
 		udp.sendTo(UDPMessage, 5, "172.17.6.255", 9000);
 
 		if (udp.recvFrom(respString, 100, sourceAddress, port) > 0)
 			cout << (respString + 7) << endl;
 
 		/* start TCP connection with the robot */
-		cout << "prima di connettermi" << endl;
 		tcp = new TCPSocket(sourceAddress, 9000);
 
 		/* authentication */
 		authenticate(username, password);
 		if (tcp->recv(respString, 100) > 0)
 			cout << (respString + 7) << endl;
-		cout << "connesso e autenticato" << endl;
 
 	}
 	catch (SocketException& e)
@@ -144,7 +141,6 @@ void SpykeeManager::readPacket()
 		cerr << "Messaggio sconosciuto" << endl;
 		break;
 	}
-	if(type == PACKET_TYPE_VIDEO) hasNewImage = true;
 }
 
 void SpykeeManager::readDataInBuffer()
@@ -159,19 +155,15 @@ void SpykeeManager::readDataInBuffer()
 vector<unsigned char>* SpykeeManager::getImage()
 {
 	bool hasCompletedAcquisition = false;
-	vector<unsigned char>* image_data = NULL;
-
 	unsigned int current_position = 0;
-	unsigned int image_length = 0;
 
-	if(!hasNewImage)
+	if(!hasNewImage) // this func should not be called here...
 		throw new exception(); // TODO refactor!
 
 	hasNewImage = false;
-	/* Processing image metadata. By setting the status to ACQUIRING we will enter
-	 * the next if branch, that will process the image bytes of the packet */
-	image_length = getPayloadSize();
-	image_data = new vector<unsigned char>(image_length);
+
+	unsigned int image_length = getPayloadSize();
+	vector<unsigned char>* image_data = new vector<unsigned char>(image_length);
 	current_position = 0;
 
 	#ifdef DEBUG_SPYKEE
@@ -180,7 +172,6 @@ vector<unsigned char>* SpykeeManager::getImage()
 
 	while (!hasCompletedAcquisition)
 	{
-
 		#ifdef DEBUG_SPYKEE
 		cerr << "Processing a new packet. Size: " << message_size << " byte." << endl;
 		#endif
@@ -244,8 +235,8 @@ void SpykeeManager::sendMsg(uint8_t pkType, int length, const int8_t* payload)
 	header[0] = 'P';
 	header[1] = 'K';
 	header[2] = pkType;
-	header[3] = (length >> 8) | 0xFF;
-	header[4] = length | 0xFF;
+	header[3] = length >> 8;
+	header[4] = length;
 	tcp->send(header, 5);
 	tcp->send(payload, length);
 }
