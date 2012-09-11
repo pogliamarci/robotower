@@ -26,7 +26,7 @@ GameControl::GameControl(GameConfiguration& config) :
 		towerPoints(config.getTowerPoints()),
 		factoryPoints(config.getFactoryPoints()),
 		mainTower(config.getMainTower()),
-		towerRechargeIncrement(config.getTowerRechargeIncrement()),
+		basicRechargeIncrement(config.getBasicRechargeIncrement()),
 		factoryRechargeIncrement(config.getFactoryRechargeIncrement())
 {
 	towers.resize(config.getTowersNumber(), false); // FIXME what if mainTower >= towersNumber?
@@ -181,7 +181,7 @@ void GameControl::rechargeCard()
 {
 	if (disabledRfid.size() > 0)
 	{
-		int increment = towerRechargeIncrement * getTowerNumber()
+		int increment = basicRechargeIncrement
 				+ factoryRechargeIncrement * getFactoryNumber();
 		cardRecharge += increment;
 		if (cardRecharge >= 100)

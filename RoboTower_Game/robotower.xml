@@ -7,8 +7,8 @@
 		<points tower="100" factory="20" />
 		<!-- ID dell'obiettivo definito come torre e numero di fabbriche -->
 		<goals towerid="4" factories="3" />
-		<!-- Definisce la percentale di ricarica al secondo delle carte -->
-		<recharge tower="3" factory="2" />
+		<!-- Definisce la percentuale di ricarica al secondo delle carte -->
+		<recharge basic="3" factory="2" />
 	</config>
 	
 	<!-- Associate RFID tags with actions and num"s (the ones printed on the stickers)

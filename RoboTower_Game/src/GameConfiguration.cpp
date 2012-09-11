@@ -32,7 +32,7 @@ GameConfiguration::GameConfiguration(QString path) : QXmlDefaultHandler()
 	configuration.factoryPoints = 0;
 	configuration.towerId = 0;
 	configuration.factories = 0;
-	configuration.towerRechargeIncrement = 0;
+	configuration.basicRechargeIncrement = 0;
 	configuration.factoryRechargeIncrement = 0;
 
 	QXmlInputSource inputSource(&file);
@@ -84,7 +84,7 @@ bool GameConfiguration::startElement(const QString& namespaceURI,
 	else if(localName == "recharge")
 	{
 		configuration.factoryRechargeIncrement = atts.value("factory").toInt();
-		configuration.towerRechargeIncrement = atts.value("tower").toInt();
+		configuration.basicRechargeIncrement = atts.value("basic").toInt();
 	}
 	return true;
 }

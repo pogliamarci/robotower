@@ -43,7 +43,7 @@ private:
 		int factoryPoints;
 		int towerId;
 		int factories;
-		int towerRechargeIncrement;
+		int basicRechargeIncrement;
 		int factoryRechargeIncrement;
 	};
 	GeneralData configuration;
@@ -81,9 +81,9 @@ public:
 		return configuration.factories + 1;
 	}
 
-	inline int getTowerRechargeIncrement()
+	inline int getBasicRechargeIncrement()
 	{
-		return configuration.towerRechargeIncrement;
+		return configuration.basicRechargeIncrement;
 	}
 
 	inline int getFactoryRechargeIncrement()

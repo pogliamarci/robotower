@@ -51,7 +51,7 @@ private:
 	const int towerPoints;
 	const int factoryPoints;
 	const int mainTower;
-	const int towerRechargeIncrement;
+	const int basicRechargeIncrement;
 	const int factoryRechargeIncrement;
 	static const int maxRedLeds = 4;
 private:
