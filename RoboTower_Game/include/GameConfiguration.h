@@ -18,14 +18,10 @@
 #ifndef GAMECONFIGURATION_H_
 #define GAMECONFIGURATION_H_
 
-#include<QFile>
-#include<QXmlSimpleReader>
-#include<QXmlDefaultHandler>
-#include<QXmlInputSource>
+#include <vector>
+#include <string>
 
-#include<vector>
-
-class GameConfiguration : public QXmlDefaultHandler
+class GameConfiguration
 {
 public:
 	struct RfidEntry
@@ -34,7 +30,6 @@ public:
 		int num;
 		std::string action;
 	};
-private:
 	struct GeneralData
 	{
 		int timeToLive;
@@ -46,15 +41,17 @@ private:
 		int basicRechargeIncrement;
 		int factoryRechargeIncrement;
 	};
+private:
 	GeneralData configuration;
-	QString currentAction;
 	std::vector<std::vector<RfidEntry> > rfidList;
 
 public:
-	GameConfiguration(QString path);
-	bool startElement(const QString& namespaceURI,
-			const QString& localName, const QString& qName,
-			const QXmlAttributes& atts);
+	GameConfiguration(GeneralData configuration,
+			std::vector<std::vector<RfidEntry> > rfidList)
+	{
+		this->configuration = configuration; //FIXME copia?
+		this->rfidList = rfidList;
+	}
 	inline int getGameMaxTime()
 	{
 		return configuration.timeToLive;

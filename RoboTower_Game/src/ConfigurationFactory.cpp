@@ -15,36 +15,30 @@
  * GNU General Public License for more details.
  */
 
-#include "GameConfiguration.h"
+#include "ConfigurationFactory.h"
 
-#include <iostream>
-using namespace std;
+#include <QCoreApplication>
+#include <QXmlInputSource>
+#include <QXmlSimpleReader>
 
-GameConfiguration::GameConfiguration(QString path) : QXmlDefaultHandler()
+
+GameConfiguration ConfigurationFactory::loadConfiguration(QString relativePath)
 {
-	// ConfigHandler handler;
-	QFile file(path);
-
-	currentAction = "";
-	configuration.timeToLive = 0;
-	configuration.setupTime = 0;
-	configuration.towerPoints = 0;
-	configuration.factoryPoints = 0;
-	configuration.towerId = 0;
-	configuration.factories = 0;
-	configuration.basicRechargeIncrement = 0;
-	configuration.factoryRechargeIncrement = 0;
-
-	QXmlInputSource inputSource(&file);
-	QXmlSimpleReader reader;
-	//reader.setContentHandler(&handler);
-	reader.setContentHandler(this);
-	reader.parse(inputSource);
-	//configuration = handler.getMainConfiguration();
-	//rfidList = handler.getRfidList();
+	return loadConfiguration(QCoreApplication::applicationDirPath() ,relativePath);
 }
 
-bool GameConfiguration::startElement(const QString& namespaceURI,
+GameConfiguration ConfigurationFactory::loadConfiguration(QString folder, QString relativePath)
+{
+	QFile file(folder + relativePath);
+	QXmlInputSource inputSource(&file);
+	QXmlSimpleReader reader;
+	ConfigurationFactory* handler = new ConfigurationFactory();
+	reader.setContentHandler(handler);
+	reader.parse(inputSource);
+	return GameConfiguration(handler->configuration, handler->rfidList);
+}
+
+bool ConfigurationFactory::startElement(const QString& namespaceURI,
 		const QString& localName, const QString& qName,
 		const QXmlAttributes& atts)
 {
@@ -63,28 +57,42 @@ bool GameConfiguration::startElement(const QString& namespaceURI,
 		configuration.towerId = atts.value("towerid").toInt();
 		configuration.factories = atts.value("factories").toInt();
 	}
-	else if(localName == "action")
+	else if (localName == "action")
 	{
 		QString action = atts.value("name");
-		if(action != currentAction)
+		if (action != currentAction)
 		{
-			std::vector<RfidEntry> actionGroup;
+			std::vector<GameConfiguration::RfidEntry> actionGroup;
 			rfidList.push_back(actionGroup);
 			currentAction = action;
 		}
 	}
 	else if (localName == "tag")
 	{
-		RfidEntry entry;
+		GameConfiguration::RfidEntry entry;
 		entry.id = atts.value("id").toStdString();
 		entry.num = atts.value("num").toInt();
 		entry.action = currentAction.toStdString();
 		rfidList.back().push_back(entry);
 	}
-	else if(localName == "recharge")
+	else if (localName == "recharge")
 	{
 		configuration.factoryRechargeIncrement = atts.value("factory").toInt();
 		configuration.basicRechargeIncrement = atts.value("basic").toInt();
 	}
 	return true;
 }
+
+ConfigurationFactory::ConfigurationFactory()
+{
+	currentAction = "";
+	configuration.timeToLive = 0;
+	configuration.setupTime = 0;
+	configuration.towerPoints = 0;
+	configuration.factoryPoints = 0;
+	configuration.towerId = 0;
+	configuration.factories = 0;
+	configuration.basicRechargeIncrement = 0;
+	configuration.factoryRechargeIncrement = 0;
+}
+
