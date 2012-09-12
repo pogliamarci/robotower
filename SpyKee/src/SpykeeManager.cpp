@@ -56,7 +56,7 @@ SpykeeManager::SpykeeManager(string username, string password) throw(SpykeeExcep
 		bufferContentLength(0), hasNewImage(false)
 {
 
-	const char UDPMessage[] = { 68, 83, 67, 86, 01 };
+	const char discoveryMsg[] = { 'D', 'S', 'C', 'V', 1 };
 	char respString[100];
 	string sourceAddress;
 	unsigned short port;
@@ -65,10 +65,10 @@ SpykeeManager::SpykeeManager(string username, string password) throw(SpykeeExcep
 	{
 		/* search for a robot and get its address */
 		UDPSocket udp;
-		udp.sendTo(UDPMessage, 5, "172.17.6.255", 9000);
+		udp.sendTo(discoveryMsg, 5, "172.17.6.255", 9000);
 
 		if (udp.recvFrom(respString, 100, sourceAddress, port) > 0)
-			cout << (respString + 7) << endl;
+			cout << (respString + 6) << endl;
 
 		/* start TCP connection with the robot */
 		tcp = new TCPSocket(sourceAddress, 9000);
@@ -93,13 +93,13 @@ void SpykeeManager::authenticate(string username, string password)
 {
 	const char payloadLength = username.length() + password.length() + 2;
 	int8_t messageAuthentication[payloadLength];
-	messageAuthentication[0] = 5;
+	messageAuthentication[0] = username.length();
 	for (unsigned int i = 0; i < username.length(); i++)
 	{
 		messageAuthentication[1 + i] = username.at(i);
 	}
 
-	messageAuthentication[1 + username.length()] = 5;
+	messageAuthentication[1 + username.length()] = password.length();
 	for (unsigned int i = 0; i < password.length(); i++)
 	{
 		messageAuthentication[2 + username.length() + i] = password.at(i);
@@ -137,6 +137,18 @@ void SpykeeManager::readPacket()
 		cerr << "E' arrivato dell'audio, ma non so come processarlo..." << endl;
 		break;
 	case PACKET_TYPE_ENGINE:
+		if(getPayloadSize()==1 && buffer[0] == 3) // MESSAGE_TYPE_BATTERY_CHARGED
+			cerr << "--> BATTERIA CARICATA!!!" << endl;
+		else if(getPayloadSize()==1 && buffer[0] == 1) // MESSAGE_TYPE_ACTIVATE
+					cerr << "MESSAGE_TYPE_ACTIVATE" << endl;
+		else if(getPayloadSize()==1 && buffer[0] == 2) // MESSAGE_TYPE_DEACTIVATE
+			cerr << "MESSAGE_TYPE_DEACTIVATE" << endl;
+		else if(getPayloadSize()==1 && buffer[0] == 15) // MESSAGE_TYPE_BATTERY_OFF
+			cerr << "MESSAGE_TYPE_BATTERY_OFF" << endl;
+		else if(getPayloadSize()==1 && buffer[0] == 8) // MESSAGE_TYPE_BASE_NOT_FOUND
+			cerr << "MESSAGE_TYPE_BASE_NOT_FOUND" << endl;
+		else cerr << "Engine msg sconosciuto di tipo: " << (int) buffer[0] << endl;
+		break;
 	default:
 		cerr << "Messaggio sconosciuto di tipo " << (int) type << endl;
 		break;

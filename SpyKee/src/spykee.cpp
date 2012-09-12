@@ -60,7 +60,7 @@ int main(int argc, char** argv)
 			cerr << "Error connecting with the robot" << endl;
 			cerr << "Make sure that Spykee is turned on and " <<
 					"that your wireless network is working! " <<
-					"(Retrying in 7 seconds...)" << endl;
+					"(Retrying in 5 seconds...)" << endl;
 			sleep(5);
 		}
 	}
