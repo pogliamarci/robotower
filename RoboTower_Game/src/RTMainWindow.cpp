@@ -65,7 +65,7 @@ void RTMainWindow::setupLayout(GameConfiguration& config)
 {
 	QWidget* mainWidget = new QWidget();
 	QHBoxLayout* mainLayout = new QHBoxLayout();
-	QGridLayout* leftLayout = new QGridLayout();
+	QVBoxLayout* leftLayout = new QVBoxLayout();
 	setCentralWidget(mainWidget);
 
 	/* Children widgets */
@@ -74,7 +74,7 @@ void RTMainWindow::setupLayout(GameConfiguration& config)
 
 	mainWidget->setLayout(mainLayout);
 	mainLayout->addStretch(1);
-	mainLayout->addLayout(leftLayout, 10);
+	mainLayout->addLayout(leftLayout, 12);
 	mainLayout->addLayout(cardsLayout, 20);
 
 	batteryStatus = new QProgressBar();
@@ -103,11 +103,18 @@ void RTMainWindow::setupLayout(GameConfiguration& config)
 	batteryStatus->setStyleSheet(batStyleSheet);
 
 	/* add all to the main layout */
-	leftLayout->addWidget(currentGame, 1, 1, 2, 4);
-	leftLayout->addLayout(setupButtons(), 3, 1, 1, 2);
-	leftLayout->addWidget(setupStats(), 3, 3, 1, 2);
-	leftLayout->addWidget(new QLabel("Battery: "), 4, 1, 1, 1);
-	leftLayout->addWidget(batteryStatus, 4, 2, 1, 3);
+	QHBoxLayout* bottom = new QHBoxLayout();
+	bottom->addLayout(setupButtons());
+	bottom->addWidget(setupStats());
+	QHBoxLayout* battery = new QHBoxLayout();
+	battery->addWidget(new QLabel("Battery: "));
+	battery->addWidget(batteryStatus);
+
+	leftLayout->addWidget(currentGame, 14);
+	leftLayout->addStretch(1);
+	leftLayout->addLayout(bottom, 6);
+	leftLayout->addStretch(1);
+	leftLayout->addLayout(battery, 2);
 }
 
 RTMainWindow::RTMainWindow(GameConfiguration& config, QWidget* parent) :

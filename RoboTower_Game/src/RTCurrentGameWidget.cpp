@@ -29,7 +29,6 @@ RTCurrentGameWidget::RTCurrentGameWidget(QWidget* parent) :
 	pauseBtn->setEnabled(false);
 	currentScore = new QLCDNumber();
 	currentTTL = new QLCDNumber();
-	QGroupBox* goalsBox = new QGroupBox();
 	towersCnt = new QLabel("0");
 	factoriesCnt = new QLabel("0");
 	QGridLayout* innerGoalsLayout = new QGridLayout();
@@ -39,9 +38,8 @@ RTCurrentGameWidget::RTCurrentGameWidget(QWidget* parent) :
 	/* inner goals layout */
 	innerGoalsLayout->addWidget(new QLabel("Towers: "), 1, 1, 1, 1);
 	innerGoalsLayout->addWidget(towersCnt, 1, 2, 1, 1);
-	innerGoalsLayout->addWidget(new QLabel("Factories: "), 2, 1, 1, 1);
-	innerGoalsLayout->addWidget(factoriesCnt, 2, 2, 1, 1);
-	goalsBox->setLayout(innerGoalsLayout);
+	innerGoalsLayout->addWidget(new QLabel("Factories: "), 1, 3, 1, 1);
+	innerGoalsLayout->addWidget(factoriesCnt, 1, 4, 1, 1);
 
 	/* main layout */
 	theLayout->addWidget(pauseBtn);
@@ -59,7 +57,7 @@ RTCurrentGameWidget::RTCurrentGameWidget(QWidget* parent) :
 	theLayout->addLayout(hBox2);
 
 	/* add goals*/
-	theLayout->addWidget(goalsBox);
+	theLayout->addLayout(innerGoalsLayout);
 
 	setLayout(theLayout);
 
