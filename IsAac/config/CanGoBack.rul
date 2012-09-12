@@ -1,2 +1,2 @@
-(Obstacle_South) => (CanGoBack FALSE)
-((NOT Obstacle_South)) => (CanGoBack TRUE)
+(NOT (Obstacle_South)) => (CanGoBack TRUE);
+

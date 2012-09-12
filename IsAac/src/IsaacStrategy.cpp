@@ -58,13 +58,15 @@ void IsaacStrategy::getAction(SensorStatus& sensorStatus)
 {
 	if (timer != 0)
 		return;
-	
-	if(sensorStatus.hasValidAction())
+
+	if (sensorStatus.hasValidAction())
 	{
 		lastAction = sensorStatus.consumeLastAction();
 		action_rand_direction = rand() % 2;
 		timer = 5 * LOOPRATE;
-	} else lastAction = "";
+	}
+	else
+		lastAction = "";
 }
 
 void IsaacStrategy::resetVision()
@@ -77,7 +79,7 @@ void IsaacStrategy::resetVision()
 
 void IsaacStrategy::modifySensors()
 {
-	if(lastAction == "disable_vision")
+	if (lastAction == "disable_vision")
 	{
 		resetVision();
 	}
@@ -85,24 +87,33 @@ void IsaacStrategy::modifySensors()
 
 void IsaacStrategy::modifyActuators()
 {
-	if(lastAction == "lock_all")
+	if (lastAction == "lock_all")
 	{
 		tanSpeed = 0;
 		rotSpeed = 0;
-	} 
-	else if(lastAction == "force_rotate") 
+	}
+	else if (lastAction == "force_rotate")
 	{
 		int right_track = tanSpeed - rotSpeed;
 		int left_track = tanSpeed + rotSpeed;
-		if(action_rand_direction == 1)
+		if (action_rand_direction == 1)
 			left_track = 0;
-		else right_track = 0;
+		else
+			right_track = 0;
 		tanSpeed = (right_track + left_track) / 2;
 		rotSpeed = (left_track - right_track) / 2;
 	}
-	else if(lastAction == "go_back" && canGoBack)
+	else if (lastAction == "go_back")
 	{
-		if(tanSpeed > 0) tanSpeed = -tanSpeed;
+		cerr << "go_back attiva, canGoBack, vale : " << canGoBack << endl;
+		if (canGoBack)
+		{
+			if (tanSpeed > 0)
+				tanSpeed = -tanSpeed;
+		}
+		else
+			tanSpeed = 0;
+
 		rotSpeed = 0;
 	}
 }
@@ -126,9 +137,9 @@ void IsaacStrategy::useBrian()
 			new crisp_data("InvisibleObstacle", sonarBuffer.getTempoBloccato(),
 					reliability));
 	//sensor (difference betweeen north sonar distance and vision distance)
-	int difference = sonar[NORTH] -	(tower_found)? (towerDistance) : (factoryDistance);
-	cdl->add(
-			new crisp_data("SensorMatches", difference , reliability));
+	int difference =
+			sonar[NORTH] - (tower_found) ? (towerDistance) : (factoryDistance);
+	cdl->add(new crisp_data("SensorMatches", difference, reliability));
 	//vision
 	cdl->add(new crisp_data("TowerDetected", tower_found, reliability));
 	cdl->add(new crisp_data("TowerPosition", tower_position, reliability));
@@ -145,7 +156,8 @@ void IsaacStrategy::useBrian()
 	 * this is quite ugly but _should_ avoid some mem leaks...
 	 * The list itself will be cleared out at the _next_ iteration ;)*/
 	crisp_data_list::iterator itr;
-	for(itr = cdl->begin(); itr != cdl->end(); itr++){
+	for (itr = cdl->begin(); itr != cdl->end(); itr++)
+	{
 		delete (*itr).second;
 	}
 }
@@ -176,7 +188,8 @@ void IsaacStrategy::updateRandomValues()
 	{
 		detectedTime = 0;
 	}
-	else detectedTime++;
+	else
+		detectedTime++;
 
 	if (detectedTime == LOOPRATE)
 	{
@@ -195,6 +208,7 @@ void IsaacStrategy::parseBrianResults()
 {
 	tanSpeed = 0;
 	rotSpeed = 0;
+	canGoBack = 0;
 
 	/* parse outputs from brian and send them to actuators */
 	command_list* cl = brian->getFuzzy()->get_command_singleton_list();
@@ -217,9 +231,10 @@ void IsaacStrategy::parseBrianResults()
 		{
 			rotSpeed = it->second->get_set_point();
 		}
-		else if(temp.compare("CanGoBack") == 0)
+		else if (temp.compare("CanGoBack") == 0)
 		{
 			canGoBack = it->second->get_set_point();
+			cerr << "canGoBack trovato, vale : " << canGoBack << endl;
 		}
 	}
 
