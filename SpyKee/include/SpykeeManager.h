@@ -22,7 +22,7 @@ class SpykeeManager
 		TCPSocket* tcp;
 		char getMessageType();
 		int getPayloadSize();
-		void readDataInBuffer();
+		void readDataFromSpykee();
 		void sendMsg(uint8_t pkType, int length, const int8_t* payload);
 		void authenticate(string username, string password);
 		unsigned char buffer[SPYKEE_MAX_IMAGE];

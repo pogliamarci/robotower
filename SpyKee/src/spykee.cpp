@@ -77,12 +77,15 @@ int main(int argc, char** argv)
 	spykee->unplug();
 	spykee->setCameraStatus(true);
 
+	ros::AsyncSpinner spinner(1);
+	spinner.start();
 	while (ros::ok())
 	{
 		spykee->readPacket();
-		if(spykee->hasImage()) publishFrame(img_pub);
-		ros::spinOnce();
+		if(spykee->hasImage())
+			publishFrame(img_pub);
 	}
+	ros::waitForShutdown();
 	delete spykee;
 	return EXIT_SUCCESS;
 }

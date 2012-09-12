@@ -21,7 +21,7 @@
 #include <errno.h>
 #include <iostream>
 
-#define BAUDRATE 		B19200
+#define BAUDRATE 		B115200
 #define TOUT			300 //msec
 #define MAX_C_RECV 		40
 #define CHAR_PAUSE 		3000 //usec

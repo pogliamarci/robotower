@@ -18,7 +18,7 @@
 #include "FirmwareSpykee.h"
 #include "chprintf.h"
 
-#define SERIAL_OUT_BITRATE 19200
+#define SERIAL_OUT_BITRATE 115200
 
 CircularBuffer outputBuffer;
 

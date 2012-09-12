@@ -119,7 +119,7 @@ void SpykeeManager::setCameraStatus(bool setEnabled)
 
 void SpykeeManager::readPacket()
 {
-	readDataInBuffer();
+	readDataFromSpykee();
 	char type = PACKET_TYPE_NONE;
 	if(bufferContentLength >= 5) type = getMessageType();
 	switch(type)
@@ -128,7 +128,7 @@ void SpykeeManager::readPacket()
 		hasNewImage = true;
 		break;
 	case PACKET_TYPE_POWER:
-		cerr << "Aggiornamento sulla batteria: " << buffer[5] << " %" << endl;
+		cerr << "Aggiornamento sulla batteria: " << (int)((signed char) buffer[5]) << " %" << endl;
 		break;
 	case PACKET_TYPE_STOP:
 		cerr << "Event Music Closed arrivato" << endl;
@@ -138,12 +138,12 @@ void SpykeeManager::readPacket()
 		break;
 	case PACKET_TYPE_ENGINE:
 	default:
-		cerr << "Messaggio sconosciuto" << endl;
+		cerr << "Messaggio sconosciuto di tipo " << (int) type << endl;
 		break;
 	}
 }
 
-void SpykeeManager::readDataInBuffer()
+void SpykeeManager::readDataFromSpykee()
 {
 	bufferContentLength = tcp->recv(buffer, SPYKEE_MAX_IMAGE);
 	if(bufferContentLength > SPYKEE_MAX_IMAGE)
@@ -184,11 +184,8 @@ vector<unsigned char>* SpykeeManager::getImage()
 			current_position++;
 		}
 		if (current_position >= image_length)
-		{
 			break;
-		} else {
-			readDataInBuffer();
-		}
+		else readDataFromSpykee();
 
 		#ifdef DEBUG_SPYKEE
 		cerr <<"Finished processing the packet. Current buffer position = " << current_position << endl;
@@ -212,7 +209,8 @@ char SpykeeManager::getMessageType()
 
 void SpykeeManager::move(char leftSpeed, char rightSpeed)
 {
-	const int8_t payload[] = { leftSpeed, rightSpeed };
+	cerr << "ricevo MOVE!" << endl;
+	int8_t payload[] = { leftSpeed, rightSpeed };
 	sendMsg(PACKET_TYPE_MOVE, 2, payload);
 }
 
