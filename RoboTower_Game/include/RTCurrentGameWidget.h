@@ -20,15 +20,56 @@
 
 #include <QtGui>
 
-class RTCurrentGameWidget : public QGroupBox
+class RTCurrentGameWidget: public QGroupBox
 {
-	Q_OBJECT
+Q_OBJECT
+
+private:
+	class RTCounter: public QHBoxLayout
+	{
+	public:
+		RTCounter(QString color)
+		{
+			count = 0;
+			image.load(
+					QCoreApplication::applicationDirPath() + "/../img/counter/"
+							+ color + ".png");
+		}
+
+		inline void updateCounter(int count)
+		{
+			this->count = count;
+
+			QLayoutItem* item;
+			while ((item = takeAt(0)) != NULL)
+			{
+				delete item->widget();
+				delete item;
+			}
+
+			for (int i = 0; i < count; i++)
+			{
+				QLabel* label = new QLabel();
+				label->setPixmap(QPixmap::fromImage(image));
+				addWidget(label);
+			}
+		}
+
+		inline int getCount()
+		{
+			return count;
+		}
+
+	private:
+		int count;
+		QImage image;
+	};
 private:
 	QPushButton* pauseBtn;
 	QLCDNumber* currentScore;
 	QLCDNumber* currentTTL;
-	QLabel* towersCnt;
-	QLabel* factoriesCnt;
+	RTCounter* towersCnt;
+	RTCounter* factoriesCnt;
 	bool isPaused;
 public:
 	RTCurrentGameWidget(QWidget* parent = 0);
@@ -38,13 +79,11 @@ public:
 	void setPauseEnabled(bool isPauseEnabled);
 	inline int getFactoriesNumber()
 	{
-		return factoriesCnt->text().toInt();
+		return factoriesCnt->getCount();
 	}
 private slots:
-	void onPauseClick();
-signals:
+	void onPauseClick();signals:
 	void togglePause();
 };
-
 
 #endif /* CURRENTGAMEWIDGET_H_ */

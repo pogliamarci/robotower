@@ -29,17 +29,21 @@ RTCurrentGameWidget::RTCurrentGameWidget(QWidget* parent) :
 	pauseBtn->setEnabled(false);
 	currentScore = new QLCDNumber();
 	currentTTL = new QLCDNumber();
-	towersCnt = new QLabel("0");
-	factoriesCnt = new QLabel("0");
+	towersCnt = new RTCounter("red");
+	factoriesCnt = new RTCounter("yellow");
 	QGridLayout* innerGoalsLayout = new QGridLayout();
 
 	setTitle("Current Game");
 
 	/* inner goals layout */
 	innerGoalsLayout->addWidget(new QLabel("Towers: "), 1, 1, 1, 1);
-	innerGoalsLayout->addWidget(towersCnt, 1, 2, 1, 1);
-	innerGoalsLayout->addWidget(new QLabel("Factories: "), 1, 3, 1, 1);
-	innerGoalsLayout->addWidget(factoriesCnt, 1, 4, 1, 1);
+	innerGoalsLayout->addLayout(towersCnt, 1, 2, 1, 1);
+	innerGoalsLayout->addWidget(new QLabel("Factories: "), 2, 1, 1, 1);
+	innerGoalsLayout->addLayout(factoriesCnt, 2, 2, 1, 1);
+
+	innerGoalsLayout->setRowMinimumHeight(1, 70);
+	innerGoalsLayout->setRowMinimumHeight(2, 70);
+
 
 	/* main layout */
 	theLayout->addWidget(pauseBtn);
@@ -91,8 +95,8 @@ void RTCurrentGameWidget::onPauseClick()
 
 void RTCurrentGameWidget::updateCounter(int towers, int factories)
 {
-	towersCnt->setText(QString::number(towers));
-	factoriesCnt->setText(QString::number(factories));
+	towersCnt->updateCounter(towers);
+	factoriesCnt->updateCounter(factories);
 }
 
 void RTCurrentGameWidget::updateScore(int newScore)
