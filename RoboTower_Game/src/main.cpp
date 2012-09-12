@@ -70,6 +70,10 @@ int main(int argc, char **argv)
 	QObject::connect(&gameControl, SIGNAL(mustSetLeds(int)), &rosPublisher,
 			SLOT(setRedLeds(int)));
 
+	/* signals between ROS and the GUI */
+	QObject::connect(&rosPublisher, SIGNAL(batteryUpdate(int)), &mainWindow,
+			SLOT(updateBatteryStatus(int)));
+
 	/* signals from the GUI (button pressed and such) */
 	QObject::connect(&mainWindow, SIGNAL(start()), &gameControl,
 			SLOT(startGame()));

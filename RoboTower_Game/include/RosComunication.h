@@ -21,6 +21,7 @@
 #include "ros/ros.h"
 #include "Echoes/Rfid.h"
 #include "Echoes/Towers.h"
+#include "std_msgs/Int8.h"
 
 #include <QThread>
 #include <QObject>
@@ -39,6 +40,7 @@ private:
 	Publisher rfidActionPublisher;
 	Subscriber rfidCardSubscriber;
 	Subscriber towerSubscriber;
+	Subscriber batterySubscriber;
 	ServiceClient redLedClient;
 	ServiceClient redResetClient;
 	bool hasToQuit;
@@ -48,6 +50,7 @@ public:
 private:
 	void fromRfidCallback(const Echoes::Rfid& message);
 	void fromTowersCallback(const Echoes::Towers& message);
+	void fromBatteryCallback(const std_msgs::Int8& message);
 public slots:
 	void resetRobot();
 	void sendAction(std::string id);
@@ -58,6 +61,7 @@ signals:
 	void rosQuits(); // triggered if ros::ok() is not true anymore
 	void rfidRecieved(std::string id); //triggered when arrives a RFID tag
 	void towersUpdate(int towerNumber);
+	void batteryUpdate(int data);
 };
 
 #endif

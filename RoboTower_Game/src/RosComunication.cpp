@@ -32,6 +32,8 @@ RosComunication::RosComunication()
 			&RosComunication::fromRfidCallback, this);
 	towerSubscriber = n.subscribe("towers_data", 1,
 			&RosComunication::fromTowersCallback, this);
+	batterySubscriber = n.subscribe("spykee_battery", 1,
+			&RosComunication::fromBatteryCallback, this);
 	redLedClient = n.serviceClient<Echoes::FixedLed>("red_led");
 	redResetClient = n.serviceClient<Echoes::ResetLed>("reset_led");
 }
@@ -85,6 +87,11 @@ void RosComunication::fromRfidCallback(const Echoes::Rfid& message)
 void RosComunication::fromTowersCallback(const Echoes::Towers& message)
 {
 	emit towersUpdate(message.towerId);
+}
+
+void RosComunication::fromBatteryCallback(const std_msgs::Int8& message)
+{
+	emit batteryUpdate(message.data);
 }
 
 void RosComunication::setRedLeds(int num)

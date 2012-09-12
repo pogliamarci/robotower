@@ -73,20 +73,47 @@ void RTMainWindow::setupLayout(GameConfiguration& config)
 	cardsLayout = new RTCards(config);
 
 	mainWidget->setLayout(mainLayout);
-	mainLayout->addLayout(leftLayout);
-	mainLayout->addLayout(cardsLayout);
+	mainLayout->addStretch(1);
+	mainLayout->addLayout(leftLayout, 10);
+	mainLayout->addLayout(cardsLayout, 20);
+
+	batteryStatus = new QProgressBar();
+	batteryStatus->setObjectName(QString::fromUtf8("BatStat"));
+	batteryStatus->setMinimum(0);
+	batteryStatus->setMaximum(100);
+	batteryStatus->setValue(0);
+
+	const char * batStyleSheet =
+			"QProgressBar {"
+			"	border: 1px solid black;"
+			"	border-radius: 4px;"
+			"	color: black;"
+			"	text-align: center;"
+			"	font-weight: bold;"
+			"}"
+			"QProgressBar::chunk#BatStat {"
+			"	background: qlineargradient(x1: 0, y1: 0.5, x2: 1.5, y2: 0.5, stop: 0 red, stop: 1 white);"
+			"}"
+			"QProgressBar::chunk#BatStat[batterystatus=\"charging\"] {"
+			"	background: qlineargradient(x1: 0, y1: 0.5, x2: 1.5, y2: 0.5, stop: 0 green, stop: 1 white);"
+			"}"
+			"QProgressBar::chunk#BatStat[batterystatus=\"discharging\"] {"
+			"	background: qlineargradient(x1: 0, y1: 0.5, x2: 1.5, y2: 0.5, stop: 0 red, stop: 1 white);"
+			"}";
+	batteryStatus->setStyleSheet(batStyleSheet);
 
 	/* add all to the main layout */
 	leftLayout->addWidget(currentGame, 1, 1, 2, 4);
 	leftLayout->addLayout(setupButtons(), 3, 1, 1, 2);
 	leftLayout->addWidget(setupStats(), 3, 3, 1, 2);
+	leftLayout->addWidget(new QLabel("Battery: "), 4, 1, 1, 1);
+	leftLayout->addWidget(batteryStatus, 4, 2, 1, 3);
 }
 
 RTMainWindow::RTMainWindow(GameConfiguration& config, QWidget* parent) :
 		QMainWindow(parent), popupTimer(NULL), popupNeedsRebuilding(true)
 {
 	setupButtons();
-	//setupStats();
 	setupToolbar();
 	setupLayout(config);
 	setWindowIcon(QIcon(QCoreApplication::applicationDirPath() +"/../img/logo.png"));
@@ -101,6 +128,7 @@ RTMainWindow::RTMainWindow(GameConfiguration& config, QWidget* parent) :
 	font.setBold(true);
 	font.setPointSize(font.pointSize() + 2);
 	this->setFont(font);
+
 }
 
 void RTMainWindow::startOnClick()
@@ -163,7 +191,7 @@ void RTMainWindow::updateTowers(int factoryNumber, int towersNumber)
 	{
 		soundmanager.play(SoundManager::Lose);
 		QMessageBox message;
-		message.setText("Il robot ha abbattuto la torre! Tutto " + QString::fromUtf8("è") + " perduto!");
+		message.setText(QString::fromUtf8("Il robot ha abbattuto la torre! Tutto è perduto!"));
 		message.exec();
 	}
 	else if(factoryNumber < oldFactoriesNumber)
@@ -178,6 +206,20 @@ void RTMainWindow::updateHistory(int won, int lost, int score)
 	statWon->setText(QString::number(won));
 	statLost->setText(QString::number(lost));
 	statTotalScore->setText(QString::number(score));
+}
+
+void RTMainWindow::updateBatteryStatus(int newStatus)
+{
+	QPalette palette = this->palette();
+	if(newStatus < 0) {
+		newStatus *= -1;
+		batteryStatus->setProperty("batterystatus", "charging");
+	} else {
+		batteryStatus->setProperty("batterystatus", "discharging");
+	}
+	batteryStatus->setStyleSheet(batteryStatus->styleSheet());
+	batteryStatus->setValue(newStatus);
+
 }
 
 void RTMainWindow::updateSetupPopup(int remainingTime)

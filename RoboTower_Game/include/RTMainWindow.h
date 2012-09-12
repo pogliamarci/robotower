@@ -36,6 +36,7 @@ private:
 	QAction* newGameAction;
 	QPushButton* startBtn;
 	QPushButton* stopBtn;
+	QProgressBar* batteryStatus;
 	/* Stats */
 	QLabel* statWon;
 	QLabel* statTotalScore;
@@ -55,6 +56,7 @@ public slots:
 	void updateCardStatus(int card, bool status);
 	void updateHistory(int won, int lost, int score);
 	void updateSetupPopup(int remainingTime);
+	void updateBatteryStatus(int newStatus);
 private:
 	QLayout* setupButtons();
 	QWidget* setupStats();

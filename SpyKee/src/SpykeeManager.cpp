@@ -53,7 +53,7 @@
 using namespace std;
 
 SpykeeManager::SpykeeManager(string username, string password) throw(SpykeeException) :
-		bufferContentLength(0), hasNewImage(false)
+		bufferContentLength(0), hasNewImage(false), lastBatteryLevel(0), batteryIsUnread(false)
 {
 
 	const char discoveryMsg[] = { 'D', 'S', 'C', 'V', 1 };
@@ -128,29 +128,13 @@ void SpykeeManager::readPacket()
 		hasNewImage = true;
 		break;
 	case PACKET_TYPE_POWER:
-		cerr << "Aggiornamento sulla batteria: " << (int)((signed char) buffer[5]) << " %" << endl;
-		break;
-	case PACKET_TYPE_STOP:
-		cerr << "Event Music Closed arrivato" << endl;
-		break;
-	case PACKET_TYPE_AUDIO:
-		cerr << "E' arrivato dell'audio, ma non so come processarlo..." << endl;
-		break;
-	case PACKET_TYPE_ENGINE:
-		if(getCurrentPayloadSize()==1 && buffer[0] == 3) // MESSAGE_TYPE_BATTERY_CHARGED
-			cerr << "--> BATTERIA CARICATA!!!" << endl;
-		else if(getCurrentPayloadSize()==1 && buffer[0] == 1) // MESSAGE_TYPE_ACTIVATE
-					cerr << "MESSAGE_TYPE_ACTIVATE" << endl;
-		else if(getCurrentPayloadSize()==1 && buffer[0] == 2) // MESSAGE_TYPE_DEACTIVATE
-			cerr << "MESSAGE_TYPE_DEACTIVATE" << endl;
-		else if(getCurrentPayloadSize()==1 && buffer[0] == 15) // MESSAGE_TYPE_BATTERY_OFF
-			cerr << "MESSAGE_TYPE_BATTERY_OFF" << endl;
-		else if(getCurrentPayloadSize()==1 && buffer[0] == 8) // MESSAGE_TYPE_BASE_NOT_FOUND
-			cerr << "MESSAGE_TYPE_BASE_NOT_FOUND" << endl;
-		else cerr << "Engine msg sconosciuto di tipo: " << (int) buffer[0] << endl;
+		batteryIsUnread = true;
+		lastBatteryLevel = buffer[5];
 		break;
 	default:
-		cerr << "Messaggio sconosciuto di tipo " << (int) type << endl;
+#ifdef DEBUG_SPYKEE
+		cerr << "Messaggio non gestito di tipo " << (int) type << endl;
+#endif
 		break;
 	}
 }
@@ -164,7 +148,7 @@ void SpykeeManager::readDataFromSpykee()
 
 /* returns a pointer to a dynamically allocated vector containing the image data */
 /* waits the image to be sent from the robot... if no img is sent, the method doesn't return */
-vector<unsigned char>* SpykeeManager::getImage()
+vector<unsigned char>* SpykeeManager::readImage()
 {
 	bool hasCompletedAcquisition = false;
 	unsigned int current_position = 0;

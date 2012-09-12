@@ -21,6 +21,7 @@
 #include "SpykeeManager.h"
 #include "SpyKee/Motion.h"
 #include "sensor_msgs/CompressedImage.h"
+#include "std_msgs/Int8.h"
 
 #define SPYKEE_USER "admin"
 #define SPYKEE_PWD "admin"
@@ -34,15 +35,20 @@ void move(const SpyKee::Motion::ConstPtr& message)
 	spykee->move(left_track, right_track);
 }
 
-void publishFrame(ros::Publisher& img_pub)
+void publishFrame(ros::Publisher& img_pub, vector<unsigned char>* image)
 {
-	vector<unsigned char>* image = spykee->getImage();
-
 	sensor_msgs::CompressedImage image_msg;
 	image_msg.data = *image;
 	image_msg.format = "jpeg";
 	img_pub.publish(image_msg);
 	delete image;
+}
+
+void publishBattery(ros::Publisher& bat_pub, int level)
+{
+	std_msgs::Int8 message;
+	message.data = level;
+	bat_pub.publish(message);
 }
 
 int main(int argc, char** argv)
@@ -73,6 +79,7 @@ int main(int argc, char** argv)
 	ros::NodeHandle ros_node;
 	ros::Subscriber sub = ros_node.subscribe("spykee_motion", 1000, move);
 	ros::Publisher img_pub = ros_node.advertise<sensor_msgs::CompressedImage>("spykee_camera", 3);
+	ros::Publisher bat_pub = ros_node.advertise<std_msgs::Int8>("spykee_battery", 3);
 
 	spykee->unplug();
 	spykee->setLed(0, false); /* try to turn off the flash */
@@ -84,7 +91,13 @@ int main(int argc, char** argv)
 	{
 		spykee->readPacket();
 		if(spykee->hasImage())
-			publishFrame(img_pub);
+		{
+			publishFrame(img_pub, spykee->readImage());
+		}
+		if(spykee->hasBattery())
+		{
+			publishBattery(bat_pub, spykee->getBatteryLevel());
+		}
 	}
 	ros::waitForShutdown();
 	delete spykee;

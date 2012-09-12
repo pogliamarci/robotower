@@ -28,11 +28,23 @@ class SpykeeManager
 		unsigned char buffer[SPYKEE_MAX_IMAGE];
 		int bufferContentLength;
 		bool hasNewImage;
+		int lastBatteryLevel;
+		bool batteryIsUnread;
 	public:
 		SpykeeManager(std::string username, std::string password) throw(SpykeeException);
 		void setCameraStatus(bool setEnabled);
 		void setLed(char ledid, bool status);
-		std::vector<unsigned char>* getImage();
+		inline bool hasBattery()
+		{
+			return batteryIsUnread;
+		}
+		inline int getBatteryLevel()
+		{
+			batteryIsUnread = false;
+			return lastBatteryLevel;
+
+		}
+		std::vector<unsigned char>* readImage();
 		void move(char leftSpeed, char rightSpeed);
 		void unplug();
 		inline bool hasImage()
