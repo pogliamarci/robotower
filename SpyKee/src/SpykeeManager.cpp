@@ -221,7 +221,6 @@ char SpykeeManager::getMessageType()
 
 void SpykeeManager::move(char leftSpeed, char rightSpeed)
 {
-	cerr << "ricevo MOVE!" << endl;
 	int8_t payload[] = { leftSpeed, rightSpeed };
 	sendMsg(PACKET_TYPE_MOVE, 2, payload);
 }

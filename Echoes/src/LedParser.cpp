@@ -56,7 +56,7 @@ bool LedParser::yellowLedCallback(Echoes::BlinkingLed::Request& request,
 bool LedParser::resetLedCallback(Echoes::ResetLed::Request& request,
 		Echoes::ResetLed::Response& response)
 {
-	char buf[] = "reset";
+	char buf[] = "reset\r\n";
 	sender->sendStringCommand(buf, strlen(buf));
 	response.requestSuccessful = true;
 	return true;
