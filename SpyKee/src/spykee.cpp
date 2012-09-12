@@ -75,6 +75,7 @@ int main(int argc, char** argv)
 	ros::Publisher img_pub = ros_node.advertise<sensor_msgs::CompressedImage>("spykee_camera", 3);
 
 	spykee->unplug();
+	spykee->setLed(0, false); /* try to turn off the flash */
 	spykee->setCameraStatus(true);
 
 	ros::AsyncSpinner spinner(1);
