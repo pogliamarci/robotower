@@ -20,8 +20,8 @@ class SpykeeManager
 {
 	private:
 		TCPSocket* tcp;
-		char getMessageType();
-		int getPayloadSize();
+		char getCurrentMessageType();
+		int getCurrentPayloadSize();
 		void readDataFromSpykee();
 		void sendMsg(uint8_t pkType, int length, const int8_t* payload);
 		void authenticate(string username, string password);

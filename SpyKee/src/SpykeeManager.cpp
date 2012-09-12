@@ -121,7 +121,7 @@ void SpykeeManager::readPacket()
 {
 	readDataFromSpykee();
 	char type = PACKET_TYPE_NONE;
-	if(bufferContentLength >= 5) type = getMessageType();
+	if(bufferContentLength >= 5) type = getCurrentMessageType();
 	switch(type)
 	{
 	case PACKET_TYPE_VIDEO:
@@ -137,15 +137,15 @@ void SpykeeManager::readPacket()
 		cerr << "E' arrivato dell'audio, ma non so come processarlo..." << endl;
 		break;
 	case PACKET_TYPE_ENGINE:
-		if(getPayloadSize()==1 && buffer[0] == 3) // MESSAGE_TYPE_BATTERY_CHARGED
+		if(getCurrentPayloadSize()==1 && buffer[0] == 3) // MESSAGE_TYPE_BATTERY_CHARGED
 			cerr << "--> BATTERIA CARICATA!!!" << endl;
-		else if(getPayloadSize()==1 && buffer[0] == 1) // MESSAGE_TYPE_ACTIVATE
+		else if(getCurrentPayloadSize()==1 && buffer[0] == 1) // MESSAGE_TYPE_ACTIVATE
 					cerr << "MESSAGE_TYPE_ACTIVATE" << endl;
-		else if(getPayloadSize()==1 && buffer[0] == 2) // MESSAGE_TYPE_DEACTIVATE
+		else if(getCurrentPayloadSize()==1 && buffer[0] == 2) // MESSAGE_TYPE_DEACTIVATE
 			cerr << "MESSAGE_TYPE_DEACTIVATE" << endl;
-		else if(getPayloadSize()==1 && buffer[0] == 15) // MESSAGE_TYPE_BATTERY_OFF
+		else if(getCurrentPayloadSize()==1 && buffer[0] == 15) // MESSAGE_TYPE_BATTERY_OFF
 			cerr << "MESSAGE_TYPE_BATTERY_OFF" << endl;
-		else if(getPayloadSize()==1 && buffer[0] == 8) // MESSAGE_TYPE_BASE_NOT_FOUND
+		else if(getCurrentPayloadSize()==1 && buffer[0] == 8) // MESSAGE_TYPE_BASE_NOT_FOUND
 			cerr << "MESSAGE_TYPE_BASE_NOT_FOUND" << endl;
 		else cerr << "Engine msg sconosciuto di tipo: " << (int) buffer[0] << endl;
 		break;
@@ -174,7 +174,7 @@ vector<unsigned char>* SpykeeManager::getImage()
 
 	hasNewImage = false;
 
-	unsigned int image_length = getPayloadSize();
+	unsigned int image_length = getCurrentPayloadSize();
 	vector<unsigned char>* image_data = new vector<unsigned char>(image_length);
 	current_position = 0;
 
@@ -207,12 +207,12 @@ vector<unsigned char>* SpykeeManager::getImage()
 	return image_data;
 }
 
-int SpykeeManager::getPayloadSize()
+int SpykeeManager::getCurrentPayloadSize()
 {
 	return (buffer[3] << 8) + buffer[4];
 }
 
-char SpykeeManager::getMessageType()
+char SpykeeManager::getCurrentMessageType()
 {
 	if( (buffer[0] == 'P') && (buffer[1] == 'K') )
 		return buffer[2];
