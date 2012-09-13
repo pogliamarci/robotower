@@ -111,8 +111,7 @@ void RTMainWindow::setupLayout(GameConfiguration& config)
 	battery->addWidget(batteryStatus);
 
 	leftLayout->addWidget(currentGame, 14);
-	leftLayout->addStretch(1);
-	leftLayout->addLayout(bottom, 6);
+	leftLayout->addLayout(bottom, 4);
 	leftLayout->addStretch(1);
 	leftLayout->addLayout(battery, 2);
 }

@@ -20,6 +20,33 @@
 #define PAUSE_STRING "&Pause"
 #define RESUME_STRING "&Resume"
 
+RTCurrentGameWidget::RTCounter::RTCounter(QString color)
+{
+	count = 0;
+	image.load(
+			QCoreApplication::applicationDirPath() + "/../img/counter/"
+					+ color + ".png");
+}
+
+void RTCurrentGameWidget::RTCounter::updateCounter(int count)
+{
+	this->count = count;
+
+	QLayoutItem* item;
+	while ((item = takeAt(0)) != NULL)
+	{
+		delete item->widget();
+		delete item;
+	}
+
+	for (int i = 0; i < count; i++)
+	{
+		QLabel* label = new QLabel();
+		label->setPixmap(QPixmap::fromImage(image));
+		addWidget(label);
+	}
+}
+
 RTCurrentGameWidget::RTCurrentGameWidget(QWidget* parent) :
 		QGroupBox(parent)
 {
@@ -31,34 +58,34 @@ RTCurrentGameWidget::RTCurrentGameWidget(QWidget* parent) :
 	currentTTL = new QLCDNumber();
 	towersCnt = new RTCounter("red");
 	factoriesCnt = new RTCounter("yellow");
-	QGridLayout* innerGoalsLayout = new QGridLayout();
+
+
+	QHBoxLayout* innerGoalsLayout = new QHBoxLayout();
 
 	setTitle("Current Game");
 
 	/* inner goals layout */
-	innerGoalsLayout->addWidget(new QLabel("Towers: "), 1, 1, 1, 1);
-	innerGoalsLayout->addLayout(towersCnt, 1, 2, 1, 1);
-	innerGoalsLayout->addWidget(new QLabel("Factories: "), 2, 1, 1, 1);
-	innerGoalsLayout->addLayout(factoriesCnt, 2, 2, 1, 1);
-
-	innerGoalsLayout->setRowMinimumHeight(1, 70);
-	innerGoalsLayout->setRowMinimumHeight(2, 70);
+	// innerGoalsLayout->addWidget(new QLabel("Towers: "), 1, 1, 1, 1);
+	innerGoalsLayout->addLayout(towersCnt, 1);
+	// innerGoalsLayout->addWidget(new QLabel("Factories: "), 2, 1, 1, 1);
+	innerGoalsLayout->addLayout(factoriesCnt, 3);
+	// innerGoalsLayout->setMinimumHeight(1, 70);
 
 
 	/* main layout */
 	theLayout->addWidget(pauseBtn);
 
 	/* add score */
-	QHBoxLayout* hBox1 = new QHBoxLayout();
-	hBox1->addWidget(new QLabel("Score:"));
-	hBox1->addWidget(currentScore);
-	theLayout->addLayout(hBox1);
+	QHBoxLayout* scoreLyt = new QHBoxLayout();
+	scoreLyt->addWidget(new QLabel("Score:"));
+	scoreLyt->addWidget(currentScore);
+	theLayout->addLayout(scoreLyt);
 
 	/* add time to live */
-	QHBoxLayout* hBox2 = new QHBoxLayout();
-	hBox2->addWidget(new QLabel("Time to live:"));
-	hBox2->addWidget(currentTTL);
-	theLayout->addLayout(hBox2);
+	QHBoxLayout* ttlLyt = new QHBoxLayout();
+	ttlLyt->addWidget(new QLabel("Time to live:"));
+	ttlLyt->addWidget(currentTTL);
+	theLayout->addLayout(ttlLyt);
 
 	/* add goals*/
 	theLayout->addLayout(innerGoalsLayout);

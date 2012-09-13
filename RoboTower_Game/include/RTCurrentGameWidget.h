@@ -28,33 +28,8 @@ private:
 	class RTCounter: public QHBoxLayout
 	{
 	public:
-		RTCounter(QString color)
-		{
-			count = 0;
-			image.load(
-					QCoreApplication::applicationDirPath() + "/../img/counter/"
-							+ color + ".png");
-		}
-
-		inline void updateCounter(int count)
-		{
-			this->count = count;
-
-			QLayoutItem* item;
-			while ((item = takeAt(0)) != NULL)
-			{
-				delete item->widget();
-				delete item;
-			}
-
-			for (int i = 0; i < count; i++)
-			{
-				QLabel* label = new QLabel();
-				label->setPixmap(QPixmap::fromImage(image));
-				addWidget(label);
-			}
-		}
-
+		RTCounter(QString color);
+		void updateCounter(int count);
 		inline int getCount()
 		{
 			return count;
