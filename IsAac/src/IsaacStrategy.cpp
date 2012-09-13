@@ -17,7 +17,7 @@
 
 #include "IsaacStrategy.h"
 
-IsaacStrategy::IsaacStrategy()
+IsaacStrategy::IsaacStrategy() : memory(LOOPRATE)
 {
 	brian = new MrBrian(FUZZYASSOC, FUZZYSHAPES, PRIES, PRIESACTIONS, CANDOES,
 			BEHAVIORS, WANTERS, DEFUZZYASSOC, DEFUZZYSHAPES);
@@ -28,7 +28,6 @@ IsaacStrategy::IsaacStrategy()
 		sonar[i] = 0;
 
 	detectedTime = 0;
-	randomTime = 0;
 
 	randomAhead = 0;
 	randomSearch = 0;
@@ -175,6 +174,8 @@ void IsaacStrategy::updateSensors(SensorStatus& sensorStatus)
 	towerDistance = sensorStatus.getTowerDistance();
 	factoryDistance = sensorStatus.getFactoryDistance();
 
+	if(tower_found) memory.setPosition(tower_position);
+	else if(factory_found) memory.setPosition(factory_position);
 	updateRandomValues();
 
 	if (timer > 0)
@@ -197,11 +198,8 @@ void IsaacStrategy::updateRandomValues()
 		detectedTime = 0;
 	}
 
-	if ((randomTime++) == 4 * LOOPRATE)
-	{
-		randomSearch = rand() % 100;
-		randomTime = 0;
-	}
+	randomSearch = memory.getSearchVariable(rotSpeed);
+	memory.debug();
 }
 
 void IsaacStrategy::parseBrianResults()

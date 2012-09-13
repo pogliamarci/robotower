@@ -20,61 +20,62 @@
 
 BlockedTimeCalculator::BlockedTimeCalculator()
 {
+	tempo = 0;
 	int i;
-	for(i=0; i<MAXCAMPIONI; i++)
+	for (i = 0; i < MAXCAMPIONI; i++)
 	{
-		this->data[i]=0;
+		data[i] = 0;
 	}
-	this->index=0;
+	index = 0;
 }
 
 void BlockedTimeCalculator::setTempoBloccato()
 {
-	if( this->calcolaVarianza() > THRESHOLD )
+	if (this->calcolaVarianza() > THRESHOLD)
 	{
-		this->tempo=0;
+		tempo = 0;
 	}
 	else
 	{
-		this->tempo++;
+		tempo++;
 	}
 }
 
 int BlockedTimeCalculator::getTempoBloccato()
 {
-	return this->tempo;
+	return tempo;
 }
 
 void BlockedTimeCalculator::insert(int element)
 {
-	this->data[this->index]=element;
-	this->index++;
-	if(this->index == MAXCAMPIONI) this->index=0;
+	data[index] = element;
+	index++;
+	if (index == MAXCAMPIONI)
+		index = 0;
 	setTempoBloccato();
 }
 
 float BlockedTimeCalculator::calcolaVarianza()
 {
-	float media=0, mediaquadra=0;
-	for(int i=0; i<MAXCAMPIONI; i++)
+	float media = 0, mediaquadra = 0;
+	for (int i = 0; i < MAXCAMPIONI; i++)
 	{
-		media+=this->data[i];
-		mediaquadra+=this->data[i]*this->data[i];
+		media += data[i];
+		mediaquadra += data[i] * data[i];
 	}
-	media/=MAXCAMPIONI;
-	mediaquadra/=MAXCAMPIONI;
-	return (mediaquadra-media*media);
+	media /= MAXCAMPIONI;
+	mediaquadra /= MAXCAMPIONI;
+	return (mediaquadra - media * media);
 }
 
 float BlockedTimeCalculator::calcolaMedia()
 {
-	float media=0;
-	for(int i=0; i<MAXCAMPIONI; i++)
+	float media = 0;
+	for (int i = 0; i < MAXCAMPIONI; i++)
 	{
-		media+=this->data[i];
+		media += data[i];
 	}
-	media/=MAXCAMPIONI;
+	media /= MAXCAMPIONI;
 	return media;
 }
-
 

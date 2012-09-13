@@ -21,6 +21,7 @@
 #include "brian.h"
 #include "SensorStatus.h"
 #include "BlockedTimeCalculator.h"
+#include "IsaacMemory.h"
 
 #define FUZZYASSOC (char *) "../config/ctof.txt"
 #define FUZZYSHAPES (char *) "../config/shape_ctof.txt"
@@ -47,8 +48,8 @@ private:
 	int factory_position;
 
 	BlockedTimeCalculator sonarBuffer;
+	IsaacMemory memory;
 	int detectedTime;
-	int randomTime;
 
 	int towerDistance;
 	int factoryDistance;
