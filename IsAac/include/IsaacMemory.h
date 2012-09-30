@@ -53,7 +53,7 @@ public:
 		else //altrimenti, vado piano dal lato giusto...
 		{
 			std::cerr << "[SCATTATA]" << std::endl;
-			towerPosition += (timeElapsed == 0) ? 0 : rotSpeed; //se ho appena visto la torre, non aggiorno la sua posizione.
+			towerPosition -= (timeElapsed == 0) ? 0 : rotSpeed; //se ho appena visto la torre, non aggiorno la sua posizione.
 			return (towerPosition < center) ? 45 : 55; //ritorno destra o sinistra a seconda di dove sia la torre.
 		}
 	}
