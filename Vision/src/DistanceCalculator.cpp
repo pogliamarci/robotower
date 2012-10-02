@@ -30,11 +30,11 @@ void DistanceCalculator::insertDatiTorre(int altezza, int larghezza)
 {
 	larghezzaTorre = larghezza;
 	altezzaTorre = altezza;
-	distanzaFabbrica = expCalculator(towerHeightW,altezzaFabbrica);
+	distanzaTorre = expCalculator(towerHeightW,altezzaFabbrica);
 }
 
 
 int DistanceCalculator::expCalculator(ExpWeights weight, int dim)
 {
-	return (int) weight.a*exp(weight.b*dim)+weight.c*exp(weight.d*dim);
+	return (int) ((weight.a*exp(weight.b*dim)+weight.c*exp(weight.d*dim))*1000);
 }

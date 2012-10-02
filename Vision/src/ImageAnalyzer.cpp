@@ -59,8 +59,8 @@ Vision::Results ImageAnalyzer::composeMessage()
 
 	msg.towerBlobHeight = (int) towerheight_filter.curValue();
 	msg.towerBlobWidth = (int) towerwidth_filter.curValue();
-	msg.factoryBlobHeight = (int) factorywidth_filter.curValue();
-	msg.factoryBlobWidth = (int) factoryheight_filter.curValue();
+	msg.factoryBlobHeight = (int) factoryheight_filter.curValue();
+	msg.factoryBlobWidth = (int) factorywidth_filter.curValue();
 
 	msg.towerDistance = distanceCalculator.getDistanzaTorre();
 	msg.factoryDistance = distanceCalculator.getDistanzaFabbrica();

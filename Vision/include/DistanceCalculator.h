@@ -26,15 +26,44 @@ typedef struct s_expWeight
 	float d;
 } ExpWeights;
 
-const ExpWeights factoryHeightW = {7.527, -0.03944, 2.278, -0.007077};
-const ExpWeights factoryWidthW = {5.111, -0.1401, 1.939 , -0.02379 };
+/* 		=============================
+ * 		Curve fitting table used
+ * 		=============================
+ *
+ * 		*=====================================================================================*
+ * 		|  distance (m)  | 	factory h 	  |   factory w	   | 	tower h	     |	tower w		  |
+ * 		*================*================*================*=================*================*
+ * 		|		3		 |		57		  |		 14		   |		  73	 |		13		  |
+ * 		|	   2.5		 |		63		  |		 15		   |		  89	 |		17		  |
+ * 		|		2		 |		81		  |		 16		   |		 113	 |		20		  |
+ * 		|	   1.5		 |	   107		  |		 22		   |		 140	 |		26		  |
+ * 		|	   1.3		 |	   123		  |		 25		   |		 159	 |		30		  |
+ * 		|		1		 |	   154		  |		 30		   |		 203	 |		36		  |
+ * 		|	   0.8		 |	   170		  |		 38		   |		 240	 |		44		  |
+ * 		*================*================*================*=================*================*
+ *
+ */
 
-const ExpWeights towerHeightW = {6.628, -0.03021, 2.694, -0.006427};
-const ExpWeights towerWidthW = {7.008, -0.07823, 0.895, -0.01019};
+/*
+ * Curve fitting results
+ * Using matlab fitting tool, considering exp fitting
+ */
+const ExpWeights factoryHeightW =
+{ 1.086e+05, -0.2161, 4.427, -0.009928 };
 
-class DistanceCalculator {
+const ExpWeights factoryWidthW =
+{ 1.971e+04, -0.7035, 3.418,  -0.03903 };
+
+const ExpWeights towerHeightW =
+{ 6.639, -0.01443 ,  0.7212, -0.0007514 };
+
+const ExpWeights towerWidthW =
+{ 5.5, -0.04783, 0, 0 };
+
+class DistanceCalculator
+{
 private:
-	int distanzaTorrre;
+	int distanzaTorre;
 	int distanzaFabbrica;
 	int larghezzaFabbrica;
 	int altezzaFabbrica;
@@ -44,7 +73,7 @@ private:
 public:
 	inline int getDistanzaTorre()
 	{
-		return distanzaTorrre;
+		return distanzaTorre;
 	}
 	inline int getDistanzaFabbrica()
 	{
