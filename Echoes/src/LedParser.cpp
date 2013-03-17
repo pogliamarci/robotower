@@ -78,7 +78,7 @@ void LedParser::toggleGreen(bool isOn, bool blinking)
 
 void LedParser::toggleRed(int num)
 {
-	char buf[10];
+	char buf[15];
 	char binaryNum[5];
 	toBinaryString(binaryNum, num);
 	sprintf(buf, "led R %s\r\n", binaryNum);
@@ -87,7 +87,7 @@ void LedParser::toggleRed(int num)
 
 void LedParser::toggleYellow(bool isOn, bool blinking)
 {
-	char buf[10];
+	char buf[15];
 	if (blinking && isOn)
 	{
 		sprintf(buf, "led Y B\r\n");
