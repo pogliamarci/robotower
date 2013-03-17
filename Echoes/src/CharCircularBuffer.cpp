@@ -128,7 +128,7 @@ int CharCircularBuffer::removeLine(char *dest, unsigned int maxn)
 	unsigned int c = 0;
 	if (lineCount == 0)
 		return 0;
-	while ((!isEmpty()) && (!isEndLine(buf[start])) && (c < maxn))
+	while ((!isEmpty()) && (!isEndLine(buf[start])) && (c < maxn - 1))
 	{
 		dest[c] = buf[start];
 		start = inc(start);
