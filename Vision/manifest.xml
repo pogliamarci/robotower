@@ -1,4 +1,5 @@
 <package>
+  <rosdep name="opencv2"/>
   <description brief="Vision">
 
      Vision
@@ -11,7 +12,6 @@
   <depend package="SpyKee"/>
   <depend package="roscpp"/>
   <depend package="roslib"/>
-  <depend package="opencv2"/>
   <depend package="ann"	/>
 </package>
 

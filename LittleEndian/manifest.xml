@@ -10,10 +10,9 @@
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/LittleEndian</url>
   <depend package="roscpp"/>
-  <depend package="opencv2"/>
   <depend package="SpyKee"/>
   <depend package="SpyKee"/>
-
+  <rosdep name="opencv2"/>
 </package>
 
 

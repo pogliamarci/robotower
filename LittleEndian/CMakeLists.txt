@@ -11,6 +11,8 @@ include($ENV{ROS_ROOT}/core/rosbuild/rosbuild.cmake)
 
 rosbuild_init()
 
+find_package(OpenCV REQUIRED)
+
 #set the default path for built executables to the "bin" directory
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 #set the default path for built libraries to the "lib" directory
@@ -28,3 +30,5 @@ rosbuild_genmsg()
 #rosbuild_link_boost(${PROJECT_NAME} thread)
 rosbuild_add_executable(littleendian src/littleendian.cpp src/Zone.cpp src/LittleObject.cpp )
 #target_link_libraries(example ${PROJECT_NAME})
+
+target_link_libraries(littleendian ${OpenCV_LIBS})
