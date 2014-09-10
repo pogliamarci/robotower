@@ -20,9 +20,9 @@
 
 #define CARDINAL_POINTS 4
 
-#include "Echoes/Sonar.h"
-#include "Echoes/Rfid.h"
-#include "Vision/Results.h"
+#include "echoes/Sonar.h"
+#include "echoes/Rfid.h"
+#include "vision/Results.h"
 #include "std_msgs/String.h"
 
 typedef enum
@@ -44,8 +44,8 @@ class SensorStatus
 		bool actionIsValid;
 	public:
 		SensorStatus();
-		void fromSonarCallback(const Echoes::Sonar& message);
-		void fromVisionCallback(const Vision::Results& message);
+		void fromSonarCallback(const echoes::Sonar& message);
+		void fromVisionCallback(const vision::Results& message);
 		void rfidActionCallback(const std_msgs::String& message);
 		std::string consumeLastAction();
 		/* some getters (declared here as inline) */

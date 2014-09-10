@@ -57,7 +57,7 @@ void SonarProcesser::process(string str)
 
 void SonarProcesser::publishLast()
 {
-	Echoes::Sonar msg;
+	echoes::Sonar msg;
 	msg.north = (int) north.curValue();
 	msg.south = (int) south.curValue();
 	msg.east = (int) east.curValue();

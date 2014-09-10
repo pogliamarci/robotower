@@ -1,7 +1,7 @@
 #ifndef IMAGEANALYZER_H_
 #define IMAGEANALYZER_H_
 
-#include "Vision/Results.h"
+#include "vision/Results.h"
 
 #include "ColorClassifier.h"
 #include "ColorDataset.h"
@@ -33,10 +33,10 @@ class ImageAnalyzer
 		DistanceCalculator distanceCalculator;
 	public:
 		ImageAnalyzer(KnnColorClassifier* cc, ColorDataset* cd);
-		Vision::Results analyze(cv::Mat& img);
+		vision::Results analyze(cv::Mat& img);
 	private:
 		void findObjects(cv::Mat& img);
-		Vision::Results composeMessage();
+		vision::Results composeMessage();
 		bool checkShape(int width, int height);
 };
 

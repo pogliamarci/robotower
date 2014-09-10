@@ -1,0 +1,26 @@
+<package>
+	<name>echoes</name>
+	<version>1.0.0</version>
+	<description>
+		Echoes, package che si assume il compito di gestire i moduli hardware connessi tramite la connessione seriale Zigbee.
+		In partcolare viene gestita la ricezione dei dati dai sonar e le richieste di accensione dei led.
+	</description>
+	<maintainer email="davide.tateo@mail.polimi.it">Davide Tateo</maintainer>
+	<license>GPLv2</license>
+
+	<author>Davide Tateo</author>
+	<author>Marcello Pogliani</author>
+	<url>http://ros.org/wiki/echoes</url>
+
+	<build_depend>roscpp</build_depend>
+	<build_depend>rospy</build_depend>
+	
+	<build_depend>message_generation</build_depend>
+	
+	<run_depend>message_runtime</run_depend>
+	
+	<buildtool_depend>catkin</buildtool_depend>
+</package>
+
+
+

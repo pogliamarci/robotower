@@ -18,7 +18,7 @@ class VisionParameters {
 					dataset(defaultDataset), classifier(defaultClassifier) {}
 		void buildClassifier();
 		void loadClassifier();
-		inline Vision::Results startAnalysis(cv::Mat& frame) {
+		inline vision::Results startAnalysis(cv::Mat& frame) {
 			return analyzer.analyze(frame);
 		}
 		inline void setDataset(char* dataset) {

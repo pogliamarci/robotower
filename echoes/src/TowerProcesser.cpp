@@ -18,7 +18,7 @@
 #include "TowerProcesser.h"
 #include <iostream>
 #include <cstdlib>
-#include "Echoes/Towers.h"
+#include "echoes/Towers.h"
 
 TowerProcesser::TowerProcesser(ros::Publisher pub)
 {
@@ -32,7 +32,7 @@ void TowerProcesser::process(string str)
 	int index = str.find(destroyed) + destroyed.length();
 	int tower = atoi(str.substr(index).c_str());
 	/* publish the message to ROS */
-	Echoes::Towers msg;
+	echoes::Towers msg;
 	msg.towerId = tower;
 	publisher.publish(msg);
 }

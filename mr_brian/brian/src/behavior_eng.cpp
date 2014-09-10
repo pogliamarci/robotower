@@ -103,6 +103,7 @@ proposed_action_list * behavior_engine::run_engine (predicate_list * predicates,
 	      j++;
 	    }
 	  for_each(pal->begin(),pal->end(),destroy_object_first<proposed_action>());
+	  delete pal;
 	}
       i++;//...lo fa per ognuno dei comportamenti
       

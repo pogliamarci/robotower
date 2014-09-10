@@ -44,7 +44,7 @@ void RfidProcesser::process(string str)
 	else
 	{
 		/* and finally, send data as a ROS message (if successful) */
-		Echoes::Rfid msg;
+		echoes::Rfid msg;
 		msg.id = data;
 		publisher.publish(msg);
 	}

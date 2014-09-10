@@ -32,7 +32,7 @@ SensorStatus::SensorStatus()
 	actionIsValid = false;
 }
 
-void SensorStatus::fromSonarCallback(const Echoes::Sonar& message)
+void SensorStatus::fromSonarCallback(const echoes::Sonar& message)
 {
 	sonar[NORTH] = message.north;
 	sonar[SOUTH] = message.south;
@@ -40,7 +40,7 @@ void SensorStatus::fromSonarCallback(const Echoes::Sonar& message)
 	sonar[WEST] = message.west;
 }
 
-void SensorStatus::fromVisionCallback(const Vision::Results& message)
+void SensorStatus::fromVisionCallback(const vision::Results& message)
 {
 	tower_found = message.towerFound;
 	tower_position = message.towerPos;

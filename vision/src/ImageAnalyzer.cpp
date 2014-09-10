@@ -17,7 +17,7 @@
 
 #include "ImageAnalyzer.h"
 
-Vision::Results ImageAnalyzer::analyze(cv::Mat& img)
+vision::Results ImageAnalyzer::analyze(cv::Mat& img)
 {
 	findObjects(img);
 
@@ -47,9 +47,9 @@ Vision::Results ImageAnalyzer::analyze(cv::Mat& img)
 	return composeMessage();
 }
 
-Vision::Results ImageAnalyzer::composeMessage()
+vision::Results ImageAnalyzer::composeMessage()
 {
-	Vision::Results msg;
+	vision::Results msg;
 
 	BlobInfo* tower = tower_buffer.lastValidBlob();
 	BlobInfo* factory = factory_buffer.lastValidBlob();

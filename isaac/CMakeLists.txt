@@ -1,9 +1,11 @@
 cmake_minimum_required(VERSION 2.8.3)
+project(isaac)
 
 find_package(catkin REQUIRED COMPONENTS roscpp
-					mr_brian)
-
-project(isaac)
+					mr_brian
+					echoes
+					vision
+					spykee)
 
 catkin_package()
 
@@ -15,5 +17,7 @@ add_executable(${PROJECT_NAME} src/Isaac.cpp
 			       src/SensorStatus.cpp 
 			       src/Sender.cpp 
 			       src/IsaacStrategy.cpp)
+
+target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES})
 
 

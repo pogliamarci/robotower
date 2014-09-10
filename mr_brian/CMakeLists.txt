@@ -4,9 +4,9 @@ find_package(catkin REQUIRED COMPONENTS roscpp message_generation)
 project(mr_brian)
 
 # If catkin is not found, just compile the executable without ROS goodies
-catkin_package()
-include_directories(include 
-                    fuzzy/include
+catkin_package(INCLUDE_DIRS fuzzy/include brian/include
+	       LIBRARIES fuzzy brian)
+include_directories(fuzzy/include
                     brian/include
 	            ${catkin_INCLUDE_DIRS})
 
@@ -113,5 +113,5 @@ add_library(brian STATIC
 			${FLEX_RulesScanner_OUTPUTS}
            )
 
-
+target_link_libraries(brian fuzzy)
 

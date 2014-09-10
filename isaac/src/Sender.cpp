@@ -17,19 +17,19 @@
 
 #include "Sender.h"
 
-#include "Echoes/BlinkingLed.h"
-#include "SpyKee/Motion.h"
+#include "echoes/BlinkingLed.h"
+#include "spykee/Motion.h"
 
 Sender::Sender(ros::NodeHandle& n) : yellowBlinking(false), greenBlinks(false), ledEnabled(false)
 {
-	motion = n.advertise<SpyKee::Motion>("spykee_motion", 1000);
-	yellowled = n.serviceClient<Echoes::BlinkingLed>("yellow_led");
-	greenled = n.serviceClient<Echoes::BlinkingLed>("green_led");
+	motion = n.advertise<spykee::Motion>("spykee_motion", 1000);
+	yellowled = n.serviceClient<echoes::BlinkingLed>("yellow_led");
+	greenled = n.serviceClient<echoes::BlinkingLed>("green_led");
 }
 
 void Sender::sendMotionMessage(int tanSpeed, int rotSpeed)
 {
-	SpyKee::Motion msg;
+	spykee::Motion msg;
 	msg.rotSpeed = rotSpeed;
 	msg.tanSpeed = tanSpeed;
 	this->motion.publish(msg);
@@ -47,7 +47,7 @@ void Sender::disableLed()
 
 void Sender::sendYellow()
 {
-	Echoes::BlinkingLed service;
+	echoes::BlinkingLed service;
 	service.request.on = ledEnabled;
 	service.request.blinks = yellowBlinking;
 	yellowled.call(service);
@@ -55,7 +55,7 @@ void Sender::sendYellow()
 
 void Sender::sendGreen()
 {
-	Echoes::BlinkingLed service;
+	echoes::BlinkingLed service;
 	service.request.on = greenBlinks;
 	service.request.blinks = greenBlinks;
 	greenled.call(service);

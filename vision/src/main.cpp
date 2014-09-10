@@ -19,7 +19,7 @@
 #include <fstream>
 #include "ros/ros.h"
 #include "sensor_msgs/CompressedImage.h"
-#include "Vision/Results.h"
+#include "vision/Results.h"
 
 #include "opencv2/opencv.hpp"
 #include "opencv2/highgui/highgui.hpp"
@@ -32,12 +32,12 @@ using namespace cv;
 
 ros::Publisher results_publisher;
 /* The structure containing the parameters needed for the algorithm to analyze the image */
-VisionParameters vision;
+VisionParameters visionParameters;
 
 void imageAction(Mat& frame)
 {
 	if (frame.empty()) return;
-	results_publisher.publish(vision.startAnalysis(frame));
+	results_publisher.publish(visionParameters.startAnalysis(frame));
 	imshow("SpyKeeView", frame);
 	char c = waitKey(10);
 	if(c == 'c' || c == 27) /* 27 is the ESC character ASCII code */
@@ -62,7 +62,7 @@ int main (int argc, char** argv)
 	ros::init(argc, argv, "vision");
 	ros::NodeHandle ros_node;
 	ros::Subscriber source = ros_node.subscribe("spykee_camera", 1, imageMessageCallback);
-	results_publisher = ros_node.advertise<Vision::Results>("vision_results", 10);
+	results_publisher = ros_node.advertise<vision::Results>("vision_results", 10);
 
 	/* OpenCV init */
 	namedWindow("SpyKeeView", CV_WINDOW_AUTOSIZE);
@@ -82,16 +82,16 @@ int main (int argc, char** argv)
 		}
 		else if((strcmp(argv[i], "-l") == 0))
 		{
-			vision.buildClassifier();
+			visionParameters.buildClassifier();
 		}
 		else if(strcmp(argv[i],"-L" ) == 0 && argc > (i+1))
 		{
-			vision.setDataset(argv[++i]);
-			vision.buildClassifier();
+			visionParameters.setDataset(argv[++i]);
+			visionParameters.buildClassifier();
 		}
 		else if((strcmp(argv[i], "-k") == 0) && (argc > (i+1)))
 		{
-			vision.setClassifier(argv[++i]);
+			visionParameters.setClassifier(argv[++i]);
 		}
 		else if((strcmp(argv[i],"-f") == 0) && (argc > (i+1)))
 		{
@@ -100,7 +100,7 @@ int main (int argc, char** argv)
 		}
 	}
 	/* load classifier */
-	vision.loadClassifier();
+	visionParameters.loadClassifier();
 
 	if(from_file)
 	{

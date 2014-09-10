@@ -23,9 +23,9 @@
 #include "LedParser.h"
 
 #include "ros/ros.h"
-#include "Echoes/Sonar.h"
-#include "Echoes/Rfid.h"
-#include "Echoes/Towers.h"
+#include "echoes/Sonar.h"
+#include "echoes/Rfid.h"
+#include "echoes/Towers.h"
 
 #include <iostream>
 
@@ -59,9 +59,9 @@ int main(int argc, char** argv)
 	LedParser ledParser(&read_sonar);
 
 	/* Initialisation as publisher of sonar_data msgs */
-	ros::Publisher sonar_data_pub = ros_node.advertise<Echoes::Sonar>("sonar_data", 1000);
-	ros::Publisher rfid_data_pub = ros_node.advertise<Echoes::Rfid>("rfid_data", 1000);
-	ros::Publisher towers_data_pub = ros_node.advertise<Echoes::Towers>("towers_data", 1000);
+	ros::Publisher sonar_data_pub = ros_node.advertise<echoes::Sonar>("sonar_data", 1000);
+	ros::Publisher rfid_data_pub = ros_node.advertise<echoes::Rfid>("rfid_data", 1000);
+	ros::Publisher towers_data_pub = ros_node.advertise<echoes::Towers>("towers_data", 1000);
 
 	/* Initialization of Led services */
 	ros::ServiceServer redLed_service = ros_node.advertiseService("red_led", &LedParser::redLedCallback, &ledParser);

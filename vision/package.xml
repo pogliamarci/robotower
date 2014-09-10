@@ -1,0 +1,23 @@
+<package>
+	<name>vision</name>
+	<version>1.0.0</version>
+	<description>
+		  Vision, modulo per la visione (riconoscimento colori)
+	</description>
+	<maintainer email="davide.tateo@mail.polimi.it">Davide Tateo</maintainer>
+	<license>GPLv2</license>
+
+	<author>Davide Tateo</author>
+	<author>Marcello Pogliani</author>
+	<url>http://ros.org/wiki/vision</url>
+
+	<build_depend>roscpp</build_depend>
+	<build_depend>roslib</build_depend>
+	<build_depend>opencv2</build_depend>
+	<build_depend>message_generation</build_depend>
+	
+	<run_depend>message_runtime</run_depend>
+	
+	<buildtool_depend>catkin</buildtool_depend>
+</package>
+
