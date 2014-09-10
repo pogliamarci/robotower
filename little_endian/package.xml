@@ -1,0 +1,22 @@
+<package>
+	<name>little_endian</name>
+	<version>1.0.0</version>
+	<description>
+		LittleEndian: tool per creare, selezionando le aree di interesse di un'immagine,
+		un file .dts contenente le informazioni necessarie per generare il classificatore.
+	</description>
+	<maintainer email="davide.tateo@mail.polimi.it">Davide Tateo</maintainer>
+	<license>GPLv2</license>
+
+	<author>Davide Tateo</author>
+	<author>Marcello Pogliani</author>
+	<url>http://ros.org/wiki/little_endian</url>
+
+	<build_depend>roscpp</build_depend>
+	<build_depend>opencv2</build_depend>
+	<build_depend>spykee</build_depend>
+  
+	<buildtool_depend>catkin</buildtool_depend>
+</package>
+
+

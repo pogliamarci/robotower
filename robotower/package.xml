@@ -1,0 +1,23 @@
+<package>
+	<name>robotower</name>
+	<version>1.1.1</version>
+	<description>
+		Interfaccia grafica e regole base del gioco RoboTower:
+		Calcola il tempo, gli input e quant'altro del gioco.
+	</description>
+	<maintainer email="davide.tateo@mail.polimi.it">Davide Tateo</maintainer>
+	<license>BSD</license>
+
+	<author>Davide Tateo</author>
+	<author>Marcello Pogliani</author>
+	<url>http://ros.org/wiki/robotower</url>
+
+	<build_depend>roscpp</build_depend>
+	<build_depend>echoes</build_depend>
+	
+	<buildtool_depend>catkin</buildtool_depend>
+</package>
+
+
+
+

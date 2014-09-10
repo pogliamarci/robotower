@@ -19,8 +19,8 @@
 #define ROS_PUBLISHER_H
 
 #include "ros/ros.h"
-#include "Echoes/Rfid.h"
-#include "Echoes/Towers.h"
+#include "echoes/Rfid.h"
+#include "echoes/Towers.h"
 #include "std_msgs/Int8.h"
 
 #include <QThread>
@@ -48,8 +48,8 @@ public:
 	RosComunication();
 	void run();
 private:
-	void fromRfidCallback(const Echoes::Rfid& message);
-	void fromTowersCallback(const Echoes::Towers& message);
+	void fromRfidCallback(const echoes::Rfid& message);
+	void fromTowersCallback(const echoes::Towers& message);
 	void fromBatteryCallback(const std_msgs::Int8& message);
 public slots:
 	void resetRobot();

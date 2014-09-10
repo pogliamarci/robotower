@@ -17,8 +17,8 @@
 
 #include "RosComunication.h"
 
-#include "Echoes/FixedLed.h"
-#include "Echoes/ResetLed.h"
+#include "echoes/FixedLed.h"
+#include "echoes/ResetLed.h"
 
 #include "std_msgs/String.h"
 #include "std_msgs/Bool.h"
@@ -34,8 +34,8 @@ RosComunication::RosComunication()
 			&RosComunication::fromTowersCallback, this);
 	batterySubscriber = n.subscribe("spykee_battery", 1,
 			&RosComunication::fromBatteryCallback, this);
-	redLedClient = n.serviceClient<Echoes::FixedLed>("red_led");
-	redResetClient = n.serviceClient<Echoes::ResetLed>("reset_led");
+	redLedClient = n.serviceClient<echoes::FixedLed>("red_led");
+	redResetClient = n.serviceClient<echoes::ResetLed>("reset_led");
 }
 
 void RosComunication::run()
@@ -61,7 +61,7 @@ void RosComunication::quitNow()
 
 void RosComunication::resetRobot()
 {
-	Echoes::ResetLed service;
+	echoes::ResetLed service;
 	redResetClient.call(service);
 }
 
@@ -79,12 +79,12 @@ void RosComunication::enableIsaac(bool isEnabled)
 	enableIsaacPublisher.publish(message);
 }
 
-void RosComunication::fromRfidCallback(const Echoes::Rfid& message)
+void RosComunication::fromRfidCallback(const echoes::Rfid& message)
 {
 	emit rfidRecieved(message.id);
 }
 
-void RosComunication::fromTowersCallback(const Echoes::Towers& message)
+void RosComunication::fromTowersCallback(const echoes::Towers& message)
 {
 	emit towersUpdate(message.towerId);
 }
@@ -96,7 +96,7 @@ void RosComunication::fromBatteryCallback(const std_msgs::Int8& message)
 
 void RosComunication::setRedLeds(int num)
 {
-	Echoes::FixedLed service;
+	echoes::FixedLed service;
 	service.request.numOn = num;
 	redLedClient.call(service);
 }
