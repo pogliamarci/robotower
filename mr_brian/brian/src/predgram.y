@@ -6,7 +6,7 @@
 #endif
 
 extern int predlex();
-int prederror(char *);
+int prederror(const char *);
 
 aggr_tree_multimap *pt=NULL;
 
@@ -57,7 +57,7 @@ name: NAME  {$$=(char *) malloc(strlen($1)+1);
 
 %%
   
-int prederror(char *s)
+int prederror(const char *s)
 {
   printf("\n# Predicate file error: %s\n",s);
   return 0;

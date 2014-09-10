@@ -8,7 +8,7 @@
 #define AAERROR_VERBOSE 1
 
 extern int assoclex();
-int assocerror(char *);
+int assocerror(const char *);
 extern int assocleng;
 
 association_list *al=NULL;
@@ -47,7 +47,7 @@ name: NAME {$$=(char *) malloc(strlen($1)+1);
 
 %%
 
-int assocerror(char *s)
+int assocerror(const char *s)
 {
   printf("%s\n",s);
   return 0;
