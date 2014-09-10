@@ -1,0 +1,21 @@
+<package>
+	<name>isaac</name>
+	<version>1.0.0</version>
+	<description>
+		IsAac "Is Another AI Controller" modulo per interfacciarsi all'intelligenza artificiale che sfrutta la libreria Mr.Brian
+	</description>
+	<maintainer email="davide.tateo@mail.polimi.it">Davide Tateo</maintainer>
+	<license>GPLv3</license>
+
+	<author>Davide Tateo</author>
+	<url>http://ros.org/wiki/isaac</url>
+
+	<build_depend>roscpp</build_depend>
+	<build_depend>mr_brian</build_depend>
+	<build_depend>vision</build_depend>
+	<build_depend>spykee</build_depend>
+  
+	<buildtool_depend>catkin</buildtool_depend>
+</package>
+
+

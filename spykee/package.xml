@@ -1,0 +1,22 @@
+<package>
+	<name>spykee</name>
+	<version>1.0.0</version>
+	<description>
+		  SpyKee, modulo per il controllo del movimento del robot
+	</description>
+	<maintainer email="davide.tateo@mail.polimi.it">Davide Tateo</maintainer>
+	<license>GPLv3</license>
+
+	<author>Davide Tateo</author>
+	<author>Marcello Pogliani</author>
+	<url>http://ros.org/wiki/spykee</url>
+
+	<build_depend>roscpp</build_depend>
+	<build_depend>message_generation</build_depend>
+	<build_depend>sensor_msgs</build_depend>
+	
+	<run_depend>message_runtime</run_depend>
+	<run_depend>sensor_msgs</run_depend>
+  
+	<buildtool_depend>catkin</buildtool_depend>
+</package>
