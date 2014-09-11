@@ -5,7 +5,7 @@
 		Debugger per knowledgebase di brian
 	</description>
 	<maintainer email="davide.tateo@mail.polimi.it">Davide Tateo</maintainer>
-	<license>BSD</license>
+	<license>Gplv3</license>
 
 	<author>Davide Tateo</author>
 	<url>http://ros.org/wiki/checker</url>
