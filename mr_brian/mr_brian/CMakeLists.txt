@@ -137,10 +137,6 @@ add_library(brian STATIC
 target_link_libraries(brian fuzzy)
 
 
-#option(SEPARATE_BUILD ON)
-#add_subdirectory(checker)
-add_subdirectory(gmbte)
-
 if(catkin_FOUND)
 install(TARGETS brian fuzzy
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}

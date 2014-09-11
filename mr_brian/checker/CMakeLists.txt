@@ -1,6 +1,13 @@
 cmake_minimum_required(VERSION 2.8.3)
 
+find_package(catkin)
 project(checker)
+
+if(catkin_FOUND)
+  catkin_package()
+endif()
+
+
 
 include_directories(include)
 
