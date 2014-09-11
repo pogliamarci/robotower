@@ -1,14 +1,15 @@
 cmake_minimum_required(VERSION 2.8.3)
 
-find_package(catkin REQUIRED COMPONENTS roscpp message_generation)
+find_package(catkin)
 project(mr_brian)
 
-# If catkin is not found, just compile the executable without ROS goodies
+if(catkin_FOUND)
 catkin_package(INCLUDE_DIRS fuzzy/include brian/include
 	       LIBRARIES fuzzy brian)
+endif()
+
 include_directories(fuzzy/include
-                    brian/include
-	            ${catkin_INCLUDE_DIRS})
+                    brian/include)
 
 
 #search for Bison and Flex packages
@@ -22,15 +23,35 @@ set(LIB_BRIAN_SOURCE_DIR ${PROJECT_SOURCE_DIR}/brian/src)
 
 #generate parsers and lexers from flex and Bison sources
 #for fuzzy library
-BISON_TARGET(ShapeParser ${LIB_FUZZY_SOURCE_DIR}/shapegram.y ${LIB_FUZZY_SOURCE_DIR}/shapegram.tab.cpp COMPILE_FLAGS --defines="${PROJECT_SOURCE_DIR}/fuzzy/include/shapegram.tab.h" COMPILE_FLAGS "-p shape")
-FLEX_TARGET(ShapeScanner ${LIB_FUZZY_SOURCE_DIR}/shapeflex.l ${LIB_FUZZY_SOURCE_DIR}/shapeflex.cpp COMPILE_FLAGS "-Pshape")
-BISON_TARGET(AssocParser ${LIB_FUZZY_SOURCE_DIR}/assocgram.y ${LIB_FUZZY_SOURCE_DIR}/assocgram.tab.cpp COMPILE_FLAGS --defines="${PROJECT_SOURCE_DIR}/fuzzy/include/assocgram.tab.h" COMPILE_FLAGS "-p assoc")
-FLEX_TARGET(AssocScanner ${LIB_FUZZY_SOURCE_DIR}/assocflex.l ${LIB_FUZZY_SOURCE_DIR}/assocflex.cpp COMPILE_FLAGS "-Passoc")
+BISON_TARGET(ShapeParser ${LIB_FUZZY_SOURCE_DIR}/shapegram.y 
+                         ${LIB_FUZZY_SOURCE_DIR}/shapegram.tab.cpp 
+                         COMPILE_FLAGS --defines="${PROJECT_SOURCE_DIR}/fuzzy/include/shapegram.tab.h" 
+                         COMPILE_FLAGS "-p shape")
+FLEX_TARGET(ShapeScanner ${LIB_FUZZY_SOURCE_DIR}/shapeflex.l 
+                         ${LIB_FUZZY_SOURCE_DIR}/shapeflex.cpp 
+                         COMPILE_FLAGS "-Pshape")
+BISON_TARGET(AssocParser ${LIB_FUZZY_SOURCE_DIR}/assocgram.y 
+                         ${LIB_FUZZY_SOURCE_DIR}/assocgram.tab.cpp 
+                         COMPILE_FLAGS --defines="${PROJECT_SOURCE_DIR}/fuzzy/include/assocgram.tab.h" 
+                         COMPILE_FLAGS "-p assoc")
+FLEX_TARGET(AssocScanner ${LIB_FUZZY_SOURCE_DIR}/assocflex.l 
+                         ${LIB_FUZZY_SOURCE_DIR}/assocflex.cpp 
+                         COMPILE_FLAGS "-Passoc")
 #for brian library
-BISON_TARGET(PredParser ${LIB_BRIAN_SOURCE_DIR}/predgram.y ${LIB_BRIAN_SOURCE_DIR}/predgram.tab.cpp COMPILE_FLAGS --defines="${PROJECT_SOURCE_DIR}/brian/include/predgram.tab.h" COMPILE_FLAGS "-p pred")
-FLEX_TARGET(PredScanner ${LIB_BRIAN_SOURCE_DIR}/predflex.l ${LIB_BRIAN_SOURCE_DIR}/predflex.cpp COMPILE_FLAGS "-Ppred")
-BISON_TARGET(RulesParser ${LIB_BRIAN_SOURCE_DIR}/rulesgram.y ${LIB_BRIAN_SOURCE_DIR}/rulesgram.tab.cpp COMPILE_FLAGS --defines="${PROJECT_SOURCE_DIR}/brian/include/rulesgram.tab.h"  COMPILE_FLAGS "-p rules")
-FLEX_TARGET(RulesScanner ${LIB_BRIAN_SOURCE_DIR}/rulesflex.l  ${LIB_BRIAN_SOURCE_DIR}/rulesflex.cpp COMPILE_FLAGS "-Prules")
+BISON_TARGET(PredParser ${LIB_BRIAN_SOURCE_DIR}/predgram.y 
+                        ${LIB_BRIAN_SOURCE_DIR}/predgram.tab.cpp 
+                        COMPILE_FLAGS --defines="${PROJECT_SOURCE_DIR}/brian/include/predgram.tab.h" 
+                        COMPILE_FLAGS "-p pred")
+FLEX_TARGET(PredScanner ${LIB_BRIAN_SOURCE_DIR}/predflex.l 
+                        ${LIB_BRIAN_SOURCE_DIR}/predflex.cpp 
+                        COMPILE_FLAGS "-Ppred")
+BISON_TARGET(RulesParser ${LIB_BRIAN_SOURCE_DIR}/rulesgram.y 
+                         ${LIB_BRIAN_SOURCE_DIR}/rulesgram.tab.cpp 
+                         COMPILE_FLAGS --defines="${PROJECT_SOURCE_DIR}/brian/include/rulesgram.tab.h" 
+                         COMPILE_FLAGS "-p rules")
+FLEX_TARGET(RulesScanner ${LIB_BRIAN_SOURCE_DIR}/rulesflex.l  
+                         ${LIB_BRIAN_SOURCE_DIR}/rulesflex.cpp 
+                         COMPILE_FLAGS "-Prules")
 
 #add dependencies between parser and scanner (.l e .y)
 #for fuzzy
@@ -115,3 +136,14 @@ add_library(brian STATIC
 
 target_link_libraries(brian fuzzy)
 
+
+#option(SEPARATE_BUILD ON)
+#add_subdirectory(checker)
+
+if(catkin_FOUND)
+install(TARGETS brian fuzzy
+  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+endif()

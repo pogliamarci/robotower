@@ -1,10 +1,18 @@
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
-#include <stl.h>
 #include <cstring>
 
+#include <map>
+#include <vector>
+#include <set>
+#include <algorithm>
+#include <list>
+#include <queue>
+
 #define MAXSTR 150
+
+using namespace std;
 
 extern void shapeerror(const char *s);
 extern FILE * shapein;
@@ -165,7 +173,7 @@ void addshape(char * name)
     }
 }
 
-void addfuzzyset(char * name,char * lab)
+void addfuzzyset(char * name, const char * lab)
 {
   if ((stat==ftocshape)&&(strcmp(lab,"SNG")!=0))
     {
@@ -370,7 +378,9 @@ int main(int argc, char ** argv)
 	}
     }
   else
-    basepath="../config/";
+  {
+    strcpy(basepath,"../config/"); 
+  }
 
   linenum=1;
   filename=(char *) malloc(MAXSTR);

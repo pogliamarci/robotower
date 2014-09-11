@@ -12,7 +12,7 @@ extern char* filename;
 extern int linenum;
 
 extern void addshape(char * name);
-extern void addfuzzyset(char * name,char * lab);
+extern void addfuzzyset(char * name, const char * lab);
 
 %}
 
